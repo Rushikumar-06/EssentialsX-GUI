@@ -1,5 +1,8 @@
 package fr.snipertvmc.essentialsxgui;
 
+import com.earth2me.essentials.Essentials;
+import fr.snipertvmc.essentialsxgui.managers.HookManager;
+import fr.snipertvmc.essentialsxgui.managers.LoadingManager;
 import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
 import fr.snipertvmc.essentialsxgui.utilities.RegisterUtils;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -11,6 +14,9 @@ public class Main extends JavaPlugin {
 
 
 	private static Main instance;
+
+	private HookManager hookManager;
+	private LoadingManager loadingManager;
 
 
 	// -------------------------------------------------- //
@@ -29,6 +35,17 @@ public class Main extends JavaPlugin {
 
 		// GLOBAL VARIABLES INITIALIZATION
 		instance = this;
+
+		hookManager = new HookManager();
+		loadingManager = new LoadingManager();
+
+
+		// SERVER CONFIGURATION ANALYSIS
+		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Analyzing server configuration...");
+		if (!loadingManager.isServerReady()) {
+			return;
+		}
+		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Server configuration analysis §fcompleted§7.");
 
 
 		// GLOBAL DATA INITIALIZATION
@@ -96,6 +113,23 @@ public class Main extends JavaPlugin {
 
 	public static Main getInstance() {
 		return instance;
+	}
+
+	public HookManager getHookManager() {
+		return hookManager;
+	}
+	public LoadingManager getLoadingManager() {
+		return loadingManager;
+	}
+
+
+	// -------------------------------------------------- //
+
+
+	// SHORTCUTS
+
+	public Essentials getEssentials() {
+		return hookManager.getEssentialsHook().getEssentials();
 	}
 
 
