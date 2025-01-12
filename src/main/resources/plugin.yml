@@ -9,10 +9,3 @@ author: Sniper_TVmc
 
 version: ${project.version}
 api-version: 1.13
-
-
-depend:
-  - Essentials
-
-
-commands: {}
