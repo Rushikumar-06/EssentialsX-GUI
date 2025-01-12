@@ -1,0 +1,18 @@
+main: fr.snipertvmc.essentialsxgui.Main
+
+
+name: EssentialsX-GUI
+description: GUI Addon for EssentialsX
+website: https://github.com/SniperTVmc/EssentialsX-GUI/
+author: Sniper_TVmc
+
+
+version: ${project.version}
+api-version: 1.13
+
+
+depend:
+  - Essentials
+
+
+commands: {}
