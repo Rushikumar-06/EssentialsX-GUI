@@ -9,3 +9,12 @@ author: Sniper_TVmc
 
 version: ${project.version}
 api-version: 1.13
+
+
+commands:
+
+
+  essentialsXGUI:
+    description: Get information about the plugin.
+    aliases:
+      - exg

@@ -60,13 +60,13 @@ public class Main extends JavaPlugin {
 
 		// COMMANDS REGISTRATION
 		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Registering commands...");
-		int registeredCommands = RegisterUtils.registerCommands("fr.snipertvmc.essentialxgui.commands");
+		int registeredCommands = RegisterUtils.registerCommands("fr.snipertvmc.essentialsxgui.commands");
 		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Registration of §f" + registeredCommands + " commands§7.");
 
 
 		// EVENTS REGISTRATION
 		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Registration of events...");
-		int registeredEvents = RegisterUtils.registerEvents("fr.snipertvmc.essentialxgui.events");
+		int registeredEvents = RegisterUtils.registerEvents("fr.snipertvmc.essentialsxgui.events");
 		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Registration of §f" + registeredEvents + " events§7.");
 
 
