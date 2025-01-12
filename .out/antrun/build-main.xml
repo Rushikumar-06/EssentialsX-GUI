@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project name="maven-antrun-" default="main">
-  <target name="main">
-    <copy file="G:\Sniper_TVmc\Développement\JAVA\IntelliJ WorkSpace\Spigot Plugins\EssentialsX-GUI\.out/EssentialsX-GUI-1.0.0.jar" tofile="./.builds/EssentialsX-GUI-1.0.0.jar" />
-  </target>
-</project>
