@@ -64,5 +64,5 @@ hs_err_pid*
 replay_pid*
 
 # Directories
-.build/
-.out/
+/.build/
+/.out/
