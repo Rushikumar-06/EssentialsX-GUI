@@ -15,12 +15,10 @@ public class CommandEssentialsXGUI implements CommandExecutor {
 	@Override
     public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args) {
 
-    	if (!(commandSender instanceof Player)) {
+    	if (!(commandSender instanceof Player player)) {
     		commandSender.sendMessage("§cVous ne pouvez pas utiliser cette commande dans la console.");
     		return true;
     	}
-
-		Player player = (Player) commandSender;
 
 		player.sendMessage("");
 		player.sendMessage("  §6EssentialsX-GUI §7- §fPlugin by §eSniper_TVmc");
