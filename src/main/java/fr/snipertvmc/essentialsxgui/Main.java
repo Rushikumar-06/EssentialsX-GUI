@@ -1,8 +1,12 @@
 package fr.snipertvmc.essentialsxgui;
 
 import com.earth2me.essentials.Essentials;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import fr.mrmicky.fastinv.FastInvManager;
 import fr.snipertvmc.essentialsxgui.managers.HookManager;
 import fr.snipertvmc.essentialsxgui.managers.LoadingManager;
+import fr.snipertvmc.essentialsxgui.managers.PlayerDataManager;
+import fr.snipertvmc.essentialsxgui.managers.PlayerManager;
 import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
 import fr.snipertvmc.essentialsxgui.utilities.RegisterUtils;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -15,8 +19,12 @@ public class Main extends JavaPlugin {
 
 	private static Main instance;
 
+	private ObjectMapper objectMapper;
+
 	private HookManager hookManager;
 	private LoadingManager loadingManager;
+	private PlayerDataManager playerDataManager;
+	private PlayerManager playerManager;
 
 
 	// -------------------------------------------------- //
@@ -36,8 +44,12 @@ public class Main extends JavaPlugin {
 		// GLOBAL VARIABLES INITIALIZATION
 		instance = this;
 
+		objectMapper = new ObjectMapper();
+
 		hookManager = new HookManager();
 		loadingManager = new LoadingManager();
+		playerDataManager = new PlayerDataManager();
+		playerManager = new PlayerManager();
 
 
 		// SERVER CONFIGURATION ANALYSIS
@@ -50,6 +62,7 @@ public class Main extends JavaPlugin {
 
 		// GLOBAL DATA INITIALIZATION
 		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Initialisation of global data...");
+		FastInvManager.register(this);
 		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Initialization of global data §fcompleted§7.");
 
 
@@ -115,11 +128,21 @@ public class Main extends JavaPlugin {
 		return instance;
 	}
 
+	public ObjectMapper getObjectMapper() {
+		return objectMapper;
+	}
+
 	public HookManager getHookManager() {
 		return hookManager;
 	}
 	public LoadingManager getLoadingManager() {
 		return loadingManager;
+	}
+	public PlayerDataManager getPlayerDataManager() {
+		return playerDataManager;
+	}
+	public PlayerManager getPlayerManager() {
+		return playerManager;
 	}
 
 

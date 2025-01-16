@@ -2,7 +2,6 @@ package fr.snipertvmc.essentialsxgui.hooks;
 
 import com.earth2me.essentials.Essentials;
 import fr.snipertvmc.essentialsxgui.Main;
-import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
 import org.bukkit.plugin.Plugin;
 
 public class EssentialsHook {
