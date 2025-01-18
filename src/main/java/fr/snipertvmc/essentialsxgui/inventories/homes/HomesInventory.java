@@ -33,8 +33,10 @@ public class HomesInventory extends PaginatedFastInv {
 	public HomesInventory(Player player) {
 		super(54, player.getName() + "'s homes");
 
-		previousPageItem(47, p -> new ItemBuilder(Material.ARROW).name("§bPrevious Page §7§o(" + p + "/" + lastPage() + ")").build());
-		nextPageItem(51, p -> new ItemBuilder(Material.ARROW).name("§bNext Page §7§o(" + p + "/" + lastPage() + ")").build());
+		setItems(getBorders(), new ItemBuilder(Material.STAINED_GLASS_PANE).data(15).name(" ").build());
+
+		previousPageItem(47, p -> new ItemBuilder(Material.STONE_BUTTON).name("§bPrevious Page §7§o(" + p + "/" + lastPage() + ")").build());
+		nextPageItem(51, p -> new ItemBuilder(Material.STONE_BUTTON).name("§bNext Page §7§o(" + p + "/" + lastPage() + ")").build());
 
 
 		Set<EXGHome> homes = Main.getInstance().getPlayerManager().getPlayer(player.getUniqueId().toString()).getHomes()
@@ -48,7 +50,8 @@ public class HomesInventory extends PaginatedFastInv {
 			Material material = home.getMaterial();
 
 			List<String> homeLore = new ArrayList<>();
-			homeLore.add("§7Click to teleport to this home.");
+			homeLore.add("§7Right Click to teleport to this home.");
+			homeLore.add("§7Left Click to edit this home.");
 
 			if (!displayName.equals(home.getName())) {
 				homeLore.add("§7§oId: §e§o" + home.getName());
@@ -58,7 +61,14 @@ public class HomesInventory extends PaginatedFastInv {
 			}
 
 			addContent(new ItemBuilder(material).name(displayName).lore(homeLore).build(), e -> {
-				player.performCommand("essentials:home " + home.getName());
+
+				if (e.getClick().isLeftClick()) {
+					player.performCommand("essentials:home " + home.getName());
+
+				} else if (e.getClick().isRightClick()) {
+					new HomeEditingInventory(player, home).open(player);
+				}
+
 			});
 		}
 
@@ -66,8 +76,6 @@ public class HomesInventory extends PaginatedFastInv {
 		setItem(49, new ItemBuilder(Material.BARRIER).name("§cClose").build(), e -> {
 			e.getWhoClicked().closeInventory();
 		});
-
-		setItems(getBorders(), new ItemBuilder(Material.STAINED_GLASS_PANE).data(15).name(" ").build());
 
 
 		inventoryScheme.apply(this);
