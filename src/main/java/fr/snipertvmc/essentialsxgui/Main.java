@@ -3,10 +3,7 @@ package fr.snipertvmc.essentialsxgui;
 import com.earth2me.essentials.Essentials;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.mrmicky.fastinv.FastInvManager;
-import fr.snipertvmc.essentialsxgui.managers.HookManager;
-import fr.snipertvmc.essentialsxgui.managers.LoadingManager;
-import fr.snipertvmc.essentialsxgui.managers.PlayerDataManager;
-import fr.snipertvmc.essentialsxgui.managers.PlayerManager;
+import fr.snipertvmc.essentialsxgui.managers.*;
 import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
 import fr.snipertvmc.essentialsxgui.utilities.RegisterUtils;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -21,6 +18,7 @@ public class Main extends JavaPlugin {
 
 	private ObjectMapper objectMapper;
 
+	private ChatManager chatManager;
 	private HookManager hookManager;
 	private LoadingManager loadingManager;
 	private PlayerDataManager playerDataManager;
@@ -46,6 +44,7 @@ public class Main extends JavaPlugin {
 
 		objectMapper = new ObjectMapper();
 
+		chatManager = new ChatManager();
 		hookManager = new HookManager();
 		loadingManager = new LoadingManager();
 		playerDataManager = new PlayerDataManager();
@@ -109,6 +108,7 @@ public class Main extends JavaPlugin {
 
 		// FINAL DATA SAVING
 		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Final data saving...");
+		playerManager.saveAll();
 		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Final data saving §fcompleted§7.");
 
 
@@ -132,6 +132,9 @@ public class Main extends JavaPlugin {
 		return objectMapper;
 	}
 
+	public ChatManager getChatManager() {
+		return chatManager;
+	}
 	public HookManager getHookManager() {
 		return hookManager;
 	}
