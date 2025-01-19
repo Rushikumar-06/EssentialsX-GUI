@@ -23,7 +23,7 @@ public class EXGPlayer {
 
 	public EXGPlayer(String uuid) {
 		this.uuid = UUID.fromString(uuid);
-		this.name = Bukkit.getPlayer(this.uuid).getName();
+		this.name = Bukkit.getPlayer(UUID.fromString(uuid)).getName();
 	}
 
 
