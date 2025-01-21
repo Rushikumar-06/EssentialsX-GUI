@@ -2,10 +2,9 @@ package fr.snipertvmc.essentialsxgui;
 
 import com.earth2me.essentials.Essentials;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fr.mrmicky.fastinv.FastInvManager;
 import fr.snipertvmc.essentialsxgui.managers.*;
 import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
-import fr.snipertvmc.essentialsxgui.utilities.RegisterUtils;
+import fr.snipertvmc.essentialsxgui.utilities.config.EXGInventoryYamlParser;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
@@ -19,7 +18,9 @@ public class Main extends JavaPlugin {
 	private ObjectMapper objectMapper;
 
 	private ChatManager chatManager;
+	private FilesManager filesManager;
 	private HookManager hookManager;
+	private InventoriesManager inventoriesManager;
 	private LoadingManager loadingManager;
 	private PlayerDataManager playerDataManager;
 	private PlayerManager playerManager;
@@ -45,41 +46,21 @@ public class Main extends JavaPlugin {
 		objectMapper = new ObjectMapper();
 
 		chatManager = new ChatManager();
+		filesManager = new FilesManager();
 		hookManager = new HookManager();
+		inventoriesManager = new InventoriesManager();
 		loadingManager = new LoadingManager();
 		playerDataManager = new PlayerDataManager();
 		playerManager = new PlayerManager();
 
 
-		// SERVER CONFIGURATION ANALYSIS
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Analyzing server configuration...");
-		if (!loadingManager.isServerReady()) {
-			return;
-		}
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Server configuration analysis §fcompleted§7.");
+		// FILES LOADING
+		filesManager.loadFiles();
+		inventoriesManager.loadInventories();
 
 
-		// GLOBAL DATA INITIALIZATION
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Initialisation of global data...");
-		FastInvManager.register(this);
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Initialization of global data §fcompleted§7.");
-
-
-		// TASKS INITIALIZATION
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Initialising tasks...");
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Tasks initialisation §fcompleted§7.");
-
-
-		// COMMANDS REGISTRATION
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Registering commands...");
-		int registeredCommands = RegisterUtils.registerCommands("fr.snipertvmc.essentialsxgui.commands");
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Registration of §f" + registeredCommands + " commands§7.");
-
-
-		// EVENTS REGISTRATION
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Registration of events...");
-		int registeredEvents = RegisterUtils.registerEvents("fr.snipertvmc.essentialsxgui.events");
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Registration of §f" + registeredEvents + " events§7.");
+		// LOAD PLUGIN
+		loadingManager.loadPlugin(filesManager.getConfiguration().isDetailedLoading());
 
 
 		// PLUGIN LOADING COMPLETED
@@ -106,17 +87,15 @@ public class Main extends JavaPlugin {
 		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Plugin unloading...");
 
 
-		// FINAL DATA SAVING
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Final data saving...");
-		playerManager.saveAll();
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Final data saving §fcompleted§7.");
+		// UNLOAD PLUGIN
+		loadingManager.unloadPlugin(filesManager.getConfiguration().isDetailedLoading());
 
 
-		// DÉCHARGEMENT TERMINÉ DU PLUGIN
+		// PLUGIN UNLOADING COMPLETED
 		long endTime = System.currentTimeMillis();
 		long unloadingTime = endTime - startTime;
 
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §7The plugin has §funloaded §7correctly in §f" + unloadingTime + "ms§7.");
+		ConsoleLogger.console("\t§6EssentialsX-GUI: §7The plugin has been §funloaded §7correctly in §f" + unloadingTime + "ms§7.");
 		ConsoleLogger.console("");
 	}
 
@@ -135,8 +114,14 @@ public class Main extends JavaPlugin {
 	public ChatManager getChatManager() {
 		return chatManager;
 	}
+	public FilesManager getFilesManager() {
+		return filesManager;
+	}
 	public HookManager getHookManager() {
 		return hookManager;
+	}
+	public InventoriesManager getInventoriesManager() {
+		return inventoriesManager;
 	}
 	public LoadingManager getLoadingManager() {
 		return loadingManager;
