@@ -18,9 +18,11 @@ public class EXGItemConfig {
 	// -------------------------------------------------- //
 
 
+	private boolean enabled = false;
+
 	private short slot;
 
-	private Material material;
+	private String materialName;
 	private int amount;
 	private byte data;
 
@@ -34,14 +36,17 @@ public class EXGItemConfig {
 	// -------------------------------------------------- //
 
 
-	public EXGItemConfig(short slot,
-	                     Material material, int amount, byte data,
+	public EXGItemConfig(boolean enabled,
+	                     short slot,
+	                     String materialName, int amount, byte data,
 	                     String displayName, List<String> lore,
 	                     List<Pair<Enchantment, Integer>> enchantments, List<ItemFlag> itemFlags) {
 
+		this.enabled = enabled;
+
 		this.slot = slot;
 
-		this.material = material;
+		this.materialName = materialName;
 		this.amount = amount;
 		this.data = data;
 
@@ -54,9 +59,10 @@ public class EXGItemConfig {
 
 
 	public EXGItemConfig(EXGItemConfig itemConfig) {
+		this.enabled = itemConfig.isEnabled();
 		this.slot = itemConfig.getSlot();
 
-		this.material = itemConfig.getMaterial();
+		this.materialName = itemConfig.getMaterialName();
 		this.amount = itemConfig.getAmount();
 		this.data = itemConfig.getData();
 
@@ -71,12 +77,25 @@ public class EXGItemConfig {
 	// -------------------------------------------------- //
 
 
+	public boolean isEnabled() {
+		return enabled;
+	}
+
 	public short getSlot() {
 		return slot;
 	}
 
+	public String getMaterialName() {
+		return materialName;
+	}
+
 	public Material getMaterial() {
-		return material;
+		Material possibleMaterial = Material.matchMaterial(materialName);
+		if (possibleMaterial == null) {
+			ConsoleLogger.error("Material " + materialName + " not found.");
+			return Material.GRASS;
+		}
+		return possibleMaterial;
 	}
 
 	public int getAmount() {
@@ -107,13 +126,18 @@ public class EXGItemConfig {
 	// -------------------------------------------------- //
 
 
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+
 	public void setSlot(short slot) {
 		this.slot = slot;
 	}
 
 
-	public void setMaterial(Material material) {
-		this.material = material;
+	public void setMaterial(String materialName) {
+		this.materialName = materialName;
 	}
 
 
@@ -133,10 +157,10 @@ public class EXGItemConfig {
 	public ItemStack build() {
 
 		ItemBuilder itemBuilder;
-		if (material == null || material == Material.AIR) {
+		if (materialName == null || materialName.equals("AIR")) {
 			itemBuilder = new ItemBuilder(Material.GRASS);
 		} else {
-			itemBuilder = new ItemBuilder(material);
+			itemBuilder = new ItemBuilder(getMaterial());
 		}
 
 		if (amount < 0 || amount > 64) {
@@ -182,6 +206,11 @@ public class EXGItemConfig {
 
 
 		variables.forEach((key, value) -> {
+
+			if (materialName != null) {
+				materialName = materialName.replace(key, value);
+			}
+
 			if (displayName != null) {
 				displayName = displayName.replace(key, value);
 			}

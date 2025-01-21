@@ -56,7 +56,6 @@ public class Main extends JavaPlugin {
 
 		// FILES LOADING
 		filesManager.loadFiles();
-		inventoriesManager.loadInventories();
 
 
 		// LOAD PLUGIN

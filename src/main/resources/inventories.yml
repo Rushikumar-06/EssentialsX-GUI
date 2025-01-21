@@ -30,8 +30,10 @@ config-version: "1.0"
 
 inventories:
 
+
   homes:
 
+    # Placeholders available: {player}
     title: "&a{player}'&2s Homes"
     rows: 6
 
@@ -44,9 +46,10 @@ inventories:
       - "         "
 
     borderItem:
-        slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53]
-        material: "STAINED_GLASS_PANE"
-        data: 15
+      enabled: true
+      slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53]
+      material: "STAINED_GLASS_PANE"
+      data: 15
 
     items:
 
@@ -65,15 +68,15 @@ inventories:
           - "&7Home Name: &f&o{homeName}"
 
       closeItem:
-        slot: 49
         enabled: true
+        slot: 49
         material: "BARRIER"
         displayName: "&cClose"
         lore:
           - "&7Click to close the inventory."
 
 
-      # Placeholders available: {currentPage}, {previousPage}
+      # Placeholders available: {currentPage}
       previousPageItem:
         enabled: true
         slot: 47
@@ -87,16 +90,75 @@ inventories:
         enabled: true
         slot: 51
         material: "STONE_BUTTON"
-        displayName: "&6Next Page: &e{nextPage}/{totalPages}"
+        displayName: "&6Next Page: &e{nextPage}"
         lore:
           - "&7Click to go to the next page."
 
       # Placeholders available: {currentPage}, {totalPages}
       currentPageItem:
-        slot: 4
         enabled: true
+        slot: 4
         material: "PAPER"
         displayName: "&2Page: &a{currentPage}/{totalPages}"
         lore:
           - "&7Previous Page: &f{previousPage}"
           - "&7Next Page: &f{nextPage}"
+
+
+
+
+
+  homeEditing:
+
+    # Placeholders available: {displayName}, {homeName}, {homeDisplayName}
+    # By default, if displayName is not set, it will use the home name.
+    title: "&2Editing &a{homeName}&2's home"
+    rows: 6
+
+    borderItem:
+      enabled: true
+      slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53]
+      material: "STAINED_GLASS_PANE"
+      data: 15
+
+    items:
+
+      # 'material' value will be ignored in this section. It will use the material of player's home's.
+      # Placeholders available: {displayName}, {homeName}, {homeMaterialName}
+      # By default, if displayName is not set, it will use the home name.
+      previewHomeItem:
+        enabled: true
+        slot: 22
+        displayName: "&6{homeDisplayName}"
+        lore:
+          - "&f&lRight Click &7to teleport to this home."
+          - "&f&lLeft Click &7to edit this home."
+          - ""
+          - "&7Home Name: &f&o{homeName}"
+          - "&7Material: &f&o{homeMaterialName}"
+
+      # Placeholders available: {homeName}, {displayName}
+      changeDisplayNameItem:
+        enabled: true
+        slot: 30
+        material: "NAME_TAG"
+        displayName: "&6Change Display Name"
+        lore:
+          - "&7Click to change the display name of this home."
+
+      # Placeholders available: [homeName}, {homeMaterialName}
+      changeIconItem:
+        enabled: true
+        slot: 32
+        material: "{homeMaterialName}"
+        displayName: "&6Change Icon"
+        lore:
+          - "&7Click to change the icon of this home."
+
+      backItem:
+        slot: 49
+        enabled: true
+        material: "ARROW"
+        displayName: "&cBack"
+        lore:
+          - "&7Click to go back to the homes list."

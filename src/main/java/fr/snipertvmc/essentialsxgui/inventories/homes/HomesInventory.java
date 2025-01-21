@@ -53,14 +53,18 @@ public class HomesInventory extends PaginatedFastInv {
 
 		for (EXGHome home : homes) {
 
+			ConsoleLogger.info("debug1: " + home.getName());
+
 			EXGItemConfig homeItem = config.getHomeItem().duplicate();
-			homeItem.setMaterial(home.getMaterial());
+			homeItem.setMaterial(home.getMaterial().name());
 
 			addContent(homeItem
 					.updateVariables(
 							Map.of("{displayName}", home.getDisplayName(),
 									"{homeName}", home.getName()))
 					.build(), e -> {
+
+				ConsoleLogger.info("debug2: " + home.getName());
 
 				if (e.getClick().isLeftClick()) {
 					player.performCommand("essentials:home " + home.getName());

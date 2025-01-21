@@ -37,6 +37,7 @@ public class FilesManager {
 		ConsoleLogger.console("\t§6EssentialsX-GUI: §8- §fMessages: §aLoaded");
 
 		loadInventories();
+		Main.getInstance().getInventoriesManager().loadInventories();
 		checkUpdateForInventories();
 		ConsoleLogger.console("\t§6EssentialsX-GUI: §8- §fInventories: §aLoaded");
 

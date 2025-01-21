@@ -94,8 +94,17 @@ public class InventoriesFile {
 
 		// Check if the item configuration is valid
 		if (!EXGInventoryYamlParser.isEXGItemConfigValid(path, isBorderItem)) {
-			return new EXGItemConfig((short) 0,
-					Material.BEDROCK, 1, (byte) 0,
+
+			Object slotValue = yamlConfiguration.get(path + ".slot");
+			short slot = 0;
+
+			if (slotValue instanceof Number slotNumber) {
+				slot = slotNumber.shortValue();
+			}
+
+			return new EXGItemConfig(true,
+					slot,
+					"BEDROCK", 1, (byte) 0,
 					"§4Invalid Item",
 					List.of("§cThis item configuration is invalid.",
 							"§7Please check the configuration at path:",
@@ -105,9 +114,11 @@ public class InventoriesFile {
 					);
 		}
 
+		boolean enabled = false;
+
 		short slot = 0;
 
-		Material material = Material.STONE;
+		String materialName = null;
 		int amount = 1;
 		byte data = 0;
 
@@ -118,6 +129,8 @@ public class InventoriesFile {
 		List<ItemFlag> itemFlags = null;
 
 		Map<String, Object> itemStringValues = new HashMap<>() {{
+			put("enabled", yamlConfiguration.get(path + ".enabled"));
+
 			put("slot", yamlConfiguration.get(path + ".slot"));
 
 			put("material", yamlConfiguration.get(path + ".material"));
@@ -133,11 +146,14 @@ public class InventoriesFile {
 
 		for (Map.Entry<String, Object> entry : itemStringValues.entrySet()) {
 
-			if (entry.getKey().equals("slot") && entry.getValue() != null && !isBorderItem && entry.getValue() instanceof Number slotValue) {
+			if (entry.getKey().equals("enabled") && entry.getValue() != null && entry.getValue() instanceof Boolean enabledValue) {
+				enabled = enabledValue;
+
+			} else if (entry.getKey().equals("slot") && entry.getValue() != null && !isBorderItem && entry.getValue() instanceof Number slotValue) {
 				slot = slotValue.shortValue();
 
 			} else if (entry.getKey().equals("material") && entry.getValue() != null && entry.getValue() instanceof String materialValue) {
-				material = Material.matchMaterial(materialValue) != null ? Material.matchMaterial(materialValue) : Material.STONE;
+				materialName = materialValue;
 
 			} else if (entry.getKey().equals("amount") && entry.getValue() != null && entry.getValue() instanceof Number amountValue) {
 				amount = amountValue.intValue();
@@ -175,7 +191,7 @@ public class InventoriesFile {
 			}
 		}
 
-		return new EXGItemConfig(slot, material, amount, data, displayName, lore, enchantments, itemFlags);
+		return new EXGItemConfig(enabled,slot, materialName, amount, data, displayName, lore, enchantments, itemFlags);
 	}
 
 
