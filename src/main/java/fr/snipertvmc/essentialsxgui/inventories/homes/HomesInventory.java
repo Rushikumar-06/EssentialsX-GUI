@@ -1,11 +1,10 @@
 package fr.snipertvmc.essentialsxgui.inventories.homes;
 
-import fr.mrmicky.fastinv.InventoryScheme;
-import fr.mrmicky.fastinv.ItemBuilder;
 import fr.mrmicky.fastinv.PaginatedFastInv;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGHome;
-import org.bukkit.Material;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.EXGHomesInventoryConfig;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
 import org.bukkit.entity.Player;
 
 import java.util.*;
@@ -17,26 +16,35 @@ public class HomesInventory extends PaginatedFastInv {
 	// -------------------------------------------------- //
 
 
-	private static final InventoryScheme inventoryScheme = new InventoryScheme()
-			.mask("         ")
-			.mask("         ")
-			.mask("  11111  ")
-			.mask("  11111  ")
-			.mask("         ")
-			.mask("         ")
-			.bindPagination('1');
+	private final EXGHomesInventoryConfig config = Main.getInstance().getInventoriesManager().getHomesInventoryConfig();
 
 
 	// -------------------------------------------------- //
 
 
 	public HomesInventory(Player player) {
-		super(54, player.getName() + "'s homes");
+		super(
+				Main.getInstance().getInventoriesManager().getHomesInventoryConfig().getRows() * 9,
+				Main.getInstance().getInventoriesManager().getHomesInventoryConfig().getTitle()
+						.updateVariables(Map.of(
+						"{player}", player.getName()))
+						.getTitle()
+		);
 
-		setItems(getBorders(), new ItemBuilder(Material.STAINED_GLASS_PANE).data(15).name(" ").build());
+		setItems(config.getBorderSlots(), config.getBorderItem().build());
 
-		previousPageItem(47, p -> new ItemBuilder(Material.STONE_BUTTON).name("§bPrevious Page §7§o(" + p + "/" + lastPage() + ")").build());
-		nextPageItem(51, p -> new ItemBuilder(Material.STONE_BUTTON).name("§bNext Page §7§o(" + p + "/" + lastPage() + ")").build());
+		previousPageItem(config.getPreviousPageItem().getSlot(), config.getPreviousPageItem()
+				.updateVariables(
+						Map.of("{currentPage}", String.valueOf(this.currentPage()),
+								"{previousPage}", String.valueOf(this.currentPage() - 1),
+								"{totalPages}", String.valueOf(this.lastPage())))
+				.build());
+		nextPageItem(config.getNextPageItem().getSlot(), config.getNextPageItem()
+				.updateVariables(
+						Map.of("{currentPage}", String.valueOf(this.currentPage()),
+								"{nextPage}", String.valueOf(this.currentPage() + 1),
+								"{totalPages}", String.valueOf(this.lastPage())))
+				.build());
 
 
 		Set<EXGHome> homes = Main.getInstance().getPlayerManager().getPlayer(player.getUniqueId().toString()).getHomes()
@@ -46,21 +54,14 @@ public class HomesInventory extends PaginatedFastInv {
 
 		for (EXGHome home : homes) {
 
-			String displayName = home.getDisplayName();
-			Material material = home.getMaterial();
+			EXGItemConfig homeItem = config.getHomeItem().duplicate();
+			homeItem.setMaterial(home.getMaterial());
 
-			List<String> homeLore = new ArrayList<>();
-			homeLore.add("§7Right Click to teleport to this home.");
-			homeLore.add("§7Left Click to edit this home.");
-
-			if (!displayName.equals(home.getName())) {
-				homeLore.add("§7§oId: §e§o" + home.getName());
-				displayName = "§r" + displayName;
-			} else {
-				displayName = "§f§o" + displayName;
-			}
-
-			addContent(new ItemBuilder(material).name(displayName).lore(homeLore).build(), e -> {
+			addContent(homeItem
+					.updateVariables(
+							Map.of("{displayName}", home.getDisplayName(),
+									"{homeName}", home.getName()))
+					.build(), e -> {
 
 				if (e.getClick().isLeftClick()) {
 					player.performCommand("essentials:home " + home.getName());
@@ -73,12 +74,12 @@ public class HomesInventory extends PaginatedFastInv {
 		}
 
 
-		setItem(49, new ItemBuilder(Material.BARRIER).name("§cClose").build(), e -> {
+		setItem(config.getCloseItem().getSlot(), config.getCloseItem().build(), e -> {
 			e.getWhoClicked().closeInventory();
 		});
 
 
-		inventoryScheme.apply(this);
+		config.getInventoryScheme().apply(this);
 	}
 
 
@@ -87,7 +88,13 @@ public class HomesInventory extends PaginatedFastInv {
 
 	@Override
 	protected void onPageChange(int page) {
-		setItem(4, new ItemBuilder(Material.PAPER).name("§fCurrent page: §e" + page).build());
+		setItem(config.getCurrentPageItem().getSlot(), config.getCurrentPageItem()
+				.updateVariables(
+						Map.of("{currentPage}", String.valueOf(this.currentPage()),
+								"{nextPage}", String.valueOf(this.currentPage() + 1),
+								"{previousPage}", String.valueOf(this.currentPage() - 1),
+								"{totalPages}", String.valueOf(this.lastPage())))
+				.build());;
 	}
 
 
