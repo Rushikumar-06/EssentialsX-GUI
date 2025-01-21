@@ -1,5 +1,6 @@
 package fr.snipertvmc.essentialsxgui.events.player;
 
+import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.inventories.homes.HomesInventory;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
