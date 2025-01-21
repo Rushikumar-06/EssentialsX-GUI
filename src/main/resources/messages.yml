@@ -1,0 +1,54 @@
+############################################################
+# +------------------------------------------------------+ #
+# |                     Informations                     | #
+# +------------------------------------------------------+ #
+############################################################
+
+# This is the messages file for SwiftUtils.
+
+# If you need help with the configuration of the plugin,
+# you can join our discord server at: SOON (Contact @sniper_tvmc)
+
+# For more translations,
+# check our Wiki at: SOON
+
+############################################################
+# +------------------------------------------------------+ #
+# |                        General                       | #
+# +------------------------------------------------------+ #
+############################################################
+
+# Please do not change this value as it may cause the file to be reset.
+# Default: 1.0
+messages-version: "1.0"
+
+# Change the prefix sent at the beginning of most sent messages.
+# TIP: Use {prefix} in any message to include the prefix.
+# Default: &8[&6&LEXG&8] &7
+prefix: "&8[&6&LEXG&8] &7"
+
+############################################################
+# +------------------------------------------------------+ #
+# |                   Error Messages                     | #
+# +------------------------------------------------------+ #
+############################################################
+
+errors:
+
+  invalidMaterial: "§cThe material name is invalid."
+  characterLimit: "§cThe display name must be less than 16 characters."
+
+############################################################
+# +------------------------------------------------------+ #
+# |                   General Messages                   | #
+# +------------------------------------------------------+ #
+############################################################
+
+general:
+
+  enterNewDisplayName: "§ePlease enter the new display name in the chat. §7§oType 'cancel' to cancel the action."
+  enterNewIconName: "§ePlease enter the new icon name in the chat. §7§oType 'cancel' to cancel the action."
+  actionCanceled: "§6The action has been canceled."
+
+  displayNameChanged: "§7The display name has been changed to §f{new_display_name}§7."
+  iconChanged: "§7The icon has been changed to §f{new_icon}§7."

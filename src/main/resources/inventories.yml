@@ -1,0 +1,107 @@
+############################################################
+# +------------------------------------------------------+ #
+# |                     Informations                     | #
+# +------------------------------------------------------+ #
+############################################################
+
+# This is the inventories file for EssentialsX-GUI.
+
+# If you need help with the configuration of the GUIs,
+# you can join our discord server at: SOON (Contact @sniper_tvmc)
+
+# For more information about how to configure EssentialsX-GUI,
+# check our Wiki at: SOON
+
+############################################################
+# +------------------------------------------------------+ #
+# |                        General                       | #
+# +------------------------------------------------------+ #
+############################################################
+
+# Please do not change this value as it may cause the file to be reset.
+# Default: 1.0
+config-version: "1.0"
+
+############################################################
+# +------------------------------------------------------+ #
+# |                      Inventories                     | #
+# +------------------------------------------------------+ #
+############################################################
+
+inventories:
+
+  homes:
+
+    title: "&a{player}'&2s Homes"
+    rows: 6
+
+    inventoryScheme:
+      - "         "
+      - "         "
+      - "  11111  "
+      - "  11111  "
+      - "         "
+      - "         "
+
+    borderItem:
+        slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53]
+        material: "SKULL_ITEM"
+        data: 3
+        amount: 8
+        displayName: "&8Border &7Item"
+        lore:
+            - "&9Border Lore Item"
+        enchantments:
+            - "DAMAGE_ALL:1"
+        itemFlags:
+            - "HIDE_ENCHANTS"
+
+    items:
+
+      # Change 'material' to the default item you want to use for homes.
+      # 'slot' value will be ignored in this section. Use the 'inventoryScheme' section to set the slots.
+      # Placeholders available: {displayName}, {homeName}
+      # By default, if displayName is not set, it will use the home name.
+      homeItem:
+        enabled: true
+        material: "GRASS"
+        displayName: "&6{displayName}"
+        lore:
+          - "&7Right Click to teleport to this home."
+          - "&7Left Click to edit this home."
+
+      closeItem:
+        slot: 49
+        enabled: true
+        material: "BARRIER"
+        displayName: "&cClose"
+        lore:
+          - "&7Click to close the inventory."
+
+
+      # Placeholders available: {currentPage}, {previousPage}, {totalPages}
+      previousPageItem:
+        enabled: true
+        slot: 47
+        material: "STONE_BUTTON"
+        displayName: "&6Previous Page"
+        lore:
+          - "&7Click to go to the previous page."
+
+      # Placeholders available: {currentPage}, {nextPage}, {totalPages}
+      nextPageItem:
+        enabled: true
+        slot: 51
+        material: "STONE_BUTTON"
+        displayName: "&6Next Page"
+        lore:
+          - "&7Click to go to the next page."
+
+      # Placeholders available: {currentPage}, {previousPage}, {nextPage}, {totalPages}
+      currentPageItem:
+        slot: 4
+        enabled: true
+        material: "PAPER"
+        displayName: "&6Current Page"
+        lore:
+          - "&7Page: {currentPage}"

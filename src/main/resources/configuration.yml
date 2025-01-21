@@ -1,0 +1,33 @@
+############################################################
+# +------------------------------------------------------+ #
+# |                     Informations                     | #
+# +------------------------------------------------------+ #
+############################################################
+
+# This is the configuration file for EssentialsX-GUI.
+
+# If you need help with the configuration of the plugin,
+# you can join our discord server at: SOON (Contact @sniper_tvmc)
+
+# For more information about how to configure EssentialsX-GUI,
+# check our Wiki at: SOON
+
+############################################################
+# +------------------------------------------------------+ #
+# |                        General                       | #
+# +------------------------------------------------------+ #
+############################################################
+
+# Please do not change this value as it may cause the file to be reset.
+# Default: 1.0
+config-version: "1.0"
+
+# If you want to see a detailed loading message when the plugin is loading, set this to true. (Also works for unloading)
+# Default: true
+detailed-loading: true
+
+############################################################
+# +------------------------------------------------------+ #
+# |                         SOON                         | #
+# +------------------------------------------------------+ #
+############################################################
