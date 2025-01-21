@@ -1,0 +1,37 @@
+package fr.snipertvmc.essentialsxgui.utilities;
+
+import fr.snipertvmc.essentialsxgui.Main;
+import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
+
+import java.util.Map;
+
+public class MessagesUtils {
+
+
+	// -------------------------------------------------- //
+
+
+	public static String get(EXGMessage exgMessage, Map<String, String> variables) {
+
+		String prefix = Main.getInstance().getFilesManager().getMessages().getPrefix();
+
+		String message = Main.getInstance().getFilesManager().getMessages().getString(exgMessage.getPath());
+
+		String finalMessage = message
+				.replace("\\{prefix}", prefix)
+				.replace("&", "§");
+
+		if (variables == null) {
+			return finalMessage;
+		}
+
+		for (Map.Entry<String, String> entry : variables.entrySet()) {
+			finalMessage = finalMessage.replaceAll("\\{" + entry.getKey() + "}", entry.getValue());
+		}
+
+		return finalMessage;
+	}
+
+
+	// -------------------------------------------------- //
+}
