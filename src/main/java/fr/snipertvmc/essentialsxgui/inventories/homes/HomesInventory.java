@@ -5,6 +5,7 @@ import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGHome;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.EXGHomesInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
+import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
 import org.bukkit.entity.Player;
 
 import java.util.*;
@@ -36,14 +37,12 @@ public class HomesInventory extends PaginatedFastInv {
 		previousPageItem(config.getPreviousPageItem().getSlot(), config.getPreviousPageItem()
 				.updateVariables(
 						Map.of("{currentPage}", String.valueOf(this.currentPage()),
-								"{previousPage}", String.valueOf(this.currentPage() - 1),
-								"{totalPages}", String.valueOf(this.lastPage())))
+								"{previousPage}", String.valueOf(this.currentPage() - 1)))
 				.build());
 		nextPageItem(config.getNextPageItem().getSlot(), config.getNextPageItem()
 				.updateVariables(
 						Map.of("{currentPage}", String.valueOf(this.currentPage()),
-								"{nextPage}", String.valueOf(this.currentPage() + 1),
-								"{totalPages}", String.valueOf(this.lastPage())))
+								"{nextPage}", String.valueOf(this.currentPage() + 1)))
 				.build());
 
 
@@ -88,13 +87,12 @@ public class HomesInventory extends PaginatedFastInv {
 
 	@Override
 	protected void onPageChange(int page) {
+
 		setItem(config.getCurrentPageItem().getSlot(), config.getCurrentPageItem()
 				.updateVariables(
 						Map.of("{currentPage}", String.valueOf(this.currentPage()),
-								"{nextPage}", String.valueOf(this.currentPage() + 1),
-								"{previousPage}", String.valueOf(this.currentPage() - 1),
 								"{totalPages}", String.valueOf(this.lastPage())))
-				.build());;
+				.build());
 	}
 
 
