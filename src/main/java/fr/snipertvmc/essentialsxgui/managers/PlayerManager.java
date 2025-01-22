@@ -41,7 +41,11 @@ public class PlayerManager {
 
 
 	public void saveAll() {
-		players.forEach(exgPlayer -> save(exgPlayer.getUuid().toString()));
+		for (EXGPlayer exgPlayer : players) {
+			if (exgPlayer != null) {
+				save(exgPlayer.getUuid().toString());
+			}
+		}
 	}
 
 
