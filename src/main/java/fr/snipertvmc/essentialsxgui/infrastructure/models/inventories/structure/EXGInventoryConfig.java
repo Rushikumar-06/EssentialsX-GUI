@@ -28,7 +28,7 @@ public class EXGInventoryConfig {
 
 
 	public EXGInventoryTitle getTitle() {
-		return title;
+		return title.duplicate();
 	}
 
 

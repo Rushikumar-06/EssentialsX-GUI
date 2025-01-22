@@ -1,7 +1,5 @@
 package fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure;
 
-import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
-
 import java.util.Map;
 
 public class EXGInventoryTitle {
@@ -47,6 +45,14 @@ public class EXGInventoryTitle {
 		});
 
 		return this;
+	}
+
+
+	// -------------------------------------------------- //
+
+
+	public EXGInventoryTitle duplicate() {
+		return new EXGInventoryTitle(title);
 	}
 
 

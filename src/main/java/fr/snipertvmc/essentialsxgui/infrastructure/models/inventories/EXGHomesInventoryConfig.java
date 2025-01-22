@@ -33,27 +33,27 @@ public class EXGHomesInventoryConfig extends EXGInventoryConfig {
 
 
 	public EXGItemConfig getHomeItem() {
-		return homeItem;
+		return homeItem.duplicate();
 	}
 
 
 	public EXGItemConfig getNextPageItem() {
-		return nextPageItem;
+		return nextPageItem.duplicate();
 	}
 
 
 	public EXGItemConfig getPreviousPageItem() {
-		return previousPageItem;
+		return previousPageItem.duplicate();
 	}
 
 
 	public EXGItemConfig getCurrentPageItem() {
-		return currentPageItem;
+		return currentPageItem.duplicate();
 	}
 
 
 	public EXGItemConfig getCloseItem() {
-		return closeItem;
+		return closeItem.duplicate();
 	}
 
 

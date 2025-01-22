@@ -29,22 +29,22 @@ public class EXGHomeEditingInventoryConfig extends EXGInventoryConfig {
 
 
 	public EXGItemConfig getPreviewHomeItem() {
-		return previewHomeItem;
+		return previewHomeItem.duplicate();
 	}
 
 
 	public EXGItemConfig getChangeDisplayNameItem() {
-		return changeDisplayNameItem;
+		return changeDisplayNameItem.duplicate();
 	}
 
 
 	public EXGItemConfig getChangeIconItem() {
-		return changeIconItem;
+		return changeIconItem.duplicate();
 	}
 
 
 	public EXGItemConfig getBackItem() {
-		return backItem;
+		return backItem.duplicate();
 	}
 
 
