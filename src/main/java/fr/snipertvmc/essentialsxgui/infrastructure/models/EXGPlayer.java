@@ -2,6 +2,7 @@ package fr.snipertvmc.essentialsxgui.infrastructure.models;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 
 import java.util.*;
 
@@ -14,6 +15,8 @@ public class EXGPlayer {
 	private final UUID uuid;
 	private final String name;
 
+	private final Player player;
+
 
 	private Set<EXGHome> homes = new HashSet<>();
 
@@ -23,7 +26,9 @@ public class EXGPlayer {
 
 	public EXGPlayer(String uuid) {
 		this.uuid = UUID.fromString(uuid);
-		this.name = Bukkit.getPlayer(UUID.fromString(uuid)).getName();
+
+		this.player = Bukkit.getPlayer(this.uuid);
+		this.name = player.getName();
 	}
 
 
@@ -33,20 +38,20 @@ public class EXGPlayer {
 	public UUID getUuid() {
 		return uuid;
 	}
-
-
 	public String getName() {
 		return name;
 	}
 
-
-	public Set<EXGHome> getHomes() {
-		return homes;
+	public Player getPlayer() {
+		return player;
 	}
 
 
-	public void setHomes(Set<EXGHome> homes) {
-		this.homes = homes;
+	// -------------------------------------------------- //
+
+
+	public Set<EXGHome> getHomes() {
+		return homes;
 	}
 
 
@@ -55,6 +60,11 @@ public class EXGPlayer {
 				.filter(home -> home.getName().equals(homeName))
 				.findFirst()
 				.orElse(null);
+	}
+
+
+	public void setHomes(Set<EXGHome> homes) {
+		this.homes = homes;
 	}
 
 
