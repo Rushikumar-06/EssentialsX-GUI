@@ -65,10 +65,10 @@ Finally, __restart__ the server and you're done!
 
 ## Servers using EssentialsX-GUI
 
-Are you using our plugin and would like to add your server to the list? Add me on [Discord](https://discord.com/users/478908622102069251).
+Are you using our plugin and would like to add your server to the list? Join [Discord Server](https://discord.gg/fSzK79TAYf).
 
 - No one
 
 ## Support
 
-For support, add me on [Discord](https://discord.com/users/478908622102069251).
+For support, join [Discord Server](https://discord.gg/fSzK79TAYf).
