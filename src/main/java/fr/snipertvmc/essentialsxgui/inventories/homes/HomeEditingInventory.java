@@ -34,10 +34,10 @@ public class HomeEditingInventory extends FastInv {
 						.getTitle()
 		);
 
+
 		if (config.getBorderItem().isEnabled()) {
 			setItems(config.getBorderSlots(), config.getBorderItem().build());
 		}
-
 
 
 		if (config.getPreviewHomeItem().isEnabled()) {
@@ -48,6 +48,7 @@ public class HomeEditingInventory extends FastInv {
 									"{homeMaterialName}", home.getMaterial().name()))
 					.build());
 		}
+
 
 		if (config.getChangeDisplayNameItem().isEnabled()) {
 			setItem(config.getChangeDisplayNameItem().getSlot(), config.getChangeDisplayNameItem()

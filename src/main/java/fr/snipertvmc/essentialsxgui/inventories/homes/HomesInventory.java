@@ -32,13 +32,19 @@ public class HomesInventory extends PaginatedFastInv {
 						.getTitle()
 		);
 
-		setItems(config.getBorderSlots(), config.getBorderItem().build());
+
+		if (config.getBorderItem().isEnabled()) {
+			setItems(config.getBorderSlots(), config.getBorderItem().build());
+		}
+
 
 		previousPageItem(config.getPreviousPageItem().getSlot(), config.getPreviousPageItem()
 				.updateVariables(
 						Map.of("{currentPage}", String.valueOf(this.currentPage()),
 								"{previousPage}", String.valueOf(this.currentPage() - 1)))
 				.build());
+
+
 		nextPageItem(config.getNextPageItem().getSlot(), config.getNextPageItem()
 				.updateVariables(
 						Map.of("{currentPage}", String.valueOf(this.currentPage()),
@@ -53,9 +59,7 @@ public class HomesInventory extends PaginatedFastInv {
 
 		for (EXGHome home : homes) {
 
-			ConsoleLogger.info("debug1: " + home.getName());
-
-			EXGItemConfig homeItem = config.getHomeItem().duplicate();
+			EXGItemConfig homeItem = config.getHomeItem();
 			homeItem.setMaterial(home.getMaterial().name());
 
 			addContent(homeItem
@@ -63,8 +67,6 @@ public class HomesInventory extends PaginatedFastInv {
 							Map.of("{displayName}", home.getDisplayName(),
 									"{homeName}", home.getName()))
 					.build(), e -> {
-
-				ConsoleLogger.info("debug2: " + home.getName());
 
 				if (e.getClick().isLeftClick()) {
 					player.performCommand("essentials:home " + home.getName());
@@ -77,9 +79,11 @@ public class HomesInventory extends PaginatedFastInv {
 		}
 
 
-		setItem(config.getCloseItem().getSlot(), config.getCloseItem().build(), e -> {
-			e.getWhoClicked().closeInventory();
-		});
+		if (config.getCloseItem().isEnabled()) {
+			setItem(config.getCloseItem().getSlot(), config.getCloseItem().build(), e -> {
+				e.getWhoClicked().closeInventory();
+			});
+		}
 
 
 		config.getInventoryScheme().apply(this);
