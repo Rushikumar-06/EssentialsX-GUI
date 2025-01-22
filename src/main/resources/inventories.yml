@@ -55,10 +55,10 @@ inventories:
 
       # Change 'material' to the default item you want to use for homes.
       # 'slot' value will be ignored in this section. Use the 'inventoryScheme' section to set the slots.
+      # 'enabled' value will be ignored in this section. Item will be enabled by default.
       # Placeholders available: {displayName}, {homeName}
       # By default, if displayName is not set, it will use the home name.
       homeItem:
-        enabled: true
         material: "GRASS"
         displayName: "&6{displayName}"
         lore:
@@ -76,12 +76,12 @@ inventories:
           - "&7Click to close the inventory."
 
 
-      # Placeholders available: {currentPage}
+      # Placeholders available: {currentPage}, {previousPage}
       previousPageItem:
         enabled: true
         slot: 47
         material: "STONE_BUTTON"
-        displayName: "&6Previous Page: &e{previousPage}/{totalPages}"
+        displayName: "&6Previous Page: &e{previousPage}"
         lore:
           - "&7Click to go to the previous page."
 
