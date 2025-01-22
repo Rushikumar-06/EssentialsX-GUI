@@ -31,6 +31,12 @@ public class EXGInventoryYamlParser {
 
 	private static final Map<String, List<String>> ignoredPaths = Map.of(
 
+			"enabled", List.of(
+					"inventories.homes.items.homeItem",
+					"inventories.homes.items.previousPageItem",
+					"inventories.homes.items.nextPageItem"
+			),
+
 			"slot", List.of(
 					"inventories.homes.items.homeItem"),
 
@@ -78,7 +84,7 @@ public class EXGInventoryYamlParser {
 
 
 		// Check if item is enabled
-		if (enabled instanceof Boolean && !(Boolean) enabled) {
+		if (enabled instanceof Boolean && !(Boolean) enabled && !ignoredPaths.get("enabled").contains(itemPath)) {
 			return true;
 		}
 
