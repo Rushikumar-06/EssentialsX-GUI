@@ -4,9 +4,10 @@
 
 EssentialsX-GUI is an EssentialsX addon that adds some GUIs for Essentials features, like homes, kits, warps, etc..
 
-[![Download](https://img.shields.io/github/downloads/SniperTVmc/EssentialsX-GUI/total?style=for-the-badge)](https://github.com/SniperTVmc/EssentialsX-GUI/releases/)
-[![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)](?tab=MIT-1-ov-file)
+[![Download](https://img.shields.io/github/downloads/SniperTVmc/EssentialsX-GUI/total?style=for-the-badge)](https://github.com/SniperTVmc/EssentialsX-GUI/releases/latest)
+[![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)](https://github.com/SniperTVmc/EssentialsX-GUI/blob/Main/LICENSE)
 [![CodeFactor](https://www.codefactor.io/repository/github/snipertvmc/essentialsx-gui/badge?style=for-the-badge)](https://www.codefactor.io/repository/github/snipertvmc/essentialsx-gui)
+[![Issues](https://img.shields.io/github/issues/SniperTVmc/EssentialsX-GUI?style=for-the-badge)](https://github.com/SniperTVmc/EssentialsX-GUI/issues)
 
 <!--
 ## Preview / Screenshots
@@ -36,7 +37,7 @@ Requirements:
 - EssentialsX: Version **2.20.1+**
 - Supported Versions: **[Click to view list](#supported-versions)**
 
-First, install the latest version of EssentialsX-GUI [here](github.com/SniperTVmc/EssentialsX-GUI/releases/latest).<br>
+First, install the latest version of EssentialsX-GUI [here](https://github.com/SniperTVmc/EssentialsX-GUI/releases/latest).<br>
 Then drop the file `EssentialsX-GUI-[version].jar` in the `plugins/` folder of your server.<br>
 Finally, __restart__ the server and you're done!
 
