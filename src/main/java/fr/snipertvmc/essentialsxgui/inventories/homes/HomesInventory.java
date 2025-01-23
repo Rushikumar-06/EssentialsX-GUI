@@ -5,7 +5,6 @@ import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGHome;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.EXGHomesInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
-import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
 import org.bukkit.entity.Player;
 
 import java.util.*;
@@ -31,6 +30,9 @@ public class HomesInventory extends PaginatedFastInv {
 						"{player}", player.getName()))
 						.getTitle()
 		);
+
+
+		Main.getInstance().getPlayerDataManager().cleanPlayerData(player.getUniqueId().toString());
 
 
 		if (config.getBorderItem().isEnabled()) {
