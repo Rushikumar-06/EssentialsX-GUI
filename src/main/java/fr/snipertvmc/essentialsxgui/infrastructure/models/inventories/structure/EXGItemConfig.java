@@ -126,28 +126,33 @@ public class EXGItemConfig {
 	// -------------------------------------------------- //
 
 
-	public void setEnabled(boolean enabled) {
+	public EXGItemConfig setEnabled(boolean enabled) {
 		this.enabled = enabled;
+		return this;
 	}
 
 
-	public void setSlot(short slot) {
+	public EXGItemConfig setSlot(short slot) {
 		this.slot = slot;
+		return this;
 	}
 
 
-	public void setMaterial(String materialName) {
+	public EXGItemConfig setMaterial(String materialName) {
 		this.materialName = materialName;
+		return this;
 	}
 
 
-	public void setDisplayName(String displayName) {
+	public EXGItemConfig setDisplayName(String displayName) {
 		this.displayName = displayName;
+		return this;
 	}
 
 
-	public void setLore(List<String> lore) {
+	public EXGItemConfig setLore(List<String> lore) {
 		this.lore = lore;
+		return this;
 	}
 
 

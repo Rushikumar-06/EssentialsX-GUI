@@ -42,6 +42,7 @@ public class HomeEditingInventory extends FastInv {
 
 		if (config.getPreviewHomeItem().isEnabled()) {
 			setItem(config.getPreviewHomeItem().getSlot(), config.getPreviewHomeItem()
+					.setMaterial(home.getMaterial().name())
 					.updateVariables(
 							Map.of("{homeName}", home.getName(),
 									"{homeDisplayName}", home.getDisplayName(),
