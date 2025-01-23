@@ -91,30 +91,6 @@ public class PlayerDataManager {
 	// -------------------------------------------------- //
 
 
-	public void checkForPlayerDataUpdate(String uuid, boolean homes) {
-
-
-		// CHECK FOR PLAYER HOMES UPDATE
-
-		if (homes) {
-			List<String> essentialsHomes = Main.getInstance().getEssentials().getUser(uuid).getHomes();
-			List<String> playerDataHomes = Main.getInstance().getPlayerManager().getPlayer(uuid).getHomes()
-					.stream()
-					.map(EXGHome::getName)
-					.toList();
-
-			for (String homeName : essentialsHomes) {
-				if (!playerDataHomes.contains(homeName)) {
-					cleanPlayerData(uuid);
-					return;
-				}
-			}
-		}
-
-		return;
-	}
-
-
 	public void cleanPlayerData(String uuid) {
 
 		EXGPlayer exgPlayer = Main.getInstance().getPlayerManager().getPlayer(uuid);

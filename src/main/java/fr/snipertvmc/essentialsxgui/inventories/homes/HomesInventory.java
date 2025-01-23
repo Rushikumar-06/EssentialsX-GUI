@@ -99,7 +99,9 @@ public class HomesInventory extends PaginatedFastInv {
 		setItem(config.getCurrentPageItem().getSlot(), config.getCurrentPageItem()
 				.updateVariables(
 						Map.of("{currentPage}", String.valueOf(this.currentPage()),
-								"{totalPages}", String.valueOf(this.lastPage())))
+								"{totalPages}", String.valueOf(this.lastPage()),
+								"previousPage", String.valueOf(this.currentPage() - 1),
+								"nextPage", String.valueOf(this.currentPage() + 1)))
 				.build());
 	}
 
