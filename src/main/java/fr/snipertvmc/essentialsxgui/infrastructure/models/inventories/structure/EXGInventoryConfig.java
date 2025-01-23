@@ -6,7 +6,7 @@ public class EXGInventoryConfig {
 	// -------------------------------------------------- //
 
 
-	private EXGInventoryTitle title;
+	private final EXGInventoryTitle title;
 	private int rows;
 
 	private EXGItemConfig borderItem;
@@ -27,8 +27,8 @@ public class EXGInventoryConfig {
 	// -------------------------------------------------- //
 
 
-	public EXGInventoryTitle getTitle() {
-		return title.duplicate();
+	public EXGInventoryTitle getEXGTitle() {
+		return title;
 	}
 
 
@@ -51,7 +51,7 @@ public class EXGInventoryConfig {
 
 
 	public void setTitle(String title) {
-		this.title = new EXGInventoryTitle(title);
+		this.title.setTitle(title);
 	}
 
 

@@ -29,22 +29,22 @@ public class EXGHomeEditingInventoryConfig extends EXGInventoryConfig {
 
 
 	public EXGItemConfig getPreviewHomeItem() {
-		return previewHomeItem.duplicate();
+		return previewHomeItem;
 	}
 
 
 	public EXGItemConfig getChangeDisplayNameItem() {
-		return changeDisplayNameItem.duplicate();
+		return changeDisplayNameItem;
 	}
 
 
 	public EXGItemConfig getChangeIconItem() {
-		return changeIconItem.duplicate();
+		return changeIconItem;
 	}
 
 
 	public EXGItemConfig getBackItem() {
-		return backItem.duplicate();
+		return backItem;
 	}
 
 
@@ -68,6 +68,26 @@ public class EXGHomeEditingInventoryConfig extends EXGInventoryConfig {
 
 	public void setBackItem(EXGItemConfig backItem) {
 		this.backItem = backItem;
+	}
+
+
+	// -------------------------------------------------- //
+
+
+	public EXGHomeEditingInventoryConfig copy() {
+
+		EXGHomeEditingInventoryConfig copy = new EXGHomeEditingInventoryConfig(
+				this.getEXGTitle().duplicate().getTitle(),
+				this.getRows(),
+				this.getBorderItem().duplicate(),
+				this.getBorderSlots());
+
+		copy.setPreviewHomeItem(this.getPreviewHomeItem().duplicate());
+		copy.setChangeDisplayNameItem(this.getChangeDisplayNameItem().duplicate());
+		copy.setChangeIconItem(this.getChangeIconItem().duplicate());
+		copy.setBackItem(this.getBackItem().duplicate());
+
+		return copy;
 	}
 
 

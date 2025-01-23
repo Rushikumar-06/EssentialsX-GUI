@@ -5,6 +5,7 @@ import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGHome;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.EXGHomesInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
+import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
 import org.bukkit.entity.Player;
 
 import java.util.*;
@@ -16,7 +17,7 @@ public class HomesInventory extends PaginatedFastInv {
 	// -------------------------------------------------- //
 
 
-	private final EXGHomesInventoryConfig config = Main.getInstance().getInventoriesManager().getHomesInventoryConfig();
+	private final EXGHomesInventoryConfig config = Main.getInstance().getInventoriesManager().getHomesInventoryConfig().copy();
 
 
 	// -------------------------------------------------- //
@@ -25,7 +26,8 @@ public class HomesInventory extends PaginatedFastInv {
 	public HomesInventory(Player player) {
 		super(
 				Main.getInstance().getInventoriesManager().getHomesInventoryConfig().getRows() * 9,
-				Main.getInstance().getInventoriesManager().getHomesInventoryConfig().getTitle()
+				Main.getInstance().getInventoriesManager().getHomesInventoryConfig().getEXGTitle()
+						.duplicate()
 						.updateVariables(Map.of(
 						"{player}", player.getName()))
 						.getTitle()
@@ -61,7 +63,7 @@ public class HomesInventory extends PaginatedFastInv {
 
 		for (EXGHome home : homes) {
 
-			EXGItemConfig homeItem = config.getHomeItem();
+			EXGItemConfig homeItem = config.getHomeItem().duplicate();
 			homeItem.setMaterial(home.getMaterial().name());
 
 			addContent(homeItem

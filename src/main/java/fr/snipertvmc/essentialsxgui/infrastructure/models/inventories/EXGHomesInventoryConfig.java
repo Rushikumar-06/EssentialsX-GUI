@@ -3,6 +3,7 @@ package fr.snipertvmc.essentialsxgui.infrastructure.models.inventories;
 import fr.mrmicky.fastinv.InventoryScheme;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
+import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
 
 public class EXGHomesInventoryConfig extends EXGInventoryConfig {
 
@@ -33,27 +34,27 @@ public class EXGHomesInventoryConfig extends EXGInventoryConfig {
 
 
 	public EXGItemConfig getHomeItem() {
-		return homeItem.duplicate();
+		return homeItem;
 	}
 
 
 	public EXGItemConfig getNextPageItem() {
-		return nextPageItem.duplicate();
+		return nextPageItem;
 	}
 
 
 	public EXGItemConfig getPreviousPageItem() {
-		return previousPageItem.duplicate();
+		return previousPageItem;
 	}
 
 
 	public EXGItemConfig getCurrentPageItem() {
-		return currentPageItem.duplicate();
+		return currentPageItem;
 	}
 
 
 	public EXGItemConfig getCloseItem() {
-		return closeItem.duplicate();
+		return closeItem;
 	}
 
 
@@ -92,6 +93,30 @@ public class EXGHomesInventoryConfig extends EXGInventoryConfig {
 
 	public void setInventoryScheme(InventoryScheme inventoryScheme) {
 		this.inventoryScheme = inventoryScheme;
+	}
+
+
+	// -------------------------------------------------- //
+
+
+	public EXGHomesInventoryConfig copy() {
+
+		EXGHomesInventoryConfig copy = new EXGHomesInventoryConfig(
+				this.getEXGTitle().getTitle(),
+				this.getRows(),
+				this.getBorderItem().duplicate(),
+				this.getBorderSlots()
+		);
+
+		copy.setHomeItem(this.getHomeItem().duplicate());
+		copy.setNextPageItem(this.getNextPageItem().duplicate());
+		copy.setPreviousPageItem(this.getPreviousPageItem().duplicate());
+		copy.setCurrentPageItem(this.getCurrentPageItem().duplicate());
+		copy.setCloseItem(this.getCloseItem().duplicate());
+
+		copy.setInventoryScheme(this.getInventoryScheme());
+
+		return copy;
 	}
 
 

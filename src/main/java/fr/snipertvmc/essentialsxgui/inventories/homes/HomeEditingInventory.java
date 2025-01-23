@@ -17,7 +17,7 @@ public class HomeEditingInventory extends FastInv {
 	// -------------------------------------------------- //
 
 
-	private final EXGHomeEditingInventoryConfig config = Main.getInstance().getInventoriesManager().getHomeEditingInventoryConfig();
+	private final EXGHomeEditingInventoryConfig config = Main.getInstance().getInventoriesManager().getHomeEditingInventoryConfig().copy();
 
 
 	// -------------------------------------------------- //
@@ -26,7 +26,8 @@ public class HomeEditingInventory extends FastInv {
 	public HomeEditingInventory(Player player, EXGHome home) {
 		super(
 				Main.getInstance().getInventoriesManager().getHomeEditingInventoryConfig().getRows() * 9,
-				Main.getInstance().getInventoriesManager().getHomeEditingInventoryConfig().getTitle()
+				Main.getInstance().getInventoriesManager().getHomeEditingInventoryConfig().getEXGTitle()
+						.duplicate()
 						.updateVariables(Map.of(
 								"{player}", player.getName(),
 								"{homeName}", home.getName(),

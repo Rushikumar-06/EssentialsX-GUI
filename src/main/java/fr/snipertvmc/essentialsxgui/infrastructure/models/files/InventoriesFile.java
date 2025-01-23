@@ -92,6 +92,11 @@ public class InventoriesFile {
 
 	private EXGItemConfig getItem(String path, boolean isBorderItem) {
 
+		Object enabledValue = yamlConfiguration.get(path + ".enabled");
+		if (enabledValue instanceof Boolean isEnabled && !isEnabled) {
+			return new EXGItemConfig(false, (short) 0, Material.AIR.name(), 1, (byte) 0, null, null, null, null);
+		}
+
 		// Check if the item configuration is valid
 		if (!EXGInventoryYamlParser.isEXGItemConfigValid(path, isBorderItem)) {
 
@@ -146,8 +151,8 @@ public class InventoriesFile {
 
 		for (Map.Entry<String, Object> entry : itemStringValues.entrySet()) {
 
-			if (entry.getKey().equals("enabled") && entry.getValue() != null && entry.getValue() instanceof Boolean enabledValue) {
-				enabled = enabledValue;
+			if (entry.getKey().equals("enabled") && entry.getValue() != null && entry.getValue() instanceof Boolean) {
+				enabled = (boolean) enabledValue;
 
 			} else if (entry.getKey().equals("slot") && entry.getValue() != null && !isBorderItem && entry.getValue() instanceof Number slotValue) {
 				slot = slotValue.shortValue();
@@ -191,7 +196,7 @@ public class InventoriesFile {
 			}
 		}
 
-		return new EXGItemConfig(enabled,slot, materialName, amount, data, displayName, lore, enchantments, itemFlags);
+		return new EXGItemConfig(enabled, slot, materialName, amount, data, displayName, lore, enchantments, itemFlags);
 	}
 
 
