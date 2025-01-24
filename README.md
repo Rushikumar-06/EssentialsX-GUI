@@ -9,6 +9,18 @@ EssentialsX-GUI is an EssentialsX addon that adds some GUIs for Essentials featu
 [![CodeFactor](https://www.codefactor.io/repository/github/snipertvmc/essentialsx-gui/badge?style=for-the-badge)](https://www.codefactor.io/repository/github/snipertvmc/essentialsx-gui)
 [![Issues](https://img.shields.io/github/issues/SniperTVmc/EssentialsX-GUI?style=for-the-badge)](https://github.com/SniperTVmc/EssentialsX-GUI/issues)
 
+## ✨ | Features
+
+### Homes:
+- Customize the appearance of your home in the homes's GUI
+- Customizable home display name.
+- Customizable home display icon.
+- Infinite number of homes supported.
+### Kits:
+- 🚧 ~~Available in an upcoming update.~~
+### Warps :
+- 🚧 ~~Available in an upcoming update.~~
+
 <!--
 ## Preview / Screenshots
 
@@ -29,7 +41,7 @@ EssentialsX-GUI is an EssentialsX addon that adds some GUIs for Essentials featu
 </details>
 -->
 
-## How to install EssentialsX-GUI ?
+## 🔨 | How to install EssentialsX-GUI ?
 
 Requirements:
 
@@ -41,7 +53,7 @@ First, install the latest version of EssentialsX-GUI [here](https://github.com/S
 Then drop the file `EssentialsX-GUI-[version].jar` in the `plugins/` folder of your server.<br>
 Finally, __restart__ the server and you're done!
 
-## Supported Versions
+## 📋 | Supported Versions
 
 |   Version name    | Status |
 |:-----------------:|:------:|
@@ -55,20 +67,18 @@ Finally, __restart__ the server and you're done!
 > - 🟧 : Not tested
 > - ❌ : Not supported
 
-## API Usage/Examples
+<!-- ## API Usage/Examples
 
 ```java
 
 // AN API WILL BE AVAILABLE IN A FUTURE UPDATE
 
-```
+``` -->
 
-## Servers using EssentialsX-GUI
+## 📢 | Servers using EssentialsX-GUI
 
 Are you using our plugin and would like to add your server to the list? Join [Discord Server](https://discord.gg/fSzK79TAYf).
 
-- No one
-
-## Support
+## ❓ | Support
 
 For support, join [Discord Server](https://discord.gg/fSzK79TAYf).
