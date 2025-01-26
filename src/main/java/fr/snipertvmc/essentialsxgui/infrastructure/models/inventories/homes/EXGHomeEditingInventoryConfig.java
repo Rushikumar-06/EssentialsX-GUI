@@ -1,4 +1,4 @@
-package fr.snipertvmc.essentialsxgui.infrastructure.models.inventories;
+package fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes;
 
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;

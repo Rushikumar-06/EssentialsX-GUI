@@ -4,7 +4,7 @@ import fr.mrmicky.fastinv.FastInv;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGHome;
-import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.EXGHomeEditingInventoryConfig;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes.EXGHomeEditingInventoryConfig;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

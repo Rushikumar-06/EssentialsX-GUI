@@ -1,31 +1,34 @@
-package fr.snipertvmc.essentialsxgui.inventories.homes;
+package fr.snipertvmc.essentialsxgui.inventories.kits;
 
 import fr.mrmicky.fastinv.PaginatedFastInv;
 import fr.snipertvmc.essentialsxgui.Main;
-import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGHome;
-import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes.EXGHomesInventoryConfig;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGKit;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.EXGKitsPlayerInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
 import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
-public class HomesInventory extends PaginatedFastInv {
+public class KitsPlayerInventory extends PaginatedFastInv {
 
 
 	// -------------------------------------------------- //
 
 
-	private final EXGHomesInventoryConfig config = Main.getInstance().getInventoriesManager().getHomesInventoryConfig().copy();
+	private final EXGKitsPlayerInventoryConfig config = Main.getInstance().getInventoriesManager().getKitsPlayerInventoryConfig().copy();
 
 
 	// -------------------------------------------------- //
 
 
-	public HomesInventory(Player player) {
+	public KitsPlayerInventory(Player player) {
 		super(
-				Main.getInstance().getInventoriesManager().getHomesInventoryConfig().getRows() * 9,
-				Main.getInstance().getInventoriesManager().getHomesInventoryConfig().getEXGTitle()
+				Main.getInstance().getInventoriesManager().getKitsPlayerInventoryConfig().getRows() * 9,
+				Main.getInstance().getInventoriesManager().getKitsPlayerInventoryConfig().getEXGTitle()
 						.duplicate()
 						.updateVariables(Map.of(
 						"{player}", player.getName()))
@@ -38,6 +41,13 @@ public class HomesInventory extends PaginatedFastInv {
 
 		if (config.getBorderItem().isEnabled()) {
 			setItems(config.getBorderSlots(), config.getBorderItem().build());
+		}
+
+
+		if (config.getSwitchToAdminModeItem().isEnabled() && Main.getInstance().getConfiguration().hasKitsAdminAccess(player)) {
+			setItem(config.getSwitchToAdminModeItem().getSlot(), config.getSwitchToAdminModeItem().build(), e -> {
+				new KitsAdminInventory(player).open(player);
+			});
 		}
 
 
@@ -55,27 +65,30 @@ public class HomesInventory extends PaginatedFastInv {
 				.build());
 
 
-		Set<EXGHome> homes = Main.getInstance().getPlayerManager().getPlayer(player.getUniqueId().toString()).getHomes()
+		Set<EXGKit> kits = Main.getInstance().getEXGServer().getKits()
 				.stream()
-				.sorted(Comparator.comparing(EXGHome::getName))
+				.filter(kit -> player.hasPermission("essentials.kits." + kit.getName()))
+				.sorted(Comparator.comparing(EXGKit::getName))
 				.collect(Collectors.toCollection(LinkedHashSet::new));
 
-		for (EXGHome home : homes) {
+		for (EXGKit kit : kits) {
 
-			EXGItemConfig homeItem = config.getHomeItem().duplicate();
-			homeItem.setMaterial(home.getMaterial().name());
+			EXGItemConfig kitItem = config.getKitItem().duplicate();
+			kitItem.setMaterial(kit.getMaterial().name());
 
-			addContent(homeItem
+			addContent(kitItem
 					.updateVariables(
-							Map.of("{homeDisplayName}", home.getDisplayName(),
-									"{homeName}", home.getName()))
+							Map.of("{kitDisplayName}", kit.getDisplayName(),
+									"{kitName}", kit.getName()))
 					.build(), e -> {
 
 				if (e.getClick().isLeftClick()) {
-					player.performCommand("essentials:home " + home.getName());
+					player.sendMessage("§aKit " + kit.getDisplayName() + " §aenvoyé.");
+//					player.performCommand("essentials:kit " + kit.getName());
 
 				} else if (e.getClick().isRightClick()) {
-					new HomeEditingInventory(player, home).open(player);
+					player.sendMessage("§aEdition du kit " + kit.getDisplayName() + " §aouvert.");
+//					new HomeEditingInventory(player, kit).open(player);
 				}
 
 			});

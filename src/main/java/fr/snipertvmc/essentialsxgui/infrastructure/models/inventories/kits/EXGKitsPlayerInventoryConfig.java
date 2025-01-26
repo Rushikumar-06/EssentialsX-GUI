@@ -1,17 +1,18 @@
-package fr.snipertvmc.essentialsxgui.infrastructure.models.inventories;
+package fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits;
 
 import fr.mrmicky.fastinv.InventoryScheme;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
-import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
 
-public class EXGHomesInventoryConfig extends EXGInventoryConfig {
+public class EXGKitsPlayerInventoryConfig extends EXGInventoryConfig {
 
 
 	// -------------------------------------------------- //
 
 
-	private EXGItemConfig homeItem;
+	private EXGItemConfig kitItem;
+
+	private EXGItemConfig switchToAdminModeItem;
 
 	private EXGItemConfig nextPageItem;
 	private EXGItemConfig previousPageItem;
@@ -25,7 +26,7 @@ public class EXGHomesInventoryConfig extends EXGInventoryConfig {
 	// -------------------------------------------------- //
 
 
-	public EXGHomesInventoryConfig(String title, int rows, EXGItemConfig borderItems, int... borderSlots) {
+	public EXGKitsPlayerInventoryConfig(String title, int rows, EXGItemConfig borderItems, int... borderSlots) {
 		super(title, rows, borderItems, borderSlots);
 	}
 
@@ -33,8 +34,13 @@ public class EXGHomesInventoryConfig extends EXGInventoryConfig {
 	// -------------------------------------------------- //
 
 
-	public EXGItemConfig getHomeItem() {
-		return homeItem;
+	public EXGItemConfig getKitItem() {
+		return kitItem;
+	}
+
+
+	public EXGItemConfig getSwitchToAdminModeItem() {
+		return switchToAdminModeItem;
 	}
 
 
@@ -66,8 +72,13 @@ public class EXGHomesInventoryConfig extends EXGInventoryConfig {
 	// -------------------------------------------------- //
 
 
-	public void setHomeItem(EXGItemConfig homeItem) {
-		this.homeItem = homeItem;
+	public void setKitItem(EXGItemConfig kitItem) {
+		this.kitItem = kitItem;
+	}
+
+
+	public void setSwitchToAdminModeItem(EXGItemConfig switchToAdminModeItem) {
+		this.switchToAdminModeItem = switchToAdminModeItem;
 	}
 
 
@@ -99,16 +110,17 @@ public class EXGHomesInventoryConfig extends EXGInventoryConfig {
 	// -------------------------------------------------- //
 
 
-	public EXGHomesInventoryConfig copy() {
+	public EXGKitsPlayerInventoryConfig copy() {
 
-		EXGHomesInventoryConfig copy = new EXGHomesInventoryConfig(
+		EXGKitsPlayerInventoryConfig copy = new EXGKitsPlayerInventoryConfig(
 				this.getEXGTitle().getTitle(),
 				this.getRows(),
 				this.getBorderItem().duplicate(),
 				this.getBorderSlots()
 		);
 
-		copy.setHomeItem(this.getHomeItem().duplicate());
+		copy.setKitItem(this.getKitItem().duplicate());
+		copy.setSwitchToAdminModeItem(this.getSwitchToAdminModeItem().duplicate());
 		copy.setNextPageItem(this.getNextPageItem().duplicate());
 		copy.setPreviousPageItem(this.getPreviousPageItem().duplicate());
 		copy.setCurrentPageItem(this.getCurrentPageItem().duplicate());

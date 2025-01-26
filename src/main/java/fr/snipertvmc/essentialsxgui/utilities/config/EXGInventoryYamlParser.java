@@ -34,14 +34,22 @@ public class EXGInventoryYamlParser {
 			"enabled", List.of(
 					"inventories.homes.items.homeItem",
 					"inventories.homes.items.previousPageItem",
-					"inventories.homes.items.nextPageItem"
+					"inventories.homes.items.nextPageItem",
+
+					"inventories.kitsAdmin.items.kitItem",
+					"inventories.kitsPlayer.items.kitItem"
 			),
 
 			"slot", List.of(
-					"inventories.homes.items.homeItem"),
+					"inventories.homes.items.homeItem",
+
+					"inventories.kitsAdmin.items.kitItem",
+					"inventories.kitsPlayer.items.kitItem"
+			),
 
 			"material", List.of(
-					"inventories.homeEditing.items.previewHomeItem"),
+					"inventories.homeEditing.items.previewHomeItem"
+			),
 
 			"amount", List.of(),
 

@@ -28,6 +28,10 @@ detailed-loading: true
 
 ############################################################
 # +------------------------------------------------------+ #
-# |                         SOON                         | #
+# |                      Permissions                     | #
 # +------------------------------------------------------+ #
 ############################################################
+
+# Change the permission needed to access to the Kits GUI in admin mode.
+# Default: "essentialsx.gui.kits.admin"
+kits-admin-access: "essentialsxgui.kits.admin"
