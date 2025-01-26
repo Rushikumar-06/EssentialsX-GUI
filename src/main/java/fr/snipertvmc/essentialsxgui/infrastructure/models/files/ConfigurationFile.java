@@ -2,6 +2,7 @@ package fr.snipertvmc.essentialsxgui.infrastructure.models.files;
 
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.permissions.Permission;
 
 public class ConfigurationFile {
 
@@ -24,16 +25,12 @@ public class ConfigurationFile {
 
 
 	public String getConfigVersion() {
-		String version = yamlConfiguration.getString("config-version");
-		if (version != null) {
-			return version;
-		}
-		return "0.0";
+		return yamlConfiguration.getString("general.configVersion", "Config version not found");
 	}
 
 
 	public boolean isDetailedLoading() {
-		return yamlConfiguration.getBoolean("detailed-loading");
+		return yamlConfiguration.getBoolean("general.detailedLoading", true);
 	}
 
 
@@ -46,7 +43,7 @@ public class ConfigurationFile {
 
 
 	public boolean hasKitsAdminAccess(Player player) {
-		return player.hasPermission(yamlConfiguration.getString("kits-admin-access"));
+		return player.hasPermission(yamlConfiguration.getString("permissions.guis.kitsAdminAccess", "unknownPermission"));
 	}
 
 

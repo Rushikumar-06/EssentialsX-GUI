@@ -15,10 +15,12 @@ public class MessagesUtils {
 
 		String prefix = Main.getInstance().getFilesManager().getMessages().getPrefix();
 
-		String message = Main.getInstance().getFilesManager().getMessages().getString(exgMessage.getPath());
+		String message = Main.getInstance().getFilesManager().getMessages().getString(exgMessage.getPath(),
+				"§cMessage not found! Try to reset your messages.yml file, if the problem persists, contact plugin support."
+		);
 
 		String finalMessage = message
-				.replace("\\{prefix}", prefix)
+				.replace("{prefix}", prefix)
 				.replace("&", "§");
 
 		if (variables == null) {
@@ -26,7 +28,7 @@ public class MessagesUtils {
 		}
 
 		for (Map.Entry<String, String> entry : variables.entrySet()) {
-			finalMessage = finalMessage.replaceAll("\\{" + entry.getKey() + "}", entry.getValue());
+			finalMessage = finalMessage.replace("{" + entry.getKey() + "}", entry.getValue());
 		}
 
 		return finalMessage;
