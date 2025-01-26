@@ -1,5 +1,6 @@
 package fr.snipertvmc.essentialsxgui.managers;
 
+import com.earth2me.essentials.User;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGHome;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGPlayer;
@@ -94,10 +95,11 @@ public class PlayerDataManager {
 	public void cleanPlayerData(String uuid) {
 
 		EXGPlayer exgPlayer = Main.getInstance().getPlayerManager().getPlayer(uuid);
+		User user = Main.getInstance().getEssentials().getUser(UUID.fromString(uuid));
 
 
 		// HOMES CLEANING
-		List<String> essentialsHomes = Main.getInstance().getEssentials().getUser(UUID.fromString(uuid)).getHomes();
+		List<String> essentialsHomes = user.getHomes();
 		Set<EXGHome> playerDataHomes = exgPlayer.getHomes();
 
 		Set<EXGHome> cleanedHomes = new HashSet<>();

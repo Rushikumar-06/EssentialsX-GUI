@@ -71,6 +71,7 @@ public class LoadingManager {
 		// FINAL DATA SAVING
 		if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7Final data saving..."); }
 		Main.getInstance().getPlayerManager().saveAll();
+		Main.getInstance().getServerManager().save();
 		if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7Final data saving §fcompleted§7."); }
 	}
 

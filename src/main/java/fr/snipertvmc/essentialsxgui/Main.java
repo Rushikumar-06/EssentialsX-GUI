@@ -2,9 +2,12 @@ package fr.snipertvmc.essentialsxgui;
 
 import com.earth2me.essentials.Essentials;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGServer;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.files.ConfigurationFile;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.files.InventoriesFile;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.files.MessagesFile;
 import fr.snipertvmc.essentialsxgui.managers.*;
 import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
-import fr.snipertvmc.essentialsxgui.utilities.config.EXGInventoryYamlParser;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
@@ -17,6 +20,8 @@ public class Main extends JavaPlugin {
 
 	private ObjectMapper objectMapper;
 
+	private EXGServer exgServer;
+
 	private ChatManager chatManager;
 	private FilesManager filesManager;
 	private HookManager hookManager;
@@ -24,6 +29,8 @@ public class Main extends JavaPlugin {
 	private LoadingManager loadingManager;
 	private PlayerDataManager playerDataManager;
 	private PlayerManager playerManager;
+	private ServerDataManager serverDataManager;
+	private ServerManager serverManager;
 
 
 	// -------------------------------------------------- //
@@ -52,6 +59,8 @@ public class Main extends JavaPlugin {
 		loadingManager = new LoadingManager();
 		playerDataManager = new PlayerDataManager();
 		playerManager = new PlayerManager();
+		serverDataManager = new ServerDataManager();
+		serverManager = new ServerManager();
 
 
 		// FILES LOADING
@@ -60,6 +69,10 @@ public class Main extends JavaPlugin {
 
 		// LOAD PLUGIN
 		loadingManager.loadPlugin(filesManager.getConfiguration().isDetailedLoading());
+
+
+		// SERVER INITIALIZATION
+		exgServer = serverManager.initialize();
 
 
 		// PLUGIN LOADING COMPLETED
@@ -110,6 +123,10 @@ public class Main extends JavaPlugin {
 		return objectMapper;
 	}
 
+	public EXGServer getEXGServer() {
+		return exgServer;
+	}
+
 	public ChatManager getChatManager() {
 		return chatManager;
 	}
@@ -131,6 +148,12 @@ public class Main extends JavaPlugin {
 	public PlayerManager getPlayerManager() {
 		return playerManager;
 	}
+	public ServerDataManager getServerDataManager() {
+		return serverDataManager;
+	}
+	public ServerManager getServerManager() {
+		return serverManager;
+	}
 
 
 	// -------------------------------------------------- //
@@ -140,6 +163,9 @@ public class Main extends JavaPlugin {
 
 	public Essentials getEssentials() {
 		return hookManager.getEssentialsHook().getEssentials();
+	}
+	public ConfigurationFile getConfiguration() {
+		return filesManager.getConfiguration();
 	}
 
 
