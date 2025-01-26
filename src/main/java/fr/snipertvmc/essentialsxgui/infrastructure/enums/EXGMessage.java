@@ -6,9 +6,16 @@ public enum EXGMessage {
 	// -------------------------------------------------- //
 
 
+	// ADMIN
+	FILES_RELOADING("admin.filesReloading"),
+	FILES_RELOADED("admin.filesReloaded"),
+
+
 	// ERRORS
 	INVALID_MATERIAL("errors.invalidMaterial"),
 	CHARACTER_LIMIT("errors.characterLimit"),
+
+	ARGUMENT_NOT_FOUND("errors.argumentNotFound"),
 
 
 	// GENERAL

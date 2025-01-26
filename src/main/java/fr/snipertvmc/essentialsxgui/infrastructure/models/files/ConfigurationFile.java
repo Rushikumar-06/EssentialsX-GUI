@@ -40,6 +40,11 @@ public class ConfigurationFile {
 	// -------------------------------------------------- //
 
 
+	public boolean hasEssentialsXGUICommand(Player player) {
+		return player.hasPermission(yamlConfiguration.getString("permissions.commands.essentialsxgui", "unknownPermission"));
+	}
+
+
 	public boolean hasKitsAdminAccess(Player player) {
 		return player.hasPermission(yamlConfiguration.getString("kits-admin-access"));
 	}

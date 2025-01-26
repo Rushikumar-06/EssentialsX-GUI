@@ -29,6 +29,17 @@ prefix: "&8[&6&LEXG&8] &7"
 
 ############################################################
 # +------------------------------------------------------+ #
+# |                   Admin Messages                     | #
+# +------------------------------------------------------+ #
+############################################################
+
+admin:
+
+  filesReloading: "{prefix} &eThe files are being reloaded..."
+  filesReloaded: "{prefix} &eThe files have been reloaded. Please check the console if you encounter any errors."
+
+############################################################
+# +------------------------------------------------------+ #
 # |                   Error Messages                     | #
 # +------------------------------------------------------+ #
 ############################################################
@@ -37,6 +48,8 @@ errors:
 
   invalidMaterial: "§cThe material name is invalid."
   characterLimit: "§cThe display name must be less than 16 characters."
+
+  argumentNotFound: "{prefix} §cThe argument §f{argument} §cwas not found."
 
 ############################################################
 # +------------------------------------------------------+ #

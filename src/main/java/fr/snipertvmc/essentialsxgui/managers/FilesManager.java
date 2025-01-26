@@ -104,6 +104,34 @@ public class FilesManager {
 	// -------------------------------------------------- //
 
 
+	public void reloadFiles() {
+
+		long startTime = System.currentTimeMillis();
+
+		ConsoleLogger.console("");
+		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Reloading files...");
+
+		loadConfiguration();
+		ConsoleLogger.console("\t§6EssentialsX-GUI: §8- §fConfiguration: §aReloaded");
+
+		loadMessages();
+		ConsoleLogger.console("\t§6EssentialsX-GUI: §8- §fMessages: §aReloaded");
+
+		loadInventories();
+		Main.getInstance().getInventoriesManager().loadInventories();
+		ConsoleLogger.console("\t§6EssentialsX-GUI: §8- §fInventories: §aReloaded");
+
+		long endTime = System.currentTimeMillis();
+		long loadingTime = endTime - startTime;
+
+		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Files reloading §fcompleted§7 in §f" + loadingTime + "ms§7.");
+		ConsoleLogger.console("");
+	}
+
+
+	// -------------------------------------------------- //
+
+
 	public void checkUpdateForConfiguration() {
 
 		String configVersion = Main.getInstance().getFilesManager().getConfiguration().getConfigVersion();
