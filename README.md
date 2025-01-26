@@ -12,7 +12,7 @@ EssentialsX-GUI is an EssentialsX addon that adds some GUIs for Essentials featu
 ## ✨ | Features
 
 ### Homes:
-- Customize the appearance of your home in the homes's GUI
+- Customize the appearance of your home in the homes' GUI
 - Customizable home display name.
 - Customizable home display icon.
 - Infinite number of homes supported.
