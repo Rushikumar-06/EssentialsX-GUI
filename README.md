@@ -32,7 +32,7 @@ EssentialsX-GUI is an EssentialsX addon that adds some GUIs for Essentials featu
   - Give kit to player when clicking on it.
   - 🚧 ~~Kits preview in a GUI.~~
 
-> **Supported EssentialsX features (2/2):**
+> **Supported EssentialsX features (3/3):**
 > - Essentials Kits
 > - Cooldown for each kit.
 > - Permission for each kit.
