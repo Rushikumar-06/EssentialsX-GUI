@@ -30,8 +30,6 @@ public class KitsAdminInventory extends PaginatedFastInv {
 				Main.getInstance().getInventoriesManager().getKitsAdminInventoryConfig().getRows() * 9,
 				Main.getInstance().getInventoriesManager().getKitsAdminInventoryConfig().getEXGTitle()
 						.duplicate()
-						.updateVariables(Map.of(
-						"{player}", player.getName()))
 						.getTitle()
 		);
 
