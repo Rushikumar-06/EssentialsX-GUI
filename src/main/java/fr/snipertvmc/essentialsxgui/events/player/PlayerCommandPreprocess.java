@@ -1,9 +1,11 @@
 package fr.snipertvmc.essentialsxgui.events.player;
 
 import fr.snipertvmc.essentialsxgui.Main;
+import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
 import fr.snipertvmc.essentialsxgui.inventories.homes.HomesInventory;
 import fr.snipertvmc.essentialsxgui.inventories.kits.KitsAdminInventory;
 import fr.snipertvmc.essentialsxgui.inventories.kits.KitsPlayerInventory;
+import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -52,7 +54,7 @@ public class PlayerCommandPreprocess implements Listener {
 
 			case "home", "homes" -> {
 
-				player.sendMessage("§aOpening homes inventory...");
+				player.sendMessage(MessagesUtils.get(EXGMessage.OPENING_HOMES_INVENTORY, null));
 				new HomesInventory(player).open(player);
 			}
 
@@ -63,11 +65,11 @@ public class PlayerCommandPreprocess implements Listener {
 			case "kit", "kits" -> {
 
 				if (Main.getInstance().getConfiguration().hasKitsAdminAccess(player)) {
-					player.sendMessage("§aOpening kits (admin mode) inventory...");
+					player.sendMessage(MessagesUtils.get(EXGMessage.OPENING_ADMIN_KITS_INVENTORY, null));
 					new KitsAdminInventory(player).open(player);
 
 				} else {
-					player.sendMessage("§aOpening kits (player mode) inventory...");
+					player.sendMessage(MessagesUtils.get(EXGMessage.OPENING_PLAYER_KITS_INVENTORY, null));
 					new KitsPlayerInventory(player).open(player);
 				}
 			}

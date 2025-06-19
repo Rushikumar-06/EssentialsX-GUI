@@ -24,7 +24,11 @@ public enum EXGMessage {
 	ACTION_CANCELED("general.actionCanceled"),
 
 	DISPLAY_NAME_CHANGED("general.displayNameChanged"),
-	ICON_CHANGED("general.iconChanged");
+	ICON_CHANGED("general.iconChanged"),
+
+	OPENING_HOMES_INVENTORY("general.openingHomesInventory"),
+	OPENING_ADMIN_KITS_INVENTORY("general.openingAdminKitsInventory"),
+	OPENING_PLAYER_KITS_INVENTORY("general.openingPlayerKitsInventory");
 
 
 	// -------------------------------------------------- //
