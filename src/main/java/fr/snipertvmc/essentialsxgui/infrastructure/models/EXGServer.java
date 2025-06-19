@@ -1,5 +1,6 @@
 package fr.snipertvmc.essentialsxgui.infrastructure.models;
 
+import fr.snipertvmc.essentialsxgui.infrastructure.enums.MCServerVersion;
 import org.bukkit.Material;
 
 import java.util.*;
@@ -10,6 +11,8 @@ public class EXGServer {
 	// -------------------------------------------------- //
 
 
+	private final MCServerVersion version;
+
 	private Set<EXGKit> kits = new HashSet<>();
 
 
@@ -17,6 +20,15 @@ public class EXGServer {
 
 
 	public EXGServer() {
+		this.version = MCServerVersion.getMCServerVersion();
+	}
+
+
+	// -------------------------------------------------- //
+
+
+	public MCServerVersion getVersion() {
+		return version;
 	}
 
 

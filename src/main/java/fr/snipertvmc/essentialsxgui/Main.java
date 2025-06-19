@@ -2,6 +2,7 @@ package fr.snipertvmc.essentialsxgui;
 
 import com.earth2me.essentials.Essentials;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import fr.snipertvmc.essentialsxgui.infrastructure.enums.MCServerVersion;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGServer;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.files.ConfigurationFile;
 import fr.snipertvmc.essentialsxgui.managers.*;
@@ -43,6 +44,7 @@ public class Main extends JavaPlugin {
 
 		ConsoleLogger.console("");
 		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Plugin loading...");
+		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Server version found: §a" + MCServerVersion.getMCServerVersion().name());
 
 
 		// GLOBAL VARIABLES INITIALIZATION
