@@ -25,7 +25,7 @@ public class PlayerDataManager {
 
 	public PlayerDataManager() {
 
-		this.dataFolder = new File(Main.getInstance().getDataFolder(), "data");
+		this.dataFolder = new File(Main.getInstance().getDataFolder(), "data/players/");
 		if (!dataFolder.exists()) {
 			dataFolder.mkdirs();
 		}

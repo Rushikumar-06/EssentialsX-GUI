@@ -24,7 +24,7 @@ public class ServerDataManager {
 
 	public ServerDataManager() {
 
-		this.dataFolder = new File(Main.getInstance().getDataFolder(), "data");
+		this.dataFolder = new File(Main.getInstance().getDataFolder(), "data/");
 		if (!dataFolder.exists()) {
 			dataFolder.mkdirs();
 		}
