@@ -34,7 +34,7 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 		);
 
 
-		Main.getInstance().getPlayerDataManager().cleanPlayerData(player.getUniqueId().toString());
+		Main.getInstance().getServerDataManager().cleanServerData();
 
 
 		if (config.getBorderItem().isEnabled()) {
