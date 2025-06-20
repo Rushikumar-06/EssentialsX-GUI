@@ -16,6 +16,7 @@ EssentialsX-GUI is an EssentialsX addon that adds some GUIs for Essentials featu
   - Customizable home display name.
   - Customizable home display icon.
 - Infinite number of homes supported.
+- ~~Play custom sounds when an action is performed.~~
 
 > **Supported EssentialsX features (2/2):**
 > - Essentials Homes
@@ -25,6 +26,7 @@ EssentialsX-GUI is an EssentialsX addon that adds some GUIs for Essentials featu
   - Customizable kit display name.
   - Customizable kit display icon.
 - Infinite number of kits supported.
+- ~~Play custom sounds when an action is performed.~~
 - Admin view to manage kits.
   - 🚧 ~~Chose a player and give him a kit.~~
   - 🚧 ~~Kit editor in a GUI.~~
