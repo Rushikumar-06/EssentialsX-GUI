@@ -3,7 +3,7 @@ package fr.snipertvmc.essentialsxgui.inventories.kits;
 import fr.mrmicky.fastinv.PaginatedFastInv;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGKit;
-import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.EXGKitsAdminInventoryConfig;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.EXGKitsPlayerViewInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
 import org.bukkit.entity.Player;
 
@@ -13,23 +13,25 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class KitsAdminInventory extends PaginatedFastInv {
+public class KitsPlayerViewInventory extends PaginatedFastInv {
 
 
 	// -------------------------------------------------- //
 
 
-	private final EXGKitsAdminInventoryConfig config = Main.getInstance().getInventoriesManager().getKitsAdminInventoryConfig().copy();
+	private final EXGKitsPlayerViewInventoryConfig config = Main.getInstance().getInventoriesManager().getKitsPlayerInventoryConfig().copy();
 
 
 	// -------------------------------------------------- //
 
 
-	public KitsAdminInventory(Player player) {
+	public KitsPlayerViewInventory(Player player) {
 		super(
-				Main.getInstance().getInventoriesManager().getKitsAdminInventoryConfig().getRows() * 9,
-				Main.getInstance().getInventoriesManager().getKitsAdminInventoryConfig().getEXGTitle()
+				Main.getInstance().getInventoriesManager().getKitsPlayerInventoryConfig().getRows() * 9,
+				Main.getInstance().getInventoriesManager().getKitsPlayerInventoryConfig().getEXGTitle()
 						.duplicate()
+						.updateVariables(Map.of(
+						"{player}", player.getName()))
 						.getTitle()
 		);
 
@@ -42,9 +44,9 @@ public class KitsAdminInventory extends PaginatedFastInv {
 		}
 
 
-		if (config.getSwitchToPlayerModeItem().isEnabled()) {
-			setItem(config.getSwitchToPlayerModeItem().getSlot(), config.getSwitchToPlayerModeItem().build(), e -> {
-				new KitsPlayerInventory(player).open(player);
+		if (config.getSwitchToAdminModeItem().isEnabled() && Main.getInstance().getConfiguration().hasKitsAdminAccess(player)) {
+			setItem(config.getSwitchToAdminModeItem().getSlot(), config.getSwitchToAdminModeItem().build(), e -> {
+				new KitsAdminViewInventory(player).open(player);
 			});
 		}
 
@@ -65,6 +67,7 @@ public class KitsAdminInventory extends PaginatedFastInv {
 
 		Set<EXGKit> kits = Main.getInstance().getEXGServer().getKits()
 				.stream()
+				.filter(kit -> player.hasPermission("essentials.kits." + kit.getName()))
 				.sorted(Comparator.comparing(EXGKit::getName))
 				.collect(Collectors.toCollection(LinkedHashSet::new));
 

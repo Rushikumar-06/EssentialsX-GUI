@@ -2,7 +2,6 @@ package fr.snipertvmc.essentialsxgui.infrastructure.models.files;
 
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.permissions.Permission;
 
 public class ConfigurationFile {
 

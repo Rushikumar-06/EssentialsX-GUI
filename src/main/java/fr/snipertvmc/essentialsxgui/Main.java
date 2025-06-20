@@ -53,9 +53,9 @@ public class Main extends JavaPlugin {
 		objectMapper = new ObjectMapper();
 
 		chatManager = new ChatManager();
-		filesManager = new FilesManager();
 		hookManager = new HookManager();
 		inventoriesManager = new InventoriesManager();
+		filesManager = new FilesManager();
 		loadingManager = new LoadingManager();
 		playerDataManager = new PlayerDataManager();
 		playerManager = new PlayerManager();

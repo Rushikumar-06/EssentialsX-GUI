@@ -1,0 +1,108 @@
+############################################################
+# +------------------------------------------------------+ #
+# |                     Informations                     | #
+# +------------------------------------------------------+ #
+############################################################
+
+# This is the player kits view inventory file for EssentialsX-GUI.
+
+# If you need help with the configuration of the GUI,
+# you can join our discord server at: https://discord.gg/fSzK79TAYf
+
+# For more information about how to configure EssentialsX-GUI,
+# check our Wiki at: SOON
+
+############################################################
+# +------------------------------------------------------+ #
+# |                        General                       | #
+# +------------------------------------------------------+ #
+############################################################
+
+# Please do not change this value as it may cause the file to be reset.
+# Default: 1.0
+config-version: "1.0"
+
+############################################################
+# +------------------------------------------------------+ #
+# |                      Inventories                     | #
+# +------------------------------------------------------+ #
+############################################################
+
+kitsPlayerView:
+
+  # Placeholders available: {player}
+  title: "&6Your Kits"
+  rows: 6
+
+  inventoryScheme:
+    - "         "
+    - "         "
+    - "  11111  "
+    - "  11111  "
+    - "         "
+    - "         "
+
+  borderItem:
+    enabled: true
+    slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53]
+    material: "STAINED_GLASS_PANE"
+    data: 15
+
+  items:
+
+    # 'slot' value will be ignored in this section. Use the 'inventoryScheme' section to set the slots.
+    # 'enabled' value will be ignored in this section. Item is enabled by default.
+    # Placeholders available: {kitDisplayName}, {kitName}, {kitMaterialName}
+    # By default, if kitDisplayName is not set, it will use the kit name.
+    kitItem:
+      material: "{kitMaterialName}"
+      displayName: "&6{kitDisplayName}"
+      lore:
+        - "&f&lRight Click &7to receive this kit."
+        - "&f&lLeft Click &7to preview this kit."
+        - ""
+        - "&7Kit Name: &f&o{kitName}"
+
+    switchToAdminModeItem:
+      enabled: true
+      slot: 8
+      material: "EYE_OF_ENDER"
+      displayName: "&cSwitch to Admin Mode"
+      lore:
+        - "&7Click to switch to admin mode."
+
+    # Placeholders available: {currentPage}, {previousPage}
+    previousPageItem:
+      enabled: true
+      slot: 47
+      material: "STONE_BUTTON"
+      displayName: "&6Previous Page: &e{previousPage}"
+      lore:
+        - "&7Click to go to the previous page."
+
+    # Placeholders available: {currentPage}, {nextPage}
+    nextPageItem:
+      enabled: true
+      slot: 51
+      material: "STONE_BUTTON"
+      displayName: "&6Next Page: &e{nextPage}"
+      lore:
+        - "&7Click to go to the next page."
+
+    # Placeholders available: {currentPage}, {totalPages}
+    currentPageItem:
+      enabled: true
+      slot: 4
+      material: "PAPER"
+      displayName: "&2Page: &a{currentPage}/{totalPages}"
+      lore:
+        - "&7Previous Page: &f{previousPage}"
+        - "&7Next Page: &f{nextPage}"
+
+    closeItem:
+      enabled: true
+      slot: 49
+      material: "BARRIER"
+      displayName: "&cClose"
+      lore:
+        - "&7Click to close the inventory."

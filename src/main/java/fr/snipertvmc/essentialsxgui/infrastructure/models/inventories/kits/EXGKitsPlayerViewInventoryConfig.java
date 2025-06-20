@@ -4,7 +4,7 @@ import fr.mrmicky.fastinv.InventoryScheme;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
 
-public class EXGKitsAdminInventoryConfig extends EXGInventoryConfig {
+public class EXGKitsPlayerViewInventoryConfig extends EXGInventoryConfig {
 
 
 	// -------------------------------------------------- //
@@ -12,7 +12,7 @@ public class EXGKitsAdminInventoryConfig extends EXGInventoryConfig {
 
 	private EXGItemConfig kitItem;
 
-	private EXGItemConfig switchToPlayerModeItem;
+	private EXGItemConfig switchToAdminModeItem;
 
 	private EXGItemConfig nextPageItem;
 	private EXGItemConfig previousPageItem;
@@ -26,7 +26,7 @@ public class EXGKitsAdminInventoryConfig extends EXGInventoryConfig {
 	// -------------------------------------------------- //
 
 
-	public EXGKitsAdminInventoryConfig(String title, int rows, EXGItemConfig borderItems, int... borderSlots) {
+	public EXGKitsPlayerViewInventoryConfig(String title, int rows, EXGItemConfig borderItems, int... borderSlots) {
 		super(title, rows, borderItems, borderSlots);
 	}
 
@@ -39,8 +39,8 @@ public class EXGKitsAdminInventoryConfig extends EXGInventoryConfig {
 	}
 
 
-	public EXGItemConfig getSwitchToPlayerModeItem() {
-		return switchToPlayerModeItem;
+	public EXGItemConfig getSwitchToAdminModeItem() {
+		return switchToAdminModeItem;
 	}
 
 
@@ -77,8 +77,8 @@ public class EXGKitsAdminInventoryConfig extends EXGInventoryConfig {
 	}
 
 
-	public void setSwitchToPlayerModeItem(EXGItemConfig switchToPlayerModeItem) {
-		this.switchToPlayerModeItem = switchToPlayerModeItem;
+	public void setSwitchToAdminModeItem(EXGItemConfig switchToAdminModeItem) {
+		this.switchToAdminModeItem = switchToAdminModeItem;
 	}
 
 
@@ -110,9 +110,9 @@ public class EXGKitsAdminInventoryConfig extends EXGInventoryConfig {
 	// -------------------------------------------------- //
 
 
-	public EXGKitsAdminInventoryConfig copy() {
+	public EXGKitsPlayerViewInventoryConfig copy() {
 
-		EXGKitsAdminInventoryConfig copy = new EXGKitsAdminInventoryConfig(
+		EXGKitsPlayerViewInventoryConfig copy = new EXGKitsPlayerViewInventoryConfig(
 				this.getEXGTitle().getTitle(),
 				this.getRows(),
 				this.getBorderItem().duplicate(),
@@ -120,7 +120,7 @@ public class EXGKitsAdminInventoryConfig extends EXGInventoryConfig {
 		);
 
 		copy.setKitItem(this.getKitItem().duplicate());
-		copy.setSwitchToPlayerModeItem(this.getSwitchToPlayerModeItem().duplicate());
+		copy.setSwitchToAdminModeItem(this.getSwitchToAdminModeItem().duplicate());
 		copy.setNextPageItem(this.getNextPageItem().duplicate());
 		copy.setPreviousPageItem(this.getPreviousPageItem().duplicate());
 		copy.setCurrentPageItem(this.getCurrentPageItem().duplicate());

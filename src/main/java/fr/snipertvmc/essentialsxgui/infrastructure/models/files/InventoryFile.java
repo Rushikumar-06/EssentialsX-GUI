@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class InventoriesFile {
+public class InventoryFile {
 
 
 	// -------------------------------------------------- //
@@ -28,7 +28,7 @@ public class InventoriesFile {
 	// -------------------------------------------------- //
 
 
-	public InventoriesFile(YamlConfiguration yamlConfiguration) {
+	public InventoryFile(YamlConfiguration yamlConfiguration) {
 		this.yamlConfiguration = yamlConfiguration;
 	}
 
@@ -36,7 +36,7 @@ public class InventoriesFile {
 	// -------------------------------------------------- //
 
 
-	public String getInventoriesVersion() {
+	public String getInventoryVersion() {
 		String version = yamlConfiguration.getString("config-version");
 		if (version != null) {
 			return version;
@@ -49,36 +49,36 @@ public class InventoriesFile {
 
 
 	public String getTitle(String inventoryName) {
-		return yamlConfiguration.getString("inventories." + inventoryName + ".title");
+		return yamlConfiguration.getString(inventoryName + ".title");
 	}
 
 
 	public int getRows(String inventoryName) {
-		return yamlConfiguration.getInt("inventories." + inventoryName + ".rows");
+		return yamlConfiguration.getInt(inventoryName + ".rows");
 	}
 
 
 	public EXGItemConfig getItem(String inventoryName, String itemName) {
-		EXGItemConfig itemConfig = getItem("inventories." + inventoryName + ".items." + itemName, false);
-		short slot = (short) yamlConfiguration.getInt("inventories." + inventoryName + ".items." + itemName + ".slot");
+		EXGItemConfig itemConfig = getItem(inventoryName + ".items." + itemName, false);
+		short slot = (short) yamlConfiguration.getInt(inventoryName + ".items." + itemName + ".slot");
 		itemConfig.setSlot(slot);
 		return itemConfig;
 	}
 
 
 	public EXGItemConfig getBorderItem(String inventoryName) {
-		return getItem("inventories." + inventoryName + ".borderItem", true);
+		return getItem(inventoryName + ".borderItem", true);
 	}
 
 
 	public int[] getBorderSlots(String inventoryName) {
-		List<Integer> borderSlots = yamlConfiguration.getIntegerList("inventories." + inventoryName + ".borderItem.slots");
+		List<Integer> borderSlots = yamlConfiguration.getIntegerList(inventoryName + ".borderItem.slots");
 		return borderSlots.stream().mapToInt(i -> i).toArray();
 	}
 
 
 	public InventoryScheme getInventoryScheme(String inventoryName) {
-		List<String> scheme = yamlConfiguration.getStringList("inventories." + inventoryName + ".inventoryScheme");
+		List<String> scheme = yamlConfiguration.getStringList(inventoryName + ".inventoryScheme");
 		InventoryScheme inventoryScheme = new InventoryScheme();
 		for (String line : scheme) {
 			inventoryScheme.mask(line);
@@ -98,7 +98,7 @@ public class InventoriesFile {
 		}
 
 		// Check if the item configuration is valid
-		if (!EXGInventoryYamlParser.isEXGItemConfigValid(path, isBorderItem)) {
+		if (!EXGInventoryYamlParser.isEXGItemConfigValid(this, path, isBorderItem)) {
 
 			Object slotValue = yamlConfiguration.get(path + ".slot");
 			short slot = 0;

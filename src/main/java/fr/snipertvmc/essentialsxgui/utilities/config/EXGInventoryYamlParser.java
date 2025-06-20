@@ -1,8 +1,10 @@
 package fr.snipertvmc.essentialsxgui.utilities.config;
 
 import fr.snipertvmc.essentialsxgui.Main;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.files.InventoryFile;
 import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.inventory.Inventory;
 
 import java.util.List;
 import java.util.Map;
@@ -16,7 +18,7 @@ public class EXGInventoryYamlParser {
 	public static boolean isEXGInventoryConfigValid() {
 
 		// Get the inventories configuration
-		YamlConfiguration config = Main.getInstance().getFilesManager().getInventories().getYamlConfiguration();
+//		YamlConfiguration config = Main.getInstance().getFilesManager().getInventories().getYamlConfiguration();
 
 
 		// Check if the inventories configuration is valid
@@ -32,23 +34,23 @@ public class EXGInventoryYamlParser {
 	private static final Map<String, List<String>> ignoredPaths = Map.of(
 
 			"enabled", List.of(
-					"inventories.homes.items.homeItem",
-					"inventories.homes.items.previousPageItem",
-					"inventories.homes.items.nextPageItem",
+					"homes.items.homeItem",
+					"homes.items.previousPageItem",
+					"homes.items.nextPageItem",
 
-					"inventories.kitsAdmin.items.kitItem",
-					"inventories.kitsPlayer.items.kitItem"
+					"kitsAdminView.items.kitItem",
+					"kitsPlayerView.items.kitItem"
 			),
 
 			"slot", List.of(
-					"inventories.homes.items.homeItem",
+					"homes.items.homeItem",
 
-					"inventories.kitsAdmin.items.kitItem",
-					"inventories.kitsPlayer.items.kitItem"
+					"kitsAdminView.items.kitItem",
+					"kitsPlayerView.items.kitItem"
 			),
 
 			"material", List.of(
-					"inventories.homeEditing.items.previewHomeItem"
+					"homeEditing.items.previewHomeItem"
 			),
 
 			"amount", List.of(),
@@ -68,10 +70,10 @@ public class EXGInventoryYamlParser {
 	// -------------------------------------------------- //
 
 
-	public static boolean isEXGItemConfigValid(String itemPath, boolean isBorderItem) {
+	public static boolean isEXGItemConfigValid(InventoryFile inventoryFile, String itemPath, boolean isBorderItem) {
 
 		// Get the inventories configuration
-		YamlConfiguration config = Main.getInstance().getFilesManager().getInventories().getYamlConfiguration();
+		YamlConfiguration config = inventoryFile.getYamlConfiguration();
 
 
 		// Retrieve item properties

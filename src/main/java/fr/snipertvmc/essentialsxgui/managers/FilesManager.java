@@ -2,14 +2,17 @@ package fr.snipertvmc.essentialsxgui.managers;
 
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.files.ConfigurationFile;
-import fr.snipertvmc.essentialsxgui.infrastructure.models.files.InventoriesFile;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.files.InventoryFile;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.files.MessagesFile;
 import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FilesManager {
 
@@ -19,7 +22,30 @@ public class FilesManager {
 
 	private ConfigurationFile configurationFile;
 	private MessagesFile messagesFile;
-	private InventoriesFile inventoriesFile;
+	private final Map<String, InventoryFile> inventoriesFiles = new HashMap<>();
+
+
+	private final Map<String, String> filesPaths = Map.of(
+			"configuration", "configuration",
+			"messages", "messages",
+
+			"homeEditing", "inventories/homes/homeEditing",
+			"homes", "inventories/homes/homes",
+
+			"kitsAdminView", "inventories/kits/kitsAdminView",
+			"kitsPlayerView", "inventories/kits/kitsPlayerView"
+	);
+
+	private final Map<String, String> filesVersions = Map.of(
+			"configuration", "1.0",
+			"messages", "1.0",
+
+			"homeEditing", "1.0",
+			"homes", "1.0",
+
+			"kitsAdminView", "1.0",
+			"kitsPlayerView", "1.0"
+	);
 
 
 	// -------------------------------------------------- //
@@ -29,17 +55,14 @@ public class FilesManager {
 		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Loading files...");
 
 		loadConfiguration();
-		checkUpdateForConfiguration();
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §8- §fConfiguration: §aLoaded");
+		checkUpdateForFile("configuration");
 
 		loadMessages();
-		checkUpdateForMessages();
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §8- §fMessages: §aLoaded");
+		checkUpdateForFile("messages");
 
 		loadInventories();
-		Main.getInstance().getInventoriesManager().loadInventories();
 		checkUpdateForInventories();
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §8- §fInventories: §aLoaded");
+		Main.getInstance().getInventoriesManager().loadInventories();
 
 		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Files loading §fcompleted§7.");
 	}
@@ -48,7 +71,7 @@ public class FilesManager {
 	// -------------------------------------------------- //
 
 
-	private void loadYAMLFile(String fileName) {
+	private void loadYAMLFile(String fileName, boolean inventoryFile, @Nullable String inventoryName) {
 
 		File file = new File(Main.getInstance().getDataFolder(), fileName + ".yml");
 
@@ -59,10 +82,14 @@ public class FilesManager {
 
 		YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(file);
 
+		if (inventoryFile) {
+			inventoriesFiles.put(inventoryName, new InventoryFile(yamlConfiguration));
+		}
+
 		switch (fileName) {
 			case "configuration" -> configurationFile = new ConfigurationFile(yamlConfiguration);
 			case "messages" -> messagesFile = new MessagesFile(yamlConfiguration);
-			case "inventories" -> inventoriesFile = new InventoriesFile(yamlConfiguration);
+			default -> inventoriesFiles.put(inventoryName, new InventoryFile(yamlConfiguration));
 		}
 	}
 
@@ -70,7 +97,7 @@ public class FilesManager {
 	// -------------------------------------------------- //
 
 
-	private boolean createBackupYAMLFile(String fileName) {
+	private boolean createBackupYAMLFile(String fileName, boolean inventoryFile, @Nullable String inventoryName) {
 		Date currentDate = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
 		String formattedDate = dateFormat.format(currentDate);
@@ -85,7 +112,7 @@ public class FilesManager {
 					boolean success = fileToBackup.renameTo(backupFile);
 
 					if (success) {
-						loadYAMLFile(fileName);
+						loadYAMLFile(fileName, inventoryFile, inventoryName);
 						return true;
 					}
 
@@ -95,7 +122,7 @@ public class FilesManager {
 			}
 
 		} else {
-			loadYAMLFile(fileName);
+			loadYAMLFile(fileName, inventoryFile, inventoryName);
 		}
 		return false;
 	}
@@ -132,78 +159,27 @@ public class FilesManager {
 	// -------------------------------------------------- //
 
 
-	public void checkUpdateForConfiguration() {
+	public void checkUpdateForFile(String fileName) {
 
-		String configVersion = Main.getInstance().getFilesManager().getConfiguration().getConfigVersion();
+		String latestVersion = filesVersions.get(fileName);
 
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Checking for configuration file version...");
+		String fileVersion = switch (fileName) {
+			case "configuration" -> getConfiguration().getConfigVersion();
+			case "messages" -> getMessages().getMessagesVersion();
+			default -> getInventory(fileName).getInventoryVersion();
+		};
 
-		if (Main.getInstance().getFilesManager().getConfiguration().getConfigVersion().equals(configVersion)) {
-			ConsoleLogger.console("\t§6EssentialsX-GUI: §7Your configuration file is §aup to date§7.");
+		if (latestVersion.equals(fileVersion)) {
+			ConsoleLogger.console("\t§6EssentialsX-GUI: §8- §f" + fileName + ": §aLoaded and up to date");
 			return;
 		}
 
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §7A new version is §favailable §7for your configuration file.");
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §6Updating of the configuration file...");
-
-		if (Main.getInstance().getFilesManager().backupConfiguration()) {
-			ConsoleLogger.console("\t§6EssentialsX-GUI: §aYour configuration file has been updated. §7§o(Backup created)");
+		if (Main.getInstance().getFilesManager().backupFile(fileName)) {
+			ConsoleLogger.console("\t§6EssentialsX-GUI: §8- §f" + fileName + ": §6Loaded but updated");
 			return;
 		}
 
-		ConsoleLogger.console("§cAn error has occurred while saving your current configuration file.");
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §7- §ePlease save your current configuration file, delete it,");
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §7- §eand finally restart the plugin to create a new one.");
-	}
-
-
-	public void checkUpdateForMessages() {
-
-		String messagesVersion = Main.getInstance().getFilesManager().getMessages().getMessagesVersion();
-
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Checking for messages file version...");
-
-		if (Main.getInstance().getFilesManager().getMessages().getMessagesVersion().equals(messagesVersion)) {
-			ConsoleLogger.console("\t§6EssentialsX-GUI: §7Your messages file is §aup to date§7.");
-			return;
-		}
-
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §7A new version is §favailable §7for your messages file.");
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §6Updating of the messages file...");
-
-		if (Main.getInstance().getFilesManager().backupMessages()) {
-			ConsoleLogger.console("\t§6EssentialsX-GUI: §aYour messages file has been updated. §7§o(Backup created)");
-			return;
-		}
-
-		ConsoleLogger.console("§cAn error has occurred while saving your current messages file.");
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §7- §ePlease save your current messages file, delete it,");
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §7- §eand finally restart the plugin to create a new one.");
-	}
-
-
-	public void checkUpdateForInventories() {
-
-		String inventoriesVersion = Main.getInstance().getFilesManager().getInventories().getInventoriesVersion();
-
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Checking for inventories file version...");
-
-		if (Main.getInstance().getFilesManager().getInventories().getInventoriesVersion().equals(inventoriesVersion)) {
-			ConsoleLogger.console("\t§6EssentialsX-GUI: §7Your inventories file is §aup to date§7.");
-			return;
-		}
-
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §7A new version is §favailable §7for your inventories file.");
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §6Updating of the inventories file...");
-
-		if (Main.getInstance().getFilesManager().backupInventories()) {
-			ConsoleLogger.console("\t§6EssentialsX-GUI: §aYour inventories file has been updated. §7§o(Backup created)");
-			return;
-		}
-
-		ConsoleLogger.console("§cAn error has occurred while saving your current inventories file.");
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §7- §ePlease save your current inventories file, delete it,");
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §7- §eand finally restart the plugin to create a new one.");
+		ConsoleLogger.console("\t§6EssentialsX-GUI: §8- §f" + fileName + ": §cLoaded but not updated, check wiki for more information");
 	}
 
 
@@ -216,8 +192,8 @@ public class FilesManager {
 	public MessagesFile getMessages() {
 		return messagesFile;
 	}
-	public InventoriesFile getInventories() {
-		return inventoriesFile;
+	public InventoryFile getInventory(String inventoryName) {
+		return inventoriesFiles.get(inventoryName);
 	}
 
 
@@ -225,23 +201,36 @@ public class FilesManager {
 
 
 	private void loadConfiguration() {
-		loadYAMLFile("configuration");
+		loadYAMLFile("configuration", false, null);
 	}
 	private void loadMessages() {
-		loadYAMLFile("messages");
+		loadYAMLFile("messages", false, null);
 	}
-	private void loadInventories() {
-		loadYAMLFile("inventories");
+	private void loadInventory(String inventoryName) {
+		loadYAMLFile(filesPaths.get(inventoryName), true, inventoryName);
 	}
 
-	private boolean backupConfiguration() {
-		return createBackupYAMLFile("configuration");
+	private boolean backupFile(String fileName) {
+		return switch (fileName) {
+			case "configuration", "messages" -> createBackupYAMLFile(fileName, false, null);
+			default -> createBackupYAMLFile(filesPaths.get(fileName), true, fileName);
+		};
 	}
-	private boolean backupMessages() {
-		return createBackupYAMLFile("messages");
+
+
+	// -------------------------------------------------- //
+
+
+	private void loadInventories() {
+		for (String inventoryName : Main.getInstance().getInventoriesManager().getInventoryNames()) {
+			loadInventory(inventoryName);
+		}
 	}
-	private boolean backupInventories() {
-		return createBackupYAMLFile("inventories");
+
+	private void checkUpdateForInventories() {
+		for (String inventoryName : Main.getInstance().getInventoriesManager().getInventoryNames()) {
+			checkUpdateForFile(inventoryName);
+		}
 	}
 
 

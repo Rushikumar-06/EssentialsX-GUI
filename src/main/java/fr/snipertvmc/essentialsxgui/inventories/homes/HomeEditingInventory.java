@@ -76,7 +76,9 @@ public class HomeEditingInventory extends FastInv {
 					}
 
 					home.setDisplayName(newHomeName);
-					player.sendMessage(MessagesUtils.get(EXGMessage.DISPLAY_NAME_CHANGED, Map.of("new_display_name", newHomeName)));
+					player.sendMessage(MessagesUtils.get(EXGMessage.DISPLAY_NAME_CHANGED,
+							Map.of("new_display_name", newHomeName.replace("&", "§"))
+					));
 					new HomeEditingInventory(player, home).open(player);
 
 				}, 10);
