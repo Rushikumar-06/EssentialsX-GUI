@@ -44,8 +44,6 @@ public class PlayerCommandPreprocess implements Listener {
 			return;
 		}
 
-		event.setCancelled(true);
-
 		switch (command) {
 
 			//
@@ -54,6 +52,11 @@ public class PlayerCommandPreprocess implements Listener {
 
 			case "home", "homes" -> {
 
+				if (!Main.getInstance().getConfiguration().isHomesModuleEnabled()) {
+					return;
+				}
+
+				event.setCancelled(true);
 				player.sendMessage(MessagesUtils.get(EXGMessage.OPENING_HOMES_INVENTORY, null));
 				new HomesInventory(player).open(player);
 			}
@@ -64,6 +67,11 @@ public class PlayerCommandPreprocess implements Listener {
 
 			case "kit", "kits" -> {
 
+				if (!Main.getInstance().getConfiguration().isKitsModuleEnabled()) {
+					return;
+				}
+
+				event.setCancelled(true);
 				if (Main.getInstance().getConfiguration().hasKitsAdminAccess(player)) {
 					player.sendMessage(MessagesUtils.get(EXGMessage.OPENING_ADMIN_KITS_INVENTORY, null));
 					new KitsAdminViewInventory(player).open(player);

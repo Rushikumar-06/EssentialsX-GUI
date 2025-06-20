@@ -27,9 +27,15 @@ public class ConfigurationFile {
 		return yamlConfiguration.getString("general.configVersion", "Config version not found");
 	}
 
-
 	public boolean isDetailedLoading() {
 		return yamlConfiguration.getBoolean("general.detailedLoading", true);
+	}
+
+	public boolean isHomesModuleEnabled() {
+		return yamlConfiguration.getBoolean("general.modules.homes", true);
+	}
+	public boolean isKitsModuleEnabled() {
+		return yamlConfiguration.getBoolean("general.modules.kits", true);
 	}
 
 
@@ -52,28 +58,20 @@ public class ConfigurationFile {
 	public String getString(String path) {
 		return yamlConfiguration.getString(path);
 	}
-
-
 	public String getString(String path, String defaultValue) {
 		return yamlConfiguration.getString(path, defaultValue);
 	}
 
-
 	public double getNumber(String path) {
 		return yamlConfiguration.getDouble(path);
 	}
-
-
 	public double getNumber(String path, double defaultValue) {
 		return yamlConfiguration.getDouble(path, defaultValue);
 	}
 
-
 	public boolean getBoolean(String path) {
 		return yamlConfiguration.getBoolean(path);
 	}
-
-
 	public boolean getBoolean(String path, boolean defaultValue) {
 		return yamlConfiguration.getBoolean(path, defaultValue);
 	}

@@ -28,6 +28,19 @@ general:
   # Default: true
   detailedLoading: true
 
+
+  modules:
+
+    # Set this to true if you want to use the homes feature.
+    # This will allow players to access the homes GUI.
+    # Default: true
+    homes: true
+
+    # Set this to true if you want to use the kits feature.
+    # This will allow players to access the kits GUI.
+    # Default: true
+    kits: true
+
 ############################################################
 # +------------------------------------------------------+ #
 # |                      Permissions                     | #
