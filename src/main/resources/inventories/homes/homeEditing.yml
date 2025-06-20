@@ -76,8 +76,8 @@ homeEditing:
         - "&7Click to change the icon of this home."
 
     backItem:
-      slot: 49
       enabled: true
+      slot: 49
       material: "ARROW"
       displayName: "&cBack"
       lore:

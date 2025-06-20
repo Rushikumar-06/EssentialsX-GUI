@@ -31,7 +31,7 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 				Main.getInstance().getInventoriesManager().getKitsPlayerInventoryConfig().getEXGTitle()
 						.duplicate()
 						.updateVariables(Map.of(
-						"{player}", player.getName()))
+								"{player}", player.getName()))
 						.getTitle()
 		);
 
