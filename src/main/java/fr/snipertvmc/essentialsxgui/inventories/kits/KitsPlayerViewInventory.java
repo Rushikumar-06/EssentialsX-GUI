@@ -83,12 +83,10 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 					.build(), e -> {
 
 				if (e.getClick().isLeftClick()) {
-					player.sendMessage("§aKit " + kit.getDisplayName() + " §aenvoyé.");
-//					player.performCommand("essentials:kit " + kit.getName());
+					player.performCommand("essentials:kit " + kit.getName());
 
 				} else if (e.getClick().isRightClick()) {
-					player.sendMessage("§aEdition du kit " + kit.getDisplayName() + " §aouvert.");
-//					new HomeEditingInventory(player, kit).open(player);
+					new KitsPreviewInventory(player, kit).open(player);
 				}
 
 			});

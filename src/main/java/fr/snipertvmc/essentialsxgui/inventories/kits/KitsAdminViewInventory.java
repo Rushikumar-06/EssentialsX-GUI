@@ -80,7 +80,6 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 					.build(), e -> {
 
 				if (e.getClick().isLeftClick()) {
-					player.sendMessage("§aKit " + kit.getDisplayName() + " §aenvoyé.");
 //					player.performCommand("essentials:kit " + kit.getName());
 
 				} else if (e.getClick().isRightClick()) {

@@ -5,6 +5,7 @@ import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes.EXGH
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes.EXGHomeEditingInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.EXGKitsAdminViewInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.EXGKitsPlayerViewInventoryConfig;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.EXGKitsPreviewInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class InventoriesManager {
 
 	private EXGKitsAdminViewInventoryConfig kitsAdminInventoryConfig;
 	private EXGKitsPlayerViewInventoryConfig kitsPlayerInventoryConfig;
+	private EXGKitsPreviewInventoryConfig kitsPreviewInventoryConfig;
 
 
 	// -------------------------------------------------- //
@@ -40,6 +42,7 @@ public class InventoriesManager {
 
 				case "kitsAdminView" -> loadKitsAdminViewInventory(title, rows, inventoryName, borderItem, borderSlots);
 				case "kitsPlayerView" -> loadKitsPlayerViewInventory(title, rows, inventoryName, borderItem, borderSlots);
+				case "kitsPreview" -> loadKitsPreviewInventory(title, rows, inventoryName, borderItem, borderSlots);
 			}
 		}
 	}
@@ -135,6 +138,31 @@ public class InventoriesManager {
 	}
 
 
+	private void loadKitsPreviewInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+
+		kitsPreviewInventoryConfig = new EXGKitsPreviewInventoryConfig(title, rows, borderItem, borderSlots);
+
+		kitsPreviewInventoryConfig.setTitle(title);
+		kitsPreviewInventoryConfig.setRows(rows);
+		kitsPreviewInventoryConfig.setBorderItem(borderItem);
+		kitsPreviewInventoryConfig.setBorderSlots(borderSlots);
+
+		kitsPreviewInventoryConfig.setKitItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
+				inventoryName, "kitItem"));
+		kitsPreviewInventoryConfig.setNextPageItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
+				inventoryName, "nextPageItem"));
+		kitsPreviewInventoryConfig.setPreviousPageItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
+				inventoryName, "previousPageItem"));
+		kitsPreviewInventoryConfig.setCurrentPageItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
+				inventoryName, "currentPageItem"));
+		kitsPreviewInventoryConfig.setBackItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
+				inventoryName, "backItem"));
+
+		kitsPreviewInventoryConfig.setInventoryScheme(Main.getInstance().getFilesManager().getInventory(inventoryName).getInventoryScheme(
+				inventoryName));
+	}
+
+
 	// -------------------------------------------------- //
 
 
@@ -144,7 +172,8 @@ public class InventoriesManager {
 				"homeEditing",
 
 				"kitsAdminView",
-				"kitsPlayerView"
+				"kitsPlayerView",
+				"kitsPreview"
 		);
 	}
 
@@ -161,6 +190,9 @@ public class InventoriesManager {
 	}
 	public EXGKitsPlayerViewInventoryConfig getKitsPlayerInventoryConfig() {
 		return kitsPlayerInventoryConfig;
+	}
+	public EXGKitsPreviewInventoryConfig getKitsPreviewInventoryConfig() {
+		return kitsPreviewInventoryConfig;
 	}
 
 
