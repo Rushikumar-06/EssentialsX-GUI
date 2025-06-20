@@ -30,6 +30,12 @@
 			<url>https://repo.papermc.io/repository/maven-public/</url>
 		</repository>
 
+		<!-- JitPack Repository -->
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io/</url>
+		</repository>
+
 		<!-- Essentials Repository -->
 		<repository>
 			<id>essentials-releases</id>
@@ -61,15 +67,15 @@
 		<dependency>
 			<groupId>net.essentialsx</groupId>
 			<artifactId>EssentialsX</artifactId>
-			<version>2.20.1</version>
+			<version>2.21.1</version>
 			<scope>provided</scope>
 		</dependency>
 
 		<!-- FastInv -->
 		<dependency>
 			<groupId>fr.mrmicky</groupId>
-			<artifactId>FastInv</artifactId>
-			<version>3.1.1</version>
+			<artifactId>fastinv</artifactId>
+			<version>3.1.2</version>
 			<scope>compile</scope>
 		</dependency>
 
@@ -77,7 +83,7 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.18.2</version>
+			<version>2.19.0</version>
 			<scope>compile</scope>
 		</dependency>
 
