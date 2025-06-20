@@ -2,6 +2,7 @@ package fr.snipertvmc.essentialsxgui.managers;
 
 import fr.mrmicky.fastinv.FastInvManager;
 import fr.snipertvmc.essentialsxgui.Main;
+import fr.snipertvmc.essentialsxgui.infrastructure.enums.MCServerVersion;
 import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
 import fr.snipertvmc.essentialsxgui.utilities.RegisterUtils;
 
@@ -29,7 +30,7 @@ public class LoadingManager {
 
 		// SERVER CONFIGURATION ANALYSIS
 		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Analyzing server configuration...");
-		if (!isServerReady()) {
+		if (!isServerVersionSupported() || !isServerReady()) {
 			return;
 		}
 		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Server configuration analysis §fcompleted§7.");
@@ -96,6 +97,32 @@ public class LoadingManager {
 		ConsoleLogger.console("\t§6EssentialsX-GUI: §aEssentialsX is installed on the server.");
 		ConsoleLogger.console("\t§6EssentialsX-GUI: §aVersion found: §f" + version);
 
+		return true;
+	}
+
+
+	public boolean isServerVersionSupported() {
+
+		MCServerVersion serverVersion = MCServerVersion.getMCServerVersion();
+
+		if (serverVersion == MCServerVersion.UnknownVersion) {
+			ConsoleLogger.console("\t§6EssentialsX-GUI: §cServer version not found.");
+			ConsoleLogger.console("\t§6EssentialsX-GUI: §cPlease update your server to a supported version.");
+			ConsoleLogger.console("");
+			Main.getInstance().getServer().getPluginManager().disablePlugin(Main.getInstance());
+			return false;
+		}
+
+		if (serverVersion == MCServerVersion.UnsupportedVersion) {
+			ConsoleLogger.console("\t§6EssentialsX-GUI: §7Server version found: §c" + MCServerVersion.getMCServerVersion().name());
+			ConsoleLogger.console("\t§6EssentialsX-GUI: §cThis version is not supported yet or anymore.");
+			ConsoleLogger.console("");
+
+			Main.getInstance().getServer().getPluginManager().disablePlugin(Main.getInstance());
+			return false;
+		}
+
+		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Server version found: §a" + MCServerVersion.getMCServerVersion().name());
 		return true;
 	}
 

@@ -44,7 +44,6 @@ public class Main extends JavaPlugin {
 
 		ConsoleLogger.console("");
 		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Plugin loading...");
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Server version found: §a" + MCServerVersion.getMCServerVersion().name());
 
 
 		// GLOBAL VARIABLES INITIALIZATION
