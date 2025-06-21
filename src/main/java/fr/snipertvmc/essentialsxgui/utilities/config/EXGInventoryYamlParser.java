@@ -39,14 +39,16 @@ public class EXGInventoryYamlParser {
 					"homes.items.nextPageItem",
 
 					"kitsAdminView.items.kitItem",
-					"kitsPlayerView.items.kitItem"
+					"kitsPlayerView.items.kitItem",
+					"kitsPlayerGive.items.playerItem"
 			),
 
 			"slot", List.of(
 					"homes.items.homeItem",
 
 					"kitsAdminView.items.kitItem",
-					"kitsPlayerView.items.kitItem"
+					"kitsPlayerView.items.kitItem",
+					"kitsPlayerGive.items.playerItem"
 			),
 
 			"material", List.of(

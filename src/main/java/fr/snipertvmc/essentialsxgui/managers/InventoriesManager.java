@@ -4,6 +4,7 @@ import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes.EXGHomesInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes.EXGHomeEditingInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.EXGKitsAdminViewInventoryConfig;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.EXGKitsPlayerGiveInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.EXGKitsPlayerViewInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.EXGKitsPreviewInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
@@ -22,6 +23,7 @@ public class InventoriesManager {
 	private EXGKitsAdminViewInventoryConfig kitsAdminInventoryConfig;
 	private EXGKitsPlayerViewInventoryConfig kitsPlayerInventoryConfig;
 	private EXGKitsPreviewInventoryConfig kitsPreviewInventoryConfig;
+	 private EXGKitsPlayerGiveInventoryConfig kitsPlayerGiveInventoryConfig;
 
 
 	// -------------------------------------------------- //
@@ -43,6 +45,7 @@ public class InventoriesManager {
 				case "kitsAdminView" -> loadKitsAdminViewInventory(title, rows, inventoryName, borderItem, borderSlots);
 				case "kitsPlayerView" -> loadKitsPlayerViewInventory(title, rows, inventoryName, borderItem, borderSlots);
 				case "kitsPreview" -> loadKitsPreviewInventory(title, rows, inventoryName, borderItem, borderSlots);
+				case "kitsPlayerGive" -> loadKitsPlayerGiveInventory(title, rows, inventoryName, borderItem, borderSlots);
 			}
 		}
 	}
@@ -163,6 +166,26 @@ public class InventoriesManager {
 	}
 
 
+	private void loadKitsPlayerGiveInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+
+		kitsPlayerGiveInventoryConfig = new EXGKitsPlayerGiveInventoryConfig(title, rows, borderItem, borderSlots);
+
+		kitsPlayerGiveInventoryConfig.setPlayerItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
+				inventoryName, "playerItem"));
+		kitsPlayerGiveInventoryConfig.setNextPageItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
+				inventoryName, "nextPageItem"));
+		kitsPlayerGiveInventoryConfig.setPreviousPageItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
+				inventoryName, "previousPageItem"));
+		kitsPlayerGiveInventoryConfig.setCurrentPageItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
+				inventoryName, "currentPageItem"));
+		kitsPlayerGiveInventoryConfig.setBackItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
+				inventoryName, "backItem"));
+
+		kitsPlayerGiveInventoryConfig.setInventoryScheme(Main.getInstance().getFilesManager().getInventory(inventoryName).getInventoryScheme(
+				inventoryName));
+	}
+
+
 	// -------------------------------------------------- //
 
 
@@ -173,7 +196,8 @@ public class InventoriesManager {
 
 				"kitsAdminView",
 				"kitsPlayerView",
-				"kitsPreview"
+				"kitsPreview",
+				"kitsPlayerGive"
 		);
 	}
 
@@ -193,6 +217,9 @@ public class InventoriesManager {
 	}
 	public EXGKitsPreviewInventoryConfig getKitsPreviewInventoryConfig() {
 		return kitsPreviewInventoryConfig;
+	}
+	public EXGKitsPlayerGiveInventoryConfig getKitsPlayerGiveInventoryConfig() {
+		return kitsPlayerGiveInventoryConfig;
 	}
 
 

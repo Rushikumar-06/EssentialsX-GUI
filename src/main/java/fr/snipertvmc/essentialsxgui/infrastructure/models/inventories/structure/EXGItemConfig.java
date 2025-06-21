@@ -7,7 +7,10 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.SkullMeta;
+import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -31,6 +34,8 @@ public class EXGItemConfig {
 
 	private final List<Pair<Enchantment, Integer>> enchantments;
 	private final List<ItemFlag> itemFlags;
+
+	private Map<String, String> variables = new HashMap<>();
 
 
 	// -------------------------------------------------- //
@@ -161,12 +166,7 @@ public class EXGItemConfig {
 
 	public ItemStack build() {
 
-		ItemBuilder itemBuilder;
-		if (materialName == null || materialName.equals("AIR")) {
-			itemBuilder = new ItemBuilder(Material.GRASS);
-		} else {
-			itemBuilder = new ItemBuilder(getMaterial());
-		}
+		ItemBuilder itemBuilder = getBaseItem();
 
 		if (amount < 0 || amount > 64) {
 			amount = 1;
@@ -204,12 +204,37 @@ public class EXGItemConfig {
 	}
 
 
+	private @NotNull ItemBuilder getBaseItem() {
+
+		ItemBuilder itemBuilder;
+
+		if (materialName == null || materialName.equals("AIR")) {
+			itemBuilder = new ItemBuilder(Material.GRASS);
+
+		} else if (materialName.startsWith("PLAYER_HEAD:")) {
+
+			String playerHeadName = materialName.substring("PLAYER_HEAD:".length());
+
+			itemBuilder = new ItemBuilder(Material.SKULL_ITEM);
+			itemBuilder.meta(itemMeta -> {
+				SkullMeta skullMeta = (SkullMeta) itemMeta;
+				skullMeta.setOwner(playerHeadName);
+			});
+
+		} else {
+			itemBuilder = new ItemBuilder(getMaterial());
+		}
+
+		return itemBuilder;
+	}
+
+
 	// -------------------------------------------------- //
 
 
 	public EXGItemConfig updateVariables(Map<String, String> variables) {
 
-
+		this.variables = variables;
 		variables.forEach((key, value) -> {
 
 			if (materialName != null) {
@@ -226,7 +251,6 @@ public class EXGItemConfig {
 						.collect(Collectors.toList());
 			}
 		});
-
 
 		return this;
 	}
