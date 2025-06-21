@@ -5,6 +5,7 @@ import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.MCServerVersion;
 import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
 import fr.snipertvmc.essentialsxgui.utilities.RegisterUtils;
+import fr.snipertvmc.essentialsxgui.utilities.other.UpdateUtils;
 
 public class LoadingManager {
 
@@ -33,6 +34,7 @@ public class LoadingManager {
 		if (!isServerVersionSupported() || !isServerReady()) {
 			return;
 		}
+		checkForUpdates();
 		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Server configuration analysis §fcompleted§7.");
 
 		// GLOBAL DATA INITIALIZATION
@@ -124,6 +126,31 @@ public class LoadingManager {
 
 		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Server version found: §a" + MCServerVersion.getMCServerVersion().name());
 		return true;
+	}
+
+
+	public void checkForUpdates() {
+
+		if (!Main.getInstance().getConfiguration().checkForUpdates()) {
+			return;
+		}
+
+		// TODO: Just keep the getLatestPublicVersionTag() method, remove the getLatestReleaseVersionTag() method.
+		//       This is a temporary solution to avoid the 404 error while there is no public version available.
+		String latestVersionAvailable = UpdateUtils.getLatestPublicVersionTag() != null ? UpdateUtils.getLatestPublicVersionTag() : UpdateUtils.getLatestReleaseVersionTag();
+		if (latestVersionAvailable == null) {
+			ConsoleLogger.console("\t§6EssentialsX-GUI: §cFailed to check for updates.");
+			return;
+		}
+
+		String currentVersion = Main.getInstance().getDescription().getVersion();
+		if (currentVersion.equals(latestVersionAvailable)) {
+			ConsoleLogger.console("\t§6EssentialsX-GUI: §aYou are using the latest version of EssentialsX-GUI.");
+
+		} else {
+			ConsoleLogger.console("\t§6EssentialsX-GUI: §6A new version of EssentialsX-GUI is available: §f" + latestVersionAvailable);
+			ConsoleLogger.console("\t§6EssentialsX-GUI: §ePlease update to the latest version for new features and bug fixes.");
+		}
 	}
 
 

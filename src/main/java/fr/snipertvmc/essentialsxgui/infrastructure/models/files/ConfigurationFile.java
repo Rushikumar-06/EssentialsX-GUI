@@ -31,6 +31,10 @@ public class ConfigurationFile {
 		return yamlConfiguration.getBoolean("general.detailedLoading", true);
 	}
 
+	public boolean checkForUpdates() {
+		return yamlConfiguration.getBoolean("general.checkForUpdates", true);
+	}
+
 	public boolean isHomesModuleEnabled() {
 		return yamlConfiguration.getBoolean("general.modules.homes", true);
 	}

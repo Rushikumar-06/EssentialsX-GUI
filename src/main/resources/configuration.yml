@@ -28,6 +28,10 @@ general:
   # Default: true
   detailedLoading: true
 
+  # Do you want to check for updates of the plugin?
+  # Default: true
+  checkForUpdates: true
+
 
   modules:
 
@@ -55,7 +59,7 @@ sounds:
 
 
   # The sound played when a player opens a GUI.
-    # Default: "CHEST_OPEN"
+  # Default: "CHEST_OPEN"
   guiOpen: "CHEST_OPEN"
 
   # The sound played when a player clicks on a close item.
