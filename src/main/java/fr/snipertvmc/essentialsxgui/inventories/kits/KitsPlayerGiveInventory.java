@@ -4,18 +4,13 @@ import fr.mrmicky.fastinv.PaginatedFastInv;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGKit;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.EXGKitsPlayerGiveInventoryConfig;
-import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.EXGKitsPreviewInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
-import fr.snipertvmc.essentialsxgui.utilities.other.EssentialsParser;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class KitsPlayerGiveInventory extends PaginatedFastInv {
 
@@ -31,8 +26,8 @@ public class KitsPlayerGiveInventory extends PaginatedFastInv {
 
 	public KitsPlayerGiveInventory(Player player, EXGKit kit) {
 		super(
-				Main.getInstance().getInventoriesManager().getKitsPreviewInventoryConfig().getRows() * 9,
-				Main.getInstance().getInventoriesManager().getKitsPreviewInventoryConfig().getEXGTitle()
+				Main.getInstance().getInventoriesManager().getKitsPlayerGiveInventoryConfig().getRows() * 9,
+				Main.getInstance().getInventoriesManager().getKitsPlayerGiveInventoryConfig().getEXGTitle()
 						.duplicate()
 						.updateVariables(Map.of(
 								"{kitName}", kit.getName(),
