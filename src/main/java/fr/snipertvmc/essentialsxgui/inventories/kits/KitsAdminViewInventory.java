@@ -84,7 +84,7 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 
 				} else if (e.getClick().isRightClick()) {
 					player.sendMessage("§aEdition du kit " + kit.getDisplayName() + " §aouvert.");
-//					new HomeEditingInventory(player, kit).open(player);
+					new KitEditingInventory(player, kit).open(player);
 				}
 
 			});

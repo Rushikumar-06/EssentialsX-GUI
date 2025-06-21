@@ -3,10 +3,7 @@ package fr.snipertvmc.essentialsxgui.managers;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes.EXGHomesInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes.EXGHomeEditingInventoryConfig;
-import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.EXGKitsAdminViewInventoryConfig;
-import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.EXGKitsPlayerGiveInventoryConfig;
-import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.EXGKitsPlayerViewInventoryConfig;
-import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.EXGKitsPreviewInventoryConfig;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.*;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
 
 import java.util.List;
@@ -23,7 +20,8 @@ public class InventoriesManager {
 	private EXGKitsAdminViewInventoryConfig kitsAdminInventoryConfig;
 	private EXGKitsPlayerViewInventoryConfig kitsPlayerInventoryConfig;
 	private EXGKitsPreviewInventoryConfig kitsPreviewInventoryConfig;
-	 private EXGKitsPlayerGiveInventoryConfig kitsPlayerGiveInventoryConfig;
+	private EXGKitsPlayerGiveInventoryConfig kitsPlayerGiveInventoryConfig;
+	private EXGKitEditingInventoryConfig kitEditingInventoryConfig;
 
 
 	// -------------------------------------------------- //
@@ -46,6 +44,7 @@ public class InventoriesManager {
 				case "kitsPlayerView" -> loadKitsPlayerViewInventory(title, rows, inventoryName, borderItem, borderSlots);
 				case "kitsPreview" -> loadKitsPreviewInventory(title, rows, inventoryName, borderItem, borderSlots);
 				case "kitsPlayerGive" -> loadKitsPlayerGiveInventory(title, rows, inventoryName, borderItem, borderSlots);
+				case "kitEditing" -> loadKitEditingInventory(title, rows, inventoryName, borderItem, borderSlots);
 			}
 		}
 	}
@@ -140,7 +139,6 @@ public class InventoriesManager {
 				inventoryName));
 	}
 
-
 	private void loadKitsPreviewInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
 
 		kitsPreviewInventoryConfig = new EXGKitsPreviewInventoryConfig(title, rows, borderItem, borderSlots);
@@ -165,7 +163,6 @@ public class InventoriesManager {
 				inventoryName));
 	}
 
-
 	private void loadKitsPlayerGiveInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
 
 		kitsPlayerGiveInventoryConfig = new EXGKitsPlayerGiveInventoryConfig(title, rows, borderItem, borderSlots);
@@ -185,6 +182,20 @@ public class InventoriesManager {
 				inventoryName));
 	}
 
+	private void loadKitEditingInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+
+		kitEditingInventoryConfig = new EXGKitEditingInventoryConfig(title, rows, borderItem, borderSlots);
+
+		kitEditingInventoryConfig.setPreviewKitItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
+				inventoryName, "previewKitItem"));
+		kitEditingInventoryConfig.setChangeDisplayNameItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
+				inventoryName, "changeDisplayNameItem"));
+		kitEditingInventoryConfig.setChangeIconItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
+				inventoryName, "changeIconItem"));
+		kitEditingInventoryConfig.setBackItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
+				inventoryName, "backItem"));
+	}
+
 
 	// -------------------------------------------------- //
 
@@ -197,7 +208,8 @@ public class InventoriesManager {
 				"kitsAdminView",
 				"kitsPlayerView",
 				"kitsPreview",
-				"kitsPlayerGive"
+				"kitsPlayerGive",
+				"kitEditing"
 		);
 	}
 
@@ -220,6 +232,9 @@ public class InventoriesManager {
 	}
 	public EXGKitsPlayerGiveInventoryConfig getKitsPlayerGiveInventoryConfig() {
 		return kitsPlayerGiveInventoryConfig;
+	}
+	public EXGKitEditingInventoryConfig getKitEditingInventoryConfig() {
+		return kitEditingInventoryConfig;
 	}
 
 

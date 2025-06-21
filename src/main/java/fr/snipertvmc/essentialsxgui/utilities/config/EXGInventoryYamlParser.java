@@ -52,7 +52,8 @@ public class EXGInventoryYamlParser {
 			),
 
 			"material", List.of(
-					"homeEditing.items.previewHomeItem"
+					"homeEditing.items.previewHomeItem",
+					"kitEditing.items.previewKitItem"
 			),
 
 			"amount", List.of(),

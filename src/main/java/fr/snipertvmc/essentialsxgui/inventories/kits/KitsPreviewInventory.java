@@ -17,7 +17,7 @@ public class KitsPreviewInventory extends PaginatedFastInv {
 	// -------------------------------------------------- //
 
 
-	private final EXGKitsPreviewInventoryConfig config = Main.getInstance().getInventoriesManager().getKitsPreviewInventoryConfig();
+	private final EXGKitsPreviewInventoryConfig config = Main.getInstance().getInventoriesManager().getKitsPreviewInventoryConfig().copy();
 
 
 	// -------------------------------------------------- //

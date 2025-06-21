@@ -18,7 +18,7 @@ public class KitsPlayerGiveInventory extends PaginatedFastInv {
 	// -------------------------------------------------- //
 
 
-	private final EXGKitsPlayerGiveInventoryConfig config = Main.getInstance().getInventoriesManager().getKitsPlayerGiveInventoryConfig();
+	private final EXGKitsPlayerGiveInventoryConfig config = Main.getInstance().getInventoriesManager().getKitsPlayerGiveInventoryConfig().copy();
 
 
 	// -------------------------------------------------- //
