@@ -31,15 +31,53 @@ general:
 
   modules:
 
-    # Set this to true if you want to use the homes feature.
+    # Set this to true if you want to use the homes features.
     # This will allow players to access the homes GUI.
     # Default: true
     homes: true
 
-    # Set this to true if you want to use the kits feature.
+    # Set this to true if you want to use the kits features.
     # This will allow players to access the kits GUI.
     # Default: true
     kits: true
+
+############################################################
+# +------------------------------------------------------+ #
+# |                        Sounds                        | #
+# +------------------------------------------------------+ #
+############################################################
+
+sounds:
+
+  # Set this to true if you want to enable sounds in the plugin.
+  # Default: true
+  enabled: true
+
+
+  # The sound played when a player opens a GUI.
+    # Default: "CHEST_OPEN"
+  guiOpen: "CHEST_OPEN"
+
+  # The sound played when a player clicks on a close item.
+  # Default: "CHEST_CLOSE"
+  guiClose: "CHEST_CLOSE"
+
+  # The sound played when a player clicks on a back item.
+  # Default: "SHOOT_ARROW"
+  guiBack: "SHOOT_ARROW"
+
+  # The sound played when a player clicks on an interactive item in the GUI.
+  # Default: "CHICKEN_EGG_POP"
+  guiClick: "CHICKEN_EGG_POP"
+
+
+  # The sound played when a player completes an action.
+  # Default: "LEVEL_UP"
+  actionSuccess: "LEVEL_UP"
+
+  # The sound played when a player fails an action.
+  # Default: "VILLAGER_NO"
+  actionFailure: "VILLAGER_NO"
 
 ############################################################
 # +------------------------------------------------------+ #

@@ -2,9 +2,11 @@ package fr.snipertvmc.essentialsxgui.inventories.homes;
 
 import fr.mrmicky.fastinv.PaginatedFastInv;
 import fr.snipertvmc.essentialsxgui.Main;
+import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGHome;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes.EXGHomesInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
+import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.entity.Player;
 
 import java.util.*;
@@ -76,6 +78,7 @@ public class HomesInventory extends PaginatedFastInv {
 
 				} else if (e.getClick().isRightClick()) {
 					new HomeEditingInventory(player, home).open(player);
+					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 				}
 
 			});
@@ -84,7 +87,9 @@ public class HomesInventory extends PaginatedFastInv {
 
 		if (config.getCloseItem().isEnabled()) {
 			setItem(config.getCloseItem().getSlot(), config.getCloseItem().build(), e -> {
+
 				e.getWhoClicked().closeInventory();
+				SoundsUtils.playSound(player, EXGSound.GUI_CLOSE);
 			});
 		}
 

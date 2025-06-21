@@ -2,9 +2,11 @@ package fr.snipertvmc.essentialsxgui.inventories.kits;
 
 import fr.mrmicky.fastinv.PaginatedFastInv;
 import fr.snipertvmc.essentialsxgui.Main;
+import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGKit;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.EXGKitsPlayerViewInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
+import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.entity.Player;
 
 import java.util.Comparator;
@@ -46,7 +48,9 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 
 		if (config.getSwitchToAdminModeItem().isEnabled() && Main.getInstance().getConfiguration().hasKitsAdminAccess(player)) {
 			setItem(config.getSwitchToAdminModeItem().getSlot(), config.getSwitchToAdminModeItem().build(), e -> {
+
 				new KitsAdminViewInventory(player).open(player);
+				SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 			});
 		}
 
@@ -84,9 +88,11 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 
 				if (e.getClick().isLeftClick()) {
 					player.performCommand("essentials:kit " + kit.getName());
+					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 
 				} else if (e.getClick().isRightClick()) {
 					new KitsPreviewInventory(player, kit).open(player);
+					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 				}
 
 			});
@@ -95,7 +101,9 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 
 		if (config.getCloseItem().isEnabled()) {
 			setItem(config.getCloseItem().getSlot(), config.getCloseItem().build(), e -> {
+
 				e.getWhoClicked().closeInventory();
+				SoundsUtils.playSound(player, EXGSound.GUI_CLOSE);
 			});
 		}
 

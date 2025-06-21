@@ -42,6 +42,18 @@ public class ConfigurationFile {
 	// -------------------------------------------------- //
 
 
+	public boolean areSoundsEnabled() {
+		return yamlConfiguration.getBoolean("sounds.enabled", true);
+	}
+
+	public String getSound(String path) {
+		return yamlConfiguration.getString("sounds." + path, null);
+	}
+
+
+	// -------------------------------------------------- //
+
+
 	public boolean hasEssentialsXGUICommand(Player player) {
 		return player.hasPermission(yamlConfiguration.getString("permissions.commands.essentialsxgui", "unknownPermission"));
 	}

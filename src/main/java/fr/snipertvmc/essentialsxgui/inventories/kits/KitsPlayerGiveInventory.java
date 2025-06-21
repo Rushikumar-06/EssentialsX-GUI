@@ -2,9 +2,11 @@ package fr.snipertvmc.essentialsxgui.inventories.kits;
 
 import fr.mrmicky.fastinv.PaginatedFastInv;
 import fr.snipertvmc.essentialsxgui.Main;
+import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGKit;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.EXGKitsPlayerGiveInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
+import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -73,12 +75,15 @@ public class KitsPlayerGiveInventory extends PaginatedFastInv {
 					.build(), e -> {
 
 				player.performCommand("essentials:kit " + kit.getName() + " " + target.getName());
+				SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 			});
 		}
 
 		if (config.getBackItem().isEnabled()) {
 			setItem(config.getBackItem().getSlot(), config.getBackItem().build(), e -> {
+
 				new KitsAdminViewInventory(player).open(player);
+				SoundsUtils.playSound(player, EXGSound.GUI_BACK);
 			});
 		}
 

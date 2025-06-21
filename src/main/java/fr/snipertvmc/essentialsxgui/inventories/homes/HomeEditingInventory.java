@@ -3,9 +3,11 @@ package fr.snipertvmc.essentialsxgui.inventories.homes;
 import fr.mrmicky.fastinv.FastInv;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
+import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGHome;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes.EXGHomeEditingInventoryConfig;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
+import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
@@ -81,6 +83,8 @@ public class HomeEditingInventory extends FastInv {
 					));
 					new HomeEditingInventory(player, home).open(player);
 
+					SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
+
 				}, 10);
 			});
 		}
@@ -115,6 +119,8 @@ public class HomeEditingInventory extends FastInv {
 					player.sendMessage(MessagesUtils.get(EXGMessage.ICON_CHANGED, Map.of("new_icon", material.name())));
 					new HomeEditingInventory(player, home).open(player);
 
+					SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
+
 				}, 10);
 			});
 		}
@@ -122,7 +128,9 @@ public class HomeEditingInventory extends FastInv {
 
 		if (config.getBackItem().isEnabled()) {
 			setItem(config.getBackItem().getSlot(), config.getBackItem().build(), e -> {
+
 				new HomesInventory(player).open(player);
+				SoundsUtils.playSound(player, EXGSound.GUI_BACK);
 			});
 		}
 	}

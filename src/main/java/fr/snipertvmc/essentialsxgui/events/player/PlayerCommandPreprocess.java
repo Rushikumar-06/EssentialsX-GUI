@@ -2,10 +2,12 @@ package fr.snipertvmc.essentialsxgui.events.player;
 
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
+import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
 import fr.snipertvmc.essentialsxgui.inventories.homes.HomesInventory;
 import fr.snipertvmc.essentialsxgui.inventories.kits.KitsAdminViewInventory;
 import fr.snipertvmc.essentialsxgui.inventories.kits.KitsPlayerViewInventory;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
+import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -57,8 +59,10 @@ public class PlayerCommandPreprocess implements Listener {
 				}
 
 				event.setCancelled(true);
+
 				player.sendMessage(MessagesUtils.get(EXGMessage.OPENING_HOMES_INVENTORY, null));
 				new HomesInventory(player).open(player);
+				SoundsUtils.playSound(player, EXGSound.GUI_OPEN);
 			}
 
 			//
@@ -72,6 +76,7 @@ public class PlayerCommandPreprocess implements Listener {
 				}
 
 				event.setCancelled(true);
+
 				if (Main.getInstance().getConfiguration().hasKitsAdminAccess(player)) {
 					player.sendMessage(MessagesUtils.get(EXGMessage.OPENING_ADMIN_KITS_INVENTORY, null));
 					new KitsAdminViewInventory(player).open(player);
@@ -80,6 +85,8 @@ public class PlayerCommandPreprocess implements Listener {
 					player.sendMessage(MessagesUtils.get(EXGMessage.OPENING_PLAYER_KITS_INVENTORY, null));
 					new KitsPlayerViewInventory(player).open(player);
 				}
+
+				SoundsUtils.playSound(player, EXGSound.GUI_OPEN);
 			}
 		}
 

@@ -3,9 +3,11 @@ package fr.snipertvmc.essentialsxgui.inventories.kits;
 import fr.mrmicky.fastinv.FastInv;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
+import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGKit;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.EXGKitEditingInventoryConfig;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
+import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
@@ -66,12 +68,14 @@ public class KitEditingInventory extends FastInv {
 					if (newKitName.equalsIgnoreCase("cancel")) {
 						player.sendMessage(MessagesUtils.get(EXGMessage.ACTION_CANCELED, null));
 						new KitEditingInventory(player, kit).open(player);
+						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 						return;
 					}
 
 					if (newKitName.length() > 16) {
 						player.sendMessage(MessagesUtils.get(EXGMessage.CHARACTER_LIMIT, null));
 						new KitEditingInventory(player, kit).open(player);
+						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 						return;
 					}
 
@@ -80,6 +84,7 @@ public class KitEditingInventory extends FastInv {
 							Map.of("new_display_name", newKitName.replace("&", "§"))
 					));
 					new KitEditingInventory(player, kit).open(player);
+					SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
 
 				}, 10);
 			});
@@ -100,6 +105,7 @@ public class KitEditingInventory extends FastInv {
 					if (materialName.equalsIgnoreCase("cancel")) {
 						player.sendMessage(MessagesUtils.get(EXGMessage.ACTION_CANCELED, null));
 						new KitEditingInventory(player, kit).open(player);
+						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 						return;
 					}
 
@@ -108,12 +114,14 @@ public class KitEditingInventory extends FastInv {
 					if (material == null) {
 						player.sendMessage(MessagesUtils.get(EXGMessage.INVALID_MATERIAL, null));
 						new KitEditingInventory(player, kit).open(player);
+						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 						return;
 					}
 
 					kit.setMaterial(material);
 					player.sendMessage(MessagesUtils.get(EXGMessage.ICON_CHANGED, Map.of("new_icon", material.name())));
 					new KitEditingInventory(player, kit).open(player);
+					SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
 
 				}, 10);
 			});
@@ -122,7 +130,9 @@ public class KitEditingInventory extends FastInv {
 
 		if (config.getBackItem().isEnabled()) {
 			setItem(config.getBackItem().getSlot(), config.getBackItem().build(), e -> {
+
 				new KitsAdminViewInventory(player).open(player);
+				SoundsUtils.playSound(player, EXGSound.GUI_BACK);
 			});
 		}
 	}
