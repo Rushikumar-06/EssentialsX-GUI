@@ -28,7 +28,7 @@ EssentialsX-GUI is an EssentialsX addon that adds some GUIs for Essentials featu
 - Infinite number of kits supported.
 - 🚧 ~~Play custom sounds when an action is performed.~~
 - Admin view to manage kits.
-  - 🚧 ~~Chose a player and give him a kit.~~
+  - Chose a player and give him a kit.
   - 🚧 ~~Kit editor in a GUI.~~
 - Player view to see owned kits.
   - Give kit to player when clicking on it.
