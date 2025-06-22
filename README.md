@@ -77,11 +77,12 @@ Finally, __restart__ the server and you're done!
 
 ## 📋 | Supported Versions
 
-|   Version name    | Status |
-|:-----------------:|:------:|
-| 1.8.8 and earlier |   🟧   |
-|       1.8.8       |   ✅    |
-| 1.8.8 and higher  |   🟧   |
+|   Version name    | Status | Tested plugin version |
+|:-----------------:|:------:|-----------------------|
+| 1.8.8 and earlier |   🟧   | ✖️                    |
+|       1.8.8       |   ✅    | 1.0.0-beta5           |
+|      1.12.2       |   ✅    | 1.0.0-beta5           |
+| 1.8.8 and higher  |   🟧   | ✖️                    |
 
 > Legend:
 > - ✅ : Supported
