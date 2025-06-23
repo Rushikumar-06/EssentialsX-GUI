@@ -67,7 +67,10 @@ public class Main extends JavaPlugin {
 
 
 		// LOAD PLUGIN
-		loadingManager.loadPlugin(filesManager.getConfiguration().isDetailedLoading());
+		boolean cancelLoading = false;
+		if (!loadingManager.loadPlugin(filesManager.getConfiguration().isDetailedLoading())) {
+			cancelLoading = true;
+		}
 
 
 		// SERVER INITIALIZATION
@@ -81,6 +84,11 @@ public class Main extends JavaPlugin {
 		ConsoleLogger.console("\t§6EssentialsX-GUI: §7The plugin has been §floaded §7correctly in §f" + loadingTime + "ms§7.");
 		ConsoleLogger.console("");
 
+		if (cancelLoading) {
+			ConsoleLogger.console("\t§6EssentialsX-GUI: §cPlugin will be disabled due to loading errors.");
+			ConsoleLogger.console("");
+			getServer().getPluginManager().disablePlugin(this);
+		}
 	}
 
 
