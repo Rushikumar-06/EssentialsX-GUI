@@ -67,7 +67,7 @@ EssentialsX-GUI is an EssentialsX addon that adds some GUIs for Essentials featu
 Requirements:
 
 - Minecraft Server: **Java Edition**
-- Java Version: **17+**
+- Java Version: **16+**
 - EssentialsX Version: **2.21.1+**
 - Supported Versions: **[Click to view list](#supported-versions)**
 
