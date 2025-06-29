@@ -1,6 +1,7 @@
 package fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure;
 
-import fr.mrmicky.fastinv.ItemBuilder;
+import fr.snipertvmc.essentialsxgui.Main;
+import fr.snipertvmc.essentialsxgui.libraries.fastinv.ItemBuilder;
 import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
 import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.Material;

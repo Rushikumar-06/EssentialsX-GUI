@@ -1,6 +1,6 @@
 package fr.snipertvmc.essentialsxgui.managers;
 
-import fr.mrmicky.fastinv.FastInvManager;
+import fr.snipertvmc.essentialsxgui.libraries.fastinv.FastInvManager;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.MCServerVersion;
 import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;

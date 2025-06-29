@@ -5,6 +5,7 @@ import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGHome;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGPlayer;
 import fr.snipertvmc.essentialsxgui.utilities.data.JsonUtils;
+import org.bukkit.Material;
 
 import java.io.File;
 import java.io.IOException;

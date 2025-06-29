@@ -1,6 +1,5 @@
 package fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits;
 
-import fr.mrmicky.fastinv.InventoryScheme;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
 

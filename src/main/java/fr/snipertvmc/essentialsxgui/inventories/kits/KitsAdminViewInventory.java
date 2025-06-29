@@ -1,6 +1,6 @@
 package fr.snipertvmc.essentialsxgui.inventories.kits;
 
-import fr.mrmicky.fastinv.PaginatedFastInv;
+import fr.snipertvmc.essentialsxgui.libraries.fastinv.PaginatedFastInv;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGKit;
@@ -88,7 +88,6 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 
 				} else if (e.getClick().isRightClick()) {
-					player.sendMessage("§aEdition du kit " + kit.getDisplayName() + " §aouvert.");
 					new KitEditingInventory(player, kit).open(player);
 					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 				}

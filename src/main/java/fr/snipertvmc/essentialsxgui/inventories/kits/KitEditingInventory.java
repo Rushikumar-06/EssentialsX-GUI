@@ -1,6 +1,6 @@
 package fr.snipertvmc.essentialsxgui.inventories.kits;
 
-import fr.mrmicky.fastinv.FastInv;
+import fr.snipertvmc.essentialsxgui.libraries.fastinv.FastInv;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;

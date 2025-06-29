@@ -1,9 +1,10 @@
 package fr.snipertvmc.essentialsxgui.infrastructure.models.files;
 
-import fr.mrmicky.fastinv.InventoryScheme;
+import fr.snipertvmc.essentialsxgui.Main;
+import fr.snipertvmc.essentialsxgui.libraries.fastinv.InventoryScheme;
+import fr.snipertvmc.essentialsxgui.infrastructure.enums.MCServerVersion;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
-import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
-import fr.snipertvmc.essentialsxgui.utilities.config.EXGInventoryYamlParser;
+import fr.snipertvmc.essentialsxgui.utilities.config.EXGItemConfigParser;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.Material;
