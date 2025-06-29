@@ -98,7 +98,10 @@ public class EXGItemConfig {
 		Material possibleMaterial = Material.matchMaterial(materialName);
 		if (possibleMaterial == null) {
 			ConsoleLogger.error("Material " + materialName + " not found.");
-			return Material.GRASS;
+			return switch (Main.getInstance().getMCServerVersion()) {
+				case v1_8_8, v1_9_4, v1_10_2, v1_11_2, v1_12_2 -> Material.matchMaterial("GRASS");
+				default -> Material.matchMaterial("GRASS_BLOCK");
+			};
 		}
 		return possibleMaterial;
 	}
@@ -215,7 +218,12 @@ public class EXGItemConfig {
 
 			String playerHeadName = materialName.substring("PLAYER_HEAD:".length());
 
-			itemBuilder = new ItemBuilder(Material.SKULL_ITEM);
+			Material material = switch (Main.getInstance().getMCServerVersion()) {
+				case v1_8_8, v1_9_4, v1_10_2, v1_11_2, v1_12_2 -> Material.matchMaterial("SKULL_ITEM");
+				default -> Material.matchMaterial("PLAYER_HEAD");
+			};
+
+			itemBuilder = new ItemBuilder(material);
 			itemBuilder.meta(itemMeta -> {
 				SkullMeta skullMeta = (SkullMeta) itemMeta;
 				skullMeta.setOwner(playerHeadName);

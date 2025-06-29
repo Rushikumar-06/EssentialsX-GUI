@@ -31,6 +31,8 @@ public class Main extends JavaPlugin {
 	private ServerDataManager serverDataManager;
 	private ServerManager serverManager;
 
+	private MCServerVersion mcServerVersion;
+
 
 	// -------------------------------------------------- //
 
@@ -60,6 +62,8 @@ public class Main extends JavaPlugin {
 		playerManager = new PlayerManager();
 		serverDataManager = new ServerDataManager();
 		serverManager = new ServerManager();
+
+		mcServerVersion = MCServerVersion.getMCServerVersion();
 
 
 		// FILES LOADING
@@ -173,6 +177,13 @@ public class Main extends JavaPlugin {
 	}
 	public ConfigurationFile getConfiguration() {
 		return filesManager.getConfiguration();
+	}
+
+
+	// CONSTANTS VARIABLES
+
+	public MCServerVersion getMCServerVersion() {
+		return mcServerVersion;
 	}
 
 

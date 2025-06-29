@@ -106,7 +106,7 @@ public class LoadingManager {
 
 	public boolean isServerVersionSupported() {
 
-		MCServerVersion serverVersion = MCServerVersion.getMCServerVersion();
+		MCServerVersion serverVersion = Main.getInstance().getMCServerVersion();
 		if (serverVersion == MCServerVersion.UnknownVersion || serverVersion == MCServerVersion.UnsupportedVersion ||
 				!serverVersion.isFullySupported()) {
 

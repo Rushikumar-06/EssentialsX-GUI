@@ -58,30 +58,35 @@ sounds:
   enabled: true
 
 
+  # Warning: This section should follow values listed on this website:
+  # - https://helpch.at/docs/1.21.5/org/bukkit/Sound.html
+  # Change '1.21.5' with your current Minecraft version.
+
+
   # The sound played when a player opens a GUI.
-  # Default: "CHEST_OPEN"
-  guiOpen: "CHEST_OPEN"
+  # Default: "%%value_guiOpen%%"
+  guiOpen: "%%value_guiOpen%%"
 
   # The sound played when a player clicks on a close item.
-  # Default: "CHEST_CLOSE"
-  guiClose: "CHEST_CLOSE"
+  # Default: "%%value_guiClose%%"
+  guiClose: "%%value_guiClose%%"
 
   # The sound played when a player clicks on a back item.
-  # Default: "SHOOT_ARROW"
-  guiBack: "SHOOT_ARROW"
+  # Default: "%%value_guiBack%%"
+  guiBack: "%%value_guiBack%%"
 
   # The sound played when a player clicks on an interactive item in the GUI.
-  # Default: "CHICKEN_EGG_POP"
-  guiClick: "CHICKEN_EGG_POP"
+  # Default: "%%value_guiClick%%"
+  guiClick: "%%value_guiClick%%"
 
 
   # The sound played when a player completes an action.
-  # Default: "LEVEL_UP"
-  actionSuccess: "LEVEL_UP"
+  # Default: "%%value_actionSuccess%%"
+  actionSuccess: "%%value_actionSuccess%%"
 
   # The sound played when a player fails an action.
-  # Default: "VILLAGER_NO"
-  actionFailure: "VILLAGER_NO"
+  # Default: "%%value_actionFailure%%"
+  actionFailure: "%%value_actionFailure%%"
 
 ############################################################
 # +------------------------------------------------------+ #

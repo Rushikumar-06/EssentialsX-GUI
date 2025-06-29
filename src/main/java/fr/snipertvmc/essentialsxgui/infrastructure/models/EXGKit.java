@@ -1,5 +1,6 @@
 package fr.snipertvmc.essentialsxgui.infrastructure.models;
 
+import fr.snipertvmc.essentialsxgui.Main;
 import org.bukkit.Material;
 
 public class EXGKit {
@@ -20,7 +21,10 @@ public class EXGKit {
 	public EXGKit(String name) {
 		this.name = name;
 		this.displayName = name;
-		this.material = Material.GRASS;
+		this.material = switch (Main.getInstance().getMCServerVersion()) {
+			case v1_8_8, v1_9_4, v1_10_2, v1_11_2, v1_12_2 -> Material.matchMaterial("GRASS");
+			default -> Material.matchMaterial("GRASS_BLOCK");
+		};
 	}
 
 

@@ -30,7 +30,7 @@ public enum MCServerVersion {
 
 	v1_15_2("1.15.2", "v1_15_R1", 578, false),
 
-	v1_16_5("1.16.5", "v1_16_R3", 754, false),
+	v1_16_5("1.16.5", "v1_16_R3", 754, true),
 
 	v1_17_1("1.17.1", "v1_17_R1", 756, false),
 
@@ -41,7 +41,7 @@ public enum MCServerVersion {
 	v1_20_6("1.20.6", "v1_20_R3", 766, false),
 
 	v1_21_1("1.21.1", "v1_21_R3", 769, false),
-	v1_21_4("1.21.4", "v1_21_R3", 769, false),
+	v1_21_4("1.21.4", "v1_21_R3", 769, true),
 	v1_21_5("1.21.5", "v1_21_R4", 770, false);
 
 
@@ -93,7 +93,7 @@ public enum MCServerVersion {
 	}
 
 
-	public static MCServerVersion getMCServerVersion(String serverVersion) {
+	private static MCServerVersion getMCServerVersion(String serverVersion) {
 		for (MCServerVersion mcServerVersion : MCServerVersion.values()) {
 			if (serverVersion.equals(mcServerVersion.getVersionName())) {
 				return mcServerVersion;

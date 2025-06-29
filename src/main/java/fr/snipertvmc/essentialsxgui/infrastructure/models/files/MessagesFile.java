@@ -1,6 +1,11 @@
 package fr.snipertvmc.essentialsxgui.infrastructure.models.files;
 
+import fr.snipertvmc.essentialsxgui.infrastructure.enums.MCServerVersion;
 import org.bukkit.configuration.file.YamlConfiguration;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MessagesFile {
 
@@ -69,6 +74,19 @@ public class MessagesFile {
 
 	public boolean getBoolean(String path, boolean defaultValue) {
 		return yamlConfiguration.getBoolean(path, defaultValue);
+	}
+
+
+	// -------------------------------------------------- //
+
+
+	public Map<String, String> getPlaceholders() {
+		return new HashMap<>();
+	}
+
+
+	public List<String> getKeysToRemove() {
+		return List.of();
 	}
 
 

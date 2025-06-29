@@ -34,6 +34,10 @@ kitsPreview:
   title: "&6Kit Preview: &e{kitDisplayName}"
   rows: 6
 
+  # The inventory scheme defines the layout of the inventory.
+  # " " means an empty slot.
+  # "1" means a slot with an item.
+  # Here "1" is used to indicate where the kit items will be placed.
   inventoryScheme:
     - "         "
     - "         "
@@ -45,8 +49,9 @@ kitsPreview:
   borderItem:
     enabled: true
     slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53]
-    material: "STAINED_GLASS_PANE"
+    material: "%%value_materialBorderItem%%"
     data: 15
+    displayName: "§8- §6§lEssentialsX-GUI"
 
   items:
 

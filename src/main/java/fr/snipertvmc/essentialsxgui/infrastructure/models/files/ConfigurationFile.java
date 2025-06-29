@@ -1,7 +1,13 @@
 package fr.snipertvmc.essentialsxgui.infrastructure.models.files;
 
+import fr.snipertvmc.essentialsxgui.Main;
+import fr.snipertvmc.essentialsxgui.infrastructure.enums.MCServerVersion;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ConfigurationFile {
 
@@ -71,25 +77,45 @@ public class ConfigurationFile {
 	// -------------------------------------------------- //
 
 
-	public String getString(String path) {
-		return yamlConfiguration.getString(path);
-	}
-	public String getString(String path, String defaultValue) {
-		return yamlConfiguration.getString(path, defaultValue);
+	public Map<String, String> getPlaceholders() {
+
+		MCServerVersion serverVersion = Main.getInstance().getMCServerVersion();
+		switch (serverVersion) {
+
+			case v1_8_8 -> {
+
+				return Map.of(
+						"value_guiOpen", "CHEST_OPEN",
+						"value_guiClose", "CHEST_CLOSE",
+						"value_guiBack", "SHOOT_ARROW",
+						"value_guiClick", "CHICKEN_EGG_POP",
+
+						"value_actionSuccess", "LEVEL_UP",
+						"value_actionFailure", "VILLAGER_NO"
+				);
+			}
+
+			case v1_9_4, v1_10_2, v1_11_2, v1_12_2, v1_13_2, v1_14_4, v1_15_2, v1_16_5,
+			     v1_17_1, v1_18_2, v1_19_4, v1_20_6, v1_21_1, v1_21_4, v1_21_5 -> {
+
+				return Map.of(
+						"value_guiOpen", "BLOCK_CHEST_OPEN",
+						"value_guiClose", "BLOCK_CHEST_CLOSE",
+						"value_guiBack", "ENTITY_EXPERIENCE_BOTTLE_THROW",
+						"value_guiClick", "ENTITY_CHICKEN_EGG",
+
+						"value_actionSuccess", "ENTITY_PLAYER_LEVELUP",
+						"value_actionFailure", "ENTITY_VILLAGER_NO"
+				);
+			}
+		}
+
+		return new HashMap<>();
 	}
 
-	public double getNumber(String path) {
-		return yamlConfiguration.getDouble(path);
-	}
-	public double getNumber(String path, double defaultValue) {
-		return yamlConfiguration.getDouble(path, defaultValue);
-	}
 
-	public boolean getBoolean(String path) {
-		return yamlConfiguration.getBoolean(path);
-	}
-	public boolean getBoolean(String path, boolean defaultValue) {
-		return yamlConfiguration.getBoolean(path, defaultValue);
+	public List<String> getKeysToRemove() {
+		return List.of();
 	}
 
 
