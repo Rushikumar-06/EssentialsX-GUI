@@ -82,6 +82,8 @@ Finally, __restart__ the server and you're done!
 | 1.8.8 and earlier |   🟧   | ✖️                    |
 |       1.8.8       |   ✅    | 1.0.0-beta5           |
 |      1.12.2       |   ✅    | 1.0.0-beta5           |
+|      1.16.5       |   ✅    | 1.0.0-beta5           |
+|      1.21.4       |   ✅    | 1.0.0-beta5           |
 | 1.8.8 and higher  |   🟧   | ✖️                    |
 
 > Legend:
