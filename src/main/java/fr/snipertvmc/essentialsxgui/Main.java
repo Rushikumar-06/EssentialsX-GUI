@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.MCServerVersion;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGServer;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.files.ConfigurationFile;
+import fr.snipertvmc.essentialsxgui.libraries.bstats.Metrics;
 import fr.snipertvmc.essentialsxgui.managers.*;
 import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -32,6 +33,7 @@ public class Main extends JavaPlugin {
 	private ServerManager serverManager;
 
 	private MCServerVersion mcServerVersion;
+	private Metrics metrics;
 
 
 	// -------------------------------------------------- //
@@ -64,6 +66,7 @@ public class Main extends JavaPlugin {
 		serverManager = new ServerManager();
 
 		mcServerVersion = MCServerVersion.getMCServerVersion();
+		metrics = new Metrics(this, 26314);
 
 
 		// FILES LOADING
@@ -184,6 +187,9 @@ public class Main extends JavaPlugin {
 
 	public MCServerVersion getMCServerVersion() {
 		return mcServerVersion;
+	}
+	public Metrics getMetrics() {
+		return metrics;
 	}
 
 

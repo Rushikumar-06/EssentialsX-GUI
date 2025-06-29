@@ -1,5 +1,6 @@
 package fr.snipertvmc.essentialsxgui.managers;
 
+import fr.snipertvmc.essentialsxgui.libraries.bstats.Metrics;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.FastInvManager;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.MCServerVersion;
@@ -58,6 +59,12 @@ public class LoadingManager {
 		if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7Registration of events..."); }
 		int registeredEvents = RegisterUtils.registerEvents("fr.snipertvmc.essentialsxgui.events");
 		if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7Registration of §f" + registeredEvents + " events§7."); }
+
+
+		// METRICS CHARTS LOADING
+		if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7Loading metrics charts..."); }
+		loadMetricsCharts();
+		if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7Metrics charts loading §fcompleted§7."); }
 
 
 		// PLUGIN LOADING COMPLETED
@@ -155,6 +162,20 @@ public class LoadingManager {
 			ConsoleLogger.console("\t§6EssentialsX-GUI: §6A new version of EssentialsX-GUI is available: §f" + latestVersionAvailable);
 			ConsoleLogger.console("\t§6EssentialsX-GUI: §ePlease update to the latest version for new features and bug fixes.");
 		}
+	}
+
+
+	// -------------------------------------------------- //
+
+
+	private void loadMetricsCharts() {
+
+
+		// EssentialsX Version Chart
+		Main.getInstance().getMetrics().addCustomChart(
+				new Metrics.SimplePie("essentialsx_version", () -> Main.getInstance().getEssentials() != null ?
+						Main.getInstance().getEssentials().getDescription().getVersion() : "Other")
+		);
 	}
 
 
