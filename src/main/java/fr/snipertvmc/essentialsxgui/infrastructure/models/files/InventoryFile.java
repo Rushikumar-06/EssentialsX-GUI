@@ -24,13 +24,15 @@ public class InventoryFile {
 
 
 	private final YamlConfiguration yamlConfiguration;
+	private final String inventoryName;
 
 
 	// -------------------------------------------------- //
 
 
-	public InventoryFile(YamlConfiguration yamlConfiguration) {
+	public InventoryFile(YamlConfiguration yamlConfiguration, String inventoryName) {
 		this.yamlConfiguration = yamlConfiguration;
+		this.inventoryName = inventoryName;
 	}
 
 
@@ -49,17 +51,17 @@ public class InventoryFile {
 	// -------------------------------------------------- //
 
 
-	public String getTitle(String inventoryName) {
+	public String getTitle() {
 		return yamlConfiguration.getString(inventoryName + ".title");
 	}
 
 
-	public int getRows(String inventoryName) {
+	public int getRows() {
 		return yamlConfiguration.getInt(inventoryName + ".rows");
 	}
 
 
-	public EXGItemConfig getItem(String inventoryName, String itemName) {
+	public EXGItemConfig getItem(String itemName) {
 		EXGItemConfig itemConfig = getItem(inventoryName + ".items." + itemName, false);
 		short slot = (short) yamlConfiguration.getInt(inventoryName + ".items." + itemName + ".slot");
 		itemConfig.setSlot(slot);
@@ -67,18 +69,18 @@ public class InventoryFile {
 	}
 
 
-	public EXGItemConfig getBorderItem(String inventoryName) {
+	public EXGItemConfig getBorderItem() {
 		return getItem(inventoryName + ".borderItem", true);
 	}
 
 
-	public int[] getBorderSlots(String inventoryName) {
+	public int[] getBorderSlots() {
 		List<Integer> borderSlots = yamlConfiguration.getIntegerList(inventoryName + ".borderItem.slots");
 		return borderSlots.stream().mapToInt(i -> i).toArray();
 	}
 
 
-	public InventoryScheme getInventoryScheme(String inventoryName) {
+	public InventoryScheme getInventoryScheme() {
 		List<String> scheme = yamlConfiguration.getStringList(inventoryName + ".inventoryScheme");
 		InventoryScheme inventoryScheme = new InventoryScheme();
 		for (String line : scheme) {
@@ -99,7 +101,7 @@ public class InventoryFile {
 		}
 
 		// Check if the item configuration is valid
-		if (!EXGInventoryYamlParser.isEXGItemConfigValid(this, path, isBorderItem)) {
+		if (!EXGItemConfigParser.isEXGItemConfigValid(this, path, isBorderItem)) {
 
 			Object slotValue = yamlConfiguration.get(path + ".slot");
 			short slot = 0;
@@ -111,93 +113,69 @@ public class InventoryFile {
 			return new EXGItemConfig(true,
 					slot,
 					"BEDROCK", 1, (byte) 0,
-					"§4Invalid Item",
+					"§4§lInvalid Item",
 					List.of("§cThis item configuration is invalid.",
-							"§7Please check the configuration at path:",
-							"§8- §f" + path,
-							"§7and fix the errors seen in the console."),
+							"  §7Please check the §f" + inventoryName + " §7file",
+							"  §7and fix error(s) seen in the console.",
+							"",
+							"§6Item path involved: ",
+							"§8- §e" + path),
 					null, null
-					);
+			);
 		}
 
-		boolean enabled = false;
+		return parseItemConfig(path);
+	}
 
-		short slot = 0;
 
-		String materialName = null;
-		int amount = 1;
-		byte data = 0;
-
-		String displayName = null;
-		List<String> lore = null;
-
-		List<Pair<Enchantment, Integer>> enchantments = null;
-		List<ItemFlag> itemFlags = null;
+	private EXGItemConfig parseItemConfig(String path) {
 
 		Map<String, Object> itemStringValues = new HashMap<>() {{
-			put("enabled", yamlConfiguration.get(path + ".enabled"));
+			put("enabled", yamlConfiguration.getBoolean(path + ".enabled"));
 
-			put("slot", yamlConfiguration.get(path + ".slot"));
+			put("slot", yamlConfiguration.getInt(path + ".slot"));
 
-			put("material", yamlConfiguration.get(path + ".material"));
-			put("amount", yamlConfiguration.get(path + ".amount"));
-			put("data", yamlConfiguration.get(path + ".data"));
+			put("material", yamlConfiguration.getString(path + ".material"));
+			put("amount", yamlConfiguration.getInt(path + ".amount", 1));
+			put("data", yamlConfiguration.getInt(path + ".data", 0));
 
-			put("displayName", yamlConfiguration.get(path + ".displayName"));
-			put("lore", yamlConfiguration.get(path + ".lore"));
+			put("displayName", yamlConfiguration.getString(path + ".displayName"));
+			put("lore", yamlConfiguration.getStringList(path + ".lore"));
 
-			put("enchantments", yamlConfiguration.get(path + ".enchantments"));
-			put("itemFlags", yamlConfiguration.get(path + ".item-flags"));
+			put("enchantments", yamlConfiguration.getStringList(path + ".enchantments"));
+			put("itemFlags", yamlConfiguration.getStringList(path + ".item-flags"));
 		}};
 
-		for (Map.Entry<String, Object> entry : itemStringValues.entrySet()) {
 
-			if (entry.getKey().equals("enabled") && entry.getValue() != null && entry.getValue() instanceof Boolean) {
-				enabled = (boolean) enabledValue;
+		List<String> lore = new ArrayList<>((List<String>) itemStringValues.get("lore"));
 
-			} else if (entry.getKey().equals("slot") && entry.getValue() != null && !isBorderItem && entry.getValue() instanceof Number slotValue) {
-				slot = slotValue.shortValue();
-
-			} else if (entry.getKey().equals("material") && entry.getValue() != null && entry.getValue() instanceof String materialValue) {
-				materialName = materialValue;
-
-			} else if (entry.getKey().equals("amount") && entry.getValue() != null && entry.getValue() instanceof Number amountValue) {
-				amount = amountValue.intValue();
-
-			} else if (entry.getKey().equals("data") && entry.getValue() != null && entry.getValue() instanceof Number dataValue) {
-				data = dataValue.byteValue();
-
-			} else if (entry.getKey().equals("displayName") && entry.getValue() != null && entry.getValue() instanceof String displayNameValue) {
-				displayName = displayNameValue;
-
-			} else if (entry.getKey().equals("lore") && entry.getValue() != null && entry.getValue() instanceof List<?> loreValue) {
-				lore = new ArrayList<>();
-				for (Object loreLine : loreValue) {
-					lore.add((String) loreLine);
-				}
-
-			} else if (entry.getKey().equals("enchantments") && entry.getValue() != null && entry.getValue() instanceof List<?> enchantmentsList) {
-				enchantments = new ArrayList<>();
-				for (Object enchantment : enchantmentsList) {
-					String[] enchantmentSplit = ((String) enchantment).split(":");
-					if (Enchantment.getByName(enchantmentSplit[0]) != null) {
-						enchantments.add(new ImmutablePair<>(Enchantment.getByName(enchantmentSplit[0]), Integer.parseInt(enchantmentSplit[1])));
-					}
-				}
-
-			} else if (entry.getKey().equals("itemFlags") && entry.getValue() != null && entry.getValue() instanceof List<?> itemFlagsList) {
-				itemFlags = new ArrayList<>();
-				for (Object itemFlag : itemFlagsList) {
-					try {
-						itemFlags.add(ItemFlag.valueOf((String) itemFlag));
-					} catch (IllegalArgumentException e) {
-						ConsoleLogger.console("§cInvalid ItemFlag: §7" + itemFlag);
-					}
-				}
+		List<Pair<Enchantment, Integer>> enchantments = new ArrayList<>();
+		for (Object enchantment : (List<String>) itemStringValues.get("enchantments")) {
+			String[] enchantmentSplit = ((String) enchantment).split(":");
+			if (Enchantment.getByName(enchantmentSplit[0]) != null) {
+				enchantments.add(new ImmutablePair<>(Enchantment.getByName(enchantmentSplit[0]), Integer.parseInt(enchantmentSplit[1])));
 			}
 		}
 
-		return new EXGItemConfig(enabled, slot, materialName, amount, data, displayName, lore, enchantments, itemFlags);
+		List<ItemFlag> itemFlags = new ArrayList<>();
+		for (String itemFlag : (List<String>) itemStringValues.get("itemFlags")) {
+			itemFlags.add(ItemFlag.valueOf(itemFlag));
+		}
+
+		return new EXGItemConfig(
+				(boolean) itemStringValues.get("enabled"),
+				((Number) itemStringValues.get("slot")).shortValue(),
+
+				(String) itemStringValues.get("material"),
+				(Integer) itemStringValues.get("amount"),
+				((Number) itemStringValues.get("data")).byteValue(),
+
+				(String) itemStringValues.get("displayName"),
+				lore,
+
+				enchantments,
+				itemFlags
+		);
 	}
 
 
@@ -206,6 +184,53 @@ public class InventoryFile {
 
 	public YamlConfiguration getYamlConfiguration() {
 		return yamlConfiguration;
+	}
+
+
+	// -------------------------------------------------- //
+
+
+	public Map<String, String> getPlaceholders() {
+
+		MCServerVersion serverVersion = Main.getInstance().getMCServerVersion();
+		switch (serverVersion) {
+
+			case v1_8_8, v1_9_4, v1_10_2, v1_11_2, v1_12_2 -> {
+
+				return Map.of(
+						"value_materialBorderItem", "STAINED_GLASS_PANE",
+						"value_materialHomeItem", "GRASS",
+						"value_materialAdminModeItem", "EYE_OF_ENDER"
+				);
+			}
+
+			case v1_13_2, v1_14_4, v1_15_2, v1_16_5,
+			     v1_17_1, v1_18_2, v1_19_4, v1_20_6, v1_21_1, v1_21_4, v1_21_5 -> {
+
+				return Map.of(
+						"value_materialBorderItem", "BLACK_STAINED_GLASS_PANE",
+						"value_materialHomeItem", "GRASS_BLOCK",
+						"value_materialAdminModeItem", "ENDER_EYE"
+				);
+			}
+		}
+
+		return new HashMap<>();
+	}
+
+
+	public List<String> getKeysToRemove() {
+
+		MCServerVersion serverVersion = Main.getInstance().getMCServerVersion();
+		switch (serverVersion) {
+
+			case v1_13_2, v1_14_4, v1_15_2, v1_16_5,
+			     v1_17_1, v1_18_2, v1_19_4, v1_20_6, v1_21_1, v1_21_4, v1_21_5 -> {
+				return List.of("data");
+			}
+		}
+
+		return List.of();
 	}
 
 

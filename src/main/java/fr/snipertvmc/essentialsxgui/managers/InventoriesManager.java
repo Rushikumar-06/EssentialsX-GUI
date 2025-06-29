@@ -1,10 +1,13 @@
 package fr.snipertvmc.essentialsxgui.managers;
 
 import fr.snipertvmc.essentialsxgui.Main;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.files.InventoryFile;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes.EXGHomesInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes.EXGHomeEditingInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.*;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
+import fr.snipertvmc.essentialsxgui.utilities.config.EXGInventoryConfigParser;
+import fr.snipertvmc.essentialsxgui.utilities.data.MapUtils;
 
 import java.util.List;
 
@@ -31,10 +34,12 @@ public class InventoriesManager {
 
 		for (String inventoryName : getInventoryNames()) {
 
-			String title = Main.getInstance().getFilesManager().getInventory(inventoryName).getTitle(inventoryName);
-			int rows = Main.getInstance().getFilesManager().getInventory(inventoryName).getRows(inventoryName);
-			EXGItemConfig borderItem = Main.getInstance().getFilesManager().getInventory(inventoryName).getBorderItem(inventoryName);
-			int[] borderSlots = Main.getInstance().getFilesManager().getInventory(inventoryName).getBorderSlots(inventoryName);
+			InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
+
+			String title = inventoryFile.getTitle();
+			int rows = inventoryFile.getRows();
+			EXGItemConfig borderItem = inventoryFile.getBorderItem();
+			int[] borderSlots = inventoryFile.getBorderSlots();
 
 			switch (inventoryName) {
 				case "homes" -> loadHomesInventory(title, rows, inventoryName, borderItem, borderSlots);
@@ -62,33 +67,36 @@ public class InventoriesManager {
 
 		homesInventoryConfig = new EXGHomesInventoryConfig(title, rows, borderItem, borderSlots);
 
-		homesInventoryConfig.setHomeItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
-				inventoryName, "homeItem"));
-		homesInventoryConfig.setNextPageItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
-				inventoryName, "nextPageItem"));
-		homesInventoryConfig.setPreviousPageItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
-				inventoryName, "previousPageItem"));
-		homesInventoryConfig.setCurrentPageItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
-				inventoryName, "currentPageItem"));
-		homesInventoryConfig.setCloseItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
-				inventoryName, "closeItem"));
+		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
 
-		homesInventoryConfig.setInventoryScheme(Main.getInstance().getFilesManager().getInventory(inventoryName).getInventoryScheme(
-				inventoryName));
+		homesInventoryConfig.setHomeItem(inventoryFile.getItem(
+				"homeItem"));
+		homesInventoryConfig.setNextPageItem(inventoryFile.getItem(
+				"nextPageItem"));
+		homesInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
+				"previousPageItem"));
+		homesInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
+				"currentPageItem"));
+		homesInventoryConfig.setCloseItem(inventoryFile.getItem(
+				"closeItem"));
+
+		homesInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
 	}
 
 	private void loadHomeEditingInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
 
+		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
+
 		homeEditingInventoryConfig = new EXGHomeEditingInventoryConfig(title, rows, borderItem, borderSlots);
 
-		homeEditingInventoryConfig.setPreviewHomeItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
-				inventoryName, "previewHomeItem"));
-		homeEditingInventoryConfig.setChangeDisplayNameItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
-				inventoryName, "changeDisplayNameItem"));
-		homeEditingInventoryConfig.setChangeIconItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
-				inventoryName, "changeIconItem"));
-		homeEditingInventoryConfig.setBackItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
-				inventoryName, "backItem"));
+		homeEditingInventoryConfig.setPreviewHomeItem(inventoryFile.getItem(
+				"previewHomeItem"));
+		homeEditingInventoryConfig.setChangeDisplayNameItem(inventoryFile.getItem(
+				"changeDisplayNameItem"));
+		homeEditingInventoryConfig.setChangeIconItem(inventoryFile.getItem(
+				"changeIconItem"));
+		homeEditingInventoryConfig.setBackItem(inventoryFile.getItem(
+				"backItem"));
 	}
 
 
@@ -99,47 +107,51 @@ public class InventoriesManager {
 
 	private void loadKitsAdminViewInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
 
+		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
+
 		kitsAdminInventoryConfig = new EXGKitsAdminViewInventoryConfig(title, rows, borderItem, borderSlots);
 
-		kitsAdminInventoryConfig.setKitItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
-				inventoryName, "kitItem"));
-		kitsAdminInventoryConfig.setSwitchToPlayerModeItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
-				inventoryName, "switchToPlayerModeItem"));
-		kitsAdminInventoryConfig.setNextPageItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
-				inventoryName, "nextPageItem"));
-		kitsAdminInventoryConfig.setPreviousPageItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
-				inventoryName, "previousPageItem"));
-		kitsAdminInventoryConfig.setCurrentPageItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
-				inventoryName, "currentPageItem"));
-		kitsAdminInventoryConfig.setCloseItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
-				inventoryName, "closeItem"));
+		kitsAdminInventoryConfig.setKitItem(inventoryFile.getItem(
+				"kitItem"));
+		kitsAdminInventoryConfig.setSwitchToPlayerModeItem(inventoryFile.getItem(
+				"switchToPlayerModeItem"));
+		kitsAdminInventoryConfig.setNextPageItem(inventoryFile.getItem(
+				"nextPageItem"));
+		kitsAdminInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
+				"previousPageItem"));
+		kitsAdminInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
+				"currentPageItem"));
+		kitsAdminInventoryConfig.setCloseItem(inventoryFile.getItem(
+				"closeItem"));
 
-		kitsAdminInventoryConfig.setInventoryScheme(Main.getInstance().getFilesManager().getInventory(inventoryName).getInventoryScheme(
-				inventoryName));
+		kitsAdminInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
 	}
 
 	private void loadKitsPlayerViewInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
 
+		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
+
 		kitsPlayerInventoryConfig = new EXGKitsPlayerViewInventoryConfig(title, rows, borderItem, borderSlots);
 
-		kitsPlayerInventoryConfig.setKitItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
-				inventoryName, "kitItem"));
-		kitsPlayerInventoryConfig.setSwitchToAdminModeItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
-				inventoryName, "switchToAdminModeItem"));
-		kitsPlayerInventoryConfig.setNextPageItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
-				inventoryName, "nextPageItem"));
-		kitsPlayerInventoryConfig.setPreviousPageItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
-				inventoryName, "previousPageItem"));
-		kitsPlayerInventoryConfig.setCurrentPageItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
-				inventoryName, "currentPageItem"));
-		kitsPlayerInventoryConfig.setCloseItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
-				inventoryName, "closeItem"));
+		kitsPlayerInventoryConfig.setKitItem(inventoryFile.getItem(
+				"kitItem"));
+		kitsPlayerInventoryConfig.setSwitchToAdminModeItem(inventoryFile.getItem(
+				"switchToAdminModeItem"));
+		kitsPlayerInventoryConfig.setNextPageItem(inventoryFile.getItem(
+				"nextPageItem"));
+		kitsPlayerInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
+				"previousPageItem"));
+		kitsPlayerInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
+				"currentPageItem"));
+		kitsPlayerInventoryConfig.setCloseItem(inventoryFile.getItem(
+				"closeItem"));
 
-		kitsPlayerInventoryConfig.setInventoryScheme(Main.getInstance().getFilesManager().getInventory(inventoryName).getInventoryScheme(
-				inventoryName));
+		kitsPlayerInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
 	}
 
 	private void loadKitsPreviewInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+
+		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
 
 		kitsPreviewInventoryConfig = new EXGKitsPreviewInventoryConfig(title, rows, borderItem, borderSlots);
 
@@ -148,52 +160,54 @@ public class InventoriesManager {
 		kitsPreviewInventoryConfig.setBorderItem(borderItem);
 		kitsPreviewInventoryConfig.setBorderSlots(borderSlots);
 
-		kitsPreviewInventoryConfig.setKitItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
-				inventoryName, "kitItem"));
-		kitsPreviewInventoryConfig.setNextPageItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
-				inventoryName, "nextPageItem"));
-		kitsPreviewInventoryConfig.setPreviousPageItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
-				inventoryName, "previousPageItem"));
-		kitsPreviewInventoryConfig.setCurrentPageItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
-				inventoryName, "currentPageItem"));
-		kitsPreviewInventoryConfig.setBackItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
-				inventoryName, "backItem"));
+		kitsPreviewInventoryConfig.setKitItem(inventoryFile.getItem(
+				"kitItem"));
+		kitsPreviewInventoryConfig.setNextPageItem(inventoryFile.getItem(
+				"nextPageItem"));
+		kitsPreviewInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
+				"previousPageItem"));
+		kitsPreviewInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
+				"currentPageItem"));
+		kitsPreviewInventoryConfig.setBackItem(inventoryFile.getItem(
+				"backItem"));
 
-		kitsPreviewInventoryConfig.setInventoryScheme(Main.getInstance().getFilesManager().getInventory(inventoryName).getInventoryScheme(
-				inventoryName));
+		kitsPreviewInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
 	}
 
 	private void loadKitsPlayerGiveInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
 
+		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
+
 		kitsPlayerGiveInventoryConfig = new EXGKitsPlayerGiveInventoryConfig(title, rows, borderItem, borderSlots);
 
-		kitsPlayerGiveInventoryConfig.setPlayerItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
-				inventoryName, "playerItem"));
-		kitsPlayerGiveInventoryConfig.setNextPageItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
-				inventoryName, "nextPageItem"));
-		kitsPlayerGiveInventoryConfig.setPreviousPageItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
-				inventoryName, "previousPageItem"));
-		kitsPlayerGiveInventoryConfig.setCurrentPageItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
-				inventoryName, "currentPageItem"));
-		kitsPlayerGiveInventoryConfig.setBackItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
-				inventoryName, "backItem"));
+		kitsPlayerGiveInventoryConfig.setPlayerItem(inventoryFile.getItem(
+				"playerItem"));
+		kitsPlayerGiveInventoryConfig.setNextPageItem(inventoryFile.getItem(
+				"nextPageItem"));
+		kitsPlayerGiveInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
+				"previousPageItem"));
+		kitsPlayerGiveInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
+				"currentPageItem"));
+		kitsPlayerGiveInventoryConfig.setBackItem(inventoryFile.getItem(
+				"backItem"));
 
-		kitsPlayerGiveInventoryConfig.setInventoryScheme(Main.getInstance().getFilesManager().getInventory(inventoryName).getInventoryScheme(
-				inventoryName));
+		kitsPlayerGiveInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
 	}
 
 	private void loadKitEditingInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
 
+		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
+
 		kitEditingInventoryConfig = new EXGKitEditingInventoryConfig(title, rows, borderItem, borderSlots);
 
-		kitEditingInventoryConfig.setPreviewKitItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
-				inventoryName, "previewKitItem"));
-		kitEditingInventoryConfig.setChangeDisplayNameItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
-				inventoryName, "changeDisplayNameItem"));
-		kitEditingInventoryConfig.setChangeIconItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
-				inventoryName, "changeIconItem"));
-		kitEditingInventoryConfig.setBackItem(Main.getInstance().getFilesManager().getInventory(inventoryName).getItem(
-				inventoryName, "backItem"));
+		kitEditingInventoryConfig.setPreviewKitItem(inventoryFile.getItem(
+				"previewKitItem"));
+		kitEditingInventoryConfig.setChangeDisplayNameItem(inventoryFile.getItem(
+				"changeDisplayNameItem"));
+		kitEditingInventoryConfig.setChangeIconItem(inventoryFile.getItem(
+				"changeIconItem"));
+		kitEditingInventoryConfig.setBackItem(inventoryFile.getItem(
+				"backItem"));
 	}
 
 

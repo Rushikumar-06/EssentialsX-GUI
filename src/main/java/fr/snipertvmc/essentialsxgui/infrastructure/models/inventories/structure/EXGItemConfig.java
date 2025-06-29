@@ -184,6 +184,8 @@ public class EXGItemConfig {
 
 		if (displayName != null) {
 			itemBuilder.name(displayName.replace("&", "§"));
+		} else {
+			itemBuilder.name(this.getMaterial().name());
 		}
 
 		if (lore != null) {
