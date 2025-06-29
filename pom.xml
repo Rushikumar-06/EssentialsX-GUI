@@ -71,14 +71,6 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- FastInv -->
-		<dependency>
-			<groupId>fr.mrmicky</groupId>
-			<artifactId>fastinv</artifactId>
-			<version>3.1.2</version>
-			<scope>compile</scope>
-		</dependency>
-
 		<!-- Jackson -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -141,12 +133,6 @@
 							<transformers>
 								<transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
 							</transformers>
-							<relocations>
-								<relocation>
-									<pattern>fr.mrmicky.fastinv</pattern>
-									<shadedPattern>fr.snipertvmc.fastinv</shadedPattern>
-								</relocation>
-							</relocations>
 						</configuration>
 					</execution>
 				</executions>
