@@ -1,6 +1,6 @@
 ############################################################
 # +------------------------------------------------------+ #
-# |                     Informations                     | #
+# |                      Information                     | #
 # +------------------------------------------------------+ #
 ############################################################
 
@@ -19,12 +19,11 @@
 ############################################################
 
 # Please do not change this value as it may cause the file to be reset.
-# Default: 1.0
+# Default: "1.0"
 messages-version: "1.0"
 
 # Change the prefix sent at the beginning of most sent messages.
 # TIP: Use {prefix} in any message to include the prefix.
-# Default: &8[&6&LEXG&8] &7
 prefix: "&8[&6&LEXG&8]&7"
 
 ############################################################
