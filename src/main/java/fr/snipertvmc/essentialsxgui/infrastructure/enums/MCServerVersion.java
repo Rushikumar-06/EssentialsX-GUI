@@ -11,59 +11,63 @@ public enum MCServerVersion {
 	// -------------------------------------------------- //
 
 
-	UnknownVersion("Unknown version", "Unknown", -1, false),
-	UnsupportedVersion("Unsupported version", "Unsupported", -1, false),
+	UnknownVersion("Unknown version", false, false),
+	UnsupportedVersion("Unsupported version", false, false),
 
-	v1_8_8("1.8.8", "v1_8_R3", 47, true),
+	v1_8_8("1.8.8", true, false),
 
-	v1_9_4("1.9.4", "v1_9_R2", 110, false),
+	v1_9_4("1.9.4", false, false),
 
-	v1_10_2("1.10.2", "v1_10_R1", 210, false),
+	v1_10_2("1.10.2", false, false),
 
-	v1_11_2("1.11.2", "v1_11_R1", 316, false),
+	v1_11_2("1.11.2", false, false),
 
-	v1_12_2("1.12.2", "v1_12_R1", 340, true),
+	v1_12_2("1.12.2", true, false),
 
-	v1_13_2("1.13.2", "v1_13_R2", 404, false),
+	v1_13_2("1.13.2", false, false),
 
-	v1_14_4("1.14.4", "v1_14_R1", 498, false),
+	v1_14_4("1.14.4", false, false),
 
-	v1_15_2("1.15.2", "v1_15_R1", 578, false),
+	v1_15_2("1.15.2", false, false),
 
-	v1_16_5("1.16.5", "v1_16_R3", 754, true),
+	v1_16_5("1.16.5", true, false),
 
-	v1_17_1("1.17.1", "v1_17_R1", 756, false),
+	v1_17_1("1.17.1", false, false),
 
-	v1_18_2("1.18.2", "v1_18_R2", 758, false),
+	v1_18_2("1.18.2", false, false),
 
-	v1_19_4("1.19.4", "v1_19_R3", 762, false),
+	v1_19_4("1.19.4", false, false),
 
-	v1_20_6("1.20.6", "v1_20_R3", 766, false),
+	v1_20_6("1.20.6", false, false),
 
-	v1_21_1("1.21.1", "v1_21_R3", 769, false),
-	v1_21_4("1.21.4", "v1_21_R3", 769, true),
-	v1_21_5("1.21.5", "v1_21_R4", 770, false);
+	v1_21("1.21", false, false),
+	v1_21_1("1.21.1", false, false),
+	v1_21_2("1.21.2", false, false),
+	v1_21_3("1.21.3", false, false),
+	v1_21_4("1.21.4", true, false),
+	v1_21_5("1.21.5", false, false),
+	v1_21_6("1.21.6", false, false),
+	v1_21_7("1.21.7", false, false),
+	v1_21_8("1.21.8", false, false);
 
 
 	// -------------------------------------------------- //
 
 
 	private final String versionName;
-	private final String versionNMS;
-	private final int versionProtocol;
 
 	private final boolean fullySupported;
+	private final boolean deprecated;
 
 
 	// -------------------------------------------------- //
 
 
-	MCServerVersion(String versionName, String versionNMS, int versionProtocol, boolean fullySupported) {
+	MCServerVersion(String versionName, boolean fullySupported, boolean deprecated) {
 		this.versionName = versionName;
-		this.versionNMS = versionNMS;
-		this.versionProtocol = versionProtocol;
 
 		this.fullySupported = fullySupported;
+		this.deprecated = deprecated;
 	}
 
 
@@ -73,15 +77,12 @@ public enum MCServerVersion {
 	public String getVersionName() {
 		return versionName;
 	}
-	public String getVersionNMS() {
-		return versionNMS;
-	}
-	public int getVersionProtocol() {
-		return versionProtocol;
-	}
 
 	public boolean isFullySupported() {
 		return fullySupported;
+	}
+	public boolean isDeprecated() {
+		return deprecated;
 	}
 
 
