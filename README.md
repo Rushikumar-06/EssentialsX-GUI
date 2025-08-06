@@ -102,8 +102,31 @@ Finally, __restart__ the server and you're done!
 
 ## 📢 | Servers using EssentialsX-GUI
 
-Are you using our plugin and would like to add your server to the list? Join [Discord Server](https://discord.gg/fSzK79TAYf).
+Are you using our plugin and would like to add your server to the list?
+Join [Discord Server](https://discord.gg/fSzK79TAYf).
 
 ## ❓ | Support
 
 For support, join [Discord Server](https://discord.gg/fSzK79TAYf).
+
+## 👥 | Contributors
+
+- **Sniper_TVmc** — Creator, lead developer and project manager.
+
+## 📝 | License
+
+This project is licensed under the
+[GNU General Public License v3.0](https://github.com/SniperTVmc/EssentialsX-GUI/blob/Main/LICENSE).<br>
+In the same way as the plugin, EssentialsX is licensed under the
+[GPL-3.0](https://github.com/EssentialsX/Essentials/blob/2.x/LICENSE).
+
+## ⚠️ | Disclaimer
+
+**EssentialsX-GUI** is an independent, unofficial addon developed by [Sniper_TVmc](https://github.com/SniperTVmc),
+designed to provide graphical interfaces for some EssentialsX commands and features.<br>
+This project is **not affiliated, associated, authorized, endorsed by, or in any way officially connected**
+with EssentialsX or any of its contributors.<br>
+All references to EssentialsX are for compatibility and integration purposes only.
+
+Consequently, EssentialsX-GUI is not responsible for any issues or bugs that may arise from the use of EssentialsX.<br>
+And EssentialsX is not responsible for any issues or bugs that may arise from the use of EssentialsX-GUI.
