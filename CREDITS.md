@@ -15,6 +15,6 @@ In this file, you'll find the credits and disclaimers for the EssentialsX-GUI pr
 
 ## 📃 | Licenses and legal notices
 
-This project is distributed under the **MIT** license.
+This project is distributed under the **GPL-3.0** license.
 A copy of this license is included in the repository root (`LICENSE`).
 The above mentions are intended to recognize all assistance, without introducing additional constraints.
