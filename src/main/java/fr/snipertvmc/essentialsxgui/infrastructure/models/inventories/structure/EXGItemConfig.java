@@ -172,6 +172,10 @@ public class EXGItemConfig {
 
 		ItemBuilder itemBuilder = getBaseItem();
 
+		if (!enabled) {
+			return new ItemStack(Material.AIR);
+		}
+
 		if (amount < 0 || amount > 64) {
 			amount = 1;
 		}
@@ -213,6 +217,10 @@ public class EXGItemConfig {
 	private @NotNull ItemBuilder getBaseItem() {
 
 		ItemBuilder itemBuilder;
+
+		if (!enabled) {
+			return new ItemBuilder(Material.AIR);
+		}
 
 		if (materialName == null || materialName.equals("AIR")) {
 			itemBuilder = new ItemBuilder(Material.GRASS);
