@@ -71,6 +71,8 @@ public class InventoriesManager {
 
 		homesInventoryConfig.setHomeItem(inventoryFile.getItem(
 				"homeItem"));
+		homesInventoryConfig.setNoHomesItem(inventoryFile.getItem(
+				"noHomesItem"));
 		homesInventoryConfig.setNextPageItem(inventoryFile.getItem(
 				"nextPageItem"));
 		homesInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
@@ -113,6 +115,8 @@ public class InventoriesManager {
 
 		kitsAdminInventoryConfig.setKitItem(inventoryFile.getItem(
 				"kitItem"));
+		kitsAdminInventoryConfig.setNoKitsItem(inventoryFile.getItem(
+				"noKitsItem"));
 		kitsAdminInventoryConfig.setSwitchToPlayerModeItem(inventoryFile.getItem(
 				"switchToPlayerModeItem"));
 		kitsAdminInventoryConfig.setNextPageItem(inventoryFile.getItem(
@@ -135,6 +139,8 @@ public class InventoriesManager {
 
 		kitsPlayerInventoryConfig.setKitItem(inventoryFile.getItem(
 				"kitItem"));
+		kitsPlayerInventoryConfig.setNoKitsItem(inventoryFile.getItem(
+				"noKitsItem"));
 		kitsPlayerInventoryConfig.setSwitchToAdminModeItem(inventoryFile.getItem(
 				"switchToAdminModeItem"));
 		kitsPlayerInventoryConfig.setNextPageItem(inventoryFile.getItem(

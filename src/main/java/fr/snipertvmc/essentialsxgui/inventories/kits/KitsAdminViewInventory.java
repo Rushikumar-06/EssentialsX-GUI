@@ -95,6 +95,10 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 			});
 		}
 
+		if (kits.isEmpty()) {
+			addContent(config.getNoKitsItem().build());
+		}
+
 
 		if (config.getCloseItem().isEnabled()) {
 			setItem(config.getCloseItem().getSlot(), config.getCloseItem().build(), e -> {

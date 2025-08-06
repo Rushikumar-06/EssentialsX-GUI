@@ -11,6 +11,7 @@ public class EXGKitsAdminViewInventoryConfig extends EXGInventoryConfig {
 
 
 	private EXGItemConfig kitItem;
+	private EXGItemConfig noKitsItem;
 
 	private EXGItemConfig switchToPlayerModeItem;
 
@@ -36,6 +37,11 @@ public class EXGKitsAdminViewInventoryConfig extends EXGInventoryConfig {
 
 	public EXGItemConfig getKitItem() {
 		return kitItem;
+	}
+
+
+	public EXGItemConfig getNoKitsItem() {
+		return noKitsItem;
 	}
 
 
@@ -74,6 +80,11 @@ public class EXGKitsAdminViewInventoryConfig extends EXGInventoryConfig {
 
 	public void setKitItem(EXGItemConfig kitItem) {
 		this.kitItem = kitItem;
+	}
+
+
+	public void setNoKitsItem(EXGItemConfig noKitsItem) {
+		this.noKitsItem = noKitsItem;
 	}
 
 
@@ -120,6 +131,7 @@ public class EXGKitsAdminViewInventoryConfig extends EXGInventoryConfig {
 		);
 
 		copy.setKitItem(this.getKitItem().duplicate());
+		copy.setNoKitsItem(this.getNoKitsItem().duplicate());
 		copy.setSwitchToPlayerModeItem(this.getSwitchToPlayerModeItem().duplicate());
 		copy.setNextPageItem(this.getNextPageItem().duplicate());
 		copy.setPreviousPageItem(this.getPreviousPageItem().duplicate());

@@ -11,6 +11,7 @@ public class EXGHomesInventoryConfig extends EXGInventoryConfig {
 
 
 	private EXGItemConfig homeItem;
+	private EXGItemConfig noHomesItem;
 
 	private EXGItemConfig nextPageItem;
 	private EXGItemConfig previousPageItem;
@@ -34,6 +35,11 @@ public class EXGHomesInventoryConfig extends EXGInventoryConfig {
 
 	public EXGItemConfig getHomeItem() {
 		return homeItem;
+	}
+
+
+	public EXGItemConfig getNoHomesItem() {
+		return noHomesItem;
 	}
 
 
@@ -67,6 +73,11 @@ public class EXGHomesInventoryConfig extends EXGInventoryConfig {
 
 	public void setHomeItem(EXGItemConfig homeItem) {
 		this.homeItem = homeItem;
+	}
+
+
+	public void setNoHomesItem(EXGItemConfig noHomesItem) {
+		this.noHomesItem = noHomesItem;
 	}
 
 
@@ -108,6 +119,7 @@ public class EXGHomesInventoryConfig extends EXGInventoryConfig {
 		);
 
 		copy.setHomeItem(this.getHomeItem().duplicate());
+		copy.setNoHomesItem(this.getNoHomesItem().duplicate());
 		copy.setNextPageItem(this.getNextPageItem().duplicate());
 		copy.setPreviousPageItem(this.getPreviousPageItem().duplicate());
 		copy.setCurrentPageItem(this.getCurrentPageItem().duplicate());

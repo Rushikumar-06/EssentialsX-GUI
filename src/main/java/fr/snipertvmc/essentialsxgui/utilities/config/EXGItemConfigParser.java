@@ -32,9 +32,12 @@ public class EXGItemConfigParser {
 
 			"slot", List.of(
 					"homes.items.homeItem",
+					"homes.items.noHomesItem",
 
 					"kitsAdminView.items.kitItem",
+                    "kitsAdminView.items.noKitsItem",
 					"kitsPlayerView.items.kitItem",
+                    "kitsPlayerView.items.noKitsItem",
 					"kitsPlayerGive.items.playerItem"
 			),
 

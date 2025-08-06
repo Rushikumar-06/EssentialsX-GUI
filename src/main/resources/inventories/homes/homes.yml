@@ -69,6 +69,16 @@ homes:
         - ""
         - "&7Home Name: &f&o{homeName}"
 
+    # 'slot' value will be ignored in this section. The item will be placed in the first slot like a kit item.
+    # The item will be displayed if the player doesn't have any homes set.
+    noHomesItem:
+      enabled: true
+      material: "BARRIER"
+      displayName: "&cNo Homes"
+      lore:
+        - "&7You have no homes set."
+        - "&7Use &f/sethome <name> &7to set a home."
+
     # Placeholders available: {currentPage}, {previousPage}
     previousPageItem:
       enabled: true

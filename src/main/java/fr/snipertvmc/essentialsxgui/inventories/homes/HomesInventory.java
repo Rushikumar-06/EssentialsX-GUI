@@ -84,6 +84,10 @@ public class HomesInventory extends PaginatedFastInv {
 			});
 		}
 
+		if (homes.isEmpty()) {
+			addContent(config.getNoHomesItem().build());
+		}
+
 
 		if (config.getCloseItem().isEnabled()) {
 			setItem(config.getCloseItem().getSlot(), config.getCloseItem().build(), e -> {

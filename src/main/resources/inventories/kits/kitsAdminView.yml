@@ -67,6 +67,16 @@ kitsAdminView:
         - ""
         - "&7Kit Name: &f&o{kitName}"
 
+    # 'slot' value will be ignored in this section. The item will be placed in the first slot like a kit item.
+    # The item will be displayed if the server has no kits available.
+    noKitsItem:
+      enabled: true
+      material: "BARRIER"
+      displayName: "&cNo Kits"
+      lore:
+        - "&7There are no kits available."
+        - "&7Use &f/createkit <kitName> &7to create a kit."
+
     switchToPlayerModeItem:
       enabled: true
       slot: 8
