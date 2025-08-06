@@ -12,7 +12,6 @@ public enum MCServerVersion {
 
 
 	UnknownVersion("Unknown version", false, false),
-	UnsupportedVersion("Unsupported version", false, false),
 
 	v1_8_8("1.8.8", true, false),
 
@@ -101,10 +100,6 @@ public enum MCServerVersion {
 			}
 		}
 
-		if (serverVersion.matches("1.\\d+\\.\\d+")) {
-			return UnsupportedVersion;
-		}
-
 		return UnknownVersion;
 	}
 
@@ -126,6 +121,13 @@ public enum MCServerVersion {
 
 	private String getServerNMSVersion() {
 		return Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
+	}
+
+
+	public boolean isFormatValid(String version) {
+		Pattern pattern = Pattern.compile("^(1\\.\\d+\\.\\d+|[0-9]+\\.[0-9]+)$");
+		Matcher matcher = pattern.matcher(version);
+		return matcher.matches();
 	}
 
 

@@ -32,7 +32,8 @@ public class LoadingManager {
 
 		// SERVER CONFIGURATION ANALYSIS
 		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Analyzing server configuration...");
-		if (!isServerVersionSupported() || !isServerReady()) {
+		checkForServerVersionSupport();
+		if (!isServerReady()) {
 			return false;
 		}
 		checkForUpdates();
@@ -111,32 +112,36 @@ public class LoadingManager {
 	}
 
 
-	public boolean isServerVersionSupported() {
+	public void checkForServerVersionSupport() {
 
 		MCServerVersion serverVersion = Main.getInstance().getMCServerVersion();
-		if (serverVersion == MCServerVersion.UnknownVersion || serverVersion == MCServerVersion.UnsupportedVersion ||
-				!serverVersion.isFullySupported()) {
+		String serverVersionColor = serverVersion.isFullySupported() ? "§2" : "§6";
+		serverVersionColor = serverVersion == MCServerVersion.UnknownVersion ? "§4" : serverVersionColor;
 
-			if (serverVersion == MCServerVersion.UnknownVersion) {
-				ConsoleLogger.console("\t§6EssentialsX-GUI: §cServer version not found.");
-				ConsoleLogger.console("\t§6EssentialsX-GUI: §cPlease update your server to a supported version.");
+		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Server version found: " + serverVersionColor + serverVersion.getVersionName());
 
-			} else {
-				ConsoleLogger.console("\t§6EssentialsX-GUI: §7Server version found: §c" + serverVersion.getVersionName());
-
-				if (serverVersion == MCServerVersion.UnsupportedVersion) {
-					ConsoleLogger.console("\t§6EssentialsX-GUI: §cThis version is not supported yet or anymore.");
-
-				} else {
-					ConsoleLogger.console("\t§6EssentialsX-GUI: §6Be careful: this version is not fully supported.");
-				}
-			}
-
-			return serverVersion != MCServerVersion.UnknownVersion && serverVersion != MCServerVersion.UnsupportedVersion;
+		if (serverVersion == MCServerVersion.UnknownVersion) {
+			ConsoleLogger.console("\t§6EssentialsX-GUI: §cBe very careful, the version has not been recognized or is not supported.");
+			ConsoleLogger.console("\t§6EssentialsX-GUI: §cPlease check the documentation for more information about this error.");
+			return;
 		}
 
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Server version found: §a" + serverVersion.getVersionName());
-		return true;
+		if (serverVersion.isDeprecated()) {
+			ConsoleLogger.console("\t§6EssentialsX-GUI: §eThis server version is deprecated and could be removed in the future.");
+			ConsoleLogger.console("\t§6EssentialsX-GUI: §ePlease consider updating to a newer version.");
+			ConsoleLogger.console("\t§6EssentialsX-GUI: §eA list of fully supported versions is available on the plugin page.");
+			return;
+		}
+
+		if (!serverVersion.isFullySupported()) {
+			ConsoleLogger.console("\t§6EssentialsX-GUI: §eBe aware that this version of EssentialsX-GUI could");
+			ConsoleLogger.console("\t§6EssentialsX-GUI: §enot be fully compatible with your server version.");
+			ConsoleLogger.console("\t§6EssentialsX-GUI: §eA list of fully supported versions is available on the plugin page.");
+			return;
+		}
+
+		ConsoleLogger.console("\t§6EssentialsX-GUI: §aThis server version is fully supported by EssentialsX-GUI.");
+		return;
 	}
 
 
