@@ -16,15 +16,22 @@ public enum EXGMessage {
 	CHARACTER_LIMIT("errors.characterLimit"),
 
 	ARGUMENT_NOT_FOUND("errors.argumentNotFound"),
+	NO_PERMISSION("errors.noPermission"),
+
+	HOME_DELETE_ERROR("general.homeDeleteError"),
 
 
 	// GENERAL
 	ENTER_NEW_DISPLAY_NAME("general.enterNewDisplayName"),
 	ENTER_NEW_ICON_NAME("general.enterNewIconName"),
+	CONFIRM_DELETE_HOME("general.confirmDeleteHome"),
+	CONFIRM_DELETE_KIT("general.confirmDeleteKit"),
 	ACTION_CANCELED("general.actionCanceled"),
 
 	DISPLAY_NAME_CHANGED("general.displayNameChanged"),
 	ICON_CHANGED("general.iconChanged"),
+	HOME_DELETED("general.homeDeleted"),
+	KIT_DELETED("general.kitDeleted"),
 
 	OPENING_HOMES_INVENTORY("general.openingHomesInventory"),
 	OPENING_ADMIN_KITS_INVENTORY("general.openingAdminKitsInventory"),

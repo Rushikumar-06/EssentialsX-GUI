@@ -82,7 +82,7 @@ public class HomeEditingInventory extends FastInv {
 
 						home.setDisplayName(newHomeName);
 						player.sendMessage(MessagesUtils.get(EXGMessage.DISPLAY_NAME_CHANGED,
-								Map.of("new_display_name", newHomeName.replace("&", "§"))
+								Map.of("newDisplayName", newHomeName.replace("&", "§"))
 						));
 						new HomeEditingInventory(player, home).open(player);
 
@@ -122,10 +122,50 @@ public class HomeEditingInventory extends FastInv {
 						}
 
 						home.setMaterial(material);
-						player.sendMessage(MessagesUtils.get(EXGMessage.ICON_CHANGED, Map.of("new_icon", material.name())));
+						player.sendMessage(MessagesUtils.get(EXGMessage.ICON_CHANGED, Map.of("newIcon", material.name())));
 						new HomeEditingInventory(player, home).open(player);
 
 						SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
+					});
+
+				}, 10);
+			});
+		}
+
+		if (config.getDeleteHomeItem().isEnabled()) {
+			setItem(config.getDeleteHomeItem().getSlot(), config.getDeleteHomeItem()
+					.updateVariables(
+							Map.of("{homeName}", home.getName(),
+									"{homeDisplayName}", home.getDisplayName()))
+					.build(), e -> {
+
+				player.closeInventory();
+				player.sendMessage(MessagesUtils.get(EXGMessage.CONFIRM_DELETE_HOME, Map.of("homeName", home.getName())));
+				Main.getInstance().getChatManager().addChat(player.getUniqueId(), result -> {
+
+					Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
+
+						if (result.equalsIgnoreCase("confirm")) {
+
+							try {
+								Main.getInstance().getEssentials().getUser(player).delHome(home.getName());
+
+							} catch (Exception ex) {
+								player.sendMessage(MessagesUtils.get(EXGMessage.HOME_DELETE_ERROR, null));
+								new HomesInventory(player).open(player);
+								SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
+								return;
+							}
+
+							player.sendMessage(MessagesUtils.get(EXGMessage.HOME_DELETED, Map.of("homeName", home.getName())));
+							new HomesInventory(player).open(player);
+							SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
+
+						} else {
+							player.sendMessage(MessagesUtils.get(EXGMessage.ACTION_CANCELED, null));
+							new HomeEditingInventory(player, home).open(player);
+							SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
+						}
 					});
 
 				}, 10);

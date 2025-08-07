@@ -97,6 +97,8 @@ public class InventoriesManager {
 				"changeDisplayNameItem"));
 		homeEditingInventoryConfig.setChangeIconItem(inventoryFile.getItem(
 				"changeIconItem"));
+		homeEditingInventoryConfig.setDeleteHomeItem(inventoryFile.getItem(
+				"deleteHomeItem"));
 		homeEditingInventoryConfig.setBackItem(inventoryFile.getItem(
 				"backItem"));
 	}
@@ -212,6 +214,8 @@ public class InventoriesManager {
 				"changeDisplayNameItem"));
 		kitEditingInventoryConfig.setChangeIconItem(inventoryFile.getItem(
 				"changeIconItem"));
+		kitEditingInventoryConfig.setDeleteKitItem(inventoryFile.getItem(
+				"deleteKitItem"));
 		kitEditingInventoryConfig.setBackItem(inventoryFile.getItem(
 				"backItem"));
 	}

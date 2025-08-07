@@ -70,11 +70,20 @@ homeEditing:
     # Placeholders available: [homeName}, {homeMaterialName}
     changeIconItem:
       enabled: true
-      slot: 32
+      slot: 31
       material: "{homeMaterialName}"
       displayName: "&6Change Icon"
       lore:
         - "&7Click to change the icon of this home."
+
+    deleteHomeItem:
+      enabled: true
+      slot: 32
+      material: "LAVA_BUCKET"
+      displayName: "&cDelete Home"
+      lore:
+        - "&7Click to delete this home."
+        - "&cThis action cannot be undone!"
 
     backItem:
       enabled: true

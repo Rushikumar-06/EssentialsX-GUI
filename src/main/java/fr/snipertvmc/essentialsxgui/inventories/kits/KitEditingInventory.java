@@ -1,5 +1,7 @@
 package fr.snipertvmc.essentialsxgui.inventories.kits;
 
+import fr.snipertvmc.essentialsxgui.inventories.homes.HomeEditingInventory;
+import fr.snipertvmc.essentialsxgui.inventories.homes.HomesInventory;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.FastInv;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
@@ -84,7 +86,7 @@ public class KitEditingInventory extends FastInv {
 
 						kit.setDisplayName(newKitName);
 						player.sendMessage(MessagesUtils.get(EXGMessage.DISPLAY_NAME_CHANGED,
-								Map.of("new_display_name", newKitName.replace("&", "§"))
+								Map.of("newDisplayName", newKitName.replace("&", "§"))
 						));
 						new KitEditingInventory(player, kit).open(player);
 						SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
@@ -126,10 +128,41 @@ public class KitEditingInventory extends FastInv {
 						}
 
 						kit.setMaterial(material);
-						player.sendMessage(MessagesUtils.get(EXGMessage.ICON_CHANGED, Map.of("new_icon", material.name())));
+						player.sendMessage(MessagesUtils.get(EXGMessage.ICON_CHANGED, Map.of("newIcon", material.name())));
 						new KitEditingInventory(player, kit).open(player);
 						SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
 
+					});
+
+				}, 10);
+			});
+		}
+
+		if (config.getDeleteKitItem().isEnabled()) {
+			setItem(config.getDeleteKitItem().getSlot(), config.getDeleteKitItem()
+					.updateVariables(
+							Map.of("{kitName}", kit.getName(),
+									"{kitDisplayName}", kit.getDisplayName()))
+					.build(), e -> {
+
+				player.closeInventory();
+				player.sendMessage(MessagesUtils.get(EXGMessage.CONFIRM_DELETE_KIT, Map.of("kitName", kit.getName())));
+				Main.getInstance().getChatManager().addChat(player.getUniqueId(), result -> {
+
+					Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
+
+						if (result.equalsIgnoreCase("confirm")) {
+
+							Main.getInstance().getEssentials().getKits().removeKit(kit.getName());
+							player.sendMessage(MessagesUtils.get(EXGMessage.KIT_DELETED, Map.of("kitName", kit.getName())));
+							new KitsPlayerViewInventory(player).open(player);
+							SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
+
+						} else {
+							player.sendMessage(MessagesUtils.get(EXGMessage.ACTION_CANCELED, null));
+							new KitEditingInventory(player, kit).open(player);
+							SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
+						}
 					});
 
 				}, 10);

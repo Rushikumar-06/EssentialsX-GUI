@@ -70,11 +70,20 @@ kitEditing:
     # Placeholders available: [kitName}, {kitMaterialName}
     changeIconItem:
       enabled: true
-      slot: 32
+      slot: 31
       material: "{kitMaterialName}"
       displayName: "&6Change Icon"
       lore:
         - "&7Click to change the icon of this kit."
+
+    deleteKitItem:
+      enabled: true
+      slot: 32
+      material: "LAVA_BUCKET"
+      displayName: "&cDelete Kit"
+      lore:
+        - "&7Click to delete this kit."
+        - "&cThis action cannot be undone!"
 
     backItem:
       enabled: true

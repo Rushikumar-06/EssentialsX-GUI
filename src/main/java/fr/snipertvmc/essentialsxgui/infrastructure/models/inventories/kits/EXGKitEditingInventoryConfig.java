@@ -13,6 +13,7 @@ public class EXGKitEditingInventoryConfig extends EXGInventoryConfig {
 
 	private EXGItemConfig changeDisplayNameItem;
 	private EXGItemConfig changeIconItem;
+	private EXGItemConfig deleteKitItem;
 
 	private EXGItemConfig backItem;
 
@@ -32,16 +33,15 @@ public class EXGKitEditingInventoryConfig extends EXGInventoryConfig {
 		return previewKitItem;
 	}
 
-
 	public EXGItemConfig getChangeDisplayNameItem() {
 		return changeDisplayNameItem;
 	}
-
-
 	public EXGItemConfig getChangeIconItem() {
 		return changeIconItem;
 	}
-
+	public EXGItemConfig getDeleteKitItem() {
+		return deleteKitItem;
+	}
 
 	public EXGItemConfig getBackItem() {
 		return backItem;
@@ -55,16 +55,15 @@ public class EXGKitEditingInventoryConfig extends EXGInventoryConfig {
 		this.previewKitItem = previewKitItem;
 	}
 
-
 	public void setChangeDisplayNameItem(EXGItemConfig changeDisplayNameItem) {
 		this.changeDisplayNameItem = changeDisplayNameItem;
 	}
-
-
 	public void setChangeIconItem(EXGItemConfig changeIconItem) {
 		this.changeIconItem = changeIconItem;
 	}
-
+	public void setDeleteKitItem(EXGItemConfig deleteKitItem) {
+		this.deleteKitItem = deleteKitItem;
+	}
 
 	public void setBackItem(EXGItemConfig backItem) {
 		this.backItem = backItem;
@@ -83,10 +82,12 @@ public class EXGKitEditingInventoryConfig extends EXGInventoryConfig {
 				this.getBorderSlots());
 
 		copy.setPreviewKitItem(this.getPreviewKitItem().duplicate());
+
 		copy.setChangeDisplayNameItem(this.getChangeDisplayNameItem().duplicate());
 		copy.setChangeIconItem(this.getChangeIconItem().duplicate());
-		copy.setBackItem(this.getBackItem().duplicate());
+		copy.setDeleteKitItem(this.getDeleteKitItem().duplicate());
 
+		copy.setBackItem(this.getBackItem().duplicate());
 		return copy;
 	}
 
