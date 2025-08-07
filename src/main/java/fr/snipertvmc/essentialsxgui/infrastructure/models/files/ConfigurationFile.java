@@ -68,6 +68,10 @@ public class ConfigurationFile {
 		return player.hasPermission(yamlConfiguration.getString("permissions.commands.essentialsxgui", "unknownPermission"));
 	}
 
+	public boolean hasEssentialsXGUICommandDebugArgument(Player player) {
+		return player.hasPermission(yamlConfiguration.getString("permissions.commands.essentialsxgui.debugArgument", "unknownPermission"));
+	}
+
 
 	public boolean hasKitsAdminAccess(Player player) {
 		return player.hasPermission(yamlConfiguration.getString("permissions.guis.kitsAdminAccess", "unknownPermission"));

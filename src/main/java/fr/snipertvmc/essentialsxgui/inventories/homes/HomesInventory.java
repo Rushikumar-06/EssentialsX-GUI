@@ -6,6 +6,7 @@ import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGHome;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes.EXGHomesInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
+import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.entity.Player;
 
@@ -80,7 +81,6 @@ public class HomesInventory extends PaginatedFastInv {
 					new HomeEditingInventory(player, home).open(player);
 					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 				}
-
 			});
 		}
 

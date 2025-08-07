@@ -102,6 +102,10 @@ permissions:
     # Default: "essentialsxgui.command.essentialsxgui"
     essentialsxgui: "essentialsxgui.command.essentialsxgui"
 
+    # Change the permission needed to access to the EssentialsX-GUI debug command.
+    # Default: "essentialsxgui.command.essentialsxgui.debug"
+    debugArgument: "essentialsxgui.command.essentialsxgui.debug"
+
 
   guis:
 
