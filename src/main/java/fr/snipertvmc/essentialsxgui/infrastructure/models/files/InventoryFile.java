@@ -4,6 +4,7 @@ import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.InventoryScheme;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.MCServerVersion;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
+import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
 import fr.snipertvmc.essentialsxgui.utilities.config.EXGItemConfigParser;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
@@ -131,7 +132,7 @@ public class InventoryFile {
 	private EXGItemConfig parseItemConfig(String path) {
 
 		Map<String, Object> itemStringValues = new HashMap<>() {{
-			put("enabled", yamlConfiguration.getBoolean(path + ".enabled"));
+			put("enabled", yamlConfiguration.get(path + ".enabled"));
 
 			put("slot", yamlConfiguration.getInt(path + ".slot"));
 
@@ -162,8 +163,13 @@ public class InventoryFile {
 			itemFlags.add(ItemFlag.valueOf(itemFlag));
 		}
 
+		Object booleanValue = itemStringValues.get("enabled");
+		if (!(booleanValue instanceof Boolean)) {
+			booleanValue = true;
+		}
+
 		return new EXGItemConfig(
-				(boolean) itemStringValues.get("enabled"),
+				(boolean) booleanValue,
 				((Number) itemStringValues.get("slot")).shortValue(),
 
 				(String) itemStringValues.get("material"),
