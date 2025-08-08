@@ -75,6 +75,7 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 
 			EXGItemConfig kitItem = config.getKitItem().duplicate();
 			kitItem.setMaterial(kit.getMaterial().name());
+			kitItem.setData(kit.getData());
 
 			addContent(kitItem
 					.updateVariables(
@@ -216,7 +217,7 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 				}
 
 				Main.getInstance().getHookManager().getEssentialsHook().createKitWithPlayer(player, kitName, delay);
-				player.sendMessage(MessagesUtils.get(EXGMessage.KIT_CREATED, Map.of("homeName", result)));
+				player.sendMessage(MessagesUtils.get(EXGMessage.KIT_CREATED, Map.of("kitName", kitName, "kitDelay", String.valueOf(delay))));
 				new KitsAdminViewInventory(player).open(player);
 				SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
 			});

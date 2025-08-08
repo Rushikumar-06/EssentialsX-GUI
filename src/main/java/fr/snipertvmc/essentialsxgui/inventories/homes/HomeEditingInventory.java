@@ -6,11 +6,15 @@ import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGHome;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes.EXGHomeEditingInventoryConfig;
+import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
+import fr.snipertvmc.essentialsxgui.utilities.data.TypeUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.*;
 
@@ -31,10 +35,10 @@ public class HomeEditingInventory extends FastInv {
 				Main.getInstance().getInventoriesManager().getHomeEditingInventoryConfig().getRows() * 9,
 				Main.getInstance().getInventoriesManager().getHomeEditingInventoryConfig().getEXGTitle()
 						.duplicate()
-						.updateVariables(Map.of(
-								"player", player.getName(),
-								"homeName", home.getName(),
-								"homeDisplayName", home.getDisplayName()))
+						.updateVariables(
+								Map.of("player", player.getName(),
+										"homeName", home.getName(),
+										"homeDisplayName", home.getDisplayName()))
 						.getTitle()
 		);
 
@@ -47,10 +51,12 @@ public class HomeEditingInventory extends FastInv {
 		if (config.getPreviewHomeItem().isEnabled()) {
 			setItem(config.getPreviewHomeItem().getSlot(), config.getPreviewHomeItem()
 					.setMaterial(home.getMaterial().name())
+					.setData(home.getData())
 					.updateVariables(
 							Map.of("homeName", home.getName(),
 									"homeDisplayName", home.getDisplayName(),
-									"homeMaterialName", home.getMaterial().name()))
+									"homeMaterialName", home.getMaterial().name(),
+									"homeMaterialData", String.valueOf(home.getData())))
 					.build());
 		}
 
@@ -63,12 +69,10 @@ public class HomeEditingInventory extends FastInv {
 					.build(), e -> changeHomeDisplayName(player, home));
 		}
 
-
 		if (config.getChangeIconItem().isEnabled()) {
 			setItem(config.getChangeIconItem().getSlot(), config.getChangeIconItem()
 					.updateVariables(
-							Map.of("homeName", home.getName(),
-									"homeMaterialName", home.getMaterial().name()))
+							Map.of("homeName", home.getName()))
 					.build(), e -> changeHomeIcon(player, home));
 		}
 
@@ -142,18 +146,36 @@ public class HomeEditingInventory extends FastInv {
 		player.closeInventory();
 		player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_ICON_NAME, null));
 
-		Main.getInstance().getChatManager().addChat(player.getUniqueId(), materialName -> {
+		Main.getInstance().getChatManager().addChat(player.getUniqueId(), result -> {
 
 			Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
 
-				if (materialName.equalsIgnoreCase("cancel")) {
+				if (result.equalsIgnoreCase("cancel")) {
 					player.sendMessage(MessagesUtils.get(EXGMessage.ACTION_CANCELED, null));
 					new HomeEditingInventory(player, home).open(player);
 					SoundsUtils.playSound(player, EXGSound.ACTION_CANCELED);
 					return;
 				}
 
-				Material material = Material.matchMaterial(materialName);
+				Material material;
+				byte data = 0;
+
+				if (result.contains(":")) {
+
+					String[] materialSplit = result.split(":");
+					if (materialSplit.length != 2 || !TypeUtils.isByte(materialSplit[1])) {
+						player.sendMessage(MessagesUtils.get(EXGMessage.INVALID_MATERIAL, null));
+						new HomeEditingInventory(player, home).open(player);
+						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
+						return;
+					}
+
+					material = Material.matchMaterial(materialSplit[0]);
+					data = Byte.parseByte(materialSplit[1]);
+
+				} else {
+					material = Material.matchMaterial(result);
+				}
 
 				if (material == null) {
 					player.sendMessage(MessagesUtils.get(EXGMessage.INVALID_MATERIAL, null));
@@ -163,6 +185,8 @@ public class HomeEditingInventory extends FastInv {
 				}
 
 				home.setMaterial(material);
+				home.setData(data);
+
 				player.sendMessage(MessagesUtils.get(EXGMessage.ICON_CHANGED, Map.of("newIcon", material.name())));
 				new HomeEditingInventory(player, home).open(player);
 				SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);

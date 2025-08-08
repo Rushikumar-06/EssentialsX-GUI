@@ -3,6 +3,7 @@ package fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.ItemBuilder;
 import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
+import fr.snipertvmc.essentialsxgui.utilities.data.TypeUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -149,6 +150,12 @@ public class EXGItemConfig {
 
 	public EXGItemConfig setMaterial(String materialName) {
 		this.materialName = materialName;
+		return this;
+	}
+
+
+	public EXGItemConfig setData(byte data) {
+		this.data = data;
 		return this;
 	}
 

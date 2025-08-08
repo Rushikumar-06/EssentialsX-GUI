@@ -9,6 +9,7 @@ import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGKit;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.EXGKitEditingInventoryConfig;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
+import fr.snipertvmc.essentialsxgui.utilities.data.TypeUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -33,10 +34,10 @@ public class KitEditingInventory extends FastInv {
 				Main.getInstance().getInventoriesManager().getKitEditingInventoryConfig().getRows() * 9,
 				Main.getInstance().getInventoriesManager().getKitEditingInventoryConfig().getEXGTitle()
 						.duplicate()
-						.updateVariables(Map.of(
-								"player", player.getName(),
-								"kitName", kit.getName(),
-								"kitDisplayName", kit.getDisplayName()))
+						.updateVariables(
+								Map.of("player", player.getName(),
+										"kitName", kit.getName(),
+										"kitDisplayName", kit.getDisplayName()))
 						.getTitle()
 		);
 
@@ -49,10 +50,12 @@ public class KitEditingInventory extends FastInv {
 		if (config.getPreviewKitItem().isEnabled()) {
 			setItem(config.getPreviewKitItem().getSlot(), config.getPreviewKitItem()
 					.setMaterial(kit.getMaterial().name())
+					.setData(kit.getData())
 					.updateVariables(
 							Map.of("kitName", kit.getName(),
 									"kitDisplayName", kit.getDisplayName(),
-									"kitMaterialName", kit.getMaterial().name()))
+									"kitMaterialName", kit.getMaterial().name(),
+									"kitMaterialData", String.valueOf(kit.getData())))
 					.build());
 		}
 
@@ -69,8 +72,7 @@ public class KitEditingInventory extends FastInv {
 		if (config.getChangeIconItem().isEnabled()) {
 			setItem(config.getChangeIconItem().getSlot(), config.getChangeIconItem()
 					.updateVariables(
-							Map.of("kitName", kit.getName(),
-									"kitMaterialName", kit.getMaterial().name()))
+							Map.of("kitName", kit.getName()))
 					.build(), e -> changeKitIcon(player, kit));
 		}
 
@@ -143,18 +145,36 @@ public class KitEditingInventory extends FastInv {
 
 		player.closeInventory();
 		player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_ICON_NAME, null));
-		Main.getInstance().getChatManager().addChat(player.getUniqueId(), materialName -> {
+		Main.getInstance().getChatManager().addChat(player.getUniqueId(), result -> {
 
 			Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
 
-				if (materialName.equalsIgnoreCase("cancel")) {
+				if (result.equalsIgnoreCase("cancel")) {
 					player.sendMessage(MessagesUtils.get(EXGMessage.ACTION_CANCELED, null));
 					new KitEditingInventory(player, kit).open(player);
 					SoundsUtils.playSound(player, EXGSound.ACTION_CANCELED);
 					return;
 				}
 
-				Material material = Material.matchMaterial(materialName);
+				Material material;
+				byte data = 0;
+
+				if (result.contains(":")) {
+
+					String[] materialSplit = result.split(":");
+					if (materialSplit.length != 2 || !TypeUtils.isByte(materialSplit[1])) {
+						player.sendMessage(MessagesUtils.get(EXGMessage.INVALID_MATERIAL, null));
+						new KitEditingInventory(player, kit).open(player);
+						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
+						return;
+					}
+
+					material = Material.matchMaterial(materialSplit[0]);
+					data = Byte.parseByte(materialSplit[1]);
+
+				} else {
+					material = Material.matchMaterial(result);
+				}
 
 				if (material == null) {
 					player.sendMessage(MessagesUtils.get(EXGMessage.INVALID_MATERIAL, null));
@@ -164,6 +184,8 @@ public class KitEditingInventory extends FastInv {
 				}
 
 				kit.setMaterial(material);
+				kit.setData(data);
+
 				player.sendMessage(MessagesUtils.get(EXGMessage.ICON_CHANGED, Map.of("newIcon", material.name())));
 				new KitEditingInventory(player, kit).open(player);
 				SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
@@ -190,7 +212,7 @@ public class KitEditingInventory extends FastInv {
 
 					Main.getInstance().getEssentials().getKits().removeKit(kit.getName());
 					player.sendMessage(MessagesUtils.get(EXGMessage.KIT_DELETED, Map.of("kitName", kit.getName())));
-					new KitsPlayerViewInventory(player).open(player);
+					new KitsAdminViewInventory(player).open(player);
 					SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
 
 				} else {

@@ -53,6 +53,7 @@ public class PlayerDataManager {
 			playerDataHomes.put(homeName, new HashMap<>() {{
 				put("displayName", homeName);
 				put("material", defaultMaterial);
+				put("data", "0");
 			}});
 		}
 

@@ -79,6 +79,7 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 
 			EXGItemConfig kitItem = config.getKitItem().duplicate();
 			kitItem.setMaterial(kit.getMaterial().name());
+			kitItem.setData(kit.getData());
 
 			addContent(kitItem
 					.updateVariables(

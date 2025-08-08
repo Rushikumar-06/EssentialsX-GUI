@@ -45,7 +45,7 @@ kitEditing:
   items:
 
     # 'material' value will be ignored in this section. It will use the material of player's kit's.
-    # Placeholders available: {kitDisplayName}, {kitName}, {kitMaterialName}
+    # Placeholders available: {kitDisplayName}, {kitName}, {kitMaterialName}, {kitMaterialData}
     # By default, if kitDisplayName is not set, it will use the kit name.
     previewKitItem:
       enabled: true
@@ -67,11 +67,11 @@ kitEditing:
       lore:
         - "&7Click to change the display name of this kit."
 
-    # Placeholders available: [kitName}, {kitMaterialName}
+    # Placeholders available: [kitName}
     changeIconItem:
       enabled: true
       slot: 31
-      material: "{kitMaterialName}"
+      material: "CHEST"
       displayName: "&6Change Icon"
       lore:
         - "&7Click to change the icon of this kit."

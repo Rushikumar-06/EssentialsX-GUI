@@ -220,7 +220,8 @@ public class InventoryFile {
 						"value_materialBorderItem", "BLACK_STAINED_GLASS_PANE",
 						"value_materialHomeItem", "GRASS_BLOCK",
 						"value_materialAdminModeItem", "ENDER_EYE",
-						"value_materialCreateHomeItem", "PISTON"
+						"value_materialCreateHomeItem", "PISTON",
+						"value_materialCreateKitItem", "PISTON"
 				);
 			}
 		}

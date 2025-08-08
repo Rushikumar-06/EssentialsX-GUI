@@ -79,6 +79,7 @@ public class EXGPlayer {
 			homes.put(home.getName(), new HashMap<>() {{
 				put("displayName", home.getDisplayName());
 				put("material", home.getMaterial().toString());
+				put("data", home.getData());
 			}});
 		});
 
@@ -91,6 +92,7 @@ public class EXGPlayer {
 			EXGHome home = new EXGHome(homeName);
 			home.setDisplayName((String) ((Map<String, Object>) homeData).get("displayName"));
 			home.setMaterial(Material.valueOf((String) ((Map<String, Object>) homeData).get("material")));
+			home.setData(Byte.parseByte(String.valueOf(((Map<String, Object>) homeData).get("data"))));
 			this.homes.add(home);
 		});
 	}

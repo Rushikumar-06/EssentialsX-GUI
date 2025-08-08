@@ -45,6 +45,7 @@ public class ServerDataManager {
 			serverKits.put(kitName, new HashMap<>() {{
 				put("displayName", kitName);
 				put("material", "CHEST");
+				put("data", "0");
 			}});
 		}
 

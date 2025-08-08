@@ -71,6 +71,7 @@ public class HomesInventory extends PaginatedFastInv {
 
 			EXGItemConfig homeItem = config.getHomeItem().duplicate();
 			homeItem.setMaterial(home.getMaterial().name());
+			homeItem.setData(home.getData());
 
 			addContent(homeItem
 					.updateVariables(

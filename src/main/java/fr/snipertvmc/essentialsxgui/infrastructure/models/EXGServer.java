@@ -65,6 +65,7 @@ public class EXGServer {
 			kits.put(kit.getName(), new HashMap<>() {{
 				put("displayName", kit.getDisplayName());
 				put("material", kit.getMaterial().toString());
+				put("data", kit.getData());
 			}});
 		});
 
@@ -77,6 +78,7 @@ public class EXGServer {
 			EXGKit kit = new EXGKit(kitName);
 			kit.setDisplayName((String) ((Map<String, Object>) kitData).get("displayName"));
 			kit.setMaterial(Material.valueOf((String) ((Map<String, Object>) kitData).get("material")));
+			kit.setData(Byte.parseByte(String.valueOf(((Map<String, Object>) kitData).get("data"))));
 			this.kits.add(kit);
 		});
 	}

@@ -13,6 +13,7 @@ public class EXGHome {
 
 	private String displayName;
 	private Material material;
+	private byte data;
 
 
 	// -------------------------------------------------- //
@@ -25,6 +26,7 @@ public class EXGHome {
 			case v1_8_8, v1_9_4, v1_10_2, v1_11_2, v1_12_2 -> Material.matchMaterial("GRASS");
 			default -> Material.matchMaterial("GRASS_BLOCK");
 		};
+		this.data = 0;
 	}
 
 
@@ -35,14 +37,14 @@ public class EXGHome {
 		return name;
 	}
 
-
 	public String getDisplayName() {
 		return displayName;
 	}
-
-
 	public Material getMaterial() {
 		return material;
+	}
+	public byte getData() {
+		return data;
 	}
 
 
@@ -53,9 +55,11 @@ public class EXGHome {
 		this.displayName = displayName;
 	}
 
-
 	public void setMaterial(Material material) {
 		this.material = material;
+	}
+	public void setData(byte data) {
+		this.data = data;
 	}
 
 
