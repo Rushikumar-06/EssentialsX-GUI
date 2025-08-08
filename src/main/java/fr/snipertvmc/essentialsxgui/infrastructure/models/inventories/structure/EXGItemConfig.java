@@ -257,16 +257,16 @@ public class EXGItemConfig {
 		variables.forEach((key, value) -> {
 
 			if (materialName != null) {
-				materialName = materialName.replace(key, value);
+				materialName = materialName.replace("{" + key + "}", value);
 			}
 
 			if (displayName != null) {
-				displayName = displayName.replace(key, value);
+				displayName = displayName.replace("{" + key + "}", value);
 			}
 
 			if (lore != null) {
 				lore = lore.stream()
-						.map(line -> line.replace(key, value))
+						.map(line -> line.replace("{" + key + "}", value))
 						.collect(Collectors.toList());
 			}
 		});

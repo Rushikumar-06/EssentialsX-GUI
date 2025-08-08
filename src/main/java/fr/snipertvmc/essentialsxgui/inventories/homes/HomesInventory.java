@@ -31,7 +31,7 @@ public class HomesInventory extends PaginatedFastInv {
 				Main.getInstance().getInventoriesManager().getHomesInventoryConfig().getEXGTitle()
 						.duplicate()
 						.updateVariables(Map.of(
-						"{player}", player.getName()))
+						"player", player.getName()))
 						.getTitle()
 		);
 
@@ -46,15 +46,15 @@ public class HomesInventory extends PaginatedFastInv {
 
 		previousPageItem(config.getPreviousPageItem().getSlot(), config.getPreviousPageItem()
 				.updateVariables(
-						Map.of("{currentPage}", String.valueOf(this.currentPage()),
-								"{previousPage}", String.valueOf(this.currentPage() - 1)))
+						Map.of("currentPage", String.valueOf(this.currentPage()),
+								"previousPage", String.valueOf(this.currentPage() - 1)))
 				.build());
 
 
 		nextPageItem(config.getNextPageItem().getSlot(), config.getNextPageItem()
 				.updateVariables(
-						Map.of("{currentPage}", String.valueOf(this.currentPage()),
-								"{nextPage}", String.valueOf(this.currentPage() + 1)))
+						Map.of("currentPage", String.valueOf(this.currentPage()),
+								"nextPage", String.valueOf(this.currentPage() + 1)))
 				.build());
 
 
@@ -70,8 +70,8 @@ public class HomesInventory extends PaginatedFastInv {
 
 			addContent(homeItem
 					.updateVariables(
-							Map.of("{homeDisplayName}", home.getDisplayName(),
-									"{homeName}", home.getName()))
+							Map.of("homeDisplayName", home.getDisplayName(),
+									"homeName", home.getName()))
 					.build(), e -> {
 
 				if (e.getClick().isLeftClick()) {
@@ -110,10 +110,10 @@ public class HomesInventory extends PaginatedFastInv {
 
 		setItem(config.getCurrentPageItem().getSlot(), config.getCurrentPageItem()
 				.updateVariables(
-						Map.of("{currentPage}", String.valueOf(this.currentPage()),
-								"{totalPages}", String.valueOf(this.lastPage()),
-								"{previousPage}", String.valueOf(this.currentPage() - 1),
-								"{nextPage}", String.valueOf(this.currentPage() + 1)))
+						Map.of("currentPage", String.valueOf(this.currentPage()),
+								"totalPages", String.valueOf(this.lastPage()),
+								"previousPage", String.valueOf(this.currentPage() - 1),
+								"nextPage", String.valueOf(this.currentPage() + 1)))
 				.build());
 	}
 

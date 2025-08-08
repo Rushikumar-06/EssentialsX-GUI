@@ -32,8 +32,8 @@ public class KitsPlayerGiveInventory extends PaginatedFastInv {
 				Main.getInstance().getInventoriesManager().getKitsPlayerGiveInventoryConfig().getEXGTitle()
 						.duplicate()
 						.updateVariables(Map.of(
-								"{kitName}", kit.getName(),
-								"{kitDisplayName}", kit.getDisplayName()))
+								"kitName", kit.getName(),
+								"kitDisplayName", kit.getDisplayName()))
 						.getTitle()
 		);
 
@@ -48,15 +48,15 @@ public class KitsPlayerGiveInventory extends PaginatedFastInv {
 
 		previousPageItem(config.getPreviousPageItem().getSlot(), config.getPreviousPageItem()
 				.updateVariables(Map.of(
-						"{currentPage}", String.valueOf(this.currentPage()),
-						"{previousPage}", String.valueOf(this.currentPage() - 1)))
+						"currentPage", String.valueOf(this.currentPage()),
+						"previousPage", String.valueOf(this.currentPage() - 1)))
 				.build());
 
 
 		nextPageItem(config.getNextPageItem().getSlot(), config.getNextPageItem()
 				.updateVariables(Map.of(
-						"{currentPage}", String.valueOf(this.currentPage()),
-						"{nextPage}", String.valueOf(this.currentPage() + 1)))
+						"currentPage", String.valueOf(this.currentPage()),
+						"nextPage", String.valueOf(this.currentPage() + 1)))
 				.build());
 
 		List<Player> targets = Bukkit.getOnlinePlayers().stream()
@@ -69,9 +69,9 @@ public class KitsPlayerGiveInventory extends PaginatedFastInv {
 			EXGItemConfig playerItem = config.getPlayerItem().duplicate();
 			addContent(playerItem
 					.updateVariables(Map.of(
-							"{targetName}", target.getName(),
-							"{kitName}", kit.getName(),
-							"{kitDisplayName}", kit.getDisplayName()))
+							"targetName", target.getName(),
+							"kitName", kit.getName(),
+							"kitDisplayName", kit.getDisplayName()))
 					.build(), e -> {
 
 				player.performCommand("essentials:kit " + kit.getName() + " " + target.getName());
@@ -100,10 +100,10 @@ public class KitsPlayerGiveInventory extends PaginatedFastInv {
 
 		setItem(config.getCurrentPageItem().getSlot(), config.getCurrentPageItem()
 				.updateVariables(
-						Map.of("{currentPage}", String.valueOf(this.currentPage()),
-								"{totalPages}", String.valueOf(this.lastPage()),
-								"{previousPage}", String.valueOf(this.currentPage() - 1),
-								"{nextPage}", String.valueOf(this.currentPage() + 1)))
+						Map.of("currentPage", String.valueOf(this.currentPage()),
+								"totalPages", String.valueOf(this.lastPage()),
+								"previousPage", String.valueOf(this.currentPage() - 1),
+								"nextPage", String.valueOf(this.currentPage() + 1)))
 				.build());
 	}
 

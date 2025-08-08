@@ -32,9 +32,9 @@ public class HomeEditingInventory extends FastInv {
 				Main.getInstance().getInventoriesManager().getHomeEditingInventoryConfig().getEXGTitle()
 						.duplicate()
 						.updateVariables(Map.of(
-								"{player}", player.getName(),
-								"{homeName}", home.getName(),
-								"{homeDisplayName}", home.getDisplayName()))
+								"player", player.getName(),
+								"homeName", home.getName(),
+								"homeDisplayName", home.getDisplayName()))
 						.getTitle()
 		);
 
@@ -48,9 +48,9 @@ public class HomeEditingInventory extends FastInv {
 			setItem(config.getPreviewHomeItem().getSlot(), config.getPreviewHomeItem()
 					.setMaterial(home.getMaterial().name())
 					.updateVariables(
-							Map.of("{homeName}", home.getName(),
-									"{homeDisplayName}", home.getDisplayName(),
-									"{homeMaterialName}", home.getMaterial().name()))
+							Map.of("homeName", home.getName(),
+									"homeDisplayName", home.getDisplayName(),
+									"homeMaterialName", home.getMaterial().name()))
 					.build());
 		}
 
@@ -58,8 +58,8 @@ public class HomeEditingInventory extends FastInv {
 		if (config.getChangeDisplayNameItem().isEnabled()) {
 			setItem(config.getChangeDisplayNameItem().getSlot(), config.getChangeDisplayNameItem()
 					.updateVariables(
-							Map.of("{homeName}", home.getName(),
-									"{homeDisplayName}", home.getDisplayName()))
+							Map.of("homeName", home.getName(),
+									"homeDisplayName", home.getDisplayName()))
 					.build(), e -> {
 
 				player.closeInventory();
@@ -97,8 +97,8 @@ public class HomeEditingInventory extends FastInv {
 		if (config.getChangeIconItem().isEnabled()) {
 			setItem(config.getChangeIconItem().getSlot(), config.getChangeIconItem()
 					.updateVariables(
-							Map.of("{homeName}", home.getName(),
-									"{homeMaterialName}", home.getMaterial().name()))
+							Map.of("homeName", home.getName(),
+									"homeMaterialName", home.getMaterial().name()))
 					.build(), e -> {
 
 				player.closeInventory();
@@ -135,8 +135,8 @@ public class HomeEditingInventory extends FastInv {
 		if (config.getDeleteHomeItem().isEnabled()) {
 			setItem(config.getDeleteHomeItem().getSlot(), config.getDeleteHomeItem()
 					.updateVariables(
-							Map.of("{homeName}", home.getName(),
-									"{homeDisplayName}", home.getDisplayName()))
+							Map.of("homeName", home.getName(),
+									"homeDisplayName", home.getDisplayName()))
 					.build(), e -> {
 
 				player.closeInventory();

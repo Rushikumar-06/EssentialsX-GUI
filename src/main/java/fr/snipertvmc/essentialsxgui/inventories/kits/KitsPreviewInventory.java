@@ -31,8 +31,8 @@ public class KitsPreviewInventory extends PaginatedFastInv {
 				Main.getInstance().getInventoriesManager().getKitsPreviewInventoryConfig().getEXGTitle()
 						.duplicate()
 						.updateVariables(Map.of(
-								"{kitName}", kit.getName(),
-								"{kitDisplayName}", kit.getDisplayName()))
+								"kitName", kit.getName(),
+								"kitDisplayName", kit.getDisplayName()))
 						.getTitle()
 		);
 
@@ -47,15 +47,15 @@ public class KitsPreviewInventory extends PaginatedFastInv {
 
 		previousPageItem(config.getPreviousPageItem().getSlot(), config.getPreviousPageItem()
 				.updateVariables(
-						Map.of("{currentPage}", String.valueOf(this.currentPage()),
-								"{previousPage}", String.valueOf(this.currentPage() - 1)))
+						Map.of("currentPage", String.valueOf(this.currentPage()),
+								"previousPage", String.valueOf(this.currentPage() - 1)))
 				.build());
 
 
 		nextPageItem(config.getNextPageItem().getSlot(), config.getNextPageItem()
 				.updateVariables(
-						Map.of("{currentPage}", String.valueOf(this.currentPage()),
-								"{nextPage}", String.valueOf(this.currentPage() + 1)))
+						Map.of("currentPage", String.valueOf(this.currentPage()),
+								"nextPage", String.valueOf(this.currentPage() + 1)))
 				.build());
 
 
@@ -88,10 +88,10 @@ public class KitsPreviewInventory extends PaginatedFastInv {
 
 		setItem(config.getCurrentPageItem().getSlot(), config.getCurrentPageItem()
 				.updateVariables(
-						Map.of("{currentPage}", String.valueOf(this.currentPage()),
-								"{totalPages}", String.valueOf(this.lastPage()),
-								"{previousPage}", String.valueOf(this.currentPage() - 1),
-								"{nextPage}", String.valueOf(this.currentPage() + 1)))
+						Map.of("currentPage", String.valueOf(this.currentPage()),
+								"totalPages", String.valueOf(this.lastPage()),
+								"previousPage", String.valueOf(this.currentPage() - 1),
+								"nextPage", String.valueOf(this.currentPage() + 1)))
 				.build());
 	}
 

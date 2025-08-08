@@ -55,15 +55,15 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 
 		previousPageItem(config.getPreviousPageItem().getSlot(), config.getPreviousPageItem()
 				.updateVariables(
-						Map.of("{currentPage}", String.valueOf(this.currentPage()),
-								"{previousPage}", String.valueOf(this.currentPage() - 1)))
+						Map.of("currentPage", String.valueOf(this.currentPage()),
+								"previousPage", String.valueOf(this.currentPage() - 1)))
 				.build());
 
 
 		nextPageItem(config.getNextPageItem().getSlot(), config.getNextPageItem()
 				.updateVariables(
-						Map.of("{currentPage}", String.valueOf(this.currentPage()),
-								"{nextPage}", String.valueOf(this.currentPage() + 1)))
+						Map.of("currentPage", String.valueOf(this.currentPage()),
+								"nextPage", String.valueOf(this.currentPage() + 1)))
 				.build());
 
 
@@ -79,8 +79,8 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 
 			addContent(kitItem
 					.updateVariables(
-							Map.of("{kitDisplayName}", kit.getDisplayName(),
-									"{kitName}", kit.getName()))
+							Map.of("kitDisplayName", kit.getDisplayName(),
+									"kitName", kit.getName()))
 					.build(), e -> {
 
 				if (e.getClick().isLeftClick()) {
@@ -121,10 +121,10 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 
 		setItem(config.getCurrentPageItem().getSlot(), config.getCurrentPageItem()
 				.updateVariables(
-						Map.of("{currentPage}", String.valueOf(this.currentPage()),
-								"{totalPages}", String.valueOf(this.lastPage()),
-								"{previousPage}", String.valueOf(this.currentPage() - 1),
-								"{nextPage}", String.valueOf(this.currentPage() + 1)))
+						Map.of("currentPage", String.valueOf(this.currentPage()),
+								"totalPages", String.valueOf(this.lastPage()),
+								"previousPage", String.valueOf(this.currentPage() - 1),
+								"nextPage", String.valueOf(this.currentPage() + 1)))
 				.build());
 	}
 

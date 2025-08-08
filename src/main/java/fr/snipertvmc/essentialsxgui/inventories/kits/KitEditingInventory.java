@@ -34,9 +34,9 @@ public class KitEditingInventory extends FastInv {
 				Main.getInstance().getInventoriesManager().getKitEditingInventoryConfig().getEXGTitle()
 						.duplicate()
 						.updateVariables(Map.of(
-								"{player}", player.getName(),
-								"{kitName}", kit.getName(),
-								"{kitDisplayName}", kit.getDisplayName()))
+								"player", player.getName(),
+								"kitName", kit.getName(),
+								"kitDisplayName", kit.getDisplayName()))
 						.getTitle()
 		);
 
@@ -50,9 +50,9 @@ public class KitEditingInventory extends FastInv {
 			setItem(config.getPreviewKitItem().getSlot(), config.getPreviewKitItem()
 					.setMaterial(kit.getMaterial().name())
 					.updateVariables(
-							Map.of("{kitName}", kit.getName(),
-									"{kitDisplayName}", kit.getDisplayName(),
-									"{kitMaterialName}", kit.getMaterial().name()))
+							Map.of("kitName", kit.getName(),
+									"kitDisplayName", kit.getDisplayName(),
+									"kitMaterialName", kit.getMaterial().name()))
 					.build());
 		}
 
@@ -60,8 +60,8 @@ public class KitEditingInventory extends FastInv {
 		if (config.getChangeDisplayNameItem().isEnabled()) {
 			setItem(config.getChangeDisplayNameItem().getSlot(), config.getChangeDisplayNameItem()
 					.updateVariables(
-							Map.of("{kitName}", kit.getName(),
-									"{kitDisplayName}", kit.getDisplayName()))
+							Map.of("kitName", kit.getName(),
+									"kitDisplayName", kit.getDisplayName()))
 					.build(), e -> {
 
 				player.closeInventory();
@@ -77,8 +77,8 @@ public class KitEditingInventory extends FastInv {
 							return;
 						}
 
-						if (newKitName.length() > 16) {
-							player.sendMessage(MessagesUtils.get(EXGMessage.CHARACTER_LIMIT, null));
+						if (newKitName.isEmpty() || newKitName.length() > 32) {
+							player.sendMessage(MessagesUtils.get(EXGMessage.LENGTH_LIMIT, Map.of("min", "1", "max", "32")));
 							new KitEditingInventory(player, kit).open(player);
 							SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 							return;
@@ -101,8 +101,8 @@ public class KitEditingInventory extends FastInv {
 		if (config.getChangeIconItem().isEnabled()) {
 			setItem(config.getChangeIconItem().getSlot(), config.getChangeIconItem()
 					.updateVariables(
-							Map.of("{kitName}", kit.getName(),
-									"{kitMaterialName}", kit.getMaterial().name()))
+							Map.of("kitName", kit.getName(),
+									"kitMaterialName", kit.getMaterial().name()))
 					.build(), e -> {
 
 				player.closeInventory();
@@ -141,8 +141,8 @@ public class KitEditingInventory extends FastInv {
 		if (config.getDeleteKitItem().isEnabled()) {
 			setItem(config.getDeleteKitItem().getSlot(), config.getDeleteKitItem()
 					.updateVariables(
-							Map.of("{kitName}", kit.getName(),
-									"{kitDisplayName}", kit.getDisplayName()))
+							Map.of("kitName", kit.getName(),
+									"kitDisplayName", kit.getDisplayName()))
 					.build(), e -> {
 
 				player.closeInventory();
