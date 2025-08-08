@@ -62,39 +62,7 @@ public class KitEditingInventory extends FastInv {
 					.updateVariables(
 							Map.of("kitName", kit.getName(),
 									"kitDisplayName", kit.getDisplayName()))
-					.build(), e -> {
-
-				player.closeInventory();
-				player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_DISPLAY_NAME, null));
-				Main.getInstance().getChatManager().addChat(player.getUniqueId(), newKitName -> {
-
-					Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
-
-						if (newKitName.equalsIgnoreCase("cancel")) {
-							player.sendMessage(MessagesUtils.get(EXGMessage.ACTION_CANCELED, null));
-							new KitEditingInventory(player, kit).open(player);
-							SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
-							return;
-						}
-
-						if (newKitName.isEmpty() || newKitName.length() > 32) {
-							player.sendMessage(MessagesUtils.get(EXGMessage.LENGTH_LIMIT, Map.of("min", "1", "max", "32")));
-							new KitEditingInventory(player, kit).open(player);
-							SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
-							return;
-						}
-
-						kit.setDisplayName(newKitName);
-						player.sendMessage(MessagesUtils.get(EXGMessage.DISPLAY_NAME_CHANGED,
-								Map.of("newDisplayName", newKitName.replace("&", "§"))
-						));
-						new KitEditingInventory(player, kit).open(player);
-						SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
-
-					});
-
-				}, 10);
-			});
+					.build(), e -> changeKitDisplayName(player, kit));
 		}
 
 
@@ -103,39 +71,7 @@ public class KitEditingInventory extends FastInv {
 					.updateVariables(
 							Map.of("kitName", kit.getName(),
 									"kitMaterialName", kit.getMaterial().name()))
-					.build(), e -> {
-
-				player.closeInventory();
-				player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_ICON_NAME, null));
-				Main.getInstance().getChatManager().addChat(player.getUniqueId(), materialName -> {
-
-					Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
-
-						if (materialName.equalsIgnoreCase("cancel")) {
-							player.sendMessage(MessagesUtils.get(EXGMessage.ACTION_CANCELED, null));
-							new KitEditingInventory(player, kit).open(player);
-							SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
-							return;
-						}
-
-						Material material = Material.matchMaterial(materialName);
-
-						if (material == null) {
-							player.sendMessage(MessagesUtils.get(EXGMessage.INVALID_MATERIAL, null));
-							new KitEditingInventory(player, kit).open(player);
-							SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
-							return;
-						}
-
-						kit.setMaterial(material);
-						player.sendMessage(MessagesUtils.get(EXGMessage.ICON_CHANGED, Map.of("newIcon", material.name())));
-						new KitEditingInventory(player, kit).open(player);
-						SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
-
-					});
-
-				}, 10);
-			});
+					.build(), e -> changeKitIcon(player, kit));
 		}
 
 		if (config.getDeleteKitItem().isEnabled()) {
@@ -143,30 +79,7 @@ public class KitEditingInventory extends FastInv {
 					.updateVariables(
 							Map.of("kitName", kit.getName(),
 									"kitDisplayName", kit.getDisplayName()))
-					.build(), e -> {
-
-				player.closeInventory();
-				player.sendMessage(MessagesUtils.get(EXGMessage.CONFIRM_DELETE_KIT, Map.of("kitName", kit.getName())));
-				Main.getInstance().getChatManager().addChat(player.getUniqueId(), result -> {
-
-					Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
-
-						if (result.equalsIgnoreCase("confirm")) {
-
-							Main.getInstance().getEssentials().getKits().removeKit(kit.getName());
-							player.sendMessage(MessagesUtils.get(EXGMessage.KIT_DELETED, Map.of("kitName", kit.getName())));
-							new KitsPlayerViewInventory(player).open(player);
-							SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
-
-						} else {
-							player.sendMessage(MessagesUtils.get(EXGMessage.ACTION_CANCELED, null));
-							new KitEditingInventory(player, kit).open(player);
-							SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
-						}
-					});
-
-				}, 10);
-			});
+					.build(), e -> deleteKit(player, kit));
 		}
 
 
@@ -177,6 +90,105 @@ public class KitEditingInventory extends FastInv {
 				SoundsUtils.playSound(player, EXGSound.GUI_BACK);
 			});
 		}
+	}
+
+
+	// -------------------------------------------------- //
+
+
+	public void changeKitDisplayName(Player player, EXGKit kit) {
+
+		player.closeInventory();
+		player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_DISPLAY_NAME, null));
+		Main.getInstance().getChatManager().addChat(player.getUniqueId(), newKitName -> {
+
+			Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
+
+				if (newKitName.equalsIgnoreCase("cancel")) {
+					player.sendMessage(MessagesUtils.get(EXGMessage.ACTION_CANCELED, null));
+					new KitEditingInventory(player, kit).open(player);
+					SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
+					return;
+				}
+
+				if (newKitName.isEmpty() || newKitName.length() > 32) {
+					player.sendMessage(MessagesUtils.get(EXGMessage.LENGTH_LIMIT, Map.of("min", "1", "max", "32")));
+					new KitEditingInventory(player, kit).open(player);
+					SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
+					return;
+				}
+
+				kit.setDisplayName(newKitName);
+				player.sendMessage(MessagesUtils.get(EXGMessage.DISPLAY_NAME_CHANGED,
+						Map.of("newDisplayName", newKitName.replace("&", "§"))
+				));
+				new KitEditingInventory(player, kit).open(player);
+				SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
+
+			});
+
+		}, 10);
+	}
+
+
+	public void changeKitIcon(Player player, EXGKit kit) {
+
+		player.closeInventory();
+		player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_ICON_NAME, null));
+		Main.getInstance().getChatManager().addChat(player.getUniqueId(), materialName -> {
+
+			Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
+
+				if (materialName.equalsIgnoreCase("cancel")) {
+					player.sendMessage(MessagesUtils.get(EXGMessage.ACTION_CANCELED, null));
+					new KitEditingInventory(player, kit).open(player);
+					SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
+					return;
+				}
+
+				Material material = Material.matchMaterial(materialName);
+
+				if (material == null) {
+					player.sendMessage(MessagesUtils.get(EXGMessage.INVALID_MATERIAL, null));
+					new KitEditingInventory(player, kit).open(player);
+					SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
+					return;
+				}
+
+				kit.setMaterial(material);
+				player.sendMessage(MessagesUtils.get(EXGMessage.ICON_CHANGED, Map.of("newIcon", material.name())));
+				new KitEditingInventory(player, kit).open(player);
+				SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
+
+			});
+
+		}, 10);
+	}
+
+
+	public void deleteKit(Player player, EXGKit kit) {
+
+		player.closeInventory();
+		player.sendMessage(MessagesUtils.get(EXGMessage.CONFIRM_DELETE_KIT, Map.of("kitName", kit.getName())));
+		Main.getInstance().getChatManager().addChat(player.getUniqueId(), result -> {
+
+			Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
+
+				if (result.equalsIgnoreCase("confirm")) {
+
+					Main.getInstance().getEssentials().getKits().removeKit(kit.getName());
+					player.sendMessage(MessagesUtils.get(EXGMessage.KIT_DELETED, Map.of("kitName", kit.getName())));
+					new KitsPlayerViewInventory(player).open(player);
+					SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
+
+				} else {
+					player.sendMessage(MessagesUtils.get(EXGMessage.ACTION_CANCELED, null));
+					new KitEditingInventory(player, kit).open(player);
+					SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
+				}
+			});
+
+		}, 10);
 	}
 
 

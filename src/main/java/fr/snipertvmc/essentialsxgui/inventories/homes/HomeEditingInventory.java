@@ -60,37 +60,7 @@ public class HomeEditingInventory extends FastInv {
 					.updateVariables(
 							Map.of("homeName", home.getName(),
 									"homeDisplayName", home.getDisplayName()))
-					.build(), e -> {
-
-				player.closeInventory();
-				player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_DISPLAY_NAME, null));
-				Main.getInstance().getChatManager().addChat(player.getUniqueId(), newHomeName -> {
-
-					Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
-
-						if (newHomeName.equalsIgnoreCase("cancel")) {
-							player.sendMessage(MessagesUtils.get(EXGMessage.ACTION_CANCELED, null));
-							new HomeEditingInventory(player, home).open(player);
-							return;
-						}
-
-						if (newHomeName.isEmpty() || newHomeName.length() > 32) {
-							player.sendMessage(MessagesUtils.get(EXGMessage.LENGTH_LIMIT, Map.of("min", "1", "max", "32")));
-							new HomeEditingInventory(player, home).open(player);
-							return;
-						}
-
-						home.setDisplayName(newHomeName);
-						player.sendMessage(MessagesUtils.get(EXGMessage.DISPLAY_NAME_CHANGED,
-								Map.of("newDisplayName", newHomeName.replace("&", "§"))
-						));
-						new HomeEditingInventory(player, home).open(player);
-
-						SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
-					});
-
-				}, 10);
-			});
+					.build(), e -> changeHomeDisplayName(player, home));
 		}
 
 
@@ -99,37 +69,7 @@ public class HomeEditingInventory extends FastInv {
 					.updateVariables(
 							Map.of("homeName", home.getName(),
 									"homeMaterialName", home.getMaterial().name()))
-					.build(), e -> {
-
-				player.closeInventory();
-				player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_ICON_NAME, null));
-				Main.getInstance().getChatManager().addChat(player.getUniqueId(), materialName -> {
-
-					Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
-
-						if (materialName.equalsIgnoreCase("cancel")) {
-							player.sendMessage(MessagesUtils.get(EXGMessage.ACTION_CANCELED, null));
-							new HomeEditingInventory(player, home).open(player);
-							return;
-						}
-
-						Material material = Material.matchMaterial(materialName);
-
-						if (material == null) {
-							player.sendMessage(MessagesUtils.get(EXGMessage.INVALID_MATERIAL, null));
-							new HomeEditingInventory(player, home).open(player);
-							return;
-						}
-
-						home.setMaterial(material);
-						player.sendMessage(MessagesUtils.get(EXGMessage.ICON_CHANGED, Map.of("newIcon", material.name())));
-						new HomeEditingInventory(player, home).open(player);
-
-						SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
-					});
-
-				}, 10);
-			});
+					.build(), e -> changeHomeIcon(player, home));
 		}
 
 		if (config.getDeleteHomeItem().isEnabled()) {
@@ -137,39 +77,7 @@ public class HomeEditingInventory extends FastInv {
 					.updateVariables(
 							Map.of("homeName", home.getName(),
 									"homeDisplayName", home.getDisplayName()))
-					.build(), e -> {
-
-				player.closeInventory();
-				player.sendMessage(MessagesUtils.get(EXGMessage.CONFIRM_DELETE_HOME, Map.of("homeName", home.getName())));
-				Main.getInstance().getChatManager().addChat(player.getUniqueId(), result -> {
-
-					Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
-
-						if (result.equalsIgnoreCase("confirm")) {
-
-							try {
-								Main.getInstance().getEssentials().getUser(player).delHome(home.getName());
-
-							} catch (Exception ex) {
-								player.sendMessage(MessagesUtils.get(EXGMessage.HOME_DELETE_ERROR, null));
-								new HomesInventory(player).open(player);
-								SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
-								return;
-							}
-
-							player.sendMessage(MessagesUtils.get(EXGMessage.HOME_DELETED, Map.of("homeName", home.getName())));
-							new HomesInventory(player).open(player);
-							SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
-
-						} else {
-							player.sendMessage(MessagesUtils.get(EXGMessage.ACTION_CANCELED, null));
-							new HomeEditingInventory(player, home).open(player);
-							SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
-						}
-					});
-
-				}, 10);
-			});
+					.build(), e -> deleteHome(player, home));
 		}
 
 
@@ -182,6 +90,112 @@ public class HomeEditingInventory extends FastInv {
 		}
 	}
 
+
+	// -------------------------------------------------- //
+
+
+	public void changeHomeDisplayName(Player player, EXGHome home) {
+
+		player.closeInventory();
+		player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_DISPLAY_NAME, null));
+
+		Main.getInstance().getChatManager().addChat(player.getUniqueId(), newHomeName -> {
+
+			Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
+
+				if (newHomeName.equalsIgnoreCase("cancel")) {
+					player.sendMessage(MessagesUtils.get(EXGMessage.ACTION_CANCELED, null));
+					new HomeEditingInventory(player, home).open(player);
+					return;
+				}
+
+				if (newHomeName.isEmpty() || newHomeName.length() > 32) {
+					player.sendMessage(MessagesUtils.get(EXGMessage.LENGTH_LIMIT, Map.of("min", "1", "max", "32")));
+					new HomeEditingInventory(player, home).open(player);
+					return;
+				}
+
+				home.setDisplayName(newHomeName);
+				player.sendMessage(MessagesUtils.get(EXGMessage.DISPLAY_NAME_CHANGED,
+						Map.of("newDisplayName", newHomeName.replace("&", "§"))
+				));
+				new HomeEditingInventory(player, home).open(player);
+
+				SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
+			});
+
+		}, 10);
+	}
+
+
+	public void changeHomeIcon(Player player, EXGHome home) {
+
+		player.closeInventory();
+		player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_ICON_NAME, null));
+
+		Main.getInstance().getChatManager().addChat(player.getUniqueId(), materialName -> {
+
+			Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
+
+				if (materialName.equalsIgnoreCase("cancel")) {
+					player.sendMessage(MessagesUtils.get(EXGMessage.ACTION_CANCELED, null));
+					new HomeEditingInventory(player, home).open(player);
+					return;
+				}
+
+				Material material = Material.matchMaterial(materialName);
+
+				if (material == null) {
+					player.sendMessage(MessagesUtils.get(EXGMessage.INVALID_MATERIAL, null));
+					new HomeEditingInventory(player, home).open(player);
+					return;
+				}
+
+				home.setMaterial(material);
+				player.sendMessage(MessagesUtils.get(EXGMessage.ICON_CHANGED, Map.of("newIcon", material.name())));
+				new HomeEditingInventory(player, home).open(player);
+
+				SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
+			});
+
+		}, 10);
+	}
+
+
+	public void deleteHome(Player player, EXGHome home) {
+
+		player.closeInventory();
+		player.sendMessage(MessagesUtils.get(EXGMessage.CONFIRM_DELETE_HOME, Map.of("homeName", home.getName())));
+
+		Main.getInstance().getChatManager().addChat(player.getUniqueId(), result -> {
+
+			Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
+
+				if (result.equalsIgnoreCase("confirm")) {
+
+					try {
+						Main.getInstance().getEssentials().getUser(player).delHome(home.getName());
+
+					} catch (Exception ex) {
+						player.sendMessage(MessagesUtils.get(EXGMessage.HOME_DELETE_ERROR, null));
+						new HomesInventory(player).open(player);
+						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
+						return;
+					}
+
+					player.sendMessage(MessagesUtils.get(EXGMessage.HOME_DELETED, Map.of("homeName", home.getName())));
+					new HomesInventory(player).open(player);
+					SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
+
+				} else {
+					player.sendMessage(MessagesUtils.get(EXGMessage.ACTION_CANCELED, null));
+					new HomeEditingInventory(player, home).open(player);
+					SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
+				}
+			});
+
+		}, 10);
+	}
 
 	// -------------------------------------------------- //
 }
