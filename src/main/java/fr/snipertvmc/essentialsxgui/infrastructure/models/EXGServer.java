@@ -21,7 +21,7 @@ public class EXGServer {
 
 
 	public EXGServer() {
-		this.version = Main.getInstance().getMCServerVersion();;
+		this.version = Main.getInstance().getMCServerVersion();
 	}
 
 
