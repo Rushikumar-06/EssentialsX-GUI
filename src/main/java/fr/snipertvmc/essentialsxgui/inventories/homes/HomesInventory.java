@@ -1,5 +1,6 @@
 package fr.snipertvmc.essentialsxgui.inventories.homes;
 
+import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.PaginatedFastInv;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
@@ -7,7 +8,9 @@ import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGHome;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes.EXGHomesInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
 import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
+import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.*;
@@ -84,8 +87,24 @@ public class HomesInventory extends PaginatedFastInv {
 			});
 		}
 
+
 		if (homes.isEmpty()) {
 			addContent(config.getNoHomesItem().build());
+		}
+
+
+		if (config.getCreateHomeItem().isEnabled()) {
+			setItem(config.getCreateHomeItem().getSlot(), config.getCreateHomeItem()
+					.build(), e -> {
+
+				if (player.hasPermission("essentials.sethome")) {
+					createNewHome(player);
+					return;
+				}
+
+				player.sendMessage(MessagesUtils.get(EXGMessage.NO_PERMISSION, null));
+				SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
+			});
 		}
 
 
@@ -99,6 +118,50 @@ public class HomesInventory extends PaginatedFastInv {
 
 
 		config.getInventoryScheme().apply(this);
+	}
+
+
+	// -------------------------------------------------- //
+
+
+	private void createNewHome(Player player) {
+
+		player.closeInventory();
+		player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_HOME_NAME, null));
+		Main.getInstance().getChatManager().addChat(player.getUniqueId(), result -> {
+
+			Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
+
+				if (result.equalsIgnoreCase("cancel")) {
+					player.sendMessage(MessagesUtils.get(EXGMessage.ACTION_CANCELED, null));
+					new HomesInventory(player).open(player);
+					SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
+					return;
+				}
+
+				if (result.isEmpty() || result.length() > 32) {
+					player.sendMessage(MessagesUtils.get(EXGMessage.LENGTH_LIMIT, Map.of("min", "1", "max", "32")));
+					new HomesInventory(player).open(player);
+					SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
+					return;
+				}
+
+				Set<EXGHome> homes = Main.getInstance().getPlayerManager().getPlayer(player.getUniqueId().toString()).getHomes();
+
+				if (homes.stream().anyMatch(home -> home.getName().equalsIgnoreCase(result))) {
+					player.sendMessage(MessagesUtils.get(EXGMessage.HOME_NAME_ALREADY_EXISTS, null));
+					new HomesInventory(player).open(player);
+					SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
+					return;
+				}
+
+				Main.getInstance().getEssentials().getUser(player).setHome(result, player.getLocation());
+				player.sendMessage(MessagesUtils.get(EXGMessage.HOME_CREATED, Map.of("homeName", result)));
+				new HomesInventory(player).open(player);
+				SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
+			});
+
+		}, 10);
 	}
 
 

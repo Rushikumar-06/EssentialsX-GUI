@@ -74,8 +74,8 @@ public class HomeEditingInventory extends FastInv {
 							return;
 						}
 
-						if (newHomeName.length() > 16) {
-							player.sendMessage(MessagesUtils.get(EXGMessage.CHARACTER_LIMIT, null));
+						if (newHomeName.isEmpty() || newHomeName.length() > 32) {
+							player.sendMessage(MessagesUtils.get(EXGMessage.LENGTH_LIMIT, Map.of("min", "1", "max", "32")));
 							new HomeEditingInventory(player, home).open(player);
 							return;
 						}

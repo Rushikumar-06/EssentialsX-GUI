@@ -77,6 +77,14 @@ kitsAdminView:
         - "&7There are no kits available."
         - "&7Use &f/createkit <kitName> &7to create a kit."
 
+    createKitItem:
+      enabled: true
+      slot: 0
+      material: "PISTON"
+      displayName: "&aCreate Kit"
+      lore:
+        - "&7Click to create a new kit."
+
     switchToPlayerModeItem:
       enabled: true
       slot: 8

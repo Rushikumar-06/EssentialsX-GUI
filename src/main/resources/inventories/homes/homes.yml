@@ -79,6 +79,14 @@ homes:
         - "&7You have no homes set."
         - "&7Use &f/sethome <name> &7to set a home."
 
+    createHomeItem:
+      enabled: true
+      slot: 0
+      material: "PISTON"
+      displayName: "&aCreate Home"
+      lore:
+        - "&7Click to create a new home."
+
     # Placeholders available: {currentPage}, {previousPage}
     previousPageItem:
       enabled: true

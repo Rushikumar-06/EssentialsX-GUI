@@ -13,6 +13,8 @@ public class EXGHomesInventoryConfig extends EXGInventoryConfig {
 	private EXGItemConfig homeItem;
 	private EXGItemConfig noHomesItem;
 
+	private EXGItemConfig createHomeItem;
+
 	private EXGItemConfig nextPageItem;
 	private EXGItemConfig previousPageItem;
 	private EXGItemConfig currentPageItem;
@@ -36,32 +38,27 @@ public class EXGHomesInventoryConfig extends EXGInventoryConfig {
 	public EXGItemConfig getHomeItem() {
 		return homeItem;
 	}
-
-
 	public EXGItemConfig getNoHomesItem() {
 		return noHomesItem;
 	}
 
+	public EXGItemConfig getCreateHomeItem() {
+		return createHomeItem;
+	}
 
 	public EXGItemConfig getNextPageItem() {
 		return nextPageItem;
 	}
-
-
 	public EXGItemConfig getPreviousPageItem() {
 		return previousPageItem;
 	}
-
-
 	public EXGItemConfig getCurrentPageItem() {
 		return currentPageItem;
 	}
 
-
 	public EXGItemConfig getCloseItem() {
 		return closeItem;
 	}
-
 
 	public InventoryScheme getInventoryScheme() {
 		return inventoryScheme;
@@ -74,32 +71,27 @@ public class EXGHomesInventoryConfig extends EXGInventoryConfig {
 	public void setHomeItem(EXGItemConfig homeItem) {
 		this.homeItem = homeItem;
 	}
-
-
 	public void setNoHomesItem(EXGItemConfig noHomesItem) {
 		this.noHomesItem = noHomesItem;
 	}
 
+	public void setCreateHomeItem(EXGItemConfig createHomeItem) {
+		this.createHomeItem = createHomeItem;
+	}
 
 	public void setNextPageItem(EXGItemConfig nextPageItem) {
 		this.nextPageItem = nextPageItem;
 	}
-
-
 	public void setPreviousPageItem(EXGItemConfig previousPageItem) {
 		this.previousPageItem = previousPageItem;
 	}
-
-
 	public void setCurrentPageItem(EXGItemConfig currentPageItem) {
 		this.currentPageItem = currentPageItem;
 	}
 
-
 	public void setCloseItem(EXGItemConfig closeItem) {
 		this.closeItem = closeItem;
 	}
-
 
 	public void setInventoryScheme(InventoryScheme inventoryScheme) {
 		this.inventoryScheme = inventoryScheme;
@@ -120,13 +112,16 @@ public class EXGHomesInventoryConfig extends EXGInventoryConfig {
 
 		copy.setHomeItem(this.getHomeItem().duplicate());
 		copy.setNoHomesItem(this.getNoHomesItem().duplicate());
+
+		copy.setCreateHomeItem(this.getCreateHomeItem().duplicate());
+
 		copy.setNextPageItem(this.getNextPageItem().duplicate());
 		copy.setPreviousPageItem(this.getPreviousPageItem().duplicate());
 		copy.setCurrentPageItem(this.getCurrentPageItem().duplicate());
+
 		copy.setCloseItem(this.getCloseItem().duplicate());
 
 		copy.setInventoryScheme(this.getInventoryScheme());
-
 		return copy;
 	}
 
