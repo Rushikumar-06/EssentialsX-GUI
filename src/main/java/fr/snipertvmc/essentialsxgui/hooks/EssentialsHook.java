@@ -1,9 +1,11 @@
 package fr.snipertvmc.essentialsxgui.hooks;
 
 import com.earth2me.essentials.Essentials;
+import com.earth2me.essentials.User;
 import com.earth2me.essentials.craftbukkit.Inventories;
 import com.earth2me.essentials.libs.snakeyaml.external.biz.base64Coder.Base64Coder;
 import fr.snipertvmc.essentialsxgui.Main;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGPlayer;
 import net.ess3.provider.SerializationProvider;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -40,6 +42,18 @@ public class EssentialsHook {
 
 
 	// -------------------------------------------------- //
+
+
+	public boolean canCreateHome(Player player) {
+		int homeLimit = essentials.getSettings().getHomeLimit(essentials.getUser(player));
+		EXGPlayer exgPlayer = Main.getInstance().getPlayerManager().getPlayer(player.getUniqueId().toString());
+
+		if (player.hasPermission("essentials.sethome.multiple.unlimited")) {
+			return true;
+		}
+
+		return homeLimit > exgPlayer.getHomes().size();
+	}
 
 
 	public void createKitWithPlayer(Player player, String kitName, long delay) {

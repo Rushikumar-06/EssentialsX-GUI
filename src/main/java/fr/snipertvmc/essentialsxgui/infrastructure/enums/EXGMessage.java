@@ -21,6 +21,7 @@ public enum EXGMessage {
 
 	HOME_DELETE_ERROR("general.homeDeleteError"),
 	HOME_NAME_ALREADY_EXISTS("errors.homeNameAlreadyExists"),
+	HOME_LIMIT_REACHED("errors.homeLimitReached"),
 
 	KIT_NAME_ALREADY_EXISTS("errors.kitNameAlreadyExists"),
 

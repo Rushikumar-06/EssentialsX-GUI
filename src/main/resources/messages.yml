@@ -57,6 +57,7 @@ errors:
 
   homeDeleteError: "&cAn error occurred while deleting the home. Please contact the server administrator."
   homeNameAlreadyExists: "&cA home with this name already exists."
+  homeLimitReached: "&cYou have reached the maximum number of homes allowed."
 
   kitNameAlreadyExists: "&cA kit with this name already exists."
 
