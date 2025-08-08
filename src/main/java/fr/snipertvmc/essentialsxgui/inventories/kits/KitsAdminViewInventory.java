@@ -144,6 +144,10 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 
 	private void createNewKitName(Player player) {
 
+		if (!Main.getInstance().getChatManager().canDoChat(player.getUniqueId())) {
+			return;
+		}
+
 		player.closeInventory();
 		player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_KIT_NAME, null));
 		Main.getInstance().getChatManager().addChat(player.getUniqueId(), result -> {
@@ -153,7 +157,7 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 				if (result.equalsIgnoreCase("cancel")) {
 					player.sendMessage(MessagesUtils.get(EXGMessage.ACTION_CANCELED, null));
 					new KitsAdminViewInventory(player).open(player);
-					SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
+					SoundsUtils.playSound(player, EXGSound.ACTION_CANCELED);
 					return;
 				}
 
@@ -191,7 +195,7 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 				if (result.equalsIgnoreCase("cancel")) {
 					player.sendMessage(MessagesUtils.get(EXGMessage.ACTION_CANCELED, null));
 					new KitsAdminViewInventory(player).open(player);
-					SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
+					SoundsUtils.playSound(player, EXGSound.ACTION_CANCELED);
 					return;
 				}
 

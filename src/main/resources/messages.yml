@@ -80,6 +80,8 @@ general:
   confirmDeleteKit: "&6Are you sure you want to delete the '({kitName})' kit ? &7Type &f'confirm' &7to confirm or &f'cancel' &7to cancel."
 
   actionCanceled: "&6The action has been canceled."
+  actionExpired: "&cThe action has expired. Please try again."
+  ongoingAction: "&eAn action is already in progress. Please wait until it is completed or canceled."
 
 
   # Placeholders available: {newDisplayName}

@@ -98,6 +98,10 @@ public class KitEditingInventory extends FastInv {
 
 	public void changeKitDisplayName(Player player, EXGKit kit) {
 
+		if (!Main.getInstance().getChatManager().canDoChat(player.getUniqueId())) {
+			return;
+		}
+
 		player.closeInventory();
 		player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_DISPLAY_NAME, null));
 		Main.getInstance().getChatManager().addChat(player.getUniqueId(), newKitName -> {
@@ -107,7 +111,7 @@ public class KitEditingInventory extends FastInv {
 				if (newKitName.equalsIgnoreCase("cancel")) {
 					player.sendMessage(MessagesUtils.get(EXGMessage.ACTION_CANCELED, null));
 					new KitEditingInventory(player, kit).open(player);
-					SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
+					SoundsUtils.playSound(player, EXGSound.ACTION_CANCELED);
 					return;
 				}
 
@@ -133,6 +137,10 @@ public class KitEditingInventory extends FastInv {
 
 	public void changeKitIcon(Player player, EXGKit kit) {
 
+		if (!Main.getInstance().getChatManager().canDoChat(player.getUniqueId())) {
+			return;
+		}
+
 		player.closeInventory();
 		player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_ICON_NAME, null));
 		Main.getInstance().getChatManager().addChat(player.getUniqueId(), materialName -> {
@@ -142,7 +150,7 @@ public class KitEditingInventory extends FastInv {
 				if (materialName.equalsIgnoreCase("cancel")) {
 					player.sendMessage(MessagesUtils.get(EXGMessage.ACTION_CANCELED, null));
 					new KitEditingInventory(player, kit).open(player);
-					SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
+					SoundsUtils.playSound(player, EXGSound.ACTION_CANCELED);
 					return;
 				}
 
@@ -168,6 +176,10 @@ public class KitEditingInventory extends FastInv {
 
 	public void deleteKit(Player player, EXGKit kit) {
 
+		if (!Main.getInstance().getChatManager().canDoChat(player.getUniqueId())) {
+			return;
+		}
+
 		player.closeInventory();
 		player.sendMessage(MessagesUtils.get(EXGMessage.CONFIRM_DELETE_KIT, Map.of("kitName", kit.getName())));
 		Main.getInstance().getChatManager().addChat(player.getUniqueId(), result -> {
@@ -184,7 +196,12 @@ public class KitEditingInventory extends FastInv {
 				} else {
 					player.sendMessage(MessagesUtils.get(EXGMessage.ACTION_CANCELED, null));
 					new KitEditingInventory(player, kit).open(player);
-					SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
+
+					if (result.equalsIgnoreCase("cancel")) {
+						SoundsUtils.playSound(player, EXGSound.ACTION_CANCELED);
+					} else {
+						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
+					}
 				}
 			});
 

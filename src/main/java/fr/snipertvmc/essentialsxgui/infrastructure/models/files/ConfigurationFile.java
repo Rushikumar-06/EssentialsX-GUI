@@ -95,6 +95,7 @@ public class ConfigurationFile {
 						"value_guiClick", "CHICKEN_EGG_POP",
 
 						"value_actionSuccess", "LEVEL_UP",
+						"value_actionCanceled", "ITEM_BREAK",
 						"value_actionFailure", "VILLAGER_NO"
 				);
 			}
@@ -110,6 +111,7 @@ public class ConfigurationFile {
 						"value_guiClick", "ENTITY_CHICKEN_EGG",
 
 						"value_actionSuccess", "ENTITY_PLAYER_LEVELUP",
+						"value_actionCanceled", "ENTITY_ITEM_BREAK",
 						"value_actionFailure", "ENTITY_VILLAGER_NO"
 				);
 			}

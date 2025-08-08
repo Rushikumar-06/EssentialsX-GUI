@@ -36,6 +36,8 @@ public enum EXGMessage {
 	CONFIRM_DELETE_KIT("general.confirmDeleteKit"),
 
 	ACTION_CANCELED("general.actionCanceled"),
+	ACTION_EXPIRED("general.actionExpired"),
+	ONGOING_ACTION("general.ongoingAction"),
 
 
 	DISPLAY_NAME_CHANGED("general.displayNameChanged"),

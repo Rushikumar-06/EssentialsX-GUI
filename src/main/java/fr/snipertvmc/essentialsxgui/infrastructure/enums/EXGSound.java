@@ -1,7 +1,6 @@
 package fr.snipertvmc.essentialsxgui.infrastructure.enums;
 
 import fr.snipertvmc.essentialsxgui.Main;
-import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
 import org.bukkit.Sound;
 
 public enum EXGSound {
@@ -18,6 +17,7 @@ public enum EXGSound {
 
 	// ACTION
 	ACTION_SUCCESS("actionSuccess", "LEVEL_UP"),
+	ACTION_CANCELED("actionCanceled", "ITEM_BREAK"),
 	ACTION_FAILURE("actionFailure", "VILLAGER_NO");
 
 

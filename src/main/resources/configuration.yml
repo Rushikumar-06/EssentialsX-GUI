@@ -84,6 +84,10 @@ sounds:
   # Default: "%%value_actionSuccess%%"
   actionSuccess: "%%value_actionSuccess%%"
 
+  # The sound played when a player cancels an action.
+  # Default: "%%value_actionCanceled%%"
+  actionCanceled: "%%value_actionCanceled%%"
+
   # The sound played when a player fails an action.
   # Default: "%%value_actionFailure%%"
   actionFailure: "%%value_actionFailure%%"

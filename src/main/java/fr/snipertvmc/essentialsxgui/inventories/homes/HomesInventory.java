@@ -130,6 +130,10 @@ public class HomesInventory extends PaginatedFastInv {
 
 	private void createNewHome(Player player) {
 
+		if (!Main.getInstance().getChatManager().canDoChat(player.getUniqueId())) {
+			return;
+		}
+
 		player.closeInventory();
 		player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_HOME_NAME, null));
 		Main.getInstance().getChatManager().addChat(player.getUniqueId(), result -> {
@@ -139,7 +143,7 @@ public class HomesInventory extends PaginatedFastInv {
 				if (result.equalsIgnoreCase("cancel")) {
 					player.sendMessage(MessagesUtils.get(EXGMessage.ACTION_CANCELED, null));
 					new HomesInventory(player).open(player);
-					SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
+					SoundsUtils.playSound(player, EXGSound.ACTION_CANCELED);
 					return;
 				}
 
