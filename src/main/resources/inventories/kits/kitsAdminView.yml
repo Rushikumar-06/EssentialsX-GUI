@@ -81,7 +81,7 @@ kitsAdminView:
     createKitItem:
       enabled: true
       slot: 0
-      material: "PISTON"
+      material: "%%value_materialCreateKitItem%%"
       displayName: "&aCreate Kit"
       lore:
         - "&7Click to create a new kit."

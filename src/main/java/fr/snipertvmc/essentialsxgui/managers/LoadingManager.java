@@ -32,10 +32,10 @@ public class LoadingManager {
 
 		// SERVER CONFIGURATION ANALYSIS
 		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Analyzing server configuration...");
-		checkForServerVersionSupport();
 		if (!isServerReady()) {
 			return false;
 		}
+		checkForServerVersionSupport();
 		checkForUpdates();
 		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Server configuration analysis §fcompleted§7.");
 
@@ -91,23 +91,29 @@ public class LoadingManager {
 	// -------------------------------------------------- //
 
 
+	private final String essentialsVersionRequired = "2.21.2";
+
+
 	public boolean isServerReady() {
 
 		if (Main.getInstance().getEssentials() == null) {
 
 			ConsoleLogger.console("\t§6EssentialsX-GUI: §cEssentialsX is not installed on the server.");
-			ConsoleLogger.console("\t§6EssentialsX-GUI: §cPlease install EssentialsX (2.20.1+) to use this plugin.");
-			ConsoleLogger.console("");
-
-			Main.getInstance().getServer().getPluginManager().disablePlugin(Main.getInstance());
+			ConsoleLogger.console("\t§6EssentialsX-GUI: §cPlease install EssentialsX (" + essentialsVersionRequired + ") to use this plugin.");
 			return false;
 		}
 
 		String version = Main.getInstance().getEssentials().getDescription().getVersion();
+		String essentialsVersionColor = version.equals(essentialsVersionRequired) ? "§a" : "§c";
 
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §aEssentialsX is installed on the server.");
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §aVersion found: §f" + version);
+		ConsoleLogger.console("\t§6EssentialsX-GUI: §7EssentialsX version found: " + essentialsVersionColor + version);
 
+		if (!version.equals(essentialsVersionRequired)) {
+			ConsoleLogger.console("\t§6EssentialsX-GUI: §cCurrent version is not supported. §4(Required version: §4" + essentialsVersionRequired + ")");
+			return false;
+		}
+
+		ConsoleLogger.console("\t§6EssentialsX-GUI: §aThis EssentialsX version is supported by EssentialsX-GUI.");
 		return true;
 	}
 
@@ -115,7 +121,7 @@ public class LoadingManager {
 	public void checkForServerVersionSupport() {
 
 		MCServerVersion serverVersion = Main.getInstance().getMCServerVersion();
-		String serverVersionColor = serverVersion.isFullySupported() ? "§2" : "§6";
+		String serverVersionColor = serverVersion.isFullySupported() ? "§a" : "§6";
 		serverVersionColor = serverVersion == MCServerVersion.UnknownVersion ? "§4" : serverVersionColor;
 
 		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Server version found: " + serverVersionColor + serverVersion.getVersionName());
@@ -161,11 +167,11 @@ public class LoadingManager {
 
 		String currentVersion = Main.getInstance().getDescription().getVersion();
 		if (currentVersion.equals(latestVersionAvailable)) {
-			ConsoleLogger.console("\t§6EssentialsX-GUI: §aYou are using the latest version of EssentialsX-GUI.");
+			ConsoleLogger.console("\t§6EssentialsX-GUI: §7You are using the §alatest §7version of EssentialsX-GUI.");
 
 		} else {
-			ConsoleLogger.console("\t§6EssentialsX-GUI: §6A new version of EssentialsX-GUI is available: §f" + latestVersionAvailable);
-			ConsoleLogger.console("\t§6EssentialsX-GUI: §ePlease update to the latest version for new features and bug fixes.");
+			ConsoleLogger.console("\t§6EssentialsX-GUI: §eA new version of EssentialsX-GUI is available: §f" + latestVersionAvailable);
+			ConsoleLogger.console("\t§6EssentialsX-GUI: §6Please update to the latest version for new features and bug fixes.");
 		}
 	}
 

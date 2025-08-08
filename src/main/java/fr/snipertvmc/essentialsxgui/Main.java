@@ -98,21 +98,24 @@ public class Main extends JavaPlugin {
 
 
 		// SERVER INITIALIZATION
-		exgServer = serverManager.initialize();
+		if (!cancelLoading) {
+			exgServer = serverManager.initialize();
+		}
 
 
 		// PLUGIN LOADING COMPLETED
 		long endTime = System.currentTimeMillis();
 		long loadingTime = endTime - startTime;
 
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §7The plugin has been §floaded §7correctly in §f" + loadingTime + "ms§7.");
-		ConsoleLogger.console("");
-
 		if (cancelLoading) {
 			ConsoleLogger.console("\t§6EssentialsX-GUI: §cPlugin will be disabled due to loading errors.");
 			ConsoleLogger.console("");
 			getServer().getPluginManager().disablePlugin(this);
+			return;
 		}
+
+		ConsoleLogger.console("\t§6EssentialsX-GUI: §7The plugin has been §floaded §7correctly in §f" + loadingTime + "ms§7.");
+		ConsoleLogger.console("");
 	}
 
 

@@ -206,7 +206,9 @@ public class InventoryFile {
 				return Map.of(
 						"value_materialBorderItem", "STAINED_GLASS_PANE",
 						"value_materialHomeItem", "GRASS",
-						"value_materialAdminModeItem", "EYE_OF_ENDER"
+						"value_materialAdminModeItem", "EYE_OF_ENDER",
+						"value_materialCreateHomeItem", "PISTON_BASE",
+						"value_materialCreateKitItem", "PISTON_BASE"
 				);
 			}
 
@@ -217,7 +219,8 @@ public class InventoryFile {
 				return Map.of(
 						"value_materialBorderItem", "BLACK_STAINED_GLASS_PANE",
 						"value_materialHomeItem", "GRASS_BLOCK",
-						"value_materialAdminModeItem", "ENDER_EYE"
+						"value_materialAdminModeItem", "ENDER_EYE",
+						"value_materialCreateHomeItem", "PISTON"
 				);
 			}
 		}

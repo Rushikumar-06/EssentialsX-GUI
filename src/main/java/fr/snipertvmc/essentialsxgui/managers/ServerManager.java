@@ -27,6 +27,10 @@ public class ServerManager {
 
 		EXGServer exgServer = Main.getInstance().getEXGServer();
 
+		if (exgServer == null) {
+			return;
+		}
+
 		Map<String, Object> kits = exgServer.getKitsRaw();
 		Map<String, Object> serverData = new HashMap<>() {{
 			put("kits", kits);

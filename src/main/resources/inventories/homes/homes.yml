@@ -83,7 +83,7 @@ homes:
     createHomeItem:
       enabled: true
       slot: 0
-      material: "PISTON"
+      material: "%%value_materialCreateHomeItem%%"
       displayName: "&aCreate Home"
       lore:
         - "&7Click to create a new home."
