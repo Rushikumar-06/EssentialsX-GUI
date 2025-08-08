@@ -2,6 +2,7 @@ package fr.snipertvmc.essentialsxgui.inventories.kits;
 
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGHome;
+import fr.snipertvmc.essentialsxgui.inventories.homes.HomeEditingInventory;
 import fr.snipertvmc.essentialsxgui.inventories.homes.HomesInventory;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.PaginatedFastInv;
 import fr.snipertvmc.essentialsxgui.Main;
@@ -14,6 +15,7 @@ import fr.snipertvmc.essentialsxgui.utilities.data.TypeUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryAction;
 
 import java.util.Comparator;
 import java.util.LinkedHashSet;
@@ -87,6 +89,9 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 				} else if (e.getClick().isRightClick()) {
 					new KitEditingInventory(player, kit).open(player);
 					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
+
+				} else if (e.getAction().equals(InventoryAction.DROP_ONE_SLOT)) {
+					new KitEditingInventory(player, kit).deleteKit(player, kit);
 				}
 
 			});

@@ -64,6 +64,7 @@ kitsAdminView:
       lore:
         - "&f&lRight Click &7to give this kit to a player."
         - "&f&lLeft Click &7to edit this kit."
+        - "&f&lDrop &7to delete this kit."
         - ""
         - "&7Kit Name: &f&o{kitName}"
 

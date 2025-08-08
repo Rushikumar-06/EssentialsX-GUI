@@ -66,6 +66,7 @@ homes:
       lore:
         - "&f&lRight Click &7to teleport to this home."
         - "&f&lLeft Click &7to edit this home."
+        - "&f&lDrop &7to delete this home."
         - ""
         - "&7Home Name: &f&o{homeName}"
 

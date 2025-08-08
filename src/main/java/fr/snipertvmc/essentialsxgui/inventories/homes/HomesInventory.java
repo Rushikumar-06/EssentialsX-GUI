@@ -12,6 +12,7 @@ import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryAction;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -83,6 +84,9 @@ public class HomesInventory extends PaginatedFastInv {
 				} else if (e.getClick().isRightClick()) {
 					new HomeEditingInventory(player, home).open(player);
 					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
+
+				} else if (e.getAction().equals(InventoryAction.DROP_ONE_SLOT)) {
+					new HomeEditingInventory(player, home).deleteHome(player, home);
 				}
 			});
 		}
