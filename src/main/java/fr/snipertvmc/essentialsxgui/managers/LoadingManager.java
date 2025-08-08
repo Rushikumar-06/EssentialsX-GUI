@@ -157,9 +157,7 @@ public class LoadingManager {
 			return;
 		}
 
-		// Just keep the getLatestPublicVersionTag() method, remove the getLatestReleaseVersionTag() method.
-		//  This is a temporary solution to avoid the 404 error while there is no public version available.
-		String latestVersionAvailable = UpdateUtils.getLatestPublicVersionTag() != null ? UpdateUtils.getLatestPublicVersionTag() : UpdateUtils.getLatestReleaseVersionTag();
+		String latestVersionAvailable = UpdateUtils.getLatestPublicVersionTag();
 		if (latestVersionAvailable == null) {
 			ConsoleLogger.console("\t§6EssentialsX-GUI: §cFailed to check for updates.");
 			return;

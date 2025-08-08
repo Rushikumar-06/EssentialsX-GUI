@@ -22,6 +22,7 @@ public class UpdateUtils {
 	}
 
 
+	@Deprecated
 	public static String getLatestReleaseVersionTag() {
 		return getLatestVersionTag(true);
 	}
