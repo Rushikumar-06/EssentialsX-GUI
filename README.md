@@ -69,7 +69,7 @@ EssentialsX-GUI is an EssentialsX addon that adds some GUIs for Essentials featu
   <br>
 </details>
 
-### __2. Kit (admin view)__
+### __2. Kit (player view)__
 
 <details>
   <br>
@@ -77,7 +77,7 @@ EssentialsX-GUI is an EssentialsX addon that adds some GUIs for Essentials featu
   <br>
 </details>
 
-### __2. Kit (player view)__
+### __2. Kit (admin view)__
 
 <details>
   <br>
