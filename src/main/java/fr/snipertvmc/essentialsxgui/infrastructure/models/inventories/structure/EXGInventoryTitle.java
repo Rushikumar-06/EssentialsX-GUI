@@ -41,7 +41,7 @@ public class EXGInventoryTitle {
 	public EXGInventoryTitle updateVariables(Map<String, String> variables) {
 
 		variables.forEach((key, value) -> {
-			title = title.replace(key, value);
+			title = title.replace("{" + key + "}", value);
 		});
 
 		return this;
