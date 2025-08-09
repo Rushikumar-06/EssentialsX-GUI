@@ -87,11 +87,11 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 									"kitName", kit.getName()))
 					.build(), e -> {
 
-				if (e.getClick().isLeftClick()) {
+				if (e.getClick().isRightClick()) {
 					player.performCommand("essentials:kit " + kit.getName());
 					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 
-				} else if (e.getClick().isRightClick()) {
+				} else if (e.getClick().isLeftClick()) {
 					new KitsPreviewInventory(player, kit).open(player);
 					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 				}

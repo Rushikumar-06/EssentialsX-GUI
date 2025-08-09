@@ -79,10 +79,10 @@ public class HomesInventory extends PaginatedFastInv {
 									"homeName", home.getName()))
 					.build(), e -> {
 
-				if (e.getClick().isLeftClick()) {
+				if (e.getClick().isRightClick()) {
 					player.performCommand("essentials:home " + home.getName());
 
-				} else if (e.getClick().isRightClick()) {
+				} else if (e.getClick().isLeftClick()) {
 					new HomeEditingInventory(player, home).open(player);
 					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 

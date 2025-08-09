@@ -83,11 +83,11 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 									"kitName", kit.getName()))
 					.build(), e -> {
 
-				if (e.getClick().isLeftClick()) {
+				if (e.getClick().isRightClick()) {
 					new KitsPlayerGiveInventory(player, kit).open(player);
 					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 
-				} else if (e.getClick().isRightClick()) {
+				} else if (e.getClick().isLeftClick()) {
 					new KitEditingInventory(player, kit).open(player);
 					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 
