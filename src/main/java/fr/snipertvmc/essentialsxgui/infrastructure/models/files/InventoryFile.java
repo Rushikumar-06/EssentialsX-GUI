@@ -144,7 +144,7 @@ public class InventoryFile {
 			put("lore", yamlConfiguration.getStringList(path + ".lore"));
 
 			put("enchantments", yamlConfiguration.getStringList(path + ".enchantments"));
-			put("itemFlags", yamlConfiguration.getStringList(path + ".item-flags"));
+			put("itemFlags", yamlConfiguration.getStringList(path + ".itemFlags"));
 		}};
 
 
