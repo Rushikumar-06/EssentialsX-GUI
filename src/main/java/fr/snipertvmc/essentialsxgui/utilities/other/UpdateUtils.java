@@ -17,28 +17,9 @@ public class UpdateUtils {
 	// -------------------------------------------------- //
 
 
-	public static String getLatestPublicVersionTag() {
-		return getLatestVersionTag(false);
-	}
+	public static String getLatestVersionTag() {
 
-
-	@Deprecated
-	public static String getLatestReleaseVersionTag() {
-		return getLatestVersionTag(true);
-	}
-
-
-	// -------------------------------------------------- //
-
-
-	private static String getLatestVersionTag(boolean allowPreReleases) {
-
-		String API_URL;
-		if (allowPreReleases) {
-			API_URL = "https://api.github.com/repos/SniperTVmc/EssentialsX-GUI/releases";
-		} else {
-			API_URL = "https://api.github.com/repos/SniperTVmc/EssentialsX-GUI/releases/latest";
-		}
+		String API_URL = "https://api.github.com/repos/SniperTVmc/EssentialsX-GUI/releases/latest";
 
 		HttpClient client = HttpClient.newHttpClient();
 		HttpRequest request = HttpRequest.newBuilder()
@@ -52,9 +33,8 @@ public class UpdateUtils {
 			if (response.statusCode() == 200) {
 
 				ObjectMapper mapper = new ObjectMapper();
-				JsonNode root = mapper.readTree(response.body());
-				JsonNode latestRelease = root.get(0);
-				return latestRelease.get("tag_name").asText();
+				JsonNode jsonNode = mapper.readTree(response.body());
+				return jsonNode.get("tag_name").asText();
 			}
 
 		} catch (IOException | InterruptedException e) {

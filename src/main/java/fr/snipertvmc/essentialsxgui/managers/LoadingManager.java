@@ -157,7 +157,7 @@ public class LoadingManager {
 			return;
 		}
 
-		String latestVersionAvailable = UpdateUtils.getLatestPublicVersionTag();
+		String latestVersionAvailable = UpdateUtils.getLatestVersionTag();
 		if (latestVersionAvailable == null) {
 			ConsoleLogger.console("\t§6EssentialsX-GUI: §cFailed to check for updates.");
 			return;
