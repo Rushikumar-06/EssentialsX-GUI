@@ -91,10 +91,9 @@ public class LoadingManager {
 	// -------------------------------------------------- //
 
 
-	private final String essentialsVersionRequired = "2.21.2";
-
-
 	public boolean isServerReady() {
+
+		String essentialsVersionRequired = Main.getInstance().getHookManager().getEssentialsHook().getMinimumVersionRequired();
 
 		if (Main.getInstance().getEssentials() == null) {
 
@@ -103,13 +102,14 @@ public class LoadingManager {
 			return false;
 		}
 
+		boolean essentialsVersionSupported = Main.getInstance().getHookManager().getEssentialsHook().isEssentialsVersionSupported();
 		String version = Main.getInstance().getEssentials().getDescription().getVersion();
-		String essentialsVersionColor = version.equals(essentialsVersionRequired) ? "§a" : "§c";
+		String essentialsVersionColor = essentialsVersionSupported ? "§a" : "§c";
 
 		ConsoleLogger.console("\t§6EssentialsX-GUI: §7EssentialsX version found: " + essentialsVersionColor + version);
 
-		if (!version.equals(essentialsVersionRequired)) {
-			ConsoleLogger.console("\t§6EssentialsX-GUI: §cCurrent version is not supported. §4(Required version: §4" + essentialsVersionRequired + ")");
+		if (!essentialsVersionSupported) {
+			ConsoleLogger.console("\t§6EssentialsX-GUI: §cCurrent version is not supported. §4(Minimum version required: §4" + essentialsVersionRequired + ")");
 			return false;
 		}
 

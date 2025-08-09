@@ -44,6 +44,43 @@ public class EssentialsHook {
 	// -------------------------------------------------- //
 
 
+	private final String minimumVersionRequired = "2.21.2";
+
+
+	public String getMinimumVersionRequired() {
+		return minimumVersionRequired;
+	}
+
+
+	public boolean isEssentialsVersionSupported() {
+
+		String version = essentials.getDescription().getVersion();
+		String cleanVersion = version.split("-")[0];
+
+		return isVersionGreaterOrEqual(cleanVersion, minimumVersionRequired);
+	}
+
+
+	private boolean isVersionGreaterOrEqual(String current, String minimum) {
+		String[] currentParts = current.split("\\.");
+		String[] minimumParts = minimum.split("\\.");
+
+		int length = Math.max(currentParts.length, minimumParts.length);
+
+		for (int i = 0; i < length; i++) {
+			int cur = (i < currentParts.length) ? Integer.parseInt(currentParts[i]) : 0;
+			int min = (i < minimumParts.length) ? Integer.parseInt(minimumParts[i]) : 0;
+
+			if (cur > min) return true;
+			if (cur < min) return false;
+		}
+		return true;
+	}
+
+
+	// -------------------------------------------------- //
+
+
 	public boolean canCreateHome(Player player) {
 		int homeLimit = essentials.getSettings().getHomeLimit(essentials.getUser(player));
 		EXGPlayer exgPlayer = Main.getInstance().getPlayerManager().getPlayer(player.getUniqueId().toString());
