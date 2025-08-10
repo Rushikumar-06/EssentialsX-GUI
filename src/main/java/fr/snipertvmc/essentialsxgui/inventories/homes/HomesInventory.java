@@ -7,7 +7,6 @@ import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGHome;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes.EXGHomesInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
-import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.Bukkit;
@@ -95,6 +94,21 @@ public class HomesInventory extends PaginatedFastInv {
 
 		if (homes.isEmpty()) {
 			addContent(config.getNoHomesItem().build());
+		}
+
+		if (player.hasPermission("essentials.home.bed") && config.getBedHomeItem().isEnabled()) {
+			setItem(config.getBedHomeItem().getSlot(), config.getBedHomeItem()
+					.updateVariables(Map.of("player", player.getName()))
+					.build(), e -> {
+
+				if (player.hasPermission("essentials.home.bed")) {
+					player.performCommand("essentials:home bed");
+					return;
+				}
+
+				player.sendMessage(MessagesUtils.get(EXGMessage.NO_PERMISSION, null));
+				SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
+			});
 		}
 
 

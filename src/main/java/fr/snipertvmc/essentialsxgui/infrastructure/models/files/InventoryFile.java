@@ -208,7 +208,8 @@ public class InventoryFile {
 						"value_materialHomeItem", "GRASS",
 						"value_materialAdminModeItem", "EYE_OF_ENDER",
 						"value_materialCreateHomeItem", "PISTON_BASE",
-						"value_materialCreateKitItem", "PISTON_BASE"
+						"value_materialCreateKitItem", "PISTON_BASE",
+						"value_materialBedHomeItem", "BED"
 				);
 			}
 
@@ -221,7 +222,8 @@ public class InventoryFile {
 						"value_materialHomeItem", "GRASS_BLOCK",
 						"value_materialAdminModeItem", "ENDER_EYE",
 						"value_materialCreateHomeItem", "PISTON",
-						"value_materialCreateKitItem", "PISTON"
+						"value_materialCreateKitItem", "PISTON",
+						"value_materialBedHomeItem", "RED_BED"
 				);
 			}
 		}

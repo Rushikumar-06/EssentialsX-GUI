@@ -19,8 +19,8 @@
 ############################################################
 
 # Please do not change this value as it may cause the file to be reset.
-# Default: "1.0"
-config-version: "1.0"
+# Default: "1.1"
+config-version: "1.1"
 
 ############################################################
 # +------------------------------------------------------+ #
@@ -69,6 +69,17 @@ homes:
         - "&f&lDrop &7to delete this home."
         - ""
         - "&7Home Name: &f&o{homeName}"
+
+    bedHomeItem:
+      enabled: true
+      material: "%%value_materialBedHomeItem%%"
+      slot: 8
+      displayName: "&2Bed Home"
+      lore:
+        - "&7The bed home is an automatic home"
+        - "&7set when you sleep in a bed."
+        - ""
+        - "&f&lRight Click &7to teleport to your bed home."
 
     # 'slot' value will be ignored in this section. The item will be placed in the first slot like a kit item.
     # The item will be displayed if the player doesn't have any homes set.

@@ -48,7 +48,7 @@ public class FilesManager {
 			"messages", "1.0",
 
 			"homeEditing", "1.0",
-			"homes", "1.0",
+			"homes", "1.1",
 
 			"kitsAdminView", "1.0",
 			"kitsPlayerView", "1.0",

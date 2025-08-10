@@ -71,6 +71,8 @@ public class InventoriesManager {
 
 		homesInventoryConfig.setHomeItem(inventoryFile.getItem(
 				"homeItem"));
+		homesInventoryConfig.setBedHomeItem(inventoryFile.getItem(
+				"bedHomeItem"));
 		homesInventoryConfig.setNoHomesItem(inventoryFile.getItem(
 				"noHomesItem"));
 		homesInventoryConfig.setCreateHomeItem(inventoryFile.getItem(
