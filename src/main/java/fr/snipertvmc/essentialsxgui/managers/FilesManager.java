@@ -44,11 +44,11 @@ public class FilesManager {
 	);
 
 	private final Map<String, String> filesVersions = Map.of(
-			"configuration", "1.1",
-			"messages", "1.1",
+			"configuration", "1.1", // Latest plugin version known before update file: 1.0.1
+			"messages", "1.1", // Latest plugin version known before update file: 1.0.1
 
 			"homeEditing", "1.0",
-			"homes", "1.1",
+			"homes", "1.1", // Latest plugin version known before update file: 1.0.0
 
 			"kitsAdminView", "1.0",
 			"kitsPlayerView", "1.0",

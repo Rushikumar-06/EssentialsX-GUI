@@ -57,6 +57,7 @@ errors:
   # Placeholders available: {argument}
   argumentNotFound: "{prefix} &cThe argument &f{argument} &cwas not found."
   noPermission: "{prefix} &cYou do not have permission to perform this action."
+  onlyForPlayers: "{prefix} &cThis command can only be executed by players."
 
   homeDeleteError: "&cAn error occurred while deleting the home. Please contact the server administrator."
   homeNameAlreadyExists: "&cA home with this name already exists."

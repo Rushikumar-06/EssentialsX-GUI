@@ -20,6 +20,7 @@ public enum EXGMessage {
 
 	ARGUMENT_NOT_FOUND("errors.argumentNotFound"),
 	NO_PERMISSION("errors.noPermission"),
+	ONLY_FOR_PLAYERS("errors.onlyForPlayers"),
 
 	HOME_DELETE_ERROR("general.homeDeleteError"),
 	HOME_NAME_ALREADY_EXISTS("errors.homeNameAlreadyExists"),

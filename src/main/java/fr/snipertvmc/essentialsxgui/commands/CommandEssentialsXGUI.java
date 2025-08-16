@@ -26,45 +26,28 @@ public class CommandEssentialsXGUI implements CommandExecutor, TabCompleter {
 	@Override
     public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args) {
 
-		if (!(commandSender instanceof Player player)) {
-			sendAboutMessage(commandSender);
-			return true;
-		}
-
-		if (args.length == 0 || !Main.getInstance().getConfiguration().hasEssentialsXGUICommand(player)) {
-			sendAboutMessage(player);
+		if (args.length == 0 || (commandSender instanceof Player player && !Main.getInstance().getConfiguration().hasEssentialsXGUICommand(player))) {
+			sendHelpMessage(commandSender);
 			return true;
 		}
 
 		String firstArg = args[0].toLowerCase();
-
 		switch (firstArg) {
 
-
-			// RELOAD ARGUMENT
-			case "reload" -> {
-				player.sendMessage(MessagesUtils.get(EXGMessage.FILES_RELOADING, null));
-				Main.getInstance().getFilesManager().reloadFiles();
-				player.sendMessage(MessagesUtils.get(EXGMessage.FILES_RELOADED, null));
-			}
-
+			// HELP ARGUMENT
+			case "help" -> sendHelpMessage(commandSender);
 
 			// ABOUT ARGUMENT
-			case "about" -> sendAboutMessage(player);
+			case "about" -> sendAboutMessage(commandSender);
 
+			// RELOAD ARGUMENT
+			case "reload" -> reloadPlugin(commandSender);
 
 			// DEBUG ARGUMENT
-			case "debug" -> {
-				if (Main.getInstance().getConfiguration().hasEssentialsXGUICommandDebugArgument(player)) {
-					showDebugMessage(player);
-				} else {
-					player.sendMessage(MessagesUtils.get(EXGMessage.NO_PERMISSION, null));
-				}
-			}
-
+			case "debug" -> showDebugMessage(commandSender);
 
 			// NOT FOUND ARGUMENT
-			default -> player.sendMessage(MessagesUtils.get(EXGMessage.ARGUMENT_NOT_FOUND, Map.of("argument", firstArg)));
+			default -> commandSender.sendMessage(MessagesUtils.get(EXGMessage.ARGUMENT_NOT_FOUND, Map.of("argument", firstArg)));
 		}
 
     	return true;
@@ -72,6 +55,19 @@ public class CommandEssentialsXGUI implements CommandExecutor, TabCompleter {
 
 
 	// -------------------------------------------------- //
+
+
+	public void sendHelpMessage(CommandSender commandSender) {
+
+		commandSender.sendMessage("");
+		commandSender.sendMessage("  §6EssentialsX-GUI §7- §fHelp");
+		commandSender.sendMessage("");
+		commandSender.sendMessage("    §8■ §7/exg help §7- §fDisplay this help message.");
+		commandSender.sendMessage("    §8■ §7/exg about §7- §fDisplay information about the plugin.");
+		commandSender.sendMessage("    §8■ §7/exg reload §7- §fReload the plugin files.");
+		commandSender.sendMessage("    §8■ §7/exg debug §7- §fDisplay debug informations.");
+		commandSender.sendMessage("");
+	}
 
 
 	public void sendAboutMessage(CommandSender commandSender) {
@@ -90,7 +86,12 @@ public class CommandEssentialsXGUI implements CommandExecutor, TabCompleter {
 
 	public void showDebugMessage(CommandSender commandSender) {
 
-		EXGPlayer exgPlayer = Main.getInstance().getPlayerManager().getPlayer(((Player) commandSender).getUniqueId().toString());
+		if (!(commandSender instanceof Player player)) {
+			commandSender.sendMessage(MessagesUtils.get(EXGMessage.ONLY_FOR_PLAYERS, null));
+			return;
+		}
+
+		EXGPlayer exgPlayer = Main.getInstance().getPlayerManager().getPlayer(player.getUniqueId().toString());
 		Set<EXGHome> homes = exgPlayer.getHomes();
 		Set<EXGKit> kits = Main.getInstance().getEXGServer().getKits();
 
@@ -113,6 +114,16 @@ public class CommandEssentialsXGUI implements CommandExecutor, TabCompleter {
 	// -------------------------------------------------- //
 
 
+	public void reloadPlugin(CommandSender commandSender) {
+		commandSender.sendMessage(MessagesUtils.get(EXGMessage.FILES_RELOADING, null));
+		Main.getInstance().getFilesManager().reloadFiles();
+		commandSender.sendMessage(MessagesUtils.get(EXGMessage.FILES_RELOADED, null));
+	}
+
+
+	// -------------------------------------------------- //
+
+
 	@Override
 	public List<String> onTabComplete(CommandSender commandSender, Command command, String label, String[] args) {
 
@@ -120,7 +131,7 @@ public class CommandEssentialsXGUI implements CommandExecutor, TabCompleter {
 
 		if (args.length == 1) {
 
-			List<String> firstArgs = List.of("about", "reload");
+			List<String> firstArgs = List.of("help", "about", "reload", "debug");
 			String input = args[0];
 
 			for (String option : firstArgs) {
