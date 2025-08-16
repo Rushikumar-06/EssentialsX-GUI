@@ -64,18 +64,30 @@ public class FilesManager {
 	public void loadFiles() {
 		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Loading files...");
 
-		loadConfiguration();
-		checkUpdateForFile("configuration");
-
-		loadMessages();
-		checkUpdateForFile("messages");
-
-		loadInventories();
-		checkUpdateForInventories();
-		checkForErrorsInInventoriesConfig(false);
-		Main.getInstance().getInventoriesManager().loadInventories();
+		loadAndCheckConfiguration(false);
+		loadAndCheckMessages(false);
+		loadAndCheckInventories(false);
 
 		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Files loading §fcompleted§7.");
+	}
+
+
+	public void reloadFiles() {
+
+		long startTime = System.currentTimeMillis();
+
+		ConsoleLogger.console("");
+		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Reloading files...");
+
+		loadAndCheckConfiguration(true);
+		loadAndCheckMessages(true);
+		loadAndCheckInventories(true);
+
+		long endTime = System.currentTimeMillis();
+		long loadingTime = endTime - startTime;
+
+		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Files reloading §fcompleted§7 in §f" + loadingTime + "ms§7.");
+		ConsoleLogger.console("");
 	}
 
 
@@ -104,9 +116,6 @@ public class FilesManager {
 		patchFilePlaceholders(fileName);
 		patchFileKeys(fileName);
 	}
-
-
-	// -------------------------------------------------- //
 
 
 	private boolean createBackupYAMLFile(String fileName) {
@@ -144,34 +153,6 @@ public class FilesManager {
 	// -------------------------------------------------- //
 
 
-	public void reloadFiles() {
-
-		long startTime = System.currentTimeMillis();
-
-		ConsoleLogger.console("");
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Reloading files...");
-
-		loadConfiguration();
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §8- §fconfiguration: §aReloaded");
-
-		loadMessages();
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §8- §fmessages: §aReloaded");
-
-		loadInventories();
-		checkForErrorsInInventoriesConfig(true);
-		Main.getInstance().getInventoriesManager().loadInventories();
-
-		long endTime = System.currentTimeMillis();
-		long loadingTime = endTime - startTime;
-
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Files reloading §fcompleted§7 in §f" + loadingTime + "ms§7.");
-		ConsoleLogger.console("");
-	}
-
-
-	// -------------------------------------------------- //
-
-
 	public void checkUpdateForFile(String fileName) {
 
 		String latestVersion = filesVersions.get(fileName);
@@ -182,31 +163,8 @@ public class FilesManager {
 			default -> getInventory(fileName).getInventoryVersion();
 		};
 
-		if (latestVersion.equals(fileVersion)) {
-			ConsoleLogger.console("\t§6EssentialsX-GUI: §8- §f" + fileName + ": §aLoaded and up to date");
-			return;
-		}
-
-		if (Main.getInstance().getFilesManager().createBackupYAMLFile(fileName)) {
-			ConsoleLogger.console("\t§6EssentialsX-GUI: §8- §f" + fileName + ": §6Loaded but updated");
-			return;
-		}
-
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §8- §f" + fileName + ": §cLoaded but not updated, check wiki for more information");
-	}
-
-
-	public void checkForErrorsInInventoriesConfig(boolean reload) {
-
-		for (String inventoryName : Main.getInstance().getInventoriesManager().getInventoryNames()) {
-
-			InventoryFile inventoryFile = getInventory(inventoryName);
-
-			if (!EXGInventoryConfigParser.isEXGInventoryConfigValid(inventoryFile)) {
-				ConsoleLogger.console("\t§6EssentialsX-GUI: §8- §f" + inventoryName + ": §cThis file is not valid, please check the configuration.");
-			} else {
-				ConsoleLogger.console("\t§6EssentialsX-GUI: §8- §f" + inventoryName + ": §a" + (reload ? "Reloaded" : "Loaded"));
-			}
+		if (!latestVersion.equals(fileVersion)) {
+			Main.getInstance().getFilesManager().createBackupYAMLFile(fileName);
 		}
 	}
 
@@ -315,6 +273,41 @@ public class FilesManager {
 	// -------------------------------------------------- //
 
 
+	public void loadAndCheckConfiguration(boolean reload) {
+		loadYAMLFile("configuration");
+		checkUpdateForFile("configuration");
+		String label = reload ? "Reloaded" : "Loaded";
+		ConsoleLogger.console("\t§6EssentialsX-GUI: §8- §fconfiguration.yml: §a" + label);
+	}
+
+
+	public void loadAndCheckMessages(boolean reload) {
+		loadYAMLFile("messages");
+		checkUpdateForFile("messages");
+		String label = reload ? "Reloaded" : "Loaded";
+		ConsoleLogger.console("\t§6EssentialsX-GUI: §8- §fmessages.yml: §a" + label);
+	}
+
+
+	public void loadAndCheckInventories(boolean reload) {
+
+		for (String inventoryName : Main.getInstance().getInventoriesManager().getInventoryNames()) {
+			loadYAMLFile(inventoryName);
+			checkUpdateForFile(inventoryName);
+			boolean isValid = EXGInventoryConfigParser.isEXGInventoryConfigValid(getInventory(inventoryName));
+			Main.getInstance().getInventoriesManager().loadInventory(inventoryName);
+
+			String label = reload ? "Reloaded" : "Loaded";
+			label = isValid ? label : "§4Not valid, please resolve the above errors";
+
+			ConsoleLogger.console("\t§6EssentialsX-GUI: §8- §f" + inventoryName + ".yml: §a" + label);
+		}
+	}
+
+
+	// -------------------------------------------------- //
+
+
 	public ConfigurationFile getConfiguration() {
 		return configurationFile;
 	}
@@ -324,39 +317,6 @@ public class FilesManager {
 	public InventoryFile getInventory(String inventoryName) {
 		return inventoriesFiles.get(inventoryName);
 	}
-
-
-	// -------------------------------------------------- //
-
-
-	private void loadConfiguration() {
-		loadYAMLFile("configuration");
-	}
-	private void loadMessages() {
-		loadYAMLFile("messages");
-	}
-	private void loadInventory(String inventoryName) {
-		loadYAMLFile(inventoryName);
-	}
-
-
-	// -------------------------------------------------- //
-
-
-	private void loadInventories() {
-		for (String inventoryName : Main.getInstance().getInventoriesManager().getInventoryNames()) {
-			loadInventory(inventoryName);
-		}
-	}
-
-	private void checkUpdateForInventories() {
-		for (String inventoryName : Main.getInstance().getInventoriesManager().getInventoryNames()) {
-			checkUpdateForFile(inventoryName);
-		}
-	}
-
-
-	// -------------------------------------------------- //
 
 
 	public String getInventoryName(InventoryFile inventoryFile) {

@@ -30,27 +30,24 @@ public class InventoriesManager {
 	// -------------------------------------------------- //
 
 
-	public void loadInventories() {
+	public void loadInventory(String inventoryName) {
 
-		for (String inventoryName : getInventoryNames()) {
+		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
 
-			InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
+		String title = inventoryFile.getTitle();
+		int rows = inventoryFile.getRows();
+		EXGItemConfig borderItem = inventoryFile.getBorderItem();
+		int[] borderSlots = inventoryFile.getBorderSlots();
 
-			String title = inventoryFile.getTitle();
-			int rows = inventoryFile.getRows();
-			EXGItemConfig borderItem = inventoryFile.getBorderItem();
-			int[] borderSlots = inventoryFile.getBorderSlots();
+		switch (inventoryName) {
+			case "homes" -> loadHomesInventory(title, rows, inventoryName, borderItem, borderSlots);
+			case "homeEditing" -> loadHomeEditingInventory(title, rows, inventoryName, borderItem, borderSlots);
 
-			switch (inventoryName) {
-				case "homes" -> loadHomesInventory(title, rows, inventoryName, borderItem, borderSlots);
-				case "homeEditing" -> loadHomeEditingInventory(title, rows, inventoryName, borderItem, borderSlots);
-
-				case "kitsAdminView" -> loadKitsAdminViewInventory(title, rows, inventoryName, borderItem, borderSlots);
-				case "kitsPlayerView" -> loadKitsPlayerViewInventory(title, rows, inventoryName, borderItem, borderSlots);
-				case "kitsPreview" -> loadKitsPreviewInventory(title, rows, inventoryName, borderItem, borderSlots);
-				case "kitsPlayerGive" -> loadKitsPlayerGiveInventory(title, rows, inventoryName, borderItem, borderSlots);
-				case "kitEditing" -> loadKitEditingInventory(title, rows, inventoryName, borderItem, borderSlots);
-			}
+			case "kitsAdminView" -> loadKitsAdminViewInventory(title, rows, inventoryName, borderItem, borderSlots);
+			case "kitsPlayerView" -> loadKitsPlayerViewInventory(title, rows, inventoryName, borderItem, borderSlots);
+			case "kitsPreview" -> loadKitsPreviewInventory(title, rows, inventoryName, borderItem, borderSlots);
+			case "kitsPlayerGive" -> loadKitsPlayerGiveInventory(title, rows, inventoryName, borderItem, borderSlots);
+			case "kitEditing" -> loadKitEditingInventory(title, rows, inventoryName, borderItem, borderSlots);
 		}
 	}
 
