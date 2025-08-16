@@ -19,6 +19,10 @@ public class PlayerJoin implements Listener {
 
 		Main.getInstance().getPlayerManager().initialize(player.getUniqueId().toString());
 		Main.getInstance().getPlayerDataManager().cleanPlayerData(player.getUniqueId().toString());
+
+		Main.getInstance().getServer().getScheduler().runTaskLater(Main.getInstance(), () -> {
+			Main.getInstance().getLoadingManager().alertPlayerForUpdate(player);
+		}, 20L);
 	}
 
 

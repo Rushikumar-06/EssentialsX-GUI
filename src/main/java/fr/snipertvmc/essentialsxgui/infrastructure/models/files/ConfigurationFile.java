@@ -64,6 +64,11 @@ public class ConfigurationFile {
 	// -------------------------------------------------- //
 
 
+	public boolean canReceiveUpdateAlert(Player player) {
+		return player.hasPermission(yamlConfiguration.getString("permissions.admin.updateAlert", "unknownPermission"));
+	}
+
+
 	public boolean hasEssentialsXGUICommand(Player player) {
 		return player.hasPermission(yamlConfiguration.getString("permissions.commands.essentialsxgui", "unknownPermission"));
 	}

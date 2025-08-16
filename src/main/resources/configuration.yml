@@ -21,8 +21,8 @@
 general:
 
   # Please do not change this value as it may cause the file to be reset.
-  # Default: "1.0"
-  configVersion: "1.0"
+  # Default: "1.1"
+  configVersion: "1.1"
 
   # If you want to see a detailed loading message when the plugin is loading, set this to true. (Also works for unloading)
   # Default: true
@@ -99,6 +99,12 @@ sounds:
 ############################################################
 
 permissions:
+
+  admin:
+
+    # Change the permission needed to receive a message when an update of the plugin is available.
+    # Default: "essentialsxgui.admin.update"
+    updateAlert: "essentialsxgui.admin.update"
 
   commands:
 

@@ -1,12 +1,17 @@
 package fr.snipertvmc.essentialsxgui.managers;
 
+import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
 import fr.snipertvmc.essentialsxgui.libraries.bstats.Metrics;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.FastInvManager;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.MCServerVersion;
 import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
+import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.RegisterUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.UpdateUtils;
+import org.bukkit.entity.Player;
+
+import java.util.Map;
 
 public class LoadingManager {
 
@@ -151,6 +156,13 @@ public class LoadingManager {
 	}
 
 
+	// -------------------------------------------------- //
+
+
+	private boolean updateAvailable = false;
+	private String latestVersionAvailable = null;
+
+
 	public void checkForUpdates() {
 
 		if (!Main.getInstance().getConfiguration().checkForUpdates()) {
@@ -166,11 +178,33 @@ public class LoadingManager {
 		String currentVersion = Main.getInstance().getDescription().getVersion();
 		if (currentVersion.equals(latestVersionAvailable)) {
 			ConsoleLogger.console("\t§6EssentialsX-GUI: §7You are using the §alatest §7version of EssentialsX-GUI.");
+			updateAvailable = false;
+			this.latestVersionAvailable = null;
 
 		} else {
 			ConsoleLogger.console("\t§6EssentialsX-GUI: §eA new version of EssentialsX-GUI is available: §f" + latestVersionAvailable);
 			ConsoleLogger.console("\t§6EssentialsX-GUI: §6Please update to the latest version for new features and bug fixes.");
+
+			updateAvailable = true;
+			this.latestVersionAvailable = latestVersionAvailable;
 		}
+	}
+
+
+	public void alertPlayerForUpdate(Player player) {
+
+		if (!updateAvailable) {
+			return;
+		}
+
+		if (!Main.getInstance().getConfiguration().canReceiveUpdateAlert(player)) {
+			return;
+		}
+
+		player.sendMessage(MessagesUtils.get(EXGMessage.ALERT_UPDATE_AVAILABLE, Map.of(
+				"currentVersion", Main.getInstance().getDescription().getVersion(),
+				"latestVersion", latestVersionAvailable
+		)));
 	}
 
 

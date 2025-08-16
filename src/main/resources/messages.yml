@@ -19,8 +19,8 @@
 ############################################################
 
 # Please do not change this value as it may cause the file to be reset.
-# Default: "1.0"
-messages-version: "1.0"
+# Default: "1.1"
+messages-version: "1.1"
 
 # Change the prefix sent at the beginning of most sent messages.
 # TIP: Use {prefix} in any message to include the prefix.
@@ -36,6 +36,9 @@ admin:
 
   filesReloading: "{prefix} &eThe files are being reloaded..."
   filesReloaded: "{prefix} &eThe files have been reloaded. Please check the console if you encounter any errors."
+
+  # Placeholders available: {currentVersion}, {latestVersion}
+  alertUpdateAvailable: "{prefix} &eAn update is available for EssentialsX-GUI. &6Please check the console for more information."
 
 ############################################################
 # +------------------------------------------------------+ #

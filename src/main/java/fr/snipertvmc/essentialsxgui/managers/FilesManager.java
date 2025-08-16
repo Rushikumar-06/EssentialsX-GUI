@@ -44,8 +44,8 @@ public class FilesManager {
 	);
 
 	private final Map<String, String> filesVersions = Map.of(
-			"configuration", "1.0",
-			"messages", "1.0",
+			"configuration", "1.1",
+			"messages", "1.1",
 
 			"homeEditing", "1.0",
 			"homes", "1.1",

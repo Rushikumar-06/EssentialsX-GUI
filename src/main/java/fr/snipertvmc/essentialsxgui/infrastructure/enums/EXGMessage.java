@@ -10,6 +10,8 @@ public enum EXGMessage {
 	FILES_RELOADING("admin.filesReloading"),
 	FILES_RELOADED("admin.filesReloaded"),
 
+	ALERT_UPDATE_AVAILABLE("admin.alertUpdateAvailable"),
+
 
 	// ERRORS
 	INVALID_MATERIAL("errors.invalidMaterial"),
