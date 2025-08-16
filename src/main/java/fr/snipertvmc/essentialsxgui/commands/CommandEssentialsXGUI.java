@@ -12,6 +12,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -95,17 +97,27 @@ public class CommandEssentialsXGUI implements CommandExecutor, TabCompleter {
 		Set<EXGHome> homes = exgPlayer.getHomes();
 		Set<EXGKit> kits = Main.getInstance().getEXGServer().getKits();
 
+		String currentLocalDataTime = ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss z"));
+
 		commandSender.sendMessage("");
-		commandSender.sendMessage("  §dDebug information §7- §f" + commandSender.getName());
+		commandSender.sendMessage("  §d§lDebug information §7- §f" + commandSender.getName());
 		commandSender.sendMessage("");
-		commandSender.sendMessage("  §eHomes list §7- §6" + homes.size() + " home(s)");
+		commandSender.sendMessage("    §8■ §bServer informations");
+		commandSender.sendMessage("      §8▢ §fName: §7" + Main.getInstance().getServer().getName());
+		commandSender.sendMessage("      §8▢ §fVersion: §7" + Main.getInstance().getServer().getVersion());
+		commandSender.sendMessage("      §8▢ §fBukkit Version: §7" + Main.getInstance().getServer().getBukkitVersion());
+		commandSender.sendMessage("      §8▢ §fEssentialsX Version: §7" + Main.getInstance().getEssentials().getDescription().getVersion());
+		commandSender.sendMessage("      §8▢ §fEssentialsX-GUI Version: §7" + Main.getInstance().getDescription().getVersion());
+		commandSender.sendMessage("      §8▢ §fLocal date and time: §7" + currentLocalDataTime);
+		commandSender.sendMessage("");
+		commandSender.sendMessage("    §8■ §bHomes list §7- §3" + homes.size() + " home(s)");
 		for (EXGHome home : homes) {
-			commandSender.sendMessage("    §8■ §f" + home.getDisplayName() + " §7§o(" + home.getName() + ") §7- §f" + home.getMaterial());
+			commandSender.sendMessage("      §8▢ §f" + home.getDisplayName() + " §7§o(" + home.getName() + ") §7- §f" + home.getMaterial() + ":" + home.getData());
 		}
 		commandSender.sendMessage("");
-		commandSender.sendMessage("  §bKits list §7- §3" + homes.size() + " kit(s)");
+		commandSender.sendMessage("    §8■ §bKits list §7- §3" + kits.size() + " kit(s)");
 		for (EXGKit kit : kits) {
-			commandSender.sendMessage("    §8■ §f" + kit.getDisplayName() + " §7§o(" + kit.getName() + ") §7- §f" + kit.getMaterial());
+			commandSender.sendMessage("      §8▢ §f" + kit.getDisplayName() + " §7§o(" + kit.getName() + ") §7- §f" + kit.getMaterial() + ":" + kit.getData());
 		}
 		commandSender.sendMessage("");
 	}
