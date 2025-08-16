@@ -165,6 +165,13 @@ public class LoadingManager {
 
 	public void checkForUpdates() {
 
+		String currentVersion = Main.getInstance().getDescription().getVersion();
+		if (currentVersion.contains("-dev")) {
+			ConsoleLogger.console("\t§6EssentialsX-GUI: §5You are using a development version of EssentialsX-GUI.");
+			ConsoleLogger.console("\t§6EssentialsX-GUI: §dSome features may not work as expected, and bugs may be present.");
+			return;
+		}
+
 		if (!Main.getInstance().getConfiguration().checkForUpdates()) {
 			return;
 		}
@@ -175,7 +182,6 @@ public class LoadingManager {
 			return;
 		}
 
-		String currentVersion = Main.getInstance().getDescription().getVersion();
 		if (currentVersion.equals(latestVersionAvailable)) {
 			ConsoleLogger.console("\t§6EssentialsX-GUI: §7You are using the §alatest §7version of EssentialsX-GUI.");
 			updateAvailable = false;
