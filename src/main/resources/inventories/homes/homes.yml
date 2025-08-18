@@ -19,8 +19,8 @@
 ############################################################
 
 # Please do not change this value as it may cause the file to be reset.
-# Default: "1.1"
-config-version: "1.1"
+# Default: "1.2"
+config-version: "1.2"
 
 # 'data' value are supported in this section.
 # Just add the 'data' key with the value you want to use.
@@ -29,7 +29,6 @@ bedHomeItem:
   overworld:
     worldDisplayName: "&aOverworld"
     material: "%%value_materialBedHomeItemOverworld%%"
-    data: 14
   # You can skip the 'nether' section if your server's version is below 1.16.
   # Respawn anchors were introduced in Minecraft 1.16.
   nether:
