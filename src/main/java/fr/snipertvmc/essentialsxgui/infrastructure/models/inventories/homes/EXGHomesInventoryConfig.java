@@ -11,6 +11,7 @@ public class EXGHomesInventoryConfig extends EXGInventoryConfig {
 
 
 	private EXGItemConfig homeItem;
+	private EXGItemConfig bedHomeItem;
 	private EXGItemConfig noHomesItem;
 
 	private EXGItemConfig createHomeItem;
@@ -39,7 +40,7 @@ public class EXGHomesInventoryConfig extends EXGInventoryConfig {
 		return homeItem;
 	}
 	public EXGItemConfig getBedHomeItem() {
-		return homeItem;
+		return bedHomeItem;
 	}
 	public EXGItemConfig getNoHomesItem() {
 		return noHomesItem;
@@ -74,8 +75,8 @@ public class EXGHomesInventoryConfig extends EXGInventoryConfig {
 	public void setHomeItem(EXGItemConfig homeItem) {
 		this.homeItem = homeItem;
 	}
-	public void setBedHomeItem(EXGItemConfig homeItem) {
-		this.homeItem = homeItem;
+	public void setBedHomeItem(EXGItemConfig bedHomeItem) {
+		this.bedHomeItem = bedHomeItem;
 	}
 	public void setNoHomesItem(EXGItemConfig noHomesItem) {
 		this.noHomesItem = noHomesItem;
