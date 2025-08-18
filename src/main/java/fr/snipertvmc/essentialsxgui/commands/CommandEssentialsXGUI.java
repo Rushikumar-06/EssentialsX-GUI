@@ -80,7 +80,7 @@ public class CommandEssentialsXGUI implements CommandExecutor, TabCompleter {
 		commandSender.sendMessage("");
 		commandSender.sendMessage("    §8■ §7Version: §b" + Main.getInstance().getDescription().getVersion());
 		commandSender.sendMessage("    §8■ §7Discord: §3discord.gg/fSzK79TAYf");
-		commandSender.sendMessage("    §8■ §7Spigot: §6spigotmc.org/resources/§k100000");
+		commandSender.sendMessage("    §8■ §7Spigot: §6spigotmc.org/resources/127805");
 		commandSender.sendMessage("    §8■ §7GitHub: §fgithub.com/SniperTVmc/EssentialsX-GUI");
 		commandSender.sendMessage("");
 	}
