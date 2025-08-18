@@ -82,6 +82,13 @@ public class InventoriesManager {
 				"closeItem"));
 
 		homesInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
+
+		homesInventoryConfig.setBedHomeItemOverworldMaterial(inventoryFile.getFullBedHomeItemMaterial("overworld"),
+				inventoryFile.getBedHomeItemWorldDisplayName("overworld"));
+		homesInventoryConfig.setBedHomeItemNetherMaterial(inventoryFile.getFullBedHomeItemMaterial("nether"),
+				inventoryFile.getBedHomeItemWorldDisplayName("nether"));
+		homesInventoryConfig.setBedHomeItemNotSetMaterial(inventoryFile.getFullBedHomeItemMaterial("notSet"),
+				inventoryFile.getBedHomeItemWorldDisplayName("notSet"));
 	}
 
 	private void loadHomeEditingInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {

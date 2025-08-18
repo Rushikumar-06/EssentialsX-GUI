@@ -3,6 +3,8 @@ package fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.InventoryScheme;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
+import it.unimi.dsi.fastutil.Pair;
+import org.bukkit.configuration.ConfigurationSection;
 
 public class EXGHomesInventoryConfig extends EXGInventoryConfig {
 
@@ -23,6 +25,10 @@ public class EXGHomesInventoryConfig extends EXGInventoryConfig {
 	private EXGItemConfig closeItem;
 
 	private InventoryScheme inventoryScheme;
+
+	private Pair<String, String> bedHomeItemOverworld;
+	private Pair<String, String> bedHomeItemNether;
+	private Pair<String, String> bedHomeItemNotSet;
 
 
 	// -------------------------------------------------- //
@@ -68,6 +74,25 @@ public class EXGHomesInventoryConfig extends EXGInventoryConfig {
 		return inventoryScheme;
 	}
 
+	public String getBedHomeItemOverworldMaterial() {
+		return bedHomeItemOverworld.first();
+	}
+	public String getBedHomeItemNetherMaterial() {
+		return bedHomeItemNether.first();
+	}
+	public String getBedHomeItemNotSetMaterial() {
+		return bedHomeItemNotSet.first();
+	}
+	public String getBedHomeItemOverworldDisplayName() {
+		return bedHomeItemOverworld.second();
+	}
+	public String getBedHomeItemNetherDisplayName() {
+		return bedHomeItemNether.second();
+	}
+	public String getBedHomeItemNotSetDisplayName() {
+		return bedHomeItemNotSet.second();
+	}
+
 
 	// -------------------------------------------------- //
 
@@ -104,6 +129,16 @@ public class EXGHomesInventoryConfig extends EXGInventoryConfig {
 		this.inventoryScheme = inventoryScheme;
 	}
 
+	public void setBedHomeItemOverworldMaterial(String bedHomeItemOverworldMaterial, String bedHomeItemOverworldDisplayName) {
+		this.bedHomeItemOverworld = Pair.of(bedHomeItemOverworldMaterial, bedHomeItemOverworldDisplayName);
+	}
+	public void setBedHomeItemNetherMaterial(String bedHomeItemNetherMaterial, String bedHomeItemNetherDisplayName) {
+		this.bedHomeItemNether = Pair.of(bedHomeItemNetherMaterial, bedHomeItemNetherDisplayName);
+	}
+	public void setBedHomeItemNotSetMaterial(String bedHomeItemNotSetMaterial, String bedHomeItemNotSetDisplayName) {
+		this.bedHomeItemNotSet = Pair.of(bedHomeItemNotSetMaterial, bedHomeItemNotSetDisplayName);
+	}
+
 
 	// -------------------------------------------------- //
 
@@ -130,6 +165,10 @@ public class EXGHomesInventoryConfig extends EXGInventoryConfig {
 		copy.setCloseItem(this.getCloseItem().duplicate());
 
 		copy.setInventoryScheme(this.getInventoryScheme());
+
+		copy.setBedHomeItemOverworldMaterial(this.getBedHomeItemOverworldMaterial(), this.getBedHomeItemOverworldDisplayName());
+		copy.setBedHomeItemNetherMaterial(this.getBedHomeItemNetherMaterial(), this.getBedHomeItemNetherDisplayName());
+		copy.setBedHomeItemNotSetMaterial(this.getBedHomeItemNotSetMaterial(), this.getBedHomeItemNotSetDisplayName());
 		return copy;
 	}
 

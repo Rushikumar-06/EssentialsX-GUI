@@ -10,9 +10,12 @@ import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.
 import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
+import it.unimi.dsi.fastutil.Pair;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryAction;
+import org.bukkit.event.player.PlayerEditBookEvent;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -97,9 +100,14 @@ public class HomesInventory extends PaginatedFastInv {
 			addContent(config.getNoHomesItem().build());
 		}
 
+		String[] bedHomeMaterialParts = getBedHomeMaterialAndData(player).split(":");
+		String bedHomeMaterialName = bedHomeMaterialParts[0];
+		byte bedHomeData = Byte.parseByte(bedHomeMaterialParts[1]);
 		if (player.hasPermission("essentials.home.bed") && config.getBedHomeItem().isEnabled()) {
 			setItem(config.getBedHomeItem().getSlot(), config.getBedHomeItem()
-					.updateVariables(Map.of("player", player.getName()))
+					.updateVariables(Map.of("bedHomeWorldDisplayName", getBedHomeWorldDisplayName(player)))
+					.setMaterial(bedHomeMaterialName)
+					.setData(bedHomeData)
 					.build(), e -> {
 
 				if (player.hasPermission("essentials.home.bed")) {
@@ -193,6 +201,30 @@ public class HomesInventory extends PaginatedFastInv {
 			});
 
 		}, 10);
+	}
+
+
+	private String getBedHomeMaterialAndData(Player player) {
+		if (player.getBedSpawnLocation() == null) {
+			return config.getBedHomeItemNotSetMaterial();
+
+		} else if (player.getBedSpawnLocation().getWorld().getName().endsWith("_nether")) {
+			return config.getBedHomeItemNetherMaterial();
+		}
+
+		return config.getBedHomeItemOverworldMaterial();
+	}
+
+
+	private String getBedHomeWorldDisplayName(Player player) {
+		if (player.getBedSpawnLocation() == null) {
+			return config.getBedHomeItemNotSetDisplayName();
+
+		} else if (player.getBedSpawnLocation().getWorld().getName().endsWith("_nether")) {
+			return config.getBedHomeItemNetherDisplayName();
+		}
+
+		return config.getBedHomeItemOverworldDisplayName();
 	}
 
 

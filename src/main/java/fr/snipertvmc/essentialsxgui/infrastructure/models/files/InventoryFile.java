@@ -4,7 +4,6 @@ import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.InventoryScheme;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.MCServerVersion;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
-import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
 import fr.snipertvmc.essentialsxgui.utilities.config.EXGItemConfigParser;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
@@ -15,7 +14,6 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemFlag;
 
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -225,7 +223,7 @@ public class InventoryFile {
 						"value_materialAdminModeItem", "EYE_OF_ENDER",
 						"value_materialCreateHomeItem", "PISTON_BASE",
 						"value_materialCreateKitItem", "PISTON_BASE",
-						"value_materialBedHomeItem", "BED"
+						"value_materialBedHomeItemOverworld", "BED"
 				);
 			}
 
@@ -239,7 +237,7 @@ public class InventoryFile {
 						"value_materialAdminModeItem", "ENDER_EYE",
 						"value_materialCreateHomeItem", "PISTON",
 						"value_materialCreateKitItem", "PISTON",
-						"value_materialBedHomeItem", "RED_BED"
+						"value_materialBedHomeItemOverworld", "RED_BED"
 				);
 			}
 		}
@@ -261,6 +259,22 @@ public class InventoryFile {
 		}
 
 		return List.of();
+	}
+
+
+	// -------------------------------------------------- //
+
+	// CUSTOMS CONFIGURATIONS
+
+
+	public String getFullBedHomeItemMaterial(String worldName) {
+		String materialName = yamlConfiguration.getString("bedHomeItem." + worldName + ".material");
+		int materialData = yamlConfiguration.getInt("bedHomeItem." + worldName + ".data", 0);
+		return materialName + ":" + materialData;
+	}
+
+	public String getBedHomeItemWorldDisplayName(String worldName) {
+		return yamlConfiguration.getString("bedHomeItem." + worldName + ".worldDisplayName");
 	}
 
 
