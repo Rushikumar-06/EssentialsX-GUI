@@ -6,8 +6,6 @@ import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes.EXGH
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes.EXGHomeEditingInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.*;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
-import fr.snipertvmc.essentialsxgui.utilities.config.EXGInventoryConfigParser;
-import fr.snipertvmc.essentialsxgui.utilities.data.MapUtils;
 
 import java.util.List;
 

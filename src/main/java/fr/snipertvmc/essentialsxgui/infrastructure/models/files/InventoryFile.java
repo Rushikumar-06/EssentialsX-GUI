@@ -9,10 +9,13 @@ import fr.snipertvmc.essentialsxgui.utilities.config.EXGItemConfigParser;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.Material;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemFlag;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -98,7 +101,7 @@ public class InventoryFile {
 
 		Object enabledValue = yamlConfiguration.get(path + ".enabled");
 		if (enabledValue instanceof Boolean isEnabled && !isEnabled) {
-			return new EXGItemConfig(false, (short) 0, Material.AIR.name(), 1, (byte) 0, null, null, null, null);
+			return new EXGItemConfig(false, (short) 0, Material.AIR.name(), 1, (byte) 0, null, null, null, null, new HashMap<>());
 		}
 
 		// Check if the item configuration is valid
@@ -121,7 +124,7 @@ public class InventoryFile {
 							"",
 							"§6Item path involved: ",
 							"§8- §e" + path),
-					null, null
+					null, null, new HashMap<>()
 			);
 		}
 
@@ -131,7 +134,7 @@ public class InventoryFile {
 
 	private EXGItemConfig parseItemConfig(String path) {
 
-		Map<String, Object> itemStringValues = new HashMap<>() {{
+		Map<String, Object> itemConfiguration = new HashMap<>() {{
 			put("enabled", yamlConfiguration.get(path + ".enabled"));
 
 			put("slot", yamlConfiguration.getInt(path + ".slot"));
@@ -145,13 +148,15 @@ public class InventoryFile {
 
 			put("enchantments", yamlConfiguration.getStringList(path + ".enchantments"));
 			put("itemFlags", yamlConfiguration.getStringList(path + ".itemFlags"));
+
+			put("clickActions", yamlConfiguration.getConfigurationSection(path + ".clickActions"));
 		}};
 
 
-		List<String> lore = new ArrayList<>((List<String>) itemStringValues.get("lore"));
+		List<String> lore = new ArrayList<>((List<String>) itemConfiguration.get("lore"));
 
 		List<Pair<Enchantment, Integer>> enchantments = new ArrayList<>();
-		for (Object enchantment : (List<String>) itemStringValues.get("enchantments")) {
+		for (Object enchantment : (List<String>) itemConfiguration.get("enchantments")) {
 			String[] enchantmentSplit = ((String) enchantment).split(":");
 			if (Enchantment.getByName(enchantmentSplit[0]) != null) {
 				enchantments.add(new ImmutablePair<>(Enchantment.getByName(enchantmentSplit[0]), Integer.parseInt(enchantmentSplit[1])));
@@ -159,28 +164,39 @@ public class InventoryFile {
 		}
 
 		List<ItemFlag> itemFlags = new ArrayList<>();
-		for (String itemFlag : (List<String>) itemStringValues.get("itemFlags")) {
+		for (String itemFlag : (List<String>) itemConfiguration.get("itemFlags")) {
 			itemFlags.add(ItemFlag.valueOf(itemFlag));
 		}
 
-		Object booleanValue = itemStringValues.get("enabled");
+		ConfigurationSection clickActionsSection = (ConfigurationSection) itemConfiguration.get("clickActions");
+		Map<String, ClickType> clickActions = new HashMap<>();
+		if (clickActionsSection != null) {
+			for (String action : clickActionsSection.getKeys(false)) {
+				String clickTypeString = clickActionsSection.getString(action);
+				clickActions.put(action, ClickType.valueOf(clickTypeString.toUpperCase()));
+			}
+		}
+
+		Object booleanValue = itemConfiguration.get("enabled");
 		if (!(booleanValue instanceof Boolean)) {
 			booleanValue = true;
 		}
 
 		return new EXGItemConfig(
 				(boolean) booleanValue,
-				((Number) itemStringValues.get("slot")).shortValue(),
+				((Number) itemConfiguration.get("slot")).shortValue(),
 
-				(String) itemStringValues.get("material"),
-				(Integer) itemStringValues.get("amount"),
-				((Number) itemStringValues.get("data")).byteValue(),
+				(String) itemConfiguration.get("material"),
+				(Integer) itemConfiguration.get("amount"),
+				((Number) itemConfiguration.get("data")).byteValue(),
 
-				(String) itemStringValues.get("displayName"),
+				(String) itemConfiguration.get("displayName"),
 				lore,
 
 				enchantments,
-				itemFlags
+				itemFlags,
+
+				clickActions
 		);
 	}
 

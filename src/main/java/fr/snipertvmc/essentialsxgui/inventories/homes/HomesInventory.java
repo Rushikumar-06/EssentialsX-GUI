@@ -7,6 +7,7 @@ import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGHome;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes.EXGHomesInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
+import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.Bukkit;
@@ -78,14 +79,14 @@ public class HomesInventory extends PaginatedFastInv {
 									"homeName", home.getName()))
 					.build(), e -> {
 
-				if (e.getClick().isRightClick()) {
+				if (homeItem.isCorrectClick(e.getClick(), "teleportToHome")) {
 					player.performCommand("essentials:home " + home.getName());
 
-				} else if (e.getClick().isLeftClick()) {
+				} else if (homeItem.isCorrectClick(e.getClick(), "editHome")) {
 					new HomeEditingInventory(player, home).open(player);
 					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 
-				} else if (e.getAction().equals(InventoryAction.DROP_ONE_SLOT)) {
+				} else if (homeItem.isCorrectClick(e.getClick(), "deleteHome")) {
 					new HomeEditingInventory(player, home).deleteHome(player, home);
 				}
 			});

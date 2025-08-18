@@ -3,10 +3,10 @@ package fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.ItemBuilder;
 import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
-import fr.snipertvmc.essentialsxgui.utilities.data.TypeUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
@@ -39,6 +39,8 @@ public class EXGItemConfig {
 
 	private Map<String, String> variables = new HashMap<>();
 
+	private Map<String, ClickType> clickActions = new HashMap<>();
+
 
 	// -------------------------------------------------- //
 
@@ -47,7 +49,8 @@ public class EXGItemConfig {
 	                     short slot,
 	                     String materialName, int amount, byte data,
 	                     String displayName, List<String> lore,
-	                     List<Pair<Enchantment, Integer>> enchantments, List<ItemFlag> itemFlags) {
+	                     List<Pair<Enchantment, Integer>> enchantments, List<ItemFlag> itemFlags,
+	                     Map<String, ClickType> clickActions) {
 
 		this.enabled = enabled;
 
@@ -62,6 +65,8 @@ public class EXGItemConfig {
 
 		this.enchantments = enchantments;
 		this.itemFlags = itemFlags;
+
+		this.clickActions = clickActions;
 	}
 
 
@@ -78,6 +83,10 @@ public class EXGItemConfig {
 
 		this.enchantments = itemConfig.getEnchantments();
 		this.itemFlags = itemConfig.getItemFlags();
+
+		this.variables = new HashMap<>(itemConfig.getVariables());
+
+		this.clickActions = new HashMap<>(itemConfig.getClickActions());
 	}
 
 
@@ -130,6 +139,14 @@ public class EXGItemConfig {
 
 	public List<ItemFlag> getItemFlags() {
 		return itemFlags;
+	}
+
+	public Map<String, String> getVariables() {
+		return variables;
+	}
+
+	public Map<String, ClickType> getClickActions() {
+		return clickActions;
 	}
 
 
@@ -287,6 +304,17 @@ public class EXGItemConfig {
 
 	public EXGItemConfig duplicate() {
 		return new EXGItemConfig(this);
+	}
+
+
+	// -------------------------------------------------- //
+
+
+	public boolean isCorrectClick(ClickType playerClickType, String actionName) {
+		if (!clickActions.containsKey(actionName)) {
+			return false;
+		}
+		return playerClickType.name().equals(clickActions.get(actionName).name());
 	}
 
 

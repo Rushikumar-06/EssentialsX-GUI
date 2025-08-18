@@ -76,6 +76,7 @@ public class EXGItemConfigParser {
 		Object enchantments = config.get(itemPath + ".enchantments");
 
 
+		// Validate item properties
 		return isEnabled(enabled, itemPath) &&
 
 				isSlotValid(slot, slots, itemPath, inventoryName, isBorderItem) &&
@@ -88,7 +89,9 @@ public class EXGItemConfigParser {
 				isLoreValid(lore, itemPath) &&
 
 				areEnchantmentsValid(enchantments, itemPath) &&
-				areItemFlagsValid(itemFlags, itemPath);
+				areItemFlagsValid(itemFlags, itemPath) &&
+
+				EXGItemCustomConfigParser.isEXGItemCustomConfigValid(inventoryFile, itemPath);
 	}
 
 

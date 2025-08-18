@@ -58,17 +58,26 @@ homes:
     # 'enabled' value will be ignored in this section. Item is enabled by default.
     # 'slot' value will be ignored in this section. Use the 'inventoryScheme' section to set the slots.
     # Change 'material' to the default item you want to use for homes.
+    #
+    # Change the click from 'clickActions' section with a valid ClickType.
+    # A complete list is available at: https://helpch.at/docs/1.21.5/org/bukkit/event/inventory/ClickType.html
+    # Change '1.21.5' with your current Minecraft version.
+    #
     # Placeholders available: {homeDisplayName}, {homeName}
     # By default, if homeDisplayName is not set, it will use the home name.
     homeItem:
       material: "%%value_materialHomeItem%%"
       displayName: "&6{homeDisplayName}"
       lore:
-        - "&f&lRight Click &7to teleport to this home."
-        - "&f&lLeft Click &7to edit this home."
+        - "&f&lLeft Click &7to teleport to this home."
+        - "&f&lRight Click &7to edit this home."
         - "&f&lDrop &7to delete this home."
         - ""
         - "&7Home Name: &f&o{homeName}"
+      clickActions:
+        teleportToHome: "LEFT"
+        editHome: "RIGHT"
+        deleteHome: "DROP"
 
     bedHomeItem:
       enabled: true
@@ -79,7 +88,7 @@ homes:
         - "&7The bed home is an automatic home"
         - "&7set when you sleep in a bed."
         - ""
-        - "&f&lRight Click &7to teleport to your bed home."
+        - "&7Click to teleport to your bed home."
 
     # 'slot' value will be ignored in this section. The item will be placed in the first slot like a kit item.
     # The item will be displayed if the player doesn't have any homes set.

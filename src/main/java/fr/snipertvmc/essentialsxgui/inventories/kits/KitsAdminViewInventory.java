@@ -83,15 +83,15 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 									"kitName", kit.getName()))
 					.build(), e -> {
 
-				if (e.getClick().isRightClick()) {
+				if (kitItem.isCorrectClick(e.getClick(), "giveKit")) {
 					new KitsPlayerGiveInventory(player, kit).open(player);
 					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 
-				} else if (e.getClick().isLeftClick()) {
+				} else if (kitItem.isCorrectClick(e.getClick(), "editKit")) {
 					new KitEditingInventory(player, kit).open(player);
 					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 
-				} else if (e.getAction().equals(InventoryAction.DROP_ONE_SLOT)) {
+				} else if (kitItem.isCorrectClick(e.getClick(), "deleteKit")) {
 					new KitEditingInventory(player, kit).deleteKit(player, kit);
 				}
 

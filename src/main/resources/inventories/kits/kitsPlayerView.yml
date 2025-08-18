@@ -57,16 +57,24 @@ kitsPlayerView:
 
     # 'slot' value will be ignored in this section. Use the 'inventoryScheme' section to set the slots.
     # 'enabled' value will be ignored in this section. Item is enabled by default.
+    #
+    # Change the click from 'clickActions' section with a valid ClickType.
+    # A complete list is available at: https://helpch.at/docs/1.21.5/org/bukkit/event/inventory/ClickType.html
+    # Change '1.21.5' with your current Minecraft version.
+    #
     # Placeholders available: {kitDisplayName}, {kitName}, {kitMaterialName}
     # By default, if kitDisplayName is not set, it will use the kit name.
     kitItem:
       material: "{kitMaterialName}"
       displayName: "&6{kitDisplayName}"
       lore:
-        - "&f&lRight Click &7to receive this kit."
-        - "&f&lLeft Click &7to preview this kit."
+        - "&f&lLeft Click &7to receive this kit."
+        - "&f&lRight Click &7to preview this kit."
         - ""
         - "&7Kit Name: &f&o{kitName}"
+      clickActions:
+        receiveKit: "LEFT"
+        previewKit: "RIGHT"
 
     # 'slot' value will be ignored in this section. The item will be placed in the first slot like a kit item.
     # The item will be displayed if the player has no access to any kit.

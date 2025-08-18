@@ -52,8 +52,8 @@ kitEditing:
       slot: 22
       displayName: "&6{kitDisplayName}"
       lore:
-        - "&f&lRight Click &7to receive this kit."
-        - "&f&lLeft Click &7to preview this kit."
+        - "&f&lLeft Click &7to receive this kit."
+        - "&f&lRight Click &7to preview this kit."
         - ""
         - "&7Kit Name: &f&o{kitName}"
         - "&7Material: &f&o{kitMaterialName}"
