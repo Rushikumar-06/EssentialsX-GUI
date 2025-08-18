@@ -53,9 +53,7 @@ public class KitEditingInventory extends FastInv {
 					.setData(kit.getData())
 					.updateVariables(
 							Map.of("kitName", kit.getName(),
-									"kitDisplayName", kit.getDisplayName(),
-									"kitMaterialName", kit.getMaterial().name(),
-									"kitMaterialData", String.valueOf(kit.getData())))
+									"kitDisplayName", kit.getDisplayName()))
 					.build());
 		}
 

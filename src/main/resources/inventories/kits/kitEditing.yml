@@ -19,8 +19,8 @@
 ############################################################
 
 # Please do not change this value as it may cause the file to be reset.
-# Default: "1.0"
-config-version: "1.0"
+# Default: "1.1"
+config-version: "1.1"
 
 ############################################################
 # +------------------------------------------------------+ #
@@ -45,7 +45,7 @@ kitEditing:
   items:
 
     # 'material' value will be ignored in this section. It will use the material of player's kit's.
-    # Placeholders available: {kitDisplayName}, {kitName}, {kitMaterialName}, {kitMaterialData}
+    # Placeholders available: {kitDisplayName}, {kitName}
     # By default, if kitDisplayName is not set, it will use the kit name.
     previewKitItem:
       enabled: true
@@ -56,7 +56,6 @@ kitEditing:
         - "&f&lRight Click &7to preview this kit."
         - ""
         - "&7Kit Name: &f&o{kitName}"
-        - "&7Material: &f&o{kitMaterialName}"
 
     # Placeholders available: {kitName}, {kitDisplayName}
     changeDisplayNameItem:

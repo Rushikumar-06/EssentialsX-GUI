@@ -47,14 +47,14 @@ public class FilesManager {
 			"configuration", "1.1", // Latest plugin version known before update file: 1.0.1
 			"messages", "1.1", // Latest plugin version known before update file: 1.0.1
 
-			"homeEditing", "1.0",
+			"homeEditing", "1.1", // Latest plugin version known before update file: 1.0.1
 			"homes", "1.2", // Latest plugin version known before update file: 1.0.1
 
 			"kitsAdminView", "1.1", // Latest plugin version known before update file: 1.0.1
 			"kitsPlayerView", "1.1", // Latest plugin version known before update file: 1.0.1
 			"kitsPreview", "1.0",
 			"kitsPlayerGive", "1.0",
-			"kitEditing", "1.0"
+			"kitEditing", "1.1" // Latest plugin version known before update file: 1.0.1
 	);
 
 

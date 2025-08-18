@@ -19,8 +19,8 @@
 ############################################################
 
 # Please do not change this value as it may cause the file to be reset.
-# Default: "1.0"
-config-version: "1.0"
+# Default: "1.1"
+config-version: "1.1"
 
 ############################################################
 # +------------------------------------------------------+ #
@@ -45,7 +45,7 @@ homeEditing:
   items:
 
     # 'material' value will be ignored in this section. It will use the material of player's home's.
-    # Placeholders available: {homeDisplayName}, {homeName}, {homeMaterialName}, {homeMaterialData}
+    # Placeholders available: {homeDisplayName}, {homeName}
     # By default, if homeDisplayName is not set, it will use the home name.
     previewHomeItem:
       enabled: true
@@ -57,7 +57,6 @@ homeEditing:
         - "&f&lDrop &7to delete this home."
         - ""
         - "&7Home Name: &f&o{homeName}"
-        - "&7Material: &f&o{homeMaterialName}"
 
     # Placeholders available: {homeName}, {homeDisplayName}
     changeDisplayNameItem:

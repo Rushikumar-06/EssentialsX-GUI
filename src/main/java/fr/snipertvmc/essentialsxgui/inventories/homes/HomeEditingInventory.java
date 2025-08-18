@@ -54,9 +54,7 @@ public class HomeEditingInventory extends FastInv {
 					.setData(home.getData())
 					.updateVariables(
 							Map.of("homeName", home.getName(),
-									"homeDisplayName", home.getDisplayName(),
-									"homeMaterialName", home.getMaterial().name(),
-									"homeMaterialData", String.valueOf(home.getData())))
+									"homeDisplayName", home.getDisplayName()))
 					.build());
 		}
 
