@@ -3,8 +3,7 @@ package fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.InventoryScheme;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
-import it.unimi.dsi.fastutil.Pair;
-import org.bukkit.configuration.ConfigurationSection;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class EXGHomesInventoryConfig extends EXGInventoryConfig {
 
@@ -26,9 +25,9 @@ public class EXGHomesInventoryConfig extends EXGInventoryConfig {
 
 	private InventoryScheme inventoryScheme;
 
-	private Pair<String, String> bedHomeItemOverworld;
-	private Pair<String, String> bedHomeItemNether;
-	private Pair<String, String> bedHomeItemNotSet;
+	private ImmutablePair<String, String> bedHomeItemOverworld;
+	private ImmutablePair<String, String> bedHomeItemNether;
+	private ImmutablePair<String, String> bedHomeItemNotSet;
 
 
 	// -------------------------------------------------- //
@@ -75,22 +74,22 @@ public class EXGHomesInventoryConfig extends EXGInventoryConfig {
 	}
 
 	public String getBedHomeItemOverworldMaterial() {
-		return bedHomeItemOverworld.first();
+		return bedHomeItemOverworld.getLeft();
 	}
 	public String getBedHomeItemNetherMaterial() {
-		return bedHomeItemNether.first();
+		return bedHomeItemNether.getLeft();
 	}
 	public String getBedHomeItemNotSetMaterial() {
-		return bedHomeItemNotSet.first();
+		return bedHomeItemNotSet.getLeft();
 	}
 	public String getBedHomeItemOverworldDisplayName() {
-		return bedHomeItemOverworld.second();
+		return bedHomeItemOverworld.getRight();
 	}
 	public String getBedHomeItemNetherDisplayName() {
-		return bedHomeItemNether.second();
+		return bedHomeItemNether.getRight();
 	}
 	public String getBedHomeItemNotSetDisplayName() {
-		return bedHomeItemNotSet.second();
+		return bedHomeItemNotSet.getRight();
 	}
 
 
@@ -130,13 +129,13 @@ public class EXGHomesInventoryConfig extends EXGInventoryConfig {
 	}
 
 	public void setBedHomeItemOverworldMaterial(String bedHomeItemOverworldMaterial, String bedHomeItemOverworldDisplayName) {
-		this.bedHomeItemOverworld = Pair.of(bedHomeItemOverworldMaterial, bedHomeItemOverworldDisplayName);
+		this.bedHomeItemOverworld = ImmutablePair.of(bedHomeItemOverworldMaterial, bedHomeItemOverworldDisplayName);
 	}
 	public void setBedHomeItemNetherMaterial(String bedHomeItemNetherMaterial, String bedHomeItemNetherDisplayName) {
-		this.bedHomeItemNether = Pair.of(bedHomeItemNetherMaterial, bedHomeItemNetherDisplayName);
+		this.bedHomeItemNether = ImmutablePair.of(bedHomeItemNetherMaterial, bedHomeItemNetherDisplayName);
 	}
 	public void setBedHomeItemNotSetMaterial(String bedHomeItemNotSetMaterial, String bedHomeItemNotSetDisplayName) {
-		this.bedHomeItemNotSet = Pair.of(bedHomeItemNotSetMaterial, bedHomeItemNotSetDisplayName);
+		this.bedHomeItemNotSet = ImmutablePair.of(bedHomeItemNotSetMaterial, bedHomeItemNotSetDisplayName);
 	}
 
 
