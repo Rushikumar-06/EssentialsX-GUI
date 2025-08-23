@@ -85,16 +85,15 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 
 				if (kitItem.isCorrectClick(e.getClick(), "giveKit")) {
 					new KitsPlayerGiveInventory(player, kit).open(player);
-					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 
 				} else if (kitItem.isCorrectClick(e.getClick(), "editKit")) {
 					new KitEditingInventory(player, kit).open(player);
-					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 
 				} else if (kitItem.isCorrectClick(e.getClick(), "deleteKit")) {
 					new KitEditingInventory(player, kit).deleteKit(player, kit);
 				}
 
+				SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 			});
 		}
 
@@ -109,6 +108,7 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 
 				if (player.hasPermission("essentials.createkit")) {
 					createNewKitName(player);
+					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 					return;
 				}
 

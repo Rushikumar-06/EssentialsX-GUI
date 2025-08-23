@@ -82,11 +82,12 @@ public class HomesInventory extends PaginatedFastInv {
 
 				} else if (homeItem.isCorrectClick(e.getClick(), "editHome")) {
 					new HomeEditingInventory(player, home).open(player);
-					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 
 				} else if (homeItem.isCorrectClick(e.getClick(), "deleteHome")) {
 					new HomeEditingInventory(player, home).deleteHome(player, home);
 				}
+
+				SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 			});
 		}
 
@@ -122,6 +123,7 @@ public class HomesInventory extends PaginatedFastInv {
 
 				if (player.hasPermission("essentials.sethome")) {
 					createNewHome(player);
+					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 					return;
 				}
 
