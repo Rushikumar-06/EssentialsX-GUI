@@ -40,26 +40,10 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 		);
 
 
+		initializeGeneralInventory(player);
+
+
 		Main.getInstance().getServerDataManager().cleanServerData();
-
-
-		if (config.getBorderItem().isEnabled()) {
-			setItems(config.getBorderSlots(), config.getBorderItem().build());
-		}
-
-
-		previousPageItem(config.getPreviousPageItem().getSlot(), config.getPreviousPageItem()
-				.updateVariables(
-						Map.of("currentPage", String.valueOf(this.currentPage()),
-								"previousPage", String.valueOf(this.currentPage() - 1)))
-				.build());
-
-
-		nextPageItem(config.getNextPageItem().getSlot(), config.getNextPageItem()
-				.updateVariables(
-						Map.of("currentPage", String.valueOf(this.currentPage()),
-								"nextPage", String.valueOf(this.currentPage() + 1)))
-				.build());
 
 
 		Set<EXGKit> kits = kitSearch != null ? definedKits :
@@ -154,6 +138,31 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 				});
 			}
 		}
+	}
+
+
+	// -------------------------------------------------- //
+
+
+	private void initializeGeneralInventory(Player player) {
+
+		if (config.getBorderItem().isEnabled()) {
+			setItems(config.getBorderSlots(), config.getBorderItem().build());
+		}
+
+
+		previousPageItem(config.getPreviousPageItem().getSlot(), config.getPreviousPageItem()
+				.updateVariables(
+						Map.of("currentPage", String.valueOf(this.currentPage()),
+								"previousPage", String.valueOf(this.currentPage() - 1)))
+				.build());
+
+
+		nextPageItem(config.getNextPageItem().getSlot(), config.getNextPageItem()
+				.updateVariables(
+						Map.of("currentPage", String.valueOf(this.currentPage()),
+								"nextPage", String.valueOf(this.currentPage() + 1)))
+				.build());
 
 
 		if (config.getCloseItem().isEnabled()) {
