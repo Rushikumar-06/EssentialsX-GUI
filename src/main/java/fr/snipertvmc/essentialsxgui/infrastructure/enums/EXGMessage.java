@@ -28,6 +28,7 @@ public enum EXGMessage {
 	NO_HOME_FOUND("errors.noHomeFound"),
 
 	KIT_NAME_ALREADY_EXISTS("errors.kitNameAlreadyExists"),
+	NO_KIT_FOUND("errors.noKitFound"),
 
 
 	// GENERAL
@@ -41,6 +42,7 @@ public enum EXGMessage {
 	CONFIRM_DELETE_KIT("general.confirmDeleteKit"),
 
 	SEARCH_HOME("general.searchHome"),
+	SEARCH_KIT("general.searchKit"),
 
 	ACTION_CANCELED("general.actionCanceled"),
 	ACTION_EXPIRED("general.actionExpired"),

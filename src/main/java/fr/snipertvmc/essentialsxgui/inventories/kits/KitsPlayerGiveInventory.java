@@ -82,7 +82,7 @@ public class KitsPlayerGiveInventory extends PaginatedFastInv {
 		if (config.getBackItem().isEnabled()) {
 			setItem(config.getBackItem().getSlot(), config.getBackItem().build(), e -> {
 
-				new KitsAdminViewInventory(player).open(player);
+				new KitsAdminViewInventory(player, null, null).open(player);
 				SoundsUtils.playSound(player, EXGSound.GUI_BACK);
 			});
 		}

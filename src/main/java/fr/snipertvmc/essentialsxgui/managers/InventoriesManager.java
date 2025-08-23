@@ -86,6 +86,7 @@ public class InventoriesManager {
 				"previousPageItem"));
 		homesInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
 				"currentPageItem"));
+
 		homesInventoryConfig.setCloseItem(inventoryFile.getItem(
 				"closeItem"));
 
@@ -140,6 +141,12 @@ public class InventoriesManager {
 				"createKitItem"));
 		kitsAdminInventoryConfig.setSwitchToPlayerModeItem(inventoryFile.getItem(
 				"switchToPlayerModeItem"));
+		kitsAdminInventoryConfig.setSearchKitItem(inventoryFile.getItem(
+				"searchKitItem"));
+		kitsAdminInventoryConfig.setCancelSearchKitItem(inventoryFile.getItem(
+				"cancelSearchKitItem"));
+		kitsAdminInventoryConfig.setNoSearchKitResultsItem(inventoryFile.getItem(
+				"noSearchKitResultsItem"));
 
 		kitsAdminInventoryConfig.setNextPageItem(inventoryFile.getItem(
 				"nextPageItem"));
@@ -147,6 +154,7 @@ public class InventoriesManager {
 				"previousPageItem"));
 		kitsAdminInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
 				"currentPageItem"));
+
 		kitsAdminInventoryConfig.setCloseItem(inventoryFile.getItem(
 				"closeItem"));
 
@@ -166,6 +174,12 @@ public class InventoriesManager {
 
 		kitsPlayerInventoryConfig.setSwitchToAdminModeItem(inventoryFile.getItem(
 				"switchToAdminModeItem"));
+		kitsPlayerInventoryConfig.setSearchKitItem(inventoryFile.getItem(
+				"searchKitItem"));
+		kitsPlayerInventoryConfig.setCancelSearchKitItem(inventoryFile.getItem(
+				"cancelSearchKitItem"));
+		kitsPlayerInventoryConfig.setNoSearchKitResultsItem(inventoryFile.getItem(
+				"noSearchKitResultsItem"));
 
 		kitsPlayerInventoryConfig.setNextPageItem(inventoryFile.getItem(
 				"nextPageItem"));
@@ -173,6 +187,7 @@ public class InventoriesManager {
 				"previousPageItem"));
 		kitsPlayerInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
 				"currentPageItem"));
+
 		kitsPlayerInventoryConfig.setCloseItem(inventoryFile.getItem(
 				"closeItem"));
 
@@ -199,6 +214,7 @@ public class InventoriesManager {
 				"previousPageItem"));
 		kitsPreviewInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
 				"currentPageItem"));
+
 		kitsPreviewInventoryConfig.setBackItem(inventoryFile.getItem(
 				"backItem"));
 
@@ -220,6 +236,7 @@ public class InventoriesManager {
 				"previousPageItem"));
 		kitsPlayerGiveInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
 				"currentPageItem"));
+
 		kitsPlayerGiveInventoryConfig.setBackItem(inventoryFile.getItem(
 				"backItem"));
 

@@ -1,9 +1,6 @@
 package fr.snipertvmc.essentialsxgui.inventories.kits;
 
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
-import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGHome;
-import fr.snipertvmc.essentialsxgui.inventories.homes.HomeEditingInventory;
-import fr.snipertvmc.essentialsxgui.inventories.homes.HomesInventory;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.PaginatedFastInv;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
@@ -15,7 +12,6 @@ import fr.snipertvmc.essentialsxgui.utilities.data.TypeUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryAction;
 
 import java.util.Comparator;
 import java.util.LinkedHashSet;
@@ -35,7 +31,7 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 	// -------------------------------------------------- //
 
 
-	public KitsAdminViewInventory(Player player) {
+	public KitsAdminViewInventory(Player player, String kitSearch, Set<EXGKit> definedKits) {
 		super(
 				Main.getInstance().getInventoriesManager().getKitsAdminInventoryConfig().getRows() * 9,
 				Main.getInstance().getInventoriesManager().getKitsAdminInventoryConfig().getEXGTitle()
@@ -66,10 +62,12 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 				.build());
 
 
-		Set<EXGKit> kits = Main.getInstance().getEXGServer().getKits()
-				.stream()
-				.sorted(Comparator.comparing(EXGKit::getName))
-				.collect(Collectors.toCollection(LinkedHashSet::new));
+		Set<EXGKit> kits = kitSearch != null ? definedKits :
+
+				Main.getInstance().getEXGServer().getKits()
+						.stream()
+						.sorted(Comparator.comparing(EXGKit::getName))
+						.collect(Collectors.toCollection(LinkedHashSet::new));
 
 		for (EXGKit kit : kits) {
 
@@ -98,7 +96,16 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 		}
 
 		if (kits.isEmpty()) {
-			addContent(config.getNoKitsItem().build());
+
+			if (kitSearch == null) {
+				addContent(config.getNoKitsItem().build());
+
+			} else {
+				addContent(config.getNoSearchKitResultsItem()
+						.updateVariables(
+								Map.of("kitSearch", kitSearch))
+						.build());
+			}
 		}
 
 
@@ -121,9 +128,31 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 		if (config.getSwitchToPlayerModeItem().isEnabled()) {
 			setItem(config.getSwitchToPlayerModeItem().getSlot(), config.getSwitchToPlayerModeItem().build(), e -> {
 
-				new KitsPlayerViewInventory(player).open(player);
+				new KitsPlayerViewInventory(player, null, null).open(player);
 				SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 			});
+		}
+
+
+		if (kitSearch == null) {
+			if (config.getSearchKitItem().isEnabled() && !kits.isEmpty()) {
+				setItem(config.getSearchKitItem().getSlot(), config.getSearchKitItem()
+						.build(), e -> {
+
+					searchKit(player);
+					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
+				});
+			}
+
+		} else {
+			if (config.getCancelSearchKitItem().isEnabled()) {
+				setItem(config.getCancelSearchKitItem().getSlot(), config.getCancelSearchKitItem()
+						.build(), e -> {
+
+					new KitsAdminViewInventory(player, null, null).open(player);
+					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
+				});
+			}
 		}
 
 
@@ -157,14 +186,14 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 
 				if (result.equalsIgnoreCase("cancel")) {
 					player.sendMessage(MessagesUtils.get(EXGMessage.ACTION_CANCELED, null));
-					new KitsAdminViewInventory(player).open(player);
+					new KitsAdminViewInventory(player, null, null).open(player);
 					SoundsUtils.playSound(player, EXGSound.ACTION_CANCELED);
 					return;
 				}
 
 				if (result.isEmpty() || result.length() > 32) {
 					player.sendMessage(MessagesUtils.get(EXGMessage.LENGTH_LIMIT, Map.of("min", "1", "max", "32")));
-					new KitsAdminViewInventory(player).open(player);
+					new KitsAdminViewInventory(player, null, null).open(player);
 					SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 					return;
 				}
@@ -173,7 +202,7 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 
 				if (kits.stream().anyMatch(kit -> kit.getName().equalsIgnoreCase(result))) {
 					player.sendMessage(MessagesUtils.get(EXGMessage.KIT_NAME_ALREADY_EXISTS, null));
-					new KitsAdminViewInventory(player).open(player);
+					new KitsAdminViewInventory(player, null, null).open(player);
 					SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 					return;
 				}
@@ -195,14 +224,14 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 
 				if (result.equalsIgnoreCase("cancel")) {
 					player.sendMessage(MessagesUtils.get(EXGMessage.ACTION_CANCELED, null));
-					new KitsAdminViewInventory(player).open(player);
+					new KitsAdminViewInventory(player, null, null).open(player);
 					SoundsUtils.playSound(player, EXGSound.ACTION_CANCELED);
 					return;
 				}
 
 				if (!TypeUtils.isLong(result)) {
 					player.sendMessage(MessagesUtils.get(EXGMessage.INVALID_NUMBER, null));
-					new KitsAdminViewInventory(player).open(player);
+					new KitsAdminViewInventory(player, null, null).open(player);
 					SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 					return;
 				}
@@ -211,14 +240,54 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 
 				if (delay < 0 || delay > 999999999) {
 					player.sendMessage(MessagesUtils.get(EXGMessage.LENGTH_LIMIT, Map.of("min", "0", "max", "999999999")));
-					new KitsAdminViewInventory(player).open(player);
+					new KitsAdminViewInventory(player, null, null).open(player);
 					SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 					return;
 				}
 
 				Main.getInstance().getHookManager().getEssentialsHook().createKitWithPlayer(player, kitName, delay);
 				player.sendMessage(MessagesUtils.get(EXGMessage.KIT_CREATED, Map.of("kitName", kitName, "kitDelay", String.valueOf(delay))));
-				new KitsAdminViewInventory(player).open(player);
+				new KitsAdminViewInventory(player, null, null).open(player);
+				SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
+			});
+
+		}, 10);
+	}
+
+
+	private void searchKit(Player player) {
+
+		if (!Main.getInstance().getChatManager().canDoChat(player.getUniqueId())) {
+			return;
+		}
+
+		player.closeInventory();
+		player.sendMessage(MessagesUtils.get(EXGMessage.SEARCH_KIT, null));
+		Main.getInstance().getChatManager().addChat(player.getUniqueId(), result -> {
+
+			Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
+
+				if (result.equalsIgnoreCase("cancel")) {
+					player.sendMessage(MessagesUtils.get(EXGMessage.ACTION_CANCELED, null));
+					new KitsAdminViewInventory(player, null, null).open(player);
+					SoundsUtils.playSound(player, EXGSound.ACTION_CANCELED);
+					return;
+				}
+
+				Set<EXGKit> searchKits = Main.getInstance().getEXGServer().getKits()
+						.stream()
+						.filter(kit -> MessagesUtils.removeColorCodes(kit.getDisplayName()).toLowerCase().startsWith(result.toLowerCase()))
+						.sorted(Comparator.comparing(EXGKit::getName))
+						.collect(Collectors.toCollection(LinkedHashSet::new));
+
+				if (searchKits.isEmpty()) {
+					player.sendMessage(MessagesUtils.get(EXGMessage.NO_KIT_FOUND, null));
+					new KitsAdminViewInventory(player, result, searchKits).open(player);
+					SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
+					return;
+				}
+
+				new KitsAdminViewInventory(player, result, searchKits).open(player);
 				SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
 			});
 

@@ -70,7 +70,7 @@ public class KitsPreviewInventory extends PaginatedFastInv {
 		if (config.getBackItem().isEnabled()) {
 			setItem(config.getBackItem().getSlot(), config.getBackItem().build(), e -> {
 
-				new KitsPlayerViewInventory(player).open(player);
+				new KitsPlayerViewInventory(player, null, null).open(player);
 				SoundsUtils.playSound(player, EXGSound.GUI_BACK);
 			});
 		}

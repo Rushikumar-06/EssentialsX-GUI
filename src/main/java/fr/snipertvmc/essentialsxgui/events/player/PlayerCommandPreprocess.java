@@ -79,11 +79,11 @@ public class PlayerCommandPreprocess implements Listener {
 
 				if (Main.getInstance().getConfiguration().hasKitsAdminAccess(player)) {
 					player.sendMessage(MessagesUtils.get(EXGMessage.OPENING_ADMIN_KITS_INVENTORY, null));
-					new KitsAdminViewInventory(player).open(player);
+					new KitsAdminViewInventory(player, null, null).open(player);
 
 				} else {
 					player.sendMessage(MessagesUtils.get(EXGMessage.OPENING_PLAYER_KITS_INVENTORY, null));
-					new KitsPlayerViewInventory(player).open(player);
+					new KitsPlayerViewInventory(player, null, null).open(player);
 				}
 
 				SoundsUtils.playSound(player, EXGSound.GUI_OPEN);

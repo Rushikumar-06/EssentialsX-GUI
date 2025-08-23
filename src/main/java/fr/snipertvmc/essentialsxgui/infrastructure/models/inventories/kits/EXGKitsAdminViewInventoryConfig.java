@@ -15,6 +15,9 @@ public class EXGKitsAdminViewInventoryConfig extends EXGInventoryConfig {
 
 	private EXGItemConfig switchToPlayerModeItem;
 	private EXGItemConfig createKitItem;
+	private EXGItemConfig searchKitItem;
+	private EXGItemConfig cancelSearchKitItem;
+	private EXGItemConfig noSearchKitResultsItem;
 
 	private EXGItemConfig nextPageItem;
 	private EXGItemConfig previousPageItem;
@@ -43,11 +46,20 @@ public class EXGKitsAdminViewInventoryConfig extends EXGInventoryConfig {
 		return noKitsItem;
 	}
 
+	public EXGItemConfig getSwitchToPlayerModeItem() {
+		return switchToPlayerModeItem;
+	}
 	public EXGItemConfig getCreateKitItem() {
 		return createKitItem;
 	}
-	public EXGItemConfig getSwitchToPlayerModeItem() {
-		return switchToPlayerModeItem;
+	public EXGItemConfig getSearchKitItem() {
+		return searchKitItem;
+	}
+	public EXGItemConfig getCancelSearchKitItem() {
+		return cancelSearchKitItem;
+	}
+	public EXGItemConfig getNoSearchKitResultsItem() {
+		return noSearchKitResultsItem;
 	}
 
 	public EXGItemConfig getNextPageItem() {
@@ -79,11 +91,20 @@ public class EXGKitsAdminViewInventoryConfig extends EXGInventoryConfig {
 		this.noKitsItem = noKitsItem;
 	}
 
+	public void setSwitchToPlayerModeItem(EXGItemConfig switchToPlayerModeItem) {
+		this.switchToPlayerModeItem = switchToPlayerModeItem;
+	}
 	public void setCreateKitItem(EXGItemConfig createKitItem) {
 		this.createKitItem = createKitItem;
 	}
-	public void setSwitchToPlayerModeItem(EXGItemConfig switchToPlayerModeItem) {
-		this.switchToPlayerModeItem = switchToPlayerModeItem;
+	public void setSearchKitItem(EXGItemConfig searchKitItem) {
+		this.searchKitItem = searchKitItem;
+	}
+	public void setCancelSearchKitItem(EXGItemConfig cancelSearchKitItem) {
+		this.cancelSearchKitItem = cancelSearchKitItem;
+	}
+	public void setNoSearchKitResultsItem(EXGItemConfig noSearchKitResultsItem) {
+		this.noSearchKitResultsItem = noSearchKitResultsItem;
 	}
 
 	public void setNextPageItem(EXGItemConfig nextPageItem) {
@@ -122,6 +143,9 @@ public class EXGKitsAdminViewInventoryConfig extends EXGInventoryConfig {
 
 		copy.setCreateKitItem(this.getCreateKitItem().duplicate());
 		copy.setSwitchToPlayerModeItem(this.getSwitchToPlayerModeItem().duplicate());
+		copy.setSearchKitItem(this.getSearchKitItem().duplicate());
+		copy.setCancelSearchKitItem(this.getCancelSearchKitItem().duplicate());
+		copy.setNoSearchKitResultsItem(this.getNoSearchKitResultsItem().duplicate());
 
 		copy.setNextPageItem(this.getNextPageItem().duplicate());
 		copy.setPreviousPageItem(this.getPreviousPageItem().duplicate());

@@ -65,6 +65,7 @@ errors:
   noHomeFound: "&cNo home found with that name."
 
   kitNameAlreadyExists: "&cA kit with this name already exists."
+  noKitFound: "&cNo kit found with that name."
 
 ############################################################
 # +------------------------------------------------------+ #
@@ -86,6 +87,7 @@ general:
   confirmDeleteKit: "&6Are you sure you want to delete the '({kitName})' kit ? &7Type &f'confirm' &7to confirm or &f'cancel' &7to cancel."
 
   searchHome: "&ePlease enter first few letters of the &fhome name &ein the chat. &7&oType 'cancel' to cancel the action."
+  searchKit: "&ePlease enter first few letters of the &fkit name &ein the chat. &7&oType 'cancel' to cancel the action."
 
   actionCanceled: "&6The action has been canceled."
   actionExpired: "&cThe action has expired. Please try again."

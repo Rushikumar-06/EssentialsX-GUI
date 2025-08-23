@@ -19,8 +19,8 @@
 ############################################################
 
 # Please do not change this value as it may cause the file to be reset.
-# Default: "1.1"
-config-version: "1.1"
+# Default: "1.2"
+config-version: "1.2"
 
 ############################################################
 # +------------------------------------------------------+ #
@@ -92,6 +92,34 @@ kitsPlayerView:
       displayName: "&cSwitch to Admin Mode"
       lore:
         - "&7Click to switch to admin mode."
+
+    searchKitItem:
+      enabled: true
+      slot: 45
+      material: "TRIPWIRE_HOOK"
+      displayName: "&bSearch Kit"
+      lore:
+        - "&7Click to search for a kit."
+
+    cancelSearchKitItem:
+      enabled: true
+      slot: 45
+      material: "REDSTONE_BLOCK"
+      displayName: "&cCancel Search"
+      lore:
+        - "&7Click to cancel the kit search."
+
+    # 'slot' value will be ignored in this section. The item will be placed in the first slot like a kit item.
+    # The item will be displayed if the player doesn't have any kits set.
+    # Placeholders available: {kitSearch}
+    noSearchKitResultsItem:
+      enabled: true
+      material: "BARRIER"
+      displayName: "&cNo Results"
+      lore:
+        - "&7No kits matched your search."
+        - ""
+        - "&7Your search: &f&o{kitSearch}"
 
     # Placeholders available: {currentPage}, {previousPage}
     previousPageItem:

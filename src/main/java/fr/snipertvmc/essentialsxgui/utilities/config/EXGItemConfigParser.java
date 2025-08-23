@@ -37,8 +37,10 @@ public class EXGItemConfigParser {
 
 					"kitsAdminView.items.kitItem",
                     "kitsAdminView.items.noKitsItem",
+					"kitsAdminView.items.noSearchKitResultsItem",
 					"kitsPlayerView.items.kitItem",
                     "kitsPlayerView.items.noKitsItem",
+					"kitsPlayerView.items.noSearchKitResultsItem",
 					"kitsPlayerGive.items.playerItem"
 			),
 

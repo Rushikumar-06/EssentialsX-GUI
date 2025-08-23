@@ -63,9 +63,9 @@ public class HomesInventory extends PaginatedFastInv {
 		Set<EXGHome> homes = homeSearch != null ? definedHomes :
 
 				Main.getInstance().getPlayerManager().getPlayer(player.getUniqueId().toString()).getHomes()
-				.stream()
-				.sorted(Comparator.comparing(EXGHome::getName))
-				.collect(Collectors.toCollection(LinkedHashSet::new));
+						.stream()
+						.sorted(Comparator.comparing(EXGHome::getName))
+						.collect(Collectors.toCollection(LinkedHashSet::new));
 
 
 		for (EXGHome home : homes) {
@@ -260,7 +260,7 @@ public class HomesInventory extends PaginatedFastInv {
 						.collect(Collectors.toCollection(LinkedHashSet::new));
 
 				if (searchHomes.isEmpty()) {
-					player.sendMessage(MessagesUtils.get(EXGMessage.NO_HOME_FOUND, Map.of("homeName", result)));
+					player.sendMessage(MessagesUtils.get(EXGMessage.NO_HOME_FOUND, null));
 					new HomesInventory(player, result, searchHomes).open(player);
 					SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 					return;

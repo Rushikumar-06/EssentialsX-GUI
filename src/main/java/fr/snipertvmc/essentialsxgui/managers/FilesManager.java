@@ -50,8 +50,8 @@ public class FilesManager {
 			"homeEditing", "1.1", // Latest plugin version known before update file: 1.0.1
 			"homes", "1.3", // Latest plugin version known before update file: 1.0.2
 
-			"kitsAdminView", "1.1", // Latest plugin version known before update file: 1.0.1
-			"kitsPlayerView", "1.1", // Latest plugin version known before update file: 1.0.1
+			"kitsAdminView", "1.2", // Latest plugin version known before update file: 1.0.2
+			"kitsPlayerView", "1.2", // Latest plugin version known before update file: 1.0.2
 			"kitsPreview", "1.0",
 			"kitsPlayerGive", "1.0",
 			"kitEditing", "1.1" // Latest plugin version known before update file: 1.0.1

@@ -86,7 +86,7 @@ public class KitEditingInventory extends FastInv {
 		if (config.getBackItem().isEnabled()) {
 			setItem(config.getBackItem().getSlot(), config.getBackItem().build(), e -> {
 
-				new KitsAdminViewInventory(player).open(player);
+				new KitsAdminViewInventory(player, null, null).open(player);
 				SoundsUtils.playSound(player, EXGSound.GUI_BACK);
 			});
 		}
@@ -210,7 +210,7 @@ public class KitEditingInventory extends FastInv {
 
 					Main.getInstance().getEssentials().getKits().removeKit(kit.getName());
 					player.sendMessage(MessagesUtils.get(EXGMessage.KIT_DELETED, Map.of("kitName", kit.getName())));
-					new KitsAdminViewInventory(player).open(player);
+					new KitsAdminViewInventory(player, null, null).open(player);
 					SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
 
 				} else {

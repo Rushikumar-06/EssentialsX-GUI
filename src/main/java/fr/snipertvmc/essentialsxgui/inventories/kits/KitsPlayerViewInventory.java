@@ -1,12 +1,15 @@
 package fr.snipertvmc.essentialsxgui.inventories.kits;
 
+import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.PaginatedFastInv;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGKit;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.EXGKitsPlayerViewInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
+import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.Comparator;
@@ -27,13 +30,13 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 	// -------------------------------------------------- //
 
 
-	public KitsPlayerViewInventory(Player player) {
+	public KitsPlayerViewInventory(Player player, String kitSearch, Set<EXGKit> definedKits) {
 		super(
 				Main.getInstance().getInventoriesManager().getKitsPlayerInventoryConfig().getRows() * 9,
 				Main.getInstance().getInventoriesManager().getKitsPlayerInventoryConfig().getEXGTitle()
 						.duplicate()
-						.updateVariables(Map.of(
-								"player", player.getName()))
+						.updateVariables(
+								Map.of("player", player.getName()))
 						.getTitle()
 		);
 
@@ -43,15 +46,6 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 
 		if (config.getBorderItem().isEnabled()) {
 			setItems(config.getBorderSlots(), config.getBorderItem().build());
-		}
-
-
-		if (config.getSwitchToAdminModeItem().isEnabled() && Main.getInstance().getConfiguration().hasKitsAdminAccess(player)) {
-			setItem(config.getSwitchToAdminModeItem().getSlot(), config.getSwitchToAdminModeItem().build(), e -> {
-
-				new KitsAdminViewInventory(player).open(player);
-				SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
-			});
 		}
 
 
@@ -69,11 +63,13 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 				.build());
 
 
-		Set<EXGKit> kits = Main.getInstance().getEXGServer().getKits()
-				.stream()
-				.filter(kit -> player.hasPermission("essentials.kits." + kit.getName()))
-				.sorted(Comparator.comparing(EXGKit::getName))
-				.collect(Collectors.toCollection(LinkedHashSet::new));
+		Set<EXGKit> kits = kitSearch != null ? definedKits :
+
+				Main.getInstance().getEXGServer().getKits()
+						.stream()
+						.filter(kit -> player.hasPermission("essentials.kits." + kit.getName()))
+						.sorted(Comparator.comparing(EXGKit::getName))
+						.collect(Collectors.toCollection(LinkedHashSet::new));
 
 		for (EXGKit kit : kits) {
 
@@ -100,7 +96,47 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 		}
 
 		if (kits.isEmpty()) {
-			addContent(config.getNoKitsItem().build());
+
+			if (kitSearch == null) {
+				addContent(config.getNoKitsItem().build());
+
+			} else {
+				addContent(config.getNoSearchKitResultsItem()
+						.updateVariables(
+								Map.of("kitSearch", kitSearch))
+						.build());
+			}
+		}
+
+
+		if (config.getSwitchToAdminModeItem().isEnabled() && Main.getInstance().getConfiguration().hasKitsAdminAccess(player)) {
+			setItem(config.getSwitchToAdminModeItem().getSlot(), config.getSwitchToAdminModeItem().build(), e -> {
+
+				new KitsAdminViewInventory(player, null, null).open(player);
+				SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
+			});
+		}
+
+
+		if (kitSearch == null) {
+			if (config.getSearchKitItem().isEnabled() && !kits.isEmpty()) {
+				setItem(config.getSearchKitItem().getSlot(), config.getSearchKitItem()
+						.build(), e -> {
+
+					searchKit(player);
+					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
+				});
+			}
+
+		} else {
+			if (config.getCancelSearchKitItem().isEnabled()) {
+				setItem(config.getCancelSearchKitItem().getSlot(), config.getCancelSearchKitItem()
+						.build(), e -> {
+
+					new KitsPlayerViewInventory(player, null, null).open(player);
+					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
+				});
+			}
 		}
 
 
@@ -114,6 +150,50 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 
 
 		config.getInventoryScheme().apply(this);
+	}
+
+
+	// -------------------------------------------------- //
+
+
+	private void searchKit(Player player) {
+
+		if (!Main.getInstance().getChatManager().canDoChat(player.getUniqueId())) {
+			return;
+		}
+
+		player.closeInventory();
+		player.sendMessage(MessagesUtils.get(EXGMessage.SEARCH_KIT, null));
+		Main.getInstance().getChatManager().addChat(player.getUniqueId(), result -> {
+
+			Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
+
+				if (result.equalsIgnoreCase("cancel")) {
+					player.sendMessage(MessagesUtils.get(EXGMessage.ACTION_CANCELED, null));
+					new KitsPlayerViewInventory(player, null, null).open(player);
+					SoundsUtils.playSound(player, EXGSound.ACTION_CANCELED);
+					return;
+				}
+
+				Set<EXGKit> searchKits = Main.getInstance().getEXGServer().getKits()
+						.stream()
+						.filter(kit -> player.hasPermission("essentials.kits." + kit.getName()))
+						.filter(kit -> MessagesUtils.removeColorCodes(kit.getDisplayName()).toLowerCase().startsWith(result.toLowerCase()))
+						.sorted(Comparator.comparing(EXGKit::getName))
+						.collect(Collectors.toCollection(LinkedHashSet::new));
+
+				if (searchKits.isEmpty()) {
+					player.sendMessage(MessagesUtils.get(EXGMessage.NO_KIT_FOUND, null));
+					new KitsPlayerViewInventory(player, result, searchKits).open(player);
+					SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
+					return;
+				}
+
+				new KitsPlayerViewInventory(player, result, searchKits).open(player);
+				SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
+			});
+
+		}, 10);
 	}
 
 
