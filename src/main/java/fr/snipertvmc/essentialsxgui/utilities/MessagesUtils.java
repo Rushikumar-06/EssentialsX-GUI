@@ -36,4 +36,14 @@ public class MessagesUtils {
 
 
 	// -------------------------------------------------- //
+
+
+	public static String removeColorCodes(String message) {
+		return message
+				.replaceAll("§[0-9a-fk-or]", "")
+				.replaceAll("&[0-9a-fk-or]", "");
+	}
+
+
+	// -------------------------------------------------- //
 }

@@ -25,6 +25,7 @@ public enum EXGMessage {
 	HOME_DELETE_ERROR("general.homeDeleteError"),
 	HOME_NAME_ALREADY_EXISTS("errors.homeNameAlreadyExists"),
 	HOME_LIMIT_REACHED("errors.homeLimitReached"),
+	NO_HOME_FOUND("errors.noHomeFound"),
 
 	KIT_NAME_ALREADY_EXISTS("errors.kitNameAlreadyExists"),
 
@@ -38,6 +39,8 @@ public enum EXGMessage {
 
 	CONFIRM_DELETE_HOME("general.confirmDeleteHome"),
 	CONFIRM_DELETE_KIT("general.confirmDeleteKit"),
+
+	SEARCH_HOME("general.searchHome"),
 
 	ACTION_CANCELED("general.actionCanceled"),
 	ACTION_EXPIRED("general.actionExpired"),

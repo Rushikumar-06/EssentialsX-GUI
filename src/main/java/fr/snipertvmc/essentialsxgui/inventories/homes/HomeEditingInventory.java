@@ -86,7 +86,7 @@ public class HomeEditingInventory extends FastInv {
 		if (config.getBackItem().isEnabled()) {
 			setItem(config.getBackItem().getSlot(), config.getBackItem().build(), e -> {
 
-				new HomesInventory(player).open(player);
+				new HomesInventory(player, null, null).open(player);
 				SoundsUtils.playSound(player, EXGSound.GUI_BACK);
 			});
 		}
@@ -214,13 +214,13 @@ public class HomeEditingInventory extends FastInv {
 
 					} catch (Exception ex) {
 						player.sendMessage(MessagesUtils.get(EXGMessage.HOME_DELETE_ERROR, null));
-						new HomesInventory(player).open(player);
+						new HomesInventory(player, null, null).open(player);
 						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 						return;
 					}
 
 					player.sendMessage(MessagesUtils.get(EXGMessage.HOME_DELETED, Map.of("homeName", home.getName())));
-					new HomesInventory(player).open(player);
+					new HomesInventory(player, null, null).open(player);
 					SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
 
 				} else {

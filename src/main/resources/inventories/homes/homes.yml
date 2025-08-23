@@ -19,8 +19,8 @@
 ############################################################
 
 # Please do not change this value as it may cause the file to be reset.
-# Default: "1.2"
-config-version: "1.2"
+# Default: "1.3"
+config-version: "1.3"
 
 # 'data' value are supported in this section.
 # Just add the 'data' key with the value you want to use.
@@ -125,6 +125,34 @@ homes:
       displayName: "&aCreate Home"
       lore:
         - "&7Click to create a new home."
+
+    searchHomeItem:
+        enabled: true
+        slot: 45
+        material: "TRIPWIRE_HOOK"
+        displayName: "&bSearch Home"
+        lore:
+          - "&7Click to search for a home."
+
+    cancelSearchHomeItem:
+        enabled: true
+        slot: 45
+        material: "REDSTONE_BLOCK"
+        displayName: "&cCancel Search"
+        lore:
+          - "&7Click to cancel the home search."
+
+    # 'slot' value will be ignored in this section. The item will be placed in the first slot like a kit item.
+    # The item will be displayed if the player doesn't have any homes set.
+    # Placeholders available: {homeSearch}
+    noSearchHomeResultsItem:
+      enabled: true
+      material: "BARRIER"
+      displayName: "&cNo Results"
+      lore:
+        - "&7No homes matched your search."
+        - ""
+        - "&7Your search: &f&o{homeSearch}"
 
     # Placeholders available: {currentPage}, {previousPage}
     previousPageItem:

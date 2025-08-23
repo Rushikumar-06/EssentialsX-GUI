@@ -16,6 +16,9 @@ public class EXGHomesInventoryConfig extends EXGInventoryConfig {
 	private EXGItemConfig noHomesItem;
 
 	private EXGItemConfig createHomeItem;
+	private EXGItemConfig searchHomeItem;
+	private EXGItemConfig cancelSearchHomeItem;
+	private EXGItemConfig noSearchHomeResultsItem;
 
 	private EXGItemConfig nextPageItem;
 	private EXGItemConfig previousPageItem;
@@ -53,6 +56,15 @@ public class EXGHomesInventoryConfig extends EXGInventoryConfig {
 
 	public EXGItemConfig getCreateHomeItem() {
 		return createHomeItem;
+	}
+	public EXGItemConfig getSearchHomeItem() {
+		return searchHomeItem;
+	}
+	public EXGItemConfig getCancelSearchHomeItem() {
+		return cancelSearchHomeItem;
+	}
+	public EXGItemConfig getNoSearchHomeResultsItem() {
+		return noSearchHomeResultsItem;
 	}
 
 	public EXGItemConfig getNextPageItem() {
@@ -109,6 +121,15 @@ public class EXGHomesInventoryConfig extends EXGInventoryConfig {
 	public void setCreateHomeItem(EXGItemConfig createHomeItem) {
 		this.createHomeItem = createHomeItem;
 	}
+	public void setSearchHomeItem(EXGItemConfig searchHomeItem) {
+		this.searchHomeItem = searchHomeItem;
+	}
+	public void setCancelSearchHomeItem(EXGItemConfig cancelSearchHomeItem) {
+		this.cancelSearchHomeItem = cancelSearchHomeItem;
+	}
+	public void setNoSearchHomeResultsItem(EXGItemConfig noSearchHomeResultsItem) {
+		this.noSearchHomeResultsItem = noSearchHomeResultsItem;
+	}
 
 	public void setNextPageItem(EXGItemConfig nextPageItem) {
 		this.nextPageItem = nextPageItem;
@@ -156,6 +177,9 @@ public class EXGHomesInventoryConfig extends EXGInventoryConfig {
 		copy.setNoHomesItem(this.getNoHomesItem().duplicate());
 
 		copy.setCreateHomeItem(this.getCreateHomeItem().duplicate());
+		copy.setSearchHomeItem(this.getSearchHomeItem().duplicate());
+		copy.setCancelSearchHomeItem(this.getCancelSearchHomeItem().duplicate());
+		copy.setNoSearchHomeResultsItem(this.getNoSearchHomeResultsItem().duplicate());
 
 		copy.setNextPageItem(this.getNextPageItem().duplicate());
 		copy.setPreviousPageItem(this.getPreviousPageItem().duplicate());

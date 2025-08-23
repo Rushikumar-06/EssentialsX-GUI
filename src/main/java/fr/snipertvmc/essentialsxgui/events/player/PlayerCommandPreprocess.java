@@ -61,7 +61,7 @@ public class PlayerCommandPreprocess implements Listener {
 				event.setCancelled(true);
 
 				player.sendMessage(MessagesUtils.get(EXGMessage.OPENING_HOMES_INVENTORY, null));
-				new HomesInventory(player).open(player);
+				new HomesInventory(player, null, null).open(player);
 				SoundsUtils.playSound(player, EXGSound.GUI_OPEN);
 			}
 

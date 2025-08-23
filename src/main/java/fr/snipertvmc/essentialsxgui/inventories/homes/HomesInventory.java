@@ -27,13 +27,13 @@ public class HomesInventory extends PaginatedFastInv {
 	// -------------------------------------------------- //
 
 
-	public HomesInventory(Player player) {
+	public HomesInventory(Player player, String homeSearch, Set<EXGHome> definedHomes) {
 		super(
 				Main.getInstance().getInventoriesManager().getHomesInventoryConfig().getRows() * 9,
 				Main.getInstance().getInventoriesManager().getHomesInventoryConfig().getEXGTitle()
 						.duplicate()
-						.updateVariables(Map.of(
-						"player", player.getName()))
+						.updateVariables(
+								Map.of("player", player.getName()))
 						.getTitle()
 		);
 
@@ -60,10 +60,13 @@ public class HomesInventory extends PaginatedFastInv {
 				.build());
 
 
-		Set<EXGHome> homes = Main.getInstance().getPlayerManager().getPlayer(player.getUniqueId().toString()).getHomes()
+		Set<EXGHome> homes = homeSearch != null ? definedHomes :
+
+				Main.getInstance().getPlayerManager().getPlayer(player.getUniqueId().toString()).getHomes()
 				.stream()
 				.sorted(Comparator.comparing(EXGHome::getName))
 				.collect(Collectors.toCollection(LinkedHashSet::new));
+
 
 		for (EXGHome home : homes) {
 
@@ -93,7 +96,16 @@ public class HomesInventory extends PaginatedFastInv {
 
 
 		if (homes.isEmpty()) {
-			addContent(config.getNoHomesItem().build());
+
+			if (homeSearch == null) {
+				addContent(config.getNoHomesItem().build());
+
+			} else {
+				addContent(config.getNoSearchHomeResultsItem()
+						.updateVariables(
+								Map.of("homeSearch", homeSearch))
+						.build());
+			}
 		}
 
 		String[] bedHomeMaterialParts = getBedHomeMaterialAndData(player).split(":");
@@ -133,6 +145,28 @@ public class HomesInventory extends PaginatedFastInv {
 		}
 
 
+		if (homeSearch == null) {
+			if (config.getSearchHomeItem().isEnabled() && !homes.isEmpty()) {
+				setItem(config.getSearchHomeItem().getSlot(), config.getSearchHomeItem()
+						.build(), e -> {
+
+					searchHome(player);
+					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
+				});
+			}
+
+		} else {
+			if (config.getCancelSearchHomeItem().isEnabled()) {
+				setItem(config.getCancelSearchHomeItem().getSlot(), config.getCancelSearchHomeItem()
+						.build(), e -> {
+
+					new HomesInventory(player, null, null).open(player);
+					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
+				});
+			}
+		}
+
+
 		if (config.getCloseItem().isEnabled()) {
 			setItem(config.getCloseItem().getSlot(), config.getCloseItem().build(), e -> {
 
@@ -163,14 +197,14 @@ public class HomesInventory extends PaginatedFastInv {
 
 				if (result.equalsIgnoreCase("cancel")) {
 					player.sendMessage(MessagesUtils.get(EXGMessage.ACTION_CANCELED, null));
-					new HomesInventory(player).open(player);
+					new HomesInventory(player, null, null).open(player);
 					SoundsUtils.playSound(player, EXGSound.ACTION_CANCELED);
 					return;
 				}
 
 				if (result.isEmpty() || result.length() > 32) {
 					player.sendMessage(MessagesUtils.get(EXGMessage.LENGTH_LIMIT, Map.of("min", "1", "max", "32")));
-					new HomesInventory(player).open(player);
+					new HomesInventory(player, null, null).open(player);
 					SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 					return;
 				}
@@ -179,21 +213,60 @@ public class HomesInventory extends PaginatedFastInv {
 
 				if (homes.stream().anyMatch(home -> home.getName().equalsIgnoreCase(result))) {
 					player.sendMessage(MessagesUtils.get(EXGMessage.HOME_NAME_ALREADY_EXISTS, null));
-					new HomesInventory(player).open(player);
+					new HomesInventory(player, null, null).open(player);
 					SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 					return;
 				}
 
 				if (!Main.getInstance().getHookManager().getEssentialsHook().canCreateHome(player)) {
 					player.sendMessage(MessagesUtils.get(EXGMessage.HOME_LIMIT_REACHED, null));
-					new HomesInventory(player).open(player);
+					new HomesInventory(player, null, null).open(player);
 					SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 					return;
 				}
 
 				Main.getInstance().getEssentials().getUser(player).setHome(result, player.getLocation());
 				player.sendMessage(MessagesUtils.get(EXGMessage.HOME_CREATED, Map.of("homeName", result)));
-				new HomesInventory(player).open(player);
+				new HomesInventory(player, null, null).open(player);
+				SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
+			});
+
+		}, 10);
+	}
+
+
+	private void searchHome(Player player) {
+
+		if (!Main.getInstance().getChatManager().canDoChat(player.getUniqueId())) {
+			return;
+		}
+
+		player.closeInventory();
+		player.sendMessage(MessagesUtils.get(EXGMessage.SEARCH_HOME, null));
+		Main.getInstance().getChatManager().addChat(player.getUniqueId(), result -> {
+
+			Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
+
+				if (result.equalsIgnoreCase("cancel")) {
+					player.sendMessage(MessagesUtils.get(EXGMessage.ACTION_CANCELED, null));
+					new HomesInventory(player, null, null).open(player);
+					SoundsUtils.playSound(player, EXGSound.ACTION_CANCELED);
+					return;
+				}
+
+				Set<EXGHome> searchHomes = Main.getInstance().getPlayerManager().getPlayer(player.getUniqueId().toString()).getHomes()
+						.stream()
+						.filter(home -> MessagesUtils.removeColorCodes(home.getDisplayName()).toLowerCase().startsWith(result.toLowerCase()))
+						.collect(Collectors.toCollection(LinkedHashSet::new));
+
+				if (searchHomes.isEmpty()) {
+					player.sendMessage(MessagesUtils.get(EXGMessage.NO_HOME_FOUND, Map.of("homeName", result)));
+					new HomesInventory(player, result, searchHomes).open(player);
+					SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
+					return;
+				}
+
+				new HomesInventory(player, result, searchHomes).open(player);
 				SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
 			});
 

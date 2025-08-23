@@ -70,8 +70,16 @@ public class InventoriesManager {
 				"bedHomeItem"));
 		homesInventoryConfig.setNoHomesItem(inventoryFile.getItem(
 				"noHomesItem"));
+
 		homesInventoryConfig.setCreateHomeItem(inventoryFile.getItem(
 				"createHomeItem"));
+		homesInventoryConfig.setSearchHomeItem(inventoryFile.getItem(
+				"searchHomeItem"));
+		homesInventoryConfig.setCancelSearchHomeItem(inventoryFile.getItem(
+				"cancelSearchHomeItem"));
+		homesInventoryConfig.setNoSearchHomeResultsItem(inventoryFile.getItem(
+				"noSearchHomeResultsItem"));
+
 		homesInventoryConfig.setNextPageItem(inventoryFile.getItem(
 				"nextPageItem"));
 		homesInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
@@ -99,12 +107,14 @@ public class InventoriesManager {
 
 		homeEditingInventoryConfig.setPreviewHomeItem(inventoryFile.getItem(
 				"previewHomeItem"));
+
 		homeEditingInventoryConfig.setChangeDisplayNameItem(inventoryFile.getItem(
 				"changeDisplayNameItem"));
 		homeEditingInventoryConfig.setChangeIconItem(inventoryFile.getItem(
 				"changeIconItem"));
 		homeEditingInventoryConfig.setDeleteHomeItem(inventoryFile.getItem(
 				"deleteHomeItem"));
+
 		homeEditingInventoryConfig.setBackItem(inventoryFile.getItem(
 				"backItem"));
 	}
@@ -125,10 +135,12 @@ public class InventoriesManager {
 				"kitItem"));
 		kitsAdminInventoryConfig.setNoKitsItem(inventoryFile.getItem(
 				"noKitsItem"));
+
 		kitsAdminInventoryConfig.setCreateKitItem(inventoryFile.getItem(
 				"createKitItem"));
 		kitsAdminInventoryConfig.setSwitchToPlayerModeItem(inventoryFile.getItem(
 				"switchToPlayerModeItem"));
+
 		kitsAdminInventoryConfig.setNextPageItem(inventoryFile.getItem(
 				"nextPageItem"));
 		kitsAdminInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
@@ -151,8 +163,10 @@ public class InventoriesManager {
 				"kitItem"));
 		kitsPlayerInventoryConfig.setNoKitsItem(inventoryFile.getItem(
 				"noKitsItem"));
+
 		kitsPlayerInventoryConfig.setSwitchToAdminModeItem(inventoryFile.getItem(
 				"switchToAdminModeItem"));
+
 		kitsPlayerInventoryConfig.setNextPageItem(inventoryFile.getItem(
 				"nextPageItem"));
 		kitsPlayerInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
@@ -178,6 +192,7 @@ public class InventoriesManager {
 
 		kitsPreviewInventoryConfig.setKitItem(inventoryFile.getItem(
 				"kitItem"));
+
 		kitsPreviewInventoryConfig.setNextPageItem(inventoryFile.getItem(
 				"nextPageItem"));
 		kitsPreviewInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
@@ -198,6 +213,7 @@ public class InventoriesManager {
 
 		kitsPlayerGiveInventoryConfig.setPlayerItem(inventoryFile.getItem(
 				"playerItem"));
+
 		kitsPlayerGiveInventoryConfig.setNextPageItem(inventoryFile.getItem(
 				"nextPageItem"));
 		kitsPlayerGiveInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
@@ -218,12 +234,14 @@ public class InventoriesManager {
 
 		kitEditingInventoryConfig.setPreviewKitItem(inventoryFile.getItem(
 				"previewKitItem"));
+
 		kitEditingInventoryConfig.setChangeDisplayNameItem(inventoryFile.getItem(
 				"changeDisplayNameItem"));
 		kitEditingInventoryConfig.setChangeIconItem(inventoryFile.getItem(
 				"changeIconItem"));
 		kitEditingInventoryConfig.setDeleteKitItem(inventoryFile.getItem(
 				"deleteKitItem"));
+
 		kitEditingInventoryConfig.setBackItem(inventoryFile.getItem(
 				"backItem"));
 	}
