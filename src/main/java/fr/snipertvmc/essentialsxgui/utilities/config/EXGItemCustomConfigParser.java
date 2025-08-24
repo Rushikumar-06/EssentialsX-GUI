@@ -17,18 +17,18 @@ public class EXGItemCustomConfigParser {
 	// -------------------------------------------------- //
 
 
-	private static final Map<String, List<String>> requiredPaths = Map.of(
+	private static final Map<String, List<String>> requiredPaths = new HashMap<>() {{
 
-			"clickActions", List.of(
+		put("clickActions", List.of(
 
-					// HOMES
-					"homes.items.homeItem",
+				// HOMES
+				"homes.items.homeItem",
 
-					// KITS
-					"kitsAdminView.items.kitItem",
-					"kitsPlayerView.items.kitItem"
-			)
-	);
+				// KITS
+				"kitsAdminView.items.kitItem",
+				"kitsPlayerView.items.kitItem"
+		));
+	}};
 
 
 	private static final Map<String, List<String>> clickActionsPath = new HashMap<>() {{

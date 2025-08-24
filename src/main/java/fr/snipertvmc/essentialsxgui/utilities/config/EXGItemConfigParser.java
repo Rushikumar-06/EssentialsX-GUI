@@ -9,6 +9,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,37 +19,37 @@ public class EXGItemConfigParser {
 	// -------------------------------------------------- //
 
 
-	private static final Map<String, List<String>> ignoredPaths = Map.of(
+	private static final Map<String, List<String>> ignoredPaths = new HashMap<>() {{
 
-			"enabled", List.of(
-					"homes.items.homeItem",
-					"homes.items.previousPageItem",
-					"homes.items.nextPageItem",
+		put("enabled", List.of(
+				"homes.items.homeItem",
+				"homes.items.previousPageItem",
+				"homes.items.nextPageItem",
 
-					"kitsAdminView.items.kitItem",
-					"kitsPlayerView.items.kitItem",
-					"kitsPlayerGive.items.playerItem"
-			),
+				"kitsAdminView.items.kitItem",
+				"kitsPlayerView.items.kitItem",
+				"kitsPlayerGive.items.playerItem"
+		));
 
-			"slot", List.of(
-					"homes.items.homeItem",
-					"homes.items.noHomesItem",
-					"homes.items.noSearchHomeResultsItem",
+		put("slot", List.of(
+				"homes.items.homeItem",
+				"homes.items.noHomesItem",
+				"homes.items.noSearchHomeResultsItem",
 
-					"kitsAdminView.items.kitItem",
-                    "kitsAdminView.items.noKitsItem",
-					"kitsAdminView.items.noSearchKitResultsItem",
-					"kitsPlayerView.items.kitItem",
-                    "kitsPlayerView.items.noKitsItem",
-					"kitsPlayerView.items.noSearchKitResultsItem",
-					"kitsPlayerGive.items.playerItem"
-			),
+				"kitsAdminView.items.kitItem",
+				"kitsAdminView.items.noKitsItem",
+				"kitsAdminView.items.noSearchKitResultsItem",
+				"kitsPlayerView.items.kitItem",
+				"kitsPlayerView.items.noKitsItem",
+				"kitsPlayerView.items.noSearchKitResultsItem",
+				"kitsPlayerGive.items.playerItem"
+		));
 
-			"material", List.of(
-					"homeEditing.items.previewHomeItem",
-					"kitEditing.items.previewKitItem"
-			)
-	);
+		put("material", List.of(
+				"homeEditing.items.previewHomeItem",
+				"kitEditing.items.previewKitItem"
+		));
+	}};
 
 
 	// -------------------------------------------------- //

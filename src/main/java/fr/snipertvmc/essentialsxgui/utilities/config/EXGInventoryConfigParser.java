@@ -5,6 +5,7 @@ import fr.snipertvmc.essentialsxgui.infrastructure.models.files.InventoryFile;
 import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
 import org.bukkit.configuration.file.YamlConfiguration;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,19 +15,19 @@ public class EXGInventoryConfigParser {
 	// -------------------------------------------------- //
 
 
-	private static final Map<String, List<String>> ignoredPaths = Map.of(
+	private static final Map<String, List<String>> ignoredPaths = new HashMap<>() {{
 
-			"title", List.of(
-			),
+		put("title", List.of(
+		));
 
-			"rows", List.of(
-			),
+		put("rows", List.of(
+		));
 
-			"inventoryScheme", List.of(
-					"homeEditing",
-					"kitEditing"
-			)
-	);
+		put("inventoryScheme", List.of(
+				"homeEditing",
+				"kitEditing"
+		));
+	}};
 
 
 	// -------------------------------------------------- //
