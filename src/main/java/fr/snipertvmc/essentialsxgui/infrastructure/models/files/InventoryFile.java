@@ -1,12 +1,11 @@
 package fr.snipertvmc.essentialsxgui.infrastructure.models.files;
 
 import fr.snipertvmc.essentialsxgui.Main;
+import fr.snipertvmc.essentialsxgui.libraries.exglib.Pair;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.InventoryScheme;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.MCServerVersion;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
 import fr.snipertvmc.essentialsxgui.utilities.config.EXGItemConfigParser;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -117,7 +116,7 @@ public class InventoryFile {
 					"BEDROCK", 1, (byte) 0,
 					"§4§lInvalid Item",
 					List.of("§cThis item configuration is invalid.",
-							"  §7Please check the §f" + inventoryName + " §7file",
+							"  §7Please check the §f" + inventoryName + ".yml §7file",
 							"  §7and fix error(s) seen in the console.",
 							"",
 							"§6Item path involved: ",
@@ -157,7 +156,7 @@ public class InventoryFile {
 		for (Object enchantment : (List<String>) itemConfiguration.get("enchantments")) {
 			String[] enchantmentSplit = ((String) enchantment).split(":");
 			if (Enchantment.getByName(enchantmentSplit[0]) != null) {
-				enchantments.add(new ImmutablePair<>(Enchantment.getByName(enchantmentSplit[0]), Integer.parseInt(enchantmentSplit[1])));
+				enchantments.add(Pair.of(Enchantment.getByName(enchantmentSplit[0]), Integer.parseInt(enchantmentSplit[1])));
 			}
 		}
 

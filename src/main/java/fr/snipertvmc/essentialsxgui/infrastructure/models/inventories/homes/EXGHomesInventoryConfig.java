@@ -3,7 +3,7 @@ package fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.InventoryScheme;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
-import org.apache.commons.lang3.tuple.ImmutablePair;
+import fr.snipertvmc.essentialsxgui.libraries.exglib.Pair;
 
 public class EXGHomesInventoryConfig extends EXGInventoryConfig {
 
@@ -28,9 +28,9 @@ public class EXGHomesInventoryConfig extends EXGInventoryConfig {
 
 	private InventoryScheme inventoryScheme;
 
-	private ImmutablePair<String, String> bedHomeItemOverworld;
-	private ImmutablePair<String, String> bedHomeItemNether;
-	private ImmutablePair<String, String> bedHomeItemNotSet;
+	private Pair<String, String> bedHomeItemOverworld;
+	private Pair<String, String> bedHomeItemNether;
+	private Pair<String, String> bedHomeItemNotSet;
 
 
 	// -------------------------------------------------- //
@@ -150,13 +150,13 @@ public class EXGHomesInventoryConfig extends EXGInventoryConfig {
 	}
 
 	public void setBedHomeItemOverworldMaterial(String bedHomeItemOverworldMaterial, String bedHomeItemOverworldDisplayName) {
-		this.bedHomeItemOverworld = ImmutablePair.of(bedHomeItemOverworldMaterial, bedHomeItemOverworldDisplayName);
+		this.bedHomeItemOverworld = Pair.of(bedHomeItemOverworldMaterial, bedHomeItemOverworldDisplayName);
 	}
 	public void setBedHomeItemNetherMaterial(String bedHomeItemNetherMaterial, String bedHomeItemNetherDisplayName) {
-		this.bedHomeItemNether = ImmutablePair.of(bedHomeItemNetherMaterial, bedHomeItemNetherDisplayName);
+		this.bedHomeItemNether = Pair.of(bedHomeItemNetherMaterial, bedHomeItemNetherDisplayName);
 	}
 	public void setBedHomeItemNotSetMaterial(String bedHomeItemNotSetMaterial, String bedHomeItemNotSetDisplayName) {
-		this.bedHomeItemNotSet = ImmutablePair.of(bedHomeItemNotSetMaterial, bedHomeItemNotSetDisplayName);
+		this.bedHomeItemNotSet = Pair.of(bedHomeItemNotSetMaterial, bedHomeItemNotSetDisplayName);
 	}
 
 
