@@ -41,11 +41,7 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 		);
 
 
-		initializeGeneralInventory(player);
-
-
 		Main.getInstance().getServerDataManager().cleanServerData();
-
 
 		Set<EXGKit> kits = kitSearch != null ? definedKits :
 
@@ -54,6 +50,19 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 						.filter(kit -> player.hasPermission("essentials.kits." + kit.getName()))
 						.sorted(Comparator.comparing(EXGKit::getName))
 						.collect(Collectors.toCollection(LinkedHashSet::new));
+
+
+		initializeGeneralInventory(player);
+		defineKitsItems(player, kitSearch, kits);
+		defineSwitchToAdminModeItem(player);
+		defineSearchKitItem(player, kitSearch, kits);
+	}
+
+
+	// -------------------------------------------------- //
+
+
+	private void defineKitsItems(Player player, String kitSearch, Set<EXGKit> kits) {
 
 		for (EXGKit kit : kits) {
 
@@ -91,7 +100,10 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 						.build());
 			}
 		}
+	}
 
+
+	private void defineSwitchToAdminModeItem(Player player) {
 
 		if (config.getSwitchToAdminModeItem().isEnabled() && Main.getInstance().getConfiguration().hasKitsAdminAccess(player)) {
 			setItem(config.getSwitchToAdminModeItem().getSlot(), config.getSwitchToAdminModeItem().build(), e -> {
@@ -100,7 +112,10 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 				SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 			});
 		}
+	}
 
+
+	private void defineSearchKitItem(Player player, String kitSearch, Set<EXGKit> kits) {
 
 		if (kitSearch == null) {
 			if (config.getSearchKitItem().isEnabled() && !kits.isEmpty()) {
@@ -123,9 +138,6 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 			}
 		}
 	}
-
-
-	// -------------------------------------------------- //
 
 
 	private void initializeGeneralInventory(Player player) {

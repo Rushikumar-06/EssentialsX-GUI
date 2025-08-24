@@ -38,11 +38,7 @@ public class HomesInventory extends PaginatedFastInv {
 		);
 
 
-		initializeGeneralInventory(player);
-
-
 		Main.getInstance().getPlayerDataManager().cleanPlayerData(player.getUniqueId().toString());
-
 
 		Set<EXGHome> homes = homeSearch != null ? definedHomes :
 
@@ -51,6 +47,19 @@ public class HomesInventory extends PaginatedFastInv {
 						.sorted(Comparator.comparing(EXGHome::getName))
 						.collect(Collectors.toCollection(LinkedHashSet::new));
 
+
+		initializeInventory(player);
+		addHomesItems(player, homes, homeSearch);
+		addBedHomeItem(player);
+		addCreateHomeItem(player);
+		addSearchHomeItem(player, homes, homeSearch);
+	}
+
+
+	// -------------------------------------------------- //
+
+
+	private void addHomesItems(Player player, Set<EXGHome> homes, String homeSearch) {
 
 		for (EXGHome home : homes) {
 
@@ -78,7 +87,6 @@ public class HomesInventory extends PaginatedFastInv {
 			});
 		}
 
-
 		if (homes.isEmpty()) {
 
 			if (homeSearch == null) {
@@ -91,6 +99,10 @@ public class HomesInventory extends PaginatedFastInv {
 						.build());
 			}
 		}
+	}
+
+
+	private void addBedHomeItem(Player player) {
 
 		String[] bedHomeMaterialParts = getBedHomeMaterialAndData(player).split(":");
 		String bedHomeMaterialName = bedHomeMaterialParts[0];
@@ -111,7 +123,10 @@ public class HomesInventory extends PaginatedFastInv {
 				SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 			});
 		}
+	}
 
+
+	private void addCreateHomeItem(Player player) {
 
 		if (config.getCreateHomeItem().isEnabled()) {
 			setItem(config.getCreateHomeItem().getSlot(), config.getCreateHomeItem()
@@ -127,7 +142,10 @@ public class HomesInventory extends PaginatedFastInv {
 				SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 			});
 		}
+	}
 
+
+	private void addSearchHomeItem(Player player, Set<EXGHome> homes, String homeSearch) {
 
 		if (homeSearch == null) {
 			if (config.getSearchHomeItem().isEnabled() && !homes.isEmpty()) {
@@ -152,10 +170,7 @@ public class HomesInventory extends PaginatedFastInv {
 	}
 
 
-	// -------------------------------------------------- //
-
-
-	private void initializeGeneralInventory(Player player) {
+	private void initializeInventory(Player player) {
 
 		if (config.getBorderItem().isEnabled()) {
 			setItems(config.getBorderSlots(), config.getBorderItem().build());
