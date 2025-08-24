@@ -10,30 +10,28 @@ public enum EXGSound {
 
 
 	// GUI
-	GUI_OPEN("guiOpen", "CHEST_OPEN"),
-	GUI_CLOSE("guiClose", "CHEST_CLOSE"),
-	GUI_BACK("guiBack", "SHOOT_ARROW"),
-	GUI_CLICK("guiClick", "CHICKEN_EGG_POP"),
+	GUI_OPEN("guiOpen"),
+	GUI_CLOSE("guiClose"),
+	GUI_BACK("guiBack"),
+	GUI_CLICK("guiClick"),
 
 	// ACTION
-	ACTION_SUCCESS("actionSuccess", "LEVEL_UP"),
-	ACTION_CANCELED("actionCanceled", "ITEM_BREAK"),
-	ACTION_FAILURE("actionFailure", "VILLAGER_NO");
+	ACTION_SUCCESS("actionSuccess"),
+	ACTION_CANCELED("actionCanceled"),
+	ACTION_FAILURE("actionFailure");
 
 
 	// -------------------------------------------------- //
 
 
 	private final String soundPath;
-	private final String defaultSoundName;
 
 
 	// -------------------------------------------------- //
 
 
-	EXGSound(String soundPath, String defaultSoundName) {
+	EXGSound(String soundPath) {
 		this.soundPath = soundPath;
-		this.defaultSoundName = defaultSoundName;
 	}
 
 
@@ -43,15 +41,8 @@ public enum EXGSound {
 	public String getSoundPath() {
 		return soundPath;
 	}
-
-
 	public String getSoundName() {
 		return Main.getInstance().getConfiguration().getSound(soundPath);
-	}
-
-
-	public String getDefaultSoundName() {
-		return defaultSoundName;
 	}
 
 
@@ -60,8 +51,8 @@ public enum EXGSound {
 		try {
 			return Sound.valueOf(getSoundName());
 
-		} catch (IllegalArgumentException e) {
-			return Sound.valueOf(defaultSoundName);
+		} catch (Exception e) {
+			return null;
 		}
 	}
 

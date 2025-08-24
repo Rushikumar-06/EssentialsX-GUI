@@ -53,7 +53,8 @@ general:
 
 sounds:
 
-  # Set this to true if you want to enable sounds in the plugin.
+  # Set this to true if you want to enable all sounds in the plugin.
+  # To disable a specific sound, you can leave the sound name blank.
   # Default: true
   enabled: true
 
