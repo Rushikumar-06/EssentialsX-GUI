@@ -77,7 +77,9 @@ public class PlayerCommandPreprocess implements Listener {
 
 				event.setCancelled(true);
 
-				if (Main.getInstance().getConfiguration().hasKitsAdminAccess(player)) {
+				if (Main.getInstance().getConfiguration().hasKitsAdminAccess(player)
+						&& Main.getInstance().getConfiguration().mustOpenKitAdminViewByDefault()) {
+
 					player.sendMessage(MessagesUtils.get(EXGMessage.OPENING_ADMIN_KITS_INVENTORY, null));
 					new KitsAdminViewInventory(player, null, null).open(player);
 

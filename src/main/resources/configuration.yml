@@ -21,8 +21,8 @@
 general:
 
   # Please do not change this value as it may cause the file to be reset.
-  # Default: "1.1"
-  configVersion: "1.1"
+  # Default: "1.2"
+  configVersion: "1.2"
 
   # If you want to see a detailed loading message when the plugin is loading, set this to true. (Also works for unloading)
   # Default: true
@@ -44,6 +44,12 @@ general:
     # This will allow players to access the kits GUI.
     # Default: true
     kits: true
+
+
+  # Set this to true if you want to open the kit admin view by default when the /kit command is performed for players
+  # with permission to see the admin view.
+  # Default: false
+  openKitAdminViewByDefault: false
 
 ############################################################
 # +------------------------------------------------------+ #

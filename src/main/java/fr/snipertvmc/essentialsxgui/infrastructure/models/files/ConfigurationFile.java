@@ -48,6 +48,10 @@ public class ConfigurationFile {
 		return yamlConfiguration.getBoolean("general.modules.kits", true);
 	}
 
+	public boolean mustOpenKitAdminViewByDefault() {
+		return yamlConfiguration.getBoolean("general.openKitAdminViewByDefault", false);
+	}
+
 
 	// -------------------------------------------------- //
 
