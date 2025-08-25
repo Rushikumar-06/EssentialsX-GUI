@@ -2,10 +2,8 @@ package fr.snipertvmc.essentialsxgui.infrastructure.enums;
 
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
-import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.entity.Player;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public enum EXGEntryResult {

@@ -1,21 +1,16 @@
 package fr.snipertvmc.essentialsxgui.inventories.kits;
 
-import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGEntryType;
-import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGEntrySettings;
-import fr.snipertvmc.essentialsxgui.inventories.homes.HomeEditingInventory;
-import fr.snipertvmc.essentialsxgui.inventories.homes.HomesInventory;
-import fr.snipertvmc.essentialsxgui.libraries.fastinv.FastInv;
 import fr.snipertvmc.essentialsxgui.Main;
+import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGEntryType;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGEntrySettings;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGKit;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.EXGKitEditingInventoryConfig;
+import fr.snipertvmc.essentialsxgui.libraries.fastinv.FastInv;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.data.DataEntryUtils;
-import fr.snipertvmc.essentialsxgui.utilities.type.TypeUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 import java.util.Map;

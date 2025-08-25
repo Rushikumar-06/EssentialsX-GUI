@@ -1,8 +1,8 @@
 package fr.snipertvmc.essentialsxgui.utilities.data;
 
 import fr.snipertvmc.essentialsxgui.Main;
-import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGEntrySettings;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGEntryResult;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGEntrySettings;
 import fr.snipertvmc.essentialsxgui.libraries.exglib.Pair;
 import fr.snipertvmc.essentialsxgui.utilities.type.TypeUtils;
 import org.bukkit.Bukkit;

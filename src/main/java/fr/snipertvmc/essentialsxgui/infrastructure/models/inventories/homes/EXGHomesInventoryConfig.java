@@ -1,9 +1,9 @@
 package fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes;
 
-import fr.snipertvmc.essentialsxgui.libraries.fastinv.InventoryScheme;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
 import fr.snipertvmc.essentialsxgui.libraries.exglib.Pair;
+import fr.snipertvmc.essentialsxgui.libraries.fastinv.InventoryScheme;
 
 public class EXGHomesInventoryConfig extends EXGInventoryConfig {
 

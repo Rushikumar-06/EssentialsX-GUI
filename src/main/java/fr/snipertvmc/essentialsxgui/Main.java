@@ -24,7 +24,6 @@ import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGServer;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.files.ConfigurationFile;
 import fr.snipertvmc.essentialsxgui.libraries.bstats.Metrics;
 import fr.snipertvmc.essentialsxgui.managers.*;
-import fr.snipertvmc.essentialsxgui.managers.InventoriesManager;
 import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
 import org.bukkit.plugin.java.JavaPlugin;
 

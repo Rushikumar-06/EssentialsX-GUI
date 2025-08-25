@@ -1,6 +1,5 @@
 package fr.snipertvmc.essentialsxgui.infrastructure.models.files;
 
-import fr.snipertvmc.essentialsxgui.infrastructure.enums.MCServerVersion;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.util.HashMap;

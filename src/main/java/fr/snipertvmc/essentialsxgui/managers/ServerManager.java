@@ -3,7 +3,8 @@ package fr.snipertvmc.essentialsxgui.managers;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGServer;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ServerManager {
 

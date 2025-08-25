@@ -1,10 +1,10 @@
 package fr.snipertvmc.essentialsxgui.infrastructure.models.files;
 
 import fr.snipertvmc.essentialsxgui.Main;
-import fr.snipertvmc.essentialsxgui.libraries.exglib.Pair;
-import fr.snipertvmc.essentialsxgui.libraries.fastinv.InventoryScheme;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.MCServerVersion;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
+import fr.snipertvmc.essentialsxgui.libraries.exglib.Pair;
+import fr.snipertvmc.essentialsxgui.libraries.fastinv.InventoryScheme;
 import fr.snipertvmc.essentialsxgui.utilities.config.EXGItemConfigParser;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;

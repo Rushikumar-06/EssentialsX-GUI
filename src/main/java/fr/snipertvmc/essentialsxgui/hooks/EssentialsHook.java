@@ -2,7 +2,6 @@ package fr.snipertvmc.essentialsxgui.hooks;
 
 import com.earth2me.essentials.Essentials;
 import com.earth2me.essentials.MetaItemStack;
-import com.earth2me.essentials.User;
 import com.earth2me.essentials.craftbukkit.Inventories;
 import com.earth2me.essentials.libs.snakeyaml.external.biz.base64Coder.Base64Coder;
 import com.earth2me.essentials.textreader.IText;
