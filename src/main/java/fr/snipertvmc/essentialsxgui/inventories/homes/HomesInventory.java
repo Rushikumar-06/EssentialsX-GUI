@@ -1,6 +1,8 @@
 package fr.snipertvmc.essentialsxgui.inventories.homes;
 
+import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGEntryType;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGEntrySettings;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.PaginatedFastInv;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
@@ -8,8 +10,8 @@ import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGHome;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes.EXGHomesInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
+import fr.snipertvmc.essentialsxgui.utilities.data.DataEntryUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.*;
@@ -215,47 +217,38 @@ public class HomesInventory extends PaginatedFastInv {
 
 		player.closeInventory();
 		player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_HOME_NAME, null));
-		Main.getInstance().getChatManager().addChat(player.getUniqueId(), result -> {
 
-			Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
+		EXGEntrySettings entrySettings = new EXGEntrySettings(EXGEntryType.CHAT)
+				.setMinLength(1)
+				.setMaxLength(32);
 
-				if (result.equalsIgnoreCase("cancel")) {
-					player.sendMessage(MessagesUtils.get(EXGMessage.ACTION_CANCELED, null));
+		DataEntryUtils.processStringEntry(player, entrySettings,
+
+				result -> {
+
+					Set<EXGHome> homes = Main.getInstance().getPlayerManager().getPlayer(player.getUniqueId().toString()).getHomes();
+
+					if (homes.stream().anyMatch(home -> home.getName().equalsIgnoreCase(result.getLeft()))) {
+						player.sendMessage(MessagesUtils.get(EXGMessage.HOME_NAME_ALREADY_EXISTS, null));
+						new HomesInventory(player, null, null).open(player);
+						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
+						return;
+					}
+
+					if (!Main.getInstance().getHookManager().getEssentialsHook().canCreateHome(player)) {
+						player.sendMessage(MessagesUtils.get(EXGMessage.HOME_LIMIT_REACHED, null));
+						new HomesInventory(player, null, null).open(player);
+						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
+						return;
+					}
+
+					Main.getInstance().getEssentials().getUser(player).setHome(result.getLeft(), player.getLocation());
+					player.sendMessage(MessagesUtils.get(EXGMessage.HOME_CREATED, Map.of("homeName", result.getLeft())));
 					new HomesInventory(player, null, null).open(player);
-					SoundsUtils.playSound(player, EXGSound.ACTION_CANCELED);
-					return;
-				}
+					SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
 
-				if (result.isEmpty() || result.length() > 32) {
-					player.sendMessage(MessagesUtils.get(EXGMessage.LENGTH_LIMIT, Map.of("min", "1", "max", "32")));
-					new HomesInventory(player, null, null).open(player);
-					SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
-					return;
-				}
-
-				Set<EXGHome> homes = Main.getInstance().getPlayerManager().getPlayer(player.getUniqueId().toString()).getHomes();
-
-				if (homes.stream().anyMatch(home -> home.getName().equalsIgnoreCase(result))) {
-					player.sendMessage(MessagesUtils.get(EXGMessage.HOME_NAME_ALREADY_EXISTS, null));
-					new HomesInventory(player, null, null).open(player);
-					SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
-					return;
-				}
-
-				if (!Main.getInstance().getHookManager().getEssentialsHook().canCreateHome(player)) {
-					player.sendMessage(MessagesUtils.get(EXGMessage.HOME_LIMIT_REACHED, null));
-					new HomesInventory(player, null, null).open(player);
-					SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
-					return;
-				}
-
-				Main.getInstance().getEssentials().getUser(player).setHome(result, player.getLocation());
-				player.sendMessage(MessagesUtils.get(EXGMessage.HOME_CREATED, Map.of("homeName", result)));
-				new HomesInventory(player, null, null).open(player);
-				SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
-			});
-
-		}, 10);
+				}, entry -> new HomesInventory(player, null, null).open(player)
+		);
 	}
 
 
@@ -267,35 +260,34 @@ public class HomesInventory extends PaginatedFastInv {
 
 		player.closeInventory();
 		player.sendMessage(MessagesUtils.get(EXGMessage.SEARCH_HOME, null));
-		Main.getInstance().getChatManager().addChat(player.getUniqueId(), result -> {
 
-			Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
+		EXGEntrySettings entrySettings = new EXGEntrySettings(EXGEntryType.CHAT);
 
-				if (result.equalsIgnoreCase("cancel")) {
-					player.sendMessage(MessagesUtils.get(EXGMessage.ACTION_CANCELED, null));
-					new HomesInventory(player, null, null).open(player);
-					SoundsUtils.playSound(player, EXGSound.ACTION_CANCELED);
-					return;
-				}
+		DataEntryUtils.processStringEntry(player, entrySettings,
 
-				Set<EXGHome> searchHomes = Main.getInstance().getPlayerManager().getPlayer(player.getUniqueId().toString()).getHomes()
-						.stream()
-						.filter(home -> MessagesUtils.removeColorCodes(home.getDisplayName()).toLowerCase().startsWith(result.toLowerCase()))
-						.collect(Collectors.toCollection(LinkedHashSet::new));
+				result -> {
 
-				if (searchHomes.isEmpty()) {
-					player.sendMessage(MessagesUtils.get(EXGMessage.NO_HOME_FOUND, null));
-					new HomesInventory(player, result, searchHomes).open(player);
-					SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
-					return;
-				}
+					Set<EXGHome> searchHomes = Main.getInstance().getPlayerManager().getPlayer(player.getUniqueId().toString()).getHomes()
+							.stream()
+							.filter(home -> MessagesUtils.removeColorCodes(home.getDisplayName()).toLowerCase().startsWith(result.getLeft().toLowerCase()))
+							.collect(Collectors.toCollection(LinkedHashSet::new));
 
-				new HomesInventory(player, result, searchHomes).open(player);
-				SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
-			});
+					if (searchHomes.isEmpty()) {
+						player.sendMessage(MessagesUtils.get(EXGMessage.NO_HOME_FOUND, null));
+						new HomesInventory(player, result.getLeft(), searchHomes).open(player);
+						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
+						return;
+					}
 
-		}, 10);
+					new HomesInventory(player, result.getLeft(), searchHomes).open(player);
+					SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
+
+				}, entry -> new HomesInventory(player, null, null).open(player)
+		);
 	}
+
+
+	// -------------------------------------------------- //
 
 
 	private String getBedHomeMaterialAndData(Player player) {

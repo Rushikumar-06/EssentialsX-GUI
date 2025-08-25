@@ -1,5 +1,7 @@
 package fr.snipertvmc.essentialsxgui.inventories.homes;
 
+import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGEntryType;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGEntrySettings;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.FastInv;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
@@ -7,10 +9,9 @@ import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGHome;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes.EXGHomeEditingInventoryConfig;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
-import fr.snipertvmc.essentialsxgui.utilities.type.TypeUtils;
+import fr.snipertvmc.essentialsxgui.utilities.data.DataEntryUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 import java.util.*;
@@ -93,43 +94,33 @@ public class HomeEditingInventory extends FastInv {
 	// -------------------------------------------------- //
 
 
-	public void changeHomeDisplayName(Player player, EXGHome home) {
+		public void changeHomeDisplayName(Player player, EXGHome home) {
 
-		if (!Main.getInstance().getChatManager().canDoChat(player.getUniqueId())) {
-			return;
+			if (!Main.getInstance().getChatManager().canDoChat(player.getUniqueId())) {
+				return;
+			}
+
+			player.closeInventory();
+			player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_DISPLAY_NAME, null));
+
+			EXGEntrySettings entrySettings = new EXGEntrySettings(EXGEntryType.CHAT)
+					.setMinLength(1)
+					.setMaxLength(32);
+
+			DataEntryUtils.processStringEntry(player, entrySettings,
+
+					result -> {
+
+						home.setDisplayName(result.getLeft());
+						player.sendMessage(MessagesUtils.get(EXGMessage.DISPLAY_NAME_CHANGED,
+								Map.of("newDisplayName", result.getLeft().replace("&", "§"))
+						));
+						new HomeEditingInventory(player, home).open(player);
+						SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
+
+					}, entry -> new HomeEditingInventory(player, home).open(player)
+			);
 		}
-
-		player.closeInventory();
-		player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_DISPLAY_NAME, null));
-
-		Main.getInstance().getChatManager().addChat(player.getUniqueId(), newHomeName -> {
-
-			Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
-
-				if (newHomeName.equalsIgnoreCase("cancel")) {
-					player.sendMessage(MessagesUtils.get(EXGMessage.ACTION_CANCELED, null));
-					new HomeEditingInventory(player, home).open(player);
-					SoundsUtils.playSound(player, EXGSound.ACTION_CANCELED);
-					return;
-				}
-
-				if (newHomeName.isEmpty() || newHomeName.length() > 32) {
-					player.sendMessage(MessagesUtils.get(EXGMessage.LENGTH_LIMIT, Map.of("min", "1", "max", "32")));
-					new HomeEditingInventory(player, home).open(player);
-					SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
-					return;
-				}
-
-				home.setDisplayName(newHomeName);
-				player.sendMessage(MessagesUtils.get(EXGMessage.DISPLAY_NAME_CHANGED,
-						Map.of("newDisplayName", newHomeName.replace("&", "§"))
-				));
-				new HomeEditingInventory(player, home).open(player);
-				SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
-			});
-
-		}, 10);
-	}
 
 
 	public void changeHomeIcon(Player player, EXGHome home) {
@@ -141,53 +132,20 @@ public class HomeEditingInventory extends FastInv {
 		player.closeInventory();
 		player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_ICON_NAME, null));
 
-		Main.getInstance().getChatManager().addChat(player.getUniqueId(), result -> {
+		EXGEntrySettings entrySettings = new EXGEntrySettings(EXGEntryType.CHAT);
+		DataEntryUtils.processMaterialEntry(player, entrySettings,
 
-			Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
+				result -> {
 
-				if (result.equalsIgnoreCase("cancel")) {
-					player.sendMessage(MessagesUtils.get(EXGMessage.ACTION_CANCELED, null));
+					home.setMaterial(result.getLeft().getLeft());
+					home.setData(result.getLeft().getRight());
+
+					player.sendMessage(MessagesUtils.get(EXGMessage.ICON_CHANGED, Map.of("newIcon", result.getLeft().getLeft().name())));
 					new HomeEditingInventory(player, home).open(player);
-					SoundsUtils.playSound(player, EXGSound.ACTION_CANCELED);
-					return;
-				}
+					SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
 
-				Material material;
-				byte data = 0;
-
-				if (result.contains(":")) {
-
-					String[] materialSplit = result.split(":");
-					if (materialSplit.length != 2 || !TypeUtils.isByte(materialSplit[1])) {
-						player.sendMessage(MessagesUtils.get(EXGMessage.INVALID_MATERIAL, null));
-						new HomeEditingInventory(player, home).open(player);
-						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
-						return;
-					}
-
-					material = Material.matchMaterial(materialSplit[0]);
-					data = Byte.parseByte(materialSplit[1]);
-
-				} else {
-					material = Material.matchMaterial(result);
-				}
-
-				if (material == null) {
-					player.sendMessage(MessagesUtils.get(EXGMessage.INVALID_MATERIAL, null));
-					new HomeEditingInventory(player, home).open(player);
-					SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
-					return;
-				}
-
-				home.setMaterial(material);
-				home.setData(data);
-
-				player.sendMessage(MessagesUtils.get(EXGMessage.ICON_CHANGED, Map.of("newIcon", material.name())));
-				new HomeEditingInventory(player, home).open(player);
-				SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
-			});
-
-		}, 10);
+				}, entry -> new HomeEditingInventory(player, home).open(player)
+		);
 	}
 
 
@@ -200,12 +158,12 @@ public class HomeEditingInventory extends FastInv {
 		player.closeInventory();
 		player.sendMessage(MessagesUtils.get(EXGMessage.CONFIRM_DELETE_HOME, Map.of("homeName", home.getName())));
 
-		Main.getInstance().getChatManager().addChat(player.getUniqueId(), result -> {
+		EXGEntrySettings entrySettings = new EXGEntrySettings(EXGEntryType.CHAT)
+				.setEqualsToSomething("confirm");
 
-			Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
+		DataEntryUtils.processStringEntry(player, entrySettings,
 
-				if (result.equalsIgnoreCase("confirm")) {
-
+				result -> {
 					try {
 						Main.getInstance().getEssentials().getUser(player).delHome(home.getName());
 
@@ -216,23 +174,14 @@ public class HomeEditingInventory extends FastInv {
 						return;
 					}
 
-					player.sendMessage(MessagesUtils.get(EXGMessage.HOME_DELETED, Map.of("homeName", home.getName())));
+					player.sendMessage(MessagesUtils.get(EXGMessage.HOME_DELETED,
+							Map.of("homeName", home.getName()))
+					);
 					new HomesInventory(player, null, null).open(player);
 					SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
 
-				} else {
-					player.sendMessage(MessagesUtils.get(EXGMessage.ACTION_CANCELED, null));
-					new HomeEditingInventory(player, home).open(player);
-
-					if (result.equalsIgnoreCase("cancel")) {
-						SoundsUtils.playSound(player, EXGSound.ACTION_CANCELED);
-					} else {
-						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
-					}
-				}
-			});
-
-		}, 10);
+				}, entry -> new HomeEditingInventory(player, home).open(player)
+		);
 	}
 
 	// -------------------------------------------------- //

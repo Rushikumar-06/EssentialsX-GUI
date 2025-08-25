@@ -1,6 +1,10 @@
 package fr.snipertvmc.essentialsxgui.inventories.kits;
 
+import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGEntryType;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGEntrySettings;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGHome;
+import fr.snipertvmc.essentialsxgui.inventories.homes.HomesInventory;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.PaginatedFastInv;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
@@ -8,6 +12,7 @@ import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGKit;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.EXGKitsPlayerViewInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
+import fr.snipertvmc.essentialsxgui.utilities.data.DataEntryUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -185,36 +190,32 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 
 		player.closeInventory();
 		player.sendMessage(MessagesUtils.get(EXGMessage.SEARCH_KIT, null));
-		Main.getInstance().getChatManager().addChat(player.getUniqueId(), result -> {
 
-			Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
+		EXGEntrySettings entrySettings = new EXGEntrySettings(EXGEntryType.CHAT);
 
-				if (result.equalsIgnoreCase("cancel")) {
-					player.sendMessage(MessagesUtils.get(EXGMessage.ACTION_CANCELED, null));
-					new KitsPlayerViewInventory(player, null, null).open(player);
-					SoundsUtils.playSound(player, EXGSound.ACTION_CANCELED);
-					return;
-				}
+		DataEntryUtils.processStringEntry(player, entrySettings,
 
-				Set<EXGKit> searchKits = Main.getInstance().getEXGServer().getKits()
-						.stream()
-						.filter(kit -> player.hasPermission("essentials.kits." + kit.getName()))
-						.filter(kit -> MessagesUtils.removeColorCodes(kit.getDisplayName()).toLowerCase().startsWith(result.toLowerCase()))
-						.sorted(Comparator.comparing(EXGKit::getName))
-						.collect(Collectors.toCollection(LinkedHashSet::new));
+				result -> {
 
-				if (searchKits.isEmpty()) {
-					player.sendMessage(MessagesUtils.get(EXGMessage.NO_KIT_FOUND, null));
-					new KitsPlayerViewInventory(player, result, searchKits).open(player);
-					SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
-					return;
-				}
+					Set<EXGKit> searchKits = Main.getInstance().getEXGServer().getKits()
+							.stream()
+							.filter(kit -> player.hasPermission("essentials.kits." + kit.getName()))
+							.filter(kit -> MessagesUtils.removeColorCodes(kit.getDisplayName()).toLowerCase().startsWith(result.getLeft().toLowerCase()))
+							.sorted(Comparator.comparing(EXGKit::getName))
+							.collect(Collectors.toCollection(LinkedHashSet::new));
 
-				new KitsPlayerViewInventory(player, result, searchKits).open(player);
-				SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
-			});
+					if (searchKits.isEmpty()) {
+						player.sendMessage(MessagesUtils.get(EXGMessage.NO_KIT_FOUND, null));
+						new KitsPlayerViewInventory(player, result.getLeft(), searchKits).open(player);
+						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
+						return;
+					}
 
-		}, 10);
+					new KitsPlayerViewInventory(player, result.getLeft(), searchKits).open(player);
+					SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
+
+				}, entry -> new KitsPlayerViewInventory(player, null, null).open(player)
+		);
 	}
 
 

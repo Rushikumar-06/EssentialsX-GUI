@@ -1,5 +1,9 @@
 package fr.snipertvmc.essentialsxgui.inventories.kits;
 
+import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGEntryType;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGEntrySettings;
+import fr.snipertvmc.essentialsxgui.inventories.homes.HomeEditingInventory;
+import fr.snipertvmc.essentialsxgui.inventories.homes.HomesInventory;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.FastInv;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
@@ -7,6 +11,7 @@ import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGKit;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.EXGKitEditingInventoryConfig;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
+import fr.snipertvmc.essentialsxgui.utilities.data.DataEntryUtils;
 import fr.snipertvmc.essentialsxgui.utilities.type.TypeUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.Bukkit;
@@ -112,34 +117,24 @@ public class KitEditingInventory extends FastInv {
 
 		player.closeInventory();
 		player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_DISPLAY_NAME, null));
-		Main.getInstance().getChatManager().addChat(player.getUniqueId(), newKitName -> {
 
-			Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
+		EXGEntrySettings entrySettings = new EXGEntrySettings(EXGEntryType.CHAT)
+				.setMinLength(1)
+				.setMaxLength(32);
 
-				if (newKitName.equalsIgnoreCase("cancel")) {
-					player.sendMessage(MessagesUtils.get(EXGMessage.ACTION_CANCELED, null));
+		DataEntryUtils.processStringEntry(player, entrySettings,
+
+				result -> {
+
+					kit.setDisplayName(result.getLeft());
+					player.sendMessage(MessagesUtils.get(EXGMessage.DISPLAY_NAME_CHANGED,
+							Map.of("newDisplayName", result.getLeft().replace("&", "§"))
+					));
 					new KitEditingInventory(player, kit).open(player);
-					SoundsUtils.playSound(player, EXGSound.ACTION_CANCELED);
-					return;
-				}
+					SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
 
-				if (newKitName.isEmpty() || newKitName.length() > 32) {
-					player.sendMessage(MessagesUtils.get(EXGMessage.LENGTH_LIMIT, Map.of("min", "1", "max", "32")));
-					new KitEditingInventory(player, kit).open(player);
-					SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
-					return;
-				}
-
-				kit.setDisplayName(newKitName);
-				player.sendMessage(MessagesUtils.get(EXGMessage.DISPLAY_NAME_CHANGED,
-						Map.of("newDisplayName", newKitName.replace("&", "§"))
-				));
-				new KitEditingInventory(player, kit).open(player);
-				SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
-
-			});
-
-		}, 10);
+				}, entry -> new KitEditingInventory(player, kit).open(player)
+		);
 	}
 
 
@@ -151,54 +146,21 @@ public class KitEditingInventory extends FastInv {
 
 		player.closeInventory();
 		player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_ICON_NAME, null));
-		Main.getInstance().getChatManager().addChat(player.getUniqueId(), result -> {
 
-			Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
+		EXGEntrySettings entrySettings = new EXGEntrySettings(EXGEntryType.CHAT);
+		DataEntryUtils.processMaterialEntry(player, entrySettings,
 
-				if (result.equalsIgnoreCase("cancel")) {
-					player.sendMessage(MessagesUtils.get(EXGMessage.ACTION_CANCELED, null));
+				result -> {
+
+					kit.setMaterial(result.getLeft().getLeft());
+					kit.setData(result.getLeft().getRight());
+
+					player.sendMessage(MessagesUtils.get(EXGMessage.ICON_CHANGED, Map.of("newIcon", result.getLeft().getLeft().name())));
 					new KitEditingInventory(player, kit).open(player);
-					SoundsUtils.playSound(player, EXGSound.ACTION_CANCELED);
-					return;
-				}
+					SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
 
-				Material material;
-				byte data = 0;
-
-				if (result.contains(":")) {
-
-					String[] materialSplit = result.split(":");
-					if (materialSplit.length != 2 || !TypeUtils.isByte(materialSplit[1])) {
-						player.sendMessage(MessagesUtils.get(EXGMessage.INVALID_MATERIAL, null));
-						new KitEditingInventory(player, kit).open(player);
-						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
-						return;
-					}
-
-					material = Material.matchMaterial(materialSplit[0]);
-					data = Byte.parseByte(materialSplit[1]);
-
-				} else {
-					material = Material.matchMaterial(result);
-				}
-
-				if (material == null) {
-					player.sendMessage(MessagesUtils.get(EXGMessage.INVALID_MATERIAL, null));
-					new KitEditingInventory(player, kit).open(player);
-					SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
-					return;
-				}
-
-				kit.setMaterial(material);
-				kit.setData(data);
-
-				player.sendMessage(MessagesUtils.get(EXGMessage.ICON_CHANGED, Map.of("newIcon", material.name())));
-				new KitEditingInventory(player, kit).open(player);
-				SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
-
-			});
-
-		}, 10);
+				}, entry -> new KitEditingInventory(player, kit).open(player)
+		);
 	}
 
 
@@ -210,30 +172,21 @@ public class KitEditingInventory extends FastInv {
 
 		player.closeInventory();
 		player.sendMessage(MessagesUtils.get(EXGMessage.CONFIRM_DELETE_KIT, Map.of("kitName", kit.getName())));
-		Main.getInstance().getChatManager().addChat(player.getUniqueId(), result -> {
 
-			Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
+		EXGEntrySettings entrySettings = new EXGEntrySettings(EXGEntryType.CHAT)
+				.setEqualsToSomething("confirm");
 
-				if (result.equalsIgnoreCase("confirm")) {
+		DataEntryUtils.processStringEntry(player, entrySettings,
+
+				result -> {
 
 					Main.getInstance().getEssentials().getKits().removeKit(kit.getName());
 					player.sendMessage(MessagesUtils.get(EXGMessage.KIT_DELETED, Map.of("kitName", kit.getName())));
 					new KitsAdminViewInventory(player, null, null).open(player);
 					SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
 
-				} else {
-					player.sendMessage(MessagesUtils.get(EXGMessage.ACTION_CANCELED, null));
-					new KitEditingInventory(player, kit).open(player);
-
-					if (result.equalsIgnoreCase("cancel")) {
-						SoundsUtils.playSound(player, EXGSound.ACTION_CANCELED);
-					} else {
-						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
-					}
-				}
-			});
-
-		}, 10);
+				}, entry -> new KitEditingInventory(player, kit).open(player)
+		);
 	}
 
 
