@@ -35,7 +35,7 @@ public class EXGItemConfig {
 	private List<String> lore;
 
 	private final List<Pair<Enchantment, Integer>> enchantments;
-	private final List<ItemFlag> itemFlags;
+	private List<ItemFlag> itemFlags;
 
 	private Map<String, String> variables = new HashMap<>();
 
@@ -185,6 +185,12 @@ public class EXGItemConfig {
 
 	public EXGItemConfig setLore(List<String> lore) {
 		this.lore = lore;
+		return this;
+	}
+
+
+	public EXGItemConfig setItemFlags(List<ItemFlag> itemFlags) {
+		this.itemFlags = itemFlags;
 		return this;
 	}
 

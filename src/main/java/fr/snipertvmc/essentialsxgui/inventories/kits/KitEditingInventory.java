@@ -81,6 +81,16 @@ public class KitEditingInventory extends FastInv {
 		}
 
 
+		if (config.getEditKitContentsItem().isEnabled()) {
+			setItem(config.getEditKitContentsItem().getSlot(), config.getEditKitContentsItem()
+					.build(), e -> {
+
+				new KitEditorInventory(player, kit).open(player);
+				SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
+			});
+		}
+
+
 		if (config.getBackItem().isEnabled()) {
 			setItem(config.getBackItem().getSlot(), config.getBackItem().build(), e -> {
 

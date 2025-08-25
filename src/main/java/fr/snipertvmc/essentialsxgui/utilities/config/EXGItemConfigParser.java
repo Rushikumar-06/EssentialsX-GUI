@@ -29,6 +29,8 @@ public class EXGItemConfigParser {
 				"kitsAdminView.items.kitItem",
 				"kitsPlayerView.items.kitItem",
 				"kitPlayerGive.items.playerItem",
+				"kitEditor.items.saveKitItem",
+				"kitEditor.items.cancelChangesItem"
 		));
 
 		put("slot", List.of(

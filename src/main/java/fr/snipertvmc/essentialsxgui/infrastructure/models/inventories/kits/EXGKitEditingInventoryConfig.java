@@ -14,6 +14,7 @@ public class EXGKitEditingInventoryConfig extends EXGInventoryConfig {
 	private EXGItemConfig changeDisplayNameItem;
 	private EXGItemConfig changeIconItem;
 	private EXGItemConfig deleteKitItem;
+	private EXGItemConfig editKitContentsItem;
 
 	private EXGItemConfig backItem;
 
@@ -42,6 +43,9 @@ public class EXGKitEditingInventoryConfig extends EXGInventoryConfig {
 	public EXGItemConfig getDeleteKitItem() {
 		return deleteKitItem;
 	}
+	public EXGItemConfig getEditKitContentsItem() {
+		return editKitContentsItem;
+	}
 
 	public EXGItemConfig getBackItem() {
 		return backItem;
@@ -63,6 +67,9 @@ public class EXGKitEditingInventoryConfig extends EXGInventoryConfig {
 	}
 	public void setDeleteKitItem(EXGItemConfig deleteKitItem) {
 		this.deleteKitItem = deleteKitItem;
+	}
+	public void setEditKitContentsItem(EXGItemConfig editKitContentsItem) {
+		this.editKitContentsItem = editKitContentsItem;
 	}
 
 	public void setBackItem(EXGItemConfig backItem) {
@@ -86,6 +93,7 @@ public class EXGKitEditingInventoryConfig extends EXGInventoryConfig {
 		copy.setChangeDisplayNameItem(this.getChangeDisplayNameItem().duplicate());
 		copy.setChangeIconItem(this.getChangeIconItem().duplicate());
 		copy.setDeleteKitItem(this.getDeleteKitItem().duplicate());
+		copy.setEditKitContentsItem(this.getEditKitContentsItem().duplicate());
 
 		copy.setBackItem(this.getBackItem().duplicate());
 		return copy;

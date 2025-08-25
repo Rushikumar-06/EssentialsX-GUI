@@ -38,9 +38,10 @@ public class FilesManager {
 
 			"kitsAdminView", "inventories/kits/kitsAdminView",
 			"kitsPlayerView", "inventories/kits/kitsPlayerView",
-			"kitEditing", "inventories/kits/kitEditing"
 			"kitPreview", "inventories/kits/kitPreview",
 			"kitPlayerGive", "inventories/kits/kitPlayerGive",
+			"kitEditing", "inventories/kits/kitEditing",
+			"kitEditor", "inventories/kits/kitEditor"
 	);
 
 	private final Map<String, String> filesVersions = Map.of(
@@ -52,9 +53,10 @@ public class FilesManager {
 
 			"kitsAdminView", "1.2", // Updated for version: 1.0.3
 			"kitsPlayerView", "1.2", // Updated for version: 1.0.3
-			"kitEditing", "1.1" // Updated for version: 1.0.2
 			"kitPreview", "1.0",
 			"kitPlayerGive", "1.0",
+			"kitEditing", "1.1", // Updated for version: 1.0.2
+			"kitEditor", "1.0" // Updated for version: 1.0.2
 	);
 
 

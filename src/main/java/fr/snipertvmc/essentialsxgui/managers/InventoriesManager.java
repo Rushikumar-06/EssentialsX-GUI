@@ -47,6 +47,8 @@ public class InventoriesManager {
 			case "kitPreview" -> loadKitPreviewInventory(title, rows, inventoryName, borderItem, borderSlots);
 			case "kitPlayerGive" -> loadkitPlayerGiveInventory(title, rows, inventoryName, borderItem, borderSlots);
 			case "kitEditing" -> loadKitEditingInventory(title, rows, inventoryName, borderItem, borderSlots);
+			case "kitEditor" -> loadKitEditorInventory(title, rows, inventoryName, borderItem, borderSlots);
+
 		}
 	}
 
@@ -267,6 +269,19 @@ public class InventoriesManager {
 	}
 
 
+	private void loadKitEditorInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+
+		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
+
+		kitEditorInventoryConfig = new EXGKitEditorInventoryConfig(title, rows, borderItem, borderSlots);
+
+		kitEditorInventoryConfig.setSaveKitItem(inventoryFile.getItem(
+				"saveKitItem"));
+		kitEditorInventoryConfig.setCancelChangesItem(inventoryFile.getItem(
+				"cancelChangesItem"));
+	}
+
+
 	// -------------------------------------------------- //
 
 
@@ -277,9 +292,10 @@ public class InventoriesManager {
 
 				"kitsAdminView",
 				"kitsPlayerView",
-				"kitEditing"
 				"kitPreview",
 				"kitPlayerGive",
+				"kitEditing",
+				"kitEditor"
 		);
 	}
 
@@ -306,6 +322,10 @@ public class InventoriesManager {
 	public EXGKitEditingInventoryConfig getKitEditingInventoryConfig() {
 		return kitEditingInventoryConfig;
 	}
+	public EXGKitEditorInventoryConfig getKitEditorInventoryConfig() {
+		return kitEditorInventoryConfig;
+	}
+
 
 
 	// -------------------------------------------------- //

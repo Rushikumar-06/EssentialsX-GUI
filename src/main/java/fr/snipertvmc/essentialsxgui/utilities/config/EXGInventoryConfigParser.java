@@ -25,7 +25,9 @@ public class EXGInventoryConfigParser {
 
 		put("inventoryScheme", List.of(
 				"homeEditing",
-				"kitEditing"
+
+				"kitEditing",
+				"kitEditor"
 		));
 	}};
 

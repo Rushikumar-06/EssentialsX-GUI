@@ -8,7 +8,7 @@ import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGKit;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.EXGKitsAdminViewInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
-import fr.snipertvmc.essentialsxgui.utilities.data.TypeUtils;
+import fr.snipertvmc.essentialsxgui.utilities.type.TypeUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -76,7 +76,7 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 					.build(), e -> {
 
 				if (kitItem.isCorrectClick(e.getClick(), "giveKit")) {
-					new KitsPlayerGiveInventory(player, kit).open(player);
+					new KitPlayerGiveInventory(player, kit).open(player);
 
 				} else if (kitItem.isCorrectClick(e.getClick(), "editKit")) {
 					new KitEditingInventory(player, kit).open(player);

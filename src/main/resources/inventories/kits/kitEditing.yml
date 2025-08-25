@@ -84,6 +84,15 @@ kitEditing:
         - "&7Click to delete this kit."
         - "&cThis action cannot be undone!"
 
+    editKitContentsItem:
+      enabled: true
+      slot: 21
+      material: "ENDER_CHEST"
+      displayName: "&6Edit Kit Contents"
+      lore:
+        - "&7Click to edit the contents of this kit."
+        - "&7&oYou will be able to add or remove items from it."
+
     backItem:
       enabled: true
       slot: 49

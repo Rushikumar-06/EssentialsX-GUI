@@ -81,7 +81,7 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 
 				} else if (kitItem.isCorrectClick(e.getClick(), "previewKit")) {
-					new KitsPreviewInventory(player, kit).open(player);
+					new KitPreviewInventory(player, kit).open(player);
 					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 				}
 

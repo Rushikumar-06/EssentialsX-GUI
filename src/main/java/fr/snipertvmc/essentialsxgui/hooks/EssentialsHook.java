@@ -1,9 +1,13 @@
 package fr.snipertvmc.essentialsxgui.hooks;
 
 import com.earth2me.essentials.Essentials;
+import com.earth2me.essentials.MetaItemStack;
 import com.earth2me.essentials.User;
 import com.earth2me.essentials.craftbukkit.Inventories;
 import com.earth2me.essentials.libs.snakeyaml.external.biz.base64Coder.Base64Coder;
+import com.earth2me.essentials.textreader.IText;
+import com.earth2me.essentials.textreader.KeywordReplacer;
+import com.earth2me.essentials.textreader.SimpleTextInput;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGPlayer;
 import net.ess3.provider.SerializationProvider;
@@ -93,6 +97,9 @@ public class EssentialsHook {
 	}
 
 
+	// -------------------------------------------------- //
+
+
 	public void createKitWithPlayer(Player player, String kitName, long delay) {
 
 		final ItemStack[] items = Inventories.getInventory(essentials.getUser(player).getBase(), true);
@@ -114,6 +121,72 @@ public class EssentialsHook {
 		}
 
 		essentials.getKits().addKit(kitName, list, delay);
+	}
+
+
+	public List<ItemStack> getKitItems(Player player, String kitName) {
+
+		final List<String> itemStringList = new ArrayList<>();
+		try {
+			final Object kitItems = essentials.getKits().getKit(kitName).get("items");
+			if (kitItems instanceof List) {
+				for (final Object item : (List) kitItems) {
+					if (item instanceof String) {
+						itemStringList.add(item.toString());
+					}
+				}
+			}
+		} catch (Exception e) {
+			return new ArrayList<>();
+		}
+
+		final List<ItemStack> itemList = new ArrayList<>();
+		final IText input = new SimpleTextInput(itemStringList);
+		final IText output = new KeywordReplacer(input, essentials.getUser(player).getSource(), essentials, true, true);
+		final boolean allowUnsafe = essentials.getSettings().allowUnsafeEnchantments();
+		final SerializationProvider serializationProvider = essentials.provider(SerializationProvider.class);
+
+		for (final String kitItem : output.getLines()) {
+			// Ignore money and commands
+			if (kitItem.startsWith("$") || kitItem.startsWith(essentials.getSettings().getCurrencySymbol())) {
+				continue;
+			}
+			if (kitItem.startsWith("/")) {
+				continue;
+			}
+
+			final ItemStack stack;
+
+			if (kitItem.startsWith("@")) {
+				stack = serializationProvider.deserializeItem(Base64Coder.decodeLines(kitItem.substring(1)));
+			} else {
+				final String[] parts = kitItem.split(" +");
+				final ItemStack parseStack;
+				try {
+					parseStack = essentials.getItemDb().get(parts[0], parts.length > 1 ? Integer.parseInt(parts[1]) : 1);
+				} catch (Exception ignored) {
+					continue;
+				}
+
+				if (parseStack.getType() == Material.AIR) {
+					continue;
+				}
+
+				final MetaItemStack metaStack = new MetaItemStack(parseStack);
+				if (parts.length > 2) {
+					try {
+						metaStack.parseStringMeta(null, allowUnsafe, parts, 2, essentials);
+					} catch (Exception ignored) {
+						continue;
+					}
+				}
+				stack = metaStack.getItemStack();
+			}
+
+			itemList.add(stack);
+		}
+
+		return itemList;
 	}
 
 
