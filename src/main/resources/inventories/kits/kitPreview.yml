@@ -4,7 +4,7 @@
 # +------------------------------------------------------+ #
 ############################################################
 
-# This is the player giving kit inventory file for EssentialsX-GUI.
+# This is the preview kit inventory file for EssentialsX-GUI.
 
 # If you need help with the configuration of the GUI,
 # you can join our discord server at: https://discord.gg/fSzK79TAYf
@@ -28,16 +28,16 @@ config-version: "1.0"
 # +------------------------------------------------------+ #
 ############################################################
 
-kitsPlayerGive:
+kitPreview:
 
   # Placeholders available: {kitDisplayName}, {kitName}
-  title: "&aGive Kit &2{kitDisplayName}"
+  title: "&6Kit Preview: &e{kitDisplayName}"
   rows: 6
 
   # The inventory scheme defines the layout of the inventory.
   # " " means an empty slot.
   # "1" means a slot with an item.
-  # Here "1" is used to indicate where the player items will be placed.
+  # Here "1" is used to indicate where the kit items will be placed.
   inventoryScheme:
     - "         "
     - "         "
@@ -55,18 +55,16 @@ kitsPlayerGive:
 
   items:
 
-    # 'enabled' value will be ignored in this section. Item is enabled by default.
-    # 'slot' value will be ignored in this section. Use the 'inventoryScheme' section to set the slots.
-    # 'material' value as "PLAYER_HEAD:{targetName}" will use the player's head as the item.
-    # Placeholders available: {targetName}, {kitName}, {kitDisplayName}
+    # Placeholders available: {kitDisplayName}, {kitName}, {kitMaterialName}
     # By default, if kitDisplayName is not set, it will use the kit name.
-    playerItem:
-      material: "PLAYER_HEAD:{targetName}"
-      data: 3
-      displayName: "&b{targetName}"
+    kitItem:
+      enabled: true
+      slot: 4
+      material: "{kitMaterialName}"
+      displayName: "&6{kitDisplayName}"
       lore:
-        - "&7Click to give this kit to the player."
-        - "&7Kit Name: &f{kitName}"
+        - "&7Kit Name: &f&o{kitName}"
+        - "&7Kit icon: &f&o{kitMaterialName}"
 
     # Placeholders available: {currentPage}, {previousPage}
     previousPageItem:

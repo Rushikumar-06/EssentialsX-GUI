@@ -20,9 +20,10 @@ public class InventoriesManager {
 
 	private EXGKitsAdminViewInventoryConfig kitsAdminInventoryConfig;
 	private EXGKitsPlayerViewInventoryConfig kitsPlayerInventoryConfig;
-	private EXGKitsPreviewInventoryConfig kitsPreviewInventoryConfig;
-	private EXGKitsPlayerGiveInventoryConfig kitsPlayerGiveInventoryConfig;
+	private EXGKitPreviewInventoryConfig kitPreviewInventoryConfig;
+	private EXGKitPlayerGiveInventoryConfig kitPlayerGiveInventoryConfig;
 	private EXGKitEditingInventoryConfig kitEditingInventoryConfig;
+	private EXGKitEditorInventoryConfig kitEditorInventoryConfig;
 
 
 	// -------------------------------------------------- //
@@ -43,8 +44,8 @@ public class InventoriesManager {
 
 			case "kitsAdminView" -> loadKitsAdminViewInventory(title, rows, inventoryName, borderItem, borderSlots);
 			case "kitsPlayerView" -> loadKitsPlayerViewInventory(title, rows, inventoryName, borderItem, borderSlots);
-			case "kitsPreview" -> loadKitsPreviewInventory(title, rows, inventoryName, borderItem, borderSlots);
-			case "kitsPlayerGive" -> loadKitsPlayerGiveInventory(title, rows, inventoryName, borderItem, borderSlots);
+			case "kitPreview" -> loadKitPreviewInventory(title, rows, inventoryName, borderItem, borderSlots);
+			case "kitPlayerGive" -> loadkitPlayerGiveInventory(title, rows, inventoryName, borderItem, borderSlots);
 			case "kitEditing" -> loadKitEditingInventory(title, rows, inventoryName, borderItem, borderSlots);
 		}
 	}
@@ -194,53 +195,53 @@ public class InventoriesManager {
 		kitsPlayerInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
 	}
 
-	private void loadKitsPreviewInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+	private void loadKitPreviewInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
 
 		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
 
-		kitsPreviewInventoryConfig = new EXGKitsPreviewInventoryConfig(title, rows, borderItem, borderSlots);
+		kitPreviewInventoryConfig = new EXGKitPreviewInventoryConfig(title, rows, borderItem, borderSlots);
 
-		kitsPreviewInventoryConfig.setTitle(title);
-		kitsPreviewInventoryConfig.setRows(rows);
-		kitsPreviewInventoryConfig.setBorderItem(borderItem);
-		kitsPreviewInventoryConfig.setBorderSlots(borderSlots);
+		kitPreviewInventoryConfig.setTitle(title);
+		kitPreviewInventoryConfig.setRows(rows);
+		kitPreviewInventoryConfig.setBorderItem(borderItem);
+		kitPreviewInventoryConfig.setBorderSlots(borderSlots);
 
-		kitsPreviewInventoryConfig.setKitItem(inventoryFile.getItem(
+		kitPreviewInventoryConfig.setKitItem(inventoryFile.getItem(
 				"kitItem"));
 
-		kitsPreviewInventoryConfig.setNextPageItem(inventoryFile.getItem(
+		kitPreviewInventoryConfig.setNextPageItem(inventoryFile.getItem(
 				"nextPageItem"));
-		kitsPreviewInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
+		kitPreviewInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
 				"previousPageItem"));
-		kitsPreviewInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
+		kitPreviewInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
 				"currentPageItem"));
 
-		kitsPreviewInventoryConfig.setBackItem(inventoryFile.getItem(
+		kitPreviewInventoryConfig.setBackItem(inventoryFile.getItem(
 				"backItem"));
 
-		kitsPreviewInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
+		kitPreviewInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
 	}
 
-	private void loadKitsPlayerGiveInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+	private void loadkitPlayerGiveInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
 
 		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
 
-		kitsPlayerGiveInventoryConfig = new EXGKitsPlayerGiveInventoryConfig(title, rows, borderItem, borderSlots);
+		kitPlayerGiveInventoryConfig = new EXGKitPlayerGiveInventoryConfig(title, rows, borderItem, borderSlots);
 
-		kitsPlayerGiveInventoryConfig.setPlayerItem(inventoryFile.getItem(
+		kitPlayerGiveInventoryConfig.setPlayerItem(inventoryFile.getItem(
 				"playerItem"));
 
-		kitsPlayerGiveInventoryConfig.setNextPageItem(inventoryFile.getItem(
+		kitPlayerGiveInventoryConfig.setNextPageItem(inventoryFile.getItem(
 				"nextPageItem"));
-		kitsPlayerGiveInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
+		kitPlayerGiveInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
 				"previousPageItem"));
-		kitsPlayerGiveInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
+		kitPlayerGiveInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
 				"currentPageItem"));
 
-		kitsPlayerGiveInventoryConfig.setBackItem(inventoryFile.getItem(
+		kitPlayerGiveInventoryConfig.setBackItem(inventoryFile.getItem(
 				"backItem"));
 
-		kitsPlayerGiveInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
+		kitPlayerGiveInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
 	}
 
 	private void loadKitEditingInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
@@ -258,6 +259,8 @@ public class InventoriesManager {
 				"changeIconItem"));
 		kitEditingInventoryConfig.setDeleteKitItem(inventoryFile.getItem(
 				"deleteKitItem"));
+		kitEditingInventoryConfig.setEditKitContentsItem(inventoryFile.getItem(
+				"editKitContentsItem"));
 
 		kitEditingInventoryConfig.setBackItem(inventoryFile.getItem(
 				"backItem"));
@@ -274,9 +277,9 @@ public class InventoriesManager {
 
 				"kitsAdminView",
 				"kitsPlayerView",
-				"kitsPreview",
-				"kitsPlayerGive",
 				"kitEditing"
+				"kitPreview",
+				"kitPlayerGive",
 		);
 	}
 
@@ -294,11 +297,11 @@ public class InventoriesManager {
 	public EXGKitsPlayerViewInventoryConfig getKitsPlayerInventoryConfig() {
 		return kitsPlayerInventoryConfig;
 	}
-	public EXGKitsPreviewInventoryConfig getKitsPreviewInventoryConfig() {
-		return kitsPreviewInventoryConfig;
+	public EXGKitPreviewInventoryConfig getKitPreviewInventoryConfig() {
+		return kitPreviewInventoryConfig;
 	}
-	public EXGKitsPlayerGiveInventoryConfig getKitsPlayerGiveInventoryConfig() {
-		return kitsPlayerGiveInventoryConfig;
+	public EXGKitPlayerGiveInventoryConfig getKitPlayerGiveInventoryConfig() {
+		return kitPlayerGiveInventoryConfig;
 	}
 	public EXGKitEditingInventoryConfig getKitEditingInventoryConfig() {
 		return kitEditingInventoryConfig;

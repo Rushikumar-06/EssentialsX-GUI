@@ -4,32 +4,31 @@ import fr.snipertvmc.essentialsxgui.libraries.fastinv.PaginatedFastInv;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGKit;
-import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.EXGKitsPlayerGiveInventoryConfig;
-import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.EXGKitPreviewInventoryConfig;
+import fr.snipertvmc.essentialsxgui.utilities.other.EssentialsParser;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
-public class KitsPlayerGiveInventory extends PaginatedFastInv {
+public class KitPreviewInventory extends PaginatedFastInv {
 
 
 	// -------------------------------------------------- //
 
 
-	private final EXGKitsPlayerGiveInventoryConfig config = Main.getInstance().getInventoriesManager().getKitsPlayerGiveInventoryConfig().copy();
+	private final EXGKitPreviewInventoryConfig config = Main.getInstance().getInventoriesManager().getKitPreviewInventoryConfig().copy();
 
 
 	// -------------------------------------------------- //
 
 
-	public KitsPlayerGiveInventory(Player player, EXGKit kit) {
+	public KitPreviewInventory(Player player, EXGKit kit) {
 		super(
-				Main.getInstance().getInventoriesManager().getKitsPlayerGiveInventoryConfig().getRows() * 9,
-				Main.getInstance().getInventoriesManager().getKitsPlayerGiveInventoryConfig().getEXGTitle()
+				Main.getInstance().getInventoriesManager().getKitPreviewInventoryConfig().getRows() * 9,
+				Main.getInstance().getInventoriesManager().getKitPreviewInventoryConfig().getEXGTitle()
 						.duplicate()
 						.updateVariables(Map.of(
 								"kitName", kit.getName(),
@@ -47,42 +46,31 @@ public class KitsPlayerGiveInventory extends PaginatedFastInv {
 
 
 		previousPageItem(config.getPreviousPageItem().getSlot(), config.getPreviousPageItem()
-				.updateVariables(Map.of(
-						"currentPage", String.valueOf(this.currentPage()),
-						"previousPage", String.valueOf(this.currentPage() - 1)))
+				.updateVariables(
+						Map.of("currentPage", String.valueOf(this.currentPage()),
+								"previousPage", String.valueOf(this.currentPage() - 1)))
 				.build());
 
 
 		nextPageItem(config.getNextPageItem().getSlot(), config.getNextPageItem()
-				.updateVariables(Map.of(
-						"currentPage", String.valueOf(this.currentPage()),
-						"nextPage", String.valueOf(this.currentPage() + 1)))
+				.updateVariables(
+						Map.of("currentPage", String.valueOf(this.currentPage()),
+								"nextPage", String.valueOf(this.currentPage() + 1)))
 				.build());
 
-		List<Player> targets = Bukkit.getOnlinePlayers().stream()
-				.map(p -> (Player) p)
-				.sorted(Comparator.comparing(Player::getName))
-				.toList();
 
-		for (Player target : targets) {
-
-			EXGItemConfig playerItem = config.getPlayerItem().duplicate();
-			addContent(playerItem
-					.updateVariables(Map.of(
-							"targetName", target.getName(),
-							"kitName", kit.getName(),
-							"kitDisplayName", kit.getDisplayName()))
-					.build(), e -> {
-
-				player.performCommand("essentials:kit " + kit.getName() + " " + target.getName());
-				SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
-			});
+		List<String> serializedItems = (List<String>) Main.getInstance().getEssentials().getKits().getKit(kit.getName()).get("items");
+		List<ItemStack> items = EssentialsParser.deserializeKitItems(Main.getInstance().getEssentials(), serializedItems, player);
+		for (ItemStack item : items) {
+			if (item != null && item.getType() != org.bukkit.Material.AIR) {
+				addContent(item);
+			}
 		}
 
 		if (config.getBackItem().isEnabled()) {
 			setItem(config.getBackItem().getSlot(), config.getBackItem().build(), e -> {
 
-				new KitsAdminViewInventory(player, null, null).open(player);
+				new KitsPlayerViewInventory(player, null, null).open(player);
 				SoundsUtils.playSound(player, EXGSound.GUI_BACK);
 			});
 		}

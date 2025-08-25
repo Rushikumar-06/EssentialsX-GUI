@@ -1,4 +1,4 @@
-package fr.snipertvmc.essentialsxgui.utilities.data;
+package fr.snipertvmc.essentialsxgui.utilities.type;
 
 public class TypeUtils {
 

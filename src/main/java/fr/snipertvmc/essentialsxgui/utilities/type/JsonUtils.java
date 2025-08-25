@@ -1,4 +1,4 @@
-package fr.snipertvmc.essentialsxgui.utilities.data;
+package fr.snipertvmc.essentialsxgui.utilities.type;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import fr.snipertvmc.essentialsxgui.Main;

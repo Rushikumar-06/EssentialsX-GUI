@@ -6,7 +6,7 @@ import fr.snipertvmc.essentialsxgui.infrastructure.models.files.InventoryFile;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.files.MessagesFile;
 import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
 import fr.snipertvmc.essentialsxgui.utilities.config.EXGInventoryConfigParser;
-import fr.snipertvmc.essentialsxgui.utilities.data.MapUtils;
+import fr.snipertvmc.essentialsxgui.utilities.type.MapUtils;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
@@ -38,9 +38,9 @@ public class FilesManager {
 
 			"kitsAdminView", "inventories/kits/kitsAdminView",
 			"kitsPlayerView", "inventories/kits/kitsPlayerView",
-			"kitsPreview", "inventories/kits/kitsPreview",
-			"kitsPlayerGive", "inventories/kits/kitsPlayerGive",
 			"kitEditing", "inventories/kits/kitEditing"
+			"kitPreview", "inventories/kits/kitPreview",
+			"kitPlayerGive", "inventories/kits/kitPlayerGive",
 	);
 
 	private final Map<String, String> filesVersions = Map.of(
@@ -52,9 +52,9 @@ public class FilesManager {
 
 			"kitsAdminView", "1.2", // Updated for version: 1.0.3
 			"kitsPlayerView", "1.2", // Updated for version: 1.0.3
-			"kitsPreview", "1.0",
-			"kitsPlayerGive", "1.0",
 			"kitEditing", "1.1" // Updated for version: 1.0.2
+			"kitPreview", "1.0",
+			"kitPlayerGive", "1.0",
 	);
 
 

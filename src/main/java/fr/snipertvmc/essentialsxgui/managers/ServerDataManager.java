@@ -3,7 +3,7 @@ package fr.snipertvmc.essentialsxgui.managers;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGKit;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGServer;
-import fr.snipertvmc.essentialsxgui.utilities.data.JsonUtils;
+import fr.snipertvmc.essentialsxgui.utilities.type.JsonUtils;
 
 import java.io.File;
 import java.io.IOException;

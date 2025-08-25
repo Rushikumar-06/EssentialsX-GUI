@@ -28,7 +28,7 @@ public class EXGItemConfigParser {
 
 				"kitsAdminView.items.kitItem",
 				"kitsPlayerView.items.kitItem",
-				"kitsPlayerGive.items.playerItem"
+				"kitPlayerGive.items.playerItem",
 		));
 
 		put("slot", List.of(
@@ -42,7 +42,7 @@ public class EXGItemConfigParser {
 				"kitsPlayerView.items.kitItem",
 				"kitsPlayerView.items.noKitsItem",
 				"kitsPlayerView.items.noSearchKitResultsItem",
-				"kitsPlayerGive.items.playerItem"
+				"kitPlayerGive.items.playerItem"
 		));
 
 		put("material", List.of(

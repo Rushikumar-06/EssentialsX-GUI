@@ -1,0 +1,67 @@
+############################################################
+# +------------------------------------------------------+ #
+# |                      Information                     | #
+# +------------------------------------------------------+ #
+############################################################
+
+# This is the kit editor inventory file for EssentialsX-GUI.
+
+# If you need help with the configuration of the GUI,
+# you can join our discord server at: https://discord.gg/fSzK79TAYf
+
+# For more information about how to configure EssentialsX-GUI,
+# check our Wiki at: https://sniper-tvmc.gitbook.io/essentialsx-gui/configuration/inventories
+
+############################################################
+# +------------------------------------------------------+ #
+# |                        General                       | #
+# +------------------------------------------------------+ #
+############################################################
+
+# Please do not change this value as it may cause the file to be reset.
+# Default: "1.0"
+config-version: "1.0"
+
+############################################################
+# +------------------------------------------------------+ #
+# |                       Inventory                      | #
+# +------------------------------------------------------+ #
+############################################################
+
+kitEditor:
+
+  # Placeholders available: {kitDisplayName}, {kitName}, {kitDisplayName}
+  # By default, if kitDisplayName is not set, it will use the kit name.
+  title: "&3Kit Editor &8- &b{kitName}"
+  # ⚠️ Warning: Make sure to always keep 36 slots empty for the kit items.
+  #      - Consequently, the number of rows must be at least 5 to contains the 36 items
+  #        of a kit and the actions items.
+  rows: 6
+
+  # ⚠️ Warning: Make sure to always keep 36 slots (4 rows) empty for the kit items.
+  borderItem:
+    enabled: true
+    slots: [36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 48, 49, 50, 52, 53]
+    material: "%%value_materialBorderItem%%"
+    data: 15
+    displayName: "§8- §6§lEssentialsX-GUI"
+
+  items:
+
+    # 'enabled' value will be ignored in this section. Item is enabled by default.
+    saveKitItem:
+      slot: 47
+      material: "LIME_DYE"
+      displayName: "&aSave Kit"
+      lore:
+        - "&7Click to save the changes made to this kit."
+
+    # 'enabled' value will be ignored in this section. Item is enabled by default.
+    cancelChangesItem:
+      slot: 51
+      material: "RED_DYE"
+      displayName: "&cCancel Changes"
+      lore:
+        - "&7Click to cancel all the changes made to this kit."
+        - ""
+        - "§4§lWarning: §cAll changes, and your items, will be lost!"

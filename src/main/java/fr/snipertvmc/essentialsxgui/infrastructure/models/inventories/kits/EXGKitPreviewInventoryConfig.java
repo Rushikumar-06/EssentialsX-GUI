@@ -4,13 +4,13 @@ import fr.snipertvmc.essentialsxgui.libraries.fastinv.InventoryScheme;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
 
-public class EXGKitsPlayerGiveInventoryConfig extends EXGInventoryConfig {
+public class EXGKitPreviewInventoryConfig extends EXGInventoryConfig {
 
 
 	// -------------------------------------------------- //
 
 
-	private EXGItemConfig playerItem;
+	private EXGItemConfig kitItem;
 
 	private EXGItemConfig nextPageItem;
 	private EXGItemConfig previousPageItem;
@@ -24,7 +24,7 @@ public class EXGKitsPlayerGiveInventoryConfig extends EXGInventoryConfig {
 	// -------------------------------------------------- //
 
 
-	public EXGKitsPlayerGiveInventoryConfig(String title, int rows, EXGItemConfig borderItems, int... borderSlots) {
+	public EXGKitPreviewInventoryConfig(String title, int rows, EXGItemConfig borderItems, int... borderSlots) {
 		super(title, rows, borderItems, borderSlots);
 	}
 
@@ -32,8 +32,8 @@ public class EXGKitsPlayerGiveInventoryConfig extends EXGInventoryConfig {
 	// -------------------------------------------------- //
 
 
-	public EXGItemConfig getPlayerItem() {
-		return playerItem;
+	public EXGItemConfig getKitItem() {
+		return kitItem;
 	}
 
 
@@ -65,8 +65,8 @@ public class EXGKitsPlayerGiveInventoryConfig extends EXGInventoryConfig {
 	// -------------------------------------------------- //
 
 
-	public void setPlayerItem(EXGItemConfig playerItem) {
-		this.playerItem = playerItem;
+	public void setKitItem(EXGItemConfig kitItem) {
+		this.kitItem = kitItem;
 	}
 
 
@@ -98,16 +98,16 @@ public class EXGKitsPlayerGiveInventoryConfig extends EXGInventoryConfig {
 	// -------------------------------------------------- //
 
 
-	public EXGKitsPlayerGiveInventoryConfig copy() {
+	public EXGKitPreviewInventoryConfig copy() {
 
-		EXGKitsPlayerGiveInventoryConfig copy = new EXGKitsPlayerGiveInventoryConfig(
+		EXGKitPreviewInventoryConfig copy = new EXGKitPreviewInventoryConfig(
 				this.getEXGTitle().getTitle(),
 				this.getRows(),
 				this.getBorderItem().duplicate(),
 				this.getBorderSlots()
 		);
 
-		copy.setPlayerItem(this.getPlayerItem().duplicate());
+		copy.setKitItem(this.getKitItem().duplicate());
 		copy.setNextPageItem(this.getNextPageItem().duplicate());
 		copy.setPreviousPageItem(this.getPreviousPageItem().duplicate());
 		copy.setCurrentPageItem(this.getCurrentPageItem().duplicate());
