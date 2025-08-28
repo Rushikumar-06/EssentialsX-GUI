@@ -219,10 +219,11 @@ public class HomesInventory extends PaginatedFastInv {
 			return;
 		}
 
-		player.closeInventory();
+		SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("homes", "createNewHomeEntryType");
 		if (entryType == EXGEntryType.CHAT) {
+			player.closeInventory();
 			player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_HOME_NAME_CHAT, null));
 		}
 
@@ -267,10 +268,11 @@ public class HomesInventory extends PaginatedFastInv {
 			return;
 		}
 
-		player.closeInventory();
+		SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("homes", "searchHomeEntryType");
 		if (entryType == EXGEntryType.CHAT) {
+			player.closeInventory();
 			player.sendMessage(MessagesUtils.get(EXGMessage.SEARCH_HOME_CHAT, null));
 		}
 
@@ -343,6 +345,9 @@ public class HomesInventory extends PaginatedFastInv {
 								"previousPage", String.valueOf(this.currentPage() - 1),
 								"nextPage", String.valueOf(this.currentPage() + 1)))
 				.build());
+
+		Player player = this.getInventory().getViewers().isEmpty() ? null : (Player) this.getInventory().getViewers().get(0);
+		SoundsUtils.playSound(player, EXGSound.GUI_PAGE_CHANGE);
 	}
 
 

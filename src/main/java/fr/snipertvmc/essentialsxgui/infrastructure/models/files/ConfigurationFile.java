@@ -156,41 +156,33 @@ public class ConfigurationFile {
 
 	public Map<String, String> getPlaceholders() {
 
+		Map<String, String> placeholders = new HashMap<>();
+
+		placeholders.put("value_guiOpen", "BLOCK_CHEST_OPEN");
+		placeholders.put("value_guiClose", "BLOCK_CHEST_CLOSE");
+		placeholders.put("value_guiBack", "ENTITY_EXPERIENCE_BOTTLE_THROW");
+		placeholders.put("value_guiClick", "ENTITY_CHICKEN_EGG");
+		placeholders.put("value_guiPageChange", "ITEM_BOOK_PAGE_TURN");
+
+		placeholders.put("value_actionSuccess", "ENTITY_PLAYER_LEVELUP");
+		placeholders.put("value_actionCanceled", "ENTITY_ITEM_BREAK");
+		placeholders.put("value_actionFailure", "ENTITY_VILLAGER_NO");
+
 		MCServerVersion serverVersion = Main.getInstance().getMCServerVersion();
-		switch (serverVersion) {
 
-			case v1_8_8 -> {
+		if (serverVersion == MCServerVersion.v1_8_8) {
+			placeholders.put("value_guiOpen", "CHEST_OPEN");
+			placeholders.put("value_guiClose", "CHEST_CLOSE");
+			placeholders.put("value_guiBack", "SHOOT_ARROW");
+			placeholders.put("value_guiClick", "CHICKEN_EGG_POP");
+			placeholders.put("value_guiPageChange", "CLICK");
 
-				return Map.of(
-						"value_guiOpen", "CHEST_OPEN",
-						"value_guiClose", "CHEST_CLOSE",
-						"value_guiBack", "SHOOT_ARROW",
-						"value_guiClick", "CHICKEN_EGG_POP",
-
-						"value_actionSuccess", "LEVEL_UP",
-						"value_actionCanceled", "ITEM_BREAK",
-						"value_actionFailure", "VILLAGER_NO"
-				);
-			}
-
-			case v1_9_4, v1_10_2, v1_11_2, v1_12_2, v1_13_2, v1_14_4, v1_15_2, v1_16_5,
-			     v1_17_1, v1_18_2, v1_19_4, v1_20_6, v1_21, v1_21_1, v1_21_2, v1_21_3,
-			     v1_21_4, v1_21_5, v1_21_6, v1_21_7, v1_21_8 -> {
-
-				return Map.of(
-						"value_guiOpen", "BLOCK_CHEST_OPEN",
-						"value_guiClose", "BLOCK_CHEST_CLOSE",
-						"value_guiBack", "ENTITY_EXPERIENCE_BOTTLE_THROW",
-						"value_guiClick", "ENTITY_CHICKEN_EGG",
-
-						"value_actionSuccess", "ENTITY_PLAYER_LEVELUP",
-						"value_actionCanceled", "ENTITY_ITEM_BREAK",
-						"value_actionFailure", "ENTITY_VILLAGER_NO"
-				);
-			}
+			placeholders.put("value_actionSuccess", "LEVEL_UP");
+			placeholders.put("value_actionCanceled", "ITEM_BREAK");
+			placeholders.put("value_actionFailure", "VILLAGER_NO");
 		}
 
-		return new HashMap<>();
+		return placeholders;
 	}
 
 

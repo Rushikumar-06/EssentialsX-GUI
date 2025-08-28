@@ -69,7 +69,7 @@ general:
                                    "ACACIA_LOG", "DARK_OAK_LOG", "OAK_LEAVES", "SPRUCE_LEAVES", "BIRCH_LEAVES",
                                    "JUNGLE_LEAVES", "ACACIA_LEAVES", "DARK_OAK_LEAVES", "SPONGE", "GLASS", "LAPIS_ORE",
                                    "LAPIS_BLOCK", "DISPENSER", "SANDSTONE", "NOTE_BLOCK", "DEAD_BUSH",
-                                   "BROWN_MUSHROOM", "RED_MUSHROOM", "GOLD_BLOCK", "IRON_BLOCK", "BRICK_BLOCK", "TNT",
+                                   "BROWN_MUSHROOM", "RED_MUSHROOM", "GOLD_BLOCK", "IRON_BLOCK", "BRICKS", "TNT",
                                    "BOOKSHELF", "MOSSY_COBBLESTONE", "OBSIDIAN"]
 
 
@@ -116,7 +116,7 @@ general:
                                    "ACACIA_LOG", "DARK_OAK_LOG", "OAK_LEAVES", "SPRUCE_LEAVES", "BIRCH_LEAVES",
                                    "JUNGLE_LEAVES", "ACACIA_LEAVES", "DARK_OAK_LEAVES", "SPONGE", "GLASS", "LAPIS_ORE",
                                    "LAPIS_BLOCK", "DISPENSER", "SANDSTONE", "NOTE_BLOCK", "DEAD_BUSH",
-                                   "BROWN_MUSHROOM", "RED_MUSHROOM", "GOLD_BLOCK", "IRON_BLOCK", "BRICK_BLOCK", "TNT",
+                                   "BROWN_MUSHROOM", "RED_MUSHROOM", "GOLD_BLOCK", "IRON_BLOCK", "BRICKS", "TNT",
                                    "BOOKSHELF", "MOSSY_COBBLESTONE", "OBSIDIAN"]
 
 
@@ -177,6 +177,10 @@ sounds:
   # The sound played when a player clicks on an interactive item in the GUI.
   # Default: "%%value_guiClick%%"
   guiClick: "%%value_guiClick%%"
+
+  # The sound played when a player changes the page in a paginated GUI.
+  # Default: "%%value_guiPageChange%%"
+  guiPageChange: "%%value_guiPageChange%%"
 
 
   # The sound played when a player completes an action.

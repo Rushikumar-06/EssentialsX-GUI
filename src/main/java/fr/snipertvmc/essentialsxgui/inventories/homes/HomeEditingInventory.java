@@ -100,10 +100,11 @@ public class HomeEditingInventory extends FastInv {
 				return;
 			}
 
-			player.closeInventory();
+			SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 
 			EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("homes", "changeHomeDisplayNameEntryType");
 			if (entryType == EXGEntryType.CHAT) {
+				player.closeInventory();
 				player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_DISPLAY_NAME_CHAT, null));
 			}
 
@@ -134,10 +135,11 @@ public class HomeEditingInventory extends FastInv {
 			return;
 		}
 
-		player.closeInventory();
+		SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("homes", "changeHomeIconEntryType");
 		if (entryType == EXGEntryType.CHAT) {
+			player.closeInventory();
 			player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_ICON_NAME_CHAT, null));
 		}
 
@@ -169,10 +171,11 @@ public class HomeEditingInventory extends FastInv {
 			return;
 		}
 
-		player.closeInventory();
+		SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("homes", "deleteHomeEntryType");
 		if (entryType == EXGEntryType.CHAT) {
+			player.closeInventory();
 			player.sendMessage(MessagesUtils.get(EXGMessage.CONFIRM_DELETE_HOME_CHAT, Map.of("homeName", home.getName())));
 		}
 

@@ -205,10 +205,11 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 			return;
 		}
 
-		player.closeInventory();
+		SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("kits", "createNewKitNameEntryType");
 		if (entryType == EXGEntryType.CHAT) {
+			player.closeInventory();
 			player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_HOME_NAME_CHAT, null));
 		}
 
@@ -239,10 +240,15 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 
 	private void createNewKitDelay(Player player, String kitName) {
 
-		player.closeInventory();
+		if (!Main.getInstance().getChatManager().canDoChat(player.getUniqueId())) {
+			return;
+		}
+
+		SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("kits", "createNewKitDelayEntryType");
 		if (entryType == EXGEntryType.CHAT) {
+			player.closeInventory();
 			player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_KIT_DELAY_CHAT, null));
 		}
 
@@ -272,10 +278,11 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 			return;
 		}
 
-		player.closeInventory();
+		SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("kits", "searchKitEntryType");
 		if (entryType == EXGEntryType.CHAT) {
+			player.closeInventory();
 			player.sendMessage(MessagesUtils.get(EXGMessage.SEARCH_KIT_CHAT, null));
 		}
 
@@ -322,6 +329,9 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 								"previousPage", String.valueOf(this.currentPage() - 1),
 								"nextPage", String.valueOf(this.currentPage() + 1)))
 				.build());
+
+		Player player = this.getInventory().getViewers().isEmpty() ? null : (Player) this.getInventory().getViewers().get(0);
+		SoundsUtils.playSound(player, EXGSound.GUI_PAGE_CHANGE);
 	}
 
 

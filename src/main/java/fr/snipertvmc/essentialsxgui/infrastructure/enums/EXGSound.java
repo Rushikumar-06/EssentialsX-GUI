@@ -14,6 +14,7 @@ public enum EXGSound {
 	GUI_CLOSE("guiClose"),
 	GUI_BACK("guiBack"),
 	GUI_CLICK("guiClick"),
+	GUI_PAGE_CHANGE("guiPageChange"),
 
 	// ACTION
 	ACTION_SUCCESS("actionSuccess"),

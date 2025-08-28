@@ -2,6 +2,7 @@ package fr.snipertvmc.essentialsxgui.inventories.others;
 
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGEntryResult;
+import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGEntrySettings;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.others.EXGDataEntryGUInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
@@ -9,6 +10,7 @@ import fr.snipertvmc.essentialsxgui.libraries.exglib.Pair;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.ItemBuilder;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.PaginatedFastInv;
 import fr.snipertvmc.essentialsxgui.utilities.data.DataEntryUtils;
+import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
@@ -142,6 +144,13 @@ public class DataEntryGUIInventory extends PaginatedFastInv {
 								"previousPage", String.valueOf(page - 1),
 								"nextPage", String.valueOf(page + 1)))
 				.build());
+
+		if (this.getInventory().getViewers().isEmpty()) {
+			return;
+		}
+
+		Player player = this.getInventory().getViewers().isEmpty() ? null : (Player) this.getInventory().getViewers().get(0);
+		SoundsUtils.playSound(player, EXGSound.GUI_PAGE_CHANGE);
 	}
 
 

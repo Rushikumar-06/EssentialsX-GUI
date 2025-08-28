@@ -111,10 +111,11 @@ public class KitEditingInventory extends FastInv {
 			return;
 		}
 
-		player.closeInventory();
+		SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("kits", "changeKitIconEntryType");
 		if (entryType == EXGEntryType.CHAT) {
+			player.closeInventory();
 			player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_DISPLAY_NAME_CHAT, null));
 		}
 
@@ -145,10 +146,11 @@ public class KitEditingInventory extends FastInv {
 			return;
 		}
 
-		player.closeInventory();
+		SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("kits", "changeKitIconEntryType");
 		if (entryType == EXGEntryType.CHAT) {
+			player.closeInventory();
 			player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_ICON_NAME_CHAT, null));
 		}
 
@@ -180,10 +182,11 @@ public class KitEditingInventory extends FastInv {
 			return;
 		}
 
-		player.closeInventory();
+		SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("kits", "deleteKitEntryType");
 		if (entryType == EXGEntryType.CHAT) {
+			player.closeInventory();
 			player.sendMessage(MessagesUtils.get(EXGMessage.CONFIRM_DELETE_KIT_CHAT, Map.of("kitName", kit.getName())));
 		}
 

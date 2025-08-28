@@ -125,20 +125,40 @@ public class DataEntryUtils {
 
 			}, 10);
 
-			case GUI -> {
+			case ANVIL -> new DataEntryAnvilInventory(player, entrySettings,
 
-				Consumer<Pair<String, EXGEntryResult>> updatedOnSuccess = result -> {
-					Pair<Pair<Material, Byte>, EXGEntryResult> materialResult = checkMaterialEntry(result.getLeft());
-					onSuccess.accept(new Pair<>(materialResult.getLeft(), result.getRight()));
-				};
+					materialPairResult -> {
 
-				Consumer<Pair<String, EXGEntryResult>> updatedOnFailure = result -> {
-					Pair<Pair<Material, Byte>, EXGEntryResult> materialResult = checkMaterialEntry(result.getLeft());
-					onFailure.accept(new Pair<>(materialResult.getLeft(), result.getRight()));
-				};
+						Pair<Pair<Material, Byte>, EXGEntryResult> result = checkMaterialEntry(materialPairResult.getLeft());
 
-				new DataEntryGUIInventory(player, entrySettings, updatedOnSuccess, updatedOnFailure).open(player);
-			}
+						if (result.getRight() == EXGEntryResult.SUCCESS) {
+							onSuccess.accept(result);
+						} else {
+							onFailure.accept(result);
+							result.getRight().playResult(player);
+						}
+
+					},
+					materialPairResult -> onFailure.accept(new Pair<>(null, EXGEntryResult.CANCELED))
+			);
+
+			case GUI -> new DataEntryGUIInventory(player, entrySettings,
+
+					materialPairResult -> {
+
+						Pair<Pair<Material, Byte>, EXGEntryResult> result = checkMaterialEntry(materialPairResult.getLeft());
+
+						if (result.getRight() == EXGEntryResult.SUCCESS) {
+							onSuccess.accept(result);
+						} else {
+							onFailure.accept(result);
+							result.getRight().playResult(player);
+						}
+
+					},
+					materialPairResult -> onFailure.accept(new Pair<>(null, EXGEntryResult.CANCELED))
+
+			).open(player);
 		}
 
 	}

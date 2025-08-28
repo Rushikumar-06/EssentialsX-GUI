@@ -93,6 +93,9 @@ public class KitPreviewInventory extends PaginatedFastInv {
 								"previousPage", String.valueOf(this.currentPage() - 1),
 								"nextPage", String.valueOf(this.currentPage() + 1)))
 				.build());
+
+		Player player = this.getInventory().getViewers().isEmpty() ? null : (Player) this.getInventory().getViewers().get(0);
+		SoundsUtils.playSound(player, EXGSound.GUI_PAGE_CHANGE);
 	}
 
 
