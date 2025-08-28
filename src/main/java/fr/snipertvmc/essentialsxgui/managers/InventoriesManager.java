@@ -5,6 +5,7 @@ import fr.snipertvmc.essentialsxgui.infrastructure.models.files.InventoryFile;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes.EXGHomeEditingInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes.EXGHomesInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.*;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.others.EXGDataEntryGUInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
 
 import java.util.List;
@@ -24,6 +25,8 @@ public class InventoriesManager {
 	private EXGKitPlayerGiveInventoryConfig kitPlayerGiveInventoryConfig;
 	private EXGKitEditingInventoryConfig kitEditingInventoryConfig;
 	private EXGKitEditorInventoryConfig kitEditorInventoryConfig;
+
+	private EXGDataEntryGUInventoryConfig dataEntryGUIInventoryConfig;
 
 
 	// -------------------------------------------------- //
@@ -48,6 +51,8 @@ public class InventoriesManager {
 			case "kitPlayerGive" -> loadkitPlayerGiveInventory(title, rows, inventoryName, borderItem, borderSlots);
 			case "kitEditing" -> loadKitEditingInventory(title, rows, inventoryName, borderItem, borderSlots);
 			case "kitEditor" -> loadKitEditorInventory(title, rows, inventoryName, borderItem, borderSlots);
+
+			case "dataEntryGUI" -> loadDataEntryGUIInventory(title, rows, inventoryName, borderItem, borderSlots);
 
 		}
 	}
@@ -282,6 +287,34 @@ public class InventoriesManager {
 	}
 
 
+	//
+	// KITS INVENTORIES
+	//
+
+
+	public void loadDataEntryGUIInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+
+		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
+
+		dataEntryGUIInventoryConfig = new EXGDataEntryGUInventoryConfig(title, rows, borderItem, borderSlots);
+
+		dataEntryGUIInventoryConfig.setMaterialIconItem(
+				inventoryFile.getItem("materialIconItem"));
+
+		dataEntryGUIInventoryConfig.setNextPageItem(inventoryFile.getItem(
+				"nextPageItem"));
+		dataEntryGUIInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
+				"previousPageItem"));
+		dataEntryGUIInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
+				"currentPageItem"));
+
+		dataEntryGUIInventoryConfig.setCancelItem(inventoryFile.getItem(
+				"cancelItem"));
+
+		dataEntryGUIInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
+	}
+
+
 	// -------------------------------------------------- //
 
 
@@ -295,9 +328,14 @@ public class InventoriesManager {
 				"kitPreview",
 				"kitPlayerGive",
 				"kitEditing",
-				"kitEditor"
+				"kitEditor",
+
+				"dataEntryGUI"
 		);
 	}
+
+
+	// -------------------------------------------------- //
 
 
 	public EXGHomesInventoryConfig getHomesInventoryConfig() {
@@ -306,6 +344,7 @@ public class InventoriesManager {
 	public EXGHomeEditingInventoryConfig getHomeEditingInventoryConfig() {
 		return homeEditingInventoryConfig;
 	}
+
 
 	public EXGKitsAdminViewInventoryConfig getKitsAdminInventoryConfig() {
 		return kitsAdminInventoryConfig;
@@ -326,6 +365,10 @@ public class InventoriesManager {
 		return kitEditorInventoryConfig;
 	}
 
+
+	public EXGDataEntryGUInventoryConfig getDataEntryGUIInventoryConfig() {
+		return dataEntryGUIInventoryConfig;
+	}
 
 
 	// -------------------------------------------------- //

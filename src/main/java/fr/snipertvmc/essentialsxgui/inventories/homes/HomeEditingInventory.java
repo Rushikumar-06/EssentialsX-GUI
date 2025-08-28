@@ -7,6 +7,7 @@ import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGEntrySettings;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGHome;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes.EXGHomeEditingInventoryConfig;
+import fr.snipertvmc.essentialsxgui.libraries.exglib.Pair;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.FastInv;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.data.DataEntryUtils;
@@ -100,11 +101,16 @@ public class HomeEditingInventory extends FastInv {
 			}
 
 			player.closeInventory();
-			player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_DISPLAY_NAME, null));
 
-			EXGEntrySettings entrySettings = new EXGEntrySettings(EXGEntryType.CHAT)
-					.setMinLength(1)
-					.setMaxLength(32);
+			EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("homes", "changeHomeDisplayNameEntryType");
+			if (entryType == EXGEntryType.CHAT) {
+				player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_DISPLAY_NAME_CHAT, null));
+			}
+
+			EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
+					.setEntryDisplayName(MessagesUtils.get(EXGMessage.ENTER_NEW_DISPLAY_NAME, null))
+					.setMinLength(Main.getInstance().getConfiguration().getMinNameLength())
+					.setMaxLength(Main.getInstance().getConfiguration().getMaxNameLength());
 
 			DataEntryUtils.processStringEntry(player, entrySettings,
 
@@ -129,9 +135,18 @@ public class HomeEditingInventory extends FastInv {
 		}
 
 		player.closeInventory();
-		player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_ICON_NAME, null));
 
-		EXGEntrySettings entrySettings = new EXGEntrySettings(EXGEntryType.CHAT);
+		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("homes", "changeHomeIconEntryType");
+		if (entryType == EXGEntryType.CHAT) {
+			player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_ICON_NAME_CHAT, null));
+		}
+
+		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
+				.setEntryDisplayName(MessagesUtils.get(EXGMessage.ENTER_NEW_ICON_NAME, null))
+				.setMaterialListPath("general.modules.homes.changeHomeIconMaterialList")
+				.setMinLength(Main.getInstance().getConfiguration().getMinNameLength())
+				.setMaxLength(Main.getInstance().getConfiguration().getMaxNameLength());
+
 		DataEntryUtils.processMaterialEntry(player, entrySettings,
 
 				result -> {
@@ -155,9 +170,14 @@ public class HomeEditingInventory extends FastInv {
 		}
 
 		player.closeInventory();
-		player.sendMessage(MessagesUtils.get(EXGMessage.CONFIRM_DELETE_HOME, Map.of("homeName", home.getName())));
 
-		EXGEntrySettings entrySettings = new EXGEntrySettings(EXGEntryType.CHAT)
+		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("homes", "deleteHomeEntryType");
+		if (entryType == EXGEntryType.CHAT) {
+			player.sendMessage(MessagesUtils.get(EXGMessage.CONFIRM_DELETE_HOME_CHAT, Map.of("homeName", home.getName())));
+		}
+
+		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
+				.setEntryDisplayName(MessagesUtils.get(EXGMessage.CONFIRM_DELETE_HOME, null))
 				.setEqualsToSomething("confirm");
 
 		DataEntryUtils.processStringEntry(player, entrySettings,

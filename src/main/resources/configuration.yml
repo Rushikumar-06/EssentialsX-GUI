@@ -35,15 +35,107 @@ general:
 
   modules:
 
-    # Set this to true if you want to use the homes features.
-    # This will allow players to access the homes GUI.
-    # Default: true
-    homes: true
+    homes:
 
-    # Set this to true if you want to use the kits features.
-    # This will allow players to access the kits GUI.
-    # Default: true
-    kits: true
+      # Set this to true if you want to use the homes features.
+      # This will allow players to access the homes GUI.
+      # Default: true
+      enabled: true
+
+
+      # Decide how players can create a home.
+      # Ways available: "CHAT", "ANVIL"
+      createNewHomeEntryType: "CHAT"
+
+
+      # Decide how players can search for a home.
+      # Ways available: "CHAT", "ANVIL"
+      searchHomeEntryType: "ANVIL"
+
+
+      # Decide how players can change the display name of a home.
+      # Ways available: "CHAT", "ANVIL"
+      changeHomeDisplayNameEntryType: "CHAT"
+
+
+      # Decide how players can change the icon of a home.
+      # Ways available: "CHAT", "ANVIL", "GUI"
+      changeHomeIconEntryType: "GUI"
+
+      # If you set the changeHomeIconEntryType to "GUI", you must set the materials available in the GUI here.
+      changeHomeIconMaterialList: ["STONE", "DIRT", "COBBLESTONE", "OAK_PLANKS", "SPRUCE_PLANKS", "BIRCH_PLANKS",
+                                   "JUNGLE_PLANKS", "ACACIA_PLANKS", "DARK_OAK_PLANKS","SAND", "GRAVEL", "GOLD_ORE",
+                                   "IRON_ORE", "COAL_ORE", "OAK_LOG", "SPRUCE_LOG", "BIRCH_LOG", "JUNGLE_LOG",
+                                   "ACACIA_LOG", "DARK_OAK_LOG", "OAK_LEAVES", "SPRUCE_LEAVES", "BIRCH_LEAVES",
+                                   "JUNGLE_LEAVES", "ACACIA_LEAVES", "DARK_OAK_LEAVES", "SPONGE", "GLASS", "LAPIS_ORE",
+                                   "LAPIS_BLOCK", "DISPENSER", "SANDSTONE", "NOTE_BLOCK", "DEAD_BUSH",
+                                   "BROWN_MUSHROOM", "RED_MUSHROOM", "GOLD_BLOCK", "IRON_BLOCK", "BRICK_BLOCK", "TNT",
+                                   "BOOKSHELF", "MOSSY_COBBLESTONE", "OBSIDIAN"]
+
+
+      # Decide how players can delete a home.
+      # Ways available: "CHAT", "ANVIL"
+      deleteHomeEntryType: "CHAT"
+
+    kits:
+
+      # Set this to true if you want to use the kits features.
+      # This will allow players to access the kits GUI.
+      # Default: true
+      enabled: true
+
+
+      # Decide how players can create a kit.
+      # Ways available: "CHAT", "ANVIL"
+      createNewKitNameEntryType: "CHAT"
+
+
+      # Decide how players can create a kit.
+      # Ways available: "CHAT", "ANVIL"
+      createNewKitDelayEntryType: "CHAT"
+
+
+      # Decide how players can search for a kit.
+      # Ways available: "CHAT", "ANVIL"
+      searchKitEntryType: "ANVIL"
+
+
+      # Decide how players can change the display name of a kit.
+      # Ways available: "CHAT", "ANVIL"
+      changeKitDisplayNameEntryType: "CHAT"
+
+
+      # Decide how players can change the icon of a kit.
+      # Ways available: "CHAT", "ANVIL", "GUI"
+      changeKitIconEntryType: "GUI"
+
+      # If you set the changeKitIconEntryType to "GUI", you must set the materials available in the GUI here.
+      changeKitIconMaterialList: ["STONE", "DIRT", "COBBLESTONE", "OAK_PLANKS", "SPRUCE_PLANKS", "BIRCH_PLANKS",
+                                   "JUNGLE_PLANKS", "ACACIA_PLANKS", "DARK_OAK_PLANKS","SAND", "GRAVEL", "GOLD_ORE",
+                                   "IRON_ORE", "COAL_ORE", "OAK_LOG", "SPRUCE_LOG", "BIRCH_LOG", "JUNGLE_LOG",
+                                   "ACACIA_LOG", "DARK_OAK_LOG", "OAK_LEAVES", "SPRUCE_LEAVES", "BIRCH_LEAVES",
+                                   "JUNGLE_LEAVES", "ACACIA_LEAVES", "DARK_OAK_LEAVES", "SPONGE", "GLASS", "LAPIS_ORE",
+                                   "LAPIS_BLOCK", "DISPENSER", "SANDSTONE", "NOTE_BLOCK", "DEAD_BUSH",
+                                   "BROWN_MUSHROOM", "RED_MUSHROOM", "GOLD_BLOCK", "IRON_BLOCK", "BRICK_BLOCK", "TNT",
+                                   "BOOKSHELF", "MOSSY_COBBLESTONE", "OBSIDIAN"]
+
+
+      # Decide how players can delete a kit.
+      # Ways available: "CHAT", "ANVIL"
+      deleteKitEntryType: "CHAT"
+
+
+  # Default text of input when using anvil way to enter text.
+  # Default: "Type here"
+  anvilTypeHereText: "Type here"
+
+
+  # Minimum and maximum length for names entered by players.
+  # ⚠️ Warning: Payers can bypass these limits if they use the defaults commands of EssentialsX.
+  #             This only applies to names and not to display names, icons, etc.
+  # Default: min = 3, max = 32
+  minNameLength: 3
+  maxNameLength: 32
 
 
   # Set this to true if you want to open the kit admin view by default when the /kit command is performed for players

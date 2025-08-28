@@ -75,19 +75,29 @@ errors:
 
 general:
 
-  enterNewDisplayName: "&ePlease enter the new &fdisplay name &ein the chat. &7&oType 'cancel' to cancel the action."
-  enterNewIconName: "&ePlease enter the new &ficon name &ein the chat. &7&oType 'cancel' to cancel the action."
-  enterNewHomeName: "&ePlease enter the new &fhome name &ein the chat. &7&oType 'cancel' to cancel the action."
-  enterNewKitName: "&ePlease enter the new &fkit name &ein the chat. &7&oType 'cancel' to cancel the action."
-  enterNewKitDelay: "&ePlease enter the new &fkit delay &ein the chat. &7&oType 'cancel' to cancel the action."
+  enterNewDisplayNameInChat: "&ePlease enter the new &fdisplay name &ein the chat. &7&oType 'cancel' to cancel the action."
+  enterNewIconNameInChat: "&ePlease enter the new &ficon name &ein the chat. &7&oType 'cancel' to cancel the action."
+  enterNewHomeNameInChat: "&ePlease enter the new &fhome name &ein the chat. &7&oType 'cancel' to cancel the action."
+  enterNewKitNameInChat: "&ePlease enter the new &fkit name &ein the chat. &7&oType 'cancel' to cancel the action."
+  enterNewKitDelayInChat: "&ePlease enter the new &fkit delay &ein the chat. &7&oType 'cancel' to cancel the action."
+  enterNewDisplayName: "Enter new display name"
+  enterNewIconName: "Enter new icon name"
+  enterNewHomeName: "Enter new home name"
+  enterNewKitName: "Enter new kit name"
+  enterNewKitDelay: "Enter new kit delay"
+
+  searchHomeInChat: "&ePlease enter first few letters of the &fhome name &ein the chat. &7&oType 'cancel' to cancel the action."
+  searchKitInChat: "&ePlease enter first few letters of the &fkit name &ein the chat. &7&oType 'cancel' to cancel the action."
+  searchHome: "Search home"
+  searchKit: "Search kit"
 
   # Placeholders available: {homeName}
-  confirmDeleteHome: "&6Are you sure you want to delete this home? ({homeName}) &7Type &f'confirm' &7to confirm or &f'cancel' &7to cancel."
+  confirmDeleteHomeInChat: "&6Are you sure you want to delete this home? ({homeName}) &7Type &f'confirm' &7to confirm or &f'cancel' &7to cancel."
   # Placeholders available: {kitName}
-  confirmDeleteKit: "&6Are you sure you want to delete the '({kitName})' kit ? &7Type &f'confirm' &7to confirm or &f'cancel' &7to cancel."
+  confirmDeleteKitInChat: "&6Are you sure you want to delete the '({kitName})' kit ? &7Type &f'confirm' &7to confirm or &f'cancel' &7to cancel."
+  confirmDeleteHome: "Type 'confirm' to confirm deletion"
+  confirmDeleteKit: "Type 'confirm' to confirm deletion"
 
-  searchHome: "&ePlease enter first few letters of the &fhome name &ein the chat. &7&oType 'cancel' to cancel the action."
-  searchKit: "&ePlease enter first few letters of the &fkit name &ein the chat. &7&oType 'cancel' to cancel the action."
 
   actionCanceled: "&6The action has been canceled."
   actionExpired: "&cThe action has expired. Please try again."

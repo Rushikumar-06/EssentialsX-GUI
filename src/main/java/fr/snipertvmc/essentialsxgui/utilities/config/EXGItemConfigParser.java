@@ -30,7 +30,9 @@ public class EXGItemConfigParser {
 				"kitsPlayerView.items.kitItem",
 				"kitPlayerGive.items.playerItem",
 				"kitEditor.items.saveKitItem",
-				"kitEditor.items.cancelChangesItem"
+				"kitEditor.items.cancelChangesItem",
+
+				"dataEntryGUI.items.materialIconItem"
 		));
 
 		put("slot", List.of(
@@ -44,12 +46,16 @@ public class EXGItemConfigParser {
 				"kitsPlayerView.items.kitItem",
 				"kitsPlayerView.items.noKitsItem",
 				"kitsPlayerView.items.noSearchKitResultsItem",
-				"kitPlayerGive.items.playerItem"
+				"kitPlayerGive.items.playerItem",
+
+				"dataEntryGUI.items.materialIconItem"
 		));
 
 		put("material", List.of(
 				"homeEditing.items.previewHomeItem",
-				"kitEditing.items.previewKitItem"
+				"kitEditing.items.previewKitItem",
+
+				"dataEntryGUI.items.materialIconItem"
 		));
 	}};
 

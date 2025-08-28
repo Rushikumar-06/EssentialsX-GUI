@@ -29,35 +29,40 @@ public class FilesManager {
 	private final Map<String, InventoryFile> inventoriesFiles = new HashMap<>();
 
 
-	private final Map<String, String> filesPaths = Map.of(
-			"configuration", "configuration",
-			"messages", "messages",
+	private final Map<String, String> filesPaths = new HashMap<>() {{
+		put("configuration", "configuration");
+		put("messages", "messages");
 
-			"homeEditing", "inventories/homes/homeEditing",
-			"homes", "inventories/homes/homes",
+		put("homeEditing", "inventories/homes/homeEditing");
+		put("homes", "inventories/homes/homes");
 
-			"kitsAdminView", "inventories/kits/kitsAdminView",
-			"kitsPlayerView", "inventories/kits/kitsPlayerView",
-			"kitPreview", "inventories/kits/kitPreview",
-			"kitPlayerGive", "inventories/kits/kitPlayerGive",
-			"kitEditing", "inventories/kits/kitEditing",
-			"kitEditor", "inventories/kits/kitEditor"
-	);
+		put("kitsAdminView", "inventories/kits/kitsAdminView");
+		put("kitsPlayerView", "inventories/kits/kitsPlayerView");
+		put("kitPreview", "inventories/kits/kitPreview");
+		put("kitPlayerGive", "inventories/kits/kitPlayerGive");
+		put("kitEditing", "inventories/kits/kitEditing");
+		put("kitEditor", "inventories/kits/kitEditor");
 
-	private final Map<String, String> filesVersions = Map.of(
-			"configuration", "1.2", // Updated for version: 1.0.3
-			"messages", "1.2", // Updated for version: 1.0.3
+		put("dataEntryGUI", "inventories/others/dataEntryGUI");
+	}};
 
-			"homeEditing", "1.1", // Updated for version: 1.0.2
-			"homes", "1.3", // Updated for version: 1.0.3
 
-			"kitsAdminView", "1.2", // Updated for version: 1.0.3
-			"kitsPlayerView", "1.2", // Updated for version: 1.0.3
-			"kitPreview", "1.0",
-			"kitPlayerGive", "1.0",
-			"kitEditing", "1.1", // Updated for version: 1.0.2
-			"kitEditor", "1.0" // Updated for version: 1.0.2
-	);
+	private final Map<String, String> filesVersions = new HashMap<>() {{
+		put("configuration", "1.2"); // Updated for version: 1.1.0
+		put("messages", "1.2"); // Updated for version: 1.1.0
+
+		put("homeEditing", "1.1"); // Updated for version: 1.0.2
+		put("homes", "1.3"); // Updated for version: 1.1.0
+
+		put("kitsAdminView", "1.2"); // Updated for version: 1.1.0
+		put("kitsPlayerView", "1.2"); // Updated for version: 1.1.0
+		put("kitPreview", "1.0");
+		put("kitPlayerGive", "1.0");
+		put("kitEditing", "1.1"); // Updated for version: 1.0.2
+		put("kitEditor", "1.0"); // Updated for version: 1.0.2
+
+		put("dataEntryGUI", "1.0"); // Updated for version: 1.1.0
+	}};
 
 
 	// -------------------------------------------------- //

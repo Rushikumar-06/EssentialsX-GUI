@@ -32,17 +32,26 @@ public enum EXGMessage {
 
 
 	// GENERAL
+	ENTER_NEW_DISPLAY_NAME_CHAT("general.enterNewDisplayNameInChat"),
+	ENTER_NEW_ICON_NAME_CHAT("general.enterNewIconNameInChat"),
+	ENTER_NEW_HOME_NAME_CHAT("general.enterNewHomeNameInChat"),
+	ENTER_NEW_KIT_NAME_CHAT("general.enterNewKitNameInChat"),
+	ENTER_NEW_KIT_DELAY_CHAT("general.enterNewKitDelayInChat"),
 	ENTER_NEW_DISPLAY_NAME("general.enterNewDisplayName"),
 	ENTER_NEW_ICON_NAME("general.enterNewIconName"),
 	ENTER_NEW_HOME_NAME("general.enterNewHomeName"),
 	ENTER_NEW_KIT_NAME("general.enterNewKitName"),
 	ENTER_NEW_KIT_DELAY("general.enterNewKitDelay"),
 
-	CONFIRM_DELETE_HOME("general.confirmDeleteHome"),
-	CONFIRM_DELETE_KIT("general.confirmDeleteKit"),
-
+	SEARCH_HOME_CHAT("general.searchHomeInChat"),
+	SEARCH_KIT_CHAT("general.searchKitInChat"),
 	SEARCH_HOME("general.searchHome"),
 	SEARCH_KIT("general.searchKit"),
+
+	CONFIRM_DELETE_HOME_CHAT("general.confirmDeleteHomeInChat"),
+	CONFIRM_DELETE_KIT_CHAT("general.confirmDeleteKitInChat"),
+	CONFIRM_DELETE_HOME("general.confirmDeleteHome"),
+	CONFIRM_DELETE_KIT("general.confirmDeleteKit"),
 
 	ACTION_CANCELED("general.actionCanceled"),
 	ACTION_EXPIRED("general.actionExpired"),

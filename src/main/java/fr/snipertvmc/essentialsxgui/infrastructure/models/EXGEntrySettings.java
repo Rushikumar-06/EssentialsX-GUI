@@ -1,6 +1,7 @@
 package fr.snipertvmc.essentialsxgui.infrastructure.models;
 
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGEntryType;
+import fr.snipertvmc.essentialsxgui.libraries.exglib.Pair;
 import org.bukkit.Material;
 
 public class EXGEntrySettings {
@@ -10,6 +11,7 @@ public class EXGEntrySettings {
 
 
 	private final EXGEntryType entryType;
+	private String entryDisplayName;
 
 	// For String
 	int minLength = -1;
@@ -20,6 +22,7 @@ public class EXGEntrySettings {
 
 	// For Material
 	private Material[] acceptedMaterials;
+	private String materialListPath;
 
 
 	// -------------------------------------------------- //
@@ -36,6 +39,9 @@ public class EXGEntrySettings {
 	// General
 	public EXGEntryType getType() {
 		return entryType;
+	}
+	public String getEntryDisplayName() {
+		return entryDisplayName;
 	}
 
 	// For String
@@ -59,9 +65,19 @@ public class EXGEntrySettings {
 	public Material[] getAcceptedMaterials() {
 		return acceptedMaterials;
 	}
+	public String getMaterialListPath() {
+		return materialListPath;
+	}
 
 
 	// -------------------------------------------------- //
+
+
+	// General
+	public EXGEntrySettings setEntryDisplayName(String entryDisplayName) {
+		this.entryDisplayName = entryDisplayName;
+		return this;
+	}
 
 
 	// For String
@@ -90,6 +106,10 @@ public class EXGEntrySettings {
 	// For Material
 	public EXGEntrySettings setAcceptedMaterials(Material[] acceptedMaterials) {
 		this.acceptedMaterials = acceptedMaterials;
+		return this;
+	}
+	public EXGEntrySettings setMaterialListPath(String materialListPath) {
+		this.materialListPath = materialListPath;
 		return this;
 	}
 

@@ -8,6 +8,7 @@ import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGEntrySettings;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGHome;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes.EXGHomesInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
+import fr.snipertvmc.essentialsxgui.libraries.exglib.Pair;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.PaginatedFastInv;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.data.DataEntryUtils;
@@ -219,11 +220,16 @@ public class HomesInventory extends PaginatedFastInv {
 		}
 
 		player.closeInventory();
-		player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_HOME_NAME, null));
 
-		EXGEntrySettings entrySettings = new EXGEntrySettings(EXGEntryType.CHAT)
-				.setMinLength(1)
-				.setMaxLength(32);
+		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("homes", "createNewHomeEntryType");
+		if (entryType == EXGEntryType.CHAT) {
+			player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_HOME_NAME_CHAT, null));
+		}
+
+		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
+				.setEntryDisplayName(MessagesUtils.get(EXGMessage.ENTER_NEW_DISPLAY_NAME, null))
+				.setMinLength(Main.getInstance().getConfiguration().getMinNameLength())
+				.setMaxLength(Main.getInstance().getConfiguration().getMaxNameLength());
 
 		DataEntryUtils.processStringEntry(player, entrySettings,
 
@@ -262,9 +268,16 @@ public class HomesInventory extends PaginatedFastInv {
 		}
 
 		player.closeInventory();
-		player.sendMessage(MessagesUtils.get(EXGMessage.SEARCH_HOME, null));
 
-		EXGEntrySettings entrySettings = new EXGEntrySettings(EXGEntryType.CHAT);
+		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("homes", "searchHomeEntryType");
+		if (entryType == EXGEntryType.CHAT) {
+			player.sendMessage(MessagesUtils.get(EXGMessage.SEARCH_HOME_CHAT, null));
+		}
+
+		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
+				.setEntryDisplayName(MessagesUtils.get(EXGMessage.SEARCH_HOME, null))
+				.setMinLength(1)
+				.setMaxLength(Main.getInstance().getConfiguration().getMaxNameLength());
 
 		DataEntryUtils.processStringEntry(player, entrySettings,
 

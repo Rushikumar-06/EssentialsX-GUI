@@ -8,6 +8,7 @@ import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGEntrySettings;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGKit;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.EXGKitsPlayerViewInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
+import fr.snipertvmc.essentialsxgui.libraries.exglib.Pair;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.PaginatedFastInv;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.data.DataEntryUtils;
@@ -186,9 +187,16 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 		}
 
 		player.closeInventory();
-		player.sendMessage(MessagesUtils.get(EXGMessage.SEARCH_KIT, null));
 
-		EXGEntrySettings entrySettings = new EXGEntrySettings(EXGEntryType.CHAT);
+		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("kits", "searchKitEntryType");
+		if (entryType == EXGEntryType.CHAT) {
+			player.sendMessage(MessagesUtils.get(EXGMessage.SEARCH_KIT_CHAT, null));
+		}
+
+		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
+				.setEntryDisplayName(MessagesUtils.get(EXGMessage.SEARCH_KIT, null))
+				.setMinLength(1)
+				.setMaxLength(Main.getInstance().getConfiguration().getMaxNameLength());
 
 		DataEntryUtils.processStringEntry(player, entrySettings,
 

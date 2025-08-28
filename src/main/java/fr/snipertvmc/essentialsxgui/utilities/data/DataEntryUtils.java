@@ -3,6 +3,8 @@ package fr.snipertvmc.essentialsxgui.utilities.data;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGEntryResult;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGEntrySettings;
+import fr.snipertvmc.essentialsxgui.inventories.others.DataEntryAnvilInventory;
+import fr.snipertvmc.essentialsxgui.inventories.others.DataEntryGUIInventory;
 import fr.snipertvmc.essentialsxgui.libraries.exglib.Pair;
 import fr.snipertvmc.essentialsxgui.utilities.type.TypeUtils;
 import org.bukkit.Bukkit;
@@ -43,17 +45,15 @@ public class DataEntryUtils {
 
 			}, 10);
 
-			case ANVIL -> {
+			case ANVIL -> new DataEntryAnvilInventory(player, entrySettings, onSuccess, onFailure);
 
-				player.sendMessage("§cAnvil entry not implemented yet. Contact an admin.");
-				onFailure.accept(null);
-			}
+			case GUI -> new DataEntryGUIInventory(player, entrySettings, onSuccess, onFailure).open(player);
 		}
 
 	}
 
 
-	private static Pair<String, EXGEntryResult> checkStringEntry(String value, EXGEntrySettings entrySettings) {
+	public static Pair<String, EXGEntryResult> checkStringEntry(String value, EXGEntrySettings entrySettings) {
 
 		if (entrySettings.getEqualsToSomething() != null && value.equalsIgnoreCase(entrySettings.getEqualsToSomething())) {
 			return new Pair<>(value, EXGEntryResult.SUCCESS);
@@ -112,7 +112,7 @@ public class DataEntryUtils {
 
 			case CHAT -> Main.getInstance().getChatManager().addChat(player.getUniqueId(), entry -> {
 
-				Pair<Pair<Material, Byte>, EXGEntryResult> result = checkMaterialEntry(entry, entrySettings);
+				Pair<Pair<Material, Byte>, EXGEntryResult> result = checkMaterialEntry(entry);
 
 				Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
 					if (result.getRight() == EXGEntryResult.SUCCESS) {
@@ -125,17 +125,26 @@ public class DataEntryUtils {
 
 			}, 10);
 
-			case ANVIL -> {
+			case GUI -> {
 
-				player.sendMessage("§cAnvil entry not implemented yet. Contact an admin.");
-				onFailure.accept(null);
+				Consumer<Pair<String, EXGEntryResult>> updatedOnSuccess = result -> {
+					Pair<Pair<Material, Byte>, EXGEntryResult> materialResult = checkMaterialEntry(result.getLeft());
+					onSuccess.accept(new Pair<>(materialResult.getLeft(), result.getRight()));
+				};
+
+				Consumer<Pair<String, EXGEntryResult>> updatedOnFailure = result -> {
+					Pair<Pair<Material, Byte>, EXGEntryResult> materialResult = checkMaterialEntry(result.getLeft());
+					onFailure.accept(new Pair<>(materialResult.getLeft(), result.getRight()));
+				};
+
+				new DataEntryGUIInventory(player, entrySettings, updatedOnSuccess, updatedOnFailure).open(player);
 			}
 		}
 
 	}
 
 
-	private static Pair<Pair<Material, Byte>, EXGEntryResult> checkMaterialEntry(String value, EXGEntrySettings entrySettings) {
+	public static Pair<Pair<Material, Byte>, EXGEntryResult> checkMaterialEntry(String value) {
 
 		if (value.equalsIgnoreCase("cancel")) {
 			return new Pair<>(null, EXGEntryResult.CANCELED);
