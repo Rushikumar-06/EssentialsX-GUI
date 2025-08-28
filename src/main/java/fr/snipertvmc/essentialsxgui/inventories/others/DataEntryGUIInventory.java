@@ -102,18 +102,17 @@ public class DataEntryGUIInventory extends PaginatedFastInv {
 			setItems(config.getBorderSlots(), config.getBorderItem().build());
 		}
 
-
-		previousPageItem(config.getPreviousPageItem().getSlot(), config.getPreviousPageItem()
+		previousPageItem(config.getPreviousPageItem().getSlot(), p -> config.getPreviousPageItem().duplicate()
 				.updateVariables(
-						Map.of("currentPage", String.valueOf(this.currentPage()),
-								"previousPage", String.valueOf(this.currentPage() - 1)))
+						Map.of("currentPage", String.valueOf(p + 1),
+								"previousPage", String.valueOf(p)))
 				.build());
 
 
-		nextPageItem(config.getNextPageItem().getSlot(), config.getNextPageItem()
+		nextPageItem(config.getNextPageItem().getSlot(), p -> config.getNextPageItem().duplicate()
 				.updateVariables(
-						Map.of("currentPage", String.valueOf(this.currentPage()),
-								"nextPage", String.valueOf(this.currentPage() + 1)))
+						Map.of("currentPage", String.valueOf(p - 1),
+								"nextPage", String.valueOf(p)))
 				.build());
 
 
@@ -136,12 +135,12 @@ public class DataEntryGUIInventory extends PaginatedFastInv {
 	@Override
 	protected void onPageChange(int page) {
 
-		setItem(config.getCurrentPageItem().getSlot(), config.getCurrentPageItem()
+		setItem(config.getCurrentPageItem().getSlot(), config.getCurrentPageItem().duplicate()
 				.updateVariables(
-						Map.of("currentPage", String.valueOf(this.currentPage()),
+						Map.of("currentPage", String.valueOf(page),
 								"totalPages", String.valueOf(this.lastPage()),
-								"previousPage", String.valueOf(this.currentPage() - 1),
-								"nextPage", String.valueOf(this.currentPage() + 1)))
+								"previousPage", String.valueOf(page - 1),
+								"nextPage", String.valueOf(page + 1)))
 				.build());
 	}
 

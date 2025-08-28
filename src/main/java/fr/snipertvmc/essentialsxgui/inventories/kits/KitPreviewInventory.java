@@ -45,17 +45,17 @@ public class KitPreviewInventory extends PaginatedFastInv {
 		}
 
 
-		previousPageItem(config.getPreviousPageItem().getSlot(), config.getPreviousPageItem()
+		previousPageItem(config.getPreviousPageItem().getSlot(), p -> config.getPreviousPageItem().duplicate()
 				.updateVariables(
-						Map.of("currentPage", String.valueOf(this.currentPage()),
-								"previousPage", String.valueOf(this.currentPage() - 1)))
+						Map.of("currentPage", String.valueOf(p + 1),
+								"previousPage", String.valueOf(p)))
 				.build());
 
 
-		nextPageItem(config.getNextPageItem().getSlot(), config.getNextPageItem()
+		nextPageItem(config.getNextPageItem().getSlot(), p -> config.getNextPageItem().duplicate()
 				.updateVariables(
-						Map.of("currentPage", String.valueOf(this.currentPage()),
-								"nextPage", String.valueOf(this.currentPage() + 1)))
+						Map.of("currentPage", String.valueOf(p - 1),
+								"nextPage", String.valueOf(p)))
 				.build());
 
 
