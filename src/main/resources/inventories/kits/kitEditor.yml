@@ -44,7 +44,7 @@ kitEditor:
     slots: [36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 48, 49, 50, 52, 53]
     material: "%%value_materialBorderItem%%"
     data: 15
-    displayName: "§8- §6§lEssentialsX-GUI"
+    displayName: "&8- &6&lEssentialsX-GUI"
 
   items:
 
@@ -64,4 +64,4 @@ kitEditor:
       lore:
         - "&7Click to cancel all the changes made to this kit."
         - ""
-        - "§4§lWarning: §cAll changes, and your items, will be lost!"
+        - "&4&lWarning: &cAll changes, and your items, will be lost!"
