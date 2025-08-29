@@ -250,7 +250,7 @@ public class HomesInventory extends PaginatedFastInv {
 						return;
 					}
 
-					Main.getInstance().getEssentials().getUser(player).setHome(result.getLeft(), player.getLocation());
+					Main.getInstance().getEssentials().getUser(player).setHome(result.getLeft().replace(" ", "_"), player.getLocation());
 					player.sendMessage(MessagesUtils.get(EXGMessage.HOME_CREATED, Map.of("homeName", result.getLeft())));
 					new HomesInventory(player, null, null).open(player);
 					SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);

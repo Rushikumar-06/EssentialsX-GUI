@@ -261,7 +261,7 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 
 					long delay = Long.parseLong(result.getLeft());
 
-					Main.getInstance().getHookManager().getEssentialsHook().createKitWithPlayer(player, kitName, delay);
+					Main.getInstance().getHookManager().getEssentialsHook().createKitWithPlayer(player, kitName.replace(" ", "_"), delay);
 					player.sendMessage(MessagesUtils.get(EXGMessage.KIT_CREATED, Map.of("kitName", kitName, "kitDelay", String.valueOf(delay))));
 					new KitsAdminViewInventory(player, null, null).open(player);
 					SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
