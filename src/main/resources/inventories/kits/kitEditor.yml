@@ -51,7 +51,8 @@ kitEditor:
     # 'enabled' value will be ignored in this section. Item is enabled by default.
     saveKitItem:
       slot: 47
-      material: "LIME_DYE"
+      material: "%%value_materialSaveKitItem%%"
+      data: 10
       displayName: "&aSave Kit"
       lore:
         - "&7Click to save the changes made to this kit."
@@ -59,7 +60,8 @@ kitEditor:
     # 'enabled' value will be ignored in this section. Item is enabled by default.
     cancelChangesItem:
       slot: 51
-      material: "RED_DYE"
+      material: "%%value_materialCancelChangesItem%%"
+      data: 1
       displayName: "&cCancel Changes"
       lore:
         - "&7Click to cancel all the changes made to this kit."

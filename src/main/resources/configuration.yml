@@ -63,14 +63,8 @@ general:
       changeHomeIconEntryType: "GUI"
 
       # If you set the changeHomeIconEntryType to "GUI", you must set the materials available in the GUI here.
-      changeHomeIconMaterialList: ["STONE", "DIRT", "COBBLESTONE", "OAK_PLANKS", "SPRUCE_PLANKS", "BIRCH_PLANKS",
-                                   "JUNGLE_PLANKS", "ACACIA_PLANKS", "DARK_OAK_PLANKS","SAND", "GRAVEL", "GOLD_ORE",
-                                   "IRON_ORE", "COAL_ORE", "OAK_LOG", "SPRUCE_LOG", "BIRCH_LOG", "JUNGLE_LOG",
-                                   "ACACIA_LOG", "DARK_OAK_LOG", "OAK_LEAVES", "SPRUCE_LEAVES", "BIRCH_LEAVES",
-                                   "JUNGLE_LEAVES", "ACACIA_LEAVES", "DARK_OAK_LEAVES", "SPONGE", "GLASS", "LAPIS_ORE",
-                                   "LAPIS_BLOCK", "DISPENSER", "SANDSTONE", "NOTE_BLOCK", "DEAD_BUSH",
-                                   "BROWN_MUSHROOM", "RED_MUSHROOM", "GOLD_BLOCK", "IRON_BLOCK", "BRICKS", "TNT",
-                                   "BOOKSHELF", "MOSSY_COBBLESTONE", "OBSIDIAN"]
+      changeHomeIconMaterialList: ["STONE", "COBBLESTONE", "DIRT", "IRON_ORE", "DIAMOND_BLOCK", "SPONGE", "ANVIL",
+                                   "QUARTZ_BLOCK", "COOKED_BEEF", "APPLE", "BREAD", "WHEAT", "BOW", "IRON_SWORD",]
 
 
       # Decide how players can delete a home.
@@ -110,14 +104,8 @@ general:
       changeKitIconEntryType: "GUI"
 
       # If you set the changeKitIconEntryType to "GUI", you must set the materials available in the GUI here.
-      changeKitIconMaterialList: ["STONE", "DIRT", "COBBLESTONE", "OAK_PLANKS", "SPRUCE_PLANKS", "BIRCH_PLANKS",
-                                   "JUNGLE_PLANKS", "ACACIA_PLANKS", "DARK_OAK_PLANKS","SAND", "GRAVEL", "GOLD_ORE",
-                                   "IRON_ORE", "COAL_ORE", "OAK_LOG", "SPRUCE_LOG", "BIRCH_LOG", "JUNGLE_LOG",
-                                   "ACACIA_LOG", "DARK_OAK_LOG", "OAK_LEAVES", "SPRUCE_LEAVES", "BIRCH_LEAVES",
-                                   "JUNGLE_LEAVES", "ACACIA_LEAVES", "DARK_OAK_LEAVES", "SPONGE", "GLASS", "LAPIS_ORE",
-                                   "LAPIS_BLOCK", "DISPENSER", "SANDSTONE", "NOTE_BLOCK", "DEAD_BUSH",
-                                   "BROWN_MUSHROOM", "RED_MUSHROOM", "GOLD_BLOCK", "IRON_BLOCK", "BRICKS", "TNT",
-                                   "BOOKSHELF", "MOSSY_COBBLESTONE", "OBSIDIAN"]
+      changeKitIconMaterialList: ["STONE", "COBBLESTONE", "DIRT", "IRON_ORE", "DIAMOND_BLOCK", "SPONGE", "ANVIL",
+                                  "QUARTZ_BLOCK", "COOKED_BEEF", "APPLE", "BREAD", "WHEAT", "BOW", "IRON_SWORD",]
 
 
       # Decide how players can delete a kit.
