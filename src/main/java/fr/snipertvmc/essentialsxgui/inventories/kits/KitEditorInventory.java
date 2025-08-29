@@ -100,7 +100,7 @@ public class KitEditorInventory extends FastInv {
 
 	private void saveKit(Player player, EXGKit kit, ItemStack... kitItems) {
 
-		long delay = (long) Main.getInstance().getEssentials().getKits().getKit(kit.getName()).get("delay");
+		long delay = ((Number) Main.getInstance().getEssentials().getKits().getKit(kit.getName()).get("delay")).longValue();
 
 		EXGPlayerInventoryData inventoryBackup = InventoryBackupUtils.createPlayerInventoryBackup(player);
 		player.getInventory().clear();
