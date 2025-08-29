@@ -14,6 +14,7 @@ import fr.snipertvmc.essentialsxgui.utilities.data.DataEntryUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.entity.Player;
 
+import java.util.List;
 import java.util.Map;
 
 public class HomeEditingInventory extends FastInv {
@@ -109,6 +110,7 @@ public class HomeEditingInventory extends FastInv {
 			}
 
 			EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
+					.setAcceptedTypes(List.of(EXGEntryType.CHAT, EXGEntryType.ANVIL))
 					.setEntryDisplayName(MessagesUtils.get(EXGMessage.ENTER_NEW_DISPLAY_NAME, null))
 					.setMinLength(Main.getInstance().getConfiguration().getMinNameLength())
 					.setMaxLength(Main.getInstance().getConfiguration().getMaxNameLength());
@@ -144,6 +146,7 @@ public class HomeEditingInventory extends FastInv {
 		}
 
 		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
+				.setAcceptedTypes(List.of(EXGEntryType.CHAT, EXGEntryType.ANVIL, EXGEntryType.GUI))
 				.setEntryDisplayName(MessagesUtils.get(EXGMessage.ENTER_NEW_ICON_NAME, null))
 				.setMaterialListPath("general.modules.homes.changeHomeIconMaterialList")
 				.setMinLength(Main.getInstance().getConfiguration().getMinNameLength())
@@ -180,6 +183,7 @@ public class HomeEditingInventory extends FastInv {
 		}
 
 		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
+				.setAcceptedTypes(List.of(EXGEntryType.CHAT, EXGEntryType.ANVIL))
 				.setEntryDisplayName(MessagesUtils.get(EXGMessage.CONFIRM_DELETE_HOME, null))
 				.setEqualsToSomething("confirm");
 

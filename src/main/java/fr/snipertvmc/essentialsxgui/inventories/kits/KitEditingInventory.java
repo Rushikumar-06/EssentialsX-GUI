@@ -14,6 +14,7 @@ import fr.snipertvmc.essentialsxgui.utilities.data.DataEntryUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.entity.Player;
 
+import java.util.List;
 import java.util.Map;
 
 public class KitEditingInventory extends FastInv {
@@ -120,6 +121,7 @@ public class KitEditingInventory extends FastInv {
 		}
 
 		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
+				.setAcceptedTypes(List.of(EXGEntryType.CHAT, EXGEntryType.ANVIL))
 				.setEntryDisplayName(MessagesUtils.get(EXGMessage.ENTER_NEW_DISPLAY_NAME, null))
 				.setMinLength(Main.getInstance().getConfiguration().getMinNameLength())
 				.setMaxLength(Main.getInstance().getConfiguration().getMaxNameLength());
@@ -155,6 +157,7 @@ public class KitEditingInventory extends FastInv {
 		}
 
 		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
+				.setAcceptedTypes(List.of(EXGEntryType.CHAT, EXGEntryType.ANVIL, EXGEntryType.GUI))
 				.setEntryDisplayName(MessagesUtils.get(EXGMessage.ENTER_NEW_ICON_NAME, null))
 				.setMaterialListPath("general.modules.kits.changeKitIconMaterialList")
 				.setMinLength(Main.getInstance().getConfiguration().getMinNameLength())
@@ -191,6 +194,7 @@ public class KitEditingInventory extends FastInv {
 		}
 
 		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
+				.setAcceptedTypes(List.of(EXGEntryType.CHAT, EXGEntryType.ANVIL))
 				.setEntryDisplayName(MessagesUtils.get(EXGMessage.CONFIRM_DELETE_KIT, null))
 				.setEqualsToSomething("confirm");
 

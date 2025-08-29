@@ -24,8 +24,9 @@ public class DataEntryUtils {
 	                                      Consumer<Pair<String, EXGEntryResult>> onSuccess,
 	                                      Consumer<Pair<String, EXGEntryResult>> onFailure) {
 
-		if (!entrySettings.getType().getTypeAccepted().getClass().isInstance(String.class)) {
-			throw new IllegalArgumentException("The entry type " + entrySettings.getType().name() + " is not compatible with String.");
+		if (!entrySettings.getAcceptedTypes().contains(entrySettings.getType())) {
+			onFailure.accept(new Pair<>(null, EXGEntryResult.CANCELED));
+			throw new IllegalArgumentException("The entry type " + entrySettings.getType() + " is not accepted in the accepted types list.");
 		}
 
 		switch (entrySettings.getType()) {
@@ -107,8 +108,9 @@ public class DataEntryUtils {
 	                                        Consumer<Pair<Pair<Material, Byte>, EXGEntryResult>> onSuccess,
 	                                        Consumer<Pair<Pair<Material, Byte>, EXGEntryResult>> onFailure) {
 
-		if (!entrySettings.getType().getTypeAccepted().getClass().isInstance(Material.class)) {
-			throw new IllegalArgumentException("The entry type " + entrySettings.getType().name() + " is not compatible with Material.");
+		if (!entrySettings.getAcceptedTypes().contains(entrySettings.getType())) {
+			onFailure.accept(new Pair<>(null, EXGEntryResult.CANCELED));
+			throw new IllegalArgumentException("The entry type " + entrySettings.getType() + " is not accepted in the accepted types list.");
 		}
 
 		switch (entrySettings.getType()) {

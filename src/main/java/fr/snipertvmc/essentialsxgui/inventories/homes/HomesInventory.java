@@ -15,10 +15,7 @@ import fr.snipertvmc.essentialsxgui.utilities.data.DataEntryUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.entity.Player;
 
-import java.util.Comparator;
-import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class HomesInventory extends PaginatedFastInv {
@@ -228,6 +225,7 @@ public class HomesInventory extends PaginatedFastInv {
 		}
 
 		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
+				.setAcceptedTypes(List.of(EXGEntryType.CHAT, EXGEntryType.ANVIL))
 				.setEntryDisplayName(MessagesUtils.get(EXGMessage.ENTER_NEW_DISPLAY_NAME, null))
 				.setMinLength(Main.getInstance().getConfiguration().getMinNameLength())
 				.setMaxLength(Main.getInstance().getConfiguration().getMaxNameLength());
@@ -277,6 +275,7 @@ public class HomesInventory extends PaginatedFastInv {
 		}
 
 		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
+				.setAcceptedTypes(List.of(EXGEntryType.CHAT, EXGEntryType.ANVIL))
 				.setEntryDisplayName(MessagesUtils.get(EXGMessage.SEARCH_HOME, null))
 				.setMinLength(1)
 				.setMaxLength(Main.getInstance().getConfiguration().getMaxNameLength());

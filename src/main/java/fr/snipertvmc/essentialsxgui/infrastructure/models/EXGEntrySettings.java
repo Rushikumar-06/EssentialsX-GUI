@@ -4,6 +4,8 @@ import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGEntryType;
 import fr.snipertvmc.essentialsxgui.libraries.exglib.Pair;
 import org.bukkit.Material;
 
+import java.util.List;
+
 public class EXGEntrySettings {
 
 
@@ -12,6 +14,7 @@ public class EXGEntrySettings {
 
 	private final EXGEntryType entryType;
 	private String entryDisplayName;
+	private List<EXGEntryType> acceptedTypes;
 
 	// For String
 	int minLength = -1;
@@ -42,6 +45,9 @@ public class EXGEntrySettings {
 	}
 	public String getEntryDisplayName() {
 		return entryDisplayName;
+	}
+	public List<EXGEntryType> getAcceptedTypes() {
+		return acceptedTypes;
 	}
 
 	// For String
@@ -76,6 +82,10 @@ public class EXGEntrySettings {
 	// General
 	public EXGEntrySettings setEntryDisplayName(String entryDisplayName) {
 		this.entryDisplayName = entryDisplayName;
+		return this;
+	}
+	public EXGEntrySettings setAcceptedTypes(List<EXGEntryType> acceptedTypes) {
+		this.acceptedTypes = acceptedTypes;
 		return this;
 	}
 
