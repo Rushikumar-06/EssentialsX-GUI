@@ -55,8 +55,11 @@ public class DataEntryUtils {
 
 	public static Pair<String, EXGEntryResult> checkStringEntry(String value, EXGEntrySettings entrySettings) {
 
-		if (entrySettings.getEqualsToSomething() != null && value.equalsIgnoreCase(entrySettings.getEqualsToSomething())) {
-			return new Pair<>(value, EXGEntryResult.SUCCESS);
+		if (entrySettings.getEqualsToSomething() != null) {
+			if (value.equalsIgnoreCase(entrySettings.getEqualsToSomething())) {
+				return new Pair<>(value, EXGEntryResult.SUCCESS);
+			}
+			return new Pair<>(value, EXGEntryResult.CANCELED);
 		}
 
 		if (value.equalsIgnoreCase("cancel")) {
