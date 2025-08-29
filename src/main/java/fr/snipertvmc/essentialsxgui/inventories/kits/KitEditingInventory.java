@@ -114,7 +114,7 @@ public class KitEditingInventory extends FastInv {
 
 		SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 
-		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("kits", "changeKitIconEntryType");
+		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("kits", "changeKitDisplayNameEntryType");
 		if (entryType == EXGEntryType.CHAT) {
 			player.closeInventory();
 			player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_DISPLAY_NAME_CHAT, null));
