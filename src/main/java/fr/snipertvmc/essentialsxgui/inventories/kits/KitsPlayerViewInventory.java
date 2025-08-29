@@ -183,8 +183,6 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 			return;
 		}
 
-		SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
-
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("kits", "searchKitEntryType");
 		if (entryType == EXGEntryType.CHAT) {
 			player.closeInventory();

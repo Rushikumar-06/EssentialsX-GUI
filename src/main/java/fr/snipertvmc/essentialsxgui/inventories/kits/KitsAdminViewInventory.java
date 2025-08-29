@@ -202,8 +202,6 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 			return;
 		}
 
-		SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
-
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("kits", "createNewKitNameEntryType");
 		if (entryType == EXGEntryType.CHAT) {
 			player.closeInventory();
@@ -242,8 +240,6 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 			return;
 		}
 
-		SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
-
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("kits", "createNewKitDelayEntryType");
 		if (entryType == EXGEntryType.CHAT) {
 			player.closeInventory();
@@ -276,8 +272,6 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 		if (!Main.getInstance().getChatManager().canDoChat(player.getUniqueId())) {
 			return;
 		}
-
-		SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("kits", "searchKitEntryType");
 		if (entryType == EXGEntryType.CHAT) {

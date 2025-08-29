@@ -63,7 +63,11 @@ public class KitEditingInventory extends FastInv {
 					.updateVariables(
 							Map.of("kitName", kit.getName(),
 									"kitDisplayName", kit.getDisplayName()))
-					.build(), e -> changeKitDisplayName(player, kit));
+					.build(), e -> {
+
+				SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
+				changeKitDisplayName(player, kit);
+			});
 		}
 
 
@@ -71,7 +75,11 @@ public class KitEditingInventory extends FastInv {
 			setItem(config.getChangeIconItem().getSlot(), config.getChangeIconItem()
 					.updateVariables(
 							Map.of("kitName", kit.getName()))
-					.build(), e -> changeKitIcon(player, kit));
+					.build(), e -> {
+
+				SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
+				changeKitIcon(player, kit);
+			});
 		}
 
 		if (config.getDeleteKitItem().isEnabled()) {
@@ -79,7 +87,11 @@ public class KitEditingInventory extends FastInv {
 					.updateVariables(
 							Map.of("kitName", kit.getName(),
 									"kitDisplayName", kit.getDisplayName()))
-					.build(), e -> deleteKit(player, kit));
+					.build(), e -> {
+
+				SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
+				deleteKit(player, kit);
+			});
 		}
 
 
@@ -111,8 +123,6 @@ public class KitEditingInventory extends FastInv {
 		if (!Main.getInstance().getChatManager().canDoChat(player.getUniqueId())) {
 			return;
 		}
-
-		SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("kits", "changeKitDisplayNameEntryType");
 		if (entryType == EXGEntryType.CHAT) {
@@ -148,8 +158,6 @@ public class KitEditingInventory extends FastInv {
 			return;
 		}
 
-		SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
-
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("kits", "changeKitIconEntryType");
 		if (entryType == EXGEntryType.CHAT) {
 			player.closeInventory();
@@ -184,8 +192,6 @@ public class KitEditingInventory extends FastInv {
 		if (!Main.getInstance().getChatManager().canDoChat(player.getUniqueId())) {
 			return;
 		}
-
-		SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("kits", "deleteKitEntryType");
 		if (entryType == EXGEntryType.CHAT) {

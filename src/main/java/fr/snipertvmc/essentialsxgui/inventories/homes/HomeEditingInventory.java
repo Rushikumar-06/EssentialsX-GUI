@@ -12,6 +12,7 @@ import fr.snipertvmc.essentialsxgui.libraries.fastinv.FastInv;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.data.DataEntryUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 import java.util.List;
@@ -63,14 +64,22 @@ public class HomeEditingInventory extends FastInv {
 					.updateVariables(
 							Map.of("homeName", home.getName(),
 									"homeDisplayName", home.getDisplayName()))
-					.build(), e -> changeHomeDisplayName(player, home));
+					.build(), e -> {
+
+				SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
+				changeHomeDisplayName(player, home);
+			});
 		}
 
 		if (config.getChangeIconItem().isEnabled()) {
 			setItem(config.getChangeIconItem().getSlot(), config.getChangeIconItem()
 					.updateVariables(
 							Map.of("homeName", home.getName()))
-					.build(), e -> changeHomeIcon(player, home));
+					.build(), e -> {
+
+				SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
+				changeHomeIcon(player, home);
+			});
 		}
 
 		if (config.getDeleteHomeItem().isEnabled()) {
@@ -78,7 +87,11 @@ public class HomeEditingInventory extends FastInv {
 					.updateVariables(
 							Map.of("homeName", home.getName(),
 									"homeDisplayName", home.getDisplayName()))
-					.build(), e -> deleteHome(player, home));
+					.build(), e -> {
+
+				SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
+				deleteHome(player, home);
+			});
 		}
 
 
@@ -100,8 +113,6 @@ public class HomeEditingInventory extends FastInv {
 			if (!Main.getInstance().getChatManager().canDoChat(player.getUniqueId())) {
 				return;
 			}
-
-			SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 
 			EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("homes", "changeHomeDisplayNameEntryType");
 			if (entryType == EXGEntryType.CHAT) {
@@ -137,8 +148,6 @@ public class HomeEditingInventory extends FastInv {
 			return;
 		}
 
-		SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
-
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("homes", "changeHomeIconEntryType");
 		if (entryType == EXGEntryType.CHAT) {
 			player.closeInventory();
@@ -173,8 +182,6 @@ public class HomeEditingInventory extends FastInv {
 		if (!Main.getInstance().getChatManager().canDoChat(player.getUniqueId())) {
 			return;
 		}
-
-		SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("homes", "deleteHomeEntryType");
 		if (entryType == EXGEntryType.CHAT) {
