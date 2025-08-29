@@ -286,7 +286,8 @@ public class HomesInventory extends PaginatedFastInv {
 
 					Set<EXGHome> searchHomes = Main.getInstance().getPlayerManager().getPlayer(player.getUniqueId().toString()).getHomes()
 							.stream()
-							.filter(home -> MessagesUtils.removeColorCodes(home.getDisplayName()).toLowerCase().startsWith(result.getLeft().toLowerCase()))
+							.filter(home -> MessagesUtils.removeColorCodes(home.getDisplayName()).toLowerCase().contains(result.getLeft().toLowerCase()) ||
+									MessagesUtils.removeColorCodes(home.getName()).toLowerCase().contains(result.getLeft().toLowerCase()))
 							.collect(Collectors.toCollection(LinkedHashSet::new));
 
 					if (searchHomes.isEmpty()) {

@@ -204,7 +204,8 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 					Set<EXGKit> searchKits = Main.getInstance().getEXGServer().getKits()
 							.stream()
 							.filter(kit -> player.hasPermission("essentials.kits." + kit.getName()))
-							.filter(kit -> MessagesUtils.removeColorCodes(kit.getDisplayName()).toLowerCase().startsWith(result.getLeft().toLowerCase()))
+							.filter(kit -> MessagesUtils.removeColorCodes(kit.getDisplayName()).toLowerCase().contains(result.getLeft().toLowerCase()) ||
+									MessagesUtils.removeColorCodes(kit.getName()).toLowerCase().contains(result.getLeft().toLowerCase()))
 							.sorted(Comparator.comparing(EXGKit::getName))
 							.collect(Collectors.toCollection(LinkedHashSet::new));
 

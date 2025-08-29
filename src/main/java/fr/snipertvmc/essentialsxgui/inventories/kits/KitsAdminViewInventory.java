@@ -297,7 +297,8 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 
 					Set<EXGKit> searchKits = Main.getInstance().getEXGServer().getKits()
 							.stream()
-							.filter(kit -> MessagesUtils.removeColorCodes(kit.getDisplayName()).toLowerCase().startsWith(result.getLeft().toLowerCase()))
+							.filter(kit -> MessagesUtils.removeColorCodes(kit.getDisplayName()).toLowerCase().contains(result.getLeft().toLowerCase()) ||
+									MessagesUtils.removeColorCodes(kit.getName()).toLowerCase().contains(result.getLeft().toLowerCase()))
 							.sorted(Comparator.comparing(EXGKit::getName))
 							.collect(Collectors.toCollection(LinkedHashSet::new));
 
