@@ -170,6 +170,10 @@ public class ConfigurationFile {
 
 		MCServerVersion serverVersion = Main.getInstance().getMCServerVersion();
 
+		if (serverVersion.isLowerThan(MCServerVersion.v1_14_4)) {
+			placeholders.put("value_guiPageChange", "UI_BUTTON_CLICK");
+		}
+
 		if (serverVersion == MCServerVersion.v1_8_8) {
 			placeholders.put("value_guiOpen", "CHEST_OPEN");
 			placeholders.put("value_guiClose", "CHEST_CLOSE");
