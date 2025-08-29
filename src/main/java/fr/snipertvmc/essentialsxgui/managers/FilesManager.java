@@ -58,7 +58,7 @@ public class FilesManager {
 		put("kitsPlayerView", "1.2"); // Updated for version: 1.1.0
 		put("kitPreview", "1.0");
 		put("kitPlayerGive", "1.0");
-		put("kitEditing", "1.1"); // Updated for version: 1.0.2
+		put("kitEditing", "1.2"); // Updated for version: 1.1.0
 		put("kitEditor", "1.0"); // Updated for version: 1.0.2
 
 		put("dataEntryGUI", "1.0"); // Updated for version: 1.1.0
