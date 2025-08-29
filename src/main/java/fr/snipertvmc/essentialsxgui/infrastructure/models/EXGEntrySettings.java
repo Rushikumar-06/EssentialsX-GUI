@@ -1,7 +1,6 @@
 package fr.snipertvmc.essentialsxgui.infrastructure.models;
 
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGEntryType;
-import fr.snipertvmc.essentialsxgui.libraries.exglib.Pair;
 import org.bukkit.Material;
 
 import java.util.List;
