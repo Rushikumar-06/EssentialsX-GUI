@@ -7,14 +7,19 @@ import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGEntrySettings;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGKit;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.EXGKitEditingInventoryConfig;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.FastInv;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.data.DataEntryUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class KitEditingInventory extends FastInv {
 
@@ -47,13 +52,40 @@ public class KitEditingInventory extends FastInv {
 
 
 		if (config.getPreviewKitItem().isEnabled()) {
-			setItem(config.getPreviewKitItem().getSlot(), config.getPreviewKitItem()
-					.setMaterial(kit.getMaterial().name())
-					.setData(kit.getData())
-					.updateVariables(
-							Map.of("kitName", kit.getName(),
-									"kitDisplayName", kit.getDisplayName()))
-					.build());
+
+			EXGItemConfig previewKitItem = config.getPreviewKitItem().duplicate();
+			previewKitItem.setMaterial(kit.getMaterial().name());
+			previewKitItem.setData(kit.getData());
+
+			ItemStack previewKitItemStack;
+
+			if (kit.getCustomItemStack() != null) {
+				previewKitItemStack = kit.getCustomItemStack().clone();
+				ItemMeta meta = previewKitItemStack.getItemMeta();
+
+				meta.setDisplayName(previewKitItem.getDisplayName()
+						.replace("{kitDisplayName}", kit.getDisplayName())
+						.replace("{kitName}", kit.getName())
+						.replace("&", "§"));
+
+				meta.setLore(previewKitItem.getLore().stream()
+						.map(line -> line
+								.replace("{kitDisplayName}", kit.getDisplayName())
+								.replace("{kitName}", kit.getName())
+								.replace("&", "§"))
+						.collect(Collectors.toList()));
+
+				previewKitItemStack.setItemMeta(meta);
+
+			} else {
+				previewKitItemStack = previewKitItem
+						.updateVariables(
+								Map.of("kitDisplayName", kit.getDisplayName(),
+										"kitName", kit.getName()))
+						.build();
+			}
+
+			setItem(config.getPreviewKitItem().getSlot(), previewKitItemStack);
 		}
 
 
@@ -161,6 +193,23 @@ public class KitEditingInventory extends FastInv {
 		if (entryType == EXGEntryType.CHAT) {
 			player.closeInventory();
 			player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_ICON_NAME_CHAT, null));
+
+		} else if (entryType == EXGEntryType.ITEM_IN_HAND) {
+
+			ItemStack itemInHand = player.getInventory().getItem(player.getInventory().getHeldItemSlot());
+
+			if (itemInHand == null || itemInHand.getType() == Material.AIR) {
+				player.sendMessage(MessagesUtils.get(EXGMessage.ITEM_CANT_BE_AIR, null));
+				new KitEditingInventory(player, kit).open(player);
+				SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
+				return;
+			}
+
+			kit.setCustomItemStack(itemInHand);
+			player.sendMessage(MessagesUtils.get(EXGMessage.ICON_CHANGED, Map.of("newIcon", itemInHand.getType().name())));
+			new KitEditingInventory(player, kit).open(player);
+			SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
+			return;
 		}
 
 		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
@@ -174,6 +223,7 @@ public class KitEditingInventory extends FastInv {
 
 				result -> {
 
+					kit.setCustomItemStack(null);
 					kit.setMaterial(result.getLeft().getLeft());
 					kit.setData(result.getLeft().getRight());
 

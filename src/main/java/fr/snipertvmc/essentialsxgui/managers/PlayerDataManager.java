@@ -53,6 +53,7 @@ public class PlayerDataManager {
 				put("displayName", homeName);
 				put("material", defaultMaterial);
 				put("data", "0");
+				put("customItemStack", null);
 			}});
 		}
 

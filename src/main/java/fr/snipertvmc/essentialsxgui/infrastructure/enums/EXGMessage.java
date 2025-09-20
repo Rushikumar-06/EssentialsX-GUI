@@ -26,6 +26,7 @@ public enum EXGMessage {
 	HOME_NAME_ALREADY_EXISTS("errors.homeNameAlreadyExists"),
 	HOME_LIMIT_REACHED("errors.homeLimitReached"),
 	NO_HOME_FOUND("errors.noHomeFound"),
+	ITEM_CANT_BE_AIR("errors.itemCantBeAir"),
 
 	KIT_NAME_ALREADY_EXISTS("errors.kitNameAlreadyExists"),
 	NO_KIT_FOUND("errors.noKitFound"),

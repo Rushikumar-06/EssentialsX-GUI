@@ -1,5 +1,6 @@
 package fr.snipertvmc.essentialsxgui.infrastructure.models;
 
+import fr.snipertvmc.essentialsxgui.utilities.serializers.ItemStackSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -80,6 +81,7 @@ public class EXGPlayer {
 				put("displayName", home.getDisplayName());
 				put("material", home.getMaterial().toString());
 				put("data", home.getData());
+				put("customItemStack", ItemStackSerializer.serialize(home.getCustomItemStack()));
 			}});
 		});
 
@@ -93,6 +95,14 @@ public class EXGPlayer {
 			home.setDisplayName((String) ((Map<String, Object>) homeData).get("displayName"));
 			home.setMaterial(Material.valueOf((String) ((Map<String, Object>) homeData).get("material")));
 			home.setData(Byte.parseByte(String.valueOf(((Map<String, Object>) homeData).get("data"))));
+
+			String serializedItemStack = (String) ((Map<String, Object>) homeData).get("customItemStack");
+			if (serializedItemStack != null) {
+				home.setCustomItemStack(ItemStackSerializer.deserialize(serializedItemStack)[0]);
+			} else {
+				home.setCustomItemStack(null);
+			}
+
 			this.homes.add(home);
 		});
 	}

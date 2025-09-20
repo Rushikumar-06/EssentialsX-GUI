@@ -9,10 +9,13 @@ import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGHome;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes.EXGHomesInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.PaginatedFastInv;
+import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.data.DataEntryUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -69,11 +72,35 @@ public class HomesInventory extends PaginatedFastInv {
 			homeItem.setMaterial(home.getMaterial().name());
 			homeItem.setData(home.getData());
 
-			addContent(homeItem
-					.updateVariables(
-							Map.of("homeDisplayName", home.getDisplayName(),
-									"homeName", home.getName()))
-					.build(), e -> {
+			ItemStack homeItemStack;
+
+			if (home.getCustomItemStack() != null) {
+				homeItemStack = home.getCustomItemStack().clone();
+				ItemMeta meta = homeItemStack.getItemMeta();
+
+				meta.setDisplayName(homeItem.getDisplayName()
+						.replace("{homeDisplayName}", home.getDisplayName())
+						.replace("{homeName}", home.getName())
+						.replace("&", "§"));
+
+				meta.setLore(homeItem.getLore().stream()
+						.map(line -> line
+								.replace("{homeDisplayName}", home.getDisplayName())
+								.replace("{homeName}", home.getName())
+								.replace("&", "§"))
+						.collect(Collectors.toList()));
+
+				homeItemStack.setItemMeta(meta);
+
+			} else {
+				 homeItemStack = homeItem
+						 .updateVariables(
+								Map.of("homeDisplayName", home.getDisplayName(),
+										"homeName", home.getName()))
+						.build();
+			}
+
+			addContent(homeItemStack, e -> {
 
 				if (homeItem.isCorrectClick(e.getClick(), "teleportToHome")) {
 					player.performCommand("essentials:home " + home.getName());

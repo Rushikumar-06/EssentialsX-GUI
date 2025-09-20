@@ -2,6 +2,7 @@ package fr.snipertvmc.essentialsxgui.infrastructure.models;
 
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.MCServerVersion;
+import fr.snipertvmc.essentialsxgui.utilities.serializers.ItemStackSerializer;
 import org.bukkit.Material;
 
 import java.util.HashMap;
@@ -69,6 +70,7 @@ public class EXGServer {
 				put("displayName", kit.getDisplayName());
 				put("material", kit.getMaterial().toString());
 				put("data", kit.getData());
+				put("customItemStack", ItemStackSerializer.serialize(kit.getCustomItemStack()));
 			}});
 		});
 
@@ -82,6 +84,14 @@ public class EXGServer {
 			kit.setDisplayName((String) ((Map<String, Object>) kitData).get("displayName"));
 			kit.setMaterial(Material.valueOf((String) ((Map<String, Object>) kitData).get("material")));
 			kit.setData(Byte.parseByte(String.valueOf(((Map<String, Object>) kitData).get("data"))));
+
+			String serializedItemStack = (String) ((Map<String, Object>) kitData).get("customItemStack");
+			if (serializedItemStack != null) {
+				kit.setCustomItemStack(ItemStackSerializer.deserialize(serializedItemStack)[0]);
+			} else {
+				kit.setCustomItemStack(null);
+			}
+
 			this.kits.add(kit);
 		});
 	}

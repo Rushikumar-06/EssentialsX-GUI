@@ -2,6 +2,7 @@ package fr.snipertvmc.essentialsxgui.infrastructure.models;
 
 import fr.snipertvmc.essentialsxgui.Main;
 import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 
 public class EXGHome {
 
@@ -14,6 +15,8 @@ public class EXGHome {
 	private String displayName;
 	private Material material;
 	private byte data;
+
+	private ItemStack customItemStack;
 
 
 	// -------------------------------------------------- //
@@ -47,6 +50,10 @@ public class EXGHome {
 		return data;
 	}
 
+	public ItemStack getCustomItemStack() {
+		return customItemStack;
+	}
+
 
 	// -------------------------------------------------- //
 
@@ -60,6 +67,10 @@ public class EXGHome {
 	}
 	public void setData(byte data) {
 		this.data = data;
+	}
+
+	public void setCustomItemStack(ItemStack customItemStack) {
+		this.customItemStack = customItemStack;
 	}
 
 
