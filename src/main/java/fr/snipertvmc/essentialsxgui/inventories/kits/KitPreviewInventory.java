@@ -59,8 +59,7 @@ public class KitPreviewInventory extends PaginatedFastInv {
 				.build());
 
 
-		List<String> serializedItems = (List<String>) Main.getInstance().getEssentials().getKits().getKit(kit.getName()).get("items");
-		List<ItemStack> items = EssentialsParser.deserializeKitItems(Main.getInstance().getEssentials(), serializedItems, player);
+		List<ItemStack> items = Main.getInstance().getHookManager().getEssentialsHook().getKitItems(player, kit.getName());
 		for (ItemStack item : items) {
 			if (item != null && item.getType() != org.bukkit.Material.AIR) {
 				addContent(item);
