@@ -234,6 +234,13 @@ public class LoadingManager {
 				new Metrics.SimplePie("essentialsx_version", () -> Main.getInstance().getEssentials() != null ?
 						Main.getInstance().getEssentials().getDescription().getVersion() : "Other")
 		);
+
+
+		// Storage Type Chart
+		Main.getInstance().getMetrics().addCustomChart(
+				new Metrics.SimplePie("storage_type", () -> Main.getInstance().getConfiguration().getStorageType() != null ?
+						Main.getInstance().getConfiguration().getStorageType() : "Other")
+		);
 	}
 
 
