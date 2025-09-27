@@ -10,7 +10,6 @@ import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGPlayer;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes.EXGHomesInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.PaginatedFastInv;
-import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.data.DataEntryUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
@@ -45,7 +44,7 @@ public class HomesInventory extends PaginatedFastInv {
 
 
 		EXGPlayer exgPlayer = Main.getInstance().getPlayerManager().getPlayer(player);
-		Main.getInstance().getPlayerDataManager().cleanPlayerHomes(exgPlayer);
+		Main.getInstance().getPlayerDataManager().updatePlayerHomes(exgPlayer);
 
 		Set<EXGHome> homes = homeSearch != null ? definedHomes :
 

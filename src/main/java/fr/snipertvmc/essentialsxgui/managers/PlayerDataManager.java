@@ -4,12 +4,7 @@ import com.earth2me.essentials.User;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGHome;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGPlayer;
-import fr.snipertvmc.essentialsxgui.utilities.type.JsonUtils;
-import org.bukkit.Bukkit;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.*;
 
 public class PlayerDataManager {
@@ -18,7 +13,7 @@ public class PlayerDataManager {
 	// -------------------------------------------------- //
 
 
-	public Map<String, Object> generatePlayerHomes(EXGPlayer player) {
+	public Map<String, Object> generateDefaultHomesData(EXGPlayer player) {
 
 		Map<String, Object> playerHomes = new HashMap<>();
 
@@ -43,33 +38,28 @@ public class PlayerDataManager {
 	}
 
 
-	// -------------------------------------------------- //
-
-
-	public void cleanPlayerHomes(EXGPlayer exgPlayer) {
+	public void updatePlayerHomes(EXGPlayer exgPlayer) {
 
 		User user = Main.getInstance().getEssentials().getUser(exgPlayer.getName());
 
-
-		// HOMES CLEANING
 		List<String> essentialsHomes = user.getHomes();
 		Set<EXGHome> playerHomes = exgPlayer.getHomes();
 
-		Set<EXGHome> cleanedHomes = new HashSet<>();
+		Set<EXGHome> updatedHomes = new HashSet<>();
 
 		for (EXGHome home : playerHomes) {
 			if (essentialsHomes.contains(home.getName())) {
-				cleanedHomes.add(home);
+				updatedHomes.add(home);
 			}
 		}
 
 		for (String homeName : essentialsHomes) {
 			if (playerHomes.stream().noneMatch(home -> home.getName().equals(homeName))) {
-				cleanedHomes.add(new EXGHome(homeName));
+				updatedHomes.add(new EXGHome(homeName));
 			}
 		}
 
-		exgPlayer.setHomes(cleanedHomes);
+		exgPlayer.setHomes(updatedHomes);
 	}
 
 

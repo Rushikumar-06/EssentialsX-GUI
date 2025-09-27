@@ -42,7 +42,7 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 		);
 
 
-		Main.getInstance().getServerDataManager().cleanServerKits();
+		Main.getInstance().getServerDataManager().updateServerKits();
 
 		Set<EXGKit> kits = kitSearch != null ? definedKits :
 

@@ -1,7 +1,6 @@
 package fr.snipertvmc.essentialsxgui.infrastructure.models;
 
 import fr.snipertvmc.essentialsxgui.utilities.serializers.ItemStackSerializer;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 

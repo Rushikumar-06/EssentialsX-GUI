@@ -46,7 +46,7 @@ public class KitsTableManager {
 			preparedStatement.execute();
 
 		} catch (SQLException e) {
-			ConsoleLogger.error("Erreur lors de la création de la table " + tableName + " : " + e.getMessage());
+			ConsoleLogger.error("Table creation error " + tableName + " : " + e.getMessage());
 		}
 	}
 
@@ -69,7 +69,7 @@ public class KitsTableManager {
 			}
 
 		} catch (SQLException e) {
-			throw new RuntimeException("Erreur lors de la vérification de l'existence du kit: " + kitName, e);
+			throw new RuntimeException("Error verifying kit existence: " + kitName, e);
 		}
 	}
 
@@ -77,7 +77,7 @@ public class KitsTableManager {
 	// -------------------------------------------------- //
 
 
-	public void insertKit(String kit_name, Map<String, Object> kitDataRaw) {
+	public void insertKit(String kitName, Map<String, Object> kitsRaw) {
 
 		String tableName = Main.getInstance().getConfiguration().getStorageTablePrefix() + "kits_data";
 
@@ -86,12 +86,12 @@ public class KitsTableManager {
 		try (Connection connection = Main.getInstance().getDatabaseManager().getStorage().getConnection();
 		     PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
-			preparedStatement.setString(1, kit_name);
-			preparedStatement.setString(2, JsonUtils.mapToJson(kitDataRaw));
+			preparedStatement.setString(1, kitName);
+			preparedStatement.setString(2, JsonUtils.mapToJson(kitsRaw));
 			preparedStatement.executeUpdate();
 
 		} catch (SQLException e) {
-			throw new RuntimeException("Erreur lors de l'insertion de la ligne: " + kit_name, e);
+			throw new RuntimeException("Line insertion error: " + kitName, e);
 		}
 	}
 
@@ -99,31 +99,7 @@ public class KitsTableManager {
 	// -------------------------------------------------- //
 
 
-	public String fetchKit(String kit_name) {
-
-		String tableName = Main.getInstance().getConfiguration().getStorageTablePrefix() + "kits_data";
-
-		String sql = "SELECT kit_data FROM " + tableName + " WHERE kit_name = ?";
-
-		try (Connection connection = Main.getInstance().getDatabaseManager().getStorage().getConnection();
-		     PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-
-			preparedStatement.setString(1, kit_name);
-			try (ResultSet resultSet = preparedStatement.executeQuery()) {
-				if (resultSet.next()) {
-					return resultSet.getString("kit_data");
-				}
-			}
-
-		} catch (SQLException e) {
-			throw new RuntimeException("Erreur lors de la récupération du kit: " + kit_name, e);
-		}
-
-		return null;
-	}
-
-
-	public Map<String, Object> fetchAllKits() {
+	public Map<String, Object> fetchKits() {
 
 		String tableName = Main.getInstance().getConfiguration().getStorageTablePrefix() + "kits_data";
 
@@ -143,7 +119,7 @@ public class KitsTableManager {
 			return kits;
 
 		} catch (SQLException e) {
-			throw new RuntimeException("Erreur lors de la récupération de tous les kits", e);
+			throw new RuntimeException("Error retrieving all kits", e);
 		}
 	}
 
@@ -151,7 +127,7 @@ public class KitsTableManager {
 	// -------------------------------------------------- //
 
 
-	public void updateKit(String kit_name, String kitDataJson) {
+	public void updateKit(String kitName, Map<String, Object> kitsRaw) {
 
 		String tableName = Main.getInstance().getConfiguration().getStorageTablePrefix() + "kits_data";
 
@@ -160,25 +136,19 @@ public class KitsTableManager {
 		try (Connection connection = Main.getInstance().getDatabaseManager().getStorage().getConnection();
 		     PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
-			ConsoleLogger.info("debug1: " + kitDataJson);
-			ConsoleLogger.info("debug2: " + kit_name);
-
-			preparedStatement.setObject(1, kitDataJson);
-			preparedStatement.setString(2, kit_name);
+			preparedStatement.setObject(1, JsonUtils.mapToJson(kitsRaw));
+			preparedStatement.setString(2, kitName);
 			preparedStatement.executeUpdate();
 
 		} catch (SQLException e) {
-			throw new RuntimeException("Erreur lors de la mise à jour du kit: " + kit_name, e);
+			throw new RuntimeException("Error updating the kit: " + kitName, e);
 		}
 	}
 
 
 	public void updateKits(Map<String, Object> kits) {
-
-		ConsoleLogger.info("debug3: " + kits.toString());
-
 		for (Map.Entry<String, Object> entry : kits.entrySet()) {
-			updateKit(entry.getKey(), JsonUtils.mapToJson((Map<String, Object>) entry.getValue()));
+			updateKit(entry.getKey(), (Map<String, Object>) entry.getValue());
 		}
 	}
 

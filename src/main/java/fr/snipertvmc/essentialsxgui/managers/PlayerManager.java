@@ -2,11 +2,11 @@ package fr.snipertvmc.essentialsxgui.managers;
 
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGPlayer;
-import fr.snipertvmc.essentialsxgui.utilities.type.JsonUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class PlayerManager {
 
@@ -14,7 +14,7 @@ public class PlayerManager {
 	// -------------------------------------------------- //
 
 
-	private Set<EXGPlayer> players = new HashSet<>();
+	private final Set<EXGPlayer> players = new HashSet<>();
 
 
 	// -------------------------------------------------- //
@@ -25,10 +25,12 @@ public class PlayerManager {
 		EXGPlayer exgPlayer = new EXGPlayer(player);
 		players.add(exgPlayer);
 
+
+		// HOMES LOADING
 		Map<String, Object> homesRaw;
 
 		if (!Main.getInstance().getDatabaseManager().getPlayerHomesTableManager().isPlayerExists(exgPlayer.getName())) {
-			homesRaw = Main.getInstance().getPlayerDataManager().generatePlayerHomes(exgPlayer);
+			homesRaw = Main.getInstance().getPlayerDataManager().generateDefaultHomesData(exgPlayer);
 
 			Main.getInstance().getDatabaseManager().getPlayerHomesTableManager().insertPlayer(exgPlayer.getName(), homesRaw);
 
@@ -43,8 +45,10 @@ public class PlayerManager {
 
 	public void save(EXGPlayer exgPlayer) {
 
+
+		// HOMES SAVING
 		Map<String, Object> homesRaw = exgPlayer.getHomesRaw();
-		Main.getInstance().getDatabaseManager().getPlayerHomesTableManager().updateHomes(exgPlayer.getName(), JsonUtils.mapToJson(homesRaw));
+		Main.getInstance().getDatabaseManager().getPlayerHomesTableManager().updateHomes(exgPlayer.getName(), homesRaw);
 	}
 
 

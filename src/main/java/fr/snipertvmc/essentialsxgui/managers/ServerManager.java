@@ -2,7 +2,6 @@ package fr.snipertvmc.essentialsxgui.managers;
 
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGServer;
-import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
 
 import java.util.Map;
 
@@ -12,28 +11,44 @@ public class ServerManager {
 	// -------------------------------------------------- //
 
 
-	public EXGServer initialize() {
+	private final EXGServer exgServer;
+
+
+	// -------------------------------------------------- //
+
+
+	public EXGServer getEXGServer() {
+		return exgServer;
+	}
+
+
+	// -------------------------------------------------- //
+
+
+	public ServerManager() {
 
 		EXGServer exgServer = new EXGServer();
+		this.exgServer = exgServer;
 
-		Map<String, Object> kitsRaw = Main.getInstance().getDatabaseManager().getKitsTableManager().fetchAllKits();
+
+		// KITS LOADING
+		Map<String, Object> kitsRaw = Main.getInstance().getDatabaseManager().getKitsTableManager().fetchKits();
 		if (kitsRaw.isEmpty()) {
-			kitsRaw = Main.getInstance().getServerDataManager().generateServerKits();
+			kitsRaw = Main.getInstance().getServerDataManager().generateDefaultKitsData();
 		}
-
 		exgServer.setKitsRaw(kitsRaw);
-		return exgServer;
 	}
 
 
 	public void save() {
 
 		EXGServer exgServer = Main.getInstance().getEXGServer();
-
 		if (exgServer == null) {
 			return;
 		}
 
+
+		// KITS SAVING
 		Map<String, Object> kitsRaw = exgServer.getKitsRaw();
 		Main.getInstance().getDatabaseManager().getKitsTableManager().updateKits(kitsRaw);
 	}

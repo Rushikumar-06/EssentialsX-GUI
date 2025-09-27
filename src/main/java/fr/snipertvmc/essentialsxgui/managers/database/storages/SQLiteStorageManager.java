@@ -3,13 +3,11 @@ package fr.snipertvmc.essentialsxgui.managers.database.storages;
 import com.zaxxer.hikari.HikariDataSource;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGStorage;
-import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
 import fr.snipertvmc.essentialsxgui.utilities.data.DatabaseUtils;
 
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class SQLiteStorageManager implements EXGStorage {

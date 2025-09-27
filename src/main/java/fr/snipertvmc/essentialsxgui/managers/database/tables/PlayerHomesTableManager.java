@@ -45,7 +45,7 @@ public class PlayerHomesTableManager {
 			preparedStatement.execute();
 
 		} catch (SQLException e) {
-			ConsoleLogger.error("Erreur lors de la création de la table " + tableName + " : " + e.getMessage());
+			ConsoleLogger.error("Table creation error " + tableName + " : " + e.getMessage());
 		}
 	}
 
@@ -68,7 +68,7 @@ public class PlayerHomesTableManager {
 			}
 
 		} catch (SQLException e) {
-			throw new RuntimeException("Erreur lors de la vérification de l'existence du joueur: " + playerName, e);
+			throw new RuntimeException("Error verifying player's existence: " + playerName, e);
 		}
 	}
 
@@ -76,7 +76,7 @@ public class PlayerHomesTableManager {
 	// -------------------------------------------------- //
 
 
-	public void insertPlayer(String playerName, Map<String, Object> playerHomesRaw) {
+	public void insertPlayer(String playerName, Map<String, Object> homesRaw) {
 
 		String tableName = Main.getInstance().getConfiguration().getStorageTablePrefix() + "player_homes_data";
 
@@ -86,11 +86,11 @@ public class PlayerHomesTableManager {
 		     PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
 			preparedStatement.setString(1, playerName);
-			preparedStatement.setString(2, JsonUtils.mapToJson(playerHomesRaw));
+			preparedStatement.setString(2, JsonUtils.mapToJson(homesRaw));
 			preparedStatement.executeUpdate();
 
 		} catch (SQLException e) {
-			throw new RuntimeException("Erreur lors de l'insertion de la ligne: " + playerName, e);
+			throw new RuntimeException("Line insertion error: " + playerName, e);
 		}
 	}
 
@@ -115,7 +115,7 @@ public class PlayerHomesTableManager {
 			}
 
 		} catch (SQLException e) {
-			throw new RuntimeException("Erreur lors de la récupération de la valeur: " + playerName, e);
+			throw new RuntimeException("Error retrieving value: " + playerName, e);
 		}
 
 		return null;
@@ -125,7 +125,7 @@ public class PlayerHomesTableManager {
 	// -------------------------------------------------- //
 
 
-	public void updateHomes(String playerName, String homesJson) {
+	public void updateHomes(String playerName, Map<String, Object> homesRaw) {
 
 		String tableName = Main.getInstance().getConfiguration().getStorageTablePrefix() + "player_homes_data";
 
@@ -134,12 +134,12 @@ public class PlayerHomesTableManager {
 		try (Connection connection = Main.getInstance().getDatabaseManager().getStorage().getConnection();
 		     PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
-			preparedStatement.setString(1, homesJson);
+			preparedStatement.setString(1, JsonUtils.mapToJson(homesRaw));
 			preparedStatement.setString(2, playerName);
 			preparedStatement.executeUpdate();
 
 		} catch (SQLException e) {
-			throw new RuntimeException("Erreur lors de la mise à jour de la valeur: " + playerName, e);
+			throw new RuntimeException("Error updating value: " + playerName, e);
 		}
 	}
 

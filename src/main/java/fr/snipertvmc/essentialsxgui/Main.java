@@ -81,7 +81,6 @@ public class Main extends JavaPlugin {
 		playerDataManager = new PlayerDataManager();
 		playerManager = new PlayerManager();
 		serverDataManager = new ServerDataManager();
-		serverManager = new ServerManager();
 
 		mcServerVersion = MCServerVersion.getMCServerVersion();
 		metrics = new Metrics(this, 26314);
@@ -105,7 +104,7 @@ public class Main extends JavaPlugin {
 
 		// SERVER INITIALIZATION
 		if (!cancelLoading) {
-			exgServer = serverManager.initialize();
+			serverManager = new ServerManager();
 		}
 
 
@@ -164,7 +163,7 @@ public class Main extends JavaPlugin {
 	}
 
 	public EXGServer getEXGServer() {
-		return exgServer;
+		return serverManager.getEXGServer();
 	}
 
 	public ChatManager getChatManager() {

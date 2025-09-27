@@ -3,13 +3,7 @@ package fr.snipertvmc.essentialsxgui.managers;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGKit;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGServer;
-import fr.snipertvmc.essentialsxgui.utilities.serializers.ItemStackSerializer;
-import fr.snipertvmc.essentialsxgui.utilities.type.JsonUtils;
-import org.bukkit.inventory.ItemStack;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -21,7 +15,7 @@ public class ServerDataManager {
 	// -------------------------------------------------- //
 
 
-	public Map<String, Object> generateServerKits() {
+	public Map<String, Object> generateDefaultKitsData() {
 
 		Map<String, Object> serverKits = new HashMap<>();
 
@@ -44,33 +38,28 @@ public class ServerDataManager {
 	}
 
 
-	// -------------------------------------------------- //
-
-
-	public void cleanServerKits() {
+	public void updateServerKits() {
 
 		EXGServer exgServer = Main.getInstance().getEXGServer();
 
-
-		// HOMES CLEANING
 		Set<String> essentialsKits = Main.getInstance().getEssentials().getKits().getKitKeys();
 		Set<EXGKit> serverKits = exgServer.getKits();
 
-		Set<EXGKit> cleanedKits = new HashSet<>();
+		Set<EXGKit> updatedKits = new HashSet<>();
 
 		for (EXGKit kit : serverKits) {
 			if (essentialsKits.contains(kit.getName())) {
-				cleanedKits.add(kit);
+				updatedKits.add(kit);
 			}
 		}
 
 		for (String kitName : essentialsKits) {
 			if (serverKits.stream().noneMatch(home -> home.getName().equals(kitName))) {
-				cleanedKits.add(new EXGKit(kitName));
+				updatedKits.add(new EXGKit(kitName));
 			}
 		}
 
-		exgServer.setKits(cleanedKits);
+		exgServer.setKits(updatedKits);
 	}
 
 

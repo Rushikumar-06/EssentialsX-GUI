@@ -38,7 +38,7 @@ public class KitPlayerGiveInventory extends PaginatedFastInv {
 		);
 
 
-		Main.getInstance().getServerDataManager().cleanServerKits();
+		Main.getInstance().getServerDataManager().updateServerKits();
 
 
 		if (config.getBorderItem().isEnabled()) {
