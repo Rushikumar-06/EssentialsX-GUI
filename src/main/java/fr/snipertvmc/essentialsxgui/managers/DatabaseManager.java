@@ -62,7 +62,9 @@ public class DatabaseManager {
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
 			mariaDBDriver = true;
-			ConsoleLogger.console("\t§6EssentialsX-GUI: §7MariaDB JDBC Driver §fregistered §7successfully.");
+
+			boolean detailedLoading = Main.getInstance().getConfiguration().isDetailedLoading();
+			if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7MariaDB JDBC Driver §fregistered §7successfully."); }
 
 		} catch (Exception ignored) {
 		}
@@ -74,7 +76,9 @@ public class DatabaseManager {
 		try {
 			DriverManager.deregisterDriver(DriverManager.getDriver("jdbc:mariadb://"));
 			mariaDBDriver = false;
-			ConsoleLogger.info("\t§6EssentialsX-GUI: §7MariaDB JDBC Driver §funregistered §7successfully.");
+
+			boolean detailedLoading = Main.getInstance().getConfiguration().isDetailedLoading();
+			if (detailedLoading) { ConsoleLogger.info("\t§6EssentialsX-GUI: §7MariaDB JDBC Driver §funregistered §7successfully."); }
 
 		} catch (Exception ignored) {
 		}

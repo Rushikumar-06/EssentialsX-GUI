@@ -37,8 +37,6 @@ public class Main extends JavaPlugin {
 
 	private ObjectMapper objectMapper;
 
-	private EXGServer exgServer;
-
 	private ChatManager chatManager;
 	private DatabaseManager databaseManager;
 	private FilesManager filesManager;

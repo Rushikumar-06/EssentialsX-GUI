@@ -46,7 +46,7 @@ public class LoadingManager {
 		}
 		checkForServerVersionSupport();
 		checkForUpdates();
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Server configuration analysis §fcompleted§7.");
+		if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7Server configuration analysis §fcompleted§7."); }
 
 
 		// GLOBAL DATA INITIALIZATION
