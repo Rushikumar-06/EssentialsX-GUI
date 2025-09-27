@@ -35,6 +35,10 @@ public class LoadingManager {
 		}
 
 
+		// DATABASES CONNECTION
+		Main.getInstance().getDatabaseManager().connectAllDatabases();
+
+
 		// SERVER CONFIGURATION ANALYSIS
 		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Analyzing server configuration...");
 		if (!isServerReady()) {
@@ -44,15 +48,11 @@ public class LoadingManager {
 		checkForUpdates();
 		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Server configuration analysis §fcompleted§7.");
 
+
 		// GLOBAL DATA INITIALIZATION
 		if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7Initialisation of global data..."); }
 		FastInvManager.register(Main.getInstance());
 		if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7Initialization of global data §fcompleted§7."); }
-
-
-		// TASKS INITIALIZATION
-		if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7Initialising tasks..."); }
-		if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7Tasks initialisation §fcompleted§7."); }
 
 
 		// COMMANDS REGISTRATION
@@ -90,6 +90,15 @@ public class LoadingManager {
 		Main.getInstance().getPlayerManager().saveAll();
 		Main.getInstance().getServerManager().save();
 		if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7Final data saving §fcompleted§7."); }
+
+
+		// STORAGE SAVING
+		if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7Storage saving..."); }
+		Main.getInstance().getDatabaseManager().disconnectAllDatabases();
+		if (Main.getInstance().getDatabaseManager().isMariaDBDriverLoaded()) {
+			Main.getInstance().getDatabaseManager().unregisterMariaDBDriver();
+		}
+		if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7Storage saving §fcompleted§7."); }
 	}
 
 

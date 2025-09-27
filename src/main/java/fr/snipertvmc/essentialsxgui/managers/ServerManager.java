@@ -2,8 +2,8 @@ package fr.snipertvmc.essentialsxgui.managers;
 
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGServer;
+import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class ServerManager {
@@ -16,10 +16,12 @@ public class ServerManager {
 
 		EXGServer exgServer = new EXGServer();
 
-		Map<String, Object> serverData = Main.getInstance().getServerDataManager().loadServerData();
-		Map<String, Object> kits = (Map<String, Object>) serverData.get("kits");
-		exgServer.setKitsRaw(kits);
+		Map<String, Object> kitsRaw = Main.getInstance().getDatabaseManager().getKitsTableManager().fetchAllKits();
+		if (kitsRaw.isEmpty()) {
+			kitsRaw = Main.getInstance().getServerDataManager().generateServerKits();
+		}
 
+		exgServer.setKitsRaw(kitsRaw);
 		return exgServer;
 	}
 
@@ -32,11 +34,8 @@ public class ServerManager {
 			return;
 		}
 
-		Map<String, Object> kits = exgServer.getKitsRaw();
-		Map<String, Object> serverData = new HashMap<>() {{
-			put("kits", kits);
-		}};
-		Main.getInstance().getServerDataManager().saveServerData(serverData);
+		Map<String, Object> kitsRaw = exgServer.getKitsRaw();
+		Main.getInstance().getDatabaseManager().getKitsTableManager().updateKits(kitsRaw);
 	}
 
 

@@ -40,6 +40,7 @@ public class Main extends JavaPlugin {
 	private EXGServer exgServer;
 
 	private ChatManager chatManager;
+	private DatabaseManager databaseManager;
 	private FilesManager filesManager;
 	private HookManager hookManager;
 	private InventoriesManager inventoriesManager;
@@ -88,6 +89,11 @@ public class Main extends JavaPlugin {
 
 		// FILES LOADING
 		filesManager.loadFiles();
+
+
+		// DATABASE MANAGER INITIALIZATION
+		// Must be done after loading configuration file
+		databaseManager = new DatabaseManager();
 
 
 		// LOAD PLUGIN
@@ -163,6 +169,9 @@ public class Main extends JavaPlugin {
 
 	public ChatManager getChatManager() {
 		return chatManager;
+	}
+	public DatabaseManager getDatabaseManager() {
+		return databaseManager;
 	}
 	public FilesManager getFilesManager() {
 		return filesManager;

@@ -213,3 +213,46 @@ permissions:
     # Change the permission needed to access to the Kits GUI in admin mode.
     # Default: "essentialsx.gui.kits.admin"
     kitsAdminAccess: "essentialsxgui.kits.admin"
+
+############################################################
+# +------------------------------------------------------+ #
+# |                        Storage                       | #
+# +------------------------------------------------------+ #
+############################################################
+
+storage:
+
+  # ⚠ Warning ⚠: Changing this value will migrate all your data to the new storage type,
+  #              For example, if you change from SQLite to MySQL, your data will be migrated to MySQL database,
+  #              so data (of the plugin) on your old MySQL database will be lost if you had any,
+  #              and the SQLite database file will remain in the plugin folder with all current data and
+  #              will not be used anymore. (Neither deleted, you can delete it manually if you want.)
+  #
+  # Choose the storage type you want to use to save data.
+  # Available types: "SQLite" (local file), "MySQL", "MariaDB" (preferred over MySQL)
+  # Default: "SQLite"
+  type: "SQLite"
+
+  mysql:
+
+    # MySQL or MariaDB hostname (IP address or domain name).
+    host: "localhost"
+
+    # MySQL or MariaDB port.
+    port: 3306
+
+    # MySQL or MariaDB database name.
+    database: "minecraft_database"
+
+    # MySQL or MariaDB username.
+    username: "minecraft_user"
+
+    # MySQL or MariaDB password.
+    password: ""
+
+    # MySQL or MariaDB settings.
+    # Warning: Do not change this if you don't know what you are doing.
+    settings: "?useSSL=false&serverTimezone=UTC"
+
+    # If you want to use a custom table prefix for the tables created by EssentialsX-GUI, set it here.
+    tablePrefix: "exg_"

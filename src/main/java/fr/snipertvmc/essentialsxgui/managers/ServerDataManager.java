@@ -3,7 +3,9 @@ package fr.snipertvmc.essentialsxgui.managers;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGKit;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGServer;
+import fr.snipertvmc.essentialsxgui.utilities.serializers.ItemStackSerializer;
 import fr.snipertvmc.essentialsxgui.utilities.type.JsonUtils;
+import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,27 +21,8 @@ public class ServerDataManager {
 	// -------------------------------------------------- //
 
 
-	private final File dataFolder;
+	public Map<String, Object> generateServerKits() {
 
-
-	// -------------------------------------------------- //
-
-
-	public ServerDataManager() {
-
-		this.dataFolder = new File(Main.getInstance().getDataFolder(), "data/");
-		if (!dataFolder.exists()) {
-			dataFolder.mkdirs();
-		}
-	}
-
-
-	// -------------------------------------------------- //
-
-
-	public Map<String, Object> generateServerData() {
-
-		Map<String, Object> serverData = new HashMap<>();
 		Map<String, Object> serverKits = new HashMap<>();
 
 		Set<String> essentialsKits = Main.getInstance().getEssentials().getKits().getKitKeys();
@@ -49,75 +32,45 @@ public class ServerDataManager {
 				put("displayName", kitName);
 				put("material", "CHEST");
 				put("data", "0");
+				put("customItemStack", null);
 			}});
+
+			if (!Main.getInstance().getDatabaseManager().getKitsTableManager().isKitExists(kitName)) {
+				Main.getInstance().getDatabaseManager().getKitsTableManager().insertKit(kitName, (Map<String, Object>) serverKits.get(kitName));
+			}
 		}
 
-		serverData.put("kits", serverKits);
-		return serverData;
+		return serverKits;
 	}
 
 
 	// -------------------------------------------------- //
 
 
-	public Map<String, Object> loadServerData() {
-
-		File file = new File(dataFolder, "server.json");
-		if (!file.exists()) {
-			return generateServerData();
-		}
-
-		try {
-			String json = Files.readString(file.toPath());
-			return JsonUtils.jsonToMap(json);
-
-		} catch (IOException e) {
-			throw new RuntimeException("Error when reading data for the server", e);
-		}
-	}
-
-
-	public void saveServerData(Map<String, Object> data) {
-
-		File file = new File(dataFolder, "server.json");
-
-		try {
-			String json = JsonUtils.mapToJson(data);
-			Files.writeString(file.toPath(), json);
-
-		} catch (IOException e) {
-			throw new RuntimeException("Error when saving data for the server", e);
-		}
-	}
-
-
-	// -------------------------------------------------- //
-
-
-	public void cleanServerData() {
+	public void cleanServerKits() {
 
 		EXGServer exgServer = Main.getInstance().getEXGServer();
 
 
 		// HOMES CLEANING
 		Set<String> essentialsKits = Main.getInstance().getEssentials().getKits().getKitKeys();
-		Set<EXGKit> serverDataKits = exgServer.getKits();
+		Set<EXGKit> serverKits = exgServer.getKits();
 
-		Set<EXGKit> cleanedHomes = new HashSet<>();
+		Set<EXGKit> cleanedKits = new HashSet<>();
 
-		for (EXGKit home : serverDataKits) {
-			if (essentialsKits.contains(home.getName())) {
-				cleanedHomes.add(home);
+		for (EXGKit kit : serverKits) {
+			if (essentialsKits.contains(kit.getName())) {
+				cleanedKits.add(kit);
 			}
 		}
 
 		for (String kitName : essentialsKits) {
-			if (serverDataKits.stream().noneMatch(home -> home.getName().equals(kitName))) {
-				cleanedHomes.add(new EXGKit(kitName));
+			if (serverKits.stream().noneMatch(home -> home.getName().equals(kitName))) {
+				cleanedKits.add(new EXGKit(kitName));
 			}
 		}
 
-		exgServer.setKits(cleanedHomes);
+		exgServer.setKits(cleanedKits);
 	}
 
 

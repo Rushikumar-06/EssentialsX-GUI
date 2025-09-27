@@ -40,6 +40,10 @@ admin:
   # Placeholders available: {currentVersion}, {latestVersion}
   alertUpdateAvailable: "{prefix} &eAn update is available for EssentialsX-GUI. &6Please check the console for more information."
 
+  storageTypeChangeDetected: "{prefix} &eA change in storage type has been detected. &6Please wait for the process to complete..."
+  # Placeholders available: {newStorageType}
+  storageTypeChanged: "{prefix} &eThe storage type has been successfully changed to &f{newStorageType}&e."
+
 ############################################################
 # +------------------------------------------------------+ #
 # |                   Error Messages                     | #

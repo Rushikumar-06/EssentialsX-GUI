@@ -12,6 +12,9 @@ public enum EXGMessage {
 
 	ALERT_UPDATE_AVAILABLE("admin.alertUpdateAvailable"),
 
+	STORAGE_TYPE_CHANGE_DETECTED("admin.storageTypeChangeDetected"),
+	STORAGE_TYPE_CHANGED("admin.storageTypeChanged"),
+
 
 	// ERRORS
 	INVALID_MATERIAL("errors.invalidMaterial"),

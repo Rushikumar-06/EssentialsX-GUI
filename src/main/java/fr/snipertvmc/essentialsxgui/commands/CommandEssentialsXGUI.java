@@ -128,8 +128,18 @@ public class CommandEssentialsXGUI implements CommandExecutor, TabCompleter {
 
 	public void reloadPlugin(CommandSender commandSender) {
 		commandSender.sendMessage(MessagesUtils.get(EXGMessage.FILES_RELOADING, null));
+		String oldStorageType = Main.getInstance().getConfiguration().getStorageType();
 		Main.getInstance().getFilesManager().reloadFiles();
 		commandSender.sendMessage(MessagesUtils.get(EXGMessage.FILES_RELOADED, null));
+
+		String newStorageType = Main.getInstance().getConfiguration().getStorageType();
+		if (!oldStorageType.equalsIgnoreCase(newStorageType)) {
+			commandSender.sendMessage(MessagesUtils.get(EXGMessage.STORAGE_TYPE_CHANGE_DETECTED, null));
+			Main.getInstance().getDatabaseManager().disconnectAllDatabases();
+			Main.getInstance().getDatabaseManager().initialize();
+			Main.getInstance().getDatabaseManager().connectAllDatabases();
+			commandSender.sendMessage(MessagesUtils.get(EXGMessage.STORAGE_TYPE_CHANGED, Map.of("newStorageType", newStorageType)));
+		}
 	}
 
 

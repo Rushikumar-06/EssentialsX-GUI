@@ -154,6 +154,36 @@ public class ConfigurationFile {
 	// -------------------------------------------------- //
 
 
+	public String getStorageType() {
+		return yamlConfiguration.getString("storage.type", "SQLite");
+	}
+
+	public String getStorageHost() {
+		return yamlConfiguration.getString("storage.mysql.host", "Host not found");
+	}
+	public String getStoragePort() {
+		return yamlConfiguration.getString("storage.mysql.port", "Port not found");
+	}
+	public String getStorageDatabase() {
+		return yamlConfiguration.getString("storage.mysql.database", "Database not found");
+	}
+	public String getStorageUsername() {
+		return yamlConfiguration.getString("storage.mysql.username", "Username not found");
+	}
+	public String getStoragePassword() {
+		return yamlConfiguration.getString("storage.mysql.password", "Password not found");
+	}
+	public String getStorageSettings() {
+		return yamlConfiguration.getString("storage.mysql.settings", "Settings not found");
+	}
+	public String getStorageTablePrefix() {
+		return yamlConfiguration.getString("storage.mysql.tablePrefix", "exg_");
+	}
+
+
+	// -------------------------------------------------- //
+
+
 	public Map<String, String> getPlaceholders() {
 
 		Map<String, String> placeholders = new HashMap<>();
