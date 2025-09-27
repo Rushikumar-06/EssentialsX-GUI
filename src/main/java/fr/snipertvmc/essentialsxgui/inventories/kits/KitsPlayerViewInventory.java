@@ -42,7 +42,7 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 		);
 
 
-		Main.getInstance().getServerDataManager().cleanServerData();
+		Main.getInstance().getServerDataManager().cleanServerKits();
 
 		Set<EXGKit> kits = kitSearch != null ? definedKits :
 
@@ -204,7 +204,7 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 
 	private void searchKit(Player player) {
 
-		if (!Main.getInstance().getChatManager().canDoChat(player.getUniqueId())) {
+		if (!Main.getInstance().getChatManager().canDoChat(player)) {
 			return;
 		}
 

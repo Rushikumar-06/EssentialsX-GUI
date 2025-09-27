@@ -6,6 +6,7 @@ import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGEntrySettings;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGHome;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGPlayer;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes.EXGHomesInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.PaginatedFastInv;
@@ -43,11 +44,12 @@ public class HomesInventory extends PaginatedFastInv {
 		);
 
 
-		Main.getInstance().getPlayerDataManager().cleanPlayerData(player.getUniqueId().toString());
+		EXGPlayer exgPlayer = Main.getInstance().getPlayerManager().getPlayer(player);
+		Main.getInstance().getPlayerDataManager().cleanPlayerHomes(exgPlayer);
 
 		Set<EXGHome> homes = homeSearch != null ? definedHomes :
 
-				Main.getInstance().getPlayerManager().getPlayer(player.getUniqueId().toString()).getHomes()
+				exgPlayer.getHomes()
 						.stream()
 						.sorted(Comparator.comparing(EXGHome::getName))
 						.collect(Collectors.toCollection(LinkedHashSet::new));
@@ -238,7 +240,7 @@ public class HomesInventory extends PaginatedFastInv {
 
 	private void createNewHome(Player player) {
 
-		if (!Main.getInstance().getChatManager().canDoChat(player.getUniqueId())) {
+		if (!Main.getInstance().getChatManager().canDoChat(player)) {
 			return;
 		}
 
@@ -258,7 +260,7 @@ public class HomesInventory extends PaginatedFastInv {
 
 				result -> {
 
-					Set<EXGHome> homes = Main.getInstance().getPlayerManager().getPlayer(player.getUniqueId().toString()).getHomes();
+					Set<EXGHome> homes = Main.getInstance().getPlayerManager().getPlayer(player).getHomes();
 
 					if (homes.stream().anyMatch(home -> home.getName().equalsIgnoreCase(result.getLeft()))) {
 						player.sendMessage(MessagesUtils.get(EXGMessage.HOME_NAME_ALREADY_EXISTS, null));
@@ -286,7 +288,7 @@ public class HomesInventory extends PaginatedFastInv {
 
 	private void searchHome(Player player) {
 
-		if (!Main.getInstance().getChatManager().canDoChat(player.getUniqueId())) {
+		if (!Main.getInstance().getChatManager().canDoChat(player)) {
 			return;
 		}
 
@@ -306,7 +308,7 @@ public class HomesInventory extends PaginatedFastInv {
 
 				result -> {
 
-					Set<EXGHome> searchHomes = Main.getInstance().getPlayerManager().getPlayer(player.getUniqueId().toString()).getHomes()
+					Set<EXGHome> searchHomes = Main.getInstance().getPlayerManager().getPlayer(player).getHomes()
 							.stream()
 							.filter(home -> MessagesUtils.removeColorCodes(home.getDisplayName()).toLowerCase().contains(result.getLeft().toLowerCase()) ||
 									MessagesUtils.removeColorCodes(home.getName()).toLowerCase().contains(result.getLeft().toLowerCase()))

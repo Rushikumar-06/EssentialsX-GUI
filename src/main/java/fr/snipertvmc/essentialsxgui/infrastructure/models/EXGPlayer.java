@@ -14,10 +14,7 @@ public class EXGPlayer {
 
 
 	private final UUID uuid;
-	private final String name;
-
 	private final Player player;
-
 
 	private Set<EXGHome> homes = new HashSet<>();
 
@@ -25,11 +22,9 @@ public class EXGPlayer {
 	// -------------------------------------------------- //
 
 
-	public EXGPlayer(String uuid) {
-		this.uuid = UUID.fromString(uuid);
-
-		this.player = Bukkit.getPlayer(this.uuid);
-		this.name = player.getName();
+	public EXGPlayer(Player player) {
+		this.uuid = player.getUniqueId();
+		this.player = player;
 	}
 
 
@@ -40,7 +35,7 @@ public class EXGPlayer {
 		return uuid;
 	}
 	public String getName() {
-		return name;
+		return player.getName();
 	}
 
 	public Player getPlayer() {

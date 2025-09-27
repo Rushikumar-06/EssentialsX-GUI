@@ -1,6 +1,7 @@
 package fr.snipertvmc.essentialsxgui.events.player;
 
 import fr.snipertvmc.essentialsxgui.Main;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,7 +18,8 @@ public class PlayerQuit implements Listener {
 
 		Player player = event.getPlayer();
 
-		Main.getInstance().getPlayerManager().save(player.getUniqueId().toString());
+		EXGPlayer exgPlayer = Main.getInstance().getPlayerManager().getPlayer(player);
+		Main.getInstance().getPlayerManager().save(exgPlayer);
 	}
 
 

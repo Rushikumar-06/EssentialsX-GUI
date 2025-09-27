@@ -1,6 +1,7 @@
 package fr.snipertvmc.essentialsxgui.events.player;
 
 import fr.snipertvmc.essentialsxgui.Main;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,9 +17,9 @@ public class PlayerJoin implements Listener {
 	public void onPlayerJoin(PlayerJoinEvent event) {
 
 		Player player = event.getPlayer();
+		EXGPlayer exgPlayer = Main.getInstance().getPlayerManager().initialize(player);
 
-		Main.getInstance().getPlayerManager().initialize(player.getUniqueId().toString());
-		Main.getInstance().getPlayerDataManager().cleanPlayerData(player.getUniqueId().toString());
+		Main.getInstance().getPlayerDataManager().cleanPlayerHomes(exgPlayer);
 
 		Main.getInstance().getServer().getScheduler().runTaskLater(Main.getInstance(), () -> {
 			Main.getInstance().getLoadingManager().alertPlayerForUpdate(player);

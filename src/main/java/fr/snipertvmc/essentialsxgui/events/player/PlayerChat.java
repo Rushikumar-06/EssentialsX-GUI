@@ -19,7 +19,7 @@ public class PlayerChat implements Listener {
 		String message = event.getMessage();
 
 		if (Main.getInstance().getChatManager().isTyping(player.getUniqueId())) {
-			Main.getInstance().getChatManager().accept(player.getUniqueId(), message);
+			Main.getInstance().getChatManager().accept(player, message);
 			event.setCancelled(true);
 		}
 	}

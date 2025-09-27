@@ -86,7 +86,7 @@ public class EssentialsHook {
 
 	public boolean canCreateHome(Player player) {
 		int homeLimit = essentials.getSettings().getHomeLimit(essentials.getUser(player));
-		EXGPlayer exgPlayer = Main.getInstance().getPlayerManager().getPlayer(player.getUniqueId().toString());
+		EXGPlayer exgPlayer = Main.getInstance().getPlayerManager().getPlayer(player);
 
 		if (player.hasPermission("essentials.sethome.multiple.unlimited")) {
 			return true;

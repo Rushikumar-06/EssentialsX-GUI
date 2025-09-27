@@ -40,7 +40,7 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 		);
 
 
-		Main.getInstance().getServerDataManager().cleanServerData();
+		Main.getInstance().getServerDataManager().cleanServerKits();
 
 		Set<EXGKit> kits = kitSearch != null ? definedKits :
 
@@ -223,7 +223,7 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 
 	private void createNewKitName(Player player) {
 
-		if (!Main.getInstance().getChatManager().canDoChat(player.getUniqueId())) {
+		if (!Main.getInstance().getChatManager().canDoChat(player)) {
 			return;
 		}
 
@@ -261,7 +261,7 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 
 	private void createNewKitDelay(Player player, String kitName) {
 
-		if (!Main.getInstance().getChatManager().canDoChat(player.getUniqueId())) {
+		if (!Main.getInstance().getChatManager().canDoChat(player)) {
 			return;
 		}
 
@@ -294,7 +294,7 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 
 	private void searchKit(Player player) {
 
-		if (!Main.getInstance().getChatManager().canDoChat(player.getUniqueId())) {
+		if (!Main.getInstance().getChatManager().canDoChat(player)) {
 			return;
 		}
 

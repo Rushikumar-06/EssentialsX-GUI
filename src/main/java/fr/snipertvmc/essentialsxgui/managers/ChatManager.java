@@ -35,10 +35,9 @@ public class ChatManager {
 	// -------------------------------------------------- //
 
 
-	public boolean canDoChat(UUID uuid) {
+	public boolean canDoChat(Player player) {
 
-		if (playersTyping.containsKey(uuid)) {
-			Player player = Main.getInstance().getPlayerManager().getPlayer(uuid.toString()).getPlayer();
+		if (playersTyping.containsKey(player.getUniqueId())) {
 			player.sendMessage(MessagesUtils.get(EXGMessage.ONGOING_ACTION, null));
 			SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 			return false;
@@ -48,29 +47,28 @@ public class ChatManager {
 	}
 
 
-	public void addChat(UUID uuid, Consumer<String> consumer, float seconds) {
-		playersTyping.put(uuid, consumer);
+	public void addChat(Player player, Consumer<String> consumer, float seconds) {
+		playersTyping.put(player.getUniqueId(), consumer);
 		if (seconds > 0) {
 			long ticks = (long) (seconds * 20);
-			playersTypingTasks.put(uuid,
-					Main.getInstance().getServer().getScheduler().runTaskLater(Main.getInstance(), () -> removeChat(uuid, false), ticks)
+			playersTypingTasks.put(player.getUniqueId(),
+					Main.getInstance().getServer().getScheduler().runTaskLater(Main.getInstance(), () -> removeChat(player, false), ticks)
 			);
 		}
 	}
 
 
-	public void removeChat(UUID uuid, boolean success) {
+	public void removeChat(Player player, boolean success) {
 
-		if (playersTyping.containsKey(uuid) && !success) {
-			Player player = Main.getInstance().getPlayerManager().getPlayer(uuid.toString()).getPlayer();
+		if (playersTyping.containsKey(player.getUniqueId()) && !success) {
 			player.sendMessage(MessagesUtils.get(EXGMessage.ACTION_EXPIRED, null));
 			SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 		}
 
-		playersTyping.remove(uuid);
+		playersTyping.remove(player.getUniqueId());
 
-		playersTypingTasks.get(uuid).cancel();
-		playersTypingTasks.remove(uuid);
+		playersTypingTasks.get(player.getUniqueId()).cancel();
+		playersTypingTasks.remove(player.getUniqueId());
 	}
 
 
@@ -84,9 +82,9 @@ public class ChatManager {
 	}
 
 
-	public void accept(UUID uuid, String message) {
-		playersTyping.get(uuid).accept(message);
-		removeChat(uuid, true);
+	public void accept(Player player, String message) {
+		playersTyping.get(player.getUniqueId()).accept(message);
+		removeChat(player, true);
 	}
 
 

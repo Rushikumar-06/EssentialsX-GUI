@@ -151,7 +151,7 @@ public class KitEditingInventory extends FastInv {
 
 	public void changeKitDisplayName(Player player, EXGKit kit) {
 
-		if (!Main.getInstance().getChatManager().canDoChat(player.getUniqueId())) {
+		if (!Main.getInstance().getChatManager().canDoChat(player)) {
 			return;
 		}
 
@@ -185,7 +185,7 @@ public class KitEditingInventory extends FastInv {
 
 	public void changeKitIcon(Player player, EXGKit kit) {
 
-		if (!Main.getInstance().getChatManager().canDoChat(player.getUniqueId())) {
+		if (!Main.getInstance().getChatManager().canDoChat(player)) {
 			return;
 		}
 
@@ -238,7 +238,7 @@ public class KitEditingInventory extends FastInv {
 
 	public void deleteKit(Player player, EXGKit kit) {
 
-		if (!Main.getInstance().getChatManager().canDoChat(player.getUniqueId())) {
+		if (!Main.getInstance().getChatManager().canDoChat(player)) {
 			return;
 		}
 

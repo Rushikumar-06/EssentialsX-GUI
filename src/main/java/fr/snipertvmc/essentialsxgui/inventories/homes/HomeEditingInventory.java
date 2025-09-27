@@ -140,7 +140,7 @@ public class HomeEditingInventory extends FastInv {
 
 	public void changeHomeDisplayName(Player player, EXGHome home) {
 
-		if (!Main.getInstance().getChatManager().canDoChat(player.getUniqueId())) {
+		if (!Main.getInstance().getChatManager().canDoChat(player)) {
 			return;
 		}
 
@@ -174,7 +174,7 @@ public class HomeEditingInventory extends FastInv {
 
 	public void changeHomeIcon(Player player, EXGHome home) {
 
-		if (!Main.getInstance().getChatManager().canDoChat(player.getUniqueId())) {
+		if (!Main.getInstance().getChatManager().canDoChat(player)) {
 			return;
 		}
 
@@ -227,7 +227,7 @@ public class HomeEditingInventory extends FastInv {
 
 	public void deleteHome(Player player, EXGHome home) {
 
-		if (!Main.getInstance().getChatManager().canDoChat(player.getUniqueId())) {
+		if (!Main.getInstance().getChatManager().canDoChat(player)) {
 			return;
 		}
 

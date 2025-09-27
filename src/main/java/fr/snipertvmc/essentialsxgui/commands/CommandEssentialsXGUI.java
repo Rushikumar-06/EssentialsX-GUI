@@ -93,7 +93,7 @@ public class CommandEssentialsXGUI implements CommandExecutor, TabCompleter {
 			return;
 		}
 
-		EXGPlayer exgPlayer = Main.getInstance().getPlayerManager().getPlayer(player.getUniqueId().toString());
+		EXGPlayer exgPlayer = Main.getInstance().getPlayerManager().getPlayer(player);
 		Set<EXGHome> homes = exgPlayer.getHomes();
 		Set<EXGKit> kits = Main.getInstance().getEXGServer().getKits();
 

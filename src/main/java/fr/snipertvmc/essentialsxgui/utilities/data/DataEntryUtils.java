@@ -31,7 +31,7 @@ public class DataEntryUtils {
 
 		switch (entrySettings.getType()) {
 
-			case CHAT -> Main.getInstance().getChatManager().addChat(player.getUniqueId(), entry -> {
+			case CHAT -> Main.getInstance().getChatManager().addChat(player, entry -> {
 
 				Pair<String, EXGEntryResult> result = checkStringEntry(entry, entrySettings);
 
@@ -115,7 +115,7 @@ public class DataEntryUtils {
 
 		switch (entrySettings.getType()) {
 
-			case CHAT -> Main.getInstance().getChatManager().addChat(player.getUniqueId(), entry -> {
+			case CHAT -> Main.getInstance().getChatManager().addChat(player, entry -> {
 
 				Pair<Pair<Material, Byte>, EXGEntryResult> result = checkMaterialEntry(entry);
 
