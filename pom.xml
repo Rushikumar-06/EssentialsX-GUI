@@ -160,14 +160,6 @@
 									<pattern>net.wesjd.anvilgui</pattern>
 									<shadedPattern>fr.snipertvmc.essentialsxgui.libraries.anvilgui</shadedPattern>
 								</relocation>
-								<relocation>
-									<pattern>com.zaxxer.hikari</pattern>
-									<shadedPattern>fr.snipertvmc.essentialsxgui.libraries.hikaricp</shadedPattern>
-								</relocation>
-								<relocation>
-									<pattern>io.github.classgraph</pattern>
-									<shadedPattern>fr.snipertvmc.essentialsxgui.libraries.classgraph</shadedPattern>
-								</relocation>
 							</relocations>
 							<filters>
 								<filter>

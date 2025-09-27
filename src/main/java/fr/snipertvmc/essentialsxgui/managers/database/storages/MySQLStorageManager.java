@@ -33,7 +33,13 @@ public class MySQLStorageManager implements EXGStorage {
 
 				Main.getInstance().getConfiguration().getStorageUsername(),
 				Main.getInstance().getConfiguration().getStoragePassword(),
-				"",
+				Main.getInstance().getConfiguration().getStorageSettings(),
+
+				Main.getInstance().getConfiguration().getStorageMaximumPoolSize(),
+				Main.getInstance().getConfiguration().getStorageMinimumIdle(),
+				Main.getInstance().getConfiguration().getStorageMaxLifetime(),
+				Main.getInstance().getConfiguration().getStorageKeepaliveTime(),
+				Main.getInstance().getConfiguration().getStorageConnectionTimeout(),
 
 				isMariaDB()
 		);

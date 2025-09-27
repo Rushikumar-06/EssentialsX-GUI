@@ -256,3 +256,23 @@ storage:
 
     # If you want to use a custom table prefix for the tables created by EssentialsX-GUI, set it here.
     tablePrefix: "exg_"
+
+    # MySQL or MariaDB advanced settings for HikariCP connection pool.
+    # Warning: Do not change this if you don't know what you are doing.
+    #          Default values are recommended for most servers.
+    connectionPool:
+
+      # The maximum number of connections in the pool.
+      maximumPoolSize: 10
+
+      # The minimum number of idle connections in the pool.
+      minimumIdle: 10
+
+      # The maximum lifetime of a connection in the pool (in milliseconds).
+      maxLifetime: 1800000
+
+      # The idle timeout for connections in the pool (in milliseconds).
+      keepaliveTime: 0
+
+      # The connection timeout for the pool (in milliseconds).
+      connectionTimeout: 5000

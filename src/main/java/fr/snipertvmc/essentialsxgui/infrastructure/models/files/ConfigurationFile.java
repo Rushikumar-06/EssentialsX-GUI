@@ -176,6 +176,21 @@ public class ConfigurationFile {
 	public String getStorageSettings() {
 		return yamlConfiguration.getString("storage.mysql.settings", "Settings not found");
 	}
+	public long getStorageMaximumPoolSize() {
+		return yamlConfiguration.getLong("storage.mysql.connectionPool.maximumPoolSize", 10L);
+	}
+	public long getStorageMinimumIdle() {
+		return yamlConfiguration.getLong("storage.mysql.connectionPool.minimumIdle", 10L);
+	}
+	public long getStorageMaxLifetime() {
+		return yamlConfiguration.getLong("storage.mysql.connectionPool.maxLifetime", 1800000L);
+	}
+	public long getStorageKeepaliveTime() {
+		return yamlConfiguration.getLong("storage.mysql.connectionPool.keepaliveTime", 0L);
+	}
+	public long getStorageConnectionTimeout() {
+		return yamlConfiguration.getLong("storage.mysql.connectionPool.connectionTimeout", 5000L);
+	}
 	public String getStorageTablePrefix() {
 		return yamlConfiguration.getString("storage.mysql.tablePrefix", "exg_");
 	}

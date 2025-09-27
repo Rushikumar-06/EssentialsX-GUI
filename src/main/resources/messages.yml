@@ -40,9 +40,9 @@ admin:
   # Placeholders available: {currentVersion}, {latestVersion}
   alertUpdateAvailable: "{prefix} &eAn update is available for EssentialsX-GUI. &6Please check the console for more information."
 
-  storageTypeChangeDetected: "{prefix} &eA change in storage type has been detected. &6Please wait for the process to complete..."
+  databaseReloading: "{prefix} &eThe database is being reloaded..."
   # Placeholders available: {newStorageType}
-  storageTypeChanged: "{prefix} &eThe storage type has been successfully changed to &f{newStorageType}&e."
+  databaseReloaded: "{prefix} &eThe database has been reloaded. The storage type is &f{newStorageType}&e."
 
 ############################################################
 # +------------------------------------------------------+ #

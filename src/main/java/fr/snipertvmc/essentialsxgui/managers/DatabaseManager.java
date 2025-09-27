@@ -40,6 +40,9 @@ public class DatabaseManager {
 
 			if (storageType.equalsIgnoreCase("MariaDB") && !isMariaDBDriverLoaded()) {
 				registerMariaDBDriver();
+
+			} else if (storageType.equalsIgnoreCase("MySQL") && isMariaDBDriverLoaded()) {
+				unregisterMariaDBDriver();
 			}
 
 			storage = getMySQL();
@@ -66,7 +69,10 @@ public class DatabaseManager {
 			boolean detailedLoading = Main.getInstance().getConfiguration().isDetailedLoading();
 			if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7MariaDB JDBC Driver §fregistered §7successfully."); }
 
-		} catch (Exception ignored) {
+		} catch (Exception e) {
+			ConsoleLogger.error("\tEssentialsX-GUI: An error occurred while registering the MariaDB JDBC Driver.");
+			ConsoleLogger.error("\tEssentialsX-GUI: To use MariaDB, uncomment 'libraries' section in the plugin.yml file.");
+			ConsoleLogger.error("\tEssentialsX-GUI: For more information, visit: https://sniper-tvmc.gitbook.io/essentialsx-gui/support/troubleshooting");
 		}
 	}
 

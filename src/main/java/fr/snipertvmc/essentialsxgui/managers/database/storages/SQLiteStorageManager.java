@@ -34,7 +34,10 @@ public class SQLiteStorageManager implements EXGStorage {
 			sqliteFile = new File(Main.getInstance().getDataFolder(), "database.sqlite");
 			sqliteFile.createNewFile();
 
-			dataSource = DatabaseUtils.connectDatabase(sqliteFile.getAbsolutePath());
+			dataSource = DatabaseUtils.connectDatabase(
+					sqliteFile.getAbsolutePath(),
+					Main.getInstance().getConfiguration().getStorageSettings()
+			);
 
 		} catch (IOException e) {
 			throw new RuntimeException(e);

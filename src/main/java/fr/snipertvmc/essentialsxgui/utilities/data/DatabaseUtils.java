@@ -12,6 +12,8 @@ public class DatabaseUtils {
     public static HikariDataSource connectDatabase(String host, String port, String database,
                                                    String user, String password,
                                                    String settings,
+												   long maximumPoolSize, long minimumIdle,
+												   long maxLifetime, long keepaliveTime, long connectionTimeout,
                                                    boolean isMariaDB) {
 
 	    HikariConfig config = new HikariConfig();
@@ -19,7 +21,7 @@ public class DatabaseUtils {
 	    String driverType = isMariaDB ? "mariadb" : "mysql";
 
 	    // Connection settings
-	    config.setJdbcUrl("jdbc:" + driverType + "://" + host + ":" + port + "/" + database);
+	    config.setJdbcUrl("jdbc:" + driverType + "://" + host + ":" + port + "/" + database + (settings.isEmpty() ? "" : "?" + settings));
 	    config.setUsername(user);
 	    config.setPassword(password);
 
@@ -27,25 +29,22 @@ public class DatabaseUtils {
 	    config.setDriverClassName(isMariaDB ? "org.mariadb.jdbc.Driver" : "com.mysql.cj.jdbc.Driver");
 
 	    // HikariCP settings
-	    config.setMaximumPoolSize(10);
-	    config.setMinimumIdle(10);
-	    config.setMaxLifetime(1800000);
-	    config.setKeepaliveTime(0);
-	    config.setConnectionTimeout(5000);
+	    config.setMaximumPoolSize(((Number) maximumPoolSize).intValue());
+		config.setMinimumIdle(((Number) minimumIdle).intValue());
+		config.setMaxLifetime(maxLifetime);
+		config.setKeepaliveTime(keepaliveTime);
+		config.setConnectionTimeout(connectionTimeout);
 	    config.setPoolName("EssentialsX-GUI-HikariCP");
-
-	    // Additional properties
-//			config.addDataSourceProperty("settings", settings);
 
 	    return new HikariDataSource(config);
     }
 
 
-	public static HikariDataSource connectDatabase(String sqliteFile) {
+	public static HikariDataSource connectDatabase(String sqliteFile, String settings) {
 
 		HikariConfig config = new HikariConfig();
 
-		config.setJdbcUrl("jdbc:sqlite:" + sqliteFile);
+		config.setJdbcUrl("jdbc:sqlite:" + sqliteFile + (settings.isEmpty() ? "" : "?" + settings));
 		config.setMaximumPoolSize(1);
 		config.setPoolName("EssentialsX-GUI-SQLite");
 
