@@ -24,6 +24,7 @@ import fr.snipertvmc.essentialsxgui.infrastructure.models.files.ConfigurationFil
 import fr.snipertvmc.essentialsxgui.libraries.bstats.Metrics;
 import fr.snipertvmc.essentialsxgui.managers.*;
 import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
+import net.byteflux.libby.BukkitLibraryManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
@@ -34,12 +35,14 @@ public class Main extends JavaPlugin {
 
 	private static Main instance;
 
+	private BukkitLibraryManager bukkitLibraryManager;
 
 	private ChatManager chatManager;
 	private DatabaseManager databaseManager;
 	private FilesManager filesManager;
 	private HookManager hookManager;
 	private InventoriesManager inventoriesManager;
+	private LibraryManager libraryManager;
 	private LoadingManager loadingManager;
 	private PlayerDataManager playerDataManager;
 	private PlayerManager playerManager;
@@ -64,7 +67,14 @@ public class Main extends JavaPlugin {
 		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Plugin loading...");
 
 
+		// INSTANCE INITIALIZATION
 		instance = this;
+
+
+		// LIBRARY MANAGER INITIALIZATION
+		// Must be done at the beginning to load essential libraries
+		bukkitLibraryManager = new BukkitLibraryManager(this);
+		libraryManager = new LibraryManager();
 
 
 		// MANAGERS INITIALIZATION
@@ -153,6 +163,8 @@ public class Main extends JavaPlugin {
 		return instance;
 	}
 
+	public BukkitLibraryManager getBukkitLibraryManager() {
+		return bukkitLibraryManager;
 	}
 
 	public EXGServer getEXGServer() {
@@ -173,6 +185,9 @@ public class Main extends JavaPlugin {
 	}
 	public InventoriesManager getInventoriesManager() {
 		return inventoriesManager;
+	}
+	public LibraryManager getLibraryManager() {
+		return libraryManager;
 	}
 	public LoadingManager getLoadingManager() {
 		return loadingManager;
