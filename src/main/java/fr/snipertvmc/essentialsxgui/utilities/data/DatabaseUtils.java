@@ -21,11 +21,11 @@ public class DatabaseUtils {
 	    String driverType = isMariaDB ? "mariadb" : "mysql";
 
 	    // Connection settings
-	    config.setJdbcUrl("jdbc:" + driverType + "://" + host + ":" + port + "/" + database + (settings.isEmpty() ? "" : "?" + settings));
+	    config.setJdbcUrl("jdbc:" + driverType + "://" + host + ":" + port + "/" + database + (settings.isEmpty() ? "" : settings));
 	    config.setUsername(user);
 	    config.setPassword(password);
 
-	    // MariaDB JDBC Driver
+	    // JDBC Driver
 	    config.setDriverClassName(isMariaDB ? "org.mariadb.jdbc.Driver" : "com.mysql.cj.jdbc.Driver");
 
 	    // HikariCP settings
@@ -40,13 +40,22 @@ public class DatabaseUtils {
     }
 
 
-	public static HikariDataSource connectDatabase(String sqliteFile, String settings) {
+	public static HikariDataSource connectDatabase(String sqliteFile) {
 
 		HikariConfig config = new HikariConfig();
 
-		config.setJdbcUrl("jdbc:sqlite:" + sqliteFile + (settings.isEmpty() ? "" : "?" + settings));
+		// Connection settings
+		config.setJdbcUrl("jdbc:sqlite:" + sqliteFile);
+
+		// JDBC Driver
+		config.setDriverClassName("org.sqlite.JDBC");
+
+		// HikariCP settings
 		config.setMaximumPoolSize(1);
 		config.setPoolName("EssentialsX-GUI-SQLite");
+
+		// Connection test query
+		config.setConnectionTestQuery("SELECT 1");
 
 		return new HikariDataSource(config);
 	}

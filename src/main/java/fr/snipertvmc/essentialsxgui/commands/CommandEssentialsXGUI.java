@@ -139,7 +139,7 @@ public class CommandEssentialsXGUI implements CommandExecutor, TabCompleter {
 		commandSender.sendMessage(MessagesUtils.get(EXGMessage.DATABASE_RELOADING, null));
 
 		Main.getInstance().getDatabaseManager().disconnectAllDatabases();
-		Main.getInstance().getDatabaseManager().initialize();
+		Main.getInstance().getDatabaseManager().updateDatabaseStorage();
 		Main.getInstance().getDatabaseManager().connectAllDatabases();
 
 		String newStorageType = Main.getInstance().getConfiguration().getStorageType();

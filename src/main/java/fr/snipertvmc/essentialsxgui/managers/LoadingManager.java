@@ -86,19 +86,16 @@ public class LoadingManager {
 
 
 		// FINAL DATA SAVING
-		if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7Final data saving..."); }
+		if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7Data saving..."); }
 		Main.getInstance().getPlayerManager().saveAll();
 		Main.getInstance().getServerManager().save();
-		if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7Final data saving §fcompleted§7."); }
+		if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7Data saving §fcompleted§7."); }
 
 
-		// STORAGE SAVING
-		if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7Storage saving..."); }
+		// DATABASES DISCONNECTION
+		if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7Disconnecting databases..."); }
 		Main.getInstance().getDatabaseManager().disconnectAllDatabases();
-		if (Main.getInstance().getDatabaseManager().isMariaDBDriverLoaded()) {
-			Main.getInstance().getDatabaseManager().unregisterMariaDBDriver();
-		}
-		if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7Storage saving §fcompleted§7."); }
+		if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7Databases disconnection §fcompleted§7."); }
 	}
 
 

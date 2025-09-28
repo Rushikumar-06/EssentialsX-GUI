@@ -18,7 +18,6 @@
 package fr.snipertvmc.essentialsxgui;
 
 import com.earth2me.essentials.Essentials;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.MCServerVersion;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGServer;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.files.ConfigurationFile;
@@ -35,7 +34,6 @@ public class Main extends JavaPlugin {
 
 	private static Main instance;
 
-	private ObjectMapper objectMapper;
 
 	private ChatManager chatManager;
 	private DatabaseManager databaseManager;
@@ -66,11 +64,10 @@ public class Main extends JavaPlugin {
 		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Plugin loading...");
 
 
-		// GLOBAL VARIABLES INITIALIZATION
 		instance = this;
 
-		objectMapper = new ObjectMapper();
 
+		// MANAGERS INITIALIZATION
 		chatManager = new ChatManager();
 		hookManager = new HookManager();
 		inventoriesManager = new InventoriesManager();
@@ -156,8 +153,6 @@ public class Main extends JavaPlugin {
 		return instance;
 	}
 
-	public ObjectMapper getObjectMapper() {
-		return objectMapper;
 	}
 
 	public EXGServer getEXGServer() {

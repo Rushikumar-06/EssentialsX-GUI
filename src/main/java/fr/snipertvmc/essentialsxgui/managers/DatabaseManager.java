@@ -1,22 +1,17 @@
 package fr.snipertvmc.essentialsxgui.managers;
 
 import fr.snipertvmc.essentialsxgui.Main;
-import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGStorage;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.databases.EXGStorage;
 import fr.snipertvmc.essentialsxgui.managers.database.storages.MySQLStorageManager;
 import fr.snipertvmc.essentialsxgui.managers.database.storages.SQLiteStorageManager;
 import fr.snipertvmc.essentialsxgui.managers.database.tables.KitsTableManager;
 import fr.snipertvmc.essentialsxgui.managers.database.tables.PlayerHomesTableManager;
-import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
-
-import java.sql.DriverManager;
 
 public class DatabaseManager {
 
 
 	// -------------------------------------------------- //
 
-
-	private boolean mariaDBDriver = false;
 
 	private EXGStorage storage;
 
@@ -28,71 +23,26 @@ public class DatabaseManager {
 
 
 	public DatabaseManager() {
-		initialize();
+		updateDatabaseStorage();
 	}
 
 
-	public void initialize() {
+	public void updateDatabaseStorage() {
 
 		String storageType = Main.getInstance().getConfiguration().getStorageType();
-
-		if (storageType.equalsIgnoreCase("MySQL") || (storageType.equalsIgnoreCase("MariaDB"))) {
-
-			if (storageType.equalsIgnoreCase("MariaDB") && !isMariaDBDriverLoaded()) {
-				registerMariaDBDriver();
-
-			} else if (storageType.equalsIgnoreCase("MySQL") && isMariaDBDriverLoaded()) {
-				unregisterMariaDBDriver();
-			}
-
-			storage = getMySQL();
+		if (storageType.equals("SQLite")) {
+			Main.getInstance().getLibraryManager().loadLibraries("SQLite");
+			storage = getSQLite();
 			return;
 		}
 
-		storage = getSQLite();
-
-		if (isMariaDBDriverLoaded()) {
-			unregisterMariaDBDriver();
+		if (storageType.equalsIgnoreCase("MariaDB")) {
+			Main.getInstance().getLibraryManager().loadLibraries("MariaDB");
+		} else {
+			Main.getInstance().getLibraryManager().loadLibraries("MySQL");
 		}
-	}
 
-
-	// -------------------------------------------------- //
-
-
-	public void registerMariaDBDriver() {
-
-		try {
-			Class.forName("org.mariadb.jdbc.Driver");
-			mariaDBDriver = true;
-
-			boolean detailedLoading = Main.getInstance().getConfiguration().isDetailedLoading();
-			if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7MariaDB JDBC Driver §fregistered §7successfully."); }
-
-		} catch (Exception e) {
-			ConsoleLogger.error("\tEssentialsX-GUI: An error occurred while registering the MariaDB JDBC Driver.");
-			ConsoleLogger.error("\tEssentialsX-GUI: To use MariaDB, uncomment 'libraries' section in the plugin.yml file.");
-			ConsoleLogger.error("\tEssentialsX-GUI: For more information, visit: https://sniper-tvmc.gitbook.io/essentialsx-gui/support/troubleshooting");
-		}
-	}
-
-
-	public void unregisterMariaDBDriver() {
-
-		try {
-			DriverManager.deregisterDriver(DriverManager.getDriver("jdbc:mariadb://"));
-			mariaDBDriver = false;
-
-			boolean detailedLoading = Main.getInstance().getConfiguration().isDetailedLoading();
-			if (detailedLoading) { ConsoleLogger.info("\t§6EssentialsX-GUI: §7MariaDB JDBC Driver §funregistered §7successfully."); }
-
-		} catch (Exception ignored) {
-		}
-	}
-
-
-	public boolean isMariaDBDriverLoaded() {
-		return mariaDBDriver;
+		storage = getMySQL();
 	}
 
 

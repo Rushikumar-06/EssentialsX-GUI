@@ -1,4 +1,4 @@
-package fr.snipertvmc.essentialsxgui.infrastructure.models;
+package fr.snipertvmc.essentialsxgui.infrastructure.models.databases;
 
 import java.sql.Connection;
 import java.sql.SQLException;

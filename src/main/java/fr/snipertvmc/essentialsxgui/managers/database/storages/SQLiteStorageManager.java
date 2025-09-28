@@ -2,7 +2,7 @@ package fr.snipertvmc.essentialsxgui.managers.database.storages;
 
 import com.zaxxer.hikari.HikariDataSource;
 import fr.snipertvmc.essentialsxgui.Main;
-import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGStorage;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.databases.EXGStorage;
 import fr.snipertvmc.essentialsxgui.utilities.data.DatabaseUtils;
 
 import java.io.File;
@@ -32,12 +32,11 @@ public class SQLiteStorageManager implements EXGStorage {
 
 		try {
 			sqliteFile = new File(Main.getInstance().getDataFolder(), "database.sqlite");
-			sqliteFile.createNewFile();
+			if (!sqliteFile.exists()) {
+				sqliteFile.createNewFile();
+			}
 
-			dataSource = DatabaseUtils.connectDatabase(
-					sqliteFile.getAbsolutePath(),
-					Main.getInstance().getConfiguration().getStorageSettings()
-			);
+			dataSource = DatabaseUtils.connectDatabase(sqliteFile.getAbsolutePath());
 
 		} catch (IOException e) {
 			throw new RuntimeException(e);

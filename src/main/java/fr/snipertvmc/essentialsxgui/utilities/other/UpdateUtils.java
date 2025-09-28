@@ -1,6 +1,5 @@
 package fr.snipertvmc.essentialsxgui.utilities.other;
 
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;

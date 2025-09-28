@@ -15,12 +15,7 @@ depend:
   - Essentials
 
 
-libraries:
-  - "org.mariadb.jdbc:mariadb-java-client:3.5.6"
-
-
 commands:
-
 
   essentialsXGUI:
     description: Main command for management of the plugin.

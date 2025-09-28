@@ -2,7 +2,7 @@ package fr.snipertvmc.essentialsxgui.managers.database.storages;
 
 import com.zaxxer.hikari.HikariDataSource;
 import fr.snipertvmc.essentialsxgui.Main;
-import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGStorage;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.databases.EXGStorage;
 import fr.snipertvmc.essentialsxgui.utilities.data.DatabaseUtils;
 
 import java.sql.Connection;
@@ -74,7 +74,7 @@ public class MySQLStorageManager implements EXGStorage {
 		return true;
 	}
 	public boolean isMariaDB() {
-		return Main.getInstance().getDatabaseManager().isMariaDBDriverLoaded();
+		return Main.getInstance().getConfiguration().getStorageType().equals("MariaDB");
 	}
 	public boolean isSQLite() {
 		return false;
