@@ -11,32 +11,54 @@ EssentialsX-GUI is an EssentialsX addon that adds some GUIs for Essentials featu
 
 ## ✨ | Features
 
+### General features:
+- Customizable permissions.
+- Database support: SQLite, MySQL, MariaDB (preferred over MySQL)
+- All messages are customizable.
+- Lightweight and high-performance.
+- Clean and structured code.
+
 ### Homes:
-- Customize the appearance of your home in the homes' GUI
+- Customize the appearance of your home in the homes' GUI.
   - Customizable home display name.
   - Customizable home display icon.
-- Per-player home item editor.
-- Infinite number of homes supported.
+- Chose the way you want to customize home item.
+  - Using the chat.
+  - Using an anvil.
+  - Using a GUI. *(Icons only)*
+  - Using item in hand. *(Icons only)*
+- Unique item for bed home.
+  - Possibility to customize the item according to the home's world.
+- Per-player home item editor, with preview home item.
+- Infinite number of homes supported. *(Integrated pagination system)*
 - Play custom sounds when an action is performed.
 - Home creation and deletion in a GUI.
+- Search for home by name.
 
 > **Supported EssentialsX features (2/2):**
 > - Essentials Homes
 > - Home limit per player.
 
 ### Kits:
+
 - Customize the appearance of your kits in the kits' GUI
   - Customizable kit display name.
   - Customizable kit display icon.
-- Infinite number of kits supported.
-- Play custom sounds when an action is performed.
+- Chose the way you want to customize home item.
+  - Using the chat.
+  - Using an anvil.
+  - Using a GUI. *(Icons only)*
+  - Using item in hand. *(Icons only)*
 - Admin view to manage kits.
   - Chose a player and give him a kit.
-  - Per-kit item editor.
+  - Per-kit content editor.
   - Kit creation and deletion in a GUI.
 - Player view to see owned kits.
   - Give kit to player when clicking on it.
   - Kits preview in a GUI.
+- Infinite number of kits supported. *(Integrated pagination system)*
+- Play custom sounds when an action is performed.
+- Search for kit by name.
 
 > **Supported EssentialsX features (3/3):**
 > - Essentials Kits
@@ -57,31 +79,42 @@ EssentialsX-GUI is an EssentialsX addon that adds some GUIs for Essentials featu
 ### __1. Home creation__
 <details>
   <br>
-  <img src=https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMHg0ajc0dDYwb2Z6a3N0bmw0YWRlNzdxa3FzcTR3dDNuZjVtY2NscyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/IVm322E7X9RzhXBMD0/giphy.gif alt="Home creation">
+  <img src=https://github.com/SniperTVmc/EssentialsX-GUI/blob/Main/assets/preview/home-creation.gif?raw=true alt="Home creation">
   <br>
 </details>
 
-### __2. Home customization__
-
+### __2. Home search__
 <details>
   <br>
-  <img src=https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExamNsZnZ0eXh5d3k4ZWphZmltN3Y3MmFobWVpbnRkcHJ6NW8yZjhtNCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/0oSfoLGRT3kV3L5oxT/giphy.gif alt="Home customization">
+  <img src=https://github.com/SniperTVmc/EssentialsX-GUI/blob/Main/assets/preview/home-search.gif?raw=true alt="Home creation">
   <br>
 </details>
 
-### __2. Kit (player view)__
-
+### __3. Bed home item__
 <details>
   <br>
-  <img src=https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExdXd4MnVyYnBzb3BvcWpjYTIwbWtsOGc2bDJ5cGMxZG45bG16bm40eiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/HYphchqApTdGjLuUV1/giphy.gif alt="Kit (admin view)">
+  <img src=https://github.com/SniperTVmc/EssentialsX-GUI/blob/Main/assets/preview/bed-home-item.gif?raw=true alt="Home creation">
   <br>
 </details>
 
-### __2. Kit (admin view)__
-
+### __4. Kit creation__
 <details>
   <br>
-  <img src=https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExYXpmNXNjNnNpcmExNmhuNzYwcmJ1amlzMWUwczNkYTkxMTFsc2FtNSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/0iYiAAiPEyMW5OruSX/giphy.gif alt="Kit (player view)">
+  <img src=https://github.com/SniperTVmc/EssentialsX-GUI/blob/Main/assets/preview/kit-creation.gif?raw=true alt="Home creation">
+  <br>
+</details>
+
+### __5. Home preview__
+<details>
+  <br>
+  <img src=https://github.com/SniperTVmc/EssentialsX-GUI/blob/Main/assets/preview/kit-preview.gif?raw=true alt="Home creation">
+  <br>
+</details>
+
+### __6. Kit content editor__
+<details>
+  <br>
+  <img src=https://github.com/SniperTVmc/EssentialsX-GUI/blob/Main/assets/preview/kit-content-editor.gif?raw=true alt="Home creation">
   <br>
 </details>
 
@@ -94,28 +127,7 @@ Requirements:
 - Java Version: **16+**
 - EssentialsX Version: **2.21.2+**
 
-First, install the latest version of EssentialsX-GUI [here](https://github.com/SniperTVmc/EssentialsX-GUI/releases/latest).<br>
-Then drop the file `EssentialsX-GUI-[version].jar` in the `plugins/` folder of your server.<br>
-Finally, __restart__ the server and you're done!
-
-## 📋 | Supported Versions
-
-|   Version name    | Status | Tested plugin version |
-|:-----------------:|:------:|-----------------------|
-| 1.8.8 and earlier |   🟧   | ✖️                    |
-|       1.8.8       |   ✅    | 1.0.0                 |
-|      1.12.2       |   ✅    | 1.0.0                 |
-|      1.16.5       |   ✅    | 1.0.0                 |
-|      1.21.4       |   ✅    | 1.0.0                 |
-|      1.21.8       |   ✅    | 1.0.0                 |
-|  Other versions   |   🟩   | ✖️                    |
-
-> Legend:
-> - ✅ : Supported and tested
-> - 🟩 : Should work, but not tested
-> - 🟨 : Partially supported, some features may not work
-> - 🟧 : Should not work, but may work
-> - 🟥 : Not supported at all
+> For more help, please visit the [wiki](https://sniper-tvmc.gitbook.io/essentialsx-gui/installation/prerequisites).
 
 ## 📢 | Servers using EssentialsX-GUI
 
