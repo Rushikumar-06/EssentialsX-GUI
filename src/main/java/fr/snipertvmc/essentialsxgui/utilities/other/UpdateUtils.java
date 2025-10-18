@@ -1,7 +1,8 @@
 package fr.snipertvmc.essentialsxgui.utilities.other;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.squareup.moshi.Json;
+import com.squareup.moshi.JsonAdapter;
+import com.squareup.moshi.Moshi;
 import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
 
 import java.io.IOException;
@@ -29,18 +30,31 @@ public class UpdateUtils {
 
 		try {
 			HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-			if (response.statusCode() == 200) {
 
-				ObjectMapper mapper = new ObjectMapper();
-				JsonNode jsonNode = mapper.readTree(response.body());
-				return jsonNode.get("tag_name").asText();
+			if (response.statusCode() == 200) {
+				Moshi moshi = new Moshi.Builder().build();
+				JsonAdapter<Release> adapter = moshi.adapter(Release.class);
+
+				Release release = adapter.fromJson(response.body());
+				if (release != null) {
+					return release.tagName;
+				}
 			}
 
 		} catch (IOException | InterruptedException e) {
-			ConsoleLogger.error("Failed to fetch the latest version from GitHub API: " + e.getMessage());
+			ConsoleLogger.error("Failed to fetch latest version: " + e.getMessage());
 		}
 
 		return null;
+	}
+
+
+	// -------------------------------------------------- //
+
+
+	private static class Release {
+		@Json(name = "tag_name")
+		public String tagName;
 	}
 
 

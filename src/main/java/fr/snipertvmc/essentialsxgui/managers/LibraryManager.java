@@ -25,9 +25,33 @@ public class LibraryManager {
 		BukkitLibraryManager bukkitLibraryManager = Main.getInstance().getBukkitLibraryManager();
 
 		bukkitLibraryManager.loadLibrary(Library.builder()
-				.groupId("com.fasterxml.jackson.core")
-				.artifactId("jackson-databind")
-				.version("2.20.0")
+				.groupId("com.squareup.moshi")
+				.artifactId("moshi")
+				.version("1.15.2")
+				.build());
+
+		bukkitLibraryManager.loadLibrary(Library.builder()
+				.groupId("com.squareup.okio")
+				.artifactId("okio")
+				.version("3.16.1")
+				.build());
+
+		bukkitLibraryManager.loadLibrary(Library.builder()
+				.groupId("com.squareup.okhttp3")
+				.artifactId("okhttp")
+				.version("5.2.1")
+				.build());
+
+		bukkitLibraryManager.loadLibrary(Library.builder()
+				.groupId("com.squareup.okio")
+				.artifactId("okio-jvm")
+				.version("3.16.0")
+				.build());
+
+		bukkitLibraryManager.loadLibrary(Library.builder()
+				.groupId("org.jetbrains.kotlin")
+				.artifactId("kotlin-stdlib")
+				.version("2.3.0-Beta1")
 				.build());
 
 		bukkitLibraryManager.loadLibrary(Library.builder()

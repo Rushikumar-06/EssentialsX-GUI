@@ -1,6 +1,7 @@
 package fr.snipertvmc.essentialsxgui.infrastructure.models;
 
 import fr.snipertvmc.essentialsxgui.utilities.serializers.ItemStackSerializer;
+import fr.snipertvmc.essentialsxgui.utilities.type.TypeUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
@@ -86,9 +87,16 @@ public class EXGPlayer {
 	public void setHomesRaw(Map<String, Object> homes) {
 		homes.forEach((homeName, homeData) -> {
 			EXGHome home = new EXGHome(homeName);
-			home.setDisplayName((String) ((Map<String, Object>) homeData).get("displayName"));
-			home.setMaterial(Material.valueOf((String) ((Map<String, Object>) homeData).get("material")));
-			home.setData(Byte.parseByte(String.valueOf(((Map<String, Object>) homeData).get("data"))));
+
+			Object displayNameObject = ((Map<String, Object>) homeData).get("displayName");
+			Object materialObject = ((Map<String, Object>) homeData).get("material");
+
+			Object dataObject = ((Map<String, Object>) homeData).get("data");
+			String dataString = dataObject != null ? dataObject.toString() : "0";
+
+			home.setDisplayName((String) displayNameObject);
+			home.setMaterial(Material.valueOf((String) materialObject));
+			home.setData(dataObject != null && TypeUtils.isByte(dataString) ? Byte.parseByte(dataString) : 0);
 
 			String serializedItemStack = (String) ((Map<String, Object>) homeData).get("customItemStack");
 			if (serializedItemStack != null) {

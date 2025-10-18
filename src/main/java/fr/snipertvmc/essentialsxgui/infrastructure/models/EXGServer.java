@@ -3,6 +3,7 @@ package fr.snipertvmc.essentialsxgui.infrastructure.models;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.MCServerVersion;
 import fr.snipertvmc.essentialsxgui.utilities.serializers.ItemStackSerializer;
+import fr.snipertvmc.essentialsxgui.utilities.type.TypeUtils;
 import org.bukkit.Material;
 
 import java.util.HashMap;
@@ -81,9 +82,16 @@ public class EXGServer {
 	public void setKitsRaw(Map<String, Object> kits) {
 		kits.forEach((kitName, kitData) -> {
 			EXGKit kit = new EXGKit(kitName);
-			kit.setDisplayName((String) ((Map<String, Object>) kitData).get("displayName"));
-			kit.setMaterial(Material.valueOf((String) ((Map<String, Object>) kitData).get("material")));
-			kit.setData(Byte.parseByte(String.valueOf(((Map<String, Object>) kitData).get("data"))));
+
+			Object displayNameObject = ((Map<String, Object>) kitData).get("displayName");
+			Object materialObject = ((Map<String, Object>) kitData).get("material");
+
+			Object dataObject = ((Map<String, Object>) kitData).get("data");
+			String dataString = dataObject != null ? dataObject.toString() : "0";
+
+			kit.setDisplayName((String) displayNameObject);
+			kit.setMaterial(Material.valueOf((String) materialObject));
+			kit.setData(dataObject != null && TypeUtils.isByte(dataString) ? Byte.parseByte(dataString) : 0);
 
 			String serializedItemStack = (String) ((Map<String, Object>) kitData).get("customItemStack");
 			if (serializedItemStack != null) {
