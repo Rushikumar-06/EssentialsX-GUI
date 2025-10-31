@@ -27,7 +27,9 @@ public class EXGInventoryConfigParser {
 				"homeEditing",
 
 				"kitEditing",
-				"kitEditor"
+				"kitEditor",
+
+				"warpEditing"
 		));
 	}};
 

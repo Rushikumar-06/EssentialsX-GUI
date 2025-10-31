@@ -7,6 +7,10 @@ import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes.EXGH
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.*;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.others.EXGDataEntryGUInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.warps.EXGWarpEditingInventoryConfig;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.warps.EXGWarpPlayerTeleportInventoryConfig;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.warps.EXGWarpsAdminViewInventoryConfig;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.warps.EXGWarpsPlayerViewInventoryConfig;
 
 import java.util.List;
 
@@ -19,12 +23,17 @@ public class InventoriesManager {
 	private EXGHomesInventoryConfig homesInventoryConfig;
 	private EXGHomeEditingInventoryConfig homeEditingInventoryConfig;
 
-	private EXGKitsAdminViewInventoryConfig kitsAdminInventoryConfig;
-	private EXGKitsPlayerViewInventoryConfig kitsPlayerInventoryConfig;
+	private EXGKitsAdminViewInventoryConfig kitsAdminViewInventoryConfig;
+	private EXGKitsPlayerViewInventoryConfig kitsPlayerViewInventoryConfig;
 	private EXGKitPreviewInventoryConfig kitPreviewInventoryConfig;
 	private EXGKitPlayerGiveInventoryConfig kitPlayerGiveInventoryConfig;
 	private EXGKitEditingInventoryConfig kitEditingInventoryConfig;
 	private EXGKitEditorInventoryConfig kitEditorInventoryConfig;
+
+	private EXGWarpEditingInventoryConfig warpEditingInventoryConfig;
+	private EXGWarpPlayerTeleportInventoryConfig warpPlayerTeleportInventoryConfig;
+	private EXGWarpsAdminViewInventoryConfig warpsAdminViewInventoryConfig;
+	private EXGWarpsPlayerViewInventoryConfig warpsPlayerViewInventoryConfig;
 
 	private EXGDataEntryGUInventoryConfig dataEntryGUIInventoryConfig;
 
@@ -51,6 +60,11 @@ public class InventoriesManager {
 			case "kitPlayerGive" -> loadkitPlayerGiveInventory(title, rows, inventoryName, borderItem, borderSlots);
 			case "kitEditing" -> loadKitEditingInventory(title, rows, inventoryName, borderItem, borderSlots);
 			case "kitEditor" -> loadKitEditorInventory(title, rows, inventoryName, borderItem, borderSlots);
+
+			case "warpsAdminView" -> loadWarpsAdminViewInventory(title, rows, inventoryName, borderItem, borderSlots);
+			case "warpsPlayerView" -> loadWarpsPlayerViewInventory(title, rows, inventoryName, borderItem, borderSlots);
+			case "warpPlayerTeleport" -> loadWarpPlayerTeleportInventory(title, rows, inventoryName, borderItem, borderSlots);
+			case "warpEditing" -> loadWarpEditingInventory(title, rows, inventoryName, borderItem, borderSlots);
 
 			case "dataEntryGUI" -> loadDataEntryGUIInventory(title, rows, inventoryName, borderItem, borderSlots);
 
@@ -138,68 +152,68 @@ public class InventoriesManager {
 
 		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
 
-		kitsAdminInventoryConfig = new EXGKitsAdminViewInventoryConfig(title, rows, borderItem, borderSlots);
+		kitsAdminViewInventoryConfig = new EXGKitsAdminViewInventoryConfig(title, rows, borderItem, borderSlots);
 
-		kitsAdminInventoryConfig.setKitItem(inventoryFile.getItem(
+		kitsAdminViewInventoryConfig.setKitItem(inventoryFile.getItem(
 				"kitItem"));
-		kitsAdminInventoryConfig.setNoKitsItem(inventoryFile.getItem(
+		kitsAdminViewInventoryConfig.setNoKitsItem(inventoryFile.getItem(
 				"noKitsItem"));
 
-		kitsAdminInventoryConfig.setCreateKitItem(inventoryFile.getItem(
+		kitsAdminViewInventoryConfig.setCreateKitItem(inventoryFile.getItem(
 				"createKitItem"));
-		kitsAdminInventoryConfig.setSwitchToPlayerModeItem(inventoryFile.getItem(
+		kitsAdminViewInventoryConfig.setSwitchToPlayerModeItem(inventoryFile.getItem(
 				"switchToPlayerModeItem"));
-		kitsAdminInventoryConfig.setSearchKitItem(inventoryFile.getItem(
+		kitsAdminViewInventoryConfig.setSearchKitItem(inventoryFile.getItem(
 				"searchKitItem"));
-		kitsAdminInventoryConfig.setCancelSearchKitItem(inventoryFile.getItem(
+		kitsAdminViewInventoryConfig.setCancelSearchKitItem(inventoryFile.getItem(
 				"cancelSearchKitItem"));
-		kitsAdminInventoryConfig.setNoSearchKitResultsItem(inventoryFile.getItem(
+		kitsAdminViewInventoryConfig.setNoSearchKitResultsItem(inventoryFile.getItem(
 				"noSearchKitResultsItem"));
 
-		kitsAdminInventoryConfig.setNextPageItem(inventoryFile.getItem(
+		kitsAdminViewInventoryConfig.setNextPageItem(inventoryFile.getItem(
 				"nextPageItem"));
-		kitsAdminInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
+		kitsAdminViewInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
 				"previousPageItem"));
-		kitsAdminInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
+		kitsAdminViewInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
 				"currentPageItem"));
 
-		kitsAdminInventoryConfig.setCloseItem(inventoryFile.getItem(
+		kitsAdminViewInventoryConfig.setCloseItem(inventoryFile.getItem(
 				"closeItem"));
 
-		kitsAdminInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
+		kitsAdminViewInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
 	}
 
 	private void loadKitsPlayerViewInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
 
 		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
 
-		kitsPlayerInventoryConfig = new EXGKitsPlayerViewInventoryConfig(title, rows, borderItem, borderSlots);
+		kitsPlayerViewInventoryConfig = new EXGKitsPlayerViewInventoryConfig(title, rows, borderItem, borderSlots);
 
-		kitsPlayerInventoryConfig.setKitItem(inventoryFile.getItem(
+		kitsPlayerViewInventoryConfig.setKitItem(inventoryFile.getItem(
 				"kitItem"));
-		kitsPlayerInventoryConfig.setNoKitsItem(inventoryFile.getItem(
+		kitsPlayerViewInventoryConfig.setNoKitsItem(inventoryFile.getItem(
 				"noKitsItem"));
 
-		kitsPlayerInventoryConfig.setSwitchToAdminModeItem(inventoryFile.getItem(
+		kitsPlayerViewInventoryConfig.setSwitchToAdminModeItem(inventoryFile.getItem(
 				"switchToAdminModeItem"));
-		kitsPlayerInventoryConfig.setSearchKitItem(inventoryFile.getItem(
+		kitsPlayerViewInventoryConfig.setSearchKitItem(inventoryFile.getItem(
 				"searchKitItem"));
-		kitsPlayerInventoryConfig.setCancelSearchKitItem(inventoryFile.getItem(
+		kitsPlayerViewInventoryConfig.setCancelSearchKitItem(inventoryFile.getItem(
 				"cancelSearchKitItem"));
-		kitsPlayerInventoryConfig.setNoSearchKitResultsItem(inventoryFile.getItem(
+		kitsPlayerViewInventoryConfig.setNoSearchKitResultsItem(inventoryFile.getItem(
 				"noSearchKitResultsItem"));
 
-		kitsPlayerInventoryConfig.setNextPageItem(inventoryFile.getItem(
+		kitsPlayerViewInventoryConfig.setNextPageItem(inventoryFile.getItem(
 				"nextPageItem"));
-		kitsPlayerInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
+		kitsPlayerViewInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
 				"previousPageItem"));
-		kitsPlayerInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
+		kitsPlayerViewInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
 				"currentPageItem"));
 
-		kitsPlayerInventoryConfig.setCloseItem(inventoryFile.getItem(
+		kitsPlayerViewInventoryConfig.setCloseItem(inventoryFile.getItem(
 				"closeItem"));
 
-		kitsPlayerInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
+		kitsPlayerViewInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
 	}
 
 	private void loadKitPreviewInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
@@ -288,7 +302,123 @@ public class InventoriesManager {
 
 
 	//
-	// KITS INVENTORIES
+	// WARPS INVENTORIES
+	//
+
+
+	private void loadWarpEditingInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+
+		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
+
+		warpEditingInventoryConfig = new EXGWarpEditingInventoryConfig(title, rows, borderItem, borderSlots);
+
+		warpEditingInventoryConfig.setPreviewWarpItem(inventoryFile.getItem(
+				"previewWarpItem"));
+
+		warpEditingInventoryConfig.setChangeDisplayNameItem(inventoryFile.getItem(
+				"changeDisplayNameItem"));
+		warpEditingInventoryConfig.setChangeIconItem(inventoryFile.getItem(
+				"changeIconItem"));
+		warpEditingInventoryConfig.setDeleteWarpItem(inventoryFile.getItem(
+				"deleteWarpItem"));
+
+		warpEditingInventoryConfig.setBackItem(inventoryFile.getItem(
+				"backItem"));
+	}
+
+	private void loadWarpPlayerTeleportInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+
+		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
+
+		warpPlayerTeleportInventoryConfig = new EXGWarpPlayerTeleportInventoryConfig(title, rows, borderItem, borderSlots);
+
+		warpPlayerTeleportInventoryConfig.setPlayerItem(inventoryFile.getItem(
+				"playerItem"));
+
+		warpPlayerTeleportInventoryConfig.setNextPageItem(inventoryFile.getItem(
+				"nextPageItem"));
+		warpPlayerTeleportInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
+				"previousPageItem"));
+		warpPlayerTeleportInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
+				"currentPageItem"));
+
+		warpPlayerTeleportInventoryConfig.setBackItem(inventoryFile.getItem(
+				"backItem"));
+
+		warpPlayerTeleportInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
+	}
+
+	private void loadWarpsAdminViewInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+
+		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
+
+		warpsAdminViewInventoryConfig = new EXGWarpsAdminViewInventoryConfig(title, rows, borderItem, borderSlots);
+
+		warpsAdminViewInventoryConfig.setWarpItem(inventoryFile.getItem(
+				"warpItem"));
+		warpsAdminViewInventoryConfig.setNoWarpsItem(inventoryFile.getItem(
+				"noWarpsItem"));
+
+		warpsAdminViewInventoryConfig.setCreateWarpItem(inventoryFile.getItem(
+				"createWarpItem"));
+		warpsAdminViewInventoryConfig.setSwitchToPlayerModeItem(inventoryFile.getItem(
+				"switchToPlayerModeItem"));
+		warpsAdminViewInventoryConfig.setSearchWarpItem(inventoryFile.getItem(
+				"searchWarpItem"));
+		warpsAdminViewInventoryConfig.setCancelSearchWarpItem(inventoryFile.getItem(
+				"cancelSearchWarpItem"));
+		warpsAdminViewInventoryConfig.setNoSearchWarpResultsItem(inventoryFile.getItem(
+				"noSearchWarpResultsItem"));
+
+		warpsAdminViewInventoryConfig.setNextPageItem(inventoryFile.getItem(
+				"nextPageItem"));
+		warpsAdminViewInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
+				"previousPageItem"));
+		warpsAdminViewInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
+				"currentPageItem"));
+
+		warpsAdminViewInventoryConfig.setCloseItem(inventoryFile.getItem(
+				"closeItem"));
+
+		warpsAdminViewInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
+	}
+
+	private void loadWarpsPlayerViewInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+
+		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
+
+		warpsPlayerViewInventoryConfig = new EXGWarpsPlayerViewInventoryConfig(title, rows, borderItem, borderSlots);
+
+		warpsPlayerViewInventoryConfig.setWarpItem(inventoryFile.getItem(
+				"warpItem"));
+		warpsPlayerViewInventoryConfig.setNoWarpsItem(inventoryFile.getItem(
+				"noWarpsItem"));
+
+		warpsPlayerViewInventoryConfig.setSwitchToAdminModeItem(inventoryFile.getItem(
+				"switchToAdminModeItem"));
+		warpsPlayerViewInventoryConfig.setSearchWarpItem(inventoryFile.getItem(
+				"searchWarpItem"));
+		warpsPlayerViewInventoryConfig.setCancelSearchWarpItem(inventoryFile.getItem(
+				"cancelSearchWarpItem"));
+		warpsPlayerViewInventoryConfig.setNoSearchWarpResultsItem(inventoryFile.getItem(
+				"noSearchWarpResultsItem"));
+
+		warpsPlayerViewInventoryConfig.setNextPageItem(inventoryFile.getItem(
+				"nextPageItem"));
+		warpsPlayerViewInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
+				"previousPageItem"));
+		warpsPlayerViewInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
+				"currentPageItem"));
+
+		warpsPlayerViewInventoryConfig.setCloseItem(inventoryFile.getItem(
+				"closeItem"));
+
+		warpsPlayerViewInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
+	}
+
+
+	//
+	// OTHERS INVENTORIES
 	//
 
 
@@ -330,6 +460,11 @@ public class InventoriesManager {
 				"kitEditing",
 				"kitEditor",
 
+				"warpEditing",
+				"warpPlayerTeleport",
+				"warpsAdminView",
+				"warpsPlayerView",
+
 				"dataEntryGUI"
 		);
 	}
@@ -346,11 +481,11 @@ public class InventoriesManager {
 	}
 
 
-	public EXGKitsAdminViewInventoryConfig getKitsAdminInventoryConfig() {
-		return kitsAdminInventoryConfig;
+	public EXGKitsAdminViewInventoryConfig getKitsAdminViewInventoryConfig() {
+		return kitsAdminViewInventoryConfig;
 	}
-	public EXGKitsPlayerViewInventoryConfig getKitsPlayerInventoryConfig() {
-		return kitsPlayerInventoryConfig;
+	public EXGKitsPlayerViewInventoryConfig getKitsPlayerViewInventoryConfig() {
+		return kitsPlayerViewInventoryConfig;
 	}
 	public EXGKitPreviewInventoryConfig getKitPreviewInventoryConfig() {
 		return kitPreviewInventoryConfig;
@@ -363,6 +498,20 @@ public class InventoriesManager {
 	}
 	public EXGKitEditorInventoryConfig getKitEditorInventoryConfig() {
 		return kitEditorInventoryConfig;
+	}
+
+
+	public EXGWarpEditingInventoryConfig getWarpEditingInventoryConfig() {
+		return warpEditingInventoryConfig;
+	}
+	public EXGWarpPlayerTeleportInventoryConfig getWarpPlayerTeleportInventoryConfig() {
+		return warpPlayerTeleportInventoryConfig;
+	}
+	public EXGWarpsAdminViewInventoryConfig getWarpsAdminViewInventoryConfig() {
+		return warpsAdminViewInventoryConfig;
+	}
+	public EXGWarpsPlayerViewInventoryConfig getWarpsPlayerViewInventoryConfig() {
+		return warpsPlayerViewInventoryConfig;
 	}
 
 

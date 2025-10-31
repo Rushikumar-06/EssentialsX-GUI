@@ -21,8 +21,8 @@
 general:
 
   # Please do not change this value as it may cause the file to be reset.
-  # Default: "1.3"
-  configVersion: "1.3"
+  # Default: "1.4"
+  configVersion: "1.4"
 
   # If you want to see a detailed loading message when the plugin is loading, set this to true. (Also works for unloading)
   # Default: false
@@ -32,91 +32,9 @@ general:
   # Default: true
   checkForUpdates: true
 
-
-  modules:
-
-    homes:
-
-      # Set this to true if you want to use the homes features.
-      # This will allow players to access the homes GUI.
-      # Default: true
-      enabled: true
-
-
-      # Decide how players can create a home.
-      # Ways available: "CHAT", "ANVIL"
-      createNewHomeEntryType: "CHAT"
-
-
-      # Decide how players can search for a home.
-      # Ways available: "CHAT", "ANVIL"
-      searchHomeEntryType: "ANVIL"
-
-
-      # Decide how players can change the display name of a home.
-      # Ways available: "CHAT", "ANVIL"
-      changeHomeDisplayNameEntryType: "CHAT"
-
-
-      # Decide how players can change the icon of a home.
-      # Ways available: "CHAT", "ANVIL", "GUI", "ITEM_IN_HAND"
-      changeHomeIconEntryType: "GUI"
-
-      # If you set the changeHomeIconEntryType to "GUI", you must set the materials available in the GUI here.
-      changeHomeIconMaterialList: ["STONE", "COBBLESTONE", "DIRT", "IRON_ORE", "DIAMOND_BLOCK", "SPONGE", "ANVIL",
-                                   "QUARTZ_BLOCK", "COOKED_BEEF", "APPLE", "BREAD", "WHEAT", "BOW", "IRON_SWORD",]
-
-
-      # Decide how players can delete a home.
-      # Ways available: "CHAT", "ANVIL"
-      deleteHomeEntryType: "CHAT"
-
-    kits:
-
-      # Set this to true if you want to use the kits features.
-      # This will allow players to access the kits GUI.
-      # Default: true
-      enabled: true
-
-
-      # Decide how players can create a kit.
-      # Ways available: "CHAT", "ANVIL"
-      createNewKitNameEntryType: "CHAT"
-
-
-      # Decide how players can create a kit.
-      # Ways available: "CHAT", "ANVIL"
-      createNewKitDelayEntryType: "CHAT"
-
-
-      # Decide how players can search for a kit.
-      # Ways available: "CHAT", "ANVIL"
-      searchKitEntryType: "ANVIL"
-
-
-      # Decide how players can change the display name of a kit.
-      # Ways available: "CHAT", "ANVIL"
-      changeKitDisplayNameEntryType: "CHAT"
-
-
-      # Decide how players can change the icon of a kit.
-      # Ways available: "CHAT", "ANVIL", "GUI", "ITEM_IN_HAND"
-      changeKitIconEntryType: "GUI"
-
-      # If you set the changeKitIconEntryType to "GUI", you must set the materials available in the GUI here.
-      changeKitIconMaterialList: ["STONE", "COBBLESTONE", "DIRT", "IRON_ORE", "DIAMOND_BLOCK", "SPONGE", "ANVIL",
-                                  "QUARTZ_BLOCK", "COOKED_BEEF", "APPLE", "BREAD", "WHEAT", "BOW", "IRON_SWORD",]
-
-
-      # Decide how players can delete a kit.
-      # Ways available: "CHAT", "ANVIL"
-      deleteKitEntryType: "CHAT"
-
-
   # Default text of input when using anvil way to enter text.
   # Default: "Type here"
   anvilTypeHereText: "Type here"
-
 
   # Minimum and maximum length for names entered by players.
   # ⚠️ Warning: Payers can bypass these limits if they use the defaults commands of EssentialsX.
@@ -125,11 +43,130 @@ general:
   minNameLength: 3
   maxNameLength: 32
 
-
   # Set this to true if you want to open the kit admin view by default when the /kit command is performed for players
   # with permission to see the admin view.
   # Default: false
   openKitAdminViewByDefault: false
+
+  # Set this to true if you want to open the warp admin view by default when the /warp command is performed for players
+  # with permission to see the admin view.
+  # Default: false
+  openWarpAdminViewByDefault: false
+
+############################################################
+# +------------------------------------------------------+ #
+# |                        Homes                         | #
+# +------------------------------------------------------+ #
+############################################################
+
+homes:
+
+  # Set this to true if you want to use the homes features.
+  # This will allow players to access the homes GUI.
+  # Default: true
+  enabled: true
+
+  # Decide how players can create a home.
+  # Ways available: "CHAT", "ANVIL"
+  createNewHomeEntryType: "CHAT"
+
+  # Decide how players can search for a home.
+  # Ways available: "CHAT", "ANVIL"
+  searchHomeEntryType: "ANVIL"
+
+  # Decide how players can change the display name of a home.
+  # Ways available: "CHAT", "ANVIL"
+  changeHomeDisplayNameEntryType: "CHAT"
+
+  # Decide how players can change the icon of a home.
+  # Ways available: "CHAT", "ANVIL", "GUI", "ITEM_IN_HAND"
+  changeHomeIconEntryType: "GUI"
+
+  # If you set the changeHomeIconEntryType to "GUI", you must set the materials available in the GUI here.
+  changeHomeIconMaterialList: ["STONE", "COBBLESTONE", "DIRT", "IRON_ORE", "DIAMOND_BLOCK", "SPONGE", "ANVIL",
+                               "QUARTZ_BLOCK", "COOKED_BEEF", "APPLE", "BREAD", "WHEAT", "BOW", "IRON_SWORD",]
+
+  # Decide how players can delete a home.
+  # Ways available: "CHAT", "ANVIL"
+  deleteHomeEntryType: "CHAT"
+
+############################################################
+# +------------------------------------------------------+ #
+# |                         Kits                         | #
+# +------------------------------------------------------+ #
+############################################################
+
+kits:
+
+  # Set this to true if you want to use the kits features.
+  # This will allow players to access the kits GUI.
+  # Default: true
+  enabled: true
+
+  # Decide how players can create a kit.
+  # Ways available: "CHAT", "ANVIL"
+  createNewKitNameEntryType: "CHAT"
+
+  # Decide how players can create a kit.
+  # Ways available: "CHAT", "ANVIL"
+  createNewKitDelayEntryType: "CHAT"
+
+  # Decide how players can search for a kit.
+  # Ways available: "CHAT", "ANVIL"
+  searchKitEntryType: "ANVIL"
+
+  # Decide how players can change the display name of a kit.
+  # Ways available: "CHAT", "ANVIL"
+  changeKitDisplayNameEntryType: "CHAT"
+
+  # Decide how players can change the icon of a kit.
+  # Ways available: "CHAT", "ANVIL", "GUI", "ITEM_IN_HAND"
+  changeKitIconEntryType: "GUI"
+
+  # If you set the changeKitIconEntryType to "GUI", you must set the materials available in the GUI here.
+  changeKitIconMaterialList: ["STONE", "COBBLESTONE", "DIRT", "IRON_ORE", "DIAMOND_BLOCK", "SPONGE", "ANVIL",
+                              "QUARTZ_BLOCK", "COOKED_BEEF", "APPLE", "BREAD", "WHEAT", "BOW", "IRON_SWORD",]
+
+  # Decide how players can delete a kit.
+  # Ways available: "CHAT", "ANVIL"
+  deleteKitEntryType: "CHAT"
+
+############################################################
+# +------------------------------------------------------+ #
+# |                        Warps                         | #
+# +------------------------------------------------------+ #
+############################################################
+
+warps:
+
+  # Set this to true if you want to use the warps features.
+  # This will allow players to access the warps GUI.
+  # Default: true
+  enabled: true
+
+  # Decide how players can create a warp.
+  # Ways available: "CHAT", "ANVIL"
+  createNewWarpEntryType: "CHAT"
+
+  # Decide how players can search for a warp.
+  # Ways available: "CHAT", "ANVIL"
+  searchWarpEntryType: "ANVIL"
+
+  # Decide how players can change the display name of a warp.
+  # Ways available: "CHAT", "ANVIL"
+  changeWarpDisplayNameEntryType: "CHAT"
+
+  # Decide how players can change the icon of a warp.
+  # Ways available: "CHAT", "ANVIL", "GUI", "ITEM_IN_HAND"
+  changeWarpIconEntryType: "GUI"
+
+  # If you set the changeWarpIconEntryType to "GUI", you must set the materials available in the GUI here.
+  changeWarpIconMaterialList: ["STONE", "COBBLESTONE", "DIRT", "IRON_ORE", "DIAMOND_BLOCK", "SPONGE", "ANVIL",
+                               "QUARTZ_BLOCK", "COOKED_BEEF", "APPLE", "BREAD", "WHEAT", "BOW", "IRON_SWORD",]
+
+  # Decide how players can delete a warp.
+  # Ways available: "CHAT", "ANVIL"
+  deleteWarpEntryType: "CHAT"
 
 ############################################################
 # +------------------------------------------------------+ #
@@ -213,6 +250,10 @@ permissions:
     # Change the permission needed to access to the Kits GUI in admin mode.
     # Default: "essentialsx.gui.kits.admin"
     kitsAdminAccess: "essentialsxgui.kits.admin"
+
+    # Change the permission needed to access to the Warps GUI in admin mode.
+    # Default: "essentialsx.gui.warps.admin"
+    warpsAdminAccess: "essentialsxgui.warps.admin"
 
 ############################################################
 # +------------------------------------------------------+ #

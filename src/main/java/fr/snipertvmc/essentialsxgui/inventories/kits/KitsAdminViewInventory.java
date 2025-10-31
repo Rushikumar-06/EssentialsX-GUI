@@ -25,7 +25,7 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 	// -------------------------------------------------- //
 
 
-	private final EXGKitsAdminViewInventoryConfig config = Main.getInstance().getInventoriesManager().getKitsAdminInventoryConfig().copy();
+	private final EXGKitsAdminViewInventoryConfig config = Main.getInstance().getInventoriesManager().getKitsAdminViewInventoryConfig().copy();
 
 
 	// -------------------------------------------------- //
@@ -33,8 +33,8 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 
 	public KitsAdminViewInventory(Player player, String kitSearch, Set<EXGKit> definedKits) {
 		super(
-				Main.getInstance().getInventoriesManager().getKitsAdminInventoryConfig().getRows() * 9,
-				Main.getInstance().getInventoriesManager().getKitsAdminInventoryConfig().getEXGTitle()
+				Main.getInstance().getInventoriesManager().getKitsAdminViewInventoryConfig().getRows() * 9,
+				Main.getInstance().getInventoriesManager().getKitsAdminViewInventoryConfig().getEXGTitle()
 						.duplicate()
 						.getTitle()
 		);

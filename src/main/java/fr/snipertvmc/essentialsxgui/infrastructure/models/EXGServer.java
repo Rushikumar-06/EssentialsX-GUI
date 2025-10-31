@@ -20,6 +20,7 @@ public class EXGServer {
 	private final MCServerVersion version;
 
 	private Set<EXGKit> kits = new HashSet<>();
+	private Set<EXGWarp> warps = new HashSet<>();
 
 
 	// -------------------------------------------------- //
@@ -44,6 +45,9 @@ public class EXGServer {
 	public Set<EXGKit> getKits() {
 		return kits;
 	}
+	public void setKits(Set<EXGKit> kits) {
+		this.kits = kits;
+	}
 
 
 	public EXGKit getKit(String kitName) {
@@ -52,14 +56,6 @@ public class EXGServer {
 				.findFirst()
 				.orElse(null);
 	}
-
-
-	public void setKits(Set<EXGKit> kits) {
-		this.kits = kits;
-	}
-
-
-	// -------------------------------------------------- //
 
 
 	public Map<String, Object> getKitsRaw() {
@@ -101,6 +97,68 @@ public class EXGServer {
 			}
 
 			this.kits.add(kit);
+		});
+	}
+
+
+	// -------------------------------------------------- //
+
+
+	public Set<EXGWarp> getWarps() {
+		return warps;
+	}
+	public void setWarps(Set<EXGWarp> warps) {
+		this.warps = warps;
+	}
+
+
+	public EXGWarp getWarp(String warpName) {
+		return warps.stream()
+				.filter(warp -> warp.getName().equals(warpName))
+				.findFirst()
+				.orElse(null);
+	}
+
+
+	public Map<String, Object> getWarpsRaw() {
+
+		Map<String, Object> warps = new HashMap<>();
+
+		this.warps.forEach(warp -> {
+			warps.put(warp.getName(), new HashMap<>() {{
+				put("displayName", warp.getDisplayName());
+				put("material", warp.getMaterial().toString());
+				put("data", warp.getData());
+				put("customItemStack", ItemStackSerializer.serialize(warp.getCustomItemStack()));
+			}});
+		});
+
+		return warps;
+	}
+
+
+	public void setWarpsRaw(Map<String, Object> warps) {
+		warps.forEach((warpName, warpData) -> {
+			EXGWarp warp = new EXGWarp(warpName);
+
+			Object displayNameObject = ((Map<String, Object>) warpData).get("displayName");
+			Object materialObject = ((Map<String, Object>) warpData).get("material");
+
+			Object dataObject = ((Map<String, Object>) warpData).get("data");
+			String dataString = dataObject != null ? dataObject.toString() : "0";
+
+			warp.setDisplayName((String) displayNameObject);
+			warp.setMaterial(Material.valueOf((String) materialObject));
+			warp.setData(dataObject != null && TypeUtils.isByte(dataString) ? Byte.parseByte(dataString) : 0);
+
+			String serializedItemStack = (String) ((Map<String, Object>) warpData).get("customItemStack");
+			if (serializedItemStack != null) {
+				warp.setCustomItemStack(ItemStackSerializer.deserialize(serializedItemStack)[0]);
+			} else {
+				warp.setCustomItemStack(null);
+			}
+
+			this.warps.add(warp);
 		});
 	}
 

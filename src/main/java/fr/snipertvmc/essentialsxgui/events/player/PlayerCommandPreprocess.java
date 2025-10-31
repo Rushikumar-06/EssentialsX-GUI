@@ -6,6 +6,8 @@ import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
 import fr.snipertvmc.essentialsxgui.inventories.homes.HomesInventory;
 import fr.snipertvmc.essentialsxgui.inventories.kits.KitsAdminViewInventory;
 import fr.snipertvmc.essentialsxgui.inventories.kits.KitsPlayerViewInventory;
+import fr.snipertvmc.essentialsxgui.inventories.warps.WarpsAdminViewInventory;
+import fr.snipertvmc.essentialsxgui.inventories.warps.WarpsPlayerViewInventory;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.entity.Player;
@@ -35,13 +37,17 @@ public class PlayerCommandPreprocess implements Listener {
 		String[] args = event.getMessage()
 				.split(" ");
 
+
 		if (args.length > 1) {
 			return;
 		}
 
+
 		List<String> commands = List.of(
 				"home", "homes",
-				"kit", "kits");
+				"kit", "kits",
+				"warp", "warps");
+
 		if (!commands.contains(command)) {
 			return;
 		}
@@ -86,6 +92,32 @@ public class PlayerCommandPreprocess implements Listener {
 				} else {
 					player.sendMessage(MessagesUtils.get(EXGMessage.OPENING_PLAYER_KITS_INVENTORY, null));
 					new KitsPlayerViewInventory(player, null, null).open(player);
+				}
+
+				SoundsUtils.playSound(player, EXGSound.GUI_OPEN);
+			}
+
+			//
+			// WARPS
+			//
+
+			case "warp", "warps" -> {
+
+				if (!Main.getInstance().getConfiguration().isWarpsModuleEnabled()) {
+					return;
+				}
+
+				event.setCancelled(true);
+
+				if (Main.getInstance().getConfiguration().hasWarpsAdminAccess(player)
+						&& Main.getInstance().getConfiguration().mustOpenWarpAdminViewByDefault()) {
+
+					player.sendMessage(MessagesUtils.get(EXGMessage.OPENING_ADMIN_KITS_INVENTORY, null));
+					new WarpsAdminViewInventory(player, null, null).open(player);
+
+				} else {
+					player.sendMessage(MessagesUtils.get(EXGMessage.OPENING_PLAYER_KITS_INVENTORY, null));
+					new WarpsPlayerViewInventory(player, null, null).open(player);
 				}
 
 				SoundsUtils.playSound(player, EXGSound.GUI_OPEN);

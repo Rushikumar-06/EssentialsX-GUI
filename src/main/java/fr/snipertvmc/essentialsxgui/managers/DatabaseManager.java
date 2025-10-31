@@ -6,6 +6,7 @@ import fr.snipertvmc.essentialsxgui.managers.database.storages.MySQLStorageManag
 import fr.snipertvmc.essentialsxgui.managers.database.storages.SQLiteStorageManager;
 import fr.snipertvmc.essentialsxgui.managers.database.tables.KitsTableManager;
 import fr.snipertvmc.essentialsxgui.managers.database.tables.PlayerHomesTableManager;
+import fr.snipertvmc.essentialsxgui.managers.database.tables.WarpsTableManager;
 
 public class DatabaseManager {
 
@@ -15,8 +16,9 @@ public class DatabaseManager {
 
 	private EXGStorage storage;
 
-	private final PlayerHomesTableManager playerHomesTableManager = new PlayerHomesTableManager();
 	private final KitsTableManager kitsTableManager = new KitsTableManager();
+	private final PlayerHomesTableManager playerHomesTableManager = new PlayerHomesTableManager();
+	private final WarpsTableManager warpsTableManager = new WarpsTableManager();
 
 
 	// -------------------------------------------------- //
@@ -53,6 +55,7 @@ public class DatabaseManager {
 		getStorage().connect();
 		playerHomesTableManager.initialize(storage.isSQLite());
 		kitsTableManager.initialize(storage.isSQLite());
+		warpsTableManager.initialize(storage.isSQLite());
 	}
 
 
@@ -68,11 +71,14 @@ public class DatabaseManager {
 		return storage;
 	}
 
+	public KitsTableManager getKitsTableManager() {
+		return kitsTableManager;
+	}
 	public PlayerHomesTableManager getPlayerHomesTableManager() {
 		return playerHomesTableManager;
 	}
-	public KitsTableManager getKitsTableManager() {
-		return kitsTableManager;
+	public WarpsTableManager getWarpsTableManager() {
+		return warpsTableManager;
 	}
 
 

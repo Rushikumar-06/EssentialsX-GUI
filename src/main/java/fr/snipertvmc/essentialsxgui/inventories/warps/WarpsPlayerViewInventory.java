@@ -1,13 +1,13 @@
-package fr.snipertvmc.essentialsxgui.inventories.kits;
+package fr.snipertvmc.essentialsxgui.inventories.warps;
 
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGEntryType;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGEntrySettings;
-import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGKit;
-import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.EXGKitsPlayerViewInventoryConfig;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGWarp;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.warps.EXGWarpsPlayerViewInventoryConfig;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.PaginatedFastInv;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.data.DataEntryUtils;
@@ -19,22 +19,22 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class KitsPlayerViewInventory extends PaginatedFastInv {
+public class WarpsPlayerViewInventory extends PaginatedFastInv {
 
 
 	// -------------------------------------------------- //
 
 
-	private final EXGKitsPlayerViewInventoryConfig config = Main.getInstance().getInventoriesManager().getKitsPlayerViewInventoryConfig().copy();
+	private final EXGWarpsPlayerViewInventoryConfig config = Main.getInstance().getInventoriesManager().getWarpsPlayerViewInventoryConfig().copy();
 
 
 	// -------------------------------------------------- //
 
 
-	public KitsPlayerViewInventory(Player player, String kitSearch, Set<EXGKit> definedKits) {
+	public WarpsPlayerViewInventory(Player player, String warpSearch, Set<EXGWarp> definedWarps) {
 		super(
-				Main.getInstance().getInventoriesManager().getKitsPlayerViewInventoryConfig().getRows() * 9,
-				Main.getInstance().getInventoriesManager().getKitsPlayerViewInventoryConfig().getEXGTitle()
+				Main.getInstance().getInventoriesManager().getWarpsPlayerViewInventoryConfig().getRows() * 9,
+				Main.getInstance().getInventoriesManager().getWarpsPlayerViewInventoryConfig().getEXGTitle()
 						.duplicate()
 						.updateVariables(
 								Map.of("player", player.getName()))
@@ -42,86 +42,78 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 		);
 
 
-		Main.getInstance().getServerDataManager().updateServerKits();
+		Main.getInstance().getServerDataManager().updateServerWarps();
 
-		Set<EXGKit> kits = kitSearch != null ? definedKits :
+		Set<EXGWarp> warps = warpSearch != null ? definedWarps :
 
-				Main.getInstance().getEXGServer().getKits()
+				Main.getInstance().getEXGServer().getWarps()
 						.stream()
-						.filter(kit -> player.hasPermission("essentials.kits." + kit.getName()))
-						.sorted(Comparator.comparing(EXGKit::getName))
+						.filter(warp -> player.hasPermission("essentials.warps." + warp.getName()))
+						.sorted(Comparator.comparing(EXGWarp::getName))
 						.collect(Collectors.toCollection(LinkedHashSet::new));
 
 
 		initializeGeneralInventory(player);
-		defineKitsItems(player, kitSearch, kits);
+		defineWarpsItems(player, warpSearch, warps);
 		defineSwitchToAdminModeItem(player);
-		defineSearchKitItem(player, kitSearch, kits);
+		defineSearchWarpItem(player, warpSearch, warps);
 	}
 
 
 	// -------------------------------------------------- //
 
 
-	private void defineKitsItems(Player player, String kitSearch, Set<EXGKit> kits) {
+	private void defineWarpsItems(Player player, String warpSearch, Set<EXGWarp> warps) {
 
-		for (EXGKit kit : kits) {
+		for (EXGWarp warp : warps) {
 
-			EXGItemConfig kitItem = config.getKitItem().duplicate();
-			kitItem.setMaterial(kit.getMaterial().name());
-			kitItem.setData(kit.getData());
+			EXGItemConfig warpItem = config.getWarpItem().duplicate();
+			warpItem.setMaterial(warp.getMaterial().name());
+			warpItem.setData(warp.getData());
 
-			ItemStack kitItemStack;
+			ItemStack warpItemStack;
 
-			if (kit.getCustomItemStack() != null) {
-				kitItemStack = kit.getCustomItemStack().clone();
-				ItemMeta meta = kitItemStack.getItemMeta();
+			if (warp.getCustomItemStack() != null) {
+				warpItemStack = warp.getCustomItemStack().clone();
+				ItemMeta meta = warpItemStack.getItemMeta();
 
-				meta.setDisplayName(kitItem.getDisplayName()
-						.replace("{kitDisplayName}", kit.getDisplayName())
-						.replace("{kitName}", kit.getName())
+				meta.setDisplayName(warpItem.getDisplayName()
+						.replace("{warpDisplayName}", warp.getDisplayName())
+						.replace("{warpName}", warp.getName())
 						.replace("&", "§"));
 
-				meta.setLore(kitItem.getLore().stream()
+				meta.setLore(warpItem.getLore().stream()
 						.map(line -> line
-								.replace("{kitDisplayName}", kit.getDisplayName())
-								.replace("{kitName}", kit.getName())
+								.replace("{warpDisplayName}", warp.getDisplayName())
+								.replace("{warpName}", warp.getName())
 								.replace("&", "§"))
 						.collect(Collectors.toList()));
 
-				kitItemStack.setItemMeta(meta);
+				warpItemStack.setItemMeta(meta);
 
 			} else {
-				kitItemStack = kitItem
+				warpItemStack = warpItem
 						.updateVariables(
-								Map.of("kitDisplayName", kit.getDisplayName(),
-										"kitName", kit.getName()))
+								Map.of("warpDisplayName", warp.getDisplayName(),
+										"warpName", warp.getName()))
 						.build();
 			}
 
-			addContent(kitItemStack, e -> {
-
-				if (kitItem.isCorrectClick(e.getClick(), "receiveKit")) {
-					player.performCommand("essentials:kit " + kit.getName());
-					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
-
-				} else if (kitItem.isCorrectClick(e.getClick(), "previewKit")) {
-					new KitPreviewInventory(player, kit).open(player);
-					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
-				}
-
+			addContent(warpItemStack, e -> {
+				player.performCommand("essentials:warp " + warp.getName());
+				SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 			});
 		}
 
-		if (kits.isEmpty()) {
+		if (warps.isEmpty()) {
 
-			if (kitSearch == null) {
-				addContent(config.getNoKitsItem().build());
+			if (warpSearch == null) {
+				addContent(config.getNoWarpsItem().build());
 
 			} else {
-				addContent(config.getNoSearchKitResultsItem()
+				addContent(config.getNoSearchWarpResultsItem()
 						.updateVariables(
-								Map.of("kitSearch", kitSearch))
+								Map.of("warpSearch", warpSearch))
 						.build());
 			}
 		}
@@ -130,34 +122,34 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 
 	private void defineSwitchToAdminModeItem(Player player) {
 
-		if (config.getSwitchToAdminModeItem().isEnabled() && Main.getInstance().getConfiguration().hasKitsAdminAccess(player)) {
+		if (config.getSwitchToAdminModeItem().isEnabled() && Main.getInstance().getConfiguration().hasWarpsAdminAccess(player)) {
 			setItem(config.getSwitchToAdminModeItem().getSlot(), config.getSwitchToAdminModeItem().build(), e -> {
 
-				new KitsAdminViewInventory(player, null, null).open(player);
+				new WarpsAdminViewInventory(player, null, null).open(player);
 				SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 			});
 		}
 	}
 
 
-	private void defineSearchKitItem(Player player, String kitSearch, Set<EXGKit> kits) {
+	private void defineSearchWarpItem(Player player, String warpSearch, Set<EXGWarp> warps) {
 
-		if (kitSearch == null) {
-			if (config.getSearchKitItem().isEnabled() && !kits.isEmpty()) {
-				setItem(config.getSearchKitItem().getSlot(), config.getSearchKitItem()
+		if (warpSearch == null) {
+			if (config.getSearchWarpItem().isEnabled() && !warps.isEmpty()) {
+				setItem(config.getSearchWarpItem().getSlot(), config.getSearchWarpItem()
 						.build(), e -> {
 
-					searchKit(player);
+					searchWarp(player);
 					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 				});
 			}
 
 		} else {
-			if (config.getCancelSearchKitItem().isEnabled()) {
-				setItem(config.getCancelSearchKitItem().getSlot(), config.getCancelSearchKitItem()
+			if (config.getCancelSearchWarpItem().isEnabled()) {
+				setItem(config.getCancelSearchWarpItem().getSlot(), config.getCancelSearchWarpItem()
 						.build(), e -> {
 
-					new KitsPlayerViewInventory(player, null, null).open(player);
+					new WarpsPlayerViewInventory(player, null, null).open(player);
 					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 				});
 			}
@@ -202,21 +194,21 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 	// -------------------------------------------------- //
 
 
-	private void searchKit(Player player) {
+	private void searchWarp(Player player) {
 
 		if (!Main.getInstance().getChatManager().canDoChat(player)) {
 			return;
 		}
 
-		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("kits", "searchKitEntryType");
+		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("warps", "searchWarpEntryType");
 		if (entryType == EXGEntryType.CHAT) {
 			player.closeInventory();
-			player.sendMessage(MessagesUtils.get(EXGMessage.SEARCH_KIT_CHAT, null));
+			player.sendMessage(MessagesUtils.get(EXGMessage.SEARCH_WARP_CHAT, null));
 		}
 
 		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
 				.setAcceptedTypes(List.of(EXGEntryType.CHAT, EXGEntryType.ANVIL))
-				.setEntryDisplayName(MessagesUtils.get(EXGMessage.SEARCH_KIT, null))
+				.setEntryDisplayName(MessagesUtils.get(EXGMessage.SEARCH_WARP, null))
 				.setMinLength(1)
 				.setMaxLength(Main.getInstance().getConfiguration().getMaxNameLength());
 
@@ -224,25 +216,25 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 
 				result -> {
 
-					Set<EXGKit> searchKits = Main.getInstance().getEXGServer().getKits()
+					Set<EXGWarp> searchWarps = Main.getInstance().getEXGServer().getWarps()
 							.stream()
-							.filter(kit -> player.hasPermission("essentials.kits." + kit.getName()))
-							.filter(kit -> MessagesUtils.removeColorCodes(kit.getDisplayName()).toLowerCase().contains(result.getLeft().toLowerCase()) ||
-									MessagesUtils.removeColorCodes(kit.getName()).toLowerCase().contains(result.getLeft().toLowerCase()))
-							.sorted(Comparator.comparing(EXGKit::getName))
+							.filter(warp -> player.hasPermission("essentials.warps." + warp.getName()))
+							.filter(warp -> MessagesUtils.removeColorCodes(warp.getDisplayName()).toLowerCase().contains(result.getLeft().toLowerCase()) ||
+									MessagesUtils.removeColorCodes(warp.getName()).toLowerCase().contains(result.getLeft().toLowerCase()))
+							.sorted(Comparator.comparing(EXGWarp::getName))
 							.collect(Collectors.toCollection(LinkedHashSet::new));
 
-					if (searchKits.isEmpty()) {
-						player.sendMessage(MessagesUtils.get(EXGMessage.NO_KIT_FOUND, null));
-						new KitsPlayerViewInventory(player, result.getLeft(), searchKits).open(player);
+					if (searchWarps.isEmpty()) {
+						player.sendMessage(MessagesUtils.get(EXGMessage.NO_WARP_FOUND, null));
+						new WarpsPlayerViewInventory(player, result.getLeft(), searchWarps).open(player);
 						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 						return;
 					}
 
-					new KitsPlayerViewInventory(player, result.getLeft(), searchKits).open(player);
+					new WarpsPlayerViewInventory(player, result.getLeft(), searchWarps).open(player);
 					SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
 
-				}, entry -> new KitsPlayerViewInventory(player, null, null).open(player)
+				}, entry -> new WarpsPlayerViewInventory(player, null, null).open(player)
 		);
 	}
 

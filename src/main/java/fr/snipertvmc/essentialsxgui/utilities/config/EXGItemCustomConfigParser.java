@@ -26,12 +26,16 @@ public class EXGItemCustomConfigParser {
 
 				// KITS
 				"kitsAdminView.items.kitItem",
-				"kitsPlayerView.items.kitItem"
+				"kitsPlayerView.items.kitItem",
+
+				// WARPS
+				"warpsAdminView.items.warpItem"
 		));
 	}};
 
 
 	private static final Map<String, List<String>> clickActionsPath = new HashMap<>() {{
+
 
 		// HOMES
 		put("homes.items.homeItem", List.of(
@@ -49,6 +53,13 @@ public class EXGItemCustomConfigParser {
 		put("kitsPlayerView.items.kitItem", List.of(
 				"receiveKit",
 				"previewKit"));
+
+
+		// WARPS
+		put("warpsAdminView.items.warpItem", List.of(
+				"teleportWarp",
+				"editWarp",
+				"deleteWarp"));
 	}};
 
 

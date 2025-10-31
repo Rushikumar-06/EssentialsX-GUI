@@ -51,11 +51,23 @@ public class ConfigurationFile {
 
 
 	public boolean isHomesModuleEnabled() {
-		return yamlConfiguration.getBoolean("general.modules.homes.enabled", true);
+		return yamlConfiguration.getBoolean("homes.enabled", false);
 	}
 
+	public boolean isKitsModuleEnabled() {
+		return yamlConfiguration.getBoolean("kits.enabled", false);
+	}
+
+	public boolean isWarpsModuleEnabled() {
+		return yamlConfiguration.getBoolean("warps.enabled", false);
+	}
+
+
+	// -------------------------------------------------- //
+
+
 	public EXGEntryType getEntryType(String module, String entry) {
-		String typeString = yamlConfiguration.getString("general.modules." + module + "." + entry, "CHAT");
+		String typeString = yamlConfiguration.getString(module + "." + entry, "CHAT");
 		try {
 			return EXGEntryType.valueOf(typeString);
 		} catch (IllegalArgumentException exception) {
@@ -92,10 +104,6 @@ public class ConfigurationFile {
 		return materialsList;
 	}
 
-	public boolean isKitsModuleEnabled() {
-		return yamlConfiguration.getBoolean("general.modules.kits.enabled", true);
-	}
-
 
 	// -------------------------------------------------- //
 
@@ -114,6 +122,10 @@ public class ConfigurationFile {
 
 	public boolean mustOpenKitAdminViewByDefault() {
 		return yamlConfiguration.getBoolean("general.openKitAdminViewByDefault", false);
+	}
+
+	public boolean mustOpenWarpAdminViewByDefault() {
+		return yamlConfiguration.getBoolean("general.openWarpAdminViewByDefault", false);
 	}
 
 
@@ -148,6 +160,11 @@ public class ConfigurationFile {
 
 	public boolean hasKitsAdminAccess(Player player) {
 		return player.hasPermission(yamlConfiguration.getString("permissions.guis.kitsAdminAccess", "unknownPermission"));
+	}
+
+
+	public boolean hasWarpsAdminAccess(Player player) {
+		return player.hasPermission(yamlConfiguration.getString("permissions.guis.warpsAdminAccess", "unknownPermission"));
 	}
 
 

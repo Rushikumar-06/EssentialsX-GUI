@@ -190,4 +190,12 @@ public class EssentialsHook {
 
 
 	// -------------------------------------------------- //
+
+
+	public void createWarpWithPlayer(Player player, String warpName) throws Exception {
+		essentials.getWarps().setWarp(warpName, player.getLocation());
+	}
+
+
+	// -------------------------------------------------- //
 }

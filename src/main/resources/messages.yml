@@ -19,8 +19,8 @@
 ############################################################
 
 # Please do not change this value as it may cause the file to be reset.
-# Default: "1.3"
-messages-version: "1.3"
+# Default: "1.4"
+messages-version: "1.4"
 
 # Change the prefix sent at the beginning of most sent messages.
 # TIP: Use {prefix} in any message to include the prefix.
@@ -72,6 +72,10 @@ errors:
   kitNameAlreadyExists: "&cA kit with this name already exists."
   noKitFound: "&cNo kit found with that name."
 
+  warpCreationError: "&cAn error occurred while creating the warp. Please contact the server administrator."
+  warpDeleteError: "&cAn error occurred while deleting the warp. Please contact the server administrator."
+  noWarpFound: "&cNo warp found with that name."
+
 ############################################################
 # +------------------------------------------------------+ #
 # |                   General Messages                   | #
@@ -82,26 +86,34 @@ general:
 
   enterNewDisplayNameInChat: "&ePlease enter the new &fdisplay name &ein the chat. &7&oType 'cancel' to cancel the action."
   enterNewIconNameInChat: "&ePlease enter the new &ficon name &ein the chat. &7&oType 'cancel' to cancel the action."
-  enterNewHomeNameInChat: "&ePlease enter the new &fhome name &ein the chat. &7&oType 'cancel' to cancel the action."
-  enterNewKitNameInChat: "&ePlease enter the new &fkit name &ein the chat. &7&oType 'cancel' to cancel the action."
-  enterNewKitDelayInChat: "&ePlease enter the new &fkit delay &ein the chat. &7&oType 'cancel' to cancel the action."
   enterNewDisplayName: "Enter new display name"
   enterNewIconName: "Enter new icon name"
+
+  enterNewHomeNameInChat: "&ePlease enter the new &fhome name &ein the chat. &7&oType 'cancel' to cancel the action."
   enterNewHomeName: "Enter new home name"
-  enterNewKitName: "Enter new kit name"
-  enterNewKitDelay: "Enter new kit delay"
-
   searchHomeInChat: "&ePlease enter first few letters of the &fhome name &ein the chat. &7&oType 'cancel' to cancel the action."
-  searchKitInChat: "&ePlease enter first few letters of the &fkit name &ein the chat. &7&oType 'cancel' to cancel the action."
   searchHome: "Search home"
-  searchKit: "Search kit"
-
   # Placeholders available: {homeName}
   confirmDeleteHomeInChat: "&6Are you sure you want to delete this home? ({homeName}) &7Type &f'confirm' &7to confirm or &f'cancel' &7to cancel."
+  confirmDeleteHome: "Type 'confirm' to confirm deletion"
+
+  enterNewKitNameInChat: "&ePlease enter the new &fkit name &ein the chat. &7&oType 'cancel' to cancel the action."
+  enterNewKitDelayInChat: "&ePlease enter the new &fkit delay &ein the chat. &7&oType 'cancel' to cancel the action."
+  enterNewKitName: "Enter new kit name"
+  enterNewKitDelay: "Enter new kit delay"
+  searchKitInChat: "&ePlease enter first few letters of the &fkit name &ein the chat. &7&oType 'cancel' to cancel the action."
+  searchKit: "Search kit"
   # Placeholders available: {kitName}
   confirmDeleteKitInChat: "&6Are you sure you want to delete the '({kitName})' kit ? &7Type &f'confirm' &7to confirm or &f'cancel' &7to cancel."
-  confirmDeleteHome: "Type 'confirm' to confirm deletion"
   confirmDeleteKit: "Type 'confirm' to confirm deletion"
+
+  enterNewWarpNameInChat: "&ePlease enter the new &fwarp name &ein the chat. &7&oType 'cancel' to cancel the action."
+  enterNewWarpName: "Enter new warp name"
+  searchWarpInChat: "&ePlease enter first few letters of the &fwarp name &ein the chat. &7&oType 'cancel' to cancel the action."
+  searchWarp: "Search warp"
+  # Placeholders available: {warpName}
+  confirmDeleteWarpInChat: "&6Are you sure you want to delete this warp? ({warpName}) &7Type &f'confirm' &7to confirm or &f'cancel' &7to cancel."
+  confirmDeleteWarp: "Type 'confirm' to confirm deletion"
 
 
   actionCanceled: "&6The action has been canceled."
@@ -113,17 +125,27 @@ general:
   displayNameChanged: "&7The display name has been changed to &f{newDisplayName}&7."
   # Placeholders available: {newIcon}
   iconChanged: "&7The icon has been changed to &f{newIcon}&7."
-  # Placeholders available: {homeName}
-  homeDeleted: "&7The home &f{homeName} &7has been deleted."
-  # Placeholders available: {kitName}
-  kitDeleted: "&7The kit &f{kitName} &7has been deleted."
+
   # Placeholders available: {homeName}
   homeCreated: "&7The home &f{homeName} &7has been created."
+  # Placeholders available: {homeName}
+  homeDeleted: "&7The home &f{homeName} &7has been deleted."
+
+  # Placeholders available: {kitName}
+  kitDeleted: "&7The kit &f{kitName} &7has been deleted."
   # Placeholders available: {kitName}, {kitDelay}
   kitCreated: "&7The kit &f{kitName} &7has been created with a delay of &f{kitDelay} seconds&7."
+
+  # Placeholders available: {warpName}
+  warpCreated: "&7The warp &f{warpName} &7has been created."
+  # Placeholders available: {warpName}
+  warpDeleted: "&7The warp &f{warpName} &7has been deleted."
 
 
   openingHomesInventory: "&aOpening homes inventory..."
 
   openingAdminKitsInventory: "&aOpening kits (admin mode) inventory..."
   openingPlayerKitsInventory: "&aOpening kits (player mode) inventory..."
+
+  openingAdminWarpsInventory: "&aOpening warps (admin mode) inventory..."
+  openingPlayerWarpsInventory: "&aOpening warps (player mode) inventory..."

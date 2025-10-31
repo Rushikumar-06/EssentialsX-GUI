@@ -215,7 +215,7 @@ public class KitEditingInventory extends FastInv {
 		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
 				.setAcceptedTypes(List.of(EXGEntryType.CHAT, EXGEntryType.ANVIL, EXGEntryType.GUI))
 				.setEntryDisplayName(MessagesUtils.get(EXGMessage.ENTER_NEW_ICON_NAME, null))
-				.setMaterialListPath("general.modules.kits.changeKitIconMaterialList")
+				.setMaterialListPath("kits.changeKitIconMaterialList")
 				.setMinLength(Main.getInstance().getConfiguration().getMinNameLength())
 				.setMaxLength(Main.getInstance().getConfiguration().getMaxNameLength());
 

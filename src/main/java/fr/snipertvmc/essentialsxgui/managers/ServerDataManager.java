@@ -3,6 +3,7 @@ package fr.snipertvmc.essentialsxgui.managers;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGKit;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGServer;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGWarp;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -60,6 +61,57 @@ public class ServerDataManager {
 		}
 
 		exgServer.setKits(updatedKits);
+	}
+
+
+	// -------------------------------------------------- //
+
+
+	public Map<String, Object> generateDefaultWarpsData() {
+
+		Map<String, Object> serverWarps = new HashMap<>();
+
+		Set<String> essentialsWarps = new HashSet<>(Main.getInstance().getEssentials().getWarps().getList());
+
+		for (String warpName : essentialsWarps) {
+			serverWarps.put(warpName, new HashMap<>() {{
+				put("displayName", warpName);
+				put("material", "CHEST");
+				put("data", "0");
+				put("customItemStack", null);
+			}});
+
+			if (!Main.getInstance().getDatabaseManager().getWarpsTableManager().isWarpExists(warpName)) {
+				Main.getInstance().getDatabaseManager().getWarpsTableManager().insertWarp(warpName, (Map<String, Object>) serverWarps.get(warpName));
+			}
+		}
+
+		return serverWarps;
+	}
+
+
+	public void updateServerWarps() {
+
+		EXGServer exgServer = Main.getInstance().getEXGServer();
+
+		Set<String> essentialsWarps = new HashSet<>(Main.getInstance().getEssentials().getWarps().getList());
+		Set<EXGWarp> serverWarps = exgServer.getWarps();
+
+		Set<EXGWarp> updatedWarps = new HashSet<>();
+
+		for (EXGWarp warp : serverWarps) {
+			if (essentialsWarps.contains(warp.getName())) {
+				updatedWarps.add(warp);
+			}
+		}
+
+		for (String warpName : essentialsWarps) {
+			if (serverWarps.stream().noneMatch(warp -> warp.getName().equals(warpName))) {
+				updatedWarps.add(new EXGWarp(warpName));
+			}
+		}
+
+		exgServer.setWarps(updatedWarps);
 	}
 
 

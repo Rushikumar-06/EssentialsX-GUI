@@ -49,6 +49,15 @@ public class ServerManager {
 		}
 
 		exgServer.setKitsRaw(kitsRaw);
+
+
+		// WARPS LOADING
+		Map<String, Object> warpsRaw = Main.getInstance().getDatabaseManager().getWarpsTableManager().fetchWarps();
+		if (warpsRaw.isEmpty()) {
+			warpsRaw = Main.getInstance().getServerDataManager().generateDefaultWarpsData();
+		}
+
+		exgServer.setWarpsRaw(warpsRaw);
 	}
 
 
@@ -63,6 +72,11 @@ public class ServerManager {
 		// KITS SAVING
 		Map<String, Object> kitsRaw = exgServer.getKitsRaw();
 		Main.getInstance().getDatabaseManager().getKitsTableManager().updateKits(kitsRaw);
+
+
+		// WARPS SAVING
+		Map<String, Object> warpsRaw = exgServer.getWarpsRaw();
+		Main.getInstance().getDatabaseManager().getWarpsTableManager().updateWarps(warpsRaw);
 	}
 
 

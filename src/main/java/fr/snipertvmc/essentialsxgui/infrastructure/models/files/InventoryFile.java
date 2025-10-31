@@ -222,6 +222,7 @@ public class InventoryFile {
 						"value_materialAdminModeItem", "EYE_OF_ENDER",
 						"value_materialCreateHomeItem", "PISTON_BASE",
 						"value_materialCreateKitItem", "PISTON_BASE",
+						"value_materialCreateWarpItem", "PISTON_BASE",
 						"value_materialBedHomeItemOverworld", "BED",
 						"value_materialSaveKitItem", "INK_SACK",
 						"value_materialCancelChangesItem", "INK_SACK"
@@ -238,6 +239,7 @@ public class InventoryFile {
 						"value_materialAdminModeItem", "ENDER_EYE",
 						"value_materialCreateHomeItem", "PISTON",
 						"value_materialCreateKitItem", "PISTON",
+						"value_materialCreateWarpItem", "PISTON",
 						"value_materialBedHomeItemOverworld", "RED_BED",
 						"value_materialSaveKitItem", "LIME_DYE",
 						"value_materialCancelChangesItem", "RED_DYE"

@@ -43,13 +43,18 @@ public class FilesManager {
 		put("kitEditing", "inventories/kits/kitEditing");
 		put("kitEditor", "inventories/kits/kitEditor");
 
+		put("warpEditing", "inventories/warps/warpEditing");
+		put("warpPlayerTeleport", "inventories/warps/warpPlayerTeleport");
+		put("warpsAdminView", "inventories/warps/warpsAdminView");
+		put("warpsPlayerView", "inventories/warps/warpsPlayerView");
+
 		put("dataEntryGUI", "inventories/others/dataEntryGUI");
 	}};
 
 
 	private final Map<String, String> filesVersions = new HashMap<>() {{
-		put("configuration", "1.3"); // Updated for version: 1.1.1
-		put("messages", "1.3"); // Updated for version: 1.1.1
+		put("configuration", "1.4"); // Updated for version: 1.2.0
+		put("messages", "1.4"); // Updated for version: 1.2.0
 
 		put("homeEditing", "1.1"); // Updated for version: 1.0.2
 		put("homes", "1.3"); // Updated for version: 1.1.0
@@ -60,6 +65,11 @@ public class FilesManager {
 		put("kitPlayerGive", "1.0");
 		put("kitEditing", "1.2"); // Updated for version: 1.1.0
 		put("kitEditor", "1.0"); // Updated for version: 1.0.2
+
+		put("warpEditing", "1.0"); // Updated for version: 1.2.0
+		put("warpPlayerTeleport", "1.0"); // Updated for version: 1.2.0
+		put("warpsAdminView", "1.0"); // Updated for version: 1.2.0
+		put("warpsPlayerView", "1.0"); // Updated for version: 1.2.0
 
 		put("dataEntryGUI", "1.0"); // Updated for version: 1.1.0
 	}};

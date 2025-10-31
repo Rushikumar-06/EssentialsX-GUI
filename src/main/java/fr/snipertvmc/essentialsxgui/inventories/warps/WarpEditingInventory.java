@@ -1,13 +1,13 @@
-package fr.snipertvmc.essentialsxgui.inventories.homes;
+package fr.snipertvmc.essentialsxgui.inventories.warps;
 
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGEntryType;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGEntrySettings;
-import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGHome;
-import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes.EXGHomeEditingInventoryConfig;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGWarp;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.warps.EXGWarpEditingInventoryConfig;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.FastInv;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.data.DataEntryUtils;
@@ -21,27 +21,27 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class HomeEditingInventory extends FastInv {
+public class WarpEditingInventory extends FastInv {
 
 
 	// -------------------------------------------------- //
 
 
-	private final EXGHomeEditingInventoryConfig config = Main.getInstance().getInventoriesManager().getHomeEditingInventoryConfig().copy();
+	private final EXGWarpEditingInventoryConfig config = Main.getInstance().getInventoriesManager().getWarpEditingInventoryConfig().copy();
 
 
 	// -------------------------------------------------- //
 
 
-	public HomeEditingInventory(Player player, EXGHome home) {
+	public WarpEditingInventory(Player player, EXGWarp warp) {
 		super(
-				Main.getInstance().getInventoriesManager().getHomeEditingInventoryConfig().getRows() * 9,
-				Main.getInstance().getInventoriesManager().getHomeEditingInventoryConfig().getEXGTitle()
+				Main.getInstance().getInventoriesManager().getWarpEditingInventoryConfig().getRows() * 9,
+				Main.getInstance().getInventoriesManager().getWarpEditingInventoryConfig().getEXGTitle()
 						.duplicate()
 						.updateVariables(
 								Map.of("player", player.getName(),
-										"homeName", home.getName(),
-										"homeDisplayName", home.getDisplayName()))
+										"warpName", warp.getName(),
+										"warpDisplayName", warp.getDisplayName()))
 						.getTitle()
 		);
 
@@ -51,76 +51,77 @@ public class HomeEditingInventory extends FastInv {
 		}
 
 
-		if (config.getPreviewHomeItem().isEnabled()) {
+		if (config.getPreviewWarpItem().isEnabled()) {
 
-			EXGItemConfig previewHomeItem = config.getPreviewHomeItem().duplicate();
-			previewHomeItem.setMaterial(home.getMaterial().name());
-			previewHomeItem.setData(home.getData());
+			EXGItemConfig previewWarpItem = config.getPreviewWarpItem().duplicate();
+			previewWarpItem.setMaterial(warp.getMaterial().name());
+			previewWarpItem.setData(warp.getData());
 
-			ItemStack previewHomeItemStack;
+			ItemStack previewWarpItemStack;
 
-			if (home.getCustomItemStack() != null) {
-				previewHomeItemStack = home.getCustomItemStack().clone();
-				ItemMeta meta = previewHomeItemStack.getItemMeta();
+			if (warp.getCustomItemStack() != null) {
+				previewWarpItemStack = warp.getCustomItemStack().clone();
+				ItemMeta meta = previewWarpItemStack.getItemMeta();
 
-				meta.setDisplayName(previewHomeItem.getDisplayName()
-						.replace("{homeDisplayName}", home.getDisplayName())
-						.replace("{homeName}", home.getName())
+				meta.setDisplayName(previewWarpItem.getDisplayName()
+						.replace("{warpDisplayName}", warp.getDisplayName())
+						.replace("{warpName}", warp.getName())
 						.replace("&", "§"));
 
-				meta.setLore(previewHomeItem.getLore().stream()
+				meta.setLore(previewWarpItem.getLore().stream()
 						.map(line -> line
-								.replace("{homeDisplayName}", home.getDisplayName())
-								.replace("{homeName}", home.getName())
+								.replace("{warpDisplayName}", warp.getDisplayName())
+								.replace("{warpName}", warp.getName())
 								.replace("&", "§"))
 						.collect(Collectors.toList()));
 
-				previewHomeItemStack.setItemMeta(meta);
+				previewWarpItemStack.setItemMeta(meta);
 
 			} else {
-				previewHomeItemStack = previewHomeItem
+				previewWarpItemStack = previewWarpItem
 						.updateVariables(
-								Map.of("homeDisplayName", home.getDisplayName(),
-										"homeName", home.getName()))
+								Map.of("warpDisplayName", warp.getDisplayName(),
+										"warpName", warp.getName()))
 						.build();
 			}
 
-			setItem(config.getPreviewHomeItem().getSlot(), previewHomeItemStack);
+			setItem(config.getPreviewWarpItem().getSlot(), previewWarpItemStack);
 		}
 
 
 		if (config.getChangeDisplayNameItem().isEnabled()) {
 			setItem(config.getChangeDisplayNameItem().getSlot(), config.getChangeDisplayNameItem()
 					.updateVariables(
-							Map.of("homeName", home.getName(),
-									"homeDisplayName", home.getDisplayName()))
+							Map.of("warpName", warp.getName(),
+									"warpDisplayName", warp.getDisplayName()))
 					.build(), e -> {
 
 				SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
-				changeHomeDisplayName(player, home);
+				changeWarpDisplayName(player, warp);
 			});
 		}
+
 
 		if (config.getChangeIconItem().isEnabled()) {
 			setItem(config.getChangeIconItem().getSlot(), config.getChangeIconItem()
 					.updateVariables(
-							Map.of("homeName", home.getName()))
+							Map.of("warpName", warp.getName()))
 					.build(), e -> {
 
 				SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
-				changeHomeIcon(player, home);
+				changeWarpIcon(player, warp);
 			});
 		}
 
-		if (config.getDeleteHomeItem().isEnabled()) {
-			setItem(config.getDeleteHomeItem().getSlot(), config.getDeleteHomeItem()
+		if (config.getDeleteWarpItem().isEnabled()) {
+			setItem(config.getDeleteWarpItem().getSlot(), config.getDeleteWarpItem()
 					.updateVariables(
-							Map.of("homeName", home.getName(),
-									"homeDisplayName", home.getDisplayName()))
+							Map.of("warpName", warp.getName(),
+									"warpDisplayName", warp.getDisplayName()))
 					.build(), e -> {
 
 				SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
-				deleteHome(player, home);
+				deleteWarp(player, warp);
 			});
 		}
 
@@ -128,7 +129,7 @@ public class HomeEditingInventory extends FastInv {
 		if (config.getBackItem().isEnabled()) {
 			setItem(config.getBackItem().getSlot(), config.getBackItem().build(), e -> {
 
-				new HomesInventory(player, null, null).open(player);
+				new WarpsAdminViewInventory(player, null, null).open(player);
 				SoundsUtils.playSound(player, EXGSound.GUI_BACK);
 			});
 		}
@@ -138,13 +139,13 @@ public class HomeEditingInventory extends FastInv {
 	// -------------------------------------------------- //
 
 
-	public void changeHomeDisplayName(Player player, EXGHome home) {
+	public void changeWarpDisplayName(Player player, EXGWarp warp) {
 
 		if (!Main.getInstance().getChatManager().canDoChat(player)) {
 			return;
 		}
 
-		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("homes", "changeHomeDisplayNameEntryType");
+		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("warps", "changeWarpDisplayNameEntryType");
 		if (entryType == EXGEntryType.CHAT) {
 			player.closeInventory();
 			player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_DISPLAY_NAME_CHAT, null));
@@ -160,25 +161,25 @@ public class HomeEditingInventory extends FastInv {
 
 				result -> {
 
-					home.setDisplayName(result.getLeft());
+					warp.setDisplayName(result.getLeft());
 					player.sendMessage(MessagesUtils.get(EXGMessage.DISPLAY_NAME_CHANGED,
 							Map.of("newDisplayName", result.getLeft().replace("&", "§"))
 					));
-					new HomeEditingInventory(player, home).open(player);
+					new WarpEditingInventory(player, warp).open(player);
 					SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
 
-				}, entry -> new HomeEditingInventory(player, home).open(player)
+				}, entry -> new WarpEditingInventory(player, warp).open(player)
 		);
 	}
 
 
-	public void changeHomeIcon(Player player, EXGHome home) {
+	public void changeWarpIcon(Player player, EXGWarp warp) {
 
 		if (!Main.getInstance().getChatManager().canDoChat(player)) {
 			return;
 		}
 
-		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("homes", "changeHomeIconEntryType");
+		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("warps", "changeWarpIconEntryType");
 		if (entryType == EXGEntryType.CHAT) {
 			player.closeInventory();
 			player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_ICON_NAME_CHAT, null));
@@ -189,14 +190,14 @@ public class HomeEditingInventory extends FastInv {
 
 			if (itemInHand == null || itemInHand.getType() == Material.AIR) {
 				player.sendMessage(MessagesUtils.get(EXGMessage.ITEM_CANT_BE_AIR, null));
-				new HomeEditingInventory(player, home).open(player);
+				new WarpEditingInventory(player, warp).open(player);
 				SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 				return;
 			}
 
-			home.setCustomItemStack(itemInHand);
+			warp.setCustomItemStack(itemInHand);
 			player.sendMessage(MessagesUtils.get(EXGMessage.ICON_CHANGED, Map.of("newIcon", itemInHand.getType().name())));
-			new HomeEditingInventory(player, home).open(player);
+			new WarpEditingInventory(player, warp).open(player);
 			SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
 			return;
 		}
@@ -204,7 +205,7 @@ public class HomeEditingInventory extends FastInv {
 		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
 				.setAcceptedTypes(List.of(EXGEntryType.CHAT, EXGEntryType.ANVIL, EXGEntryType.GUI))
 				.setEntryDisplayName(MessagesUtils.get(EXGMessage.ENTER_NEW_ICON_NAME, null))
-				.setMaterialListPath("homes.changeHomeIconMaterialList")
+				.setMaterialListPath("warps.changeWarpIconMaterialList")
 				.setMinLength(Main.getInstance().getConfiguration().getMinNameLength())
 				.setMaxLength(Main.getInstance().getConfiguration().getMaxNameLength());
 
@@ -212,58 +213,56 @@ public class HomeEditingInventory extends FastInv {
 
 				result -> {
 
-					home.setCustomItemStack(null);
-					home.setMaterial(result.getLeft().getLeft());
-					home.setData(result.getLeft().getRight());
+					warp.setCustomItemStack(null);
+					warp.setMaterial(result.getLeft().getLeft());
+					warp.setData(result.getLeft().getRight());
 
 					player.sendMessage(MessagesUtils.get(EXGMessage.ICON_CHANGED, Map.of("newIcon", result.getLeft().getLeft().name())));
-					new HomeEditingInventory(player, home).open(player);
+					new WarpEditingInventory(player, warp).open(player);
 					SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
 
-				}, entry -> new HomeEditingInventory(player, home).open(player)
+				}, entry -> new WarpEditingInventory(player, warp).open(player)
 		);
 	}
 
 
-	public void deleteHome(Player player, EXGHome home) {
+	public void deleteWarp(Player player, EXGWarp warp) {
 
 		if (!Main.getInstance().getChatManager().canDoChat(player)) {
 			return;
 		}
 
-		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("homes", "deleteHomeEntryType");
+		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("warps", "deleteWarpEntryType");
 		if (entryType == EXGEntryType.CHAT) {
 			player.closeInventory();
-			player.sendMessage(MessagesUtils.get(EXGMessage.CONFIRM_DELETE_HOME_CHAT, Map.of("homeName", home.getName())));
+			player.sendMessage(MessagesUtils.get(EXGMessage.CONFIRM_DELETE_WARP_CHAT, Map.of("warpName", warp.getName())));
 		}
 
 		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
 				.setAcceptedTypes(List.of(EXGEntryType.CHAT, EXGEntryType.ANVIL))
-				.setEntryDisplayName(MessagesUtils.get(EXGMessage.CONFIRM_DELETE_HOME, null))
+				.setEntryDisplayName(MessagesUtils.get(EXGMessage.CONFIRM_DELETE_WARP, null))
 				.setEqualsToSomething("confirm");
 
 		DataEntryUtils.processStringEntry(player, entrySettings,
 
 				result -> {
-					try {
-						Main.getInstance().getEssentials().getUser(player).delHome(home.getName());
 
-					} catch (Exception ex) {
-						player.sendMessage(MessagesUtils.get(EXGMessage.HOME_DELETE_ERROR, null));
-						new HomesInventory(player, null, null).open(player);
+					try {
+						Main.getInstance().getEssentials().getWarps().removeWarp(warp.getName());
+						player.sendMessage(MessagesUtils.get(EXGMessage.WARP_DELETED, Map.of("warpName", warp.getName())));
+						new WarpsAdminViewInventory(player, null, null).open(player);
+						SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
+
+					} catch (Exception e) {
+						player.sendMessage(MessagesUtils.get(EXGMessage.WARP_DELETE_ERROR, null));
+						new WarpEditingInventory(player, warp).open(player);
 						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
-						return;
 					}
 
-					player.sendMessage(MessagesUtils.get(EXGMessage.HOME_DELETED,
-							Map.of("homeName", home.getName()))
-					);
-					new HomesInventory(player, null, null).open(player);
-					SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
-
-				}, entry -> new HomeEditingInventory(player, home).open(player)
+				}, entry -> new WarpEditingInventory(player, warp).open(player)
 		);
 	}
+
 
 	// -------------------------------------------------- //
 }

@@ -22,24 +22,36 @@ public class EXGItemConfigParser {
 	private static final Map<String, List<String>> ignoredPaths = new HashMap<>() {{
 
 		put("enabled", List.of(
+
+				// HOMES
 				"homes.items.homeItem",
 				"homes.items.previousPageItem",
 				"homes.items.nextPageItem",
 
+				// KITS
 				"kitsAdminView.items.kitItem",
 				"kitsPlayerView.items.kitItem",
 				"kitPlayerGive.items.playerItem",
 				"kitEditor.items.saveKitItem",
 				"kitEditor.items.cancelChangesItem",
 
+				// WARPS
+				"warpsAdminView.items.warpItem",
+				"warpsPlayerView.items.warpItem",
+				"warpPlayerTeleport.items.playerItem",
+
+				// OTHERS
 				"dataEntryGUI.items.materialIconItem"
 		));
 
 		put("slot", List.of(
+
+				// HOMES
 				"homes.items.homeItem",
 				"homes.items.noHomesItem",
 				"homes.items.noSearchHomeResultsItem",
 
+				// KITS
 				"kitsAdminView.items.kitItem",
 				"kitsAdminView.items.noKitsItem",
 				"kitsAdminView.items.noSearchKitResultsItem",
@@ -48,13 +60,31 @@ public class EXGItemConfigParser {
 				"kitsPlayerView.items.noSearchKitResultsItem",
 				"kitPlayerGive.items.playerItem",
 
+				// WARPS
+				"warpsAdminView.items.warpItem",
+				"warpsAdminView.items.noWarpsItem",
+				"warpsAdminView.items.noSearchWarpResultsItem",
+				"warpsPlayerView.items.warpItem",
+				"warpsPlayerView.items.noWarpsItem",
+				"warpsPlayerView.items.noSearchWarpResultsItem",
+				"warpPlayerTeleport.items.playerItem",
+
+				// OTHERS
 				"dataEntryGUI.items.materialIconItem"
 		));
 
 		put("material", List.of(
+
+				// HOMES
 				"homeEditing.items.previewHomeItem",
+
+				// KITS
 				"kitEditing.items.previewKitItem",
 
+				// WARPS
+				"warpEditing.items.previewWarpItem",
+
+				// OTHERS
 				"dataEntryGUI.items.materialIconItem"
 		));
 	}};

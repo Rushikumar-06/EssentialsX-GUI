@@ -5,6 +5,7 @@ import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGHome;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGKit;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGPlayer;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGWarp;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -96,6 +97,7 @@ public class CommandEssentialsXGUI implements CommandExecutor, TabCompleter {
 		EXGPlayer exgPlayer = Main.getInstance().getPlayerManager().getPlayer(player);
 		Set<EXGHome> homes = exgPlayer.getHomes();
 		Set<EXGKit> kits = Main.getInstance().getEXGServer().getKits();
+		Set<EXGWarp> warps = Main.getInstance().getEXGServer().getWarps();
 
 		String currentLocalDataTime = ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss z"));
 
@@ -118,6 +120,11 @@ public class CommandEssentialsXGUI implements CommandExecutor, TabCompleter {
 		commandSender.sendMessage("    §8■ §bKits list §7- §3" + kits.size() + " kit(s)");
 		for (EXGKit kit : kits) {
 			commandSender.sendMessage("      §8▢ §f" + kit.getDisplayName() + " §7§o(" + kit.getName() + ") §7- §f" + kit.getMaterial() + ":" + kit.getData());
+		}
+		commandSender.sendMessage("");
+		commandSender.sendMessage("    §8■ §bWarps list §7- §3" + warps.size() + " warp(s)");
+		for (EXGWarp warp : warps) {
+			commandSender.sendMessage("      §8▢ §f" + warp.getDisplayName() + " §7§o(" + warp.getName() + ") §7- §f" + warp.getMaterial() + ":" + warp.getData());
 		}
 		commandSender.sendMessage("");
 	}
