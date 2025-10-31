@@ -54,7 +54,7 @@ EssentialsX-GUI is an EssentialsX addon that adds some GUIs for Essentials featu
   - Per-kit content editor.
   - Kit creation and deletion in a GUI.
 - Player view to see owned kits.
-  - Give kit to player when clicking on it.
+  - Give kit to player by clicking on it.
   - Kits preview in a GUI.
 - Infinite number of kits supported. *(Integrated pagination system)*
 - Play custom sounds when an action is performed.
@@ -66,7 +66,28 @@ EssentialsX-GUI is an EssentialsX addon that adds some GUIs for Essentials featu
 > - Permission for each kit.
 
 ### Warps:
-- 🚧 ~~Available in an upcoming update.~~
+
+- Customize the appearance of your warps in the warps' GUI
+    - Customizable warp display name.
+    - Customizable warp display icon.
+- Chose the way you want to customize home item.
+    - Using the chat.
+    - Using an anvil.
+    - Using a GUI. *(Icons only)*
+    - Using item in hand. *(Icons only)*
+- Admin view to manage warps.
+    - Chose a player and teleport him to the warp.
+    - Warp creation and deletion in a GUI.
+- Player view to see warps with access.
+    - Teleport player to the warp by clicking on it.
+    - Warps preview in a GUI.
+- Infinite number of warps supported. *(Integrated pagination system)*
+- Play custom sounds when an action is performed.
+- Search for warp by name.
+
+> **Supported EssentialsX features (2/2):**
+> - Essentials Warps.
+> - Permission for each warp.
 
 ### Punishment commands:
 - 🚧 ~~Available in an upcoming update.~~
