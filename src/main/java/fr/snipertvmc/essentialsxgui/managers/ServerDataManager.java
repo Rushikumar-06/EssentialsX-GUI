@@ -55,7 +55,7 @@ public class ServerDataManager {
 		}
 
 		for (String kitName : essentialsKits) {
-			if (serverKits.stream().noneMatch(home -> home.getName().equals(kitName))) {
+			if (serverKits.stream().noneMatch(kit -> kit.getName().equals(kitName))) {
 				updatedKits.add(new EXGKit(kitName));
 			}
 		}

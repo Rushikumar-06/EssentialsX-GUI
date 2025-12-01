@@ -148,6 +148,10 @@ public class WarpsTableManager {
 
 	public void updateWarps(Map<String, Object> warps) {
 		for (Map.Entry<String, Object> entry : warps.entrySet()) {
+			if (!isWarpExists(entry.getKey())) {
+				insertWarp(entry.getKey(), (Map<String, Object>) entry.getValue());
+				continue;
+			}
 			updateWarp(entry.getKey(), (Map<String, Object>) entry.getValue());
 		}
 	}

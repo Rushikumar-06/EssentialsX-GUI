@@ -148,6 +148,10 @@ public class KitsTableManager {
 
 	public void updateKits(Map<String, Object> kits) {
 		for (Map.Entry<String, Object> entry : kits.entrySet()) {
+			if (!isKitExists(entry.getKey())) {
+				insertKit(entry.getKey(), (Map<String, Object>) entry.getValue());
+				continue;
+			}
 			updateKit(entry.getKey(), (Map<String, Object>) entry.getValue());
 		}
 	}
