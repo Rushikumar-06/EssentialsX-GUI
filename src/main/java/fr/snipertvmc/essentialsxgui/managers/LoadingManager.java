@@ -10,6 +10,7 @@ import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.RegisterUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.UpdateUtils;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.util.Map;
 
@@ -45,7 +46,8 @@ public class LoadingManager {
 			return false;
 		}
 		checkForServerVersionSupport();
-		checkForUpdates();
+		startUpdateCheckerTask();
+		checkForUpdates(false);
 		if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7Server configuration analysis §fcompleted§7."); }
 
 
@@ -83,6 +85,20 @@ public class LoadingManager {
 
 
 	public void unloadPlugin(boolean detailedLoading) {
+
+
+		// CHECK IF THE PLUGIN IS NOT READY
+		if (!pluginReady) {
+			ConsoleLogger.console("\t§6EssentialsX-GUI: §cThe plugin is already unloaded.");
+			ConsoleLogger.console("\t§6EssentialsX-GUI: §cWell... it's impossible to unload an unloaded plugin ¯\\_(ツ)_/¯");
+			return;
+		}
+
+
+		// STOP TASKS
+		if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7Stopping tasks..."); }
+		stopUpdateCheckerTask();
+		if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7Tasks stopping §fcompleted§7."); }
 
 
 		// FINAL DATA SAVING
@@ -169,10 +185,10 @@ public class LoadingManager {
 	private String latestVersionAvailable = null;
 
 
-	public void checkForUpdates() {
+	public void checkForUpdates(boolean dontFlood) {
 
 		String currentVersion = Main.getInstance().getDescription().getVersion();
-		if (currentVersion.contains("-dev")) {
+		if (currentVersion.contains("-dev") && !dontFlood) {
 			ConsoleLogger.console("\t§6EssentialsX-GUI: §5You are using a development version of EssentialsX-GUI.");
 			ConsoleLogger.console("\t§6EssentialsX-GUI: §dSome features may not work as expected, and bugs may be present.");
 			return;
@@ -217,6 +233,40 @@ public class LoadingManager {
 				"currentVersion", Main.getInstance().getDescription().getVersion(),
 				"latestVersion", latestVersionAvailable
 		)));
+	}
+
+
+	// -------------------------------------------------- //
+
+
+	private BukkitTask checkForUpdatesTask = null;
+
+
+	public void startUpdateCheckerTask() {
+
+		if (checkForUpdatesTask != null) {
+			return;
+		}
+
+		long checkIntervalTicks = 20L * 60L * 60L;
+
+		checkForUpdatesTask = Main.getInstance().getServer().getScheduler().runTaskTimerAsynchronously(
+				Main.getInstance(),
+				() -> checkForUpdates(true),
+				checkIntervalTicks,
+				checkIntervalTicks
+		);
+	}
+
+
+	public void stopUpdateCheckerTask() {
+
+		if (checkForUpdatesTask == null) {
+			return;
+		}
+
+		checkForUpdatesTask.cancel();
+		checkForUpdatesTask = null;
 	}
 
 
