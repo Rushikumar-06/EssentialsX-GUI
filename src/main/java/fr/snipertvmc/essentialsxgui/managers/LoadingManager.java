@@ -21,6 +21,7 @@ public class LoadingManager {
 
 
 	private boolean pluginReady = false;
+	private final long startTimestamp = System.currentTimeMillis();
 
 
 	// -------------------------------------------------- //
@@ -296,6 +297,15 @@ public class LoadingManager {
 
 	public boolean isPluginReady() {
 		return pluginReady;
+	}
+	public long getUptimeInMilliseconds() {
+		return System.currentTimeMillis() - startTimestamp;
+	}
+	public long getUptimeInSeconds() {
+		return getUptimeInMilliseconds() / 1000L;
+	}
+	public long getUptimeInHours() {
+		return getUptimeInSeconds() / 3600L;
 	}
 
 

@@ -7,6 +7,7 @@ import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGKit;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGPlayer;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGWarp;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
+import fr.snipertvmc.essentialsxgui.utilities.PluginDebugUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -47,7 +48,7 @@ public class CommandEssentialsXGUI implements CommandExecutor, TabCompleter {
 			case "reload" -> reloadPlugin(commandSender);
 
 			// DEBUG ARGUMENT
-			case "debug" -> showDebugMessage(commandSender);
+			case "debug" -> sendDebugLinkMessage(commandSender);
 
 			// NOT FOUND ARGUMENT
 			default -> commandSender.sendMessage(MessagesUtils.get(EXGMessage.ARGUMENT_NOT_FOUND, Map.of("argument", firstArg)));
@@ -68,7 +69,7 @@ public class CommandEssentialsXGUI implements CommandExecutor, TabCompleter {
 		commandSender.sendMessage("    §8■ §7/exg help §7- §fDisplay this help message.");
 		commandSender.sendMessage("    §8■ §7/exg about §7- §fDisplay information about the plugin.");
 		commandSender.sendMessage("    §8■ §7/exg reload §7- §fReload the plugin files.");
-		commandSender.sendMessage("    §8■ §7/exg debug §7- §fDisplay debug informations.");
+		commandSender.sendMessage("    §8■ §7/exg debug §7- §fGet a debug link to help you or developers.");
 		commandSender.sendMessage("");
 	}
 
@@ -87,7 +88,7 @@ public class CommandEssentialsXGUI implements CommandExecutor, TabCompleter {
 	}
 
 
-	public void showDebugMessage(CommandSender commandSender) {
+	public void sendDebugLinkMessage(CommandSender commandSender) {
 
 		if (!(commandSender instanceof Player player)) {
 			commandSender.sendMessage(MessagesUtils.get(EXGMessage.ONLY_FOR_PLAYERS, null));
@@ -95,38 +96,7 @@ public class CommandEssentialsXGUI implements CommandExecutor, TabCompleter {
 		}
 
 		EXGPlayer exgPlayer = Main.getInstance().getPlayerManager().getPlayer(player);
-		Set<EXGHome> homes = exgPlayer.getHomes();
-		Set<EXGKit> kits = Main.getInstance().getEXGServer().getKits();
-		Set<EXGWarp> warps = Main.getInstance().getEXGServer().getWarps();
-
-		String currentLocalDataTime = ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss z"));
-
-		commandSender.sendMessage("");
-		commandSender.sendMessage("  §d§lDebug information §7- §f" + commandSender.getName());
-		commandSender.sendMessage("");
-		commandSender.sendMessage("    §8■ §bServer informations");
-		commandSender.sendMessage("      §8▢ §fName: §7" + Main.getInstance().getServer().getName());
-		commandSender.sendMessage("      §8▢ §fVersion: §7" + Main.getInstance().getServer().getVersion());
-		commandSender.sendMessage("      §8▢ §fBukkit Version: §7" + Main.getInstance().getServer().getBukkitVersion());
-		commandSender.sendMessage("      §8▢ §fEssentialsX Version: §7" + Main.getInstance().getEssentials().getDescription().getVersion());
-		commandSender.sendMessage("      §8▢ §fEssentialsX-GUI Version: §7" + Main.getInstance().getDescription().getVersion());
-		commandSender.sendMessage("      §8▢ §fLocal date and time: §7" + currentLocalDataTime);
-		commandSender.sendMessage("");
-		commandSender.sendMessage("    §8■ §bHomes list §7- §3" + homes.size() + " home(s)");
-		for (EXGHome home : homes) {
-			commandSender.sendMessage("      §8▢ §f" + home.getDisplayName() + " §7§o(" + home.getName() + ") §7- §f" + home.getMaterial() + ":" + home.getData());
-		}
-		commandSender.sendMessage("");
-		commandSender.sendMessage("    §8■ §bKits list §7- §3" + kits.size() + " kit(s)");
-		for (EXGKit kit : kits) {
-			commandSender.sendMessage("      §8▢ §f" + kit.getDisplayName() + " §7§o(" + kit.getName() + ") §7- §f" + kit.getMaterial() + ":" + kit.getData());
-		}
-		commandSender.sendMessage("");
-		commandSender.sendMessage("    §8■ §bWarps list §7- §3" + warps.size() + " warp(s)");
-		for (EXGWarp warp : warps) {
-			commandSender.sendMessage("      §8▢ §f" + warp.getDisplayName() + " §7§o(" + warp.getName() + ") §7- §f" + warp.getMaterial() + ":" + warp.getData());
-		}
-		commandSender.sendMessage("");
+		PluginDebugUtils.sendDebugToPrivateBin(exgPlayer);
 	}
 
 
