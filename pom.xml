@@ -107,6 +107,14 @@
 			<scope>compile</scope>
 		</dependency>
 
+		<!-- PrivateBin API -->
+		<dependency>
+			<groupId>com.github.InstantlyMoist</groupId>
+			<artifactId>privatebin-java-api</artifactId>
+			<version>master-5625a57693-1</version>
+			<scope>provided</scope>
+		</dependency>
+
 		<!-- Libby -->
 		<dependency>
 			<groupId>net.byteflux</groupId>

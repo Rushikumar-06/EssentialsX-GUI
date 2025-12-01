@@ -13,6 +13,7 @@ public class LibraryManager {
 	public LibraryManager() {
 		BukkitLibraryManager bukkitLibraryManager = Main.getInstance().getBukkitLibraryManager();
 		bukkitLibraryManager.addMavenCentral();
+		bukkitLibraryManager.addJitPack();
 		loadEssentialLibraries();
 	}
 
@@ -64,6 +65,18 @@ public class LibraryManager {
 				.groupId("io.github.classgraph")
 				.artifactId("classgraph")
 				.version("4.8.181")
+				.build());
+
+		bukkitLibraryManager.loadLibrary(Library.builder()
+				.groupId("com.github.InstantlyMoist")
+				.artifactId("privatebin-java-api")
+				.version("master-5625a57693-1")
+				.build());
+
+		bukkitLibraryManager.loadLibrary(Library.builder()
+				.groupId("org.json")
+				.artifactId("json")
+				.version("20250517")
 				.build());
 	}
 
