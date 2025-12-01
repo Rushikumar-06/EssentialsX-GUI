@@ -44,7 +44,7 @@ public class DataEntryUtils {
 					}
 				});
 
-			}, 10);
+			}, Main.getInstance().getConfiguration().getDelayForTypingInChat());
 
 			case ANVIL -> new DataEntryAnvilInventory(player, entrySettings, onSuccess, onFailure);
 
@@ -128,7 +128,7 @@ public class DataEntryUtils {
 					}
 				});
 
-			}, 10);
+			}, Main.getInstance().getConfiguration().getDelayForTypingInChat());
 
 			case ANVIL -> new DataEntryAnvilInventory(player, entrySettings,
 

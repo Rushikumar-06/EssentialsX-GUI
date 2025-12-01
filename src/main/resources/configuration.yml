@@ -21,8 +21,8 @@
 general:
 
   # Please do not change this value as it may cause the file to be reset.
-  # Default: "1.4"
-  configVersion: "1.4"
+  # Default: "1.5"
+  configVersion: "1.5"
 
   # If you want to see a detailed loading message when the plugin is loading, set this to true. (Also works for unloading)
   # Default: false
@@ -52,6 +52,12 @@ general:
   # with permission to see the admin view.
   # Default: false
   openWarpAdminViewByDefault: false
+
+
+  # Delay (in seconds) for typing in chat before the input is cancelled.
+  # This is used when players are required to type something in chat (like a name).
+  # Default: 10
+  delayForTypingInChat: 10
 
 ############################################################
 # +------------------------------------------------------+ #

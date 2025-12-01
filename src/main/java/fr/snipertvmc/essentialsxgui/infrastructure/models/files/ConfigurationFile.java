@@ -129,6 +129,11 @@ public class ConfigurationFile {
 	}
 
 
+	public int getDelayForTypingInChat() {
+		return yamlConfiguration.getInt("general.delayForTypingInChat", 10);
+	}
+
+
 	// -------------------------------------------------- //
 
 
