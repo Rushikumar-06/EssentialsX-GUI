@@ -6,6 +6,7 @@ import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGKit;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGPlayerInventoryData;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.EXGKitEditorInventoryConfig;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.FastInv;
+import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
 import fr.snipertvmc.essentialsxgui.utilities.data.InventoryBackupUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.Material;
@@ -97,7 +98,6 @@ public class KitEditorInventory extends FastInv {
 	// -------------------------------------------------- //
 
 
-
 	private void saveKit(Player player, EXGKit kit, ItemStack... kitItems) {
 
 		long delay = ((Number) Main.getInstance().getEssentials().getKits().getKit(kit.getName()).get("delay")).longValue();
@@ -120,12 +120,6 @@ public class KitEditorInventory extends FastInv {
 
 	@Override
 	public void onClick(InventoryClickEvent event) {
-
-		if (event.getAction().name().contains("DROP") || event.getAction().name().contains("PICKUP")) {
-			event.setCancelled(true);
-			return;
-		}
-
 		event.setCancelled(false);
 	}
 
