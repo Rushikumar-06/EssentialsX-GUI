@@ -99,9 +99,9 @@ general:
   confirmDeleteHome: "Type 'confirm' to confirm deletion"
 
   enterNewKitNameInChat: "&ePlease enter the new &fkit name &ein the chat. &7&oType 'cancel' to cancel the action."
-  enterNewKitDelayInChat: "&ePlease enter the new &fkit delay &ein the chat. &7&oType 'cancel' to cancel the action."
+  enterNewKitDelayInChat: "&ePlease enter the new &fkit delay &o(seconds) &ein the chat. &7&oType 'cancel' to cancel the action."
   enterNewKitName: "Enter new kit name"
-  enterNewKitDelay: "Enter new kit delay"
+  enterNewKitDelay: "Enter new kit delay (seconds)"
   searchKitInChat: "&ePlease enter first few letters of the &fkit name &ein the chat. &7&oType 'cancel' to cancel the action."
   searchKit: "Search kit"
   # Placeholders available: {kitName}
