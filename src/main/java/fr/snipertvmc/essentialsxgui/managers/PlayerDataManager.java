@@ -17,6 +17,10 @@ public class PlayerDataManager {
 
 		Map<String, Object> playerHomes = new HashMap<>();
 
+		if (Main.getInstance().getEssentials().getUser(player.getName()) == null) {
+			return playerHomes;
+		}
+
 		List<String> essentialsHomes = Main.getInstance().getEssentials().getUser(player.getName()).getHomes();
 
 		for (String homeName : essentialsHomes) {

@@ -19,7 +19,9 @@ public class PlayerJoin implements Listener {
 		Player player = event.getPlayer();
 		EXGPlayer exgPlayer = Main.getInstance().getPlayerManager().initialize(player);
 
-		Main.getInstance().getPlayerDataManager().updatePlayerHomes(exgPlayer);
+		if (Main.getInstance().getEssentials().getUser(player.getName()) != null) {
+			Main.getInstance().getPlayerDataManager().updatePlayerHomes(exgPlayer);
+		}
 
 		Main.getInstance().getServer().getScheduler().runTaskLater(Main.getInstance(), () -> {
 			Main.getInstance().getLoadingManager().alertPlayerForUpdate(player);
