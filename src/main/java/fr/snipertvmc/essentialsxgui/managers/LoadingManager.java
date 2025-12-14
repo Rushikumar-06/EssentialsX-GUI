@@ -47,7 +47,9 @@ public class LoadingManager {
 			return false;
 		}
 		checkForServerVersionSupport();
-		startUpdateCheckerTask();
+		if (!Main.getInstance().getDescription().getVersion().contains("-dev")) {
+			startUpdateCheckerTask();
+		}
 		checkForUpdates(false);
 		if (detailedLoading) ConsoleLogger.console("\t§6EssentialsX-GUI: §7Server configuration analysis §fcompleted§7.");
 
