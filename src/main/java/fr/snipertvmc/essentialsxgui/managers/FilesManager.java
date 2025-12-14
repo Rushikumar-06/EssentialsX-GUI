@@ -56,8 +56,8 @@ public class FilesManager {
 
 
 	private final Map<String, String> filesVersions = new HashMap<>() {{
-		put("configuration", "1.5"); // Updated for version: 1.2.1
-		put("messages", "1.5"); // Updated for version: 1.2.1
+		put("configuration", "1.5"); // Updated for version: 1.3.0
+		put("messages", "1.5"); // Updated for version: 1.3.0
 
 		put("homeEditing", "1.1"); // Updated for version: 1.0.2
 		put("homes", "1.3"); // Updated for version: 1.1.0
@@ -74,8 +74,8 @@ public class FilesManager {
 		put("warpsAdminView", "1.0"); // Updated for version: 1.2.0
 		put("warpsPlayerView", "1.0"); // Updated for version: 1.2.0
 
-		put("whoisPlayers", "1.0"); // Updated for version: 1.2.1
-		put("whoisView", "1.0"); // Updated for version: 1.2.1
+		put("whoisPlayers", "1.0"); // Updated for version: 1.3.0
+		put("whoisView", "1.0"); // Updated for version: 1.3.0
 
 		put("dataEntryGUI", "1.0"); // Updated for version: 1.1.0
 	}};
