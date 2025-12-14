@@ -60,11 +60,31 @@ general:
   # Default: false
   openWarpAdminViewByDefault: false
 
-
-  # Delay (in seconds) for typing in chat before the input is cancelled.
+  # Delay (in seconds) for typing in chat before the input is canceled.
   # This is used when players are required to type something in chat (like a name).
   # Default: 10
   delayForTypingInChat: 10
+
+  # Set this to true if you want to instantly create a home/kit/warp when the player
+  # click on the create button, without asking for information like name in chat or anvil.
+  # TIP: If you accept bedrock players, I recommend you to set this to true. Because bedrock players
+  #      typing in chat can be complicated for them. You can always change the name/icon later using the GUI.
+  # Default: false
+  skipDataEntryProcess: false
+
+  # Configure the default names used when skipDataEntryProcess (instant creation) is enabled.
+  # You must use %number% placeholder to indicate where the number will be placed. (e.g., home_1, home_2, etc.)
+  # If you don't use %number%, the same home/kit/warp will be overwritten each time a new one is created.
+  # Please just use lowercase letters, numbers and underscores. No spaces or special characters. These names will be
+  # used as internal names for EssentialsX, so they must follow EssentialsX 'naming rules'. If you don't know
+  # what that means, just use simple names like the ones provided by default.
+  instantCreationDefaultValues:
+    home_name: "home_%number%"
+
+    kit_name: "kit_%number%"
+    kit_delay: 3600
+
+    warp_name: "warp_%number%"
 
 ############################################################
 # +------------------------------------------------------+ #

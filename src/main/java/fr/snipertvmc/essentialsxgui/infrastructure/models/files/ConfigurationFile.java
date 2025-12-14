@@ -145,6 +145,23 @@ public class ConfigurationFile {
 		return yamlConfiguration.getInt("general.delayForTypingInChat", 10);
 	}
 
+	public boolean skipDataEntryProcess() {
+		return yamlConfiguration.getBoolean("general.skipDataEntryProcess", false);
+	}
+
+	public String getInstantCreationDefaultHomeName() {
+		return yamlConfiguration.getString("general.instantCreationDefaultValues.home_name", "home_%number%");
+	}
+	public String getInstantCreationDefaultKitName() {
+		return yamlConfiguration.getString("general.instantCreationDefaultValues.kit_name", "kit_%number%");
+	}
+	public long getInstantCreationDefaultKitDelay() {
+		return yamlConfiguration.getLong("general.instantCreationDefaultValues.kit_delay", 3600L);
+	}
+	public String getInstantCreationDefaultWarpName() {
+		return yamlConfiguration.getString("general.instantCreationDefaultValues.warp_name", "warp_%number%");
+	}
+
 
 	// -------------------------------------------------- //
 

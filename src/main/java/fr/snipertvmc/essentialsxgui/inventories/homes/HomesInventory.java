@@ -239,6 +239,32 @@ public class HomesInventory extends PaginatedFastInv {
 
 	private void createNewHome(Player player) {
 
+		if (Main.getInstance().getConfiguration().skipDataEntryProcess()) {
+			String instantCreationDefaultHomeName = Main.getInstance().getConfiguration().getInstantCreationDefaultHomeName();
+			int homeNumber = 1;
+
+			if (instantCreationDefaultHomeName.contains("%number%")) {
+
+				List<String> homesName = Main.getInstance().getPlayerManager().getPlayer(player).getHomes().stream()
+						.map(EXGHome::getName)
+						.toList();
+
+				while (homesName.contains(instantCreationDefaultHomeName.replace("%number%", String.valueOf(homeNumber)))) {
+					homeNumber++;
+				}
+			}
+
+			String finalHomeName = instantCreationDefaultHomeName
+					.replace("%number%", String.valueOf(homeNumber))
+					.replace(" ", "_");
+
+			Main.getInstance().getEssentials().getUser(player).setHome(finalHomeName, player.getLocation());
+			player.sendMessage(MessagesUtils.get(EXGMessage.HOME_CREATED, Map.of("homeName", finalHomeName)));
+			new HomesInventory(player, null, null).open(player);
+			SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
+			return;
+		}
+
 		if (!Main.getInstance().getChatManager().canDoChat(player)) {
 			return;
 		}

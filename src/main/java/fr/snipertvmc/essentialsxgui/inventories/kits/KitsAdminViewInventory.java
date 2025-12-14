@@ -223,6 +223,34 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 
 	private void createNewKitName(Player player) {
 
+		if (Main.getInstance().getConfiguration().skipDataEntryProcess()) {
+			String instantCreationDefaultKitName = Main.getInstance().getConfiguration().getInstantCreationDefaultKitName();
+			int kitNumber = 1;
+
+			if (instantCreationDefaultKitName.contains("%number%")) {
+
+				List<String> kitsName = Main.getInstance().getServerManager().getEXGServer().getKits().stream()
+						.map(EXGKit::getName)
+						.toList();
+
+				while (kitsName.contains(instantCreationDefaultKitName.replace("%number%", String.valueOf(kitNumber)))) {
+					kitNumber++;
+				}
+			}
+
+			String finalKitName = instantCreationDefaultKitName
+					.replace("%number%", String.valueOf(kitNumber))
+					.replace(" ", "_");
+
+			long delay = Main.getInstance().getConfiguration().getInstantCreationDefaultKitDelay();
+
+			Main.getInstance().getHookManager().getEssentialsHook().createKitWithPlayer(player, finalKitName, delay);
+			player.sendMessage(MessagesUtils.get(EXGMessage.KIT_CREATED, Map.of("kitName", finalKitName, "kitDelay", String.valueOf(delay))));
+			new KitsAdminViewInventory(player, null, null).open(player);
+			SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
+			return;
+		}
+
 		if (!Main.getInstance().getChatManager().canDoChat(player)) {
 			return;
 		}

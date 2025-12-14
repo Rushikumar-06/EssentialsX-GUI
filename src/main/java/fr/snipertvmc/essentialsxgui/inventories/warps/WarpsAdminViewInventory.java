@@ -223,6 +223,39 @@ public class WarpsAdminViewInventory extends PaginatedFastInv {
 
 	private void createNewWarp(Player player) {
 
+		if (Main.getInstance().getConfiguration().skipDataEntryProcess()) {
+			String instantCreationDefaultWarpName = Main.getInstance().getConfiguration().getInstantCreationDefaultWarpName();
+			int warpNumber = 1;
+
+			if (instantCreationDefaultWarpName.contains("%number%")) {
+
+				List<String> warpsName = Main.getInstance().getServerManager().getEXGServer().getWarps().stream()
+						.map(EXGWarp::getName)
+						.toList();
+
+				while (warpsName.contains(instantCreationDefaultWarpName.replace("%number%", String.valueOf(warpNumber)))) {
+					warpNumber++;
+				}
+			}
+
+			String finalWarpName = instantCreationDefaultWarpName
+					.replace("%number%", String.valueOf(warpNumber))
+					.replace(" ", "_");
+
+			try {
+				Main.getInstance().getHookManager().getEssentialsHook().createWarpWithPlayer(player, finalWarpName);
+				player.sendMessage(MessagesUtils.get(EXGMessage.WARP_CREATED, Map.of("warpName", finalWarpName)));
+				new WarpsAdminViewInventory(player, null, null).open(player);
+				SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
+
+			} catch (Exception e) {
+				player.sendMessage(MessagesUtils.get(EXGMessage.WARP_CREATION_ERROR, null));
+				new WarpsAdminViewInventory(player, null, null).open(player);
+				SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
+			}
+			return;
+		}
+
 		if (!Main.getInstance().getChatManager().canDoChat(player)) {
 			return;
 		}
