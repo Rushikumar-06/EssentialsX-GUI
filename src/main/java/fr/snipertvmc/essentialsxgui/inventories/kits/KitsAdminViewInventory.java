@@ -230,12 +230,12 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("kits", "createNewKitNameEntryType");
 		if (entryType == EXGEntryType.CHAT) {
 			player.closeInventory();
-			player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_HOME_NAME_CHAT, null));
+			player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_KIT_NAME, null));
 		}
 
 		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
 				.setAcceptedTypes(List.of(EXGEntryType.CHAT, EXGEntryType.ANVIL))
-				.setEntryDisplayName(MessagesUtils.get(EXGMessage.ENTER_NEW_HOME_NAME, null))
+				.setEntryDisplayName(MessagesUtils.get(EXGMessage.ENTER_NEW_KIT_NAME, null))
 				.setMinLength(Main.getInstance().getConfiguration().getMinNameLength())
 				.setMaxLength(Main.getInstance().getConfiguration().getMaxNameLength());
 
