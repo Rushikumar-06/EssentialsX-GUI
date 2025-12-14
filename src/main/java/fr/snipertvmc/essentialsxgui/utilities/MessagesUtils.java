@@ -3,12 +3,18 @@ package fr.snipertvmc.essentialsxgui.utilities;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
 
+import java.io.Console;
 import java.util.Map;
 
 public class MessagesUtils {
 
 
 	// -------------------------------------------------- //
+
+
+	public static String get(EXGMessage exgMessage) {
+		return get(exgMessage, null);
+	}
 
 
 	public static String get(EXGMessage exgMessage, Map<String, String> variables) {

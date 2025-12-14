@@ -48,13 +48,16 @@ public class FilesManager {
 		put("warpsAdminView", "inventories/warps/warpsAdminView");
 		put("warpsPlayerView", "inventories/warps/warpsPlayerView");
 
+		put("whoisPlayers", "inventories/whois/whoisPlayers");
+		put("whoisView", "inventories/whois/whoisView");
+
 		put("dataEntryGUI", "inventories/others/dataEntryGUI");
 	}};
 
 
 	private final Map<String, String> filesVersions = new HashMap<>() {{
 		put("configuration", "1.5"); // Updated for version: 1.2.1
-		put("messages", "1.4"); // Updated for version: 1.2.0
+		put("messages", "1.5"); // Updated for version: 1.2.1
 
 		put("homeEditing", "1.1"); // Updated for version: 1.0.2
 		put("homes", "1.3"); // Updated for version: 1.1.0
@@ -70,6 +73,9 @@ public class FilesManager {
 		put("warpPlayerTeleport", "1.0"); // Updated for version: 1.2.0
 		put("warpsAdminView", "1.0"); // Updated for version: 1.2.0
 		put("warpsPlayerView", "1.0"); // Updated for version: 1.2.0
+
+		put("whoisPlayers", "1.0"); // Updated for version: 1.2.1
+		put("whoisView", "1.0"); // Updated for version: 1.2.1
 
 		put("dataEntryGUI", "1.0"); // Updated for version: 1.1.0
 	}};
@@ -294,7 +300,7 @@ public class FilesManager {
 		loadYAMLFile("configuration");
 		checkUpdateForFile("configuration");
 		String label = reload ? "Reloaded" : "Loaded";
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §8- §fconfiguration.yml: §a" + label);
+		if (configurationFile.isDetailedLoading()) ConsoleLogger.console("\t§6EssentialsX-GUI: §8- §fconfiguration.yml: §a" + label);
 	}
 
 
@@ -302,7 +308,7 @@ public class FilesManager {
 		loadYAMLFile("messages");
 		checkUpdateForFile("messages");
 		String label = reload ? "Reloaded" : "Loaded";
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §8- §fmessages.yml: §a" + label);
+		if (configurationFile.isDetailedLoading()) ConsoleLogger.console("\t§6EssentialsX-GUI: §8- §fmessages.yml: §a" + label);
 	}
 
 
@@ -317,7 +323,7 @@ public class FilesManager {
 			String label = reload ? "Reloaded" : "Loaded";
 			label = isValid ? label : "§4Not valid, please resolve the above errors";
 
-			ConsoleLogger.console("\t§6EssentialsX-GUI: §8- §f" + inventoryName + ".yml: §a" + label);
+			if (configurationFile.isDetailedLoading()) ConsoleLogger.console("\t§6EssentialsX-GUI: §8- §f" + inventoryName + ".yml: §a" + label);
 		}
 	}
 

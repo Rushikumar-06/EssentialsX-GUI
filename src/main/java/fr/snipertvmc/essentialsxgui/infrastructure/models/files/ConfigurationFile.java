@@ -9,6 +9,7 @@ import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,6 +45,17 @@ public class ConfigurationFile {
 
 	public boolean checkForUpdates() {
 		return yamlConfiguration.getBoolean("general.checkForUpdates", true);
+	}
+
+	public ZoneId getDateTimezone() {
+		String zoneIdString = yamlConfiguration.getString("general.timezone", ZoneId.systemDefault().toString());
+		try {
+			return ZoneId.of(zoneIdString);
+
+		} catch (Exception exception) {
+			ConsoleLogger.warn("The timezone '" + zoneIdString + "' is not valid. Using the system default timezone instead.");
+			return ZoneId.systemDefault();
+		}
 	}
 
 

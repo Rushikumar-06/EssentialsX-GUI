@@ -8,6 +8,8 @@ import fr.snipertvmc.essentialsxgui.inventories.kits.KitsAdminViewInventory;
 import fr.snipertvmc.essentialsxgui.inventories.kits.KitsPlayerViewInventory;
 import fr.snipertvmc.essentialsxgui.inventories.warps.WarpsAdminViewInventory;
 import fr.snipertvmc.essentialsxgui.inventories.warps.WarpsPlayerViewInventory;
+import fr.snipertvmc.essentialsxgui.inventories.whois.WhoisPlayersInventory;
+import fr.snipertvmc.essentialsxgui.inventories.whois.WhoisViewInventory;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.entity.Player;
@@ -16,8 +18,21 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
 import java.util.List;
+import java.util.Map;
 
 public class PlayerCommandPreprocess implements Listener {
+
+
+	// -------------------------------------------------- //
+
+
+
+	private final List<String> commands = List.of(
+			"home", "homes",
+			"kit", "kits",
+			"warp", "warps",
+			"whois"
+	);
 
 
 	// -------------------------------------------------- //
@@ -27,32 +42,13 @@ public class PlayerCommandPreprocess implements Listener {
 	public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event) {
 
 		Player player = event.getPlayer();
+		String command = event.getMessage().split(" ")[0].replaceFirst("/", "").replace("essentials:", "").toLowerCase();
+		String[] args = event.getMessage().split(" ");
 
-		String command = event.getMessage()
-				.split(" ")[0]
-				.replaceFirst("/", "")
-				.replace("essentials:", "")
-				.toLowerCase();
-
-		String[] args = event.getMessage()
-				.split(" ");
-
-
-		if (args.length > 1) {
-			return;
-		}
-
-
-		List<String> commands = List.of(
-				"home", "homes",
-				"kit", "kits",
-				"warp", "warps");
-
-		if (!commands.contains(command)) {
-			return;
-		}
+		if (!commands.contains(command)) return;
 
 		switch (command) {
+
 
 			//
 			// HOMES
@@ -60,10 +56,11 @@ public class PlayerCommandPreprocess implements Listener {
 
 			case "home", "homes" -> {
 
+				if (args.length > 1) return;
+
 				if (!Main.getInstance().getConfiguration().isHomesModuleEnabled()) {
 					return;
 				}
-
 				event.setCancelled(true);
 
 				player.sendMessage(MessagesUtils.get(EXGMessage.OPENING_HOMES_INVENTORY, null));
@@ -71,11 +68,14 @@ public class PlayerCommandPreprocess implements Listener {
 				SoundsUtils.playSound(player, EXGSound.GUI_OPEN);
 			}
 
+
 			//
 			// KITS
 			//
 
 			case "kit", "kits" -> {
+
+				if (args.length > 1) return;
 
 				if (!Main.getInstance().getConfiguration().isKitsModuleEnabled()) {
 					return;
@@ -97,11 +97,14 @@ public class PlayerCommandPreprocess implements Listener {
 				SoundsUtils.playSound(player, EXGSound.GUI_OPEN);
 			}
 
+
 			//
 			// WARPS
 			//
 
 			case "warp", "warps" -> {
+
+				if (args.length > 1) return;
 
 				if (!Main.getInstance().getConfiguration().isWarpsModuleEnabled()) {
 					return;
@@ -120,6 +123,35 @@ public class PlayerCommandPreprocess implements Listener {
 					new WarpsPlayerViewInventory(player, null, null).open(player);
 				}
 
+				SoundsUtils.playSound(player, EXGSound.GUI_OPEN);
+			}
+
+
+			//
+ 			// WHOIS
+			//
+
+			case "whois" -> {
+
+				event.setCancelled(true);
+
+				if (args.length > 1) {
+					String targetPlayerName = args[1];
+
+					Player targetPlayer = Main.getInstance().getServer().getPlayerExact(targetPlayerName);
+					if (targetPlayer == null) {
+						player.sendMessage(MessagesUtils.get(EXGMessage.PLAYER_NOT_FOUND, Map.of("player", targetPlayerName)));
+						return;
+					}
+
+					player.sendMessage(MessagesUtils.get(EXGMessage.OPENING_WHOIS_INVENTORY));
+					new WhoisViewInventory(player, targetPlayer).open(player);
+					SoundsUtils.playSound(player, EXGSound.GUI_OPEN);
+					return;
+				}
+
+				player.sendMessage(MessagesUtils.get(EXGMessage.OPENING_WHOIS_INVENTORY));
+				new WhoisPlayersInventory(player).open(player);
 				SoundsUtils.playSound(player, EXGSound.GUI_OPEN);
 			}
 		}

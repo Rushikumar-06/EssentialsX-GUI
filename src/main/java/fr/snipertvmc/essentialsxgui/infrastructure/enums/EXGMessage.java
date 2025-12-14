@@ -20,6 +20,7 @@ public enum EXGMessage {
 	INVALID_MATERIAL("errors.invalidMaterial"),
 	LENGTH_LIMIT("errors.lengthLimit"),
 	INVALID_NUMBER("errors.invalidNumber"),
+	PLAYER_NOT_FOUND("errors.playerNotFound"),
 
 	ARGUMENT_NOT_FOUND("errors.argumentNotFound"),
 	NO_PERMISSION("errors.noPermission"),
@@ -92,7 +93,34 @@ public enum EXGMessage {
 	OPENING_PLAYER_KITS_INVENTORY("general.openingPlayerKitsInventory"),
 
 	OPENING_ADMIN_WARPS_INVENTORY("general.openingAdminWarpsInventory"),
-	OPENING_PLAYER_WARPS_INVENTORY("general.openingPlayerWarpsInventory");
+	OPENING_PLAYER_WARPS_INVENTORY("general.openingPlayerWarpsInventory"),
+
+	OPENING_WHOIS_INVENTORY("general.openingWhoisInventory"),
+
+
+	YES("general.yes_value"),
+	NO("general.no_value"),
+	FLYING("general.flying"),
+	NOT_FLYING("general.notFlying"),
+	GAMEMODE_SURVIVAL("general.gamemodeSurvival"),
+	GAMEMODE_CREATIVE("general.gamemodeCreative"),
+	GAMEMODE_ADVENTURE("general.gamemodeAdventure"),
+	GAMEMODE_SPECTATOR("general.gamemodeSpectator"),
+	DAYS("general.days"),
+	HOURS("general.hours"),
+	MINUTES("general.minutes"),
+	SECONDS("general.seconds"),
+	HIDDEN("general.hidden"),
+	DISABLED("general.disabled"),
+	NO_NICKNAME("general.noNickname"),
+	NOT_AFK("general.notAfk"),
+	NOT_JAILED("general.notJailed"),
+	NOT_MUTED("general.notMuted"),
+	NO_MUTE_REASON("general.noMuteReason"),
+	NOT_BANNED("general.notBanned"),
+	NO_BAN_REASON("general.noBanReason"),
+	PERMANENT("general.permanent"),
+	LOCATION_FORMAT("general.locationFormat");
 
 
 	// -------------------------------------------------- //

@@ -29,7 +29,9 @@ public class EXGInventoryConfigParser {
 				"kitEditing",
 				"kitEditor",
 
-				"warpEditing"
+				"warpEditing",
+
+				"whoisView"
 		));
 	}};
 

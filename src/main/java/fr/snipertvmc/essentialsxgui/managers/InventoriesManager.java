@@ -11,6 +11,8 @@ import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.warps.EXGW
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.warps.EXGWarpPlayerTeleportInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.warps.EXGWarpsAdminViewInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.warps.EXGWarpsPlayerViewInventoryConfig;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.whois.EXGWhoisPlayersInventoryConfig;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.whois.EXGWhoisViewInventoryConfig;
 
 import java.util.List;
 
@@ -34,6 +36,9 @@ public class InventoriesManager {
 	private EXGWarpPlayerTeleportInventoryConfig warpPlayerTeleportInventoryConfig;
 	private EXGWarpsAdminViewInventoryConfig warpsAdminViewInventoryConfig;
 	private EXGWarpsPlayerViewInventoryConfig warpsPlayerViewInventoryConfig;
+
+	private EXGWhoisPlayersInventoryConfig whoisPlayersInventoryConfig;
+	private EXGWhoisViewInventoryConfig whoisViewInventoryConfig;
 
 	private EXGDataEntryGUInventoryConfig dataEntryGUIInventoryConfig;
 
@@ -65,6 +70,9 @@ public class InventoriesManager {
 			case "warpsPlayerView" -> loadWarpsPlayerViewInventory(title, rows, inventoryName, borderItem, borderSlots);
 			case "warpPlayerTeleport" -> loadWarpPlayerTeleportInventory(title, rows, inventoryName, borderItem, borderSlots);
 			case "warpEditing" -> loadWarpEditingInventory(title, rows, inventoryName, borderItem, borderSlots);
+
+			case "whoisPlayers" -> loadWhoisPlayersInventory(title, rows, inventoryName, borderItem, borderSlots);
+			case "whoisView" -> loadWhoisViewInventory(title, rows, inventoryName, borderItem, borderSlots);
 
 			case "dataEntryGUI" -> loadDataEntryGUIInventory(title, rows, inventoryName, borderItem, borderSlots);
 
@@ -418,6 +426,64 @@ public class InventoriesManager {
 
 
 	//
+	// WHOIS INVENTORIES
+	//
+
+
+	private void loadWhoisPlayersInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+
+		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
+
+		whoisPlayersInventoryConfig = new EXGWhoisPlayersInventoryConfig(title, rows, borderItem, borderSlots);
+
+		whoisPlayersInventoryConfig.setPlayerItem(inventoryFile.getItem(
+				"playerItem"));
+
+		whoisPlayersInventoryConfig.setNextPageItem(inventoryFile.getItem(
+				"nextPageItem"));
+		whoisPlayersInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
+				"previousPageItem"));
+		whoisPlayersInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
+				"currentPageItem"));
+
+		whoisPlayersInventoryConfig.setCloseItem(inventoryFile.getItem(
+				"closeItem"));
+
+		whoisPlayersInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
+	}
+
+	private void loadWhoisViewInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+
+		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
+
+		whoisViewInventoryConfig = new EXGWhoisViewInventoryConfig(title, rows, borderItem, borderSlots);
+
+		whoisViewInventoryConfig.setPlayerIdentificationItem(inventoryFile.getItem(
+				"playerIdentificationItem"));
+		whoisViewInventoryConfig.setPlayerStatisticsItem(inventoryFile.getItem(
+				"playerStatisticsItem"));
+		whoisViewInventoryConfig.setPlayerWorldItem(inventoryFile.getItem(
+				"playerWorldItem"));
+		whoisViewInventoryConfig.setPlayerServerDataItem(inventoryFile.getItem(
+				"playerServerDataItem"));
+		whoisViewInventoryConfig.setPlayerPunishmentsItem(inventoryFile.getItem(
+				"playerPunishmentsItem"));
+
+		whoisViewInventoryConfig.setNextPageItem(inventoryFile.getItem(
+				"nextPageItem"));
+		whoisViewInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
+				"previousPageItem"));
+		whoisViewInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
+				"currentPageItem"));
+
+		whoisViewInventoryConfig.setBackItem(inventoryFile.getItem(
+				"backItem"));
+
+		whoisViewInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
+	}
+
+
+	//
 	// OTHERS INVENTORIES
 	//
 
@@ -464,6 +530,9 @@ public class InventoriesManager {
 				"warpPlayerTeleport",
 				"warpsAdminView",
 				"warpsPlayerView",
+
+				"whoisPlayers",
+				"whoisView",
 
 				"dataEntryGUI"
 		);
@@ -512,6 +581,14 @@ public class InventoriesManager {
 	}
 	public EXGWarpsPlayerViewInventoryConfig getWarpsPlayerViewInventoryConfig() {
 		return warpsPlayerViewInventoryConfig;
+	}
+
+
+	public EXGWhoisPlayersInventoryConfig getWhoisPlayersInventoryConfig() {
+		return whoisPlayersInventoryConfig;
+	}
+	public EXGWhoisViewInventoryConfig getWhoisViewInventoryConfig() {
+		return whoisViewInventoryConfig;
 	}
 
 

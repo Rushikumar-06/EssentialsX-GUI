@@ -49,31 +49,31 @@ public class LoadingManager {
 		checkForServerVersionSupport();
 		startUpdateCheckerTask();
 		checkForUpdates(false);
-		if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7Server configuration analysis §fcompleted§7."); }
+		if (detailedLoading) ConsoleLogger.console("\t§6EssentialsX-GUI: §7Server configuration analysis §fcompleted§7.");
 
 
 		// GLOBAL DATA INITIALIZATION
-		if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7Initialisation of global data..."); }
+		if (detailedLoading) ConsoleLogger.console("\t§6EssentialsX-GUI: §7Initialisation of global data...");
 		FastInvManager.register(Main.getInstance());
-		if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7Initialization of global data §fcompleted§7."); }
+		if (detailedLoading) ConsoleLogger.console("\t§6EssentialsX-GUI: §7Initialization of global data §fcompleted§7.");
 
 
 		// COMMANDS REGISTRATION
-		if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7Registering commands..."); }
+		if (detailedLoading) ConsoleLogger.console("\t§6EssentialsX-GUI: §7Registering commands...");
 		int registeredCommands = RegisterUtils.registerCommands("fr.snipertvmc.essentialsxgui.commands");
-		if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7Registration of §f" + registeredCommands + " commands§7."); }
+		if (detailedLoading) ConsoleLogger.console("\t§6EssentialsX-GUI: §7Registration of §f" + registeredCommands + " commands§7.");
 
 
 		// EVENTS REGISTRATION
-		if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7Registration of events..."); }
+		if (detailedLoading) ConsoleLogger.console("\t§6EssentialsX-GUI: §7Registration of events...");
 		int registeredEvents = RegisterUtils.registerEvents("fr.snipertvmc.essentialsxgui.events");
-		if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7Registration of §f" + registeredEvents + " events§7."); }
+		if (detailedLoading) ConsoleLogger.console("\t§6EssentialsX-GUI: §7Registration of §f" + registeredEvents + " events§7.");
 
 
 		// METRICS CHARTS LOADING
-		if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7Loading metrics charts..."); }
+		if (detailedLoading) ConsoleLogger.console("\t§6EssentialsX-GUI: §7Loading metrics charts...");
 		loadMetricsCharts();
-		if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7Metrics charts loading §fcompleted§7."); }
+		if (detailedLoading) ConsoleLogger.console("\t§6EssentialsX-GUI: §7Metrics charts loading §fcompleted§7.");
 
 
 		// PLUGIN LOADING COMPLETED
@@ -97,22 +97,22 @@ public class LoadingManager {
 
 
 		// STOP TASKS
-		if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7Stopping tasks..."); }
+		if (detailedLoading) ConsoleLogger.console("\t§6EssentialsX-GUI: §7Stopping tasks...");
 		stopUpdateCheckerTask();
-		if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7Tasks stopping §fcompleted§7."); }
+		if (detailedLoading) ConsoleLogger.console("\t§6EssentialsX-GUI: §7Tasks stopping §fcompleted§7.");
 
 
 		// FINAL DATA SAVING
-		if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7Data saving..."); }
+		if (detailedLoading) ConsoleLogger.console("\t§6EssentialsX-GUI: §7Data saving...");
 		Main.getInstance().getPlayerManager().saveAll();
 		Main.getInstance().getServerManager().save();
-		if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7Data saving §fcompleted§7."); }
+		if (detailedLoading) ConsoleLogger.console("\t§6EssentialsX-GUI: §7Data saving §fcompleted§7.");
 
 
 		// DATABASES DISCONNECTION
-		if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7Disconnecting databases..."); }
+		if (detailedLoading) ConsoleLogger.console("\t§6EssentialsX-GUI: §7Disconnecting databases...");
 		Main.getInstance().getDatabaseManager().disconnectAllDatabases();
-		if (detailedLoading) { ConsoleLogger.console("\t§6EssentialsX-GUI: §7Databases disconnection §fcompleted§7."); }
+		if (detailedLoading) ConsoleLogger.console("\t§6EssentialsX-GUI: §7Databases disconnection §fcompleted§7.");
 	}
 
 

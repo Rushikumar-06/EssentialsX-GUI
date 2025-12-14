@@ -32,6 +32,13 @@ general:
   # Default: true
   checkForUpdates: true
 
+  # Time zone ID used for displaying time-related information in the plugin.
+  # Leave this blank to use the server's default time zone.
+  # Example values: "America/New_York", "Europe/Paris", "Asia/Tokyo"
+  # Default: ""
+  dateTimezone: ""
+
+
   # Default text of input when using anvil way to enter text.
   # Default: "Type here"
   anvilTypeHereText: "Type here"

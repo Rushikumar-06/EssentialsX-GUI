@@ -40,6 +40,14 @@ public class EXGItemConfigParser {
 				"warpsPlayerView.items.warpItem",
 				"warpPlayerTeleport.items.playerItem",
 
+				// WHOIS
+				"whoisPlayers.items.playerItem",
+				"whoisView.items.playerIdentificationItem",
+				"whoisView.items.playerStatisticsItem",
+				"whoisView.items.playerWorldItem",
+				"whoisView.items.playerServerDataItem",
+				"whoisView.items.playerPunishmentsItem",
+
 				// OTHERS
 				"dataEntryGUI.items.materialIconItem"
 		));
@@ -68,6 +76,9 @@ public class EXGItemConfigParser {
 				"warpsPlayerView.items.noWarpsItem",
 				"warpsPlayerView.items.noSearchWarpResultsItem",
 				"warpPlayerTeleport.items.playerItem",
+
+				// WHOIS
+				"whoisPlayers.items.playerItem",
 
 				// OTHERS
 				"dataEntryGUI.items.materialIconItem"
