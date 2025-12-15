@@ -3,7 +3,6 @@ package fr.snipertvmc.essentialsxgui.utilities;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
 
-import java.io.Console;
 import java.util.Map;
 
 public class MessagesUtils {
