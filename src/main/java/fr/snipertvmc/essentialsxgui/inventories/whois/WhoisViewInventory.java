@@ -186,46 +186,76 @@ public class WhoisViewInventory extends FastInv {
 
 
 	public Map<String, String> getPlayerData(Player player) {
-
 		User user = Main.getInstance().getEssentials().getUser(player.getUniqueId());
 
+		Map<String, String> data = new HashMap<>();
 
-		// Player identification
+		data.putAll(getPlayerIdentification(user));
+		data.putAll(getPlayerStatistics(user));
+		data.putAll(getPlayerWorld(user));
+		data.putAll(getPlayerServerData(user, player));
+		data.putAll(getPlayerPunishments(user, player));
+
+		return data;
+	}
+
+
+	private Map<String, String> getPlayerIdentification(User user) {
+		Map<String, String> map = new HashMap<>();
+
 		boolean canSeeIPAddress = user.isAuthorized("essentials.whois.ip");
-		String ipAddress;
-		if (canSeeIPAddress) {
-			ipAddress = user.getBase().getAddress().getAddress().toString();
-		} else {
-			ipAddress = null;
-		}
+		String ipAddress = canSeeIPAddress
+				? user.getBase().getAddress().getAddress().toString()
+				: "§c" + MessagesUtils.get(EXGMessage.HIDDEN);
 
 		Statistic PLAY_ONE_TICK = EnumUtil.getStatistic("PLAY_ONE_MINUTE", "PLAY_ONE_TICK");
-		long playtimeMs = System.currentTimeMillis() - (user.getBase().getStatistic(PLAY_ONE_TICK) * 50L);
+		long playtimeMs = System.currentTimeMillis()
+				- (user.getBase().getStatistic(PLAY_ONE_TICK) * 50L);
 		String playtime = TimeUtils.formatDateDiffZoned(playtimeMs);
 
+		map.put("ipAddress", ipAddress);
+		map.put("playtime", playtime);
 
-		// Player statistics
-		double health = user.getBase().getHealth();
-		double maxHealth = user.getBase().getMaxHealth();
-		int foodLevel = user.getBase().getFoodLevel();
-		float saturation = user.getBase().getSaturation();
-		int experience = user.getBase().getTotalExperience();
-		int level = user.getBase().getLevel();
+		return map;
+	}
 
 
-		// Player world
-		Location worldLocation = user.getBase().getLocation();
+	private Map<String, String> getPlayerStatistics(User user) {
+		Map<String, String> map = new HashMap<>();
+
+		map.put("health", String.valueOf(user.getBase().getHealth()));
+		map.put("maxHealth", String.valueOf(user.getBase().getMaxHealth()));
+		map.put("foodLevel", String.valueOf(user.getBase().getFoodLevel()));
+		map.put("saturation", String.valueOf(user.getBase().getSaturation()));
+		map.put("experience", String.valueOf(user.getBase().getTotalExperience()));
+		map.put("level", String.valueOf(user.getBase().getLevel()));
+
+		return map;
+	}
+
+
+	private Map<String, String> getPlayerWorld(User user) {
+		Map<String, String> map = new HashMap<>();
+
+		Location loc = user.getBase().getLocation();
 		String location = MessagesUtils.get(EXGMessage.LOCATION_FORMAT, Map.of(
-				"world", worldLocation.getWorld().getName(),
-				"x", String.valueOf((int) worldLocation.getX()),
-				"y", String.valueOf((int) worldLocation.getY()),
-				"z", String.valueOf((int) worldLocation.getZ()),
-				"yaw", String.valueOf((int) worldLocation.getYaw()),
-				"pitch", String.valueOf((int) worldLocation.getPitch())
+				"world", loc.getWorld().getName(),
+				"x", String.valueOf((int) loc.getX()),
+				"y", String.valueOf((int) loc.getY()),
+				"z", String.valueOf((int) loc.getZ()),
+				"yaw", String.valueOf((int) loc.getYaw()),
+				"pitch", String.valueOf((int) loc.getPitch())
 		));
 
+		map.put("location", location);
 
-		// Player server data
+		return map;
+	}
+
+
+	private Map<String, String> getPlayerServerData(User user, Player player) {
+		Map<String, String> map = new HashMap<>();
+
 		GameMode gamemode = user.getBase().getGameMode();
 		String gamemodeName = switch (gamemode) {
 			case SURVIVAL -> MessagesUtils.get(EXGMessage.GAMEMODE_SURVIVAL);
@@ -234,98 +264,89 @@ public class WhoisViewInventory extends FastInv {
 			case SPECTATOR -> MessagesUtils.get(EXGMessage.GAMEMODE_SPECTATOR);
 		};
 
-		boolean isEcoEnabled = !Main.getInstance().getEssentials().getSettings().isEcoDisabled();
-		String money;
-		if (isEcoEnabled) {
-			money = AdventureUtil.parsed(NumberUtil.displayCurrency(user.getMoney(), Main.getInstance().getEssentials())).toString();
-		} else {
-			money = null;
-		}
+		boolean ecoEnabled = !Main.getInstance().getEssentials().getSettings().isEcoDisabled();
+		String money = ecoEnabled
+				? AdventureUtil.parsed(
+				NumberUtil.displayCurrency(user.getMoney(), Main.getInstance().getEssentials())
+		).toString()
+				: MessagesUtils.get(EXGMessage.DISABLED);
 
-		boolean isGodMode = user.isGodModeEnabled();
-		boolean canFly = user.getBase().getAllowFlight();
-		boolean isFlying = user.getBase().isFlying();
-		float walkSpeed = user.getBase().getWalkSpeed();
-		float flySpeed = user.getBase().getFlySpeed();
-		boolean isWhitelisted = user.getBase().isWhitelisted();
-		boolean isOperator = user.getBase().isOp();
-		boolean isVanished = user.isVanished();
 		String nick = user.getNickname();
 		boolean isNicked = nick != null && !nick.equals(player.getName());
 		boolean isAfk = user.isAfk();
-		String afkSince = TimeUtils.formatDateDiffZoned(user.getAfkSince());
+
+		map.put("money", money);
+		map.put("gamemodeName", gamemodeName);
+		map.put("isGodMode", yesNo(user.isGodModeEnabled()));
+		map.put("canFly", yesNo(user.getBase().getAllowFlight()));
+		map.put("isFlying", yesNo(user.getBase().isFlying()));
+		map.put("walkSpeed", String.valueOf(user.getBase().getWalkSpeed()));
+		map.put("flySpeed", String.valueOf(user.getBase().getFlySpeed()));
+		map.put("isOperator", yesNo(user.getBase().isOp()));
+		map.put("isWhitelisted", yesNo(user.getBase().isWhitelisted()));
+		map.put("isVanished", yesNo(user.isVanished()));
+		map.put("nickname", isNicked ? nick : MessagesUtils.get(EXGMessage.NO_NICKNAME));
+		map.put("isNicked", yesNo(isNicked));
+		map.put("isAfk", yesNo(isAfk));
+		map.put("afkSince", isAfk
+				? TimeUtils.formatDateDiffZoned(user.getAfkSince())
+				: MessagesUtils.get(EXGMessage.NOT_AFK));
+
+		return map;
+	}
 
 
-		// Player punishments
+	private Map<String, String> getPlayerPunishments(User user, Player player) {
+		Map<String, String> map = new HashMap<>();
+
 		boolean isJailed = user.isJailed();
-		String jailName = user.getFormattedJailTime();
-		String jailExpiry = TimeUtils.formatDateDiffZoned(user.getJailTimeout());
+		map.put("isJailed", yesNo(isJailed));
+		map.put("jailName", user.getFormattedJailTime());
+		map.put("jailExpiry", isJailed
+				? TimeUtils.formatDateDiffZoned(user.getJailTimeout())
+				: MessagesUtils.get(EXGMessage.NOT_JAILED));
 
 		boolean isMuted = user.isMuted();
-		String muteReason = user.getMuteReason();
-		String muteExpiry = TimeUtils.formatDateDiffZoned(user.getMuteTimeout());
+		map.put("isMuted", yesNo(isMuted));
+		map.put("muteReason", isMuted
+				? (user.getMuteReason() != null
+				? user.getMuteReason()
+				: MessagesUtils.get(EXGMessage.NO_MUTE_REASON))
+				: MessagesUtils.get(EXGMessage.NOT_MUTED));
+		map.put("muteExpiry", isMuted
+				? TimeUtils.formatDateDiffZoned(user.getMuteTimeout())
+				: MessagesUtils.get(EXGMessage.NOT_MUTED));
 
-		boolean isBanned = Bukkit.getServer().getBanList(BanList.Type.NAME).getBanEntry(player.getName()) != null;
-		String banReason = MessagesUtils.get(EXGMessage.NOT_BANNED);
-		String banExpiry = MessagesUtils.get(EXGMessage.NOT_BANNED);
-		if (isBanned) {
-			BanEntry banEntry = Bukkit.getServer().getBanList(BanList.Type.NAME).getBanEntry(player.getName());
-			if (banEntry != null) {
+		BanEntry banEntry = Bukkit.getServer()
+				.getBanList(BanList.Type.NAME)
+				.getBanEntry(player.getName());
 
-				if (banEntry.getReason() != null && !banEntry.getReason().isEmpty()) {
-					banReason = banEntry.getReason();
-				} else {
-					banReason = MessagesUtils.get(EXGMessage.NO_BAN_REASON);
-				}
+		boolean isBanned = banEntry != null;
+		map.put("isBanned", yesNo(isBanned));
+		map.put("banReason", isBanned
+				? (banEntry.getReason() != null && !banEntry.getReason().isEmpty()
+				? banEntry.getReason()
+				: MessagesUtils.get(EXGMessage.NO_BAN_REASON))
+				: MessagesUtils.get(EXGMessage.NOT_BANNED));
+		map.put("banExpiry", isBanned
+				? (banEntry.getExpiration() != null
+				? TimeUtils.formatDateDiffZoned(banEntry.getExpiration().getTime())
+				: MessagesUtils.get(EXGMessage.PERMANENT))
+				: MessagesUtils.get(EXGMessage.NOT_BANNED));
 
-				if (banEntry.getExpiration() != null) {
-					banExpiry = TimeUtils.formatDateDiffZoned(banEntry.getExpiration().getTime());
-				} else {
-					banExpiry = MessagesUtils.get(EXGMessage.PERMANENT);
-				}
-			}
-		}
-
-		String finalBanReason = banReason;
-		String finalBanExpiry = banExpiry;
-
-		return new HashMap<>() {{
-			put("ipAddress", canSeeIPAddress ? ipAddress : "§c" + MessagesUtils.get(EXGMessage.HIDDEN));
-			put("playtime", playtime);
-
-			put("health", String.valueOf(health));
-			put("maxHealth", String.valueOf(maxHealth));
-			put("foodLevel", String.valueOf(foodLevel));
-			put("saturation", String.valueOf(saturation));
-			put("experience", String.valueOf(experience));
-			put("level", String.valueOf(level));
-
-			put("location", location);
-
-			put("money", isEcoEnabled ? money : MessagesUtils.get(EXGMessage.DISABLED));
-			put("gamemodeName", gamemodeName);
-			put("isGodMode", isGodMode ? MessagesUtils.get(EXGMessage.YES) : MessagesUtils.get(EXGMessage.NO));
-			put("canFly", canFly ? MessagesUtils.get(EXGMessage.YES) : MessagesUtils.get(EXGMessage.NO));
-			put("isFlying", isFlying ? MessagesUtils.get(EXGMessage.YES) : MessagesUtils.get(EXGMessage.NO));
-			put("walkSpeed", String.valueOf(walkSpeed));
-			put("flySpeed", String.valueOf(flySpeed));
-			put("isOperator", isOperator ? MessagesUtils.get(EXGMessage.YES) : MessagesUtils.get(EXGMessage.NO));
-			put("isWhitelisted", isWhitelisted ? MessagesUtils.get(EXGMessage.YES) : MessagesUtils.get(EXGMessage.NO));
-			put("isVanished", isVanished ? MessagesUtils.get(EXGMessage.YES) : MessagesUtils.get(EXGMessage.NO));
-			put("nickname", isNicked ? nick : MessagesUtils.get(EXGMessage.NO_NICKNAME));
-			put("isNicked", isNicked ? MessagesUtils.get(EXGMessage.YES) : MessagesUtils.get(EXGMessage.NO));
-			put("isAfk", isAfk ? MessagesUtils.get(EXGMessage.YES) : MessagesUtils.get(EXGMessage.NO));
-			put("afkSince", isAfk ? afkSince : MessagesUtils.get(EXGMessage.NOT_AFK));
-
-			put("isJailed", isJailed ? MessagesUtils.get(EXGMessage.YES) : MessagesUtils.get(EXGMessage.NO));
-			put("jailName", jailName);
-			put("jailExpiry", isJailed ? jailExpiry : MessagesUtils.get(EXGMessage.NOT_JAILED));
-			put("isMuted", isMuted ? MessagesUtils.get(EXGMessage.YES) : MessagesUtils.get(EXGMessage.NO));
-			put("muteReason", isMuted ? (muteReason != null ? muteReason : MessagesUtils.get(EXGMessage.NO_MUTE_REASON)) : MessagesUtils.get(EXGMessage.NOT_MUTED));
-			put("muteExpiry", isMuted ? muteExpiry : MessagesUtils.get(EXGMessage.NOT_MUTED));
-			put("isBanned", isBanned ? MessagesUtils.get(EXGMessage.YES) : MessagesUtils.get(EXGMessage.NO));
-			put("banReason", finalBanReason);
-			put("banExpiry", finalBanExpiry);
-		}};
+		return map;
 	}
+
+
+	// -------------------------------------------------- //
+
+
+	private String yesNo(boolean value) {
+		return value
+				? MessagesUtils.get(EXGMessage.YES)
+				: MessagesUtils.get(EXGMessage.NO);
+	}
+
+
+	// -------------------------------------------------- //
 }
