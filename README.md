@@ -2,7 +2,7 @@
 
 # EssentialsX-GUI
 
-EssentialsX-GUI is an EssentialsX addon that adds some GUIs for Essentials features, like homes, kits, warps, etc..
+EssentialsX-GUI is an **unofficial** EssentialsX addon that adds some GUIs for Essentials features, like homes, kits, warps, whois, etc..
 
 [![Download](https://img.shields.io/github/downloads/SniperTVmc/EssentialsX-GUI/total?style=for-the-badge)](https://github.com/SniperTVmc/EssentialsX-GUI/releases/latest)
 [![License](https://img.shields.io/badge/license-GNU%20GPL%20v3-blue?style=for-the-badge)](https://github.com/SniperTVmc/EssentialsX-GUI/blob/Main/LICENSE)
@@ -17,6 +17,9 @@ EssentialsX-GUI is an EssentialsX addon that adds some GUIs for Essentials featu
 - All messages are customizable.
 - Lightweight and high-performance.
 - Clean and structured code.
+- Update checker.
+- Cross-server support: Java Edition and Bedrock Edition. *(Requires GeyserMC and Floodgate plugins)*
+- Compatible with most server types: Spigot, Paper, Purpur, Leaf, etc.
 
 ### Homes:
 - Customize the appearance of your home in the homes' GUI.
@@ -89,10 +92,21 @@ EssentialsX-GUI is an EssentialsX addon that adds some GUIs for Essentials featu
 > - Essentials Warps.
 > - Permission for each warp.
 
-### Punishment commands:
-- 🚧 ~~Available in an upcoming update.~~
-
 ### /whois command:
+- Display player's information in a GUI.
+- Player choice GUI when no player is specified.
+- Play custom sounds when an action is performed.
+- Players data divided into categories for better readability.
+  - **Player identification :** `Name`, `UUID`, `IP Address`, `Playtime`
+  - **Player statistics :** `Health`, `Hunger`, `Experience`, `Level`
+  - **Player world :** `World`, `Coordinates (X, Y, Z, Yaw, Pitch)`
+  - **Player server data :** `Gamemode`, `Flying status`, `Operator status`, `Vanished status`, `AFK status`, `Nickname`
+  - **Player punishments :** `Jail status`, `Mute status`, `Ban status`
+
+> **Supported EssentialsX features (1/1):**
+> - Show player's IP address only with permission.
+
+### Punishment commands:
 - 🚧 ~~Available in an upcoming update.~~
 
 ## 👀 | Preview / Screenshots
@@ -143,7 +157,7 @@ EssentialsX-GUI is an EssentialsX addon that adds some GUIs for Essentials featu
 
 Requirements:
 
-- Minecraft Server: **Java Edition**
+- Minecraft Server: **Java Edition**, Bedrock Edition is partially supported. *(Requires GeyserMC and Floodgate plugins)*
 - Supported Versions: **1.8.8 to 1.21.8+**
 - Java Version: **16+**
 - EssentialsX Version: **2.21.2+**
@@ -172,7 +186,7 @@ In the same way as the plugin, EssentialsX is licensed under the
 
 ## ⚠️ | Disclaimer
 
-**EssentialsX-GUI** is an independent, unofficial addon developed by [Sniper_TVmc](https://github.com/SniperTVmc),
+**EssentialsX-GUI** is an **independent**, **unofficial addon** developed by [Sniper_TVmc](https://github.com/SniperTVmc),
 designed to provide graphical interfaces for some EssentialsX commands and features.<br>
 This project is **not affiliated, associated, authorized, endorsed by, or in any way officially connected**
 with EssentialsX or any of its contributors.<br>
