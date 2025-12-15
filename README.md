@@ -159,7 +159,7 @@ Requirements:
 
 - Minecraft Server: **Java Edition**, Bedrock Edition is partially supported. *(Requires GeyserMC and Floodgate plugins)*
 - Supported Versions: **1.8.8 to 1.21.8+**
-- Java Version: **16+**
+- Java Version: **17+**
 - EssentialsX Version: **2.21.2+**
 
 > For more help, please visit the [wiki](https://sniper-tvmc.gitbook.io/essentialsx-gui/installation/prerequisites).
