@@ -62,8 +62,8 @@
 		<!-- Spigot (1.8.8) -->
 		<dependency>
 			<groupId>org.spigotmc</groupId>
-			<artifactId>spigot</artifactId>
-			<version>1.8.8-R0.1-SNAPSHOT</version>
+			<artifactId>spigot-api</artifactId>
+			<version>1.21.1-R0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -208,7 +208,7 @@
 									<shadedPattern>fr.snipertvmc.essentialsxgui.libraries.anvilgui</shadedPattern>
 								</relocation>
 								<relocation>
-									<patten>net.kyori.adventure</patten>
+									<pattern>net.kyori.adventure</pattern>
 									<shadedPattern>fr.snipertvmc.essentialsxgui.libraries.adventure</shadedPattern>
 								</relocation>
 							</relocations>
