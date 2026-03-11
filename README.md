@@ -22,89 +22,117 @@ EssentialsX-GUI is an **unofficial** EssentialsX addon that adds some GUIs for E
 - Compatible with most server types: Spigot, Paper, Purpur, Leaf, etc.
 
 ### Homes:
-- Customize the appearance of your home in the homes' GUI.
-  - Customizable home display name.
-  - Customizable home display icon.
-- Chose the way you want to customize home item.
-  - Using the chat.
-  - Using an anvil.
-  - Using a GUI. *(Icons only)*
-  - Using item in hand. *(Icons only)*
-- Unique item for bed home.
-  - Possibility to customize the item according to the home's world.
-- Per-player home item editor, with preview home item.
-- Infinite number of homes supported. *(Integrated pagination system)*
-- Play custom sounds when an action is performed.
-- Home creation and deletion in a GUI.
-- Search for home by name.
+<details><summary>Click to view all homes features.</summary>
+<ul>
+  <li>Customize the appearance of your home in the homes' GUI.<ul>
+      <li>Customizable home display name.</li>
+      <li>Customizable home display icon.</li>
+    </ul></li>
+  <li>Chose the way you want to customize home item.<ul>
+      <li>Using the chat.</li>
+      <li>Using an anvil.</li>
+      <li>Using a GUI. <em>(Icons only)</em></li>
+      <li>Using item in hand. <em>(Icons only)</em></li>
+    </ul></li>
+  <li>Unique item for bed home.<ul>
+      <li>Possibility to customize the item according to the home's world.</li>
+    </ul></li>
+  <li>Per-player home item editor, with preview home item.</li>
+  <li>Infinite number of homes supported. <em>(Integrated pagination system)</em></li>
+  <li>Play custom sounds when an action is performed.</li>
+  <li>Home creation and deletion in a GUI.</li>
+  <li>Search for home by name.</li>
+</ul>
 
 > **Supported EssentialsX features (2/2):**
 > - Essentials Homes
 > - Home limit per player.
+</details>
 
 ### Kits:
 
-- Customize the appearance of your kits in the kits' GUI
-  - Customizable kit display name.
-  - Customizable kit display icon.
-- Chose the way you want to customize home item.
-  - Using the chat.
-  - Using an anvil.
-  - Using a GUI. *(Icons only)*
-  - Using item in hand. *(Icons only)*
-- Admin view to manage kits.
-  - Chose a player and give him a kit.
-  - Per-kit content editor.
-  - Kit creation and deletion in a GUI.
-- Player view to see owned kits.
-  - Give kit to player by clicking on it.
-  - Kits preview in a GUI.
-- Infinite number of kits supported. *(Integrated pagination system)*
-- Play custom sounds when an action is performed.
-- Search for kit by name.
+<details><summary>Click to view all kits features.</summary>
+<ul>
+  <li>Customize the appearance of your kits in the kits' GUI.<ul>
+      <li>Customizable kit display name.</li>
+      <li>Customizable kit display icon.</li>
+    </ul></li>
+  <li>Choose the way you want to customize kit item.<ul>
+      <li>Using the chat.</li>
+      <li>Using an anvil.</li>
+      <li>Using a GUI. <em>(Icons only)</em></li>
+      <li>Using item in hand. <em>(Icons only)</em></li>
+    </ul></li>
+  <li>Admin view to manage kits.<ul>
+      <li>Choose a player and give him a kit.</li>
+      <li>Per-kit content editor.</li>
+      <li>Kit creation and deletion in a GUI.</li>
+    </ul></li>
+  <li>Player view to see owned kits.<ul>
+      <li>Give kit to player by clicking on it.</li>
+      <li>Kits preview in a GUI.</li>
+    </ul></li>
+  <li>Infinite number of kits supported. <em>(Integrated pagination system)</em></li>
+  <li>Play custom sounds when an action is performed.</li>
+  <li>Search for kit by name.</li>
+</ul>
 
 > **Supported EssentialsX features (3/3):**
 > - Essentials Kits
 > - Cooldown for each kit.
 > - Permission for each kit.
+</details>
 
 ### Warps:
 
-- Customize the appearance of your warps in the warps' GUI
-    - Customizable warp display name.
-    - Customizable warp display icon.
-- Chose the way you want to customize home item.
-    - Using the chat.
-    - Using an anvil.
-    - Using a GUI. *(Icons only)*
-    - Using item in hand. *(Icons only)*
-- Admin view to manage warps.
-    - Chose a player and teleport him to the warp.
-    - Warp creation and deletion in a GUI.
-- Player view to see warps with access.
-    - Teleport player to the warp by clicking on it.
-    - Warps preview in a GUI.
-- Infinite number of warps supported. *(Integrated pagination system)*
-- Play custom sounds when an action is performed.
-- Search for warp by name.
+<details><summary>Click to view all warps features.</summary>
+<ul>
+  <li>Customize the appearance of your warps in the warps' GUI.<ul>
+      <li>Customizable warp display name.</li>
+      <li>Customizable warp display icon.</li>
+    </ul></li>
+  <li>Choose the way you want to customize warp item.<ul>
+      <li>Using the chat.</li>
+      <li>Using an anvil.</li>
+      <li>Using a GUI. <em>(Icons only)</em></li>
+      <li>Using item in hand. <em>(Icons only)</em></li>
+    </ul></li>
+  <li>Admin view to manage warps.<ul>
+      <li>Choose a player and teleport him to the warp.</li>
+      <li>Warp creation and deletion in a GUI.</li>
+    </ul></li>
+  <li>Player view to see warps with access.<ul>
+      <li>Teleport player to the warp by clicking on it.</li>
+      <li>Warps preview in a GUI.</li>
+    </ul></li>
+  <li>Infinite number of warps supported. <em>(Integrated pagination system)</em></li>
+  <li>Play custom sounds when an action is performed.</li>
+  <li>Search for warp by name.</li>
+</ul>
 
 > **Supported EssentialsX features (2/2):**
 > - Essentials Warps.
 > - Permission for each warp.
+</details>
 
 ### /whois command:
-- Display player's information in a GUI.
-- Player choice GUI when no player is specified.
-- Play custom sounds when an action is performed.
-- Players data divided into categories for better readability.
-  - **Player identification :** `Name`, `UUID`, `IP Address`, `Playtime`
-  - **Player statistics :** `Health`, `Hunger`, `Experience`, `Level`
-  - **Player world :** `World`, `Coordinates (X, Y, Z, Yaw, Pitch)`
-  - **Player server data :** `Gamemode`, `Flying status`, `Operator status`, `Vanished status`, `AFK status`, `Nickname`
-  - **Player punishments :** `Jail status`, `Mute status`, `Ban status`
+<details><summary>Click to view all /whois features.</summary>
+<ul>
+  <li>Display player's information in a GUI.</li>
+  <li>Player choice GUI when no player is specified.</li>
+  <li>Play custom sounds when an action is performed.</li>
+  <li>Players data divided into categories for better readability.<ul>
+      <li><strong>Player identification :</strong> <code>Name</code>, <code>UUID</code>, <code>IP Address</code>, <code>Playtime</code></li>
+      <li><strong>Player statistics :</strong> <code>Health</code>, <code>Hunger</code>, <code>Experience</code>, <code>Level</code></li>
+      <li><strong>Player world :</strong> <code>World</code>, <code>Coordinates (X, Y, Z, Yaw, Pitch)</code></li>
+      <li><strong>Player server data :</strong> <code>Gamemode</code>, <code>Flying status</code>, <code>Operator status</code>, <code>Vanished status</code>, <code>AFK status</code>, <code>Nickname</code></li>
+      <li><strong>Player punishments :</strong> <code>Jail status</code>, <code>Mute status</code>, <code>Ban status</code></li>
+    </ul></li>
+</ul>
 
 > **Supported EssentialsX features (1/1):**
 > - Show player's IP address only with permission.
+</details>
 
 ### Punishment commands:
 - 🚧 ~~Available in an upcoming update.~~
