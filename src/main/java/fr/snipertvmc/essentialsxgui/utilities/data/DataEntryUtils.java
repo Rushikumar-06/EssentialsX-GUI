@@ -1,5 +1,6 @@
 package fr.snipertvmc.essentialsxgui.utilities.data;
 
+import com.cryptomorin.xseries.XMaterial;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGEntryResult;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGEntrySettings;
@@ -8,7 +9,6 @@ import fr.snipertvmc.essentialsxgui.inventories.others.DataEntryGUIInventory;
 import fr.snipertvmc.essentialsxgui.libraries.exglib.Pair;
 import fr.snipertvmc.essentialsxgui.utilities.type.TypeUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 import java.util.Map;
@@ -105,8 +105,8 @@ public class DataEntryUtils {
 
 
 	public static void processMaterialEntry(Player player, EXGEntrySettings entrySettings,
-	                                        Consumer<Pair<Pair<Material, Byte>, EXGEntryResult>> onSuccess,
-	                                        Consumer<Pair<Pair<Material, Byte>, EXGEntryResult>> onFailure) {
+	                                        Consumer<Pair<Pair<XMaterial, Byte>, EXGEntryResult>> onSuccess,
+	                                        Consumer<Pair<Pair<XMaterial, Byte>, EXGEntryResult>> onFailure) {
 
 		if (!entrySettings.getAcceptedTypes().contains(entrySettings.getType())) {
 			onFailure.accept(new Pair<>(null, EXGEntryResult.CANCELED));
@@ -117,7 +117,7 @@ public class DataEntryUtils {
 
 			case CHAT -> Main.getInstance().getChatManager().addChat(player, entry -> {
 
-				Pair<Pair<Material, Byte>, EXGEntryResult> result = checkMaterialEntry(entry);
+				Pair<Pair<XMaterial, Byte>, EXGEntryResult> result = checkMaterialEntry(entry);
 
 				Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
 					if (result.getRight() == EXGEntryResult.SUCCESS) {
@@ -134,7 +134,7 @@ public class DataEntryUtils {
 
 					materialPairResult -> {
 
-						Pair<Pair<Material, Byte>, EXGEntryResult> result = checkMaterialEntry(materialPairResult.getLeft());
+						Pair<Pair<XMaterial, Byte>, EXGEntryResult> result = checkMaterialEntry(materialPairResult.getLeft());
 
 						if (result.getRight() == EXGEntryResult.SUCCESS) {
 							onSuccess.accept(result);
@@ -151,7 +151,7 @@ public class DataEntryUtils {
 
 					materialPairResult -> {
 
-						Pair<Pair<Material, Byte>, EXGEntryResult> result = checkMaterialEntry(materialPairResult.getLeft());
+						Pair<Pair<XMaterial, Byte>, EXGEntryResult> result = checkMaterialEntry(materialPairResult.getLeft());
 
 						if (result.getRight() == EXGEntryResult.SUCCESS) {
 							onSuccess.accept(result);
@@ -169,13 +169,13 @@ public class DataEntryUtils {
 	}
 
 
-	public static Pair<Pair<Material, Byte>, EXGEntryResult> checkMaterialEntry(String value) {
+	public static Pair<Pair<XMaterial, Byte>, EXGEntryResult> checkMaterialEntry(String value) {
 
 		if (value.equalsIgnoreCase("cancel")) {
 			return new Pair<>(null, EXGEntryResult.CANCELED);
 		}
 
-		Material material;
+		XMaterial material;
 		byte data = 0;
 
 		if (value.contains(":")) {
@@ -185,11 +185,11 @@ public class DataEntryUtils {
 				return new Pair<>(null, EXGEntryResult.INVALID_MATERIAL);
 			}
 
-			material = Material.matchMaterial(materialSplit[0]);
+			material = XMaterial.matchXMaterial(materialSplit[0]).orElse(null);
 			data = Byte.parseByte(materialSplit[1]);
 
 		} else {
-			material = Material.matchMaterial(value);
+			material = XMaterial.matchXMaterial(value).orElse(null);
 		}
 
 		if (material == null) {

@@ -23,9 +23,10 @@
  */
 package fr.snipertvmc.essentialsxgui.libraries.fastinv;
 
+import com.cryptomorin.xseries.XEnchantment;
+import com.cryptomorin.xseries.XItemFlag;
+import com.cryptomorin.xseries.XMaterial;
 import org.bukkit.Color;
-import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -40,7 +41,7 @@ import java.util.function.Consumer;
 /**
  * Simple {@link ItemStack} builder.
  *
- * @author MrMicky
+ * @author MrMicky (original), Sniper_TVmc (XSeries adaptation)
  */
 public class ItemBuilder {
 
@@ -50,8 +51,8 @@ public class ItemBuilder {
         return new ItemBuilder(item.clone());
     }
 
-    public ItemBuilder(Material material) {
-        this(new ItemStack(material));
+    public ItemBuilder(XMaterial material) {
+        this(new ItemStack(material.get()));
     }
 
     public ItemBuilder(ItemStack item) {
@@ -82,8 +83,8 @@ public class ItemBuilder {
         });
     }
 
-    public ItemBuilder type(Material material) {
-        return edit(item -> item.setType(material));
+    public ItemBuilder type(XMaterial material) {
+        return edit(item -> item.setType(material.get()));
     }
 
     public ItemBuilder data(int data) {
@@ -99,16 +100,16 @@ public class ItemBuilder {
         return edit(item -> item.setAmount(amount));
     }
 
-    public ItemBuilder enchant(Enchantment enchantment) {
+    public ItemBuilder enchant(XEnchantment enchantment) {
         return enchant(enchantment, 1);
     }
 
-    public ItemBuilder enchant(Enchantment enchantment, int level) {
-        return meta(meta -> meta.addEnchant(enchantment, level, true));
+    public ItemBuilder enchant(XEnchantment enchantment, int level) {
+        return meta(meta -> meta.addEnchant(enchantment.get(), level, true));
     }
 
-    public ItemBuilder removeEnchant(Enchantment enchantment) {
-        return meta(meta -> meta.removeEnchant(enchantment));
+    public ItemBuilder removeEnchant(XEnchantment enchantment) {
+        return meta(meta -> meta.removeEnchant(enchantment.get()));
     }
 
     public ItemBuilder removeEnchants() {
@@ -163,20 +164,20 @@ public class ItemBuilder {
         });
     }
 
-    public ItemBuilder flags(ItemFlag... flags) {
-        return meta(meta -> meta.addItemFlags(flags));
+    public ItemBuilder flags(XItemFlag... flags) {
+        return meta(meta -> meta.addItemFlags(Arrays.stream(flags).map(XItemFlag::get).toArray(ItemFlag[]::new)));
     }
 
     public ItemBuilder flags() {
-        return flags(ItemFlag.values());
+        return flags(XItemFlag.values());
     }
 
-    public ItemBuilder removeFlags(ItemFlag... flags) {
-        return meta(meta -> meta.removeItemFlags(flags));
+    public ItemBuilder removeFlags(XItemFlag... flags) {
+        return meta(meta -> meta.removeItemFlags(Arrays.stream(flags).map(XItemFlag::get).toArray(ItemFlag[]::new)));
     }
 
     public ItemBuilder removeFlags() {
-        return removeFlags(ItemFlag.values());
+        return removeFlags(XItemFlag.values());
     }
 
     public ItemBuilder armorColor(Color color) {

@@ -1,5 +1,6 @@
 package fr.snipertvmc.essentialsxgui.inventories.kits;
 
+import com.cryptomorin.xseries.XItemFlag;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGKit;
@@ -45,14 +46,14 @@ public class KitEditorInventory extends FastInv {
 
 		if (config.getBorderItem().isEnabled()) {
 			setItems(config.getBorderSlots(), config.getBorderItem()
-					.setItemFlags(List.of(ItemFlag.HIDE_UNBREAKABLE))
+					.setItemFlags(List.of(XItemFlag.HIDE_UNBREAKABLE))
 					.build(), e -> e.setCancelled(true));
 		}
 
 
 		if (config.getSaveKitItem().isEnabled()) {
 			setItem(config.getSaveKitItem().getSlot(), config.getSaveKitItem()
-					.setItemFlags(List.of(ItemFlag.HIDE_UNBREAKABLE))
+					.setItemFlags(List.of(XItemFlag.HIDE_UNBREAKABLE))
 					.build(), e -> {
 
 				e.setCancelled(true);
@@ -73,7 +74,7 @@ public class KitEditorInventory extends FastInv {
 
 		if (config.getCancelChangesItem().isEnabled()) {
 			setItem(config.getCancelChangesItem().getSlot(), config.getCancelChangesItem()
-					.setItemFlags(List.of(ItemFlag.HIDE_UNBREAKABLE))
+					.setItemFlags(List.of(XItemFlag.HIDE_UNBREAKABLE))
 					.build(), e -> {
 
 				e.setCancelled(true);

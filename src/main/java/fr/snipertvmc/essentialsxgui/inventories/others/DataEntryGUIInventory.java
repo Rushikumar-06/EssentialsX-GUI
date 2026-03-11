@@ -1,5 +1,6 @@
 package fr.snipertvmc.essentialsxgui.inventories.others;
 
+import com.cryptomorin.xseries.XMaterial;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGEntryResult;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
@@ -11,7 +12,6 @@ import fr.snipertvmc.essentialsxgui.libraries.fastinv.ItemBuilder;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.PaginatedFastInv;
 import fr.snipertvmc.essentialsxgui.utilities.data.DataEntryUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 import java.util.List;
@@ -56,11 +56,11 @@ public class DataEntryGUIInventory extends PaginatedFastInv {
 	                              Consumer<Pair<String, EXGEntryResult>> onFailure) {
 
 
-		List<Pair<Material, Byte>> materialList = Main.getInstance().getConfiguration().getMaterialsList(entrySettings.getMaterialListPath());
+		List<Pair<XMaterial, Byte>> materialList = Main.getInstance().getConfiguration().getMaterialsList(entrySettings.getMaterialListPath());
 
 		if (materialList.isEmpty()) {
 
-			addContent(new ItemBuilder(Material.BARRIER)
+			addContent(new ItemBuilder(XMaterial.BARRIER)
 					.name("§4§lNo materials found")
 					.lore(
 							"§cPlease contact an administrator and inform them of the following details:",
@@ -72,7 +72,7 @@ public class DataEntryGUIInventory extends PaginatedFastInv {
 			return;
 		}
 
-		for (Pair<Material, Byte> materialPair : materialList) {
+		for (Pair<XMaterial, Byte> materialPair : materialList) {
 
 			EXGItemConfig materialIconItem = config.getMaterialIconItem().duplicate();
 			materialIconItem.setMaterial(materialPair.getLeft().name());
@@ -85,7 +85,7 @@ public class DataEntryGUIInventory extends PaginatedFastInv {
 					.build(), e -> {
 
 				String completeMaterial = materialPair.getLeft() + ":" + materialPair.getRight();
-				Pair<Pair<Material, Byte>, EXGEntryResult> result = DataEntryUtils.checkMaterialEntry(completeMaterial);
+				Pair<Pair<XMaterial, Byte>, EXGEntryResult> result = DataEntryUtils.checkMaterialEntry(completeMaterial);
 
 				if (result.getRight() == EXGEntryResult.SUCCESS) {
 					onSuccess.accept(new Pair<>(completeMaterial, EXGEntryResult.SUCCESS));

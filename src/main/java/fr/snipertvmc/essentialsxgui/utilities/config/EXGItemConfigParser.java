@@ -1,13 +1,13 @@
 package fr.snipertvmc.essentialsxgui.utilities.config;
 
+import com.cryptomorin.xseries.XEnchantment;
+import com.cryptomorin.xseries.XItemFlag;
+import com.cryptomorin.xseries.XMaterial;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.MCServerVersion;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.files.InventoryFile;
 import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
-import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.inventory.ItemFlag;
 
 import java.util.HashMap;
 import java.util.List;
@@ -208,20 +208,17 @@ public class EXGItemConfigParser {
 			return false;
 		}
 
-		try {
+		if ((material.toString().startsWith("{") && material.toString().endsWith("}")) ||
+				material.toString().startsWith("PLAYER_HEAD:")) {
+			return true; // Variable or custom item, no need to validate Material
+		}
 
-			if ((material.toString().startsWith("{") && material.toString().endsWith("}")) ||
-					material.toString().startsWith("PLAYER_HEAD:")) {
-				return true; // Variable or custom item, no need to validate Material
-			}
-
-			Material.valueOf(material.toString());
-			return true;
-
-		} catch (IllegalArgumentException e) {
+		if (XMaterial.matchXMaterial(material.toString()).isEmpty()) {
 			ConsoleLogger.error("Invalid material for item '" + itemPath + "': '" + material + "' is not valid.");
 			return false;
 		}
+
+		return true;
 	}
 
 
@@ -276,30 +273,31 @@ public class EXGItemConfigParser {
 			return false;
 		}
 
+		boolean allValid = true;
 		for (Object enchantment : (List<?>) enchantments) {
 
 			String[] parts = enchantment.toString().split(":");
 			if (parts.length != 2) {
 				ConsoleLogger.error("Invalid enchantment format for item '" + itemPath + "': " + enchantment + " is not in the format 'EnchantmentName:Level'.");
-				return false;
+				allValid = false;
+				continue;
 			}
 
 			try {
-				Enchantment enchantmentValue = Enchantment.getByName(parts[0]);
 				Integer.parseInt(parts[1]);
 
-				if (enchantmentValue == null) {
+				if (XEnchantment.of(parts[0]).isEmpty()) {
 					ConsoleLogger.error("Invalid enchantment name for item '" + itemPath + "': '" + parts[0] + "' is not a valid enchantment.");
-					return false;
+					allValid = false;
 				}
 
 			} catch (NumberFormatException ex) {
 				ConsoleLogger.error("Invalid enchantment level for item '" + itemPath + "': '" + parts[1] + "' is not a valid integer.");
-				return false;
+				allValid = false;
 			}
 		}
 
-		return true;
+		return allValid;
 	}
 
 
@@ -314,18 +312,16 @@ public class EXGItemConfigParser {
 			return false;
 		}
 
+		boolean allValid = true;
 		for (Object itemFlag : (List<?>) itemFlags) {
 
-			try {
-				ItemFlag.valueOf(itemFlag.toString());
-
-			} catch (IllegalArgumentException e) {
+			if (XItemFlag.of(itemFlag.toString()).isEmpty()) {
 				ConsoleLogger.error("Invalid item flag for item '" + itemPath + "': '" + itemFlag + "' is not a valid item flag.");
-				return false;
+				allValid = false;
 			}
 		}
 
-		return true;
+		return allValid;
 	}
 
 

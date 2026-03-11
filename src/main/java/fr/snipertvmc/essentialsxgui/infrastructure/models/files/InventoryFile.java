@@ -1,5 +1,7 @@
 package fr.snipertvmc.essentialsxgui.infrastructure.models.files;
 
+import com.cryptomorin.xseries.XEnchantment;
+import com.cryptomorin.xseries.XItemFlag;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.MCServerVersion;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
@@ -9,9 +11,7 @@ import fr.snipertvmc.essentialsxgui.utilities.config.EXGItemConfigParser;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.inventory.ClickType;
-import org.bukkit.inventory.ItemFlag;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -154,17 +154,19 @@ public class InventoryFile {
 
 		List<String> lore = new ArrayList<>((List<String>) itemConfiguration.get("lore"));
 
-		List<Pair<Enchantment, Integer>> enchantments = new ArrayList<>();
+		List<Pair<XEnchantment, Integer>> enchantments = new ArrayList<>();
 		for (Object enchantment : (List<String>) itemConfiguration.get("enchantments")) {
 			String[] enchantmentSplit = ((String) enchantment).split(":");
-			if (Enchantment.getByName(enchantmentSplit[0]) != null) {
-				enchantments.add(Pair.of(Enchantment.getByName(enchantmentSplit[0]), Integer.parseInt(enchantmentSplit[1])));
+			if (XEnchantment.of(enchantmentSplit[0]).isPresent()) {
+				enchantments.add(Pair.of(XEnchantment.of(enchantmentSplit[0]).get(), Integer.parseInt(enchantmentSplit[1])));
 			}
 		}
 
-		List<ItemFlag> itemFlags = new ArrayList<>();
+		List<XItemFlag> itemFlags = new ArrayList<>();
 		for (String itemFlag : (List<String>) itemConfiguration.get("itemFlags")) {
-			itemFlags.add(ItemFlag.valueOf(itemFlag));
+			if (XItemFlag.of(itemFlag).isPresent()) {
+				itemFlags.add(XItemFlag.of(itemFlag).get());
+			}
 		}
 
 		ConfigurationSection clickActionsSection = (ConfigurationSection) itemConfiguration.get("clickActions");

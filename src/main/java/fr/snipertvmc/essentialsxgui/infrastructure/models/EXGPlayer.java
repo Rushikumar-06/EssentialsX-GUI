@@ -1,8 +1,8 @@
 package fr.snipertvmc.essentialsxgui.infrastructure.models;
 
+import com.cryptomorin.xseries.XMaterial;
 import fr.snipertvmc.essentialsxgui.utilities.serializers.ItemStackSerializer;
 import fr.snipertvmc.essentialsxgui.utilities.type.TypeUtils;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 import java.util.*;
@@ -95,7 +95,7 @@ public class EXGPlayer {
 			String dataString = dataObject != null ? dataObject.toString() : "0";
 
 			home.setDisplayName((String) displayNameObject);
-			home.setMaterial(Material.valueOf((String) materialObject));
+			home.setMaterial(XMaterial.matchXMaterial((String) materialObject).orElse(XMaterial.GRASS_BLOCK));
 			home.setData(dataObject != null && TypeUtils.isByte(dataString) ? Byte.parseByte(dataString) : 0);
 
 			String serializedItemStack = (String) ((Map<String, Object>) homeData).get("customItemStack");

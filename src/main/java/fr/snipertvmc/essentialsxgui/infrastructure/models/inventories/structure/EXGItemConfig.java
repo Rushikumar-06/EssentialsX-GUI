@@ -1,13 +1,14 @@
 package fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure;
 
-import fr.snipertvmc.essentialsxgui.Main;
+import com.cryptomorin.xseries.XEnchantment;
+import com.cryptomorin.xseries.XItemFlag;
+import com.cryptomorin.xseries.XMaterial;
+import fr.snipertvmc.essentialsxgui.infrastructure.enums.MCServerVersion;
 import fr.snipertvmc.essentialsxgui.libraries.exglib.Pair;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.ItemBuilder;
 import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
 import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.inventory.ClickType;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.jetbrains.annotations.NotNull;
@@ -15,6 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class EXGItemConfig {
@@ -34,8 +36,8 @@ public class EXGItemConfig {
 	private String displayName;
 	private List<String> lore;
 
-	private final List<Pair<Enchantment, Integer>> enchantments;
-	private List<ItemFlag> itemFlags;
+	private final List<Pair<XEnchantment, Integer>> enchantments;
+	private List<XItemFlag> itemFlags;
 
 	private Map<String, String> variables = new HashMap<>();
 
@@ -51,8 +53,8 @@ public class EXGItemConfig {
 	                     short slot,
 	                     String materialName, int amount, byte data,
 	                     String displayName, List<String> lore,
-	                     List<Pair<Enchantment, Integer>> enchantments, List<ItemFlag> itemFlags,
-	                     Map<String, ClickType> clickActions) {
+	                     List<Pair<XEnchantment, Integer>> enchantments, List<XItemFlag> itemFlags,
+	                     Map<String, ClickType> clickActions,
 	                     int customModelData) {
 
 		this.enabled = enabled;
@@ -112,16 +114,13 @@ public class EXGItemConfig {
 		return materialName;
 	}
 
-	public Material getMaterial() {
-		Material possibleMaterial = Material.matchMaterial(materialName);
-		if (possibleMaterial == null) {
+	public XMaterial getMaterial() {
+		Optional<XMaterial> possibleMaterial = XMaterial.matchXMaterial(materialName);
+		if (possibleMaterial.isEmpty()) {
 			ConsoleLogger.error("Material " + materialName + " not found.");
-			return switch (Main.getInstance().getMCServerVersion()) {
-				case v1_8_8, v1_9_4, v1_10_2, v1_11_2, v1_12_2 -> Material.matchMaterial("GRASS");
-				default -> Material.matchMaterial("GRASS_BLOCK");
-			};
+			return XMaterial.GRASS_BLOCK;
 		}
-		return possibleMaterial;
+		return possibleMaterial.get();
 	}
 
 	public int getAmount() {
@@ -140,11 +139,11 @@ public class EXGItemConfig {
 		return lore;
 	}
 
-	public List<Pair<Enchantment, Integer>> getEnchantments() {
+	public List<Pair<XEnchantment, Integer>> getEnchantments() {
 		return enchantments;
 	}
 
-	public List<ItemFlag> getItemFlags() {
+	public List<XItemFlag> getItemFlags() {
 		return itemFlags;
 	}
 
@@ -200,7 +199,7 @@ public class EXGItemConfig {
 	}
 
 
-	public EXGItemConfig setItemFlags(List<ItemFlag> itemFlags) {
+	public EXGItemConfig setItemFlags(List<XItemFlag> itemFlags) {
 		this.itemFlags = itemFlags;
 		return this;
 	}
@@ -246,13 +245,13 @@ public class EXGItemConfig {
 		}
 
 		if (enchantments != null) {
-			for (Pair<Enchantment, Integer> enchantment : enchantments) {
+			for (Pair<XEnchantment, Integer> enchantment : enchantments) {
 				itemBuilder.enchant(enchantment.getLeft(), enchantment.getRight());
 			}
 		}
 
 		if (itemFlags != null) {
-			for (ItemFlag itemFlag : itemFlags) {
+			for (XItemFlag itemFlag : itemFlags) {
 				itemBuilder.flags(itemFlag);
 			}
 		}
@@ -266,20 +265,16 @@ public class EXGItemConfig {
 		ItemBuilder itemBuilder;
 
 		if (!enabled) {
-			return new ItemBuilder(Material.AIR);
+			return new ItemBuilder(XMaterial.AIR);
 		}
 
 		if (materialName == null || materialName.equals("AIR")) {
-			itemBuilder = new ItemBuilder(Material.GRASS);
+			itemBuilder = new ItemBuilder(XMaterial.GRASS_BLOCK);
 
 		} else if (materialName.startsWith("PLAYER_HEAD:")) {
 
 			String playerHeadName = materialName.substring("PLAYER_HEAD:".length());
-
-			Material material = switch (Main.getInstance().getMCServerVersion()) {
-				case v1_8_8, v1_9_4, v1_10_2, v1_11_2, v1_12_2 -> Material.matchMaterial("SKULL_ITEM");
-				default -> Material.matchMaterial("PLAYER_HEAD");
-			};
+			XMaterial material = XMaterial.PLAYER_HEAD;
 
 			itemBuilder = new ItemBuilder(material);
 			itemBuilder.meta(itemMeta -> {

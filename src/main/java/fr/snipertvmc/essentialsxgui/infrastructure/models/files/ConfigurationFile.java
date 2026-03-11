@@ -1,11 +1,11 @@
 package fr.snipertvmc.essentialsxgui.infrastructure.models.files;
 
+import com.cryptomorin.xseries.XMaterial;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGEntryType;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.MCServerVersion;
 import fr.snipertvmc.essentialsxgui.libraries.exglib.Pair;
 import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
-import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
@@ -88,10 +88,10 @@ public class ConfigurationFile {
 		}
 	}
 
-	public List<Pair<Material, Byte>> getMaterialsList(String path) {
+	public List<Pair<XMaterial, Byte>> getMaterialsList(String path) {
 
 		List<String> materialsStringList = yamlConfiguration.getStringList(path);
-		List<Pair<Material, Byte>> materialsList = new ArrayList<>();
+		List<Pair<XMaterial, Byte>> materialsList = new ArrayList<>();
 
 		for (String materialString : materialsStringList) {
 			String[] parts = materialString.split(":");
@@ -104,12 +104,12 @@ public class ConfigurationFile {
 					ConsoleLogger.warn("The data value '" + parts[1] + "' is not a valid byte for the material '" + materialName + "' in the path '" + path + "'. Using the default data value '0' instead.");
 				}
 			}
-			try {
-				Material material = Material.valueOf(materialName);
+			if (XMaterial.matchXMaterial(materialName).isPresent()) {
+				XMaterial material = XMaterial.matchXMaterial(materialName).get();
 				materialsList.add(new Pair<>(material, dataValue));
-			} catch (IllegalArgumentException exception) {
+			} else {
 				ConsoleLogger.warn("The material '" + materialName + "' is not valid in the path '" + path + "'. Using the default material 'BEDROCK' instead.");
-				materialsList.add(new Pair<>(Material.BEDROCK, dataValue));
+				materialsList.add(new Pair<>(XMaterial.BEDROCK, dataValue));
 			}
 		}
 

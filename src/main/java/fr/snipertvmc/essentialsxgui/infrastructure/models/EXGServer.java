@@ -1,10 +1,10 @@
 package fr.snipertvmc.essentialsxgui.infrastructure.models;
 
+import com.cryptomorin.xseries.XMaterial;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.MCServerVersion;
 import fr.snipertvmc.essentialsxgui.utilities.serializers.ItemStackSerializer;
 import fr.snipertvmc.essentialsxgui.utilities.type.TypeUtils;
-import org.bukkit.Material;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -86,7 +86,7 @@ public class EXGServer {
 			String dataString = dataObject != null ? dataObject.toString() : "0";
 
 			kit.setDisplayName((String) displayNameObject);
-			kit.setMaterial(Material.valueOf((String) materialObject));
+			kit.setMaterial(XMaterial.matchXMaterial((String) materialObject).orElse(XMaterial.GRASS_BLOCK));
 			kit.setData(dataObject != null && TypeUtils.isByte(dataString) ? Byte.parseByte(dataString) : 0);
 
 			String serializedItemStack = (String) ((Map<String, Object>) kitData).get("customItemStack");
@@ -148,7 +148,7 @@ public class EXGServer {
 			String dataString = dataObject != null ? dataObject.toString() : "0";
 
 			warp.setDisplayName((String) displayNameObject);
-			warp.setMaterial(Material.valueOf((String) materialObject));
+			warp.setMaterial(XMaterial.matchXMaterial((String) materialObject).orElse(XMaterial.GRASS_BLOCK));
 			warp.setData(dataObject != null && TypeUtils.isByte(dataString) ? Byte.parseByte(dataString) : 0);
 
 			String serializedItemStack = (String) ((Map<String, Object>) warpData).get("customItemStack");
