@@ -38,7 +38,7 @@ public class PlayerCommandPreprocess implements Listener {
 	// -------------------------------------------------- //
 
 
-	@EventHandler
+	@EventHandler(ignoreCancelled = true)
 	public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event) {
 
 		Player player = event.getPlayer();
