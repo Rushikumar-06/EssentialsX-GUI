@@ -41,6 +41,8 @@ public class EXGItemConfig {
 
 	private Map<String, ClickType> clickActions = new HashMap<>();
 
+	private int customModelData = 0;
+
 
 	// -------------------------------------------------- //
 
@@ -51,6 +53,7 @@ public class EXGItemConfig {
 	                     String displayName, List<String> lore,
 	                     List<Pair<Enchantment, Integer>> enchantments, List<ItemFlag> itemFlags,
 	                     Map<String, ClickType> clickActions) {
+	                     int customModelData) {
 
 		this.enabled = enabled;
 
@@ -67,6 +70,8 @@ public class EXGItemConfig {
 		this.itemFlags = itemFlags;
 
 		this.clickActions = clickActions;
+
+		this.customModelData = customModelData;
 	}
 
 
@@ -87,6 +92,8 @@ public class EXGItemConfig {
 		this.variables = new HashMap<>(itemConfig.getVariables());
 
 		this.clickActions = new HashMap<>(itemConfig.getClickActions());
+
+		this.customModelData = itemConfig.customModelData;
 	}
 
 
@@ -149,6 +156,10 @@ public class EXGItemConfig {
 		return clickActions;
 	}
 
+	public int getCustomModelData() {
+		return customModelData;
+	}
+
 
 	// -------------------------------------------------- //
 
@@ -191,6 +202,12 @@ public class EXGItemConfig {
 
 	public EXGItemConfig setItemFlags(List<ItemFlag> itemFlags) {
 		this.itemFlags = itemFlags;
+		return this;
+	}
+
+
+	public EXGItemConfig setCustomModelData(int customModelData) {
+		this.customModelData = customModelData;
 		return this;
 	}
 
@@ -274,6 +291,9 @@ public class EXGItemConfig {
 			itemBuilder = new ItemBuilder(getMaterial());
 		}
 
+		if (MCServerVersion.getMCServerVersion().isHigherThan(MCServerVersion.v1_13_2)) {
+			itemBuilder.meta(meta -> meta.setCustomModelData(customModelData));
+		}
 		return itemBuilder;
 	}
 

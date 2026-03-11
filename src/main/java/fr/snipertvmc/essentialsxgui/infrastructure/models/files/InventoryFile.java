@@ -98,7 +98,7 @@ public class InventoryFile {
 
 		Object enabledValue = yamlConfiguration.get(path + ".enabled");
 		if (enabledValue instanceof Boolean isEnabled && !isEnabled) {
-			return new EXGItemConfig(false, (short) 0, Material.AIR.name(), 1, (byte) 0, null, null, null, null, new HashMap<>());
+			return new EXGItemConfig(false, (short) 0, Material.AIR.name(), 1, (byte) 0, null, null, null, null, new HashMap<>(), 0);
 		}
 
 		// Check if the item configuration is valid
@@ -121,7 +121,7 @@ public class InventoryFile {
 							"",
 							"§6Item path involved: ",
 							"§8- §e" + path),
-					null, null, new HashMap<>()
+					null, null, new HashMap<>(), 0
 			);
 		}
 
@@ -147,6 +147,8 @@ public class InventoryFile {
 			put("itemFlags", yamlConfiguration.getStringList(path + ".itemFlags"));
 
 			put("clickActions", yamlConfiguration.getConfigurationSection(path + ".clickActions"));
+
+			put("customModelData", yamlConfiguration.getInt(path + ".customModelData", 0));
 		}};
 
 
@@ -193,7 +195,9 @@ public class InventoryFile {
 				enchantments,
 				itemFlags,
 
-				clickActions
+				clickActions,
+
+				(Integer) itemConfiguration.get("customModelData")
 		);
 	}
 
