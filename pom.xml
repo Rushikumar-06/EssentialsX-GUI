@@ -123,6 +123,22 @@
 			<scope>compile</scope>
 		</dependency>
 
+		<!-- XSeries -->
+			<dependency>
+			<groupId>com.github.cryptomorin</groupId>
+			<artifactId>XSeries</artifactId>
+			<version>13.6.0</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- Adventure API -->
+		<dependency>
+			<groupId>net.kyori</groupId>
+			<artifactId>adventure-api</artifactId>
+			<version>4.26.1</version>
+			<scope>compile</scope>
+		</dependency>
+
 	</dependencies>
 
 
@@ -177,7 +193,12 @@
 							<transformers>
 								<transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
 							</transformers>
+
 							<relocations>
+								<relocation>
+									<pattern>com.cryptomorin.xseries</pattern>
+									<shadedPattern>fr.snipertvmc.essentialsxgui.libraries.xseries</shadedPattern>
+								</relocation>
 								<relocation>
 									<pattern>net.byteflux.libby</pattern>
 									<shadedPattern>fr.snipertvmc.essentialsxgui.libraries.libby</shadedPattern>
@@ -186,14 +207,24 @@
 									<pattern>net.wesjd.anvilgui</pattern>
 									<shadedPattern>fr.snipertvmc.essentialsxgui.libraries.anvilgui</shadedPattern>
 								</relocation>
+								<relocation>
+									<patten>net.kyori.adventure</patten>
+									<shadedPattern>fr.snipertvmc.essentialsxgui.libraries.adventure</shadedPattern>
+								</relocation>
 							</relocations>
+
 							<filters>
 								<filter>
 									<artifact>*:*</artifact>
-									<excludeDefaults>false</excludeDefaults>
-									<includes>
-										<include>net/wesjd/anvilgui/**</include>
-									</includes>
+									<excludes>
+										<exclude>com/cryptomorin/xseries/XBiome*</exclude>
+										<exclude>com/cryptomorin/xseries/NMSExtras*</exclude>
+										<exclude>com/cryptomorin/xseries/NoteBlockMusic*</exclude>
+										<exclude>com/cryptomorin/xseries/SkullCacheListener*</exclude>
+										<exclude>META-INF/*.SF</exclude>
+										<exclude>META-INF/*.DSA</exclude>
+										<exclude>META-INF/*.RSA</exclude>
+									</excludes>
 								</filter>
 							</filters>
 						</configuration>
