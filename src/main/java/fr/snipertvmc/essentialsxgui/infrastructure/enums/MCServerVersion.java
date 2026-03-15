@@ -29,6 +29,7 @@ public enum MCServerVersion {
 
 	v1_15_2("1.15.2", false, false),
 
+	v1_16("1.16", false, false),
 	v1_16_5("1.16.5", true, false),
 
 	v1_17_1("1.17.1", false, false),
