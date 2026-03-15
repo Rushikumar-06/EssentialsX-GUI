@@ -10,6 +10,7 @@ import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.warps.EXGWarpsPlayerViewInventoryConfig;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.PaginatedFastInv;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
+import fr.snipertvmc.essentialsxgui.utilities.TextUtils;
 import fr.snipertvmc.essentialsxgui.utilities.data.DataEntryUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.entity.Player;
@@ -203,12 +204,12 @@ public class WarpsPlayerViewInventory extends PaginatedFastInv {
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("warps", "searchWarpEntryType");
 		if (entryType == EXGEntryType.CHAT) {
 			player.closeInventory();
-			player.sendMessage(MessagesUtils.get(EXGMessage.SEARCH_WARP_CHAT, null));
+			TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.SEARCH_WARP_CHAT));
 		}
 
 		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
 				.setAcceptedTypes(List.of(EXGEntryType.CHAT, EXGEntryType.ANVIL))
-				.setEntryDisplayName(MessagesUtils.get(EXGMessage.SEARCH_WARP, null))
+				.setEntryDisplayName(MessagesUtils.getString(EXGMessage.SEARCH_WARP))
 				.setMinLength(1)
 				.setMaxLength(Main.getInstance().getConfiguration().getMaxNameLength());
 
@@ -219,13 +220,13 @@ public class WarpsPlayerViewInventory extends PaginatedFastInv {
 					Set<EXGWarp> searchWarps = Main.getInstance().getEXGServer().getWarps()
 							.stream()
 							.filter(warp -> player.hasPermission("essentials.warps." + warp.getName()))
-							.filter(warp -> MessagesUtils.removeColorCodes(warp.getDisplayName()).toLowerCase().contains(result.getLeft().toLowerCase()) ||
-									MessagesUtils.removeColorCodes(warp.getName()).toLowerCase().contains(result.getLeft().toLowerCase()))
+							.filter(warp -> warp.getDisplayName().toLowerCase().contains(result.getLeft().toLowerCase()) ||
+									warp.getName().toLowerCase().contains(result.getLeft().toLowerCase()))
 							.sorted(Comparator.comparing(EXGWarp::getName))
 							.collect(Collectors.toCollection(LinkedHashSet::new));
 
 					if (searchWarps.isEmpty()) {
-						player.sendMessage(MessagesUtils.get(EXGMessage.NO_WARP_FOUND, null));
+						TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.NO_WARP_FOUND));
 						new WarpsPlayerViewInventory(player, result.getLeft(), searchWarps).open(player);
 						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 						return;

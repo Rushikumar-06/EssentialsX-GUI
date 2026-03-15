@@ -10,6 +10,7 @@ import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.EXGKi
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.PaginatedFastInv;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
+import fr.snipertvmc.essentialsxgui.utilities.TextUtils;
 import fr.snipertvmc.essentialsxgui.utilities.data.DataEntryUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.entity.Player;
@@ -152,7 +153,7 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 					return;
 				}
 
-				player.sendMessage(MessagesUtils.get(EXGMessage.NO_PERMISSION, null));
+				TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.NO_PERMISSION, null));
 				SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 			});
 		}
@@ -245,7 +246,7 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 			long delay = Main.getInstance().getConfiguration().getInstantCreationDefaultKitDelay();
 
 			Main.getInstance().getHookManager().getEssentialsHook().createKitWithPlayer(player, finalKitName, delay);
-			player.sendMessage(MessagesUtils.get(EXGMessage.KIT_CREATED, Map.of("kitName", finalKitName, "kitDelay", String.valueOf(delay))));
+			TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.KIT_CREATED, Map.of("kitName", finalKitName, "kitDelay", String.valueOf(delay))));
 			new KitsAdminViewInventory(player, null, null).open(player);
 			SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
 			return;
@@ -258,12 +259,12 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("kits", "createNewKitNameEntryType");
 		if (entryType == EXGEntryType.CHAT) {
 			player.closeInventory();
-			player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_KIT_NAME, null));
+			TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.ENTER_NEW_KIT_NAME));
 		}
 
 		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
 				.setAcceptedTypes(List.of(EXGEntryType.CHAT, EXGEntryType.ANVIL))
-				.setEntryDisplayName(MessagesUtils.get(EXGMessage.ENTER_NEW_KIT_NAME, null))
+				.setEntryDisplayName(MessagesUtils.getString(EXGMessage.ENTER_NEW_KIT_NAME))
 				.setMinLength(Main.getInstance().getConfiguration().getMinNameLength())
 				.setMaxLength(Main.getInstance().getConfiguration().getMaxNameLength());
 
@@ -274,7 +275,7 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 					Set<EXGKit> kits = Main.getInstance().getEXGServer().getKits();
 
 					if (kits.stream().anyMatch(kit -> kit.getName().equalsIgnoreCase(result.getLeft()))) {
-						player.sendMessage(MessagesUtils.get(EXGMessage.KIT_NAME_ALREADY_EXISTS, null));
+						TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.KIT_NAME_ALREADY_EXISTS, null));
 						new KitsAdminViewInventory(player, null, null).open(player);
 						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 						return;
@@ -296,12 +297,12 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("kits", "createNewKitDelayEntryType");
 		if (entryType == EXGEntryType.CHAT) {
 			player.closeInventory();
-			player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_KIT_DELAY_CHAT, null));
+			TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.ENTER_NEW_KIT_DELAY_CHAT));
 		}
 
 		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
 				.setAcceptedTypes(List.of(EXGEntryType.CHAT, EXGEntryType.ANVIL))
-				.setEntryDisplayName(MessagesUtils.get(EXGMessage.ENTER_NEW_KIT_DELAY, null))
+				.setEntryDisplayName(MessagesUtils.getString(EXGMessage.ENTER_NEW_KIT_DELAY))
 				.setMustBeNumber(true);
 
 		DataEntryUtils.processStringEntry(player, entrySettings,
@@ -311,7 +312,7 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 					long delay = Long.parseLong(result.getLeft());
 
 					Main.getInstance().getHookManager().getEssentialsHook().createKitWithPlayer(player, kitName.replace(" ", "_"), delay);
-					player.sendMessage(MessagesUtils.get(EXGMessage.KIT_CREATED, Map.of("kitName", kitName, "kitDelay", String.valueOf(delay))));
+					TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.KIT_CREATED, Map.of("kitName", kitName, "kitDelay", String.valueOf(delay))));
 					new KitsAdminViewInventory(player, null, null).open(player);
 					SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
 
@@ -329,12 +330,12 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("kits", "searchKitEntryType");
 		if (entryType == EXGEntryType.CHAT) {
 			player.closeInventory();
-			player.sendMessage(MessagesUtils.get(EXGMessage.SEARCH_KIT_CHAT, null));
+			TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.SEARCH_KIT_CHAT));
 		}
 
 		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
 				.setAcceptedTypes(List.of(EXGEntryType.CHAT, EXGEntryType.ANVIL))
-				.setEntryDisplayName(MessagesUtils.get(EXGMessage.SEARCH_KIT, null))
+				.setEntryDisplayName(MessagesUtils.getString(EXGMessage.SEARCH_KIT))
 				.setMinLength(1)
 				.setMaxLength(Main.getInstance().getConfiguration().getMaxNameLength());
 
@@ -344,13 +345,13 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 
 					Set<EXGKit> searchKits = Main.getInstance().getEXGServer().getKits()
 							.stream()
-							.filter(kit -> MessagesUtils.removeColorCodes(kit.getDisplayName()).toLowerCase().contains(result.getLeft().toLowerCase()) ||
-									MessagesUtils.removeColorCodes(kit.getName()).toLowerCase().contains(result.getLeft().toLowerCase()))
+							.filter(kit -> kit.getDisplayName().toLowerCase().contains(result.getLeft().toLowerCase()) ||
+									kit.getName().toLowerCase().contains(result.getLeft().toLowerCase()))
 							.sorted(Comparator.comparing(EXGKit::getName))
 							.collect(Collectors.toCollection(LinkedHashSet::new));
 
 					if (searchKits.isEmpty()) {
-						player.sendMessage(MessagesUtils.get(EXGMessage.NO_KIT_FOUND, null));
+						TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.NO_KIT_FOUND, null));
 						new KitsAdminViewInventory(player, result.getLeft(), searchKits).open(player);
 						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 						return;

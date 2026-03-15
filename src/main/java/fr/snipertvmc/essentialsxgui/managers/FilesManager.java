@@ -57,7 +57,7 @@ public class FilesManager {
 
 	private final Map<String, String> filesVersions = new HashMap<>() {{
 		put("configuration", "1.5"); // Updated for version: 1.3.0
-		put("messages", "1.5"); // Updated for version: 1.3.0
+		put("messages", "1.6"); // Updated for version: 1.4.0
 
 		put("homeEditing", "1.1"); // Updated for version: 1.0.2
 		put("homes", "1.3"); // Updated for version: 1.1.0
@@ -136,7 +136,6 @@ public class FilesManager {
 			default -> inventoriesFiles.put(fileName, new InventoryFile(yamlFile, fileName));
 		}
 
-		patchFilePlaceholders(fileName);
 		patchFileKeys(fileName);
 	}
 
@@ -193,53 +192,6 @@ public class FilesManager {
 
 
 	// -------------------------------------------------- //
-
-
-	public void patchFilePlaceholders(String fileName) {
-
-		String filePath = filesPaths.get(fileName);
-		File file = new File(Main.getInstance().getDataFolder(), filePath + ".yml");
-
-		try {
-
-			String content = Files.readString(file.toPath(), StandardCharsets.UTF_8);
-			boolean hasBeenUpdated = false;
-
-			Map<String, String> placeholders = switch (fileName) {
-				case "configuration" -> configurationFile.getPlaceholders();
-				case "messages" -> messagesFile.getPlaceholders();
-				default -> getInventory(fileName).getPlaceholders();
-			};
-
-			for (Map.Entry<String, String> entry : placeholders.entrySet()) {
-				String placeholder = "%%" + entry.getKey() + "%%";
-				String replacement = entry.getValue();
-
-				if (content.contains(placeholder)) {
-					hasBeenUpdated = true;
-				}
-				content = content.replace(placeholder, replacement);
-			}
-
-			Files.writeString(file.toPath(), content, StandardCharsets.UTF_8);
-
-			if (!hasBeenUpdated) {
-				return;
-			}
-
-			YamlConfiguration yamlFile = YamlConfiguration.loadConfiguration(file);
-
-			switch (fileName) {
-
-				case "configuration" -> configurationFile = new ConfigurationFile(yamlFile);
-				case "messages" -> messagesFile = new MessagesFile(yamlFile);
-				default -> inventoriesFiles.put(fileName, new InventoryFile(yamlFile, fileName));
-			}
-
-		} catch (IOException e) {
-			ConsoleLogger.error("Error while reading file: " + filePath + ".yml");
-		}
-	}
 
 
 	public void patchFileKeys(String fileName) {

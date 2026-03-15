@@ -26,6 +26,7 @@ package fr.snipertvmc.essentialsxgui.libraries.fastinv;
 import com.cryptomorin.xseries.XEnchantment;
 import com.cryptomorin.xseries.XItemFlag;
 import com.cryptomorin.xseries.XMaterial;
+import fr.snipertvmc.essentialsxgui.utilities.TextUtils;
 import org.bukkit.Color;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -41,7 +42,7 @@ import java.util.function.Consumer;
 /**
  * Simple {@link ItemStack} builder.
  *
- * @author MrMicky (original), Sniper_TVmc (XSeries adaptation)
+ * @author MrMicky (original), Sniper_TVmc (adaptation)
  */
 public class ItemBuilder {
 
@@ -117,7 +118,7 @@ public class ItemBuilder {
     }
 
     public ItemBuilder name(String name) {
-        return meta(meta -> meta.setDisplayName(name));
+        return meta(meta -> meta.setDisplayName(TextUtils.convertMiniMessageToText(name)));
     }
 
     public ItemBuilder lore(String lore) {
@@ -129,7 +130,7 @@ public class ItemBuilder {
     }
 
     public ItemBuilder lore(List<String> lore) {
-        return meta(meta -> meta.setLore(lore));
+        return meta(meta -> meta.setLore(TextUtils.convertMiniMessagesToText(lore)));
     }
 
     public ItemBuilder addLore(String line) {
@@ -137,12 +138,12 @@ public class ItemBuilder {
             List<String> lore = meta.getLore();
 
             if (lore == null) {
-                meta.setLore(Collections.singletonList(line));
+                meta.setLore(TextUtils.convertMiniMessagesToText(Collections.singletonList(line)));
                 return;
             }
 
             lore.add(line);
-            meta.setLore(lore);
+            meta.setLore(TextUtils.convertMiniMessagesToText(lore));
         });
     }
 
@@ -155,12 +156,12 @@ public class ItemBuilder {
             List<String> lore = meta.getLore();
 
             if (lore == null) {
-                meta.setLore(lines);
+                meta.setLore(TextUtils.convertMiniMessagesToText(lines));
                 return;
             }
 
             lore.addAll(lines);
-            meta.setLore(lore);
+            meta.setLore(TextUtils.convertMiniMessagesToText(lore));
         });
     }
 

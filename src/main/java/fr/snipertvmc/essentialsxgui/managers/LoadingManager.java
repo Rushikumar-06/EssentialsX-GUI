@@ -8,6 +8,7 @@ import fr.snipertvmc.essentialsxgui.libraries.fastinv.FastInvManager;
 import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.RegisterUtils;
+import fr.snipertvmc.essentialsxgui.utilities.TextUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.UpdateUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
@@ -232,7 +233,7 @@ public class LoadingManager {
 			return;
 		}
 
-		player.sendMessage(MessagesUtils.get(EXGMessage.ALERT_UPDATE_AVAILABLE, Map.of(
+		TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.ALERT_UPDATE_AVAILABLE, Map.of(
 				"currentVersion", Main.getInstance().getDescription().getVersion(),
 				"latestVersion", latestVersionAvailable
 		)));

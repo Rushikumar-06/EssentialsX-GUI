@@ -10,6 +10,7 @@ import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.EXGKi
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.FastInv;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
+import fr.snipertvmc.essentialsxgui.utilities.TextUtils;
 import fr.snipertvmc.essentialsxgui.utilities.data.DataEntryUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.Material;
@@ -158,12 +159,12 @@ public class KitEditingInventory extends FastInv {
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("kits", "changeKitDisplayNameEntryType");
 		if (entryType == EXGEntryType.CHAT) {
 			player.closeInventory();
-			player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_DISPLAY_NAME_CHAT, null));
+			TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.ENTER_NEW_DISPLAY_NAME_CHAT));
 		}
 
 		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
 				.setAcceptedTypes(List.of(EXGEntryType.CHAT, EXGEntryType.ANVIL))
-				.setEntryDisplayName(MessagesUtils.get(EXGMessage.ENTER_NEW_DISPLAY_NAME, null))
+				.setEntryDisplayName(MessagesUtils.getString(EXGMessage.ENTER_NEW_DISPLAY_NAME))
 				.setMinLength(Main.getInstance().getConfiguration().getMinNameLength())
 				.setMaxLength(Main.getInstance().getConfiguration().getMaxNameLength());
 
@@ -172,7 +173,7 @@ public class KitEditingInventory extends FastInv {
 				result -> {
 
 					kit.setDisplayName(result.getLeft());
-					player.sendMessage(MessagesUtils.get(EXGMessage.DISPLAY_NAME_CHANGED,
+					TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.DISPLAY_NAME_CHANGED,
 							Map.of("newDisplayName", result.getLeft().replace("&", "§"))
 					));
 					new KitEditingInventory(player, kit).open(player);
@@ -192,21 +193,21 @@ public class KitEditingInventory extends FastInv {
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("kits", "changeKitIconEntryType");
 		if (entryType == EXGEntryType.CHAT) {
 			player.closeInventory();
-			player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_ICON_NAME_CHAT, null));
+			TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.ENTER_NEW_ICON_NAME_CHAT));
 
 		} else if (entryType == EXGEntryType.ITEM_IN_HAND) {
 
 			ItemStack itemInHand = player.getInventory().getItem(player.getInventory().getHeldItemSlot());
 
 			if (itemInHand == null || itemInHand.getType() == Material.AIR) {
-				player.sendMessage(MessagesUtils.get(EXGMessage.ITEM_CANT_BE_AIR, null));
+				TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.ITEM_CANT_BE_AIR));
 				new KitEditingInventory(player, kit).open(player);
 				SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 				return;
 			}
 
 			kit.setCustomItemStack(itemInHand);
-			player.sendMessage(MessagesUtils.get(EXGMessage.ICON_CHANGED, Map.of("newIcon", itemInHand.getType().name())));
+			TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.ICON_CHANGED, Map.of("newIcon", itemInHand.getType().name())));
 			new KitEditingInventory(player, kit).open(player);
 			SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
 			return;
@@ -214,7 +215,7 @@ public class KitEditingInventory extends FastInv {
 
 		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
 				.setAcceptedTypes(List.of(EXGEntryType.CHAT, EXGEntryType.ANVIL, EXGEntryType.GUI))
-				.setEntryDisplayName(MessagesUtils.get(EXGMessage.ENTER_NEW_ICON_NAME, null))
+				.setEntryDisplayName(MessagesUtils.getString(EXGMessage.ENTER_NEW_ICON_NAME))
 				.setMaterialListPath("kits.changeKitIconMaterialList")
 				.setMinLength(Main.getInstance().getConfiguration().getMinNameLength())
 				.setMaxLength(Main.getInstance().getConfiguration().getMaxNameLength());
@@ -227,7 +228,7 @@ public class KitEditingInventory extends FastInv {
 					kit.setMaterial(result.getLeft().getLeft());
 					kit.setData(result.getLeft().getRight());
 
-					player.sendMessage(MessagesUtils.get(EXGMessage.ICON_CHANGED, Map.of("newIcon", result.getLeft().getLeft().name())));
+					TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.ICON_CHANGED, Map.of("newIcon", result.getLeft().getLeft().name())));
 					new KitEditingInventory(player, kit).open(player);
 					SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
 
@@ -245,12 +246,12 @@ public class KitEditingInventory extends FastInv {
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("kits", "deleteKitEntryType");
 		if (entryType == EXGEntryType.CHAT) {
 			player.closeInventory();
-			player.sendMessage(MessagesUtils.get(EXGMessage.CONFIRM_DELETE_KIT_CHAT, Map.of("kitName", kit.getName())));
+			TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.CONFIRM_DELETE_KIT_CHAT, Map.of("kitName", kit.getName())));
 		}
 
 		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
 				.setAcceptedTypes(List.of(EXGEntryType.CHAT, EXGEntryType.ANVIL))
-				.setEntryDisplayName(MessagesUtils.get(EXGMessage.CONFIRM_DELETE_KIT, null))
+				.setEntryDisplayName(MessagesUtils.getString(EXGMessage.CONFIRM_DELETE_KIT))
 				.setEqualsToSomething("confirm");
 
 		DataEntryUtils.processStringEntry(player, entrySettings,
@@ -258,7 +259,7 @@ public class KitEditingInventory extends FastInv {
 				result -> {
 
 					Main.getInstance().getEssentials().getKits().removeKit(kit.getName());
-					player.sendMessage(MessagesUtils.get(EXGMessage.KIT_DELETED, Map.of("kitName", kit.getName())));
+					TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.KIT_DELETED, Map.of("kitName", kit.getName())));
 					new KitsAdminViewInventory(player, null, null).open(player);
 					SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
 

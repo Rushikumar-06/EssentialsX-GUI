@@ -4,6 +4,7 @@ import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
+import fr.snipertvmc.essentialsxgui.utilities.TextUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
@@ -38,7 +39,7 @@ public class ChatManager {
 	public boolean canDoChat(Player player) {
 
 		if (playersTyping.containsKey(player.getUniqueId())) {
-			player.sendMessage(MessagesUtils.get(EXGMessage.ONGOING_ACTION, null));
+			TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.ONGOING_ACTION, null));
 			SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 			return false;
 		}
@@ -61,7 +62,7 @@ public class ChatManager {
 	public void removeChat(Player player, boolean success) {
 
 		if (playersTyping.containsKey(player.getUniqueId()) && !success) {
-			player.sendMessage(MessagesUtils.get(EXGMessage.ACTION_EXPIRED, null));
+			TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.ACTION_EXPIRED, null));
 			SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 		}
 

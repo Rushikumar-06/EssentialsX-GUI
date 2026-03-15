@@ -10,6 +10,7 @@ import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.warps.EXGWarpsAdminViewInventoryConfig;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.PaginatedFastInv;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
+import fr.snipertvmc.essentialsxgui.utilities.TextUtils;
 import fr.snipertvmc.essentialsxgui.utilities.data.DataEntryUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.entity.Player;
@@ -152,7 +153,7 @@ public class WarpsAdminViewInventory extends PaginatedFastInv {
 					return;
 				}
 
-				player.sendMessage(MessagesUtils.get(EXGMessage.NO_PERMISSION, null));
+				TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.NO_PERMISSION, null));
 				SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 			});
 		}
@@ -244,12 +245,12 @@ public class WarpsAdminViewInventory extends PaginatedFastInv {
 
 			try {
 				Main.getInstance().getHookManager().getEssentialsHook().createWarpWithPlayer(player, finalWarpName);
-				player.sendMessage(MessagesUtils.get(EXGMessage.WARP_CREATED, Map.of("warpName", finalWarpName)));
+				TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.WARP_CREATED, Map.of("warpName", finalWarpName)));
 				new WarpsAdminViewInventory(player, null, null).open(player);
 				SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
 
 			} catch (Exception e) {
-				player.sendMessage(MessagesUtils.get(EXGMessage.WARP_CREATION_ERROR, null));
+				TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.WARP_CREATION_ERROR));
 				new WarpsAdminViewInventory(player, null, null).open(player);
 				SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 			}
@@ -263,12 +264,12 @@ public class WarpsAdminViewInventory extends PaginatedFastInv {
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("warps", "createNewWarpEntryType");
 		if (entryType == EXGEntryType.CHAT) {
 			player.closeInventory();
-			player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_WARP_NAME_CHAT, null));
+			TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.ENTER_NEW_WARP_NAME_CHAT));
 		}
 
 		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
 				.setAcceptedTypes(List.of(EXGEntryType.CHAT, EXGEntryType.ANVIL))
-				.setEntryDisplayName(MessagesUtils.get(EXGMessage.ENTER_NEW_WARP_NAME, null))
+				.setEntryDisplayName(MessagesUtils.getString(EXGMessage.ENTER_NEW_WARP_NAME))
 				.setMinLength(Main.getInstance().getConfiguration().getMinNameLength())
 				.setMaxLength(Main.getInstance().getConfiguration().getMaxNameLength());
 
@@ -280,12 +281,12 @@ public class WarpsAdminViewInventory extends PaginatedFastInv {
 
 					try {
 						Main.getInstance().getHookManager().getEssentialsHook().createWarpWithPlayer(player, warpName.replace(" ", "_"));
-						player.sendMessage(MessagesUtils.get(EXGMessage.WARP_CREATED, Map.of("warpName", warpName)));
+						TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.WARP_CREATED, Map.of("warpName", warpName)));
 						new WarpsAdminViewInventory(player, null, null).open(player);
 						SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
 
 					} catch (Exception e) {
-						player.sendMessage(MessagesUtils.get(EXGMessage.WARP_CREATION_ERROR, null));
+						TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.WARP_CREATION_ERROR));
 						new WarpsAdminViewInventory(player, null, null).open(player);
 						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 					}
@@ -304,12 +305,12 @@ public class WarpsAdminViewInventory extends PaginatedFastInv {
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("warps", "searchWarpEntryType");
 		if (entryType == EXGEntryType.CHAT) {
 			player.closeInventory();
-			player.sendMessage(MessagesUtils.get(EXGMessage.SEARCH_WARP_CHAT, null));
+			TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.SEARCH_WARP_CHAT));
 		}
 
 		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
 				.setAcceptedTypes(List.of(EXGEntryType.CHAT, EXGEntryType.ANVIL))
-				.setEntryDisplayName(MessagesUtils.get(EXGMessage.SEARCH_WARP, null))
+				.setEntryDisplayName(MessagesUtils.getString(EXGMessage.SEARCH_WARP))
 				.setMinLength(1)
 				.setMaxLength(Main.getInstance().getConfiguration().getMaxNameLength());
 
@@ -319,13 +320,13 @@ public class WarpsAdminViewInventory extends PaginatedFastInv {
 
 					Set<EXGWarp> searchWarps = Main.getInstance().getEXGServer().getWarps()
 							.stream()
-							.filter(warp -> MessagesUtils.removeColorCodes(warp.getDisplayName()).toLowerCase().contains(result.getLeft().toLowerCase()) ||
-									MessagesUtils.removeColorCodes(warp.getName()).toLowerCase().contains(result.getLeft().toLowerCase()))
+							.filter(warp -> warp.getDisplayName().toLowerCase().contains(result.getLeft().toLowerCase()) ||
+									warp.getName().toLowerCase().contains(result.getLeft().toLowerCase()))
 							.sorted(Comparator.comparing(EXGWarp::getName))
 							.collect(Collectors.toCollection(LinkedHashSet::new));
 
 					if (searchWarps.isEmpty()) {
-						player.sendMessage(MessagesUtils.get(EXGMessage.NO_WARP_FOUND, null));
+						TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.NO_WARP_FOUND));
 						new WarpsAdminViewInventory(player, result.getLeft(), searchWarps).open(player);
 						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 						return;

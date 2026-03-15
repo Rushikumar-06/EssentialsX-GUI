@@ -13,10 +13,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class EXGItemConfig {
@@ -233,15 +230,13 @@ public class EXGItemConfig {
 		itemBuilder.data(data);
 
 		if (displayName != null) {
-			itemBuilder.name(displayName.replace("&", "§"));
+			itemBuilder.name(displayName);
 		} else {
 			itemBuilder.name(this.getMaterial().name());
 		}
 
 		if (lore != null) {
-			itemBuilder.lore(lore.stream()
-					.map(line -> line.replace("&", "§"))
-					.collect(Collectors.toList()));
+			itemBuilder.lore(new ArrayList<>(lore));
 		}
 
 		if (enchantments != null) {

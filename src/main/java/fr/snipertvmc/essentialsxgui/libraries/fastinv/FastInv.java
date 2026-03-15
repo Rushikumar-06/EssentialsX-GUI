@@ -23,6 +23,7 @@
  */
 package fr.snipertvmc.essentialsxgui.libraries.fastinv;
 
+import fr.snipertvmc.essentialsxgui.utilities.TextUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.*;
@@ -40,7 +41,7 @@ import java.util.stream.IntStream;
  * Lightweight and easy-to-use inventory API for Bukkit plugins.
  * The project is on <a href="https://github.com/MrMicky-FR/FastInv">GitHub</a>.
  *
- * @author MrMicky
+ * @author MrMicky (original), Sniper_TVmc (adaptation)
  * @version 3.1.2
  */
 public class FastInv implements InventoryHolder {
@@ -73,7 +74,7 @@ public class FastInv implements InventoryHolder {
      * @see Bukkit#createInventory(InventoryHolder, int, String)
      */
     public FastInv(int size, String title) {
-        this(owner -> Bukkit.createInventory(owner, size, title));
+        this(owner -> Bukkit.createInventory(owner, size, TextUtils.convertMiniMessageToText(title)));
     }
 
     /**
@@ -94,7 +95,7 @@ public class FastInv implements InventoryHolder {
      * @see Bukkit#createInventory(InventoryHolder, InventoryType, String)
      */
     public FastInv(InventoryType type, String title) {
-        this(owner -> Bukkit.createInventory(owner, type, title));
+        this(owner -> Bukkit.createInventory(owner, type, TextUtils.convertMiniMessageToText(title)));
     }
 
     public FastInv(Function<FastInv, Inventory> inventoryFunction) {

@@ -35,28 +35,28 @@ public class TimeUtils {
 		StringBuilder result = new StringBuilder();
 
 		if (days > 0) {
-			result.append(MessagesUtils.get(
+			result.append(MessagesUtils.getComponent(
 					EXGMessage.DAYS,
 					Map.of("days", String.valueOf(days))
 			)).append(" ");
 		}
 
 		if (hours > 0) {
-			result.append(MessagesUtils.get(
+			result.append(MessagesUtils.getComponent(
 					EXGMessage.HOURS,
 					Map.of("hours", String.valueOf(hours))
 			)).append(" ");
 		}
 
 		if (minutes > 0) {
-			result.append(MessagesUtils.get(
+			result.append(MessagesUtils.getComponent(
 					EXGMessage.MINUTES,
 					Map.of("minutes", String.valueOf(minutes))
 			)).append(" ");
 		}
 
 		if (seconds > 0 || result.isEmpty()) {
-			result.append(MessagesUtils.get(
+			result.append(MessagesUtils.getComponent(
 					EXGMessage.SECONDS,
 					Map.of("seconds", String.valueOf(seconds))
 			));

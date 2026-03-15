@@ -5,6 +5,7 @@ import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGPlayer;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.PluginDebugUtils;
+import fr.snipertvmc.essentialsxgui.utilities.TextUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -45,7 +46,7 @@ public class CommandEssentialsXGUI implements CommandExecutor, TabCompleter {
 			case "debug" -> sendDebugLinkMessage(commandSender);
 
 			// NOT FOUND ARGUMENT
-			default -> commandSender.sendMessage(MessagesUtils.get(EXGMessage.ARGUMENT_NOT_FOUND, Map.of("argument", firstArg)));
+			default -> TextUtils.sendComponentToCommandSender(commandSender, MessagesUtils.getComponent(EXGMessage.ARGUMENT_NOT_FOUND, Map.of("argument", firstArg)));
 		}
 
     	return true;
@@ -85,7 +86,7 @@ public class CommandEssentialsXGUI implements CommandExecutor, TabCompleter {
 	public void sendDebugLinkMessage(CommandSender commandSender) {
 
 		if (!(commandSender instanceof Player player)) {
-			commandSender.sendMessage(MessagesUtils.get(EXGMessage.ONLY_FOR_PLAYERS, null));
+			TextUtils.sendComponentToCommandSender(commandSender, MessagesUtils.getComponent(EXGMessage.ONLY_FOR_PLAYERS, null));
 			return;
 		}
 
@@ -101,20 +102,20 @@ public class CommandEssentialsXGUI implements CommandExecutor, TabCompleter {
 
 
 		// FILES RELOADING
-		commandSender.sendMessage(MessagesUtils.get(EXGMessage.FILES_RELOADING, null));
+		TextUtils.sendComponentToCommandSender(commandSender, MessagesUtils.getComponent(EXGMessage.FILES_RELOADING, null));
 		Main.getInstance().getFilesManager().reloadFiles();
-		commandSender.sendMessage(MessagesUtils.get(EXGMessage.FILES_RELOADED, null));
+		TextUtils.sendComponentToCommandSender(commandSender, MessagesUtils.getComponent(EXGMessage.FILES_RELOADED, null));
 
 
 		// DATABASE RELOADING
-		commandSender.sendMessage(MessagesUtils.get(EXGMessage.DATABASE_RELOADING, null));
+		TextUtils.sendComponentToCommandSender(commandSender, MessagesUtils.getComponent(EXGMessage.DATABASE_RELOADING, null));
 
 		Main.getInstance().getDatabaseManager().disconnectAllDatabases();
 		Main.getInstance().getDatabaseManager().updateDatabaseStorage();
 		Main.getInstance().getDatabaseManager().connectAllDatabases();
 
 		String newStorageType = Main.getInstance().getConfiguration().getStorageType();
-		commandSender.sendMessage(MessagesUtils.get(EXGMessage.DATABASE_RELOADED, Map.of("newStorageType", newStorageType)));
+		TextUtils.sendComponentToCommandSender(commandSender, MessagesUtils.getComponent(EXGMessage.DATABASE_RELOADED, Map.of("newStorageType", newStorageType)));
 	}
 
 

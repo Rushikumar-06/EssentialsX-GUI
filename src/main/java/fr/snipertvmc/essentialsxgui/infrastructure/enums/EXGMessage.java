@@ -120,7 +120,8 @@ public enum EXGMessage {
 	NOT_BANNED("general.notBanned"),
 	NO_BAN_REASON("general.noBanReason"),
 	PERMANENT("general.permanent"),
-	LOCATION_FORMAT("general.locationFormat");
+	LOCATION_FORMAT("general.locationFormat"),
+	UNKNOWN("general.unknown");
 
 
 	// -------------------------------------------------- //

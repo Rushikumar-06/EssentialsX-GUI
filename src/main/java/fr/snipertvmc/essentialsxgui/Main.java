@@ -18,6 +18,7 @@
 package fr.snipertvmc.essentialsxgui;
 
 import com.earth2me.essentials.Essentials;
+import com.earth2me.essentials.libs.kyori.adventure.platform.bukkit.BukkitAudiences;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.MCServerVersion;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGServer;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.files.ConfigurationFile;
@@ -51,6 +52,8 @@ public class Main extends JavaPlugin {
 
 	private MCServerVersion mcServerVersion;
 	private Metrics metrics;
+
+	private BukkitAudiences bukkitAudiences;
 
 
 	// -------------------------------------------------- //
@@ -89,6 +92,8 @@ public class Main extends JavaPlugin {
 
 		mcServerVersion = MCServerVersion.getMCServerVersion();
 		metrics = new Metrics(this, 26314);
+
+		bukkitAudiences  = BukkitAudiences.create(this);
 
 
 		// FILES LOADING
@@ -226,6 +231,10 @@ public class Main extends JavaPlugin {
 	}
 	public Metrics getMetrics() {
 		return metrics;
+	}
+
+	public BukkitAudiences getBukkitAudiences() {
+		return bukkitAudiences;
 	}
 
 

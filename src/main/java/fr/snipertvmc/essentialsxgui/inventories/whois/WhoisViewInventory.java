@@ -206,7 +206,7 @@ public class WhoisViewInventory extends FastInv {
 		boolean canSeeIPAddress = user.isAuthorized("essentials.whois.ip");
 		String ipAddress = canSeeIPAddress
 				? user.getBase().getAddress().getAddress().toString()
-				: "§c" + MessagesUtils.get(EXGMessage.HIDDEN);
+				: "§c" + MessagesUtils.getComponent(EXGMessage.HIDDEN);
 
 		Statistic PLAY_ONE_TICK = EnumUtil.getStatistic("PLAY_ONE_MINUTE", "PLAY_ONE_TICK");
 		long playtimeMs = System.currentTimeMillis()
@@ -238,7 +238,7 @@ public class WhoisViewInventory extends FastInv {
 		Map<String, String> map = new HashMap<>();
 
 		Location loc = user.getBase().getLocation();
-		String location = MessagesUtils.get(EXGMessage.LOCATION_FORMAT, Map.of(
+		String location = MessagesUtils.getString(EXGMessage.LOCATION_FORMAT, Map.of(
 				"world", loc.getWorld().getName(),
 				"x", String.valueOf((int) loc.getX()),
 				"y", String.valueOf((int) loc.getY()),
@@ -258,18 +258,16 @@ public class WhoisViewInventory extends FastInv {
 
 		GameMode gamemode = user.getBase().getGameMode();
 		String gamemodeName = switch (gamemode) {
-			case SURVIVAL -> MessagesUtils.get(EXGMessage.GAMEMODE_SURVIVAL);
-			case CREATIVE -> MessagesUtils.get(EXGMessage.GAMEMODE_CREATIVE);
-			case ADVENTURE -> MessagesUtils.get(EXGMessage.GAMEMODE_ADVENTURE);
-			case SPECTATOR -> MessagesUtils.get(EXGMessage.GAMEMODE_SPECTATOR);
+			case SURVIVAL -> MessagesUtils.getString(EXGMessage.GAMEMODE_SURVIVAL);
+			case CREATIVE -> MessagesUtils.getString(EXGMessage.GAMEMODE_CREATIVE);
+			case ADVENTURE -> MessagesUtils.getString(EXGMessage.GAMEMODE_ADVENTURE);
+			case SPECTATOR -> MessagesUtils.getString(EXGMessage.GAMEMODE_SPECTATOR);
 		};
 
 		boolean ecoEnabled = !Main.getInstance().getEssentials().getSettings().isEcoDisabled();
 		String money = ecoEnabled
-				? AdventureUtil.parsed(
-				NumberUtil.displayCurrency(user.getMoney(), Main.getInstance().getEssentials())
-		).toString()
-				: MessagesUtils.get(EXGMessage.DISABLED);
+				? AdventureUtil.parsed(NumberUtil.displayCurrency(user.getMoney(), Main.getInstance().getEssentials())).toString()
+				: MessagesUtils.getString(EXGMessage.DISABLED);
 
 		String nick = user.getNickname();
 		boolean isNicked = nick != null && !nick.equals(player.getName());
@@ -285,12 +283,12 @@ public class WhoisViewInventory extends FastInv {
 		map.put("isOperator", yesNo(user.getBase().isOp()));
 		map.put("isWhitelisted", yesNo(user.getBase().isWhitelisted()));
 		map.put("isVanished", yesNo(user.isVanished()));
-		map.put("nickname", isNicked ? nick : MessagesUtils.get(EXGMessage.NO_NICKNAME));
+		map.put("nickname", isNicked ? nick : MessagesUtils.getString(EXGMessage.NO_NICKNAME));
 		map.put("isNicked", yesNo(isNicked));
 		map.put("isAfk", yesNo(isAfk));
 		map.put("afkSince", isAfk
 				? TimeUtils.formatDateDiffZoned(user.getAfkSince())
-				: MessagesUtils.get(EXGMessage.NOT_AFK));
+				: MessagesUtils.getString(EXGMessage.NOT_AFK));
 
 		return map;
 	}
@@ -304,18 +302,18 @@ public class WhoisViewInventory extends FastInv {
 		map.put("jailName", user.getFormattedJailTime());
 		map.put("jailExpiry", isJailed
 				? TimeUtils.formatDateDiffZoned(user.getJailTimeout())
-				: MessagesUtils.get(EXGMessage.NOT_JAILED));
+				: MessagesUtils.getString(EXGMessage.NOT_JAILED));
 
 		boolean isMuted = user.isMuted();
 		map.put("isMuted", yesNo(isMuted));
 		map.put("muteReason", isMuted
 				? (user.getMuteReason() != null
 				? user.getMuteReason()
-				: MessagesUtils.get(EXGMessage.NO_MUTE_REASON))
-				: MessagesUtils.get(EXGMessage.NOT_MUTED));
+				: MessagesUtils.getString(EXGMessage.NO_MUTE_REASON))
+				: MessagesUtils.getString(EXGMessage.NOT_MUTED));
 		map.put("muteExpiry", isMuted
 				? TimeUtils.formatDateDiffZoned(user.getMuteTimeout())
-				: MessagesUtils.get(EXGMessage.NOT_MUTED));
+				: MessagesUtils.getString(EXGMessage.NOT_MUTED));
 
 		BanEntry banEntry = Bukkit.getServer()
 				.getBanList(BanList.Type.NAME)
@@ -326,13 +324,13 @@ public class WhoisViewInventory extends FastInv {
 		map.put("banReason", isBanned
 				? (banEntry.getReason() != null && !banEntry.getReason().isEmpty()
 				? banEntry.getReason()
-				: MessagesUtils.get(EXGMessage.NO_BAN_REASON))
-				: MessagesUtils.get(EXGMessage.NOT_BANNED));
+				: MessagesUtils.getString(EXGMessage.NO_BAN_REASON))
+				: MessagesUtils.getString(EXGMessage.NOT_BANNED));
 		map.put("banExpiry", isBanned
 				? (banEntry.getExpiration() != null
 				? TimeUtils.formatDateDiffZoned(banEntry.getExpiration().getTime())
-				: MessagesUtils.get(EXGMessage.PERMANENT))
-				: MessagesUtils.get(EXGMessage.NOT_BANNED));
+				: MessagesUtils.getString(EXGMessage.PERMANENT))
+				: MessagesUtils.getString(EXGMessage.NOT_BANNED));
 
 		return map;
 	}
@@ -343,8 +341,8 @@ public class WhoisViewInventory extends FastInv {
 
 	private String yesNo(boolean value) {
 		return value
-				? MessagesUtils.get(EXGMessage.YES)
-				: MessagesUtils.get(EXGMessage.NO);
+				? MessagesUtils.getString(EXGMessage.YES)
+				: MessagesUtils.getString(EXGMessage.NO);
 	}
 
 

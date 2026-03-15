@@ -10,6 +10,7 @@ import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes.EXGH
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.FastInv;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
+import fr.snipertvmc.essentialsxgui.utilities.TextUtils;
 import fr.snipertvmc.essentialsxgui.utilities.data.DataEntryUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.Material;
@@ -147,12 +148,12 @@ public class HomeEditingInventory extends FastInv {
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("homes", "changeHomeDisplayNameEntryType");
 		if (entryType == EXGEntryType.CHAT) {
 			player.closeInventory();
-			player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_DISPLAY_NAME_CHAT, null));
+			TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.ENTER_NEW_DISPLAY_NAME_CHAT));
 		}
 
 		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
 				.setAcceptedTypes(List.of(EXGEntryType.CHAT, EXGEntryType.ANVIL))
-				.setEntryDisplayName(MessagesUtils.get(EXGMessage.ENTER_NEW_DISPLAY_NAME, null))
+				.setEntryDisplayName(MessagesUtils.getString(EXGMessage.ENTER_NEW_DISPLAY_NAME))
 				.setMinLength(Main.getInstance().getConfiguration().getMinNameLength())
 				.setMaxLength(Main.getInstance().getConfiguration().getMaxNameLength());
 
@@ -161,7 +162,7 @@ public class HomeEditingInventory extends FastInv {
 				result -> {
 
 					home.setDisplayName(result.getLeft());
-					player.sendMessage(MessagesUtils.get(EXGMessage.DISPLAY_NAME_CHANGED,
+					TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.DISPLAY_NAME_CHANGED,
 							Map.of("newDisplayName", result.getLeft().replace("&", "§"))
 					));
 					new HomeEditingInventory(player, home).open(player);
@@ -181,21 +182,21 @@ public class HomeEditingInventory extends FastInv {
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("homes", "changeHomeIconEntryType");
 		if (entryType == EXGEntryType.CHAT) {
 			player.closeInventory();
-			player.sendMessage(MessagesUtils.get(EXGMessage.ENTER_NEW_ICON_NAME_CHAT, null));
+			TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.ENTER_NEW_ICON_NAME_CHAT));
 
 		} else if (entryType == EXGEntryType.ITEM_IN_HAND) {
 
 			ItemStack itemInHand = player.getInventory().getItem(player.getInventory().getHeldItemSlot());
 
 			if (itemInHand == null || itemInHand.getType() == Material.AIR) {
-				player.sendMessage(MessagesUtils.get(EXGMessage.ITEM_CANT_BE_AIR, null));
+				TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.ITEM_CANT_BE_AIR));
 				new HomeEditingInventory(player, home).open(player);
 				SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 				return;
 			}
 
 			home.setCustomItemStack(itemInHand);
-			player.sendMessage(MessagesUtils.get(EXGMessage.ICON_CHANGED, Map.of("newIcon", itemInHand.getType().name())));
+			TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.ICON_CHANGED, Map.of("newIcon", itemInHand.getType().name())));
 			new HomeEditingInventory(player, home).open(player);
 			SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
 			return;
@@ -203,7 +204,7 @@ public class HomeEditingInventory extends FastInv {
 
 		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
 				.setAcceptedTypes(List.of(EXGEntryType.CHAT, EXGEntryType.ANVIL, EXGEntryType.GUI))
-				.setEntryDisplayName(MessagesUtils.get(EXGMessage.ENTER_NEW_ICON_NAME, null))
+				.setEntryDisplayName(MessagesUtils.getString(EXGMessage.ENTER_NEW_ICON_NAME))
 				.setMaterialListPath("homes.changeHomeIconMaterialList")
 				.setMinLength(Main.getInstance().getConfiguration().getMinNameLength())
 				.setMaxLength(Main.getInstance().getConfiguration().getMaxNameLength());
@@ -216,7 +217,7 @@ public class HomeEditingInventory extends FastInv {
 					home.setMaterial(result.getLeft().getLeft());
 					home.setData(result.getLeft().getRight());
 
-					player.sendMessage(MessagesUtils.get(EXGMessage.ICON_CHANGED, Map.of("newIcon", result.getLeft().getLeft().name())));
+					TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.ICON_CHANGED, Map.of("newIcon", result.getLeft().getLeft().name())));
 					new HomeEditingInventory(player, home).open(player);
 					SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
 
@@ -234,12 +235,12 @@ public class HomeEditingInventory extends FastInv {
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("homes", "deleteHomeEntryType");
 		if (entryType == EXGEntryType.CHAT) {
 			player.closeInventory();
-			player.sendMessage(MessagesUtils.get(EXGMessage.CONFIRM_DELETE_HOME_CHAT, Map.of("homeName", home.getName())));
+			TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.CONFIRM_DELETE_HOME_CHAT, Map.of("homeName", home.getName())));
 		}
 
 		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
 				.setAcceptedTypes(List.of(EXGEntryType.CHAT, EXGEntryType.ANVIL))
-				.setEntryDisplayName(MessagesUtils.get(EXGMessage.CONFIRM_DELETE_HOME, null))
+				.setEntryDisplayName(MessagesUtils.getString(EXGMessage.CONFIRM_DELETE_HOME))
 				.setEqualsToSomething("confirm");
 
 		DataEntryUtils.processStringEntry(player, entrySettings,
@@ -249,13 +250,13 @@ public class HomeEditingInventory extends FastInv {
 						Main.getInstance().getEssentials().getUser(player).delHome(home.getName());
 
 					} catch (Exception ex) {
-						player.sendMessage(MessagesUtils.get(EXGMessage.HOME_DELETE_ERROR, null));
+						TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.HOME_DELETE_ERROR));
 						new HomesInventory(player, null, null).open(player);
 						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 						return;
 					}
 
-					player.sendMessage(MessagesUtils.get(EXGMessage.HOME_DELETED,
+					TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.HOME_DELETED,
 							Map.of("homeName", home.getName()))
 					);
 					new HomesInventory(player, null, null).open(player);

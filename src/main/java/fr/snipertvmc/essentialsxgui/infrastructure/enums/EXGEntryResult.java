@@ -1,6 +1,7 @@
 package fr.snipertvmc.essentialsxgui.infrastructure.enums;
 
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
+import fr.snipertvmc.essentialsxgui.utilities.TextUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.entity.Player;
 
@@ -61,7 +62,7 @@ public enum EXGEntryResult {
 	public void playResult(Player player) {
 
 		if (resultMessage != null) {
-			player.sendMessage(MessagesUtils.get(resultMessage, messageVariables));
+			TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(resultMessage, messageVariables));
 		}
 
 		if (resultSound != null) {

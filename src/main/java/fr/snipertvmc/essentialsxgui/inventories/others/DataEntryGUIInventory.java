@@ -61,12 +61,12 @@ public class DataEntryGUIInventory extends PaginatedFastInv {
 		if (materialList.isEmpty()) {
 
 			addContent(new ItemBuilder(XMaterial.BARRIER)
-					.name("§4§lNo materials found")
+					.name("<dark_red><bold>No materials found")
 					.lore(
-							"§cPlease contact an administrator and inform them of the following details:",
+							"<red>Please contact an administrator and inform them of the following details:",
 							"",
-							"§7No materials found in the config file for the entry type §f" + entrySettings.getType().name() + "§7.",
-							"§7Path: §f" + entrySettings.getMaterialListPath())
+							"<dark_gray>No materials found in the config file for the entry type <white>" + entrySettings.getType().name() + "<dark_gray>.",
+							"<dark_gray>Path: " + entrySettings.getMaterialListPath())
 					.build()
 			);
 			return;

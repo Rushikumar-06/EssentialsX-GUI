@@ -1,5 +1,6 @@
 package fr.snipertvmc.essentialsxgui.libraries.fastinv;
 
+import fr.snipertvmc.essentialsxgui.utilities.TextUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -51,7 +52,7 @@ public class PaginatedFastInv extends FastInv {
      * @see Bukkit#createInventory(InventoryHolder, int, String)
      */
     public PaginatedFastInv(int size, String title) {
-        this(owner -> Bukkit.createInventory(owner, size, title));
+        this(owner -> Bukkit.createInventory(owner, size, TextUtils.convertMiniMessageToText(title)));
     }
 
     /**

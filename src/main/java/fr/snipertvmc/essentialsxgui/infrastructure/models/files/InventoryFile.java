@@ -114,13 +114,13 @@ public class InventoryFile {
 			return new EXGItemConfig(true,
 					slot,
 					"BEDROCK", 1, (byte) 0,
-					"§4§lInvalid Item",
-					List.of("§cThis item configuration is invalid.",
-							"  §7Please check the §f" + inventoryName + ".yml §7file",
-							"  §7and fix error(s) seen in the console.",
+					"<dark_red><bold>Invalid Item",
+					List.of("<red>This item configuration is invalid.",
+							"  <dark_gray>Please check the <white>" + inventoryName + ".yml <dark_gray>file",
+							"  <dark_gray>and fix error(s) seen in the console.",
 							"",
-							"§6Item path involved: ",
-							"§8- §e" + path),
+							"<gold>Item path involved: ",
+							"<dark_gray>- <yello>" + path),
 					null, null, new HashMap<>(), 0
 			);
 		}
@@ -213,48 +213,6 @@ public class InventoryFile {
 
 
 	// -------------------------------------------------- //
-
-
-	public Map<String, String> getPlaceholders() {
-
-		MCServerVersion serverVersion = Main.getInstance().getMCServerVersion();
-		switch (serverVersion) {
-
-			case v1_8_8, v1_9_4, v1_10_2, v1_11_2, v1_12_2 -> {
-
-				return Map.of(
-						"value_materialBorderItem", "STAINED_GLASS_PANE",
-						"value_materialHomeItem", "GRASS",
-						"value_materialAdminModeItem", "EYE_OF_ENDER",
-						"value_materialCreateHomeItem", "PISTON_BASE",
-						"value_materialCreateKitItem", "PISTON_BASE",
-						"value_materialCreateWarpItem", "PISTON_BASE",
-						"value_materialBedHomeItemOverworld", "BED",
-						"value_materialSaveKitItem", "INK_SACK",
-						"value_materialCancelChangesItem", "INK_SACK"
-				);
-			}
-
-			case v1_13_2, v1_14_4, v1_15_2, v1_16_5,
-			     v1_17_1, v1_18_2, v1_19_4, v1_20_6, v1_21, v1_21_1, v1_21_2, v1_21_3,
-			     v1_21_4, v1_21_5, v1_21_6, v1_21_7, v1_21_8, v1_21_9, v1_21_10, v1_21_11 -> {
-
-				return Map.of(
-						"value_materialBorderItem", "BLACK_STAINED_GLASS_PANE",
-						"value_materialHomeItem", "GRASS_BLOCK",
-						"value_materialAdminModeItem", "ENDER_EYE",
-						"value_materialCreateHomeItem", "PISTON",
-						"value_materialCreateKitItem", "PISTON",
-						"value_materialCreateWarpItem", "PISTON",
-						"value_materialBedHomeItemOverworld", "RED_BED",
-						"value_materialSaveKitItem", "LIME_DYE",
-						"value_materialCancelChangesItem", "RED_DYE"
-				);
-			}
-		}
-
-		return new HashMap<>();
-	}
 
 
 	public List<String> getKeysToRemove() {

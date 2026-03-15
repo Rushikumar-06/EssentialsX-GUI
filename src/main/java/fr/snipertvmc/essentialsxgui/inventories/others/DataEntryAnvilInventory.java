@@ -5,6 +5,7 @@ import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGEntryResult;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGEntryType;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGEntrySettings;
 import fr.snipertvmc.essentialsxgui.libraries.exglib.Pair;
+import fr.snipertvmc.essentialsxgui.utilities.TextUtils;
 import fr.snipertvmc.essentialsxgui.utilities.data.DataEntryUtils;
 import net.wesjd.anvilgui.AnvilGUI;
 import org.bukkit.Bukkit;
@@ -29,7 +30,7 @@ public class DataEntryAnvilInventory {
 		new AnvilGUI.Builder()
 
 				.text("Type here")
-				.title(entrySettings.getEntryDisplayName())
+				.title(TextUtils.convertMiniMessageToText(entrySettings.getEntryDisplayName()))
 
 				.onClick((slot, stateSnapshot) -> {
 
