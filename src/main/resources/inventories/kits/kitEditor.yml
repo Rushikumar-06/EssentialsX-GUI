@@ -32,7 +32,7 @@ kitEditor:
 
   # Placeholders available: {kitDisplayName}, {kitName}, {kitDisplayName}
   # By default, if kitDisplayName is not set, it will use the kit name.
-  title: "<dark_aqua>Kit Editor <dark_gray>- <aqua>{kitName}<reset>"
+  title: "<gradient:#06b6d4:#3b82f6>Kit Editor</gradient> <dark_gray>- <gradient:#22c55e:#14b8a6>{kitName}</gradient><reset>"
   # ⚠️ Warning: Make sure to always keep 36 slots empty for the kit items.
   #      - Consequently, the number of rows must be at least 5 to contains the 36 items
   #        of a kit and the actions items.
@@ -42,27 +42,27 @@ kitEditor:
   borderItem:
     enabled: true
     slots: [36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 48, 49, 50, 52, 53]
-    material: "%%value_materialBorderItem%%"
+    material: "BLACK_STAINED_GLASS_PANE"
     data: 15
-    displayName: "<dark_gray>- <gold><bold>EssentialsX-GUI<reset>"
+    displayName: "<dark_gray>- <gradient:#f59e0b:#fde68a><bold>EssentialsX-GUI</bold></gradient><reset>"
 
   items:
 
     # 'enabled' value will be ignored in this section. Item is enabled by default.
     saveKitItem:
       slot: 47
-      material: "%%value_materialSaveKitItem%%"
+      material: "LIME_DYE"
       data: 10
-      displayName: "<green>Save Kit<reset>"
+      displayName: "<gradient:#22c55e:#14b8a6>Save Kit</gradient><reset>"
       lore:
         - "<gray>Click to save the changes made to this kit.<reset>"
 
     # 'enabled' value will be ignored in this section. Item is enabled by default.
     cancelChangesItem:
       slot: 51
-      material: "%%value_materialCancelChangesItem%%"
+      material: "RED_DYE"
       data: 1
-      displayName: "<red>Cancel Changes<reset>"
+      displayName: "<gradient:#ef4444:#fb7185>Cancel Changes</gradient><reset>"
       lore:
         - "<gray>Click to cancel all the changes made to this kit.<reset>"
         - ""

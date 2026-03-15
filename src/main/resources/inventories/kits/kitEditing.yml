@@ -32,15 +32,15 @@ kitEditing:
 
   # Placeholders available: {kitDisplayName}, {kitName}, {kitDisplayName}
   # By default, if kitDisplayName is not set, it will use the kit name.
-  title: "<dark_green>Editing <green>{kitName}<dark_green>'s kit<reset>"
+  title: "<gradient:#22c55e:#14b8a6>Editing {kitName}'s Kit</gradient><reset>"
   rows: 6
 
   borderItem:
     enabled: true
     slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53]
-    material: "%%value_materialBorderItem%%"
+    material: "BLACK_STAINED_GLASS_PANE"
     data: 15
-    displayName: "<dark_gray>- <gold><bold>EssentialsX-GUI<reset>"
+    displayName: "<dark_gray>- <gradient:#f59e0b:#fde68a><bold>EssentialsX-GUI</bold></gradient><reset>"
 
   items:
 
@@ -50,7 +50,7 @@ kitEditing:
     previewKitItem:
       enabled: true
       slot: 22
-      displayName: "<gold>{kitDisplayName}<reset>"
+      displayName: "<gradient:#f59e0b:#fde68a>{kitDisplayName}</gradient><reset>"
       lore:
         - "<white><bold>Left Click <gray>to receive this kit.<reset>"
         - "<white><bold>Right Click <gray>to preview this kit.<reset>"
@@ -62,7 +62,7 @@ kitEditing:
       enabled: true
       slot: 30
       material: "NAME_TAG"
-      displayName: "<gold>Change Display Name<reset>"
+      displayName: "<gradient:#f59e0b:#fde68a>Change Display Name</gradient><reset>"
       lore:
         - "<gray>Click to change the display name of this kit.<reset>"
 
@@ -71,7 +71,7 @@ kitEditing:
       enabled: true
       slot: 31
       material: "CHEST"
-      displayName: "<gold>Change Icon<reset>"
+      displayName: "<gradient:#f59e0b:#fde68a>Change Icon</gradient><reset>"
       lore:
         - "<gray>Click to change the icon of this kit.<reset>"
 
@@ -79,7 +79,7 @@ kitEditing:
       enabled: true
       slot: 32
       material: "LAVA_BUCKET"
-      displayName: "<red>Delete Kit<reset>"
+      displayName: "<gradient:#ef4444:#f97316>Delete Kit</gradient><reset>"
       lore:
         - "<gray>Click to delete this kit.<reset>"
         - "<red>This action cannot be undone!<reset>"
@@ -88,7 +88,7 @@ kitEditing:
       enabled: true
       slot: 21
       material: "ENDER_CHEST"
-      displayName: "<gold>Edit Kit Contents<reset>"
+      displayName: "<gradient:#f59e0b:#fde68a>Edit Kit Contents</gradient><reset>"
       lore:
         - "<gray>Click to edit the contents of this kit.<reset>"
         - "<gray><italic>You will be able to add or remove items from it.<reset>"
@@ -97,6 +97,6 @@ kitEditing:
       enabled: true
       slot: 49
       material: "ARROW"
-      displayName: "<red>Back<reset>"
+      displayName: "<gradient:#ef4444:#fb7185>Back</gradient><reset>"
       lore:
-        - "<gray>Click to go back to the kits list.<reset>"
+        - "<gray>Click to return to the kits list.<reset>"

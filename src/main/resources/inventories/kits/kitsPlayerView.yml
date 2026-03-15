@@ -31,7 +31,7 @@ config-version: "1.2"
 kitsPlayerView:
 
   # Placeholders available: {player}
-  title: "<gold>Your Kits<reset>"
+  title: "<gradient:#f59e0b:#fde68a>Your Kits</gradient><reset>"
   rows: 6
 
   # The inventory scheme defines the layout of the inventory.
@@ -49,9 +49,9 @@ kitsPlayerView:
   borderItem:
     enabled: true
     slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53]
-    material: "%%value_materialBorderItem%%"
+    material: "BLACK_STAINED_GLASS_PANE"
     data: 15
-    displayName: "<dark_gray>- <gold><bold>EssentialsX-GUI<reset>"
+    displayName: "<dark_gray>- <gradient:#f59e0b:#fde68a><bold>EssentialsX-GUI</bold></gradient><reset>"
 
   items:
 
@@ -66,7 +66,7 @@ kitsPlayerView:
     # By default, if kitDisplayName is not set, it will use the kit name.
     kitItem:
       material: "{kitMaterialName}"
-      displayName: "<gold>{kitDisplayName}<reset>"
+      displayName: "<gradient:#f59e0b:#fde68a>{kitDisplayName}</gradient><reset>"
       lore:
         - "<white><bold>Left Click <gray>to receive this kit.<reset>"
         - "<white><bold>Right Click <gray>to preview this kit.<reset>"
@@ -81,15 +81,15 @@ kitsPlayerView:
     noKitsItem:
       enabled: true
       material: "BARRIER"
-      displayName: "<red>No Kits<reset>"
+      displayName: "<gradient:#ef4444:#f97316>No Kits</gradient><reset>"
       lore:
         - "<gray>You have no access to any kit.<reset>"
 
     switchToAdminModeItem:
       enabled: true
       slot: 8
-      material: "%%value_materialAdminModeItem%%"
-      displayName: "<red>Switch to Admin Mode<reset>"
+      material: "ENDER_EYE"
+      displayName: "<gradient:#ef4444:#f97316>Switch to Admin Mode</gradient><reset>"
       lore:
         - "<gray>Click to switch to admin mode.<reset>"
 
@@ -97,7 +97,7 @@ kitsPlayerView:
       enabled: true
       slot: 45
       material: "TRIPWIRE_HOOK"
-      displayName: "<aqua>Search Kit<reset>"
+      displayName: "<gradient:#06b6d4:#3b82f6>Search Kit</gradient><reset>"
       lore:
         - "<gray>Click to search for a kit.<reset>"
 
@@ -105,7 +105,7 @@ kitsPlayerView:
       enabled: true
       slot: 45
       material: "REDSTONE_BLOCK"
-      displayName: "<red>Cancel Search<reset>"
+      displayName: "<gradient:#ef4444:#fb7185>Cancel Search</gradient><reset>"
       lore:
         - "<gray>Click to cancel the kit search.<reset>"
 
@@ -115,7 +115,7 @@ kitsPlayerView:
     noSearchKitResultsItem:
       enabled: true
       material: "BARRIER"
-      displayName: "<red>No Results<reset>"
+      displayName: "<gradient:#ef4444:#f97316>No Results</gradient><reset>"
       lore:
         - "<gray>No kits matched your search.<reset>"
         - ""
@@ -126,25 +126,25 @@ kitsPlayerView:
       enabled: true
       slot: 47
       material: "STONE_BUTTON"
-      displayName: "<gold>Previous Page: <yellow>{previousPage}<reset>"
+      displayName: "<gradient:#f59e0b:#f97316>Previous Page</gradient><gray>: <yellow>{previousPage}<reset>"
       lore:
-        - "<gray>Click to go to the previous page.<reset>"
+        - "<gray>Click to open the previous page.<reset>"
 
     # Placeholders available: {currentPage}, {nextPage}
     nextPageItem:
       enabled: true
       slot: 51
       material: "STONE_BUTTON"
-      displayName: "<gold>Next Page: <yellow>{nextPage}<reset>"
+      displayName: "<gradient:#f59e0b:#f97316>Next Page</gradient><gray>: <yellow>{nextPage}<reset>"
       lore:
-        - "<gray>Click to go to the next page.<reset>"
+        - "<gray>Click to open the next page.<reset>"
 
     # Placeholders available: {currentPage}, {totalPages}
     currentPageItem:
       enabled: true
       slot: 4
       material: "PAPER"
-      displayName: "<dark_green>Page: <green>{currentPage}/{totalPages}<reset>"
+      displayName: "<gradient:#22c55e:#14b8a6>Page</gradient><gray>: <green>{currentPage}/{totalPages}<reset>"
       lore:
         - "<gray>Previous Page: <white>{previousPage}<reset>"
         - "<gray>Next Page: <white>{nextPage}<reset>"
@@ -153,6 +153,6 @@ kitsPlayerView:
       enabled: true
       slot: 49
       material: "BARRIER"
-      displayName: "<red>Close<reset>"
+      displayName: "<gradient:#ef4444:#f97316>Close</gradient><reset>"
       lore:
-        - "<gray>Click to close the inventory.<reset>"
+        - "<gray>Click to close this menu.<reset>"

@@ -32,15 +32,15 @@ warpEditing:
 
   # Placeholders available: {warpDisplayName}, {warpName}, {warpDisplayName}
   # By default, if warpDisplayName is not set, it will use the warp name.
-  title: "<dark_green>Editing <green>{warpName}<dark_green>'s warp<reset>"
+  title: "<gradient:#22c55e:#14b8a6>Editing {warpName}'s Warp</gradient><reset>"
   rows: 6
 
   borderItem:
     enabled: true
     slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53]
-    material: "%%value_materialBorderItem%%"
+    material: "BLACK_STAINED_GLASS_PANE"
     data: 15
-    displayName: "<dark_gray>- <gold><bold>EssentialsX-GUI<reset>"
+    displayName: "<dark_gray>- <gradient:#f59e0b:#fde68a><bold>EssentialsX-GUI</bold></gradient><reset>"
 
   items:
 
@@ -50,7 +50,7 @@ warpEditing:
     previewWarpItem:
       enabled: true
       slot: 22
-      displayName: "<gold>{warpDisplayName}<reset>"
+      displayName: "<gradient:#f59e0b:#fde68a>{warpDisplayName}</gradient><reset>"
       lore:
         - "<white><bold>Click <gray>to teleport you to this warp.<reset>"
         - ""
@@ -61,7 +61,7 @@ warpEditing:
       enabled: true
       slot: 30
       material: "NAME_TAG"
-      displayName: "<gold>Change Display Name<reset>"
+      displayName: "<gradient:#f59e0b:#fde68a>Change Display Name</gradient><reset>"
       lore:
         - "<gray>Click to change the display name of this warp.<reset>"
 
@@ -70,7 +70,7 @@ warpEditing:
       enabled: true
       slot: 31
       material: "CHEST"
-      displayName: "<gold>Change Icon<reset>"
+      displayName: "<gradient:#f59e0b:#fde68a>Change Icon</gradient><reset>"
       lore:
         - "<gray>Click to change the icon of this warp.<reset>"
 
@@ -78,7 +78,7 @@ warpEditing:
       enabled: true
       slot: 32
       material: "LAVA_BUCKET"
-      displayName: "<red>Delete Warp<reset>"
+      displayName: "<gradient:#ef4444:#f97316>Delete Warp</gradient><reset>"
       lore:
         - "<gray>Click to delete this warp.<reset>"
         - "<red>This action cannot be undone!<reset>"
@@ -87,6 +87,6 @@ warpEditing:
       enabled: true
       slot: 49
       material: "ARROW"
-      displayName: "<red>Back<reset>"
+      displayName: "<gradient:#ef4444:#fb7185>Back</gradient><reset>"
       lore:
-        - "<gray>Click to go back to the warps list.<reset>"
+        - "<gray>Click to return to the warps list.<reset>"

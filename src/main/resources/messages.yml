@@ -24,7 +24,7 @@ messages-version: "1.6"
 
 # Change the prefix sent at the beginning of most sent messages.
 # TIP: Use {prefix} in any message to include the prefix.
-prefix: "<dark_gray>[<gold><bold>EXG<dark_gray>]<gray><reset>"
+prefix: "<dark_gray>[<gradient:#f59e0b:#fde68a><bold>EXG</bold></gradient><dark_gray>]<gray><reset>"
 
 ############################################################
 # +------------------------------------------------------+ #
@@ -34,15 +34,15 @@ prefix: "<dark_gray>[<gold><bold>EXG<dark_gray>]<gray><reset>"
 
 admin:
 
-  filesReloading: "{prefix} <yellow>The files are being reloaded...<reset>"
-  filesReloaded: "{prefix} <yellow>The files have been reloaded. Please check the console if you encounter any errors.<reset>"
+  filesReloading: "{prefix} <gradient:#f59e0b:#fde68a>Reloading plugin files...</gradient><reset>"
+  filesReloaded: "{prefix} <gradient:#22c55e:#14b8a6>Files reloaded successfully.</gradient> <gray>Check the console if anything looks wrong.<reset>"
 
   # Placeholders available: {currentVersion}, {latestVersion}
-  alertUpdateAvailable: "{prefix} <yellow>An update is available for EssentialsX-GUI. <gold>Please check the console for more information.<reset>"
+  alertUpdateAvailable: "{prefix} <gradient:#f59e0b:#fde68a>An update is available for EssentialsX-GUI.</gradient> <gray>Check the console for details.<reset>"
 
-  databaseReloading: "{prefix} <yellow>The database is being reloaded...<reset>"
+  databaseReloading: "{prefix} <gradient:#f59e0b:#fde68a>Reloading database...</gradient><reset>"
   # Placeholders available: {newStorageType}
-  databaseReloaded: "{prefix} <yellow>The database has been reloaded. The storage type is <white>{newStorageType}<yellow>.<reset>"
+  databaseReloaded: "{prefix} <gradient:#22c55e:#14b8a6>Database reloaded.</gradient> <gray>Storage: <white>{newStorageType}<reset>"
 
 ############################################################
 # +------------------------------------------------------+ #
@@ -85,73 +85,73 @@ errors:
 
 general:
 
-  enterNewDisplayNameInChat: "<yellow>Please enter the new <white>display name <yellow>in the chat. <gray><italic>Type 'cancel' to cancel the action.<reset>"
-  enterNewIconNameInChat: "<yellow>Please enter the new <white>icon name <yellow>in the chat. <gray><italic>Type 'cancel' to cancel the action.<reset>"
+  enterNewDisplayNameInChat: "<gradient:#f59e0b:#fde68a>Enter the new display name in chat.</gradient> <gray><italic>Type 'cancel' to stop.<reset>"
+  enterNewIconNameInChat: "<gradient:#f59e0b:#fde68a>Enter the new icon material in chat.</gradient> <gray><italic>Type 'cancel' to stop.<reset>"
   enterNewDisplayName: "Enter new display name"
   enterNewIconName: "Enter new icon name"
 
-  enterNewHomeNameInChat: "<yellow>Please enter the new <white>home name <yellow>in the chat. <gray><italic>Type 'cancel' to cancel the action.<reset>"
+  enterNewHomeNameInChat: "<gradient:#22c55e:#14b8a6>Enter the new home name in chat.</gradient> <gray><italic>Type 'cancel' to stop.<reset>"
   enterNewHomeName: "Enter new home name"
-  searchHomeInChat: "<yellow>Please enter first few letters of the <white>home name <yellow>in the chat. <gray><italic>Type 'cancel' to cancel the action.<reset>"
+  searchHomeInChat: "<gradient:#06b6d4:#3b82f6>Type the first letters of the home name in chat.</gradient> <gray><italic>Type 'cancel' to stop.<reset>"
   searchHome: "Search home"
   # Placeholders available: {homeName}
-  confirmDeleteHomeInChat: "<gold>Are you sure you want to delete this home? ({homeName}) <gray>Type <white>'confirm' <gray>to confirm or <white>'cancel' <gray>to cancel.<reset>"
+  confirmDeleteHomeInChat: "<gradient:#ef4444:#f97316>Delete this home?</gradient> <gray>(<white>{homeName}</white>) Type <white>'confirm'</white> or <white>'cancel'</white>.<reset>"
   confirmDeleteHome: "Type 'confirm' to confirm deletion"
 
-  enterNewKitNameInChat: "<yellow>Please enter the new <white>kit name <yellow>in the chat. <gray><italic>Type 'cancel' to cancel the action.<reset>"
-  enterNewKitDelayInChat: "<yellow>Please enter the new <white>kit delay <italic>(seconds) <yellow>in the chat. <gray><italic>Type 'cancel' to cancel the action.<reset>"
+  enterNewKitNameInChat: "<gradient:#22c55e:#14b8a6>Enter the new kit name in chat.</gradient> <gray><italic>Type 'cancel' to stop.<reset>"
+  enterNewKitDelayInChat: "<gradient:#22c55e:#14b8a6>Enter the new kit delay in seconds.</gradient> <gray><italic>Type 'cancel' to stop.<reset>"
   enterNewKitName: "Enter new kit name"
   enterNewKitDelay: "Enter new kit delay (seconds)"
-  searchKitInChat: "<yellow>Please enter first few letters of the <white>kit name <yellow>in the chat. <gray><italic>Type 'cancel' to cancel the action.<reset>"
+  searchKitInChat: "<gradient:#06b6d4:#3b82f6>Type the first letters of the kit name in chat.</gradient> <gray><italic>Type 'cancel' to stop.<reset>"
   searchKit: "Search kit"
   # Placeholders available: {kitName}
-  confirmDeleteKitInChat: "<gold>Are you sure you want to delete the '({kitName})' kit ? <gray>Type <white>'confirm' <gray>to confirm or <white>'cancel' <gray>to cancel.<reset>"
+  confirmDeleteKitInChat: "<gradient:#ef4444:#f97316>Delete this kit?</gradient> <gray>(<white>{kitName}</white>) Type <white>'confirm'</white> or <white>'cancel'</white>.<reset>"
   confirmDeleteKit: "Type 'confirm' to confirm deletion"
 
-  enterNewWarpNameInChat: "<yellow>Please enter the new <white>warp name <yellow>in the chat. <gray><italic>Type 'cancel' to cancel the action.<reset>"
+  enterNewWarpNameInChat: "<gradient:#22c55e:#14b8a6>Enter the new warp name in chat.</gradient> <gray><italic>Type 'cancel' to stop.<reset>"
   enterNewWarpName: "Enter new warp name"
-  searchWarpInChat: "<yellow>Please enter first few letters of the <white>warp name <yellow>in the chat. <gray><italic>Type 'cancel' to cancel the action.<reset>"
+  searchWarpInChat: "<gradient:#06b6d4:#3b82f6>Type the first letters of the warp name in chat.</gradient> <gray><italic>Type 'cancel' to stop.<reset>"
   searchWarp: "Search warp"
   # Placeholders available: {warpName}
-  confirmDeleteWarpInChat: "<gold>Are you sure you want to delete this warp? ({warpName}) <gray>Type <white>'confirm' <gray>to confirm or <white>'cancel' <gray>to cancel.<reset>"
+  confirmDeleteWarpInChat: "<gradient:#ef4444:#f97316>Delete this warp?</gradient> <gray>(<white>{warpName}</white>) Type <white>'confirm'</white> or <white>'cancel'</white>.<reset>"
   confirmDeleteWarp: "Type 'confirm' to confirm deletion"
 
 
-  actionCanceled: "<gold>The action has been canceled.<reset>"
-  actionExpired: "<red>The action has expired. Please try again.<reset>"
-  ongoingAction: "<yellow>An action is already in progress. Please wait until it is completed or canceled.<reset>"
+  actionCanceled: "<gradient:#ef4444:#fb7185>Action canceled.</gradient><reset>"
+  actionExpired: "<gradient:#ef4444:#f97316>Action expired.</gradient> <gray>Please try again.<reset>"
+  ongoingAction: "<gradient:#f59e0b:#fde68a>An action is already in progress.</gradient> <gray>Please wait or cancel it first.<reset>"
 
 
   # Placeholders available: {newDisplayName}
-  displayNameChanged: "<gray>The display name has been changed to <white>{newDisplayName}<gray>.<reset>"
+  displayNameChanged: "<gradient:#22c55e:#14b8a6>Display name updated.</gradient> <gray>New value: <white>{newDisplayName}<reset>"
   # Placeholders available: {newIcon}
-  iconChanged: "<gray>The icon has been changed to <white>{newIcon}<gray>.<reset>"
+  iconChanged: "<gradient:#22c55e:#14b8a6>Icon updated.</gradient> <gray>New icon: <white>{newIcon}<reset>"
 
   # Placeholders available: {homeName}
-  homeCreated: "<gray>The home <white>{homeName} <gray>has been created.<reset>"
+  homeCreated: "<gradient:#22c55e:#14b8a6>Home created.</gradient> <gray>Name: <white>{homeName}<reset>"
   # Placeholders available: {homeName}
-  homeDeleted: "<gray>The home <white>{homeName} <gray>has been deleted.<reset>"
+  homeDeleted: "<gradient:#ef4444:#f97316>Home deleted.</gradient> <gray>Name: <white>{homeName}<reset>"
 
   # Placeholders available: {kitName}
-  kitDeleted: "<gray>The kit <white>{kitName} <gray>has been deleted.<reset>"
+  kitDeleted: "<gradient:#ef4444:#f97316>Kit deleted.</gradient> <gray>Name: <white>{kitName}<reset>"
   # Placeholders available: {kitName}, {kitDelay}
-  kitCreated: "<gray>The kit <white>{kitName} <gray>has been created with a delay of <white>{kitDelay} seconds<gray>.<reset>"
+  kitCreated: "<gradient:#22c55e:#14b8a6>Kit created.</gradient> <gray>Name: <white>{kitName}</white>, Delay: <white>{kitDelay}s</white><reset>"
 
   # Placeholders available: {warpName}
-  warpCreated: "<gray>The warp <white>{warpName} <gray>has been created.<reset>"
+  warpCreated: "<gradient:#22c55e:#14b8a6>Warp created.</gradient> <gray>Name: <white>{warpName}<reset>"
   # Placeholders available: {warpName}
-  warpDeleted: "<gray>The warp <white>{warpName} <gray>has been deleted.<reset>"
+  warpDeleted: "<gradient:#ef4444:#f97316>Warp deleted.</gradient> <gray>Name: <white>{warpName}<reset>"
 
 
-  openingHomesInventory: "<green>Opening homes inventory...<reset>"
+  openingHomesInventory: "<gradient:#22c55e:#14b8a6>Opening homes menu...</gradient><reset>"
 
-  openingAdminKitsInventory: "<green>Opening kits (admin mode) inventory...<reset>"
-  openingPlayerKitsInventory: "<green>Opening kits (player mode) inventory...<reset>"
+  openingAdminKitsInventory: "<gradient:#22c55e:#14b8a6>Opening kits menu</gradient> <gray>(Admin Mode)...<reset>"
+  openingPlayerKitsInventory: "<gradient:#22c55e:#14b8a6>Opening kits menu</gradient> <gray>(Player Mode)...<reset>"
 
-  openingAdminWarpsInventory: "<green>Opening warps (admin mode) inventory...<reset>"
-  openingPlayerWarpsInventory: "<green>Opening warps (player mode) inventory...<reset>"
+  openingAdminWarpsInventory: "<gradient:#22c55e:#14b8a6>Opening warps menu</gradient> <gray>(Admin Mode)...<reset>"
+  openingPlayerWarpsInventory: "<gradient:#22c55e:#14b8a6>Opening warps menu</gradient> <gray>(Player Mode)...<reset>"
 
-  openingWhoisInventory: "<green>Opening whois inventory...<reset>"
+  openingWhoisInventory: "<gradient:#22c55e:#14b8a6>Opening whois menu...</gradient><reset>"
 
 
   yes_value: "<green>Yes<reset>"
