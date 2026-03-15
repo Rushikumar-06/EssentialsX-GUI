@@ -51,7 +51,7 @@ public enum EXGSound {
 	public Sound getSound() {
 
 		if (XSound.of(getSoundName()).isPresent()) {
-			return Sound.valueOf(XSound.of(getSoundName()).get().name());
+			return XSound.of(getSoundName()).get().get();
 
 		} else {
 			return null;

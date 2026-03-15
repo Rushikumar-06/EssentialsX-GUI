@@ -2,6 +2,8 @@ package fr.snipertvmc.essentialsxgui.utilities.other;
 
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
+import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 public class SoundsUtils {
