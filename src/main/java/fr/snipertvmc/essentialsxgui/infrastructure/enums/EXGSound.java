@@ -1,5 +1,6 @@
 package fr.snipertvmc.essentialsxgui.infrastructure.enums;
 
+import com.cryptomorin.xseries.XSound;
 import fr.snipertvmc.essentialsxgui.Main;
 import org.bukkit.Sound;
 
@@ -49,10 +50,10 @@ public enum EXGSound {
 
 	public Sound getSound() {
 
-		try {
-			return Sound.valueOf(getSoundName());
+		if (XSound.of(getSoundName()).isPresent()) {
+			return Sound.valueOf(XSound.of(getSoundName()).get().name());
 
-		} catch (Exception e) {
+		} else {
 			return null;
 		}
 	}
