@@ -32,7 +32,7 @@ kitEditing:
 
   # Placeholders available: {kitDisplayName}, {kitName}, {kitDisplayName}
   # By default, if kitDisplayName is not set, it will use the kit name.
-  title: "&2Editing &a{kitName}&2's kit"
+  title: "<dark_green>Editing <green>{kitName}<dark_green>'s kit<reset>"
   rows: 6
 
   borderItem:
@@ -40,7 +40,7 @@ kitEditing:
     slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53]
     material: "%%value_materialBorderItem%%"
     data: 15
-    displayName: "&8- &6&lEssentialsX-GUI"
+    displayName: "<dark_gray>- <gold><bold>EssentialsX-GUI<reset>"
 
   items:
 
@@ -50,53 +50,53 @@ kitEditing:
     previewKitItem:
       enabled: true
       slot: 22
-      displayName: "&6{kitDisplayName}"
+      displayName: "<gold>{kitDisplayName}<reset>"
       lore:
-        - "&f&lLeft Click &7to receive this kit."
-        - "&f&lRight Click &7to preview this kit."
+        - "<white><bold>Left Click <gray>to receive this kit.<reset>"
+        - "<white><bold>Right Click <gray>to preview this kit.<reset>"
         - ""
-        - "&7Kit Name: &f&o{kitName}"
+        - "<gray>Kit Name: <white><italic>{kitName}<reset>"
 
     # Placeholders available: {kitName}, {kitDisplayName}
     changeDisplayNameItem:
       enabled: true
       slot: 30
       material: "NAME_TAG"
-      displayName: "&6Change Display Name"
+      displayName: "<gold>Change Display Name<reset>"
       lore:
-        - "&7Click to change the display name of this kit."
+        - "<gray>Click to change the display name of this kit.<reset>"
 
     # Placeholders available: [kitName}
     changeIconItem:
       enabled: true
       slot: 31
       material: "CHEST"
-      displayName: "&6Change Icon"
+      displayName: "<gold>Change Icon<reset>"
       lore:
-        - "&7Click to change the icon of this kit."
+        - "<gray>Click to change the icon of this kit.<reset>"
 
     deleteKitItem:
       enabled: true
       slot: 32
       material: "LAVA_BUCKET"
-      displayName: "&cDelete Kit"
+      displayName: "<red>Delete Kit<reset>"
       lore:
-        - "&7Click to delete this kit."
-        - "&cThis action cannot be undone!"
+        - "<gray>Click to delete this kit.<reset>"
+        - "<red>This action cannot be undone!<reset>"
 
     editKitContentsItem:
       enabled: true
       slot: 21
       material: "ENDER_CHEST"
-      displayName: "&6Edit Kit Contents"
+      displayName: "<gold>Edit Kit Contents<reset>"
       lore:
-        - "&7Click to edit the contents of this kit."
-        - "&7&oYou will be able to add or remove items from it."
+        - "<gray>Click to edit the contents of this kit.<reset>"
+        - "<gray><italic>You will be able to add or remove items from it.<reset>"
 
     backItem:
       enabled: true
       slot: 49
       material: "ARROW"
-      displayName: "&cBack"
+      displayName: "<red>Back<reset>"
       lore:
-        - "&7Click to go back to the kits list."
+        - "<gray>Click to go back to the kits list.<reset>"

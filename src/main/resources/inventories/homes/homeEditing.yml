@@ -32,7 +32,7 @@ homeEditing:
 
   # Placeholders available: {homeDisplayName}, {homeName}, {homeDisplayName}
   # By default, if homeDisplayName is not set, it will use the home name.
-  title: "&2Editing &a{homeName}&2's home"
+  title: "<dark_green>Editing <green>{homeName}<dark_green>'s home<reset>"
   rows: 6
 
   borderItem:
@@ -40,7 +40,7 @@ homeEditing:
     slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53]
     material: "%%value_materialBorderItem%%"
     data: 15
-    displayName: "&8- &6&lEssentialsX-GUI"
+    displayName: "<dark_gray>- <gold><bold>EssentialsX-GUI<reset>"
 
   items:
 
@@ -50,46 +50,46 @@ homeEditing:
     previewHomeItem:
       enabled: true
       slot: 22
-      displayName: "&6{homeDisplayName}"
+      displayName: "<gold>{homeDisplayName}<reset>"
       lore:
-        - "&f&lLeft Click &7to teleport to this home."
-        - "&f&lRight Click &7to edit this home."
-        - "&f&lDrop &7to delete this home."
+        - "<white><bold>Left Click <gray>to teleport to this home.<reset>"
+        - "<white><bold>Right Click <gray>to edit this home.<reset>"
+        - "<white><bold>Drop <gray>to delete this home.<reset>"
         - ""
-        - "&7Home Name: &f&o{homeName}"
+        - "<gray>Home Name: <white><italic>{homeName}<reset>"
 
     # Placeholders available: {homeName}, {homeDisplayName}
     changeDisplayNameItem:
       enabled: true
       slot: 30
       material: "NAME_TAG"
-      displayName: "&6Change Display Name"
+      displayName: "<gold>Change Display Name<reset>"
       lore:
-        - "&7Click to change the display name of this home."
+        - "<gray>Click to change the display name of this home.<reset>"
 
     # Placeholders available: [homeName}
     changeIconItem:
       enabled: true
       slot: 31
       material: "CHEST"
-      displayName: "&6Change Icon"
+      displayName: "<gold>Change Icon<reset>"
       lore:
-        - "&7Click to change the icon of this home."
+        - "<gray>Click to change the icon of this home.<reset>"
 
     # Placeholders available: [homeName}, {homeDisplayName}
     deleteHomeItem:
       enabled: true
       slot: 32
       material: "LAVA_BUCKET"
-      displayName: "&cDelete Home"
+      displayName: "<red>Delete Home<reset>"
       lore:
-        - "&7Click to delete this home."
-        - "&cThis action cannot be undone!"
+        - "<gray>Click to delete this home.<reset>"
+        - "<red>This action cannot be undone!<reset>"
 
     backItem:
       enabled: true
       slot: 49
       material: "ARROW"
-      displayName: "&cBack"
+      displayName: "<red>Back<reset>"
       lore:
-        - "&7Click to go back to the homes list."
+        - "<gray>Click to go back to the homes list.<reset>"

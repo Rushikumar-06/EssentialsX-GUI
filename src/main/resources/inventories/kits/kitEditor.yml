@@ -32,7 +32,7 @@ kitEditor:
 
   # Placeholders available: {kitDisplayName}, {kitName}, {kitDisplayName}
   # By default, if kitDisplayName is not set, it will use the kit name.
-  title: "&3Kit Editor &8- &b{kitName}"
+  title: "<dark_aqua>Kit Editor <dark_gray>- <aqua>{kitName}<reset>"
   # ⚠️ Warning: Make sure to always keep 36 slots empty for the kit items.
   #      - Consequently, the number of rows must be at least 5 to contains the 36 items
   #        of a kit and the actions items.
@@ -44,7 +44,7 @@ kitEditor:
     slots: [36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 48, 49, 50, 52, 53]
     material: "%%value_materialBorderItem%%"
     data: 15
-    displayName: "&8- &6&lEssentialsX-GUI"
+    displayName: "<dark_gray>- <gold><bold>EssentialsX-GUI<reset>"
 
   items:
 
@@ -53,17 +53,17 @@ kitEditor:
       slot: 47
       material: "%%value_materialSaveKitItem%%"
       data: 10
-      displayName: "&aSave Kit"
+      displayName: "<green>Save Kit<reset>"
       lore:
-        - "&7Click to save the changes made to this kit."
+        - "<gray>Click to save the changes made to this kit.<reset>"
 
     # 'enabled' value will be ignored in this section. Item is enabled by default.
     cancelChangesItem:
       slot: 51
       material: "%%value_materialCancelChangesItem%%"
       data: 1
-      displayName: "&cCancel Changes"
+      displayName: "<red>Cancel Changes<reset>"
       lore:
-        - "&7Click to cancel all the changes made to this kit."
+        - "<gray>Click to cancel all the changes made to this kit.<reset>"
         - ""
-        - "&4&lWarning: &cAll changes, and your items, will be lost!"
+        - "<dark_red><bold>Warning: <red>All changes, and your items, will be lost!<reset>"

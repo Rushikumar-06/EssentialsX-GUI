@@ -30,7 +30,7 @@ config-version: "1.0"
 
 warpsAdminView:
 
-  title: "&6Server Warps &c&o(Admin mode)"
+  title: "<gold>Server Warps <red><italic>(Admin mode)<reset>"
   rows: 6
 
   # The inventory scheme defines the layout of the inventory.
@@ -50,7 +50,7 @@ warpsAdminView:
     slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53]
     material: "%%value_materialBorderItem%%"
     data: 15
-    displayName: "&8- &6&lEssentialsX-GUI"
+    displayName: "<dark_gray>- <gold><bold>EssentialsX-GUI<reset>"
 
   items:
 
@@ -65,13 +65,13 @@ warpsAdminView:
     # By default, if warpDisplayName is not set, it will use the warp name.
     warpItem:
       material: "{warpMaterialName}"
-      displayName: "&6{warpDisplayName}"
+      displayName: "<gold>{warpDisplayName}<reset>"
       lore:
-        - "&f&lLeft Click &7to teleport a player to this warp."
-        - "&f&lRight Click &7to edit this warp."
-        - "&f&lDrop &7to delete this warp."
+        - "<white><bold>Left Click <gray>to teleport a player to this warp.<reset>"
+        - "<white><bold>Right Click <gray>to edit this warp.<reset>"
+        - "<white><bold>Drop <gray>to delete this warp.<reset>"
         - ""
-        - "&7Warp Name: &f&o{warpName}"
+        - "<gray>Warp Name: <white><italic>{warpName}<reset>"
       clickActions:
         teleportWarp: "LEFT"
         editWarp: "RIGHT"
@@ -82,42 +82,42 @@ warpsAdminView:
     noWarpsItem:
       enabled: true
       material: "BARRIER"
-      displayName: "&cNo Warps"
+      displayName: "<red>No Warps<reset>"
       lore:
-        - "&7There are no warps available."
-        - "&7Use &f/createwarp <warpName> &7to create a warp."
+        - "<gray>There are no warps available.<reset>"
+        - "<gray>Use <white>/createwarp <warpName> <gray>to create a warp.<reset>"
 
     createWarpItem:
       enabled: true
       slot: 0
       material: "%%value_materialCreateWarpItem%%"
-      displayName: "&aCreate Warp"
+      displayName: "<green>Create Warp<reset>"
       lore:
-        - "&7Click to create a new warp."
+        - "<gray>Click to create a new warp.<reset>"
 
     switchToPlayerModeItem:
       enabled: true
       slot: 8
       material: "ENDER_PEARL"
-      displayName: "&aSwitch to Player Mode"
+      displayName: "<green>Switch to Player Mode<reset>"
       lore:
-        - "&7Click to switch to player mode."
+        - "<gray>Click to switch to player mode.<reset>"
 
     searchWarpItem:
       enabled: true
       slot: 45
       material: "TRIPWIRE_HOOK"
-      displayName: "&bSearch Warp"
+      displayName: "<aqua>Search Warp<reset>"
       lore:
-        - "&7Click to search for a warp."
+        - "<gray>Click to search for a warp.<reset>"
 
     cancelSearchWarpItem:
       enabled: true
       slot: 45
       material: "REDSTONE_BLOCK"
-      displayName: "&cCancel Search"
+      displayName: "<red>Cancel Search<reset>"
       lore:
-        - "&7Click to cancel the warp search."
+        - "<gray>Click to cancel the warp search.<reset>"
 
     # 'slot' value will be ignored in this section. The item will be placed in the first slot like a warp item.
     # The item will be displayed if the player doesn't have any warps set.
@@ -125,44 +125,44 @@ warpsAdminView:
     noSearchWarpResultsItem:
       enabled: true
       material: "BARRIER"
-      displayName: "&cNo Results"
+      displayName: "<red>No Results<reset>"
       lore:
-        - "&7No warps matched your search."
+        - "<gray>No warps matched your search.<reset>"
         - ""
-        - "&7Your search: &f&o{warpSearch}"
+        - "<gray>Your search: <white><italic>{warpSearch}<reset>"
 
     # Placeholders available: {currentPage}, {previousPage}
     previousPageItem:
       enabled: true
       slot: 47
       material: "STONE_BUTTON"
-      displayName: "&6Previous Page: &e{previousPage}"
+      displayName: "<gold>Previous Page: <yellow>{previousPage}<reset>"
       lore:
-        - "&7Click to go to the previous page."
+        - "<gray>Click to go to the previous page.<reset>"
 
     # Placeholders available: {currentPage}, {nextPage}
     nextPageItem:
       enabled: true
       slot: 51
       material: "STONE_BUTTON"
-      displayName: "&6Next Page: &e{nextPage}"
+      displayName: "<gold>Next Page: <yellow>{nextPage}<reset>"
       lore:
-        - "&7Click to go to the next page."
+        - "<gray>Click to go to the next page.<reset>"
 
     # Placeholders available: {currentPage}, {totalPages}
     currentPageItem:
       enabled: true
       slot: 4
       material: "PAPER"
-      displayName: "&2Page: &a{currentPage}/{totalPages}"
+      displayName: "<dark_green>Page: <green>{currentPage}/{totalPages}<reset>"
       lore:
-        - "&7Previous Page: &f{previousPage}"
-        - "&7Next Page: &f{nextPage}"
+        - "<gray>Previous Page: <white>{previousPage}<reset>"
+        - "<gray>Next Page: <white>{nextPage}<reset>"
 
     closeItem:
       enabled: true
       slot: 49
       material: "BARRIER"
-      displayName: "&cClose"
+      displayName: "<red>Close<reset>"
       lore:
-        - "&7Click to close the inventory."
+        - "<gray>Click to close the inventory.<reset>"

@@ -27,15 +27,15 @@ config-version: "1.3"
 # If you don't need to use it, just do not add it.
 bedHomeItem:
   overworld:
-    worldDisplayName: "&aOverworld"
+    worldDisplayName: "<green>Overworld<reset>"
     material: "%%value_materialBedHomeItemOverworld%%"
   # You can skip the 'nether' section if your server's version is below 1.16.
   # Respawn anchors were introduced in Minecraft 1.16.
   nether:
-    worldDisplayName: "&5Nether"
+    worldDisplayName: "<dark_purple>Nether<reset>"
     material: "RESPAWN_ANCHOR"
   notSet:
-    worldDisplayName: "&cNot set"
+    worldDisplayName: "<red>Not set<reset>"
     material: "BARRIER"
 
 ############################################################
@@ -47,7 +47,7 @@ bedHomeItem:
 homes:
 
   # Placeholders available: {player}
-  title: "&a{player}'&2s Homes"
+  title: "<green>{player}'<dark_green>s Homes<reset>"
   rows: 6
 
   # The inventory scheme defines the layout of the inventory.
@@ -67,7 +67,7 @@ homes:
     slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53]
     material: "%%value_materialBorderItem%%"
     data: 15
-    displayName: "&8- &6&lEssentialsX-GUI"
+    displayName: "<dark_gray>- <gold><bold>EssentialsX-GUI<reset>"
 
   items:
 
@@ -83,13 +83,13 @@ homes:
     # By default, if homeDisplayName is not set, it will use the home name.
     homeItem:
       material: "%%value_materialHomeItem%%"
-      displayName: "&6{homeDisplayName}"
+      displayName: "<gold>{homeDisplayName}<reset>"
       lore:
-        - "&f&lLeft Click &7to teleport to this home."
-        - "&f&lRight Click &7to edit this home."
-        - "&f&lDrop &7to delete this home."
+        - "<white><bold>Left Click <gray>to teleport to this home.<reset>"
+        - "<white><bold>Right Click <gray>to edit this home.<reset>"
+        - "<white><bold>Drop <gray>to delete this home.<reset>"
         - ""
-        - "&7Home Name: &f&o{homeName}"
+        - "<gray>Home Name: <white><italic>{homeName}<reset>"
       clickActions:
         teleportToHome: "LEFT"
         editHome: "RIGHT"
@@ -100,47 +100,47 @@ homes:
       enabled: true
       material: "{bedHomeWorldMaterial}"
       slot: 8
-      displayName: "&2Bed Home"
+      displayName: "<dark_green>Bed Home<reset>"
       lore:
-        - "&7The bed home is an automatic home"
-        - "&7set when you sleep in a bed."
+        - "<gray>The bed home is an automatic home<reset>"
+        - "<gray>set when you sleep in a bed.<reset>"
         - ""
-        - "&7Click to teleport to your bed home."
-        - "&7Current Bed Home World: &f{bedHomeWorldDisplayName}"
+        - "<gray>Click to teleport to your bed home.<reset>"
+        - "<gray>Current Bed Home World: <white>{bedHomeWorldDisplayName}<reset>"
 
     # 'slot' value will be ignored in this section. The item will be placed in the first slot like a kit item.
     # The item will be displayed if the player doesn't have any homes set.
     noHomesItem:
       enabled: true
       material: "BARRIER"
-      displayName: "&cNo Homes"
+      displayName: "<red>No Homes<reset>"
       lore:
-        - "&7You have no homes set."
-        - "&7Use &f/sethome <name> &7to set a home."
+        - "<gray>You have no homes set.<reset>"
+        - "<gray>Use <white>/sethome <name> <gray>to set a home.<reset>"
 
     createHomeItem:
       enabled: true
       slot: 0
       material: "%%value_materialCreateHomeItem%%"
-      displayName: "&aCreate Home"
+      displayName: "<green>Create Home<reset>"
       lore:
-        - "&7Click to create a new home."
+        - "<gray>Click to create a new home.<reset>"
 
     searchHomeItem:
         enabled: true
         slot: 45
         material: "TRIPWIRE_HOOK"
-        displayName: "&bSearch Home"
+        displayName: "<aqua>Search Home<reset>"
         lore:
-          - "&7Click to search for a home."
+          - "<gray>Click to search for a home.<reset>"
 
     cancelSearchHomeItem:
         enabled: true
         slot: 45
         material: "REDSTONE_BLOCK"
-        displayName: "&cCancel Search"
+        displayName: "<red>Cancel Search<reset>"
         lore:
-          - "&7Click to cancel the home search."
+          - "<gray>Click to cancel the home search.<reset>"
 
     # 'slot' value will be ignored in this section. The item will be placed in the first slot like a kit item.
     # The item will be displayed if the player doesn't have any homes set.
@@ -148,44 +148,44 @@ homes:
     noSearchHomeResultsItem:
       enabled: true
       material: "BARRIER"
-      displayName: "&cNo Results"
+      displayName: "<red>No Results<reset>"
       lore:
-        - "&7No homes matched your search."
+        - "<gray>No homes matched your search.<reset>"
         - ""
-        - "&7Your search: &f&o{homeSearch}"
+        - "<gray>Your search: <white><italic>{homeSearch}<reset>"
 
     # Placeholders available: {currentPage}, {previousPage}
     previousPageItem:
       enabled: true
       slot: 47
       material: "STONE_BUTTON"
-      displayName: "&6Previous Page: &e{previousPage}"
+      displayName: "<gold>Previous Page: <yellow>{previousPage}<reset>"
       lore:
-        - "&7Click to go to the previous page."
+        - "<gray>Click to go to the previous page.<reset>"
 
     # Placeholders available: {currentPage}, {nextPage}
     nextPageItem:
       enabled: true
       slot: 51
       material: "STONE_BUTTON"
-      displayName: "&6Next Page: &e{nextPage}"
+      displayName: "<gold>Next Page: <yellow>{nextPage}<reset>"
       lore:
-        - "&7Click to go to the next page."
+        - "<gray>Click to go to the next page.<reset>"
 
     # Placeholders available: {currentPage}, {totalPages}
     currentPageItem:
       enabled: true
       slot: 4
       material: "PAPER"
-      displayName: "&2Page: &a{currentPage}/{totalPages}"
+      displayName: "<dark_green>Page: <green>{currentPage}/{totalPages}<reset>"
       lore:
-        - "&7Previous Page: &f{previousPage}"
-        - "&7Next Page: &f{nextPage}"
+        - "<gray>Previous Page: <white>{previousPage}<reset>"
+        - "<gray>Next Page: <white>{nextPage}<reset>"
 
     closeItem:
       enabled: true
       slot: 49
       material: "BARRIER"
-      displayName: "&cClose"
+      displayName: "<red>Close<reset>"
       lore:
-        - "&7Click to close the inventory."
+        - "<gray>Click to close the inventory.<reset>"

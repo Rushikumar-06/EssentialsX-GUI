@@ -31,7 +31,7 @@ config-version: "1.0"
 kitPlayerGive:
 
   # Placeholders available: {kitDisplayName}, {kitName}
-  title: "&aGive Kit &2{kitDisplayName}"
+  title: "<green>Give Kit <dark_green>{kitDisplayName}<reset>"
   rows: 6
 
   # The inventory scheme defines the layout of the inventory.
@@ -51,7 +51,7 @@ kitPlayerGive:
     slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53]
     material: "%%value_materialBorderItem%%"
     data: 15
-    displayName: "&8- &6&lEssentialsX-GUI"
+    displayName: "<dark_gray>- <gold><bold>EssentialsX-GUI<reset>"
 
   items:
 
@@ -63,43 +63,43 @@ kitPlayerGive:
     playerItem:
       material: "PLAYER_HEAD:{targetName}"
       data: 3
-      displayName: "&b{targetName}"
+      displayName: "<aqua>{targetName}<reset>"
       lore:
-        - "&7Click to give this kit to the player."
-        - "&7Kit Name: &f{kitName}"
+        - "<gray>Click to give this kit to the player.<reset>"
+        - "<gray>Kit Name: <white>{kitName}<reset>"
 
     # Placeholders available: {currentPage}, {previousPage}
     previousPageItem:
       enabled: true
       slot: 47
       material: "STONE_BUTTON"
-      displayName: "&6Previous Page: &e{previousPage}"
+      displayName: "<gold>Previous Page: <yellow>{previousPage}<reset>"
       lore:
-        - "&7Click to go to the previous page."
+        - "<gray>Click to go to the previous page.<reset>"
 
     # Placeholders available: {currentPage}, {nextPage}
     nextPageItem:
       enabled: true
       slot: 51
       material: "STONE_BUTTON"
-      displayName: "&6Next Page: &e{nextPage}"
+      displayName: "<gold>Next Page: <yellow>{nextPage}<reset>"
       lore:
-        - "&7Click to go to the next page."
+        - "<gray>Click to go to the next page.<reset>"
 
     # Placeholders available: {currentPage}, {totalPages}
     currentPageItem:
       enabled: true
       slot: 4
       material: "PAPER"
-      displayName: "&2Page: &a{currentPage}/{totalPages}"
+      displayName: "<dark_green>Page: <green>{currentPage}/{totalPages}<reset>"
       lore:
-        - "&7Previous Page: &f{previousPage}"
-        - "&7Next Page: &f{nextPage}"
+        - "<gray>Previous Page: <white>{previousPage}<reset>"
+        - "<gray>Next Page: <white>{nextPage}<reset>"
 
     backItem:
       enabled: true
       slot: 49
       material: "ARROW"
-      displayName: "&cBack"
+      displayName: "<red>Back<reset>"
       lore:
-        - "&7Click to go back to the kits list."
+        - "<gray>Click to go back to the kits list.<reset>"

@@ -32,7 +32,7 @@ warpEditing:
 
   # Placeholders available: {warpDisplayName}, {warpName}, {warpDisplayName}
   # By default, if warpDisplayName is not set, it will use the warp name.
-  title: "&2Editing &a{warpName}&2's warp"
+  title: "<dark_green>Editing <green>{warpName}<dark_green>'s warp<reset>"
   rows: 6
 
   borderItem:
@@ -40,7 +40,7 @@ warpEditing:
     slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53]
     material: "%%value_materialBorderItem%%"
     data: 15
-    displayName: "&8- &6&lEssentialsX-GUI"
+    displayName: "<dark_gray>- <gold><bold>EssentialsX-GUI<reset>"
 
   items:
 
@@ -50,43 +50,43 @@ warpEditing:
     previewWarpItem:
       enabled: true
       slot: 22
-      displayName: "&6{warpDisplayName}"
+      displayName: "<gold>{warpDisplayName}<reset>"
       lore:
-        - "&f&lClick &7to teleport you to this warp."
+        - "<white><bold>Click <gray>to teleport you to this warp.<reset>"
         - ""
-        - "&7Warp Name: &f&o{warpName}"
+        - "<gray>Warp Name: <white><italic>{warpName}<reset>"
 
     # Placeholders available: {warpName}, {warpDisplayName}
     changeDisplayNameItem:
       enabled: true
       slot: 30
       material: "NAME_TAG"
-      displayName: "&6Change Display Name"
+      displayName: "<gold>Change Display Name<reset>"
       lore:
-        - "&7Click to change the display name of this warp."
+        - "<gray>Click to change the display name of this warp.<reset>"
 
     # Placeholders available: [warpName}
     changeIconItem:
       enabled: true
       slot: 31
       material: "CHEST"
-      displayName: "&6Change Icon"
+      displayName: "<gold>Change Icon<reset>"
       lore:
-        - "&7Click to change the icon of this warp."
+        - "<gray>Click to change the icon of this warp.<reset>"
 
     deleteWarpItem:
       enabled: true
       slot: 32
       material: "LAVA_BUCKET"
-      displayName: "&cDelete Warp"
+      displayName: "<red>Delete Warp<reset>"
       lore:
-        - "&7Click to delete this warp."
-        - "&cThis action cannot be undone!"
+        - "<gray>Click to delete this warp.<reset>"
+        - "<red>This action cannot be undone!<reset>"
 
     backItem:
       enabled: true
       slot: 49
       material: "ARROW"
-      displayName: "&cBack"
+      displayName: "<red>Back<reset>"
       lore:
-        - "&7Click to go back to the warps list."
+        - "<gray>Click to go back to the warps list.<reset>"
