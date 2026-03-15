@@ -1,4 +1,4 @@
-############################################################
+﻿############################################################
 # +------------------------------------------------------+ #
 # |                      Information                     | #
 # +------------------------------------------------------+ #
@@ -67,9 +67,9 @@ warpsAdminView:
       material: "{warpMaterialName}"
       displayName: "<gradient:#f59e0b:#fde68a>{warpDisplayName}</gradient><reset>"
       lore:
-        - "<white><bold>Left Click <gray>to teleport a player to this warp.<reset>"
-        - "<white><bold>Right Click <gray>to edit this warp.<reset>"
-        - "<white><bold>Drop <gray>to delete this warp.<reset>"
+        - "<gradient:#22c55e:#14b8a6><bold>Left Click</bold></gradient> <gray>to teleport a player to this warp.<reset>"
+        - "<gradient:#f59e0b:#fde68a><bold>Right Click</bold></gradient> <gray>to edit this warp.<reset>"
+        - "<gradient:#ef4444:#f97316><bold>Drop</bold></gradient> <gray>to delete this warp.<reset>"
         - ""
         - "<gray>Warp Name: <white><italic>{warpName}<reset>"
       clickActions:
@@ -166,3 +166,4 @@ warpsAdminView:
       displayName: "<gradient:#ef4444:#f97316>Close</gradient><reset>"
       lore:
         - "<gray>Click to close this menu.<reset>"
+

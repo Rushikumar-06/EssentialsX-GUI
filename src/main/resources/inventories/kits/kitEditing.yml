@@ -1,4 +1,4 @@
-############################################################
+﻿############################################################
 # +------------------------------------------------------+ #
 # |                      Information                     | #
 # +------------------------------------------------------+ #
@@ -52,8 +52,8 @@ kitEditing:
       slot: 22
       displayName: "<gradient:#f59e0b:#fde68a>{kitDisplayName}</gradient><reset>"
       lore:
-        - "<white><bold>Left Click <gray>to receive this kit.<reset>"
-        - "<white><bold>Right Click <gray>to preview this kit.<reset>"
+        - "<gradient:#22c55e:#14b8a6><bold>Left Click</bold></gradient> <gray>to receive this kit.<reset>"
+        - "<gradient:#f59e0b:#fde68a><bold>Right Click</bold></gradient> <gray>to preview this kit.<reset>"
         - ""
         - "<gray>Kit Name: <white><italic>{kitName}<reset>"
 
@@ -100,3 +100,4 @@ kitEditing:
       displayName: "<gradient:#ef4444:#fb7185>Back</gradient><reset>"
       lore:
         - "<gray>Click to return to the kits list.<reset>"
+

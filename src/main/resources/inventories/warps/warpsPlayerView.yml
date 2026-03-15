@@ -1,4 +1,4 @@
-############################################################
+﻿############################################################
 # +------------------------------------------------------+ #
 # |                      Information                     | #
 # +------------------------------------------------------+ #
@@ -63,7 +63,7 @@ warpsPlayerView:
       material: "{warpMaterialName}"
       displayName: "<gradient:#f59e0b:#fde68a>{warpDisplayName}</gradient><reset>"
       lore:
-        - "<white><bold>Click <gray>to teleport you to this warp.<reset>"
+        - "<gradient:#22c55e:#14b8a6><bold>Click</bold></gradient> <gray>to teleport you to this warp.<reset>"
         - ""
         - "<gray>Warp Name: <white><italic>{warpName}<reset>"
 
@@ -147,3 +147,4 @@ warpsPlayerView:
       displayName: "<gradient:#ef4444:#f97316>Close</gradient><reset>"
       lore:
         - "<gray>Click to close this menu.<reset>"
+

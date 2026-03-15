@@ -1,4 +1,4 @@
-############################################################
+﻿############################################################
 # +------------------------------------------------------+ #
 # |                      Information                     | #
 # +------------------------------------------------------+ #
@@ -68,8 +68,8 @@ kitsPlayerView:
       material: "{kitMaterialName}"
       displayName: "<gradient:#f59e0b:#fde68a>{kitDisplayName}</gradient><reset>"
       lore:
-        - "<white><bold>Left Click <gray>to receive this kit.<reset>"
-        - "<white><bold>Right Click <gray>to preview this kit.<reset>"
+        - "<gradient:#22c55e:#14b8a6><bold>Left Click</bold></gradient> <gray>to receive this kit.<reset>"
+        - "<gradient:#f59e0b:#fde68a><bold>Right Click</bold></gradient> <gray>to preview this kit.<reset>"
         - ""
         - "<gray>Kit Name: <white><italic>{kitName}<reset>"
       clickActions:
@@ -156,3 +156,4 @@ kitsPlayerView:
       displayName: "<gradient:#ef4444:#f97316>Close</gradient><reset>"
       lore:
         - "<gray>Click to close this menu.<reset>"
+

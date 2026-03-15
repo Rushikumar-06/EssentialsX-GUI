@@ -1,4 +1,4 @@
-############################################################
+﻿############################################################
 # +------------------------------------------------------+ #
 # |                      Information                     | #
 # +------------------------------------------------------+ #
@@ -85,9 +85,9 @@ homes:
       material: "GRASS_BLOCK"
       displayName: "<gradient:#f59e0b:#fde68a>{homeDisplayName}</gradient><reset>"
       lore:
-        - "<white><bold>Left Click <gray>to teleport to this home.<reset>"
-        - "<white><bold>Right Click <gray>to edit this home.<reset>"
-        - "<white><bold>Drop <gray>to delete this home.<reset>"
+        - "<gradient:#22c55e:#14b8a6><bold>Left Click</bold></gradient> <gray>to teleport to this home.<reset>"
+        - "<gradient:#f59e0b:#fde68a><bold>Right Click</bold></gradient> <gray>to edit this home.<reset>"
+        - "<gradient:#ef4444:#f97316><bold>Drop</bold></gradient> <gray>to delete this home.<reset>"
         - ""
         - "<gray>Home Name: <white><italic>{homeName}<reset>"
       clickActions:
@@ -189,3 +189,4 @@ homes:
       displayName: "<gradient:#ef4444:#f97316>Close</gradient><reset>"
       lore:
         - "<gray>Click to close this menu.<reset>"
+

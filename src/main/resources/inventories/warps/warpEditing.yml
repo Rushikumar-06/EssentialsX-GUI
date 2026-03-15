@@ -1,4 +1,4 @@
-############################################################
+﻿############################################################
 # +------------------------------------------------------+ #
 # |                      Information                     | #
 # +------------------------------------------------------+ #
@@ -52,7 +52,7 @@ warpEditing:
       slot: 22
       displayName: "<gradient:#f59e0b:#fde68a>{warpDisplayName}</gradient><reset>"
       lore:
-        - "<white><bold>Click <gray>to teleport you to this warp.<reset>"
+        - "<gradient:#22c55e:#14b8a6><bold>Click</bold></gradient> <gray>to teleport you to this warp.<reset>"
         - ""
         - "<gray>Warp Name: <white><italic>{warpName}<reset>"
 
@@ -90,3 +90,4 @@ warpEditing:
       displayName: "<gradient:#ef4444:#fb7185>Back</gradient><reset>"
       lore:
         - "<gray>Click to return to the warps list.<reset>"
+

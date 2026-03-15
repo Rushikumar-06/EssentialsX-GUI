@@ -1,4 +1,4 @@
-############################################################
+﻿############################################################
 # +------------------------------------------------------+ #
 # |                      Information                     | #
 # +------------------------------------------------------+ #
@@ -67,9 +67,9 @@ kitsAdminView:
       material: "{kitMaterialName}"
       displayName: "<gradient:#f59e0b:#fde68a>{kitDisplayName}</gradient><reset>"
       lore:
-        - "<white><bold>Left Click <gray>to give this kit to a player.<reset>"
-        - "<white><bold>Right Click <gray>to edit this kit.<reset>"
-        - "<white><bold>Drop <gray>to delete this kit.<reset>"
+        - "<gradient:#22c55e:#14b8a6><bold>Left Click</bold></gradient> <gray>to give this kit to a player.<reset>"
+        - "<gradient:#f59e0b:#fde68a><bold>Right Click</bold></gradient> <gray>to edit this kit.<reset>"
+        - "<gradient:#ef4444:#f97316><bold>Drop</bold></gradient> <gray>to delete this kit.<reset>"
         - ""
         - "<gray>Kit Name: <white><italic>{kitName}<reset>"
       clickActions:
@@ -166,3 +166,4 @@ kitsAdminView:
       displayName: "<gradient:#ef4444:#f97316>Close</gradient><reset>"
       lore:
         - "<gray>Click to close this menu.<reset>"
+
