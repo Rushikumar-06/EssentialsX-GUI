@@ -31,7 +31,7 @@ config-version: "1.0"
 warpsPlayerView:
 
   # Placeholders available: {player}
-  title: "<gradient:#f59e0b:#fde68a>Your Warps</gradient><reset>"
+  title: "<gradient:#f59e0b:#fde68a>Server Warps</gradient><reset>"
   rows: 6
 
   # The inventory scheme defines the layout of the inventory.
