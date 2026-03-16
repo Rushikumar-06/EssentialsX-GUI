@@ -2,6 +2,7 @@ package fr.snipertvmc.essentialsxgui.managers;
 
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
+import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGPermission;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.MCServerVersion;
 import fr.snipertvmc.essentialsxgui.libraries.bstats.Metrics;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.FastInvManager;
@@ -229,7 +230,7 @@ public class LoadingManager {
 			return;
 		}
 
-		if (!Main.getInstance().getConfiguration().canReceiveUpdateAlert(player)) {
+		if (!player.hasPermission(EXGPermission.ADMIN_UPDATE.get())) {
 			return;
 		}
 

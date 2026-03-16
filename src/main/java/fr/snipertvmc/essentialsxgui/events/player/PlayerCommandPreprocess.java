@@ -2,6 +2,7 @@ package fr.snipertvmc.essentialsxgui.events.player;
 
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
+import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGPermission;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
 import fr.snipertvmc.essentialsxgui.inventories.homes.HomesInventory;
 import fr.snipertvmc.essentialsxgui.inventories.kits.KitsAdminViewInventory;
@@ -86,7 +87,7 @@ public class PlayerCommandPreprocess implements Listener {
 
 				event.setCancelled(true);
 
-				if (Main.getInstance().getConfiguration().hasKitsAdminAccess(player)
+				if (player.hasPermission(EXGPermission.KITS_ADMIN.get())
 						&& Main.getInstance().getConfiguration().mustOpenKitAdminViewByDefault()) {
 
 					TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.OPENING_ADMIN_KITS_INVENTORY, null));
@@ -116,7 +117,7 @@ public class PlayerCommandPreprocess implements Listener {
 
 				event.setCancelled(true);
 
-				if (Main.getInstance().getConfiguration().hasWarpsAdminAccess(player)
+				if (player.hasPermission(EXGPermission.WARPS_ADMIN.get())
 						&& Main.getInstance().getConfiguration().mustOpenWarpAdminViewByDefault()) {
 
 					TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.OPENING_ADMIN_KITS_INVENTORY, null));

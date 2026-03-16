@@ -56,7 +56,7 @@ public class FilesManager {
 
 
 	private final Map<String, String> filesVersions = new HashMap<>() {{
-		put("configuration", "1.5"); // Updated for version: 1.3.0
+		put("configuration", "1.6"); // Updated for version: 1.4.0
 		put("messages", "1.6"); // Updated for version: 1.4.0
 
 		put("homeEditing", "1.1"); // Updated for version: 1.0.2

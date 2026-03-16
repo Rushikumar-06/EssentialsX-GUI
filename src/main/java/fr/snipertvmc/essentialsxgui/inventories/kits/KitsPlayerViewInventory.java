@@ -3,6 +3,7 @@ package fr.snipertvmc.essentialsxgui.inventories.kits;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGEntryType;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
+import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGPermission;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGEntrySettings;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGKit;
@@ -131,7 +132,7 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 
 	private void defineSwitchToAdminModeItem(Player player) {
 
-		if (config.getSwitchToAdminModeItem().isEnabled() && Main.getInstance().getConfiguration().hasKitsAdminAccess(player)) {
+		if (config.getSwitchToAdminModeItem().isEnabled() && player.hasPermission(EXGPermission.KITS_ADMIN.get())) {
 			setItem(config.getSwitchToAdminModeItem().getSlot(), config.getSwitchToAdminModeItem().build(), e -> {
 
 				new KitsAdminViewInventory(player, null, null).open(player);

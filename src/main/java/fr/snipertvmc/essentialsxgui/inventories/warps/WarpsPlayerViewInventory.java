@@ -3,6 +3,7 @@ package fr.snipertvmc.essentialsxgui.inventories.warps;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGEntryType;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
+import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGPermission;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGEntrySettings;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGWarp;
@@ -123,7 +124,7 @@ public class WarpsPlayerViewInventory extends PaginatedFastInv {
 
 	private void defineSwitchToAdminModeItem(Player player) {
 
-		if (config.getSwitchToAdminModeItem().isEnabled() && Main.getInstance().getConfiguration().hasWarpsAdminAccess(player)) {
+		if (config.getSwitchToAdminModeItem().isEnabled() && player.hasPermission(EXGPermission.WARPS_ADMIN.get())) {
 			setItem(config.getSwitchToAdminModeItem().getSlot(), config.getSwitchToAdminModeItem().build(), e -> {
 
 				new WarpsAdminViewInventory(player, null, null).open(player);

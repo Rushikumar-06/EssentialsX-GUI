@@ -21,8 +21,8 @@
 general:
 
   # Please do not change this value as it may cause the file to be reset.
-  # Default: "1.5"
-  configVersion: "1.5"
+  # Default: "1.6"
+  configVersion: "1.6"
 
   # If you want to see a detailed loading message when the plugin is loading, set this to true. (Also works for unloading)
   # Default: false
@@ -252,41 +252,6 @@ sounds:
   # The sound played when a player fails an action.
   # Default: "%%value_actionFailure%%"
   actionFailure: "ENTITY_VILLAGER_NO"
-
-############################################################
-# +------------------------------------------------------+ #
-# |                      Permissions                     | #
-# +------------------------------------------------------+ #
-############################################################
-
-permissions:
-
-  admin:
-
-    # Change the permission needed to receive a message when an update of the plugin is available.
-    # Default: "essentialsxgui.admin.update"
-    updateAlert: "essentialsxgui.admin.update"
-
-  commands:
-
-    # Change the permission needed to access to the EssentialsX-GUI command.
-    # Default: "essentialsxgui.command.essentialsxgui"
-    essentialsxgui: "essentialsxgui.command.essentialsxgui"
-
-    # Change the permission needed to access to the EssentialsX-GUI debug command.
-    # Default: "essentialsxgui.command.essentialsxgui.debug"
-    debugArgument: "essentialsxgui.command.essentialsxgui.debug"
-
-
-  guis:
-
-    # Change the permission needed to access to the Kits GUI in admin mode.
-    # Default: "essentialsx.gui.kits.admin"
-    kitsAdminAccess: "essentialsxgui.kits.admin"
-
-    # Change the permission needed to access to the Warps GUI in admin mode.
-    # Default: "essentialsx.gui.warps.admin"
-    warpsAdminAccess: "essentialsxgui.warps.admin"
 
 ############################################################
 # +------------------------------------------------------+ #

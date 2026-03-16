@@ -2,6 +2,7 @@ package fr.snipertvmc.essentialsxgui.commands;
 
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
+import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGPermission;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGPlayer;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.PluginDebugUtils;
@@ -25,7 +26,12 @@ public class CommandEssentialsXGUI implements CommandExecutor, TabCompleter {
 	@Override
     public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args) {
 
-		if (args.length == 0 || (commandSender instanceof Player player && !Main.getInstance().getConfiguration().hasEssentialsXGUICommand(player))) {
+		if (!commandSender.hasPermission(EXGPermission.CMD_EXG.get())) {
+			TextUtils.sendComponentToCommandSender(commandSender, MessagesUtils.getComponent(EXGMessage.NO_PERMISSION));
+			return true;
+		}
+
+		if (args.length == 0) {
 			sendHelpMessage(commandSender);
 			return true;
 		}
@@ -46,7 +52,10 @@ public class CommandEssentialsXGUI implements CommandExecutor, TabCompleter {
 			case "debug" -> sendDebugLinkMessage(commandSender);
 
 			// NOT FOUND ARGUMENT
-			default -> TextUtils.sendComponentToCommandSender(commandSender, MessagesUtils.getComponent(EXGMessage.ARGUMENT_NOT_FOUND, Map.of("argument", firstArg)));
+			default -> TextUtils.sendComponentToCommandSender(
+					commandSender,
+					MessagesUtils.getComponent(EXGMessage.ARGUMENT_NOT_FOUND, Map.of("argument", firstArg))
+			);
 		}
 
     	return true;
@@ -85,6 +94,11 @@ public class CommandEssentialsXGUI implements CommandExecutor, TabCompleter {
 
 	public void sendDebugLinkMessage(CommandSender commandSender) {
 
+		if (!commandSender.hasPermission(EXGPermission.CMD_EXG_DEBUG.get())) {
+			TextUtils.sendComponentToCommandSender(commandSender, MessagesUtils.getComponent(EXGMessage.NO_PERMISSION));
+			return;
+		}
+
 		if (!(commandSender instanceof Player player)) {
 			TextUtils.sendComponentToCommandSender(commandSender, MessagesUtils.getComponent(EXGMessage.ONLY_FOR_PLAYERS, null));
 			return;
@@ -99,6 +113,11 @@ public class CommandEssentialsXGUI implements CommandExecutor, TabCompleter {
 
 
 	public void reloadPlugin(CommandSender commandSender) {
+
+		if (!commandSender.hasPermission(EXGPermission.CMD_EXG_RELOAD.get())) {
+			TextUtils.sendComponentToCommandSender(commandSender, MessagesUtils.getComponent(EXGMessage.NO_PERMISSION));
+			return;
+		}
 
 
 		// FILES RELOADING

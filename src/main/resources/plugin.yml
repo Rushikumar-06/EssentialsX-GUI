@@ -17,7 +17,36 @@ depend:
 
 commands:
 
-  essentialsXGUI:
+  essentialsxgui:
     description: Main command for management of the plugin.
-    aliases:
-      - exg
+    aliases: [exg, egui, essentialsgui]
+
+
+permissions:
+
+  essentialsxgui.admin.update:
+    description: Allows to receive update notifications when a new version of the plugin is available.
+    default: op
+
+  essentialsxgui.command.essentialsxgui:
+    description: Allows to use the /essentialsxgui command.
+    default: op
+    children:
+        essentialsxgui.command.essentialsxgui.reload: false
+        essentialsxgui.command.essentialsxgui.debug: false
+
+  essentialsxgui.command.essentialsxgui.reload:
+    description: Allows to use the /essentialsxgui reload command.
+    default: op
+
+  essentialsxgui.command.essentialsxgui.debug:
+    description: Allows to use the /essentialsxgui debug command.
+    default: op
+
+  essentialsxgui.kits.admin:
+    description: Allows to manage kits through the GUI.
+    default: op
+
+  essentialsxgui.warps.admin:
+    description: Allows to manage warps through the GUI.
+    default: op

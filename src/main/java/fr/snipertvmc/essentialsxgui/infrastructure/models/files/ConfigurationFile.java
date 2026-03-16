@@ -178,33 +178,6 @@ public class ConfigurationFile {
 	// -------------------------------------------------- //
 
 
-	public boolean canReceiveUpdateAlert(Player player) {
-		return player.hasPermission(yamlConfiguration.getString("permissions.admin.updateAlert", "unknownPermission"));
-	}
-
-
-	public boolean hasEssentialsXGUICommand(Player player) {
-		return player.hasPermission(yamlConfiguration.getString("permissions.commands.essentialsxgui", "unknownPermission"));
-	}
-
-	public boolean hasEssentialsXGUICommandDebugArgument(Player player) {
-		return player.hasPermission(yamlConfiguration.getString("permissions.commands.essentialsxgui.debugArgument", "unknownPermission"));
-	}
-
-
-	public boolean hasKitsAdminAccess(Player player) {
-		return player.hasPermission(yamlConfiguration.getString("permissions.guis.kitsAdminAccess", "unknownPermission"));
-	}
-
-
-	public boolean hasWarpsAdminAccess(Player player) {
-		return player.hasPermission(yamlConfiguration.getString("permissions.guis.warpsAdminAccess", "unknownPermission"));
-	}
-
-
-	// -------------------------------------------------- //
-
-
 	public String getStorageType() {
 		return yamlConfiguration.getString("storage.type", "SQLite");
 	}
