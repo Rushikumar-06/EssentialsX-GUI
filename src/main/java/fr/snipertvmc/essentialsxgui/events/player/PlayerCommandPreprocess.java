@@ -58,6 +58,7 @@ public class PlayerCommandPreprocess implements Listener {
 			case "home", "homes" -> {
 
 				if (args.length > 1) return;
+				if (!player.hasPermission("essentials.home")) return;
 
 				if (!Main.getInstance().getConfiguration().isHomesModuleEnabled()) {
 					return;
@@ -77,6 +78,7 @@ public class PlayerCommandPreprocess implements Listener {
 			case "kit", "kits" -> {
 
 				if (args.length > 1) return;
+				if (!player.hasPermission("essentials.kit")) return;
 
 				if (!Main.getInstance().getConfiguration().isKitsModuleEnabled()) {
 					return;
@@ -106,6 +108,7 @@ public class PlayerCommandPreprocess implements Listener {
 			case "warp", "warps" -> {
 
 				if (args.length > 1) return;
+				if (!player.hasPermission("essentials.warp")) return;
 
 				if (!Main.getInstance().getConfiguration().isWarpsModuleEnabled()) {
 					return;
@@ -133,6 +136,8 @@ public class PlayerCommandPreprocess implements Listener {
 			//
 
 			case "whois" -> {
+
+				if (!player.hasPermission("essentials.whois")) return;
 
 				event.setCancelled(true);
 
