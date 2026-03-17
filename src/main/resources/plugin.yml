@@ -31,9 +31,6 @@ permissions:
   essentialsxgui.command.essentialsxgui:
     description: Allows to use the /essentialsxgui command.
     default: op
-    children:
-        essentialsxgui.command.essentialsxgui.reload: false
-        essentialsxgui.command.essentialsxgui.debug: false
 
   essentialsxgui.command.essentialsxgui.reload:
     description: Allows to use the /essentialsxgui reload command.
