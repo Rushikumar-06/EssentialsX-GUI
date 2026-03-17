@@ -7,6 +7,7 @@ import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGEntrySettings;
 import fr.snipertvmc.essentialsxgui.inventories.others.DataEntryAnvilInventory;
 import fr.snipertvmc.essentialsxgui.inventories.others.DataEntryGUIInventory;
 import fr.snipertvmc.essentialsxgui.libraries.exglib.Pair;
+import fr.snipertvmc.essentialsxgui.utilities.TextUtils;
 import fr.snipertvmc.essentialsxgui.utilities.type.TypeUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -65,6 +66,10 @@ public class DataEntryUtils {
 
 		if (value.equalsIgnoreCase("cancel")) {
 			return new Pair<>(value, EXGEntryResult.CANCELED);
+		}
+
+		if (!TextUtils.isValidMiniMessage(value)) {
+			return new Pair<>(value, EXGEntryResult.INVALID_FORMAT);
 		}
 
 		if ( (entrySettings.getMinLength() != -1 && value.length() < entrySettings.getMinLength())

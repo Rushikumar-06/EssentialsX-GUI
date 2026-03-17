@@ -54,6 +54,7 @@ errors:
 
   invalidMaterial: "<red>The material name is invalid.<reset>"
   invalidNumber: "<red>The input is not a valid number.<reset>"
+  invalidFormat: "<red>The input format is invalid. You must use MiniMessage formatting.<reset>"
   # Placeholders available: {min}, {max}
   lengthLimit: "<red>The input should be between <white>{min}<red> and <white>{max} <red>characters long.<reset>"
 
