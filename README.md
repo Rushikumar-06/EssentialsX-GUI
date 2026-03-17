@@ -4,7 +4,9 @@
 
 EssentialsX-GUI is an **unofficial** EssentialsX addon that adds some GUIs for Essentials features, like homes, kits, warps, whois, etc..
 
-[![Download](https://img.shields.io/github/downloads/SniperTVmc/EssentialsX-GUI/total?style=for-the-badge)](https://github.com/SniperTVmc/EssentialsX-GUI/releases/latest)
+[![Modrinth Downloads](https://img.shields.io/modrinth/dt/essentialsx-gui?style=for-the-badge&logo=modrinth&color=24b473)](https://modrinth.com/plugin/essentialsx-gui)
+[![Spigot Downloads](https://img.shields.io/spiget/downloads/127805?style=for-the-badge&logo=spigotmc&color=fba905)](https://www.spigotmc.org/resources/127805/)
+[![GitHub Download](https://img.shields.io/github/downloads/SniperTVmc/EssentialsX-GUI/total?style=for-the-badge&logo=github&color=dddddd)](https://github.com/SniperTVmc/EssentialsX-GUI/releases/latest)
 [![License](https://img.shields.io/badge/license-GNU%20GPL%20v3-blue?style=for-the-badge)](https://github.com/SniperTVmc/EssentialsX-GUI/blob/Main/LICENSE)
 [![CodeFactor](https://www.codefactor.io/repository/github/snipertvmc/essentialsx-gui/badge?style=for-the-badge)](https://www.codefactor.io/repository/github/snipertvmc/essentialsx-gui)
 [![Issues](https://img.shields.io/github/issues/SniperTVmc/EssentialsX-GUI?style=for-the-badge)](https://github.com/SniperTVmc/EssentialsX-GUI/issues)
