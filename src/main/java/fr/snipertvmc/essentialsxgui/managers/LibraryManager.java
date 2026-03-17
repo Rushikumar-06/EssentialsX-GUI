@@ -62,12 +62,6 @@ public class LibraryManager {
 				.build());
 
 		bukkitLibraryManager.loadLibrary(Library.builder()
-				.groupId("io.github.classgraph")
-				.artifactId("classgraph")
-				.version("4.8.181")
-				.build());
-
-		bukkitLibraryManager.loadLibrary(Library.builder()
 				.groupId("com.github.InstantlyMoist")
 				.artifactId("privatebin-java-api")
 				.version("master-5625a57693-1")
@@ -77,6 +71,12 @@ public class LibraryManager {
 				.groupId("org.json")
 				.artifactId("json")
 				.version("20250517")
+				.build());
+
+		bukkitLibraryManager.loadLibrary(Library.builder()
+				.groupId("com.github.cryptomorin")
+				.artifactId("XSeries")
+				.version("13.6.0")
 				.build());
 	}
 
