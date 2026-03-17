@@ -1,6 +1,7 @@
 package fr.snipertvmc.essentialsxgui.commands;
 
 import fr.snipertvmc.essentialsxgui.Main;
+import fr.snipertvmc.essentialsxgui.infrastructure.annotations.EssentialsXGUICommand;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGPermission;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGPlayer;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+@EssentialsXGUICommand(NAME = "essentialsxgui")
 public class CommandEssentialsXGUI implements CommandExecutor, TabCompleter {
 
 

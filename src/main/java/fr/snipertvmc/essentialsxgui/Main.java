@@ -28,6 +28,8 @@ import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
 import net.byteflux.libby.BukkitLibraryManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
+
 public class Main extends JavaPlugin {
 
 
@@ -231,6 +233,9 @@ public class Main extends JavaPlugin {
 	}
 	public Metrics getMetrics() {
 		return metrics;
+	}
+	public File getPluginFile() {
+		return getFile();
 	}
 
 	public BukkitAudiences getBukkitAudiences() {

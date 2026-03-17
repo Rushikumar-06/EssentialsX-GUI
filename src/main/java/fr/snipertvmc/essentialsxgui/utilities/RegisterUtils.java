@@ -1,16 +1,14 @@
 package fr.snipertvmc.essentialsxgui.utilities;
 
 import fr.snipertvmc.essentialsxgui.Main;
-import io.github.classgraph.ClassGraph;
-import io.github.classgraph.ScanResult;
-import org.bukkit.Bukkit;
+import fr.snipertvmc.essentialsxgui.infrastructure.annotations.EssentialsXGUICommand;
 import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.TabExecutor;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.event.Listener;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.jar.JarFile;
 
 public class RegisterUtils {
 
@@ -20,77 +18,80 @@ public class RegisterUtils {
 
 	public static int registerCommands(String packageName) {
 
-		int registeredCommands = 0;
+		try {
+			int counter = 0;
+			for(Class<?> instance : getClasses(packageName)) {
+				if(!CommandExecutor.class.isAssignableFrom(instance)) continue;
+				if(instance.getAnnotation(EssentialsXGUICommand.class) == null) continue;
 
-		try (ScanResult scanResult = new ClassGraph()
-				.enableClassInfo()
-				.acceptPackages(packageName)
-				.scan()) {
+				EssentialsXGUICommand command = instance.getAnnotation(EssentialsXGUICommand.class);
+				CommandExecutor commandExecutor = (CommandExecutor) instance.getDeclaredConstructor().newInstance();
 
-			List<Class<CommandExecutor>> commandClasses = scanResult
-					.getClassesImplementing(CommandExecutor.class)
-					.loadClasses(CommandExecutor.class);
-
-			for (Class<? extends CommandExecutor> commandClass : commandClasses) {
-
-				try {
-					Constructor<? extends CommandExecutor> constructor = commandClass.getDeclaredConstructor();
-					CommandExecutor commandExecutor = constructor.newInstance();
-
-					String commandName = commandClass.getSimpleName().toLowerCase().replace("command", "");
-					if (Main.getInstance().getCommand(commandName) != null) {
-						Main.getInstance().getCommand(commandName).setExecutor(commandExecutor);
-
-						if (commandExecutor instanceof TabExecutor) {
-							Main.getInstance().getCommand(commandName).setTabCompleter((TabExecutor) commandExecutor);
-						}
-						registeredCommands++;
-
-					} else {
-						ConsoleLogger.error("The command " + commandName + " is not defined in \"plugin.yml\".");
-					}
-
-				} catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-					ConsoleLogger.error("Command class registration fails: " + commandClass.getName());
-					throw new RuntimeException(e);
+				PluginCommand pluginCommand = Main.getInstance().getCommand(command.NAME());
+				if(pluginCommand == null) {
+					ConsoleLogger.error("The command '" + command.NAME() + "' has not been registered in the plugin.yml file.");
+					continue;
 				}
+
+				pluginCommand.setExecutor(commandExecutor);
+				counter++;
 			}
+
+			return counter;
+
+		} catch(Exception exception) {
+			ConsoleLogger.error("An error has occurred while registering commands : " + exception.getMessage());
 		}
 
-		return registeredCommands;
+		return 0;
 	}
-
-
-	// -------------------------------------------------- //
 
 
 	public static int registerEvents(String packageName) {
 
-		int registeredEvents = 0;
+		try {
 
-		try (ScanResult scanResult = new ClassGraph()
-				.enableClassInfo()
-				.acceptPackages(packageName)
-				.scan()) {
+			int counter = 0;
+			for(Class<?> instance : getClasses(packageName)) {
 
-			List<Class<Listener>> listenerClasses = scanResult
-					.getClassesImplementing(Listener.class)
-					.loadClasses(Listener.class);
+				if(Listener.class.isAssignableFrom(instance)) {
+					counter++;
+					Listener listener = (Listener) instance.getDeclaredConstructor().newInstance();
+					Main.getInstance().getServer().getPluginManager().registerEvents(listener, Main.getInstance());
+				}
+			}
 
-			for (Class<? extends Listener> clazz : listenerClasses) {
+			return counter;
 
-				try {
-					Listener listener = clazz.getDeclaredConstructor().newInstance();
-					Bukkit.getServer().getPluginManager().registerEvents(listener, Main.getInstance());
-					registeredEvents++;
+		} catch(Exception exception) {
+			ConsoleLogger.error("An error has occurred while registering listeners : " + exception.getMessage());
+		}
 
-				} catch (Exception e) {
-					throw new RuntimeException(e);
+		return 0;
+	}
+
+	// -------------------------------------------------- //
+
+
+	private static Set<Class<?>> getClasses(String packageName) throws Exception {
+		Set<Class<?>> classes = new HashSet<>();
+
+		String path = packageName.replace('.', '/');
+		try (JarFile jarFile = new JarFile(Main.getInstance().getPluginFile())) {
+			var entries = jarFile.entries();
+
+			while (entries.hasMoreElements()) {
+				var entry = entries.nextElement();
+				String name = entry.getName();
+
+				if (name.startsWith(path) && name.endsWith(".class") && !entry.isDirectory()) {
+					String className = name.replace('/', '.').replace(".class", "");
+					classes.add(Class.forName(className));
 				}
 			}
 		}
 
-		return registeredEvents;
+		return classes;
 	}
 
 
