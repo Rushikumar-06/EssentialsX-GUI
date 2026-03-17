@@ -132,7 +132,7 @@ public class EXGKitsAdminViewInventoryConfig extends EXGInventoryConfig {
 	public EXGKitsAdminViewInventoryConfig copy() {
 
 		EXGKitsAdminViewInventoryConfig copy = new EXGKitsAdminViewInventoryConfig(
-				this.getEXGTitle().getTitle(),
+				this.getEXGTitle().getTitle(null),
 				this.getRows(),
 				this.getBorderItem().duplicate(),
 				this.getBorderSlots()

@@ -101,7 +101,7 @@ public class EXGWhoisPlayersInventoryConfig extends EXGInventoryConfig {
 	public EXGWhoisPlayersInventoryConfig copy() {
 
 		EXGWhoisPlayersInventoryConfig copy = new EXGWhoisPlayersInventoryConfig(
-				this.getEXGTitle().getTitle(),
+				this.getEXGTitle().getTitle(null),
 				this.getRows(),
 				this.getBorderItem().duplicate(),
 				this.getBorderSlots()

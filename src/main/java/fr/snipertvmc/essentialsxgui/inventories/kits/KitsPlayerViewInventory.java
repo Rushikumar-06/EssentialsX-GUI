@@ -40,7 +40,7 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 						.duplicate()
 						.updateVariables(
 								Map.of("player", player.getName()))
-						.getTitle()
+						.getTitle(player)
 		);
 
 
@@ -98,7 +98,7 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 						.updateVariables(
 								Map.of("kitDisplayName", kit.getDisplayName(),
 										"kitName", kit.getName()))
-						.build();
+						.build(player);
 			}
 
 			addContent(kitItemStack, e -> {
@@ -118,13 +118,13 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 		if (kits.isEmpty()) {
 
 			if (kitSearch == null) {
-				addContent(config.getNoKitsItem().build());
+				addContent(config.getNoKitsItem().build(player));
 
 			} else {
 				addContent(config.getNoSearchKitResultsItem()
 						.updateVariables(
 								Map.of("kitSearch", kitSearch))
-						.build());
+						.build(player));
 			}
 		}
 	}
@@ -133,7 +133,7 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 	private void defineSwitchToAdminModeItem(Player player) {
 
 		if (config.getSwitchToAdminModeItem().isEnabled() && player.hasPermission(EXGPermission.KITS_ADMIN.get())) {
-			setItem(config.getSwitchToAdminModeItem().getSlot(), config.getSwitchToAdminModeItem().build(), e -> {
+			setItem(config.getSwitchToAdminModeItem().getSlot(), config.getSwitchToAdminModeItem().build(player), e -> {
 
 				new KitsAdminViewInventory(player, null, null).open(player);
 				SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
@@ -147,7 +147,7 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 		if (kitSearch == null) {
 			if (config.getSearchKitItem().isEnabled() && !kits.isEmpty()) {
 				setItem(config.getSearchKitItem().getSlot(), config.getSearchKitItem()
-						.build(), e -> {
+						.build(player), e -> {
 
 					searchKit(player);
 					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
@@ -157,7 +157,7 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 		} else {
 			if (config.getCancelSearchKitItem().isEnabled()) {
 				setItem(config.getCancelSearchKitItem().getSlot(), config.getCancelSearchKitItem()
-						.build(), e -> {
+						.build(player), e -> {
 
 					new KitsPlayerViewInventory(player, null, null).open(player);
 					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
@@ -170,7 +170,7 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 	private void initializeGeneralInventory(Player player) {
 
 		if (config.getBorderItem().isEnabled()) {
-			setItems(config.getBorderSlots(), config.getBorderItem().build());
+			setItems(config.getBorderSlots(), config.getBorderItem().build(player));
 		}
 
 
@@ -178,18 +178,18 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 				.updateVariables(
 						Map.of("currentPage", String.valueOf(p + 1),
 								"previousPage", String.valueOf(p)))
-				.build());
+				.build(player));
 
 
 		nextPageItem(config.getNextPageItem().getSlot(), p -> config.getNextPageItem().duplicate()
 				.updateVariables(
 						Map.of("currentPage", String.valueOf(p - 1),
 								"nextPage", String.valueOf(p)))
-				.build());
+				.build(player));
 
 
 		if (config.getCloseItem().isEnabled()) {
-			setItem(config.getCloseItem().getSlot(), config.getCloseItem().build(), e -> {
+			setItem(config.getCloseItem().getSlot(), config.getCloseItem().build(player), e -> {
 
 				e.getWhoClicked().closeInventory();
 				SoundsUtils.playSound(player, EXGSound.GUI_CLOSE);
@@ -255,15 +255,16 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 	@Override
 	protected void onPageChange(int page) {
 
+		Player player = this.getInventory().getViewers().isEmpty() ? null : (Player) this.getInventory().getViewers().get(0);
+
 		setItem(config.getCurrentPageItem().getSlot(), config.getCurrentPageItem()
 				.updateVariables(
 						Map.of("currentPage", String.valueOf(this.currentPage()),
 								"totalPages", String.valueOf(this.lastPage()),
 								"previousPage", String.valueOf(this.currentPage() - 1),
 								"nextPage", String.valueOf(this.currentPage() + 1)))
-				.build());
+				.build(player));
 
-		Player player = this.getInventory().getViewers().isEmpty() ? null : (Player) this.getInventory().getViewers().get(0);
 		SoundsUtils.playSound(player, EXGSound.GUI_PAGE_CHANGE);
 	}
 

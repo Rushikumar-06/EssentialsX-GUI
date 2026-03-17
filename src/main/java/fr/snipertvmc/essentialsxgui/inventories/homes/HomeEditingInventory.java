@@ -43,12 +43,12 @@ public class HomeEditingInventory extends FastInv {
 								Map.of("player", player.getName(),
 										"homeName", home.getName(),
 										"homeDisplayName", home.getDisplayName()))
-						.getTitle()
+						.getTitle(player)
 		);
 
 
 		if (config.getBorderItem().isEnabled()) {
-			setItems(config.getBorderSlots(), config.getBorderItem().build());
+			setItems(config.getBorderSlots(), config.getBorderItem().build(player));
 		}
 
 
@@ -83,7 +83,7 @@ public class HomeEditingInventory extends FastInv {
 						.updateVariables(
 								Map.of("homeDisplayName", home.getDisplayName(),
 										"homeName", home.getName()))
-						.build();
+						.build(player);
 			}
 
 			setItem(config.getPreviewHomeItem().getSlot(), previewHomeItemStack);
@@ -95,7 +95,7 @@ public class HomeEditingInventory extends FastInv {
 					.updateVariables(
 							Map.of("homeName", home.getName(),
 									"homeDisplayName", home.getDisplayName()))
-					.build(), e -> {
+					.build(player), e -> {
 
 				SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 				changeHomeDisplayName(player, home);
@@ -106,7 +106,7 @@ public class HomeEditingInventory extends FastInv {
 			setItem(config.getChangeIconItem().getSlot(), config.getChangeIconItem()
 					.updateVariables(
 							Map.of("homeName", home.getName()))
-					.build(), e -> {
+					.build(player), e -> {
 
 				SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 				changeHomeIcon(player, home);
@@ -118,7 +118,7 @@ public class HomeEditingInventory extends FastInv {
 					.updateVariables(
 							Map.of("homeName", home.getName(),
 									"homeDisplayName", home.getDisplayName()))
-					.build(), e -> {
+					.build(player), e -> {
 
 				SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 				deleteHome(player, home);
@@ -127,7 +127,7 @@ public class HomeEditingInventory extends FastInv {
 
 
 		if (config.getBackItem().isEnabled()) {
-			setItem(config.getBackItem().getSlot(), config.getBackItem().build(), e -> {
+			setItem(config.getBackItem().getSlot(), config.getBackItem().build(player), e -> {
 
 				new HomesInventory(player, null, null).open(player);
 				SoundsUtils.playSound(player, EXGSound.GUI_BACK);

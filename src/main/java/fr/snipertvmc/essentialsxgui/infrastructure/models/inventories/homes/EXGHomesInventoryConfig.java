@@ -166,7 +166,7 @@ public class EXGHomesInventoryConfig extends EXGInventoryConfig {
 	public EXGHomesInventoryConfig copy() {
 
 		EXGHomesInventoryConfig copy = new EXGHomesInventoryConfig(
-				this.getEXGTitle().getTitle(),
+				this.getEXGTitle().getTitle(null),
 				this.getRows(),
 				this.getBorderItem().duplicate(),
 				this.getBorderSlots()

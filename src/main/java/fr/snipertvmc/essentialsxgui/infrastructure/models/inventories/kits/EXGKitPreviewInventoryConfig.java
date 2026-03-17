@@ -101,7 +101,7 @@ public class EXGKitPreviewInventoryConfig extends EXGInventoryConfig {
 	public EXGKitPreviewInventoryConfig copy() {
 
 		EXGKitPreviewInventoryConfig copy = new EXGKitPreviewInventoryConfig(
-				this.getEXGTitle().getTitle(),
+				this.getEXGTitle().getTitle(null),
 				this.getRows(),
 				this.getBorderItem().duplicate(),
 				this.getBorderSlots()

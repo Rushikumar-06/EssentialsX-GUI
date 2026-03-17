@@ -39,7 +39,7 @@ public class DataEntryGUIInventory extends PaginatedFastInv {
 						.duplicate()
 						.updateVariables(
 								Map.of("entryDisplayName", entrySettings.getEntryDisplayName()))
-						.getTitle()
+						.getTitle(player)
 		);
 
 
@@ -82,7 +82,7 @@ public class DataEntryGUIInventory extends PaginatedFastInv {
 					.updateVariables(Map.of(
 							"materialName", materialPair.getLeft().name()
 					))
-					.build(), e -> {
+					.build(player), e -> {
 
 				String completeMaterial = materialPair.getLeft() + ":" + materialPair.getRight();
 				Pair<Pair<XMaterial, Byte>, EXGEntryResult> result = DataEntryUtils.checkMaterialEntry(completeMaterial);
@@ -102,25 +102,25 @@ public class DataEntryGUIInventory extends PaginatedFastInv {
 	private void initializeInventory(Player player, Consumer<Pair<String, EXGEntryResult>> onFailure) {
 
 		if (config.getBorderItem().isEnabled()) {
-			setItems(config.getBorderSlots(), config.getBorderItem().build());
+			setItems(config.getBorderSlots(), config.getBorderItem().build(player));
 		}
 
 		previousPageItem(config.getPreviousPageItem().getSlot(), p -> config.getPreviousPageItem().duplicate()
 				.updateVariables(
 						Map.of("currentPage", String.valueOf(p + 1),
 								"previousPage", String.valueOf(p)))
-				.build());
+				.build(player));
 
 
 		nextPageItem(config.getNextPageItem().getSlot(), p -> config.getNextPageItem().duplicate()
 				.updateVariables(
 						Map.of("currentPage", String.valueOf(p - 1),
 								"nextPage", String.valueOf(p)))
-				.build());
+				.build(player));
 
 
 		if (config.getCancelItem().isEnabled()) {
-			setItem(config.getCancelItem().getSlot(), config.getCancelItem().build(), e -> {
+			setItem(config.getCancelItem().getSlot(), config.getCancelItem().build(player), e -> {
 
 				onFailure.accept(new Pair<>(null, EXGEntryResult.CANCELED));
 				EXGEntryResult.CANCELED.playResult(player);
@@ -138,19 +138,20 @@ public class DataEntryGUIInventory extends PaginatedFastInv {
 	@Override
 	protected void onPageChange(int page) {
 
+		Player player = this.getInventory().getViewers().isEmpty() ? null : (Player) this.getInventory().getViewers().get(0);
+
 		setItem(config.getCurrentPageItem().getSlot(), config.getCurrentPageItem().duplicate()
 				.updateVariables(
 						Map.of("currentPage", String.valueOf(page),
 								"totalPages", String.valueOf(this.lastPage()),
 								"previousPage", String.valueOf(page - 1),
 								"nextPage", String.valueOf(page + 1)))
-				.build());
+				.build(player));
 
 		if (this.getInventory().getViewers().isEmpty()) {
 			return;
 		}
 
-		Player player = this.getInventory().getViewers().isEmpty() ? null : (Player) this.getInventory().getViewers().get(0);
 		SoundsUtils.playSound(player, EXGSound.GUI_PAGE_CHANGE);
 	}
 

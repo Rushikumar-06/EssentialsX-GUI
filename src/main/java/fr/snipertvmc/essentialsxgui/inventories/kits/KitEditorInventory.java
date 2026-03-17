@@ -40,21 +40,21 @@ public class KitEditorInventory extends FastInv {
 								Map.of("player", player.getName(),
 										"kitName", kit.getName(),
 										"kitDisplayName", kit.getDisplayName()))
-						.getTitle()
+						.getTitle(player)
 		);
 
 
 		if (config.getBorderItem().isEnabled()) {
 			setItems(config.getBorderSlots(), config.getBorderItem()
 					.setItemFlags(List.of(XItemFlag.HIDE_UNBREAKABLE))
-					.build(), e -> e.setCancelled(true));
+					.build(player), e -> e.setCancelled(true));
 		}
 
 
 		if (config.getSaveKitItem().isEnabled()) {
 			setItem(config.getSaveKitItem().getSlot(), config.getSaveKitItem()
 					.setItemFlags(List.of(XItemFlag.HIDE_UNBREAKABLE))
-					.build(), e -> {
+					.build(player), e -> {
 
 				e.setCancelled(true);
 
@@ -75,7 +75,7 @@ public class KitEditorInventory extends FastInv {
 		if (config.getCancelChangesItem().isEnabled()) {
 			setItem(config.getCancelChangesItem().getSlot(), config.getCancelChangesItem()
 					.setItemFlags(List.of(XItemFlag.HIDE_UNBREAKABLE))
-					.build(), e -> {
+					.build(player), e -> {
 
 				e.setCancelled(true);
 

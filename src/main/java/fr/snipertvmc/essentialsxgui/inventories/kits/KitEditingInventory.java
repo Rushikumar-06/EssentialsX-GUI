@@ -43,12 +43,12 @@ public class KitEditingInventory extends FastInv {
 								Map.of("player", player.getName(),
 										"kitName", kit.getName(),
 										"kitDisplayName", kit.getDisplayName()))
-						.getTitle()
+						.getTitle(player)
 		);
 
 
 		if (config.getBorderItem().isEnabled()) {
-			setItems(config.getBorderSlots(), config.getBorderItem().build());
+			setItems(config.getBorderSlots(), config.getBorderItem().build(player));
 		}
 
 
@@ -83,7 +83,7 @@ public class KitEditingInventory extends FastInv {
 						.updateVariables(
 								Map.of("kitDisplayName", kit.getDisplayName(),
 										"kitName", kit.getName()))
-						.build();
+						.build(player);
 			}
 
 			setItem(config.getPreviewKitItem().getSlot(), previewKitItemStack);
@@ -95,7 +95,7 @@ public class KitEditingInventory extends FastInv {
 					.updateVariables(
 							Map.of("kitName", kit.getName(),
 									"kitDisplayName", kit.getDisplayName()))
-					.build(), e -> {
+					.build(player), e -> {
 
 				SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 				changeKitDisplayName(player, kit);
@@ -107,7 +107,7 @@ public class KitEditingInventory extends FastInv {
 			setItem(config.getChangeIconItem().getSlot(), config.getChangeIconItem()
 					.updateVariables(
 							Map.of("kitName", kit.getName()))
-					.build(), e -> {
+					.build(player), e -> {
 
 				SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 				changeKitIcon(player, kit);
@@ -119,7 +119,7 @@ public class KitEditingInventory extends FastInv {
 					.updateVariables(
 							Map.of("kitName", kit.getName(),
 									"kitDisplayName", kit.getDisplayName()))
-					.build(), e -> {
+					.build(player), e -> {
 
 				SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 				deleteKit(player, kit);
@@ -129,7 +129,7 @@ public class KitEditingInventory extends FastInv {
 
 		if (config.getEditKitContentsItem().isEnabled()) {
 			setItem(config.getEditKitContentsItem().getSlot(), config.getEditKitContentsItem()
-					.build(), e -> {
+					.build(player), e -> {
 
 				new KitEditorInventory(player, kit).open(player);
 				SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
@@ -138,7 +138,7 @@ public class KitEditingInventory extends FastInv {
 
 
 		if (config.getBackItem().isEnabled()) {
-			setItem(config.getBackItem().getSlot(), config.getBackItem().build(), e -> {
+			setItem(config.getBackItem().getSlot(), config.getBackItem().build(player), e -> {
 
 				new KitsAdminViewInventory(player, null, null).open(player);
 				SoundsUtils.playSound(player, EXGSound.GUI_BACK);

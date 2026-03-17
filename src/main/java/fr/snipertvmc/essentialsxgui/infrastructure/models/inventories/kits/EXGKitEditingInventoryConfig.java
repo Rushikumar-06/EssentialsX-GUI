@@ -83,7 +83,7 @@ public class EXGKitEditingInventoryConfig extends EXGInventoryConfig {
 	public EXGKitEditingInventoryConfig copy() {
 
 		EXGKitEditingInventoryConfig copy = new EXGKitEditingInventoryConfig(
-				this.getEXGTitle().duplicate().getTitle(),
+				this.getEXGTitle().duplicate().getTitle(null),
 				this.getRows(),
 				this.getBorderItem().duplicate(),
 				this.getBorderSlots());

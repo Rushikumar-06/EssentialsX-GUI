@@ -40,7 +40,7 @@ public class WarpsPlayerViewInventory extends PaginatedFastInv {
 						.duplicate()
 						.updateVariables(
 								Map.of("player", player.getName()))
-						.getTitle()
+						.getTitle(player)
 		);
 
 
@@ -98,7 +98,7 @@ public class WarpsPlayerViewInventory extends PaginatedFastInv {
 						.updateVariables(
 								Map.of("warpDisplayName", warp.getDisplayName(),
 										"warpName", warp.getName()))
-						.build();
+						.build(player);
 			}
 
 			addContent(warpItemStack, e -> {
@@ -110,13 +110,13 @@ public class WarpsPlayerViewInventory extends PaginatedFastInv {
 		if (warps.isEmpty()) {
 
 			if (warpSearch == null) {
-				addContent(config.getNoWarpsItem().build());
+				addContent(config.getNoWarpsItem().build(player));
 
 			} else {
 				addContent(config.getNoSearchWarpResultsItem()
 						.updateVariables(
 								Map.of("warpSearch", warpSearch))
-						.build());
+						.build(player));
 			}
 		}
 	}
@@ -125,7 +125,7 @@ public class WarpsPlayerViewInventory extends PaginatedFastInv {
 	private void defineSwitchToAdminModeItem(Player player) {
 
 		if (config.getSwitchToAdminModeItem().isEnabled() && player.hasPermission(EXGPermission.WARPS_ADMIN.get())) {
-			setItem(config.getSwitchToAdminModeItem().getSlot(), config.getSwitchToAdminModeItem().build(), e -> {
+			setItem(config.getSwitchToAdminModeItem().getSlot(), config.getSwitchToAdminModeItem().build(player), e -> {
 
 				new WarpsAdminViewInventory(player, null, null).open(player);
 				SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
@@ -139,7 +139,7 @@ public class WarpsPlayerViewInventory extends PaginatedFastInv {
 		if (warpSearch == null) {
 			if (config.getSearchWarpItem().isEnabled() && !warps.isEmpty()) {
 				setItem(config.getSearchWarpItem().getSlot(), config.getSearchWarpItem()
-						.build(), e -> {
+						.build(player), e -> {
 
 					searchWarp(player);
 					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
@@ -149,7 +149,7 @@ public class WarpsPlayerViewInventory extends PaginatedFastInv {
 		} else {
 			if (config.getCancelSearchWarpItem().isEnabled()) {
 				setItem(config.getCancelSearchWarpItem().getSlot(), config.getCancelSearchWarpItem()
-						.build(), e -> {
+						.build(player), e -> {
 
 					new WarpsPlayerViewInventory(player, null, null).open(player);
 					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
@@ -162,7 +162,7 @@ public class WarpsPlayerViewInventory extends PaginatedFastInv {
 	private void initializeGeneralInventory(Player player) {
 
 		if (config.getBorderItem().isEnabled()) {
-			setItems(config.getBorderSlots(), config.getBorderItem().build());
+			setItems(config.getBorderSlots(), config.getBorderItem().build(player));
 		}
 
 
@@ -170,18 +170,18 @@ public class WarpsPlayerViewInventory extends PaginatedFastInv {
 				.updateVariables(
 						Map.of("currentPage", String.valueOf(p + 1),
 								"previousPage", String.valueOf(p)))
-				.build());
+				.build(player));
 
 
 		nextPageItem(config.getNextPageItem().getSlot(), p -> config.getNextPageItem().duplicate()
 				.updateVariables(
 						Map.of("currentPage", String.valueOf(p - 1),
 								"nextPage", String.valueOf(p)))
-				.build());
+				.build(player));
 
 
 		if (config.getCloseItem().isEnabled()) {
-			setItem(config.getCloseItem().getSlot(), config.getCloseItem().build(), e -> {
+			setItem(config.getCloseItem().getSlot(), config.getCloseItem().build(player), e -> {
 
 				e.getWhoClicked().closeInventory();
 				SoundsUtils.playSound(player, EXGSound.GUI_CLOSE);
@@ -247,15 +247,16 @@ public class WarpsPlayerViewInventory extends PaginatedFastInv {
 	@Override
 	protected void onPageChange(int page) {
 
+		Player player = this.getInventory().getViewers().isEmpty() ? null : (Player) this.getInventory().getViewers().get(0);
+
 		setItem(config.getCurrentPageItem().getSlot(), config.getCurrentPageItem()
 				.updateVariables(
 						Map.of("currentPage", String.valueOf(this.currentPage()),
 								"totalPages", String.valueOf(this.lastPage()),
 								"previousPage", String.valueOf(this.currentPage() - 1),
 								"nextPage", String.valueOf(this.currentPage() + 1)))
-				.build());
+				.build(player));
 
-		Player player = this.getInventory().getViewers().isEmpty() ? null : (Player) this.getInventory().getViewers().get(0);
 		SoundsUtils.playSound(player, EXGSound.GUI_PAGE_CHANGE);
 	}
 

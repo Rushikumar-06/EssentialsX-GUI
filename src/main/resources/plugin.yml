@@ -13,6 +13,8 @@ api-version: 1.13
 
 depend:
   - Essentials
+softdepend:
+  - PlaceholderAPI
 
 
 commands:

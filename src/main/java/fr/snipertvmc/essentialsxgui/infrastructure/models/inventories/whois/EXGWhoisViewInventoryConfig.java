@@ -116,7 +116,7 @@ public class EXGWhoisViewInventoryConfig extends EXGInventoryConfig {
 	public EXGWhoisViewInventoryConfig copy() {
 
 		EXGWhoisViewInventoryConfig copy = new EXGWhoisViewInventoryConfig(
-				this.getEXGTitle().getTitle(),
+				this.getEXGTitle().getTitle(null),
 				this.getRows(),
 				this.getBorderItem().duplicate(),
 				this.getBorderSlots()

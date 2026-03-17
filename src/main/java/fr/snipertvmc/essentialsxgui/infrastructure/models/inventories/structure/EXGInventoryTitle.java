@@ -1,5 +1,9 @@
 package fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure;
 
+import fr.snipertvmc.essentialsxgui.Main;
+import me.clip.placeholderapi.PlaceholderAPI;
+import org.bukkit.entity.Player;
+
 import java.util.Map;
 
 public class EXGInventoryTitle {
@@ -22,8 +26,12 @@ public class EXGInventoryTitle {
 	// -------------------------------------------------- //
 
 
-	public String getTitle() {
-		return title.replace("&", "§");
+	public String getTitle(Player player) {
+		if (Main.getInstance().getLoadingManager().isPlaceholderAPISupported()) {
+			return PlaceholderAPI.setPlaceholders(player, title);
+		} else {
+			return title;
+		}
 	}
 
 

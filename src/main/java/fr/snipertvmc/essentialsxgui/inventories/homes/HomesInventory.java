@@ -40,7 +40,7 @@ public class HomesInventory extends PaginatedFastInv {
 						.duplicate()
 						.updateVariables(
 								Map.of("player", player.getName()))
-						.getTitle()
+						.getTitle(player)
 		);
 
 
@@ -99,7 +99,7 @@ public class HomesInventory extends PaginatedFastInv {
 						 .updateVariables(
 								Map.of("homeDisplayName", home.getDisplayName(),
 										"homeName", home.getName()))
-						.build();
+						.build(player);
 			}
 
 			addContent(homeItemStack, e -> {
@@ -121,13 +121,13 @@ public class HomesInventory extends PaginatedFastInv {
 		if (homes.isEmpty()) {
 
 			if (homeSearch == null) {
-				addContent(config.getNoHomesItem().build());
+				addContent(config.getNoHomesItem().build(player));
 
 			} else {
 				addContent(config.getNoSearchHomeResultsItem()
 						.updateVariables(
 								Map.of("homeSearch", homeSearch))
-						.build());
+						.build(player));
 			}
 		}
 	}
@@ -143,7 +143,7 @@ public class HomesInventory extends PaginatedFastInv {
 					.updateVariables(Map.of("bedHomeWorldDisplayName", getBedHomeWorldDisplayName(player)))
 					.setMaterial(bedHomeMaterialName)
 					.setData(bedHomeData)
-					.build(), e -> {
+					.build(player), e -> {
 
 				if (player.hasPermission("essentials.home.bed")) {
 					player.performCommand("essentials:home bed");
@@ -161,7 +161,7 @@ public class HomesInventory extends PaginatedFastInv {
 
 		if (config.getCreateHomeItem().isEnabled()) {
 			setItem(config.getCreateHomeItem().getSlot(), config.getCreateHomeItem()
-					.build(), e -> {
+					.build(player), e -> {
 
 				if (player.hasPermission("essentials.sethome")) {
 					createNewHome(player);
@@ -181,7 +181,7 @@ public class HomesInventory extends PaginatedFastInv {
 		if (homeSearch == null) {
 			if (config.getSearchHomeItem().isEnabled() && !homes.isEmpty()) {
 				setItem(config.getSearchHomeItem().getSlot(), config.getSearchHomeItem()
-						.build(), e -> {
+						.build(player), e -> {
 
 					searchHome(player);
 					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
@@ -191,7 +191,7 @@ public class HomesInventory extends PaginatedFastInv {
 		} else {
 			if (config.getCancelSearchHomeItem().isEnabled()) {
 				setItem(config.getCancelSearchHomeItem().getSlot(), config.getCancelSearchHomeItem()
-						.build(), e -> {
+						.build(player), e -> {
 
 					new HomesInventory(player, null, null).open(player);
 					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
@@ -204,7 +204,7 @@ public class HomesInventory extends PaginatedFastInv {
 	private void initializeInventory(Player player) {
 
 		if (config.getBorderItem().isEnabled()) {
-			setItems(config.getBorderSlots(), config.getBorderItem().build());
+			setItems(config.getBorderSlots(), config.getBorderItem().build(player));
 		}
 
 
@@ -212,18 +212,18 @@ public class HomesInventory extends PaginatedFastInv {
 				.updateVariables(
 						Map.of("currentPage", String.valueOf(p + 1),
 								"previousPage", String.valueOf(p)))
-				.build());
+				.build(player));
 
 
 		nextPageItem(config.getNextPageItem().getSlot(), p -> config.getNextPageItem().duplicate()
 				.updateVariables(
 						Map.of("currentPage", String.valueOf(p - 1),
 								"nextPage", String.valueOf(p)))
-				.build());
+				.build(player));
 
 
 		if (config.getCloseItem().isEnabled()) {
-			setItem(config.getCloseItem().getSlot(), config.getCloseItem().build(), e -> {
+			setItem(config.getCloseItem().getSlot(), config.getCloseItem().build(player), e -> {
 
 				e.getWhoClicked().closeInventory();
 				SoundsUtils.playSound(player, EXGSound.GUI_CLOSE);
@@ -388,15 +388,16 @@ public class HomesInventory extends PaginatedFastInv {
 	@Override
 	protected void onPageChange(int page) {
 
+		Player player = this.getInventory().getViewers().isEmpty() ? null : (Player) this.getInventory().getViewers().get(0);
+
 		setItem(config.getCurrentPageItem().getSlot(), config.getCurrentPageItem()
 				.updateVariables(
 						Map.of("currentPage", String.valueOf(this.currentPage()),
 								"totalPages", String.valueOf(this.lastPage()),
 								"previousPage", String.valueOf(this.currentPage() - 1),
 								"nextPage", String.valueOf(this.currentPage() + 1)))
-				.build());
+				.build(player));
 
-		Player player = this.getInventory().getViewers().isEmpty() ? null : (Player) this.getInventory().getViewers().get(0);
 		SoundsUtils.playSound(player, EXGSound.GUI_PAGE_CHANGE);
 	}
 

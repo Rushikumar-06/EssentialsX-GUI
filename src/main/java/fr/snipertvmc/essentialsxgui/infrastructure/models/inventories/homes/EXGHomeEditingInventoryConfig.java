@@ -76,7 +76,7 @@ public class EXGHomeEditingInventoryConfig extends EXGInventoryConfig {
 	public EXGHomeEditingInventoryConfig copy() {
 
 		EXGHomeEditingInventoryConfig copy = new EXGHomeEditingInventoryConfig(
-				this.getEXGTitle().duplicate().getTitle(),
+				this.getEXGTitle().duplicate().getTitle(null),
 				this.getRows(),
 				this.getBorderItem().duplicate(),
 				this.getBorderSlots());

@@ -101,7 +101,7 @@ public class EXGWarpPlayerTeleportInventoryConfig extends EXGInventoryConfig {
 	public EXGWarpPlayerTeleportInventoryConfig copy() {
 
 		EXGWarpPlayerTeleportInventoryConfig copy = new EXGWarpPlayerTeleportInventoryConfig(
-				this.getEXGTitle().getTitle(),
+				this.getEXGTitle().getTitle(null),
 				this.getRows(),
 				this.getBorderItem().duplicate(),
 				this.getBorderSlots()

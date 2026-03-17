@@ -76,7 +76,7 @@ public class EXGWarpEditingInventoryConfig extends EXGInventoryConfig {
 	public EXGWarpEditingInventoryConfig copy() {
 
 		EXGWarpEditingInventoryConfig copy = new EXGWarpEditingInventoryConfig(
-				this.getEXGTitle().duplicate().getTitle(),
+				this.getEXGTitle().duplicate().getTitle(null),
 				this.getRows(),
 				this.getBorderItem().duplicate(),
 				this.getBorderSlots());

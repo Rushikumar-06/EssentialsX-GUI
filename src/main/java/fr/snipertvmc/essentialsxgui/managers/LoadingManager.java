@@ -11,6 +11,7 @@ import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.RegisterUtils;
 import fr.snipertvmc.essentialsxgui.utilities.TextUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.UpdateUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
 
@@ -23,6 +24,7 @@ public class LoadingManager {
 
 
 	private boolean pluginReady = false;
+	private boolean isPlaceholderAPISupported = false;
 	private final long startTimestamp = System.currentTimeMillis();
 
 
@@ -52,6 +54,7 @@ public class LoadingManager {
 		if (!Main.getInstance().getDescription().getVersion().contains("-dev")) {
 			startUpdateCheckerTask();
 		}
+		checkForPlaceholderAPISupport();
 		checkForUpdates(false);
 		if (detailedLoading) ConsoleLogger.console("\t§6EssentialsX-GUI: §7Server configuration analysis §fcompleted§7.");
 
@@ -278,6 +281,21 @@ public class LoadingManager {
 	// -------------------------------------------------- //
 
 
+	public void checkForPlaceholderAPISupport() {
+
+		if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+			ConsoleLogger.console("\t§6EssentialsX-GUI: §bPlaceholderAPI found. Placeholder support enabled.");
+			isPlaceholderAPISupported  = true;
+
+		} else {
+			isPlaceholderAPISupported = false;
+		}
+	}
+
+
+	// -------------------------------------------------- //
+
+
 	private void loadMetricsCharts() {
 
 
@@ -301,6 +319,9 @@ public class LoadingManager {
 
 	public boolean isPluginReady() {
 		return pluginReady;
+	}
+	public boolean isPlaceholderAPISupported() {
+		return isPlaceholderAPISupported;
 	}
 	public long getUptimeInMilliseconds() {
 		return System.currentTimeMillis() - startTimestamp;

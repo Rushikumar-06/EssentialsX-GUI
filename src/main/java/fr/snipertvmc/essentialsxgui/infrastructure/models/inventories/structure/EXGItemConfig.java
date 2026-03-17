@@ -3,11 +3,14 @@ package fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure
 import com.cryptomorin.xseries.XEnchantment;
 import com.cryptomorin.xseries.XItemFlag;
 import com.cryptomorin.xseries.XMaterial;
+import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.MCServerVersion;
 import fr.snipertvmc.essentialsxgui.libraries.exglib.Pair;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.ItemBuilder;
 import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
+import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
@@ -211,7 +214,7 @@ public class EXGItemConfig {
 	// -------------------------------------------------- //
 
 
-	public ItemStack build() {
+	public ItemStack build(Player player) {
 
 		ItemBuilder itemBuilder = getBaseItem();
 
@@ -230,13 +233,22 @@ public class EXGItemConfig {
 		itemBuilder.data(data);
 
 		if (displayName != null) {
-			itemBuilder.name(displayName);
+			if (Main.getInstance().getLoadingManager().isPlaceholderAPISupported()) {
+				itemBuilder.name(PlaceholderAPI.setPlaceholders(player, displayName));
+			} else {
+				itemBuilder.name(displayName);
+			}
+
 		} else {
 			itemBuilder.name(this.getMaterial().name());
 		}
 
 		if (lore != null) {
-			itemBuilder.lore(new ArrayList<>(lore));
+			if (Main.getInstance().getLoadingManager().isPlaceholderAPISupported()) {
+				itemBuilder.lore(new ArrayList<>(PlaceholderAPI.setPlaceholders(player, lore)));
+			} else {
+				itemBuilder.lore(new ArrayList<>(lore));
+			}
 		}
 
 		if (enchantments != null) {

@@ -125,7 +125,7 @@ public class EXGKitsPlayerViewInventoryConfig extends EXGInventoryConfig {
 	public EXGKitsPlayerViewInventoryConfig copy() {
 
 		EXGKitsPlayerViewInventoryConfig copy = new EXGKitsPlayerViewInventoryConfig(
-				this.getEXGTitle().getTitle(),
+				this.getEXGTitle().getTitle(null),
 				this.getRows(),
 				this.getBorderItem().duplicate(),
 				this.getBorderSlots()

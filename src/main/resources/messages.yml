@@ -12,6 +12,17 @@
 # For more translations,
 # check our Wiki at: https://sniper-tvmc.gitbook.io/essentialsx-gui/configuration/messages
 
+# Note about PlaceholderAPI :
+#   EssentialsX-GUI supports PlaceholderAPI placeholders in messages.
+#   You can use any PlaceholderAPI placeholder in the messages, and they will be parsed correctly.
+#   For example, you can use %player_name% to display the player's name in a message.
+
+#   A list of officially supported placeholders can be found on the PlaceholderAPI wiki:
+#   - https://wiki.placeholderapi.com/users/placeholder-list/minecraft/
+#
+#   ⚠️ This is different from the plugin's "placeholders," which are only available in certain messages, when specified.
+#      The plugin's “placeholders” are listed in the comments above the relevant messages and should be used with the syntax {placeholderName}.
+
 ############################################################
 # +------------------------------------------------------+ #
 # |                        General                       | #

@@ -43,12 +43,12 @@ public class WarpEditingInventory extends FastInv {
 								Map.of("player", player.getName(),
 										"warpName", warp.getName(),
 										"warpDisplayName", warp.getDisplayName()))
-						.getTitle()
+						.getTitle(player)
 		);
 
 
 		if (config.getBorderItem().isEnabled()) {
-			setItems(config.getBorderSlots(), config.getBorderItem().build());
+			setItems(config.getBorderSlots(), config.getBorderItem().build(player));
 		}
 
 
@@ -83,7 +83,7 @@ public class WarpEditingInventory extends FastInv {
 						.updateVariables(
 								Map.of("warpDisplayName", warp.getDisplayName(),
 										"warpName", warp.getName()))
-						.build();
+						.build(player);
 			}
 
 			setItem(config.getPreviewWarpItem().getSlot(), previewWarpItemStack);
@@ -95,7 +95,7 @@ public class WarpEditingInventory extends FastInv {
 					.updateVariables(
 							Map.of("warpName", warp.getName(),
 									"warpDisplayName", warp.getDisplayName()))
-					.build(), e -> {
+					.build(player), e -> {
 
 				SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 				changeWarpDisplayName(player, warp);
@@ -107,7 +107,7 @@ public class WarpEditingInventory extends FastInv {
 			setItem(config.getChangeIconItem().getSlot(), config.getChangeIconItem()
 					.updateVariables(
 							Map.of("warpName", warp.getName()))
-					.build(), e -> {
+					.build(player), e -> {
 
 				SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 				changeWarpIcon(player, warp);
@@ -119,7 +119,7 @@ public class WarpEditingInventory extends FastInv {
 					.updateVariables(
 							Map.of("warpName", warp.getName(),
 									"warpDisplayName", warp.getDisplayName()))
-					.build(), e -> {
+					.build(player), e -> {
 
 				SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 				deleteWarp(player, warp);
@@ -128,7 +128,7 @@ public class WarpEditingInventory extends FastInv {
 
 
 		if (config.getBackItem().isEnabled()) {
-			setItem(config.getBackItem().getSlot(), config.getBackItem().build(), e -> {
+			setItem(config.getBackItem().getSlot(), config.getBackItem().build(player), e -> {
 
 				new WarpsAdminViewInventory(player, null, null).open(player);
 				SoundsUtils.playSound(player, EXGSound.GUI_BACK);

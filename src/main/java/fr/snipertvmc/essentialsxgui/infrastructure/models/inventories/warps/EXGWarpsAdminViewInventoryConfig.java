@@ -132,7 +132,7 @@ public class EXGWarpsAdminViewInventoryConfig extends EXGInventoryConfig {
 	public EXGWarpsAdminViewInventoryConfig copy() {
 
 		EXGWarpsAdminViewInventoryConfig copy = new EXGWarpsAdminViewInventoryConfig(
-				this.getEXGTitle().getTitle(),
+				this.getEXGTitle().getTitle(null),
 				this.getRows(),
 				this.getBorderItem().duplicate(),
 				this.getBorderSlots()

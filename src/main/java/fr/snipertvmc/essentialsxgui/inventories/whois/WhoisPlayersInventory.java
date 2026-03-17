@@ -30,12 +30,12 @@ public class WhoisPlayersInventory extends PaginatedFastInv {
 				Main.getInstance().getInventoriesManager().getWhoisPlayersInventoryConfig().getRows() * 9,
 				Main.getInstance().getInventoriesManager().getWhoisPlayersInventoryConfig().getEXGTitle()
 						.duplicate()
-						.getTitle()
+						.getTitle(player)
 		);
 
 
 		if (config.getBorderItem().isEnabled()) {
-			setItems(config.getBorderSlots(), config.getBorderItem().build());
+			setItems(config.getBorderSlots(), config.getBorderItem().build(player));
 		}
 
 
@@ -43,14 +43,14 @@ public class WhoisPlayersInventory extends PaginatedFastInv {
 				.updateVariables(
 						Map.of("currentPage", String.valueOf(p + 1),
 								"previousPage", String.valueOf(p)))
-				.build());
+				.build(player));
 
 
 		nextPageItem(config.getNextPageItem().getSlot(), p -> config.getNextPageItem().duplicate()
 				.updateVariables(
 						Map.of("currentPage", String.valueOf(p - 1),
 								"nextPage", String.valueOf(p)))
-				.build());
+				.build(player));
 
 
 		List<Player> onlinePlayers = Bukkit.getOnlinePlayers().stream()
@@ -64,7 +64,7 @@ public class WhoisPlayersInventory extends PaginatedFastInv {
 			addContent(playerItem
 					.updateVariables(Map.of(
 							"targetName", onlinePlayer.getName()))
-					.build(), e -> {
+					.build(player), e -> {
 
 				new WhoisViewInventory(player, onlinePlayer).open(player);
 				SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
@@ -72,7 +72,7 @@ public class WhoisPlayersInventory extends PaginatedFastInv {
 		}
 
 		if (config.getCloseItem().isEnabled()) {
-			setItem(config.getCloseItem().getSlot(), config.getCloseItem().build(), e -> {
+			setItem(config.getCloseItem().getSlot(), config.getCloseItem().build(player), e -> {
 
 				e.getWhoClicked().closeInventory();
 				SoundsUtils.playSound(player, EXGSound.GUI_CLOSE);
@@ -90,15 +90,16 @@ public class WhoisPlayersInventory extends PaginatedFastInv {
 	@Override
 	protected void onPageChange(int page) {
 
+		Player player = this.getInventory().getViewers().isEmpty() ? null : (Player) this.getInventory().getViewers().get(0);
+
 		setItem(config.getCurrentPageItem().getSlot(), config.getCurrentPageItem()
 				.updateVariables(
 						Map.of("currentPage", String.valueOf(this.currentPage()),
 								"totalPages", String.valueOf(this.lastPage()),
 								"previousPage", String.valueOf(this.currentPage() - 1),
 								"nextPage", String.valueOf(this.currentPage() + 1)))
-				.build());
+				.build(player));
 
-		Player player = this.getInventory().getViewers().isEmpty() ? null : (Player) this.getInventory().getViewers().get(0);
 		SoundsUtils.playSound(player, EXGSound.GUI_PAGE_CHANGE);
 	}
 

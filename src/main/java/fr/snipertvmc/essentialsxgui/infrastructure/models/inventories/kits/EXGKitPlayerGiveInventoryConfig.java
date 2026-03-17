@@ -101,7 +101,7 @@ public class EXGKitPlayerGiveInventoryConfig extends EXGInventoryConfig {
 	public EXGKitPlayerGiveInventoryConfig copy() {
 
 		EXGKitPlayerGiveInventoryConfig copy = new EXGKitPlayerGiveInventoryConfig(
-				this.getEXGTitle().getTitle(),
+				this.getEXGTitle().getTitle(null),
 				this.getRows(),
 				this.getBorderItem().duplicate(),
 				this.getBorderSlots()

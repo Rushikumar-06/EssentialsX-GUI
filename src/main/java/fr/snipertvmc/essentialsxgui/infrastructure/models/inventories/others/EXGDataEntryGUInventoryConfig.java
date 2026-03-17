@@ -87,7 +87,7 @@ public class EXGDataEntryGUInventoryConfig extends EXGInventoryConfig {
 	public EXGDataEntryGUInventoryConfig copy() {
 
 		EXGDataEntryGUInventoryConfig copy = new EXGDataEntryGUInventoryConfig(
-				this.getEXGTitle().getTitle(),
+				this.getEXGTitle().getTitle(null),
 				this.getRows(),
 				this.getBorderItem().duplicate(),
 				this.getBorderSlots()

@@ -34,7 +34,7 @@ public class WarpPlayerTeleportInventory extends PaginatedFastInv {
 						.updateVariables(Map.of(
 								"warpName", warp.getName(),
 								"warpDisplayName", warp.getDisplayName()))
-						.getTitle()
+						.getTitle(player)
 		);
 
 
@@ -42,7 +42,7 @@ public class WarpPlayerTeleportInventory extends PaginatedFastInv {
 
 
 		if (config.getBorderItem().isEnabled()) {
-			setItems(config.getBorderSlots(), config.getBorderItem().build());
+			setItems(config.getBorderSlots(), config.getBorderItem().build(player));
 		}
 
 
@@ -50,14 +50,14 @@ public class WarpPlayerTeleportInventory extends PaginatedFastInv {
 				.updateVariables(
 						Map.of("currentPage", String.valueOf(p + 1),
 								"previousPage", String.valueOf(p)))
-				.build());
+				.build(player));
 
 
 		nextPageItem(config.getNextPageItem().getSlot(), p -> config.getNextPageItem().duplicate()
 				.updateVariables(
 						Map.of("currentPage", String.valueOf(p - 1),
 								"nextPage", String.valueOf(p)))
-				.build());
+				.build(player));
 
 
 		List<Player> targets = Bukkit.getOnlinePlayers().stream()
@@ -73,7 +73,7 @@ public class WarpPlayerTeleportInventory extends PaginatedFastInv {
 							"targetName", target.getName(),
 							"warpName", warp.getName(),
 							"warpDisplayName", warp.getDisplayName()))
-					.build(), e -> {
+					.build(player), e -> {
 
 				player.performCommand("essentials:warp " + warp.getName() + " " + target.getName());
 				SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
@@ -81,7 +81,7 @@ public class WarpPlayerTeleportInventory extends PaginatedFastInv {
 		}
 
 		if (config.getBackItem().isEnabled()) {
-			setItem(config.getBackItem().getSlot(), config.getBackItem().build(), e -> {
+			setItem(config.getBackItem().getSlot(), config.getBackItem().build(player), e -> {
 
 				new WarpsAdminViewInventory(player, null, null).open(player);
 				SoundsUtils.playSound(player, EXGSound.GUI_BACK);
@@ -99,15 +99,16 @@ public class WarpPlayerTeleportInventory extends PaginatedFastInv {
 	@Override
 	protected void onPageChange(int page) {
 
+		Player player = this.getInventory().getViewers().isEmpty() ? null : (Player) this.getInventory().getViewers().get(0);
+
 		setItem(config.getCurrentPageItem().getSlot(), config.getCurrentPageItem()
 				.updateVariables(
 						Map.of("currentPage", String.valueOf(this.currentPage()),
 								"totalPages", String.valueOf(this.lastPage()),
 								"previousPage", String.valueOf(this.currentPage() - 1),
 								"nextPage", String.valueOf(this.currentPage() + 1)))
-				.build());
+				.build(player));
 
-		Player player = this.getInventory().getViewers().isEmpty() ? null : (Player) this.getInventory().getViewers().get(0);
 		SoundsUtils.playSound(player, EXGSound.GUI_PAGE_CHANGE);
 	}
 

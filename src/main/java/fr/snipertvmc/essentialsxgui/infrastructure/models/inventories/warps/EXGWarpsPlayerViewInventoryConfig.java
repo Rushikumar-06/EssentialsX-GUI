@@ -125,7 +125,7 @@ public class EXGWarpsPlayerViewInventoryConfig extends EXGInventoryConfig {
 	public EXGWarpsPlayerViewInventoryConfig copy() {
 
 		EXGWarpsPlayerViewInventoryConfig copy = new EXGWarpsPlayerViewInventoryConfig(
-				this.getEXGTitle().getTitle(),
+				this.getEXGTitle().getTitle(null),
 				this.getRows(),
 				this.getBorderItem().duplicate(),
 				this.getBorderSlots()

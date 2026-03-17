@@ -36,13 +36,13 @@ public class WhoisViewInventory extends FastInv {
 				Main.getInstance().getInventoriesManager().getWhoisViewInventoryConfig().getEXGTitle()
 						.duplicate()
 						.updateVariables(Map.of("targetName", target.getName()))
-						.getTitle()
+						.getTitle(player)
 		);
 
 
 		// Setting border
 		if (config.getBorderItem().isEnabled()) {
-			setItems(config.getBorderSlots(), config.getBorderItem().build());
+			setItems(config.getBorderSlots(), config.getBorderItem().build(player));
 		}
 
 
@@ -98,7 +98,7 @@ public class WhoisViewInventory extends FastInv {
 							"targetUUID", uuid,
 							"targetIP", ipAddress,
 							"targetPlaytime", playtime))
-					.build()
+					.build(player)
 			);
 		}
 
@@ -112,7 +112,7 @@ public class WhoisViewInventory extends FastInv {
 							"targetSaturation", saturation,
 							"targetExperience", experience,
 							"targetLevel", level))
-					.build()
+					.build(player)
 			);
 		}
 
@@ -127,7 +127,7 @@ public class WhoisViewInventory extends FastInv {
 							"targetYaw", String.valueOf((int) worldLocation.getYaw()),
 							"targetPitch", String.valueOf((int) worldLocation.getPitch()),
 							"targetLocation", location))
-					.build()
+					.build(player)
 			);
 		}
 
@@ -150,7 +150,7 @@ public class WhoisViewInventory extends FastInv {
 							put("targetIsAfk", isAfk);
 							put("targetAfkSince", afkSince);
 					}})
-					.build()
+					.build(player)
 			);
 		}
 
@@ -168,12 +168,12 @@ public class WhoisViewInventory extends FastInv {
 						put("targetBanReason", banReason);
 						put("targetBanExpiry", banExpiry);
 					}})
-					.build()
+					.build(player)
 			);
 		}
 
 		if (config.getBackItem().isEnabled()) {
-			setItem(config.getBackItem().getSlot(), config.getBackItem().build(), e -> {
+			setItem(config.getBackItem().getSlot(), config.getBackItem().build(player), e -> {
 
 				new WhoisPlayersInventory(player).open(player);
 				SoundsUtils.playSound(player, EXGSound.GUI_BACK);
