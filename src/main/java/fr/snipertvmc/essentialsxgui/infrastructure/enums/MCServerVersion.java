@@ -111,7 +111,7 @@ public enum MCServerVersion {
 	private static String getServerVersion() {
 
 		String versionText = Bukkit.getVersion();
-		Pattern pattern = Pattern.compile("\\(MC: ([0-9]+\\.[0-9]+\\.[0-9]+)\\)");
+		Pattern pattern = Pattern.compile("MC: ([0-9.]+)");
 		Matcher matcher = pattern.matcher(versionText);
 
 		if (matcher.find()) {
