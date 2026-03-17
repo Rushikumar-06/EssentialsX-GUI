@@ -75,14 +75,6 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- ClassGraph -->
-		<dependency>
-			<groupId>io.github.classgraph</groupId>
-			<artifactId>classgraph</artifactId>
-			<version>4.8.181</version>
-			<scope>provided</scope>
-		</dependency>
-
 		<!-- Moshi -->
 		<dependency>
 			<groupId>com.squareup.moshi</groupId>
