@@ -82,14 +82,12 @@ public class HomesInventory extends PaginatedFastInv {
 
 				meta.setDisplayName(homeItem.getDisplayName()
 						.replace("{homeDisplayName}", home.getDisplayName())
-						.replace("{homeName}", home.getName())
-						.replace("&", "§"));
+						.replace("{homeName}", home.getName()));
 
 				meta.setLore(homeItem.getLore().stream()
 						.map(line -> line
 								.replace("{homeDisplayName}", home.getDisplayName())
-								.replace("{homeName}", home.getName())
-								.replace("&", "§"))
+								.replace("{homeName}", home.getName()))
 						.collect(Collectors.toList()));
 
 				homeItemStack.setItemMeta(meta);

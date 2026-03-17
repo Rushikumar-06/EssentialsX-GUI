@@ -2,7 +2,8 @@ package fr.snipertvmc.essentialsxgui.utilities;
 
 import com.earth2me.essentials.libs.kyori.adventure.text.Component;
 import com.earth2me.essentials.libs.kyori.adventure.text.minimessage.MiniMessage;
-import com.earth2me.essentials.libs.kyori.adventure.text.minimessage.internal.parser.ParsingExceptionImpl;
+import com.earth2me.essentials.libs.kyori.adventure.text.minimessage.ParsingException;
+import com.earth2me.essentials.libs.kyori.adventure.text.minimessage.tree.Node;
 import com.earth2me.essentials.libs.kyori.adventure.text.serializer.bungeecord.BungeeComponentSerializer;
 import com.earth2me.essentials.libs.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import fr.snipertvmc.essentialsxgui.Main;
@@ -33,19 +34,6 @@ public class TextUtils {
 
 
 	// -------------------------------------------------- //
-
-
-	public static boolean isValidMiniMessage(String miniMessage) {
-
-		try {
-			convertMiniMessageToComponent(miniMessage);
-
-		} catch (ParsingExceptionImpl e) {
-			return false;
-		}
-
-		return true;
-	}
 
 
 	public static Component convertMiniMessageToComponent(String miniMessage) {

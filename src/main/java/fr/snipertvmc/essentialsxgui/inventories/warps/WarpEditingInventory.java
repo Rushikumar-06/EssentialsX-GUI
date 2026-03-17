@@ -66,14 +66,12 @@ public class WarpEditingInventory extends FastInv {
 
 				meta.setDisplayName(previewWarpItem.getDisplayName()
 						.replace("{warpDisplayName}", warp.getDisplayName())
-						.replace("{warpName}", warp.getName())
-						.replace("&", "§"));
+						.replace("{warpName}", warp.getName()));
 
 				meta.setLore(previewWarpItem.getLore().stream()
 						.map(line -> line
 								.replace("{warpDisplayName}", warp.getDisplayName())
-								.replace("{warpName}", warp.getName())
-								.replace("&", "§"))
+								.replace("{warpName}", warp.getName()))
 						.collect(Collectors.toList()));
 
 				previewWarpItemStack.setItemMeta(meta);
@@ -164,7 +162,7 @@ public class WarpEditingInventory extends FastInv {
 
 					warp.setDisplayName(result.getLeft());
 					TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.DISPLAY_NAME_CHANGED,
-							Map.of("newDisplayName", result.getLeft().replace("&", "§"))
+							Map.of("newDisplayName", result.getLeft())
 					));
 					new WarpEditingInventory(player, warp).open(player);
 					SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);

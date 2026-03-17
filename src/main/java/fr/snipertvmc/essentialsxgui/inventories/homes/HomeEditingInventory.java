@@ -66,14 +66,12 @@ public class HomeEditingInventory extends FastInv {
 
 				meta.setDisplayName(previewHomeItem.getDisplayName()
 						.replace("{homeDisplayName}", home.getDisplayName())
-						.replace("{homeName}", home.getName())
-						.replace("&", "§"));
+						.replace("{homeName}", home.getName()));
 
 				meta.setLore(previewHomeItem.getLore().stream()
 						.map(line -> line
 								.replace("{homeDisplayName}", home.getDisplayName())
-								.replace("{homeName}", home.getName())
-								.replace("&", "§"))
+								.replace("{homeName}", home.getName()))
 						.collect(Collectors.toList()));
 
 				previewHomeItemStack.setItemMeta(meta);
@@ -163,7 +161,7 @@ public class HomeEditingInventory extends FastInv {
 
 					home.setDisplayName(result.getLeft());
 					TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.DISPLAY_NAME_CHANGED,
-							Map.of("newDisplayName", result.getLeft().replace("&", "§"))
+							Map.of("newDisplayName", result.getLeft())
 					));
 					new HomeEditingInventory(player, home).open(player);
 					SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);

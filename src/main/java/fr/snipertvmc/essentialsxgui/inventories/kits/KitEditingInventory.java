@@ -66,14 +66,12 @@ public class KitEditingInventory extends FastInv {
 
 				meta.setDisplayName(previewKitItem.getDisplayName()
 						.replace("{kitDisplayName}", kit.getDisplayName())
-						.replace("{kitName}", kit.getName())
-						.replace("&", "§"));
+						.replace("{kitName}", kit.getName()));
 
 				meta.setLore(previewKitItem.getLore().stream()
 						.map(line -> line
 								.replace("{kitDisplayName}", kit.getDisplayName())
-								.replace("{kitName}", kit.getName())
-								.replace("&", "§"))
+								.replace("{kitName}", kit.getName()))
 						.collect(Collectors.toList()));
 
 				previewKitItemStack.setItemMeta(meta);
@@ -174,7 +172,7 @@ public class KitEditingInventory extends FastInv {
 
 					kit.setDisplayName(result.getLeft());
 					TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.DISPLAY_NAME_CHANGED,
-							Map.of("newDisplayName", result.getLeft().replace("&", "§"))
+							Map.of("newDisplayName", result.getLeft())
 					));
 					new KitEditingInventory(player, kit).open(player);
 					SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);

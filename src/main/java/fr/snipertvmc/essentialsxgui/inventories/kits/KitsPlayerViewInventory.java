@@ -81,14 +81,12 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 
 				meta.setDisplayName(kitItem.getDisplayName()
 						.replace("{kitDisplayName}", kit.getDisplayName())
-						.replace("{kitName}", kit.getName())
-						.replace("&", "§"));
+						.replace("{kitName}", kit.getName()));
 
 				meta.setLore(kitItem.getLore().stream()
 						.map(line -> line
 								.replace("{kitDisplayName}", kit.getDisplayName())
-								.replace("{kitName}", kit.getName())
-								.replace("&", "§"))
+								.replace("{kitName}", kit.getName()))
 						.collect(Collectors.toList()));
 
 				kitItemStack.setItemMeta(meta);

@@ -78,14 +78,12 @@ public class WarpsAdminViewInventory extends PaginatedFastInv {
 
 				meta.setDisplayName(warpItem.getDisplayName()
 						.replace("{warpDisplayName}", warp.getDisplayName())
-						.replace("{warpName}", warp.getName())
-						.replace("&", "§"));
+						.replace("{warpName}", warp.getName()));
 
 				meta.setLore(warpItem.getLore().stream()
 						.map(line -> line
 								.replace("{warpDisplayName}", warp.getDisplayName())
-								.replace("{warpName}", warp.getName())
-								.replace("&", "§"))
+								.replace("{warpName}", warp.getName()))
 						.collect(Collectors.toList()));
 
 				warpItemStack.setItemMeta(meta);
