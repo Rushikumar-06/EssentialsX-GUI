@@ -1,19 +1,14 @@
 package fr.snipertvmc.essentialsxgui.infrastructure.models.files;
 
 import com.cryptomorin.xseries.XMaterial;
-import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGEntryType;
-import fr.snipertvmc.essentialsxgui.infrastructure.enums.MCServerVersion;
 import fr.snipertvmc.essentialsxgui.libraries.exglib.Pair;
 import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
 
 import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ConfigurationFile {
 
@@ -221,42 +216,6 @@ public class ConfigurationFile {
 
 
 	// -------------------------------------------------- //
-
-
-	public Map<String, String> getPlaceholders() {
-
-		Map<String, String> placeholders = new HashMap<>();
-
-		placeholders.put("value_guiOpen", "BLOCK_CHEST_OPEN");
-		placeholders.put("value_guiClose", "BLOCK_CHEST_CLOSE");
-		placeholders.put("value_guiBack", "ENTITY_EXPERIENCE_BOTTLE_THROW");
-		placeholders.put("value_guiClick", "ENTITY_CHICKEN_EGG");
-		placeholders.put("value_guiPageChange", "ITEM_BOOK_PAGE_TURN");
-
-		placeholders.put("value_actionSuccess", "ENTITY_PLAYER_LEVELUP");
-		placeholders.put("value_actionCanceled", "ENTITY_ITEM_BREAK");
-		placeholders.put("value_actionFailure", "ENTITY_VILLAGER_NO");
-
-		MCServerVersion serverVersion = Main.getInstance().getMCServerVersion();
-
-		if (serverVersion.isLowerThan(MCServerVersion.v1_14_4)) {
-			placeholders.put("value_guiPageChange", "UI_BUTTON_CLICK");
-		}
-
-		if (serverVersion == MCServerVersion.v1_8_8) {
-			placeholders.put("value_guiOpen", "CHEST_OPEN");
-			placeholders.put("value_guiClose", "CHEST_CLOSE");
-			placeholders.put("value_guiBack", "SHOOT_ARROW");
-			placeholders.put("value_guiClick", "CHICKEN_EGG_POP");
-			placeholders.put("value_guiPageChange", "CLICK");
-
-			placeholders.put("value_actionSuccess", "LEVEL_UP");
-			placeholders.put("value_actionCanceled", "ITEM_BREAK");
-			placeholders.put("value_actionFailure", "VILLAGER_NO");
-		}
-
-		return placeholders;
-	}
 
 
 	public List<String> getKeysToRemove() {

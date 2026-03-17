@@ -208,8 +208,8 @@ public class FilesManager {
 
 			List<String> keysToRemove = switch (fileName) {
 				case "configuration" -> configurationFile.getKeysToRemove();
-				 case "messages" -> messagesFile.getKeysToRemove();
-				 default -> getInventory(fileName).getKeysToRemove();
+				case "messages" -> messagesFile.getKeysToRemove();
+				default -> getInventory(fileName).getKeysToRemove();
 			};
 
 			for (String line : lines) {

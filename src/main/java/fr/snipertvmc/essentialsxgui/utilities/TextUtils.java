@@ -5,7 +5,6 @@ import com.earth2me.essentials.libs.kyori.adventure.text.minimessage.MiniMessage
 import com.earth2me.essentials.libs.kyori.adventure.text.minimessage.internal.parser.ParsingExceptionImpl;
 import com.earth2me.essentials.libs.kyori.adventure.text.serializer.bungeecord.BungeeComponentSerializer;
 import com.earth2me.essentials.libs.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
-import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.MCServerVersion;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.command.CommandSender;
@@ -19,7 +18,7 @@ public class TextUtils {
 
 
 	public static void sendComponentToCommandSender(CommandSender commandSender, Component component) {
-		Main.getInstance().getBukkitAudiences().sender(commandSender).sendMessage(component);
+		commandSender.sendMessage(convertMiniMessageToText(convertComponentToMiniMessage(component)));
 	}
 
 
@@ -44,12 +43,17 @@ public class TextUtils {
 	}
 
 
+	public static String convertComponentToMiniMessage(Component component) {
+		return MiniMessage.miniMessage().serialize(component);
+	}
+
+
 	public static String convertMiniMessageToText(String miniMessage) {
-		if (MCServerVersion.getMCServerVersion().isLowerThan(MCServerVersion.v1_16)) {
-			return LegacyComponentSerializer.legacySection().serialize(convertMiniMessageToComponent(miniMessage));
+		if (MCServerVersion.getMCServerVersion().isHigherThan(MCServerVersion.v1_15_2)) {
+			return TextComponent.toLegacyText(BungeeComponentSerializer.get().serialize(convertMiniMessageToComponent(miniMessage)));
 
 		} else {
-			return TextComponent.toLegacyText(BungeeComponentSerializer.get().serialize(convertMiniMessageToComponent(miniMessage)));
+			return LegacyComponentSerializer.legacySection().serialize(convertMiniMessageToComponent(miniMessage));
 		}
 	}
 
