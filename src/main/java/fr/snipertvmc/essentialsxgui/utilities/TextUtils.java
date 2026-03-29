@@ -2,8 +2,6 @@ package fr.snipertvmc.essentialsxgui.utilities;
 
 import com.earth2me.essentials.libs.kyori.adventure.text.Component;
 import com.earth2me.essentials.libs.kyori.adventure.text.minimessage.MiniMessage;
-import com.earth2me.essentials.libs.kyori.adventure.text.minimessage.ParsingException;
-import com.earth2me.essentials.libs.kyori.adventure.text.minimessage.tree.Node;
 import com.earth2me.essentials.libs.kyori.adventure.text.serializer.bungeecord.BungeeComponentSerializer;
 import com.earth2me.essentials.libs.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import fr.snipertvmc.essentialsxgui.Main;
