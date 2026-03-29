@@ -19,6 +19,7 @@ package fr.snipertvmc.essentialsxgui;
 
 import com.earth2me.essentials.Essentials;
 import com.earth2me.essentials.libs.kyori.adventure.platform.bukkit.BukkitAudiences;
+import dev.faststats.core.ErrorTracker;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.MCServerVersion;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGServer;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.files.ConfigurationFile;
@@ -53,9 +54,12 @@ public class Main extends JavaPlugin {
 	private ServerManager serverManager;
 
 	private MCServerVersion mcServerVersion;
-	private Metrics metrics;
+	private Metrics bStatsMetrics;
 
 	private BukkitAudiences bukkitAudiences;
+
+	private dev.faststats.core.Metrics fastStatsMetrics;
+	private final ErrorTracker fastStatsErrorTracker = ErrorTracker.contextAware();
 
 
 	// -------------------------------------------------- //
@@ -93,7 +97,7 @@ public class Main extends JavaPlugin {
 		serverDataManager = new ServerDataManager();
 
 		mcServerVersion = MCServerVersion.getMCServerVersion();
-		metrics = new Metrics(this, 26314);
+		bStatsMetrics = new Metrics(this, 26314);
 
 		bukkitAudiences  = BukkitAudiences.create(this);
 
@@ -118,6 +122,8 @@ public class Main extends JavaPlugin {
 		if (!cancelLoading) {
 			serverManager = new ServerManager();
 		}
+
+		fastStatsMetrics.ready();
 
 
 		// PLUGIN LOADING COMPLETED
@@ -148,6 +154,10 @@ public class Main extends JavaPlugin {
 
 		ConsoleLogger.console("");
 		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Plugin unloading...");
+
+
+		// METRICS SHUTDOWN
+		fastStatsMetrics.shutdown();
 
 
 		// UNLOAD PLUGIN
@@ -224,6 +234,9 @@ public class Main extends JavaPlugin {
 	public ConfigurationFile getConfiguration() {
 		return filesManager.getConfiguration();
 	}
+	public File getPluginFile() {
+		return getFile();
+	}
 
 
 	// CONSTANTS VARIABLES
@@ -231,15 +244,22 @@ public class Main extends JavaPlugin {
 	public MCServerVersion getMCServerVersion() {
 		return mcServerVersion;
 	}
-	public Metrics getMetrics() {
-		return metrics;
-	}
-	public File getPluginFile() {
-		return getFile();
+	public Metrics getbStatsMetrics() {
+		return bStatsMetrics;
 	}
 
 	public BukkitAudiences getBukkitAudiences() {
 		return bukkitAudiences;
+	}
+
+	public dev.faststats.core.Metrics getFastStatsMetrics() {
+		return fastStatsMetrics;
+	}
+	public void setFastStatsMetrics(dev.faststats.core.Metrics fastStatsMetrics) {
+		this.fastStatsMetrics = fastStatsMetrics;
+	}
+	public ErrorTracker getFastStatsErrorTracker() {
+		return fastStatsErrorTracker;
 	}
 
 

@@ -1,5 +1,7 @@
 package fr.snipertvmc.essentialsxgui.managers;
 
+import dev.faststats.bukkit.BukkitMetrics;
+import dev.faststats.core.data.Metric;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGPermission;
@@ -16,6 +18,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.util.Map;
+import java.util.concurrent.Callable;
 
 public class LoadingManager {
 
@@ -299,18 +302,37 @@ public class LoadingManager {
 	private void loadMetricsCharts() {
 
 
+		// --- Data Metrics --- //
+
+		Callable<String> essentialsVersionData = () -> Main.getInstance().getEssentials() != null ?
+				Main.getInstance().getEssentials().getDescription().getVersion() : "Other";
+
+		Callable<String> storageTypeData = () -> Main.getInstance().getConfiguration().getStorageType() != null ?
+				Main.getInstance().getConfiguration().getStorageType() : "Other";
+
+
+
+		// --- bStats Metrics //
+
 		// EssentialsX Version Chart
-		Main.getInstance().getMetrics().addCustomChart(
-				new Metrics.SimplePie("essentialsx_version", () -> Main.getInstance().getEssentials() != null ?
-						Main.getInstance().getEssentials().getDescription().getVersion() : "Other")
-		);
-
-
+		Main.getInstance().getbStatsMetrics().addCustomChart(new Metrics.SimplePie("essentialsx_version", essentialsVersionData));
 		// Storage Type Chart
-		Main.getInstance().getMetrics().addCustomChart(
-				new Metrics.SimplePie("storage_type", () -> Main.getInstance().getConfiguration().getStorageType() != null ?
-						Main.getInstance().getConfiguration().getStorageType() : "Other")
-		);
+		Main.getInstance().getbStatsMetrics().addCustomChart(new Metrics.SimplePie("storage_type", storageTypeData));
+
+
+		// -- FastStats Metrics //
+
+		Main.getInstance().setFastStatsMetrics(BukkitMetrics.factory()
+				.token("1c3f12060cd797a90580e386d61bd7e5")
+
+				// EssentialsX Version Chart
+				.addMetric(Metric.string("essentialsx_version", essentialsVersionData))
+				// Storage Type Chart
+				.addMetric(Metric.string("storage_type", storageTypeData))
+
+				.errorTracker(Main.getInstance().getFastStatsErrorTracker())
+
+				.create(Main.getInstance()));
 	}
 
 

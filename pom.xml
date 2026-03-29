@@ -60,6 +60,12 @@
 			<url>https://repo.helpch.at/releases/</url>
 		</repository>
 
+		<!-- FastStats Repository -->
+		<repository>
+			<id>faststats-releases</id>
+			<url>https://repo.faststats.dev/releases</url>
+		</repository>
+
 	</repositories>
 
 
@@ -137,6 +143,14 @@
 			<scope>compile</scope>
 		</dependency>
 
+		<!-- FastStats -->
+		<dependency>
+			<groupId>dev.faststats.metrics</groupId>
+			<artifactId>bukkit</artifactId>
+			<version>0.18.1</version>
+			<scope>compile</scope>
+		</dependency>
+
 	</dependencies>
 
 
@@ -204,6 +218,10 @@
 								<relocation>
 									<pattern>net.kyori.adventure</pattern>
 									<shadedPattern>fr.snipertvmc.essentialsxgui.libraries.adventure</shadedPattern>
+								</relocation>
+								<relocation>
+									<pattern>dev.faststats</pattern>
+									<shadedPattern>fr.snipertvmc.essentialsxgui.libraries.faststats</shadedPattern>
 								</relocation>
 							</relocations>
 
