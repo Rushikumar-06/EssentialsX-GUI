@@ -118,7 +118,7 @@ public class ItemBuilder {
     }
 
     public ItemBuilder name(String name) {
-        return meta(meta -> meta.setDisplayName(TextUtils.convertMiniMessageToText(name)));
+        return meta(meta -> meta.setDisplayName(TextUtils.convertFormattedMessageToText(name)));
     }
 
     public ItemBuilder lore(String lore) {
@@ -130,7 +130,7 @@ public class ItemBuilder {
     }
 
     public ItemBuilder lore(List<String> lore) {
-        return meta(meta -> meta.setLore(TextUtils.convertMiniMessagesToText(lore)));
+        return meta(meta -> meta.setLore(TextUtils.convertFormattedMessagesToText(lore)));
     }
 
     public ItemBuilder addLore(String line) {
@@ -138,12 +138,12 @@ public class ItemBuilder {
             List<String> lore = meta.getLore();
 
             if (lore == null) {
-                meta.setLore(TextUtils.convertMiniMessagesToText(Collections.singletonList(line)));
+                meta.setLore(TextUtils.convertFormattedMessagesToText(Collections.singletonList(line)));
                 return;
             }
 
             lore.add(line);
-            meta.setLore(TextUtils.convertMiniMessagesToText(lore));
+            meta.setLore(TextUtils.convertFormattedMessagesToText(lore));
         });
     }
 
@@ -156,12 +156,12 @@ public class ItemBuilder {
             List<String> lore = meta.getLore();
 
             if (lore == null) {
-                meta.setLore(TextUtils.convertMiniMessagesToText(lines));
+                meta.setLore(TextUtils.convertFormattedMessagesToText(lines));
                 return;
             }
 
             lore.addAll(lines);
-            meta.setLore(TextUtils.convertMiniMessagesToText(lore));
+            meta.setLore(TextUtils.convertFormattedMessagesToText(lore));
         });
     }
 

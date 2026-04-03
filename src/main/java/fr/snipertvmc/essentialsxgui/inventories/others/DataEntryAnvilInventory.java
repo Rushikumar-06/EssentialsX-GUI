@@ -30,7 +30,7 @@ public class DataEntryAnvilInventory {
 		new AnvilGUI.Builder()
 
 				.text("Type here")
-				.title(TextUtils.convertMiniMessageToText(entrySettings.getEntryDisplayName()))
+				.title(TextUtils.convertFormattedMessageToText(entrySettings.getEntryDisplayName()))
 
 				.onClick((slot, stateSnapshot) -> {
 

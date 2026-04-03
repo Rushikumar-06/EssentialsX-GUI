@@ -44,7 +44,7 @@ public class MessagesUtils {
 
 
 	public static Component getComponent(EXGMessage exgMessage, Map<String, String> variables) {
-		return TextUtils.convertMiniMessageToComponent(getString(exgMessage, variables));
+		return TextUtils.getComponent(getString(exgMessage, variables));
 	}
 
 
