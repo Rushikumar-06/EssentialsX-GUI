@@ -129,6 +129,14 @@ homes:
   changeHomeIconMaterialList: ["STONE", "COBBLESTONE", "DIRT", "IRON_ORE", "DIAMOND_BLOCK", "SPONGE", "ANVIL",
                                "QUARTZ_BLOCK", "COOKED_BEEF", "APPLE", "BREAD", "WHEAT", "BOW", "IRON_SWORD",]
 
+  # Decide which characters are allowed in the display name of a home.
+  # You can specify a list of allowed characters or use a regex pattern.
+  # Set this to "" if you want to allow all characters.
+  #   => Without regex: Just list the allowed characters in the string. For example, "abc123" will allow only letters a, b, c and numbers 1, 2, 3.
+  #   => With regex, start the string with "regex:" followed by the regex pattern.
+  #      For example, "regex:^[a-zA-Z0-9_ ]+$" will allow only letters, numbers, underscores and spaces.
+  changeHomeDisplayNameCharacterList: "regex:^[a-zA-Z0-9_ ]+$"
+
   # Decide how players can delete a home.
   # Ways available: "CHAT", "ANVIL"
   deleteHomeEntryType: "CHAT"
@@ -170,6 +178,14 @@ kits:
   changeKitIconMaterialList: ["STONE", "COBBLESTONE", "DIRT", "IRON_ORE", "DIAMOND_BLOCK", "SPONGE", "ANVIL",
                               "QUARTZ_BLOCK", "COOKED_BEEF", "APPLE", "BREAD", "WHEAT", "BOW", "IRON_SWORD",]
 
+  # Decide which characters are allowed in the display name of a kit.
+  # You can specify a list of allowed characters or use a regex pattern.
+  # Set this to "" if you want to allow all characters.
+  #   => Without regex: Just list the allowed characters in the string. For example, "abc123" will allow only letters a, b, c and numbers 1, 2, 3.
+  #   => With regex, start the string with "regex:" followed by the regex pattern.
+  #      For example, "regex:^[a-zA-Z0-9_ ]+$" will allow only letters, numbers, underscores and spaces.
+  changeKitDisplayNameCharacterList: "regex:^[a-zA-Z0-9_ ]+$"
+
   # Decide how players can delete a kit.
   # Ways available: "CHAT", "ANVIL"
   deleteKitEntryType: "CHAT"
@@ -206,6 +222,14 @@ warps:
   # If you set the changeWarpIconEntryType to "GUI", you must set the materials available in the GUI here.
   changeWarpIconMaterialList: ["STONE", "COBBLESTONE", "DIRT", "IRON_ORE", "DIAMOND_BLOCK", "SPONGE", "ANVIL",
                                "QUARTZ_BLOCK", "COOKED_BEEF", "APPLE", "BREAD", "WHEAT", "BOW", "IRON_SWORD",]
+
+  # Decide which characters are allowed in the display name of a warp.
+  # You can specify a list of allowed characters or use a regex pattern.
+  # Set this to "" if you want to allow all characters.
+  #   => Without regex: Just list the allowed characters in the string. For example, "abc123" will allow only letters a, b, c and numbers 1, 2, 3.
+  #   => With regex, start the string with "regex:" followed by the regex pattern.
+  #      For example, "regex:^[a-zA-Z0-9_ ]+$" will allow only letters, numbers, underscores and spaces.
+  changeWarpDisplayNameCharacterList: "regex:^[a-zA-Z0-9_ ]+$"
 
   # Decide how players can delete a warp.
   # Ways available: "CHAT", "ANVIL"

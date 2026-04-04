@@ -153,6 +153,7 @@ public class WarpEditingInventory extends FastInv {
 		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
 				.setAcceptedTypes(List.of(EXGEntryType.CHAT, EXGEntryType.ANVIL))
 				.setEntryDisplayName(MessagesUtils.getString(EXGMessage.ENTER_NEW_DISPLAY_NAME))
+				.setCharacterListPath("warps.changeWarpDisplayNameCharacterList")
 				.setMinLength(Main.getInstance().getConfiguration().getMinNameLength())
 				.setMaxLength(Main.getInstance().getConfiguration().getMaxNameLength());
 

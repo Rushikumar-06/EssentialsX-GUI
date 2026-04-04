@@ -18,7 +18,7 @@ public class EXGEntrySettings {
 	// For String
 	int minLength = -1;
 	int maxLength = -1;
-	char[] acceptedCharacters;
+	String characterListPath;
 	boolean mustBeNumber = false;
 	String equalsToSomething;
 
@@ -56,8 +56,8 @@ public class EXGEntrySettings {
 	public int getMaxLength() {
 		return maxLength;
 	}
-	public char[] getAcceptedCharacters() {
-		return acceptedCharacters;
+	public String getCharacterListPath() {
+		return characterListPath;
 	}
 	public boolean isMustBeNumber() {
 		return mustBeNumber;
@@ -67,9 +67,6 @@ public class EXGEntrySettings {
 	}
 
 	// For Material
-	public Material[] getAcceptedMaterials() {
-		return acceptedMaterials;
-	}
 	public String getMaterialListPath() {
 		return materialListPath;
 	}
@@ -98,8 +95,8 @@ public class EXGEntrySettings {
 		this.maxLength = maxLength;
 		return this;
 	}
-	public EXGEntrySettings setAcceptedCharacters(char[] acceptedCharacters) {
-		this.acceptedCharacters = acceptedCharacters;
+	public EXGEntrySettings setCharacterListPath(String characterListPath) {
+		this.characterListPath = characterListPath;
 		return this;
 	}
 	public EXGEntrySettings setMustBeNumber(boolean mustBeNumber) {
@@ -113,10 +110,6 @@ public class EXGEntrySettings {
 
 
 	// For Material
-	public EXGEntrySettings setAcceptedMaterials(Material[] acceptedMaterials) {
-		this.acceptedMaterials = acceptedMaterials;
-		return this;
-	}
 	public EXGEntrySettings setMaterialListPath(String materialListPath) {
 		this.materialListPath = materialListPath;
 		return this;

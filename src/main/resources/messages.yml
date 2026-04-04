@@ -68,6 +68,7 @@ errors:
   invalidMiniMessageFormat: "&cThe input format is invalid. You must use MiniMessage formatting."
   invalidLegacyFormat: "&cThe input format is invalid. You must use legacy formatting."
   invalidMixedFormat: "&cThe input format is invalid. You cannot use both MiniMessage and legacy formatting together."
+  invalidCharacter: "&cThe input contains invalid characters. Please remove any special characters and try again."
   # Placeholders available: {min}, {max}
   lengthLimit: "&cThe input should be between &f{min}&c and &f{max} &ccharacters long."
 

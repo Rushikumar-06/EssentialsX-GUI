@@ -23,6 +23,7 @@ public enum EXGMessage {
 	INVALID_LEGACY_FORMAT("errors.invalidLegacyFormat"),
 	INVALID_MIXED_FORMAT("errors.invalidMixedFormat"),
 	INVALID_NUMBER("errors.invalidNumber"),
+	INVALID_CHARACTER("errors.invalidCharacter"),
 	PLAYER_NOT_FOUND("errors.playerNotFound"),
 
 	ARGUMENT_NOT_FOUND("errors.argumentNotFound"),

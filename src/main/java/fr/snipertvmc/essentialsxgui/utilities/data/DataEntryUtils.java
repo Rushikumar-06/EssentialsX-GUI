@@ -93,22 +93,23 @@ public class DataEntryUtils {
 			return new Pair<>(value, EXGEntryResult.INVALID_NUMBER);
 		}
 
-//          /!\  WILL BE IMPLEMENTED LATER  /!\
-//
-//		if (entrySettings.getAcceptedCharacters() != null) {
-//			for (char c : value.toCharArray()) {
-//				boolean isAccepted = false;
-//				for (char ac : entrySettings.getAcceptedCharacters()) {
-//					if (c == ac) {
-//						isAccepted = true;
-//						break;
-//					}
-//				}
-//				if (!isAccepted) {
-//					return new Pair<>(value, EXGEntryResult.INVALID_CHARACTERS);
-//				}
-//			}
-//		}
+		if (entrySettings.getCharacterListPath() != null) {
+			String characterListString = Main.getInstance().getConfiguration().getCharacterList(entrySettings.getCharacterListPath());
+
+			if (characterListString.startsWith("regex:")) {
+				String regex = characterListString.substring("regex:".length());
+				if (!value.matches(regex)) {
+					return new Pair<>(value, EXGEntryResult.INVALID_CHARACTER);
+				}
+				return new Pair<>(value, EXGEntryResult.SUCCESS);
+			}
+
+			for (String character : value.split("")) {
+				if (!characterListString.contains(character)) {
+					return new Pair<>(value, EXGEntryResult.INVALID_CHARACTER);
+				}
+			}
+		}
 
 		return new Pair<>(value, EXGEntryResult.SUCCESS);
 	}

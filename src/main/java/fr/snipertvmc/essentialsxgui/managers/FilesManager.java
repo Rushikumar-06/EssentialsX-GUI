@@ -10,13 +10,10 @@ import fr.snipertvmc.essentialsxgui.utilities.type.MapUtils;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FilesManager {
 
