@@ -9,13 +9,13 @@ import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGKit;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.EXGKitsAdminViewInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.PaginatedFastInv;
+import fr.snipertvmc.essentialsxgui.utilities.InventoriesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.TextUtils;
 import fr.snipertvmc.essentialsxgui.utilities.data.DataEntryUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -67,34 +67,7 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 		for (EXGKit kit : kits) {
 
 			EXGItemConfig kitItem = config.getKitItem().duplicate();
-			kitItem.setMaterial(kit.getMaterial().name());
-			kitItem.setData(kit.getData());
-
-			ItemStack kitItemStack;
-
-			if (kit.getCustomItemStack() != null) {
-				kitItemStack = kit.getCustomItemStack().clone();
-				ItemMeta meta = kitItemStack.getItemMeta();
-
-				meta.setDisplayName(kitItem.getDisplayName()
-						.replace("{kitDisplayName}", kit.getDisplayName())
-						.replace("{kitName}", kit.getName()));
-
-				meta.setLore(kitItem.getLore().stream()
-						.map(line -> line
-								.replace("{kitDisplayName}", kit.getDisplayName())
-								.replace("{kitName}", kit.getName()))
-						.collect(Collectors.toList()));
-
-				kitItemStack.setItemMeta(meta);
-
-			} else {
-				kitItemStack = kitItem
-						.updateVariables(
-								Map.of("kitDisplayName", kit.getDisplayName(),
-										"kitName", kit.getName()))
-						.build(player);
-			}
+			ItemStack kitItemStack = InventoriesUtils.getKitItemStack(kitItem, kit, player);
 
 			addContent(kitItemStack, e -> {
 

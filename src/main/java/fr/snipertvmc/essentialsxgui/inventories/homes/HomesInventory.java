@@ -10,13 +10,13 @@ import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGPlayer;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes.EXGHomesInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.PaginatedFastInv;
+import fr.snipertvmc.essentialsxgui.utilities.InventoriesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.TextUtils;
 import fr.snipertvmc.essentialsxgui.utilities.data.DataEntryUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -71,34 +71,7 @@ public class HomesInventory extends PaginatedFastInv {
 		for (EXGHome home : homes) {
 
 			EXGItemConfig homeItem = config.getHomeItem().duplicate();
-			homeItem.setMaterial(home.getMaterial().name());
-			homeItem.setData(home.getData());
-
-			ItemStack homeItemStack;
-
-			if (home.getCustomItemStack() != null) {
-				homeItemStack = home.getCustomItemStack().clone();
-				ItemMeta meta = homeItemStack.getItemMeta();
-
-				meta.setDisplayName(homeItem.getDisplayName()
-						.replace("{homeDisplayName}", home.getDisplayName())
-						.replace("{homeName}", home.getName()));
-
-				meta.setLore(homeItem.getLore().stream()
-						.map(line -> line
-								.replace("{homeDisplayName}", home.getDisplayName())
-								.replace("{homeName}", home.getName()))
-						.collect(Collectors.toList()));
-
-				homeItemStack.setItemMeta(meta);
-
-			} else {
-				 homeItemStack = homeItem
-						 .updateVariables(
-								Map.of("homeDisplayName", home.getDisplayName(),
-										"homeName", home.getName()))
-						.build(player);
-			}
+			ItemStack homeItemStack = InventoriesUtils.getHomeItemStack(homeItem, home, player);
 
 			addContent(homeItemStack, e -> {
 

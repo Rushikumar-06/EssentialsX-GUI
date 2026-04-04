@@ -1,10 +1,10 @@
 package fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits;
 
-import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGPaginatedInventoryConfig;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.InventoryScheme;
 
-public class EXGKitsPlayerViewInventoryConfig extends EXGInventoryConfig {
+public class EXGKitsPlayerViewInventoryConfig extends EXGPaginatedInventoryConfig {
 
 
 	// -------------------------------------------------- //
@@ -17,10 +17,6 @@ public class EXGKitsPlayerViewInventoryConfig extends EXGInventoryConfig {
 	private EXGItemConfig searchKitItem;
 	private EXGItemConfig cancelSearchKitItem;
 	private EXGItemConfig noSearchKitResultsItem;
-
-	private EXGItemConfig nextPageItem;
-	private EXGItemConfig previousPageItem;
-	private EXGItemConfig currentPageItem;
 
 	private EXGItemConfig closeItem;
 
@@ -58,16 +54,6 @@ public class EXGKitsPlayerViewInventoryConfig extends EXGInventoryConfig {
 		return noSearchKitResultsItem;
 	}
 
-	public EXGItemConfig getNextPageItem() {
-		return nextPageItem;
-	}
-	public EXGItemConfig getPreviousPageItem() {
-		return previousPageItem;
-	}
-	public EXGItemConfig getCurrentPageItem() {
-		return currentPageItem;
-	}
-
 	public EXGItemConfig getCloseItem() {
 		return closeItem;
 	}
@@ -98,16 +84,6 @@ public class EXGKitsPlayerViewInventoryConfig extends EXGInventoryConfig {
 	}
 	public void setNoSearchKitResultsItem(EXGItemConfig noSearchKitResultsItem) {
 		this.noSearchKitResultsItem = noSearchKitResultsItem;
-	}
-
-	public void setNextPageItem(EXGItemConfig nextPageItem) {
-		this.nextPageItem = nextPageItem;
-	}
-	public void setPreviousPageItem(EXGItemConfig previousPageItem) {
-		this.previousPageItem = previousPageItem;
-	}
-	public void setCurrentPageItem(EXGItemConfig currentPageItem) {
-		this.currentPageItem = currentPageItem;
 	}
 
 	public void setCloseItem(EXGItemConfig closeItem) {

@@ -9,13 +9,13 @@ import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGWarp;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.warps.EXGWarpsAdminViewInventoryConfig;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.PaginatedFastInv;
+import fr.snipertvmc.essentialsxgui.utilities.InventoriesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.TextUtils;
 import fr.snipertvmc.essentialsxgui.utilities.data.DataEntryUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -67,34 +67,7 @@ public class WarpsAdminViewInventory extends PaginatedFastInv {
 		for (EXGWarp warp : warps) {
 
 			EXGItemConfig warpItem = config.getWarpItem().duplicate();
-			warpItem.setMaterial(warp.getMaterial().name());
-			warpItem.setData(warp.getData());
-
-			ItemStack warpItemStack;
-
-			if (warp.getCustomItemStack() != null) {
-				warpItemStack = warp.getCustomItemStack().clone();
-				ItemMeta meta = warpItemStack.getItemMeta();
-
-				meta.setDisplayName(warpItem.getDisplayName()
-						.replace("{warpDisplayName}", warp.getDisplayName())
-						.replace("{warpName}", warp.getName()));
-
-				meta.setLore(warpItem.getLore().stream()
-						.map(line -> line
-								.replace("{warpDisplayName}", warp.getDisplayName())
-								.replace("{warpName}", warp.getName()))
-						.collect(Collectors.toList()));
-
-				warpItemStack.setItemMeta(meta);
-
-			} else {
-				warpItemStack = warpItem
-						.updateVariables(
-								Map.of("warpDisplayName", warp.getDisplayName(),
-										"warpName", warp.getName()))
-						.build(player);
-			}
+			ItemStack warpItemStack = InventoriesUtils.getWarpItemStack(warpItem, warp, player);
 
 			addContent(warpItemStack, e -> {
 
