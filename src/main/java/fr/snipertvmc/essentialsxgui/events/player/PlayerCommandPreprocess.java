@@ -60,10 +60,7 @@ public class PlayerCommandPreprocess implements Listener {
 
 				if (args.length > 1) return;
 				if (!player.hasPermission("essentials.home")) return;
-
-				if (!Main.getInstance().getConfiguration().isHomesModuleEnabled()) {
-					return;
-				}
+				if (!Main.getInstance().getConfiguration().isHomesModuleEnabled()) return;
 				event.setCancelled(true);
 
 				TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.OPENING_HOMES_INVENTORY, null));
@@ -80,10 +77,7 @@ public class PlayerCommandPreprocess implements Listener {
 
 				if (args.length > 1) return;
 				if (!player.hasPermission("essentials.kit")) return;
-
-				if (!Main.getInstance().getConfiguration().isKitsModuleEnabled()) {
-					return;
-				}
+				if (!Main.getInstance().getConfiguration().isKitsModuleEnabled()) return;
 
 				event.setCancelled(true);
 
@@ -110,10 +104,7 @@ public class PlayerCommandPreprocess implements Listener {
 
 				if (args.length > 1) return;
 				if (!player.hasPermission("essentials.warp")) return;
-
-				if (!Main.getInstance().getConfiguration().isWarpsModuleEnabled()) {
-					return;
-				}
+				if (!Main.getInstance().getConfiguration().isWarpsModuleEnabled()) return;
 
 				event.setCancelled(true);
 
@@ -139,6 +130,7 @@ public class PlayerCommandPreprocess implements Listener {
 			case "whois" -> {
 
 				if (!player.hasPermission("essentials.whois")) return;
+				if (!Main.getInstance().getConfiguration().isWhoisModuleEnabled()) return;
 
 				event.setCancelled(true);
 

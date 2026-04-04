@@ -69,6 +69,10 @@ public class ConfigurationFile {
 		return yamlConfiguration.getBoolean("warps.enabled", false);
 	}
 
+	public boolean isWhoisModuleEnabled() {
+		return yamlConfiguration.getBoolean("whois.enabled", false);
+	}
+
 
 	// -------------------------------------------------- //
 
