@@ -29,7 +29,7 @@ public class CommandEssentialsXGUI implements CommandExecutor, TabCompleter {
     public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args) {
 
 		if (!commandSender.hasPermission(EXGPermission.CMD_EXG.get())) {
-			TextUtils.sendComponentToCommandSender(commandSender, MessagesUtils.getComponent(EXGMessage.NO_PERMISSION));
+			TextUtils.sendMessageToCommandSender(commandSender, MessagesUtils.getString(EXGMessage.NO_PERMISSION));
 			return true;
 		}
 
@@ -54,9 +54,9 @@ public class CommandEssentialsXGUI implements CommandExecutor, TabCompleter {
 			case "debug" -> sendDebugLinkMessage(commandSender);
 
 			// NOT FOUND ARGUMENT
-			default -> TextUtils.sendComponentToCommandSender(
+			default -> TextUtils.sendMessageToCommandSender(
 					commandSender,
-					MessagesUtils.getComponent(EXGMessage.ARGUMENT_NOT_FOUND, Map.of("argument", firstArg))
+					MessagesUtils.getString(EXGMessage.ARGUMENT_NOT_FOUND, Map.of("argument", firstArg))
 			);
 		}
 
@@ -97,12 +97,12 @@ public class CommandEssentialsXGUI implements CommandExecutor, TabCompleter {
 	public void sendDebugLinkMessage(CommandSender commandSender) {
 
 		if (!commandSender.hasPermission(EXGPermission.CMD_EXG_DEBUG.get())) {
-			TextUtils.sendComponentToCommandSender(commandSender, MessagesUtils.getComponent(EXGMessage.NO_PERMISSION));
+			TextUtils.sendMessageToCommandSender(commandSender, MessagesUtils.getString(EXGMessage.NO_PERMISSION));
 			return;
 		}
 
 		if (!(commandSender instanceof Player player)) {
-			TextUtils.sendComponentToCommandSender(commandSender, MessagesUtils.getComponent(EXGMessage.ONLY_FOR_PLAYERS, null));
+			TextUtils.sendMessageToCommandSender(commandSender, MessagesUtils.getString(EXGMessage.ONLY_FOR_PLAYERS, null));
 			return;
 		}
 
@@ -117,26 +117,26 @@ public class CommandEssentialsXGUI implements CommandExecutor, TabCompleter {
 	public void reloadPlugin(CommandSender commandSender) {
 
 		if (!commandSender.hasPermission(EXGPermission.CMD_EXG_RELOAD.get())) {
-			TextUtils.sendComponentToCommandSender(commandSender, MessagesUtils.getComponent(EXGMessage.NO_PERMISSION));
+			TextUtils.sendMessageToCommandSender(commandSender, MessagesUtils.getString(EXGMessage.NO_PERMISSION));
 			return;
 		}
 
 
 		// FILES RELOADING
-		TextUtils.sendComponentToCommandSender(commandSender, MessagesUtils.getComponent(EXGMessage.FILES_RELOADING, null));
+		TextUtils.sendMessageToCommandSender(commandSender, MessagesUtils.getString(EXGMessage.FILES_RELOADING, null));
 		Main.getInstance().getFilesManager().reloadFiles();
-		TextUtils.sendComponentToCommandSender(commandSender, MessagesUtils.getComponent(EXGMessage.FILES_RELOADED, null));
+		TextUtils.sendMessageToCommandSender(commandSender, MessagesUtils.getString(EXGMessage.FILES_RELOADED, null));
 
 
 		// DATABASE RELOADING
-		TextUtils.sendComponentToCommandSender(commandSender, MessagesUtils.getComponent(EXGMessage.DATABASE_RELOADING, null));
+		TextUtils.sendMessageToCommandSender(commandSender, MessagesUtils.getString(EXGMessage.DATABASE_RELOADING, null));
 
 		Main.getInstance().getDatabaseManager().disconnectAllDatabases();
 		Main.getInstance().getDatabaseManager().updateDatabaseStorage();
 		Main.getInstance().getDatabaseManager().connectAllDatabases();
 
 		String newStorageType = Main.getInstance().getConfiguration().getStorageType();
-		TextUtils.sendComponentToCommandSender(commandSender, MessagesUtils.getComponent(EXGMessage.DATABASE_RELOADED, Map.of("newStorageType", newStorageType)));
+		TextUtils.sendMessageToCommandSender(commandSender, MessagesUtils.getString(EXGMessage.DATABASE_RELOADED, Map.of("newStorageType", newStorageType)));
 	}
 
 

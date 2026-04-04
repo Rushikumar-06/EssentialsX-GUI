@@ -19,39 +19,13 @@ public class TextUtils {
 	// -------------------------------------------------- //
 
 
-	public static void sendComponentToCommandSender(CommandSender commandSender, Component component) {
-
-		String miniMessage = MiniMessage.miniMessage().serialize(component);
+	public static void sendMessageToCommandSender(CommandSender commandSender, String formattedMessage) {
 
 		if (Main.getInstance().getLoadingManager().isPlaceholderAPISupported() && commandSender instanceof Player player) {
-			miniMessage = PlaceholderAPI.setPlaceholders(player, miniMessage);
+			formattedMessage = PlaceholderAPI.setPlaceholders(player, formattedMessage);
 		}
 
-		commandSender.sendMessage(convertFormattedMessageToText(miniMessage));
-	}
-
-
-
-	// -------------------------------------------------- //
-
-
-	public static Component getComponent(String formattedMessage) {
-
-		if (isMixedFormat(formattedMessage)) {
-
-			ConsoleLogger.warn("Mixed formatting detected in message: " + formattedMessage);
-			ConsoleLogger.warn("Please use either legacy or MiniMessage formatting, not both. "
-					+ "This message will be treated as a plain text message.");
-
-			return Component.text(formattedMessage);
-		}
-
-		if (isLegacyFormat(formattedMessage)) {
-			formattedMessage = formattedMessage.replace("&", "§");
-			return LegacyComponentSerializer.legacySection().deserialize(formattedMessage);
-		}
-
-		return MiniMessage.miniMessage().deserialize(formattedMessage);
+		commandSender.sendMessage(convertFormattedMessageToText(formattedMessage));
 	}
 
 
@@ -81,17 +55,43 @@ public class TextUtils {
 	// -------------------------------------------------- //
 
 
-	public static boolean isLegacyFormat(String message) {
+	private static Component getComponent(String formattedMessage) {
+
+		if (hasMixedFormat(formattedMessage)) {
+			ConsoleLogger.warn("Mixed formatting detected in message: " + formattedMessage);
+			ConsoleLogger.warn("Please use either legacy or MiniMessage formatting, not both. "
+					+ "This message will be treated as a plain text message.");
+
+			return Component.text(formattedMessage);
+		}
+
+		if (hasLegacyFormat(formattedMessage)) {
+			formattedMessage = formattedMessage.replace("&", "§");
+			return LegacyComponentSerializer.legacySection().deserialize(formattedMessage);
+		}
+
+		return MiniMessage.miniMessage().deserialize(formattedMessage);
+	}
+
+
+	// -------------------------------------------------- //
+
+
+	public static boolean hasLegacyFormat(String message) {
 		if (message == null || message.isEmpty()) return false;
 		return message.matches(".*[&§][0-9a-fk-orx].*");
 	}
 
 
-	public static boolean isMixedFormat(String message) {
+	public static boolean hasMiniMessageFormat(String message) {
 		if (message == null || message.isEmpty()) return false;
-		boolean hasLegacy = isLegacyFormat(message);
-		boolean hasMiniMessage = message.matches(".*<[a-z0-9_#/:-]+>.*");
-		return hasLegacy && hasMiniMessage;
+		return message.matches(".*<[a-z0-9_#/:-]+>.*");
+	}
+
+
+	public static boolean hasMixedFormat(String message) {
+		if (message == null || message.isEmpty()) return false;
+		return hasLegacyFormat(message) && hasMiniMessageFormat(message);
 	}
 
 

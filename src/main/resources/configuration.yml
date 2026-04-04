@@ -77,6 +77,9 @@ general:
   # Reminder:
   #   => MiniMessage = "<red>Red text</red>". (Set this to true to use this format)
   #   => Legacy = "&cRed text" or "§cRed text". (Set this to false to use this format)
+  # TIP: If you use MiniMessage format for all messages, set this to true to keep the format consistent in all names
+  #      and display names of homes/kits/warps, especially if you allow players to use color codes in messages.
+  #      Furthermore, you will not get 'plain text' issues because of mixed format is not supported.
   acceptOnlyMiniMessageFormatInEntries: false
 
   # Configure the default names used when skipDataEntryProcess (instant creation) is enabled.

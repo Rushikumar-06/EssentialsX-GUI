@@ -148,7 +148,7 @@ public class HomesInventory extends PaginatedFastInv {
 					return;
 				}
 
-				TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.NO_PERMISSION, null));
+				TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.NO_PERMISSION, null));
 				SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 			});
 		}
@@ -167,7 +167,7 @@ public class HomesInventory extends PaginatedFastInv {
 					return;
 				}
 
-				TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.NO_PERMISSION, null));
+				TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.NO_PERMISSION, null));
 				SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 			});
 		}
@@ -258,7 +258,7 @@ public class HomesInventory extends PaginatedFastInv {
 					.replace(" ", "_");
 
 			Main.getInstance().getEssentials().getUser(player).setHome(finalHomeName, player.getLocation());
-			TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.HOME_CREATED, Map.of("homeName", finalHomeName)));
+			TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.HOME_CREATED, Map.of("homeName", finalHomeName)));
 			new HomesInventory(player, null, null).open(player);
 			SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
 			return;
@@ -271,7 +271,7 @@ public class HomesInventory extends PaginatedFastInv {
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("homes", "createNewHomeEntryType");
 		if (entryType == EXGEntryType.CHAT) {
 			player.closeInventory();
-			TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.ENTER_NEW_HOME_NAME_CHAT));
+			TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.ENTER_NEW_HOME_NAME_CHAT));
 		}
 
 		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
@@ -287,21 +287,21 @@ public class HomesInventory extends PaginatedFastInv {
 					Set<EXGHome> homes = Main.getInstance().getPlayerManager().getPlayer(player).getHomes();
 
 					if (homes.stream().anyMatch(home -> home.getName().equalsIgnoreCase(result.getLeft()))) {
-						TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.HOME_NAME_ALREADY_EXISTS));
+						TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.HOME_NAME_ALREADY_EXISTS));
 						new HomesInventory(player, null, null).open(player);
 						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 						return;
 					}
 
 					if (!Main.getInstance().getHookManager().getEssentialsHook().canCreateHome(player)) {
-						TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.HOME_LIMIT_REACHED));
+						TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.HOME_LIMIT_REACHED));
 						new HomesInventory(player, null, null).open(player);
 						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 						return;
 					}
 
 					Main.getInstance().getEssentials().getUser(player).setHome(result.getLeft().replace(" ", "_"), player.getLocation());
-					TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.HOME_CREATED, Map.of("homeName", result.getLeft())));
+					TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.HOME_CREATED, Map.of("homeName", result.getLeft())));
 					new HomesInventory(player, null, null).open(player);
 					SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
 
@@ -319,7 +319,7 @@ public class HomesInventory extends PaginatedFastInv {
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("homes", "searchHomeEntryType");
 		if (entryType == EXGEntryType.CHAT) {
 			player.closeInventory();
-			TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.SEARCH_HOME_CHAT));
+			TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.SEARCH_HOME_CHAT));
 		}
 
 		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
@@ -339,7 +339,7 @@ public class HomesInventory extends PaginatedFastInv {
 							.collect(Collectors.toCollection(LinkedHashSet::new));
 
 					if (searchHomes.isEmpty()) {
-						TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.NO_HOME_FOUND));
+						TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.NO_HOME_FOUND));
 						new HomesInventory(player, result.getLeft(), searchHomes).open(player);
 						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 						return;

@@ -66,7 +66,7 @@ public class PlayerCommandPreprocess implements Listener {
 				}
 				event.setCancelled(true);
 
-				TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.OPENING_HOMES_INVENTORY, null));
+				TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.OPENING_HOMES_INVENTORY, null));
 				new HomesInventory(player, null, null).open(player);
 				SoundsUtils.playSound(player, EXGSound.GUI_OPEN);
 			}
@@ -90,11 +90,11 @@ public class PlayerCommandPreprocess implements Listener {
 				if (player.hasPermission(EXGPermission.KITS_ADMIN.get())
 						&& Main.getInstance().getConfiguration().mustOpenKitAdminViewByDefault()) {
 
-					TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.OPENING_ADMIN_KITS_INVENTORY, null));
+					TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.OPENING_ADMIN_KITS_INVENTORY, null));
 					new KitsAdminViewInventory(player, null, null).open(player);
 
 				} else {
-					TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.OPENING_PLAYER_KITS_INVENTORY, null));
+					TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.OPENING_PLAYER_KITS_INVENTORY, null));
 					new KitsPlayerViewInventory(player, null, null).open(player);
 				}
 
@@ -120,11 +120,11 @@ public class PlayerCommandPreprocess implements Listener {
 				if (player.hasPermission(EXGPermission.WARPS_ADMIN.get())
 						&& Main.getInstance().getConfiguration().mustOpenWarpAdminViewByDefault()) {
 
-					TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.OPENING_ADMIN_KITS_INVENTORY, null));
+					TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.OPENING_ADMIN_KITS_INVENTORY, null));
 					new WarpsAdminViewInventory(player, null, null).open(player);
 
 				} else {
-					TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.OPENING_PLAYER_KITS_INVENTORY, null));
+					TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.OPENING_PLAYER_KITS_INVENTORY, null));
 					new WarpsPlayerViewInventory(player, null, null).open(player);
 				}
 
@@ -147,17 +147,17 @@ public class PlayerCommandPreprocess implements Listener {
 
 					Player targetPlayer = Main.getInstance().getServer().getPlayerExact(targetPlayerName);
 					if (targetPlayer == null) {
-						TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.PLAYER_NOT_FOUND, Map.of("player", targetPlayerName)));
+						TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.PLAYER_NOT_FOUND, Map.of("player", targetPlayerName)));
 						return;
 					}
 
-					TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.OPENING_WHOIS_INVENTORY));
+					TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.OPENING_WHOIS_INVENTORY));
 					new WhoisViewInventory(player, targetPlayer).open(player);
 					SoundsUtils.playSound(player, EXGSound.GUI_OPEN);
 					return;
 				}
 
-				TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.OPENING_WHOIS_INVENTORY));
+				TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.OPENING_WHOIS_INVENTORY));
 				new WhoisPlayersInventory(player).open(player);
 				SoundsUtils.playSound(player, EXGSound.GUI_OPEN);
 			}

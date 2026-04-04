@@ -240,7 +240,7 @@ public class LoadingManager {
 			return;
 		}
 
-		TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.ALERT_UPDATE_AVAILABLE, Map.of(
+		TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.ALERT_UPDATE_AVAILABLE, Map.of(
 				"currentVersion", Main.getInstance().getDescription().getVersion(),
 				"latestVersion", latestVersionAvailable
 		)));

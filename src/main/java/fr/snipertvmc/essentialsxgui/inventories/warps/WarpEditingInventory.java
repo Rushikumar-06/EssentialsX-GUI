@@ -147,7 +147,7 @@ public class WarpEditingInventory extends FastInv {
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("warps", "changeWarpDisplayNameEntryType");
 		if (entryType == EXGEntryType.CHAT) {
 			player.closeInventory();
-			TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.ENTER_NEW_DISPLAY_NAME_CHAT));
+			TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.ENTER_NEW_DISPLAY_NAME_CHAT));
 		}
 
 		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
@@ -161,7 +161,7 @@ public class WarpEditingInventory extends FastInv {
 				result -> {
 
 					warp.setDisplayName(result.getLeft());
-					TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.DISPLAY_NAME_CHANGED,
+					TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.DISPLAY_NAME_CHANGED,
 							Map.of("newDisplayName", result.getLeft())
 					));
 					new WarpEditingInventory(player, warp).open(player);
@@ -181,21 +181,21 @@ public class WarpEditingInventory extends FastInv {
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("warps", "changeWarpIconEntryType");
 		if (entryType == EXGEntryType.CHAT) {
 			player.closeInventory();
-			TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.ENTER_NEW_ICON_NAME_CHAT));
+			TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.ENTER_NEW_ICON_NAME_CHAT));
 
 		} else if (entryType == EXGEntryType.ITEM_IN_HAND) {
 
 			ItemStack itemInHand = player.getInventory().getItem(player.getInventory().getHeldItemSlot());
 
 			if (itemInHand == null || itemInHand.getType() == Material.AIR) {
-				TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.ITEM_CANT_BE_AIR));
+				TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.ITEM_CANT_BE_AIR));
 				new WarpEditingInventory(player, warp).open(player);
 				SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 				return;
 			}
 
 			warp.setCustomItemStack(itemInHand);
-			TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.ICON_CHANGED, Map.of("newIcon", itemInHand.getType().name())));
+			TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.ICON_CHANGED, Map.of("newIcon", itemInHand.getType().name())));
 			new WarpEditingInventory(player, warp).open(player);
 			SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
 			return;
@@ -216,7 +216,7 @@ public class WarpEditingInventory extends FastInv {
 					warp.setMaterial(result.getLeft().getLeft());
 					warp.setData(result.getLeft().getRight());
 
-					TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.ICON_CHANGED, Map.of("newIcon", result.getLeft().getLeft().name())));
+					TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.ICON_CHANGED, Map.of("newIcon", result.getLeft().getLeft().name())));
 					new WarpEditingInventory(player, warp).open(player);
 					SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
 
@@ -234,7 +234,7 @@ public class WarpEditingInventory extends FastInv {
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("warps", "deleteWarpEntryType");
 		if (entryType == EXGEntryType.CHAT) {
 			player.closeInventory();
-			TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.CONFIRM_DELETE_WARP_CHAT, Map.of("warpName", warp.getName())));
+			TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.CONFIRM_DELETE_WARP_CHAT, Map.of("warpName", warp.getName())));
 		}
 
 		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
@@ -248,12 +248,12 @@ public class WarpEditingInventory extends FastInv {
 
 					try {
 						Main.getInstance().getEssentials().getWarps().removeWarp(warp.getName());
-						TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.WARP_DELETED, Map.of("warpName", warp.getName())));
+						TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.WARP_DELETED, Map.of("warpName", warp.getName())));
 						new WarpsAdminViewInventory(player, null, null).open(player);
 						SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
 
 					} catch (Exception e) {
-						TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.WARP_DELETE_ERROR));
+						TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.WARP_DELETE_ERROR));
 						new WarpEditingInventory(player, warp).open(player);
 						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 					}

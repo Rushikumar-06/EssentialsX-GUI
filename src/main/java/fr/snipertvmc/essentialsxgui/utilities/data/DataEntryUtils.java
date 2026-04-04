@@ -68,15 +68,15 @@ public class DataEntryUtils {
 			return new Pair<>(value, EXGEntryResult.CANCELED);
 		}
 
-		if (TextUtils.isMixedFormat(value)) {
+		if (TextUtils.hasMixedFormat(value)) {
 			return new Pair<>(value, EXGEntryResult.INVALID_MIXED_FORMAT);
 		}
 
-		if (Main.getInstance().getConfiguration().acceptOnlyMiniMessageFormatInEntries() && TextUtils.isLegacyFormat(value)) {
+		if (Main.getInstance().getConfiguration().acceptOnlyMiniMessageFormatInEntries() && TextUtils.hasLegacyFormat(value)) {
 			return new Pair<>(value, EXGEntryResult.INVALID_MINIMESSAGE_FORMAT);
 		}
 
-		if (!Main.getInstance().getConfiguration().acceptOnlyMiniMessageFormatInEntries() && !TextUtils.isLegacyFormat(value)) {
+		if (!Main.getInstance().getConfiguration().acceptOnlyMiniMessageFormatInEntries() && TextUtils.hasMiniMessageFormat(value)) {
 			return new Pair<>(value, EXGEntryResult.INVALID_LEGACY_FORMAT);
 		}
 

@@ -206,7 +206,7 @@ public class WhoisViewInventory extends FastInv {
 		boolean canSeeIPAddress = user.isAuthorized("essentials.whois.ip");
 		String ipAddress = canSeeIPAddress
 				? user.getBase().getAddress().getAddress().toString()
-				: "§c" + MessagesUtils.getComponent(EXGMessage.HIDDEN);
+				: "§c" + MessagesUtils.getString(EXGMessage.HIDDEN);
 
 		Statistic PLAY_ONE_TICK = EnumUtil.getStatistic("PLAY_ONE_MINUTE", "PLAY_ONE_TICK");
 		long playtimeMs = System.currentTimeMillis()

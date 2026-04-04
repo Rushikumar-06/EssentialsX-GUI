@@ -157,7 +157,7 @@ public class KitEditingInventory extends FastInv {
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("kits", "changeKitDisplayNameEntryType");
 		if (entryType == EXGEntryType.CHAT) {
 			player.closeInventory();
-			TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.ENTER_NEW_DISPLAY_NAME_CHAT));
+			TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.ENTER_NEW_DISPLAY_NAME_CHAT));
 		}
 
 		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
@@ -171,7 +171,7 @@ public class KitEditingInventory extends FastInv {
 				result -> {
 
 					kit.setDisplayName(result.getLeft());
-					TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.DISPLAY_NAME_CHANGED,
+					TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.DISPLAY_NAME_CHANGED,
 							Map.of("newDisplayName", result.getLeft())
 					));
 					new KitEditingInventory(player, kit).open(player);
@@ -191,21 +191,21 @@ public class KitEditingInventory extends FastInv {
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("kits", "changeKitIconEntryType");
 		if (entryType == EXGEntryType.CHAT) {
 			player.closeInventory();
-			TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.ENTER_NEW_ICON_NAME_CHAT));
+			TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.ENTER_NEW_ICON_NAME_CHAT));
 
 		} else if (entryType == EXGEntryType.ITEM_IN_HAND) {
 
 			ItemStack itemInHand = player.getInventory().getItem(player.getInventory().getHeldItemSlot());
 
 			if (itemInHand == null || itemInHand.getType() == Material.AIR) {
-				TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.ITEM_CANT_BE_AIR));
+				TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.ITEM_CANT_BE_AIR));
 				new KitEditingInventory(player, kit).open(player);
 				SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 				return;
 			}
 
 			kit.setCustomItemStack(itemInHand);
-			TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.ICON_CHANGED, Map.of("newIcon", itemInHand.getType().name())));
+			TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.ICON_CHANGED, Map.of("newIcon", itemInHand.getType().name())));
 			new KitEditingInventory(player, kit).open(player);
 			SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
 			return;
@@ -226,7 +226,7 @@ public class KitEditingInventory extends FastInv {
 					kit.setMaterial(result.getLeft().getLeft());
 					kit.setData(result.getLeft().getRight());
 
-					TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.ICON_CHANGED, Map.of("newIcon", result.getLeft().getLeft().name())));
+					TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.ICON_CHANGED, Map.of("newIcon", result.getLeft().getLeft().name())));
 					new KitEditingInventory(player, kit).open(player);
 					SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
 
@@ -244,7 +244,7 @@ public class KitEditingInventory extends FastInv {
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("kits", "deleteKitEntryType");
 		if (entryType == EXGEntryType.CHAT) {
 			player.closeInventory();
-			TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.CONFIRM_DELETE_KIT_CHAT, Map.of("kitName", kit.getName())));
+			TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.CONFIRM_DELETE_KIT_CHAT, Map.of("kitName", kit.getName())));
 		}
 
 		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
@@ -257,7 +257,7 @@ public class KitEditingInventory extends FastInv {
 				result -> {
 
 					Main.getInstance().getEssentials().getKits().removeKit(kit.getName());
-					TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.KIT_DELETED, Map.of("kitName", kit.getName())));
+					TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.KIT_DELETED, Map.of("kitName", kit.getName())));
 					new KitsAdminViewInventory(player, null, null).open(player);
 					SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
 

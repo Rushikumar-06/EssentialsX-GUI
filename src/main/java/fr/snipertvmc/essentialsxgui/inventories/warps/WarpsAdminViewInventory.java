@@ -151,7 +151,7 @@ public class WarpsAdminViewInventory extends PaginatedFastInv {
 					return;
 				}
 
-				TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.NO_PERMISSION, null));
+				TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.NO_PERMISSION, null));
 				SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 			});
 		}
@@ -243,12 +243,12 @@ public class WarpsAdminViewInventory extends PaginatedFastInv {
 
 			try {
 				Main.getInstance().getHookManager().getEssentialsHook().createWarpWithPlayer(player, finalWarpName);
-				TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.WARP_CREATED, Map.of("warpName", finalWarpName)));
+				TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.WARP_CREATED, Map.of("warpName", finalWarpName)));
 				new WarpsAdminViewInventory(player, null, null).open(player);
 				SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
 
 			} catch (Exception e) {
-				TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.WARP_CREATION_ERROR));
+				TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.WARP_CREATION_ERROR));
 				new WarpsAdminViewInventory(player, null, null).open(player);
 				SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 			}
@@ -262,7 +262,7 @@ public class WarpsAdminViewInventory extends PaginatedFastInv {
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("warps", "createNewWarpEntryType");
 		if (entryType == EXGEntryType.CHAT) {
 			player.closeInventory();
-			TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.ENTER_NEW_WARP_NAME_CHAT));
+			TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.ENTER_NEW_WARP_NAME_CHAT));
 		}
 
 		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
@@ -279,12 +279,12 @@ public class WarpsAdminViewInventory extends PaginatedFastInv {
 
 					try {
 						Main.getInstance().getHookManager().getEssentialsHook().createWarpWithPlayer(player, warpName.replace(" ", "_"));
-						TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.WARP_CREATED, Map.of("warpName", warpName)));
+						TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.WARP_CREATED, Map.of("warpName", warpName)));
 						new WarpsAdminViewInventory(player, null, null).open(player);
 						SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
 
 					} catch (Exception e) {
-						TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.WARP_CREATION_ERROR));
+						TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.WARP_CREATION_ERROR));
 						new WarpsAdminViewInventory(player, null, null).open(player);
 						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 					}
@@ -303,7 +303,7 @@ public class WarpsAdminViewInventory extends PaginatedFastInv {
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("warps", "searchWarpEntryType");
 		if (entryType == EXGEntryType.CHAT) {
 			player.closeInventory();
-			TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.SEARCH_WARP_CHAT));
+			TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.SEARCH_WARP_CHAT));
 		}
 
 		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
@@ -324,7 +324,7 @@ public class WarpsAdminViewInventory extends PaginatedFastInv {
 							.collect(Collectors.toCollection(LinkedHashSet::new));
 
 					if (searchWarps.isEmpty()) {
-						TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.NO_WARP_FOUND));
+						TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.NO_WARP_FOUND));
 						new WarpsAdminViewInventory(player, result.getLeft(), searchWarps).open(player);
 						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 						return;

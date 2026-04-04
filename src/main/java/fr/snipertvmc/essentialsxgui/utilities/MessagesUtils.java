@@ -1,6 +1,5 @@
 package fr.snipertvmc.essentialsxgui.utilities;
 
-import com.earth2me.essentials.libs.kyori.adventure.text.Component;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
 
@@ -32,19 +31,6 @@ public class MessagesUtils {
 		}
 
 		return finalMessage;
-	}
-
-
-	// -------------------------------------------------- //
-
-
-	public static Component getComponent(EXGMessage exgMessage) {
-		return getComponent(exgMessage, null);
-	}
-
-
-	public static Component getComponent(EXGMessage exgMessage, Map<String, String> variables) {
-		return TextUtils.getComponent(getString(exgMessage, variables));
 	}
 
 

@@ -39,7 +39,7 @@ public class ChatManager {
 	public boolean canDoChat(Player player) {
 
 		if (playersTyping.containsKey(player.getUniqueId())) {
-			TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.ONGOING_ACTION, null));
+			TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.ONGOING_ACTION, null));
 			SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 			return false;
 		}
@@ -62,7 +62,7 @@ public class ChatManager {
 	public void removeChat(Player player, boolean success) {
 
 		if (playersTyping.containsKey(player.getUniqueId()) && !success) {
-			TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.ACTION_EXPIRED, null));
+			TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.ACTION_EXPIRED, null));
 			SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 		}
 

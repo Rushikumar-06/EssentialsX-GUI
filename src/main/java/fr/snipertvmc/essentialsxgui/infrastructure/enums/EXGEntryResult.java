@@ -63,7 +63,7 @@ public enum EXGEntryResult {
 	public void playResult(Player player) {
 
 		if (resultMessage != null) {
-			TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(resultMessage, messageVariables));
+			TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(resultMessage, messageVariables));
 		}
 
 		if (resultSound != null) {

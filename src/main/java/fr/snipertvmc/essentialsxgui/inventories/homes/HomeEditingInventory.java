@@ -146,7 +146,7 @@ public class HomeEditingInventory extends FastInv {
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("homes", "changeHomeDisplayNameEntryType");
 		if (entryType == EXGEntryType.CHAT) {
 			player.closeInventory();
-			TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.ENTER_NEW_DISPLAY_NAME_CHAT));
+			TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.ENTER_NEW_DISPLAY_NAME_CHAT));
 		}
 
 		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
@@ -160,7 +160,7 @@ public class HomeEditingInventory extends FastInv {
 				result -> {
 
 					home.setDisplayName(result.getLeft());
-					TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.DISPLAY_NAME_CHANGED,
+					TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.DISPLAY_NAME_CHANGED,
 							Map.of("newDisplayName", result.getLeft())
 					));
 					new HomeEditingInventory(player, home).open(player);
@@ -180,21 +180,21 @@ public class HomeEditingInventory extends FastInv {
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("homes", "changeHomeIconEntryType");
 		if (entryType == EXGEntryType.CHAT) {
 			player.closeInventory();
-			TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.ENTER_NEW_ICON_NAME_CHAT));
+			TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.ENTER_NEW_ICON_NAME_CHAT));
 
 		} else if (entryType == EXGEntryType.ITEM_IN_HAND) {
 
 			ItemStack itemInHand = player.getInventory().getItem(player.getInventory().getHeldItemSlot());
 
 			if (itemInHand == null || itemInHand.getType() == Material.AIR) {
-				TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.ITEM_CANT_BE_AIR));
+				TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.ITEM_CANT_BE_AIR));
 				new HomeEditingInventory(player, home).open(player);
 				SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 				return;
 			}
 
 			home.setCustomItemStack(itemInHand);
-			TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.ICON_CHANGED, Map.of("newIcon", itemInHand.getType().name())));
+			TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.ICON_CHANGED, Map.of("newIcon", itemInHand.getType().name())));
 			new HomeEditingInventory(player, home).open(player);
 			SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
 			return;
@@ -215,7 +215,7 @@ public class HomeEditingInventory extends FastInv {
 					home.setMaterial(result.getLeft().getLeft());
 					home.setData(result.getLeft().getRight());
 
-					TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.ICON_CHANGED, Map.of("newIcon", result.getLeft().getLeft().name())));
+					TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.ICON_CHANGED, Map.of("newIcon", result.getLeft().getLeft().name())));
 					new HomeEditingInventory(player, home).open(player);
 					SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
 
@@ -233,7 +233,7 @@ public class HomeEditingInventory extends FastInv {
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("homes", "deleteHomeEntryType");
 		if (entryType == EXGEntryType.CHAT) {
 			player.closeInventory();
-			TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.CONFIRM_DELETE_HOME_CHAT, Map.of("homeName", home.getName())));
+			TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.CONFIRM_DELETE_HOME_CHAT, Map.of("homeName", home.getName())));
 		}
 
 		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
@@ -248,13 +248,13 @@ public class HomeEditingInventory extends FastInv {
 						Main.getInstance().getEssentials().getUser(player).delHome(home.getName());
 
 					} catch (Exception ex) {
-						TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.HOME_DELETE_ERROR));
+						TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.HOME_DELETE_ERROR));
 						new HomesInventory(player, null, null).open(player);
 						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 						return;
 					}
 
-					TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.HOME_DELETED,
+					TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.HOME_DELETED,
 							Map.of("homeName", home.getName()))
 					);
 					new HomesInventory(player, null, null).open(player);

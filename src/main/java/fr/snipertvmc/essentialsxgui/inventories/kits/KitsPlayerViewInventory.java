@@ -211,7 +211,7 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("kits", "searchKitEntryType");
 		if (entryType == EXGEntryType.CHAT) {
 			player.closeInventory();
-			TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.SEARCH_KIT_CHAT));
+			TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.SEARCH_KIT_CHAT));
 		}
 
 		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
@@ -233,7 +233,7 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 							.collect(Collectors.toCollection(LinkedHashSet::new));
 
 					if (searchKits.isEmpty()) {
-						TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.NO_KIT_FOUND));
+						TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.NO_KIT_FOUND));
 						new KitsPlayerViewInventory(player, result.getLeft(), searchKits).open(player);
 						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 						return;

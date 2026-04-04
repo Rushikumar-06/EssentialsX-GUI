@@ -203,7 +203,7 @@ public class WarpsPlayerViewInventory extends PaginatedFastInv {
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("warps", "searchWarpEntryType");
 		if (entryType == EXGEntryType.CHAT) {
 			player.closeInventory();
-			TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.SEARCH_WARP_CHAT));
+			TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.SEARCH_WARP_CHAT));
 		}
 
 		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
@@ -225,7 +225,7 @@ public class WarpsPlayerViewInventory extends PaginatedFastInv {
 							.collect(Collectors.toCollection(LinkedHashSet::new));
 
 					if (searchWarps.isEmpty()) {
-						TextUtils.sendComponentToCommandSender(player, MessagesUtils.getComponent(EXGMessage.NO_WARP_FOUND));
+						TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.NO_WARP_FOUND));
 						new WarpsPlayerViewInventory(player, result.getLeft(), searchWarps).open(player);
 						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 						return;
