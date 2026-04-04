@@ -1,7 +1,6 @@
 package fr.snipertvmc.essentialsxgui.inventories.whois;
 
 import com.earth2me.essentials.User;
-import com.earth2me.essentials.utils.AdventureUtil;
 import com.earth2me.essentials.utils.EnumUtil;
 import com.earth2me.essentials.utils.NumberUtil;
 import fr.snipertvmc.essentialsxgui.Main;
@@ -250,7 +249,7 @@ public class WhoisViewInventory extends FastInv {
 
 		boolean ecoEnabled = !Main.getInstance().getEssentials().getSettings().isEcoDisabled();
 		String money = ecoEnabled
-				? AdventureUtil.parsed(NumberUtil.displayCurrency(user.getMoney(), Main.getInstance().getEssentials())).toString()
+				? NumberUtil.displayCurrency(user.getMoney(), Main.getInstance().getEssentials())
 				: MessagesUtils.getString(EXGMessage.DISABLED);
 
 		String nick = user.getNickname();
