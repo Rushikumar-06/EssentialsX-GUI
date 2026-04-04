@@ -6,6 +6,7 @@ import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGKit;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.EXGKitPlayerGiveInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.PaginatedFastInv;
+import fr.snipertvmc.essentialsxgui.utilities.InventoriesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -46,18 +47,7 @@ public class KitPlayerGiveInventory extends PaginatedFastInv {
 		}
 
 
-		previousPageItem(config.getPreviousPageItem().getSlot(), p -> config.getPreviousPageItem().duplicate()
-				.updateVariables(
-						Map.of("currentPage", String.valueOf(p + 1),
-								"previousPage", String.valueOf(p)))
-				.build(player));
-
-
-		nextPageItem(config.getNextPageItem().getSlot(), p -> config.getNextPageItem().duplicate()
-				.updateVariables(
-						Map.of("currentPage", String.valueOf(p - 1),
-								"nextPage", String.valueOf(p)))
-				.build(player));
+		InventoriesUtils.initializePaginatedInventory(player, config, this);
 
 
 		List<Player> targets = Bukkit.getOnlinePlayers().stream()

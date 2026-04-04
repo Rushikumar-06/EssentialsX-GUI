@@ -68,17 +68,8 @@ public class DataEntryUtils {
 			return new Pair<>(value, EXGEntryResult.CANCELED);
 		}
 
-		if (TextUtils.hasMixedFormat(value)) {
-			return new Pair<>(value, EXGEntryResult.INVALID_MIXED_FORMAT);
-		}
-
-		if (Main.getInstance().getConfiguration().acceptOnlyMiniMessageFormatInEntries() && TextUtils.hasLegacyFormat(value)) {
-			return new Pair<>(value, EXGEntryResult.INVALID_MINIMESSAGE_FORMAT);
-		}
-
-		if (!Main.getInstance().getConfiguration().acceptOnlyMiniMessageFormatInEntries() && TextUtils.hasMiniMessageFormat(value)) {
-			return new Pair<>(value, EXGEntryResult.INVALID_LEGACY_FORMAT);
-		}
+		Pair<String, EXGEntryResult> formatAnalysisResult = getFormatAnalysisResult(value);
+		if (formatAnalysisResult != null) getFormatAnalysisResult(value);
 
 		if ( (entrySettings.getMinLength() != -1 && value.length() < entrySettings.getMinLength())
 			|| (entrySettings.getMaxLength() != -1 && value.length() > entrySettings.getMaxLength()) ) {
@@ -93,22 +84,9 @@ public class DataEntryUtils {
 			return new Pair<>(value, EXGEntryResult.INVALID_NUMBER);
 		}
 
-		if (entrySettings.getCharacterListPath() != null) {
-			String characterListString = Main.getInstance().getConfiguration().getCharacterList(entrySettings.getCharacterListPath());
-
-			if (characterListString.startsWith("regex:")) {
-				String regex = characterListString.substring("regex:".length());
-				if (!value.matches(regex)) {
-					return new Pair<>(value, EXGEntryResult.INVALID_CHARACTER);
-				}
-				return new Pair<>(value, EXGEntryResult.SUCCESS);
-			}
-
-			for (String character : value.split("")) {
-				if (!characterListString.contains(character)) {
-					return new Pair<>(value, EXGEntryResult.INVALID_CHARACTER);
-				}
-			}
+		String characterListPath = Main.getInstance().getConfiguration().getCharacterList(entrySettings.getCharacterListPath());
+		if (characterListPath != null) {
+			return getCharactersAnalysisResult(characterListPath, value);
 		}
 
 		return new Pair<>(value, EXGEntryResult.SUCCESS);
@@ -211,6 +189,48 @@ public class DataEntryUtils {
 		}
 
 		return new Pair<>(new Pair<>(material, data), EXGEntryResult.SUCCESS);
+	}
+
+
+	// -------------------------------------------------- //
+
+
+	private static Pair<String, EXGEntryResult> getFormatAnalysisResult(String value) {
+
+		if (TextUtils.hasMixedFormat(value)) {
+			return new Pair<>(value, EXGEntryResult.INVALID_MIXED_FORMAT);
+		}
+
+		if (Main.getInstance().getConfiguration().acceptOnlyMiniMessageFormatInEntries() && TextUtils.hasLegacyFormat(value)) {
+			return new Pair<>(value, EXGEntryResult.INVALID_MINIMESSAGE_FORMAT);
+		}
+
+		if (!Main.getInstance().getConfiguration().acceptOnlyMiniMessageFormatInEntries() && TextUtils.hasMiniMessageFormat(value)) {
+			return new Pair<>(value, EXGEntryResult.INVALID_LEGACY_FORMAT);
+		}
+
+		return null;
+	}
+
+
+	private static Pair<String, EXGEntryResult> getCharactersAnalysisResult(String characterListString, String value) {
+
+		if (characterListString.startsWith("regex:")) {
+			String regex = characterListString.substring("regex:".length());
+			if (!value.matches(regex)) {
+				return new Pair<>(value, EXGEntryResult.INVALID_CHARACTER);
+			}
+
+		} else {
+
+			for (String character : value.split("")) {
+				if (!characterListString.contains(character)) {
+					return new Pair<>(value, EXGEntryResult.INVALID_CHARACTER);
+				}
+			}
+		}
+
+		return new Pair<>(value, EXGEntryResult.SUCCESS);
 	}
 
 

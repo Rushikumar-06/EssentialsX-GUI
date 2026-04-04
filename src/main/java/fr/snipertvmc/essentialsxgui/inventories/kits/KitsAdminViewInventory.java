@@ -52,6 +52,7 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 
 
 		initializeGeneralInventory(player);
+		InventoriesUtils.initializePaginatedInventory(player, config, this);
 		defineKitsItems(player, kits, kitSearch);
 		defineSwitchToPlayerModeItem(player);
 		defineCreateKitItem(player);
@@ -161,20 +162,6 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 		if (config.getBorderItem().isEnabled()) {
 			setItems(config.getBorderSlots(), config.getBorderItem().build(player));
 		}
-
-
-		previousPageItem(config.getPreviousPageItem().getSlot(), p -> config.getPreviousPageItem().duplicate()
-				.updateVariables(
-						Map.of("currentPage", String.valueOf(p + 1),
-								"previousPage", String.valueOf(p)))
-				.build(player));
-
-
-		nextPageItem(config.getNextPageItem().getSlot(), p -> config.getNextPageItem().duplicate()
-				.updateVariables(
-						Map.of("currentPage", String.valueOf(p - 1),
-								"nextPage", String.valueOf(p)))
-				.build(player));
 
 
 		if (config.getCloseItem().isEnabled()) {

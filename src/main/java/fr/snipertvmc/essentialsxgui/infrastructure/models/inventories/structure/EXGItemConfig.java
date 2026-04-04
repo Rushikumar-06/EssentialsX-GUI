@@ -232,6 +232,20 @@ public class EXGItemConfig {
 		}
 		itemBuilder.data(data);
 
+		applyDisplayName(player, itemBuilder);
+		applyLore(player, itemBuilder);
+
+		applyEnchantments(itemBuilder);
+		applyItemFlags(itemBuilder);
+
+		return itemBuilder.build();
+	}
+
+
+	// -------------------------------------------------- //
+
+
+	private void applyDisplayName(Player player, ItemBuilder itemBuilder) {
 		if (displayName != null) {
 			if (Main.getInstance().getLoadingManager().isPlaceholderAPISupported()) {
 				itemBuilder.name(PlaceholderAPI.setPlaceholders(player, displayName));
@@ -242,7 +256,10 @@ public class EXGItemConfig {
 		} else {
 			itemBuilder.name(this.getMaterial().name());
 		}
+	}
 
+
+	private void applyLore(Player player, ItemBuilder itemBuilder) {
 		if (lore != null) {
 			if (Main.getInstance().getLoadingManager().isPlaceholderAPISupported()) {
 				itemBuilder.lore(new ArrayList<>(PlaceholderAPI.setPlaceholders(player, lore)));
@@ -250,20 +267,24 @@ public class EXGItemConfig {
 				itemBuilder.lore(new ArrayList<>(lore));
 			}
 		}
+	}
 
+
+	private void applyEnchantments(ItemBuilder itemBuilder) {
 		if (enchantments != null) {
 			for (Pair<XEnchantment, Integer> enchantment : enchantments) {
 				itemBuilder.enchant(enchantment.getLeft(), enchantment.getRight());
 			}
 		}
+	}
 
+
+	private void applyItemFlags(ItemBuilder itemBuilder) {
 		if (itemFlags != null) {
 			for (XItemFlag itemFlag : itemFlags) {
 				itemBuilder.flags(itemFlag);
 			}
 		}
-
-		return itemBuilder.build();
 	}
 
 

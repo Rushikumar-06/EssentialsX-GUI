@@ -1,9 +1,14 @@
 package fr.snipertvmc.essentialsxgui.utilities;
 
+import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGHome;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGKit;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGWarp;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGPaginatedInventoryConfig;
+import fr.snipertvmc.essentialsxgui.libraries.fastinv.PaginatedFastInv;
+import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -12,6 +17,26 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class InventoriesUtils {
+
+
+	// -------------------------------------------------- //
+
+
+	public static void initializePaginatedInventory(Player player, EXGPaginatedInventoryConfig config, PaginatedFastInv inv) {
+
+		inv.previousPageItem(config.getPreviousPageItem().getSlot(), p -> config.getPreviousPageItem().duplicate()
+				.updateVariables(
+						Map.of("currentPage", String.valueOf(p + 1),
+								"previousPage", String.valueOf(p)))
+				.build(player));
+
+
+		inv.nextPageItem(config.getNextPageItem().getSlot(), p -> config.getNextPageItem().duplicate()
+				.updateVariables(
+						Map.of("currentPage", String.valueOf(p - 1),
+								"nextPage", String.valueOf(p)))
+				.build(player));
+	}
 
 
 	// -------------------------------------------------- //
