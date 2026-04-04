@@ -19,7 +19,9 @@ public enum EXGMessage {
 	// ERRORS
 	INVALID_MATERIAL("errors.invalidMaterial"),
 	LENGTH_LIMIT("errors.lengthLimit"),
-	INVALID_FORMAT("errors.invalidFormat"),
+	INVALID_MINIMESSAGE_FORMAT("errors.invalidMiniMessageFormat"),
+	INVALID_LEGACY_FORMAT("errors.invalidLegacyFormat"),
+	INVALID_MIXED_FORMAT("errors.invalidMixedFormat"),
 	INVALID_NUMBER("errors.invalidNumber"),
 	PLAYER_NOT_FOUND("errors.playerNotFound"),
 

@@ -21,8 +21,8 @@
 general:
 
   # Please do not change this value as it may cause the file to be reset.
-  # Default: "1.6"
-  configVersion: "1.6"
+  # Default: "1.7"
+  configVersion: "1.7"
 
   # If you want to see a detailed loading message when the plugin is loading, set this to true. (Also works for unloading)
   # Default: false
@@ -71,6 +71,13 @@ general:
   #      typing in chat can be complicated for them. You can always change the name/icon later using the GUI.
   # Default: false
   skipDataEntryProcess: false
+
+  # If you set skipDataEntryProcess to true, you can choose to only accept MiniMessage format in names and display names of homes/kits/warps.
+  # Otherwise, players can only use legacy color codes (using & or §) and they won't be able to use MiniMessage format.
+  # Reminder:
+  #   => MiniMessage = "<red>Red text</red>". (Set this to true to use this format)
+  #   => Legacy = "&cRed text" or "§cRed text". (Set this to false to use this format)
+  acceptOnlyMiniMessageFormatInEntries: false
 
   # Configure the default names used when skipDataEntryProcess (instant creation) is enabled.
   # You must use %number% placeholder to indicate where the number will be placed. (e.g., home_1, home_2, etc.)
