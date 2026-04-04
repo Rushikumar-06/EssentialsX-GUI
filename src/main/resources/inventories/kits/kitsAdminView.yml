@@ -1,4 +1,4 @@
-﻿############################################################
+############################################################
 # +------------------------------------------------------+ #
 # |                      Information                     | #
 # +------------------------------------------------------+ #
@@ -30,7 +30,7 @@ config-version: "1.2"
 
 kitsAdminView:
 
-  title: "<gradient:#f59e0b:#fde68a>Server Kits</gradient> <gray><italic>(Admin Mode)</italic></gray><reset>"
+  title: "&6Server Kits &c&o(Admin mode)"
   rows: 6
 
   # The inventory scheme defines the layout of the inventory.
@@ -50,7 +50,7 @@ kitsAdminView:
     slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53]
     material: "BLACK_STAINED_GLASS_PANE"
     data: 15
-    displayName: "<dark_gray>- <gradient:#f59e0b:#fde68a><bold>EssentialsX-GUI</bold></gradient><reset>"
+    displayName: "&8- &6&lEssentialsX-GUI"
 
   items:
 
@@ -65,13 +65,13 @@ kitsAdminView:
     # By default, if kitDisplayName is not set, it will use the kit name.
     kitItem:
       material: "{kitMaterialName}"
-      displayName: "<gradient:#f59e0b:#fde68a>{kitDisplayName}</gradient><reset>"
+      displayName: "&6{kitDisplayName}"
       lore:
-        - "<gradient:#22c55e:#14b8a6><bold>Left Click</bold></gradient> <gray>to give this kit to a player.<reset>"
-        - "<gradient:#f59e0b:#fde68a><bold>Right Click</bold></gradient> <gray>to edit this kit.<reset>"
-        - "<gradient:#ef4444:#f97316><bold>Drop</bold></gradient> <gray>to delete this kit.<reset>"
+        - "&f&lLeft Click &7to give this kit to a player."
+        - "&f&lRight Click &7to edit this kit."
+        - "&f&lDrop &7to delete this kit."
         - ""
-        - "<gray>Kit Name: <white><italic>{kitName}<reset>"
+        - "&7Kit Name: &f&o{kitName}"
       clickActions:
         giveKit: "LEFT"
         editKit: "RIGHT"
@@ -82,42 +82,42 @@ kitsAdminView:
     noKitsItem:
       enabled: true
       material: "BARRIER"
-      displayName: "<gradient:#ef4444:#f97316>No Kits</gradient><reset>"
+      displayName: "&cNo Kits"
       lore:
-        - "<gray>There are no kits available.<reset>"
-        - "<gray>Use <white>/createkit <kitName> <gray>to create a kit.<reset>"
+        - "&7There are no kits available."
+        - "&7Use &f/createkit <kitName> &7to create a kit."
 
     createKitItem:
       enabled: true
       slot: 0
       material: "PISTON"
-      displayName: "<gradient:#22c55e:#14b8a6>Create Kit</gradient><reset>"
+      displayName: "&aCreate Kit"
       lore:
-        - "<gray>Click to create a new kit.<reset>"
+        - "&7Click to create a new kit."
 
     switchToPlayerModeItem:
       enabled: true
       slot: 8
       material: "ENDER_PEARL"
-      displayName: "<gradient:#22c55e:#06b6d4>Switch to Player Mode</gradient><reset>"
+      displayName: "&aSwitch to Player Mode"
       lore:
-        - "<gray>Click to switch to player mode.<reset>"
+        - "&7Click to switch to player mode."
 
     searchKitItem:
       enabled: true
       slot: 45
       material: "TRIPWIRE_HOOK"
-      displayName: "<gradient:#06b6d4:#3b82f6>Search Kit</gradient><reset>"
+      displayName: "&bSearch Kit"
       lore:
-        - "<gray>Click to search for a kit.<reset>"
+        - "&7Click to search for a kit."
 
     cancelSearchKitItem:
       enabled: true
       slot: 45
       material: "REDSTONE_BLOCK"
-      displayName: "<gradient:#ef4444:#fb7185>Cancel Search</gradient><reset>"
+      displayName: "&cCancel Search"
       lore:
-        - "<gray>Click to cancel the kit search.<reset>"
+        - "&7Click to cancel the kit search."
 
     # 'slot' value will be ignored in this section. The item will be placed in the first slot like a kit item.
     # The item will be displayed if the player doesn't have any kits set.
@@ -125,45 +125,44 @@ kitsAdminView:
     noSearchKitResultsItem:
       enabled: true
       material: "BARRIER"
-      displayName: "<gradient:#ef4444:#f97316>No Results</gradient><reset>"
+      displayName: "&cNo Results"
       lore:
-        - "<gray>No kits matched your search.<reset>"
+        - "&7No kits matched your search."
         - ""
-        - "<gray>Your search: <white><italic>{kitSearch}<reset>"
+        - "&7Your search: &f&o{kitSearch}"
 
     # Placeholders available: {currentPage}, {previousPage}
     previousPageItem:
       enabled: true
       slot: 47
       material: "STONE_BUTTON"
-      displayName: "<gradient:#f59e0b:#f97316>Previous Page</gradient><gray>: <yellow>{previousPage}<reset>"
+      displayName: "&6Previous Page: &e{previousPage}"
       lore:
-        - "<gray>Click to open the previous page.<reset>"
+        - "&7Click to go to the previous page."
 
     # Placeholders available: {currentPage}, {nextPage}
     nextPageItem:
       enabled: true
       slot: 51
       material: "STONE_BUTTON"
-      displayName: "<gradient:#f59e0b:#f97316>Next Page</gradient><gray>: <yellow>{nextPage}<reset>"
+      displayName: "&6Next Page: &e{nextPage}"
       lore:
-        - "<gray>Click to open the next page.<reset>"
+        - "&7Click to go to the next page."
 
     # Placeholders available: {currentPage}, {totalPages}
     currentPageItem:
       enabled: true
       slot: 4
       material: "PAPER"
-      displayName: "<gradient:#22c55e:#14b8a6>Page</gradient><gray>: <green>{currentPage}/{totalPages}<reset>"
+      displayName: "&2Page: &a{currentPage}/{totalPages}"
       lore:
-        - "<gray>Previous Page: <white>{previousPage}<reset>"
-        - "<gray>Next Page: <white>{nextPage}<reset>"
+        - "&7Previous Page: &f{previousPage}"
+        - "&7Next Page: &f{nextPage}"
 
     closeItem:
       enabled: true
       slot: 49
       material: "BARRIER"
-      displayName: "<gradient:#ef4444:#f97316>Close</gradient><reset>"
+      displayName: "&cClose"
       lore:
-        - "<gray>Click to close this menu.<reset>"
-
+        - "&7Click to close the inventory."

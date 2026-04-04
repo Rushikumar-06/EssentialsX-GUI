@@ -1,4 +1,4 @@
-﻿############################################################
+############################################################
 # +------------------------------------------------------+ #
 # |                      Information                     | #
 # +------------------------------------------------------+ #
@@ -30,7 +30,7 @@ config-version: "1.0"
 
 warpsAdminView:
 
-  title: "<gradient:#f59e0b:#fde68a>Server Warps</gradient> <gray><italic>(Admin Mode)</italic></gray><reset>"
+  title: "&6Server Warps &c&o(Admin mode)"
   rows: 6
 
   # The inventory scheme defines the layout of the inventory.
@@ -50,7 +50,7 @@ warpsAdminView:
     slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53]
     material: "BLACK_STAINED_GLASS_PANE"
     data: 15
-    displayName: "<dark_gray>- <gradient:#f59e0b:#fde68a><bold>EssentialsX-GUI</bold></gradient><reset>"
+    displayName: "&8- &6&lEssentialsX-GUI"
 
   items:
 
@@ -65,13 +65,13 @@ warpsAdminView:
     # By default, if warpDisplayName is not set, it will use the warp name.
     warpItem:
       material: "{warpMaterialName}"
-      displayName: "<gradient:#f59e0b:#fde68a>{warpDisplayName}</gradient><reset>"
+      displayName: "&6{warpDisplayName}"
       lore:
-        - "<gradient:#22c55e:#14b8a6><bold>Left Click</bold></gradient> <gray>to teleport a player to this warp.<reset>"
-        - "<gradient:#f59e0b:#fde68a><bold>Right Click</bold></gradient> <gray>to edit this warp.<reset>"
-        - "<gradient:#ef4444:#f97316><bold>Drop</bold></gradient> <gray>to delete this warp.<reset>"
+        - "&f&lLeft Click &7to teleport a player to this warp."
+        - "&f&lRight Click &7to edit this warp."
+        - "&f&lDrop &7to delete this warp."
         - ""
-        - "<gray>Warp Name: <white><italic>{warpName}<reset>"
+        - "&7Warp Name: &f&o{warpName}"
       clickActions:
         teleportWarp: "LEFT"
         editWarp: "RIGHT"
@@ -82,42 +82,42 @@ warpsAdminView:
     noWarpsItem:
       enabled: true
       material: "BARRIER"
-      displayName: "<gradient:#ef4444:#f97316>No Warps</gradient><reset>"
+      displayName: "&cNo Warps"
       lore:
-        - "<gray>There are no warps available.<reset>"
-        - "<gray>Use <white>/createwarp <warpName> <gray>to create a warp.<reset>"
+        - "&7There are no warps available."
+        - "&7Use &f/createwarp <warpName> &7to create a warp."
 
     createWarpItem:
       enabled: true
       slot: 0
       material: "PISTON"
-      displayName: "<gradient:#22c55e:#14b8a6>Create Warp</gradient><reset>"
+      displayName: "&aCreate Warp"
       lore:
-        - "<gray>Click to create a new warp.<reset>"
+        - "&7Click to create a new warp."
 
     switchToPlayerModeItem:
       enabled: true
       slot: 8
       material: "ENDER_PEARL"
-      displayName: "<gradient:#22c55e:#06b6d4>Switch to Player Mode</gradient><reset>"
+      displayName: "&aSwitch to Player Mode"
       lore:
-        - "<gray>Click to switch to player mode.<reset>"
+        - "&7Click to switch to player mode."
 
     searchWarpItem:
       enabled: true
       slot: 45
       material: "TRIPWIRE_HOOK"
-      displayName: "<gradient:#06b6d4:#3b82f6>Search Warp</gradient><reset>"
+      displayName: "&bSearch Warp"
       lore:
-        - "<gray>Click to search for a warp.<reset>"
+        - "&7Click to search for a warp."
 
     cancelSearchWarpItem:
       enabled: true
       slot: 45
       material: "REDSTONE_BLOCK"
-      displayName: "<gradient:#ef4444:#fb7185>Cancel Search</gradient><reset>"
+      displayName: "&cCancel Search"
       lore:
-        - "<gray>Click to cancel the warp search.<reset>"
+        - "&7Click to cancel the warp search."
 
     # 'slot' value will be ignored in this section. The item will be placed in the first slot like a warp item.
     # The item will be displayed if the player doesn't have any warps set.
@@ -125,45 +125,44 @@ warpsAdminView:
     noSearchWarpResultsItem:
       enabled: true
       material: "BARRIER"
-      displayName: "<gradient:#ef4444:#f97316>No Results</gradient><reset>"
+      displayName: "&cNo Results"
       lore:
-        - "<gray>No warps matched your search.<reset>"
+        - "&7No warps matched your search."
         - ""
-        - "<gray>Your search: <white><italic>{warpSearch}<reset>"
+        - "&7Your search: &f&o{warpSearch}"
 
     # Placeholders available: {currentPage}, {previousPage}
     previousPageItem:
       enabled: true
       slot: 47
       material: "STONE_BUTTON"
-      displayName: "<gradient:#f59e0b:#f97316>Previous Page</gradient><gray>: <yellow>{previousPage}<reset>"
+      displayName: "&6Previous Page: &e{previousPage}"
       lore:
-        - "<gray>Click to open the previous page.<reset>"
+        - "&7Click to go to the previous page."
 
     # Placeholders available: {currentPage}, {nextPage}
     nextPageItem:
       enabled: true
       slot: 51
       material: "STONE_BUTTON"
-      displayName: "<gradient:#f59e0b:#f97316>Next Page</gradient><gray>: <yellow>{nextPage}<reset>"
+      displayName: "&6Next Page: &e{nextPage}"
       lore:
-        - "<gray>Click to open the next page.<reset>"
+        - "&7Click to go to the next page."
 
     # Placeholders available: {currentPage}, {totalPages}
     currentPageItem:
       enabled: true
       slot: 4
       material: "PAPER"
-      displayName: "<gradient:#22c55e:#14b8a6>Page</gradient><gray>: <green>{currentPage}/{totalPages}<reset>"
+      displayName: "&2Page: &a{currentPage}/{totalPages}"
       lore:
-        - "<gray>Previous Page: <white>{previousPage}<reset>"
-        - "<gray>Next Page: <white>{nextPage}<reset>"
+        - "&7Previous Page: &f{previousPage}"
+        - "&7Next Page: &f{nextPage}"
 
     closeItem:
       enabled: true
       slot: 49
       material: "BARRIER"
-      displayName: "<gradient:#ef4444:#f97316>Close</gradient><reset>"
+      displayName: "&cClose"
       lore:
-        - "<gray>Click to close this menu.<reset>"
-
+        - "&7Click to close the inventory."

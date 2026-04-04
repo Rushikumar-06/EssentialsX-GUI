@@ -1,4 +1,4 @@
-﻿############################################################
+############################################################
 # +------------------------------------------------------+ #
 # |                      Information                     | #
 # +------------------------------------------------------+ #
@@ -32,7 +32,7 @@ kitEditing:
 
   # Placeholders available: {kitDisplayName}, {kitName}, {kitDisplayName}
   # By default, if kitDisplayName is not set, it will use the kit name.
-  title: "<gradient:#22c55e:#14b8a6>Editing {kitName}'s Kit</gradient><reset>"
+  title: "&2Editing &a{kitName}&2's kit"
   rows: 6
 
   borderItem:
@@ -40,7 +40,7 @@ kitEditing:
     slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53]
     material: "BLACK_STAINED_GLASS_PANE"
     data: 15
-    displayName: "<dark_gray>- <gradient:#f59e0b:#fde68a><bold>EssentialsX-GUI</bold></gradient><reset>"
+    displayName: "&8- &6&lEssentialsX-GUI"
 
   items:
 
@@ -50,54 +50,53 @@ kitEditing:
     previewKitItem:
       enabled: true
       slot: 22
-      displayName: "<gradient:#f59e0b:#fde68a>{kitDisplayName}</gradient><reset>"
+      displayName: "&6{kitDisplayName}"
       lore:
-        - "<gradient:#22c55e:#14b8a6><bold>Left Click</bold></gradient> <gray>to receive this kit.<reset>"
-        - "<gradient:#f59e0b:#fde68a><bold>Right Click</bold></gradient> <gray>to preview this kit.<reset>"
+        - "&f&lLeft Click &7to receive this kit."
+        - "&f&lRight Click &7to preview this kit."
         - ""
-        - "<gray>Kit Name: <white><italic>{kitName}<reset>"
+        - "&7Kit Name: &f&o{kitName}"
 
     # Placeholders available: {kitName}, {kitDisplayName}
     changeDisplayNameItem:
       enabled: true
       slot: 30
       material: "NAME_TAG"
-      displayName: "<gradient:#f59e0b:#fde68a>Change Display Name</gradient><reset>"
+      displayName: "&6Change Display Name"
       lore:
-        - "<gray>Click to change the display name of this kit.<reset>"
+        - "&7Click to change the display name of this kit."
 
     # Placeholders available: [kitName}
     changeIconItem:
       enabled: true
       slot: 31
       material: "CHEST"
-      displayName: "<gradient:#f59e0b:#fde68a>Change Icon</gradient><reset>"
+      displayName: "&6Change Icon"
       lore:
-        - "<gray>Click to change the icon of this kit.<reset>"
+        - "&7Click to change the icon of this kit."
 
     deleteKitItem:
       enabled: true
       slot: 32
       material: "LAVA_BUCKET"
-      displayName: "<gradient:#ef4444:#f97316>Delete Kit</gradient><reset>"
+      displayName: "&cDelete Kit"
       lore:
-        - "<gray>Click to delete this kit.<reset>"
-        - "<red>This action cannot be undone!<reset>"
+        - "&7Click to delete this kit."
+        - "&cThis action cannot be undone!"
 
     editKitContentsItem:
       enabled: true
       slot: 21
       material: "ENDER_CHEST"
-      displayName: "<gradient:#f59e0b:#fde68a>Edit Kit Contents</gradient><reset>"
+      displayName: "&6Edit Kit Contents"
       lore:
-        - "<gray>Click to edit the contents of this kit.<reset>"
-        - "<gray><italic>You will be able to add or remove items from it.<reset>"
+        - "&7Click to edit the contents of this kit."
+        - "&7&oYou will be able to add or remove items from it."
 
     backItem:
       enabled: true
       slot: 49
       material: "ARROW"
-      displayName: "<gradient:#ef4444:#fb7185>Back</gradient><reset>"
+      displayName: "&cBack"
       lore:
-        - "<gray>Click to return to the kits list.<reset>"
-
+        - "&7Click to go back to the kits list."

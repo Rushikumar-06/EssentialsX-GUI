@@ -30,12 +30,12 @@
 ############################################################
 
 # Please do not change this value as it may cause the file to be reset.
-# Default: "1.6"
-messages-version: "1.6"
+# Default: "1.7"
+messages-version: "1.7"
 
 # Change the prefix sent at the beginning of most sent messages.
 # TIP: Use {prefix} in any message to include the prefix.
-prefix: "<dark_gray>[<gradient:#f59e0b:#fde68a><bold>EXG</bold></gradient><dark_gray>]<gray><reset>"
+prefix: "&8[&6&LEXG&8]&7"
 
 ############################################################
 # +------------------------------------------------------+ #
@@ -45,15 +45,15 @@ prefix: "<dark_gray>[<gradient:#f59e0b:#fde68a><bold>EXG</bold></gradient><dark_
 
 admin:
 
-  filesReloading: "{prefix} <gradient:#f59e0b:#fde68a>Reloading plugin files...</gradient><reset>"
-  filesReloaded: "{prefix} <gradient:#22c55e:#14b8a6>Files reloaded successfully.</gradient> <gray>Check the console if anything looks wrong.<reset>"
+  filesReloading: "{prefix} &eThe files are being reloaded..."
+  filesReloaded: "{prefix} &eThe files have been reloaded. Please check the console if you encounter any errors."
 
   # Placeholders available: {currentVersion}, {latestVersion}
-  alertUpdateAvailable: "{prefix} <gradient:#f59e0b:#fde68a>An update is available for EssentialsX-GUI.</gradient> <gray>Check the console for details.<reset>"
+  alertUpdateAvailable: "{prefix} &eAn update is available for EssentialsX-GUI. &6Please check the console for more information."
 
-  databaseReloading: "{prefix} <gradient:#f59e0b:#fde68a>Reloading database...</gradient><reset>"
+  databaseReloading: "{prefix} &eThe database is being reloaded..."
   # Placeholders available: {newStorageType}
-  databaseReloaded: "{prefix} <gradient:#22c55e:#14b8a6>Database reloaded.</gradient> <gray>Storage: <white>{newStorageType}<reset>"
+  databaseReloaded: "{prefix} &eThe database has been reloaded. The storage type is &f{newStorageType}&e."
 
 ############################################################
 # +------------------------------------------------------+ #
@@ -63,31 +63,31 @@ admin:
 
 errors:
 
-  invalidMaterial: "<red>The material name is invalid.<reset>"
-  invalidNumber: "<red>The input is not a valid number.<reset>"
-  invalidFormat: "<red>The input format is invalid. You must use MiniMessage formatting.<reset>"
+  invalidMaterial: "&cThe material name is invalid."
+  invalidNumber: "&cThe input is not a valid number."
+  invalidMiniMessageFormat: "&cThe input format is invalid. You must use MiniMessage formatting."
   # Placeholders available: {min}, {max}
-  lengthLimit: "<red>The input should be between <white>{min}<red> and <white>{max} <red>characters long.<reset>"
+  lengthLimit: "&cThe input should be between &f{min}&c and &f{max} &ccharacters long."
 
 
   # Placeholders available: {argument}
-  argumentNotFound: "{prefix} <red>The argument <white>{argument} <red>was not found.<reset>"
-  noPermission: "{prefix} <red>You do not have permission to perform this action.<reset>"
-  onlyForPlayers: "{prefix} <red>This command can only be executed by players.<reset>"
-  playerNotFound: "{prefix} <red>The specified player was not found.<reset>"
+  argumentNotFound: "{prefix} &cThe argument &f{argument} &cwas not found."
+  noPermission: "{prefix} &cYou do not have permission to perform this action."
+  onlyForPlayers: "{prefix} &cThis command can only be executed by players."
+  playerNotFound: "{prefix} &cThe specified player was not found."
 
-  homeDeleteError: "<red>An error occurred while deleting the home. Please contact the server administrator.<reset>"
-  homeNameAlreadyExists: "<red>A home with this name already exists.<reset>"
-  homeLimitReached: "<red>You have reached the maximum number of homes allowed.<reset>"
-  noHomeFound: "<red>No home found with that name.<reset>"
-  itemCantBeAir: "<red>The item cannot be air. Please take an item in your hand and try again.<reset>"
+  homeDeleteError: "&cAn error occurred while deleting the home. Please contact the server administrator."
+  homeNameAlreadyExists: "&cA home with this name already exists."
+  homeLimitReached: "&cYou have reached the maximum number of homes allowed."
+  noHomeFound: "&cNo home found with that name."
+  itemCantBeAir: "&cThe item cannot be air. Please take an item in your hand and try again."
 
-  kitNameAlreadyExists: "<red>A kit with this name already exists.<reset>"
-  noKitFound: "<red>No kit found with that name.<reset>"
+  kitNameAlreadyExists: "&cA kit with this name already exists."
+  noKitFound: "&cNo kit found with that name."
 
-  warpCreationError: "<red>An error occurred while creating the warp. Please contact the server administrator.<reset>"
-  warpDeleteError: "<red>An error occurred while deleting the warp. Please contact the server administrator.<reset>"
-  noWarpFound: "<red>No warp found with that name.<reset>"
+  warpCreationError: "&cAn error occurred while creating the warp. Please contact the server administrator."
+  warpDeleteError: "&cAn error occurred while deleting the warp. Please contact the server administrator."
+  noWarpFound: "&cNo warp found with that name."
 
 ############################################################
 # +------------------------------------------------------+ #
@@ -97,79 +97,79 @@ errors:
 
 general:
 
-  enterNewDisplayNameInChat: "<gradient:#f59e0b:#fde68a>Enter the new display name in chat.</gradient> <gray><italic>Type 'cancel' to stop.<reset>"
-  enterNewIconNameInChat: "<gradient:#f59e0b:#fde68a>Enter the new icon material in chat.</gradient> <gray><italic>Type 'cancel' to stop.<reset>"
+  enterNewDisplayNameInChat: "&ePlease enter the new &fdisplay name &ein the chat. &7&oType 'cancel' to cancel the action."
+  enterNewIconNameInChat: "&ePlease enter the new &ficon name &ein the chat. &7&oType 'cancel' to cancel the action."
   enterNewDisplayName: "Enter new display name"
   enterNewIconName: "Enter new icon name"
 
-  enterNewHomeNameInChat: "<gradient:#22c55e:#14b8a6>Enter the new home name in chat.</gradient> <gray><italic>Type 'cancel' to stop.<reset>"
+  enterNewHomeNameInChat: "&ePlease enter the new &fhome name &ein the chat. &7&oType 'cancel' to cancel the action."
   enterNewHomeName: "Enter new home name"
-  searchHomeInChat: "<gradient:#06b6d4:#3b82f6>Type the first letters of the home name in chat.</gradient> <gray><italic>Type 'cancel' to stop.<reset>"
+  searchHomeInChat: "&ePlease enter first few letters of the &fhome name &ein the chat. &7&oType 'cancel' to cancel the action."
   searchHome: "Search home"
   # Placeholders available: {homeName}
-  confirmDeleteHomeInChat: "<gradient:#ef4444:#f97316>Delete this home?</gradient> <gray>(<white>{homeName}</white>) Type <white>'confirm'</white> or <white>'cancel'</white>.<reset>"
+  confirmDeleteHomeInChat: "&6Are you sure you want to delete this home? ({homeName}) &7Type &f'confirm' &7to confirm or &f'cancel' &7to cancel."
   confirmDeleteHome: "Type 'confirm' to confirm deletion"
 
-  enterNewKitNameInChat: "<gradient:#22c55e:#14b8a6>Enter the new kit name in chat.</gradient> <gray><italic>Type 'cancel' to stop.<reset>"
-  enterNewKitDelayInChat: "<gradient:#22c55e:#14b8a6>Enter the new kit delay in seconds.</gradient> <gray><italic>Type 'cancel' to stop.<reset>"
+  enterNewKitNameInChat: "&ePlease enter the new &fkit name &ein the chat. &7&oType 'cancel' to cancel the action."
+  enterNewKitDelayInChat: "&ePlease enter the new &fkit delay &o(seconds) &ein the chat. &7&oType 'cancel' to cancel the action."
   enterNewKitName: "Enter new kit name"
   enterNewKitDelay: "Enter new kit delay (seconds)"
-  searchKitInChat: "<gradient:#06b6d4:#3b82f6>Type the first letters of the kit name in chat.</gradient> <gray><italic>Type 'cancel' to stop.<reset>"
+  searchKitInChat: "&ePlease enter first few letters of the &fkit name &ein the chat. &7&oType 'cancel' to cancel the action."
   searchKit: "Search kit"
   # Placeholders available: {kitName}
-  confirmDeleteKitInChat: "<gradient:#ef4444:#f97316>Delete this kit?</gradient> <gray>(<white>{kitName}</white>) Type <white>'confirm'</white> or <white>'cancel'</white>.<reset>"
+  confirmDeleteKitInChat: "&6Are you sure you want to delete the '({kitName})' kit ? &7Type &f'confirm' &7to confirm or &f'cancel' &7to cancel."
   confirmDeleteKit: "Type 'confirm' to confirm deletion"
 
-  enterNewWarpNameInChat: "<gradient:#22c55e:#14b8a6>Enter the new warp name in chat.</gradient> <gray><italic>Type 'cancel' to stop.<reset>"
+  enterNewWarpNameInChat: "&ePlease enter the new &fwarp name &ein the chat. &7&oType 'cancel' to cancel the action."
   enterNewWarpName: "Enter new warp name"
-  searchWarpInChat: "<gradient:#06b6d4:#3b82f6>Type the first letters of the warp name in chat.</gradient> <gray><italic>Type 'cancel' to stop.<reset>"
+  searchWarpInChat: "&ePlease enter first few letters of the &fwarp name &ein the chat. &7&oType 'cancel' to cancel the action."
   searchWarp: "Search warp"
   # Placeholders available: {warpName}
-  confirmDeleteWarpInChat: "<gradient:#ef4444:#f97316>Delete this warp?</gradient> <gray>(<white>{warpName}</white>) Type <white>'confirm'</white> or <white>'cancel'</white>.<reset>"
+  confirmDeleteWarpInChat: "&6Are you sure you want to delete this warp? ({warpName}) &7Type &f'confirm' &7to confirm or &f'cancel' &7to cancel."
   confirmDeleteWarp: "Type 'confirm' to confirm deletion"
 
 
-  actionCanceled: "<gradient:#ef4444:#fb7185>Action canceled.</gradient><reset>"
-  actionExpired: "<gradient:#ef4444:#f97316>Action expired.</gradient> <gray>Please try again.<reset>"
-  ongoingAction: "<gradient:#f59e0b:#fde68a>An action is already in progress.</gradient> <gray>Please wait or cancel it first.<reset>"
+  actionCanceled: "&6The action has been canceled."
+  actionExpired: "&cThe action has expired. Please try again."
+  ongoingAction: "&eAn action is already in progress. Please wait until it is completed or canceled."
 
 
   # Placeholders available: {newDisplayName}
-  displayNameChanged: "<gradient:#22c55e:#14b8a6>Display name updated.</gradient> <gray>New value: <white>{newDisplayName}<reset>"
+  displayNameChanged: "&7The display name has been changed to &f{newDisplayName}&7."
   # Placeholders available: {newIcon}
-  iconChanged: "<gradient:#22c55e:#14b8a6>Icon updated.</gradient> <gray>New icon: <white>{newIcon}<reset>"
+  iconChanged: "&7The icon has been changed to &f{newIcon}&7."
 
   # Placeholders available: {homeName}
-  homeCreated: "<gradient:#22c55e:#14b8a6>Home created.</gradient> <gray>Name: <white>{homeName}<reset>"
+  homeCreated: "&7The home &f{homeName} &7has been created."
   # Placeholders available: {homeName}
-  homeDeleted: "<gradient:#ef4444:#f97316>Home deleted.</gradient> <gray>Name: <white>{homeName}<reset>"
+  homeDeleted: "&7The home &f{homeName} &7has been deleted."
 
   # Placeholders available: {kitName}
-  kitDeleted: "<gradient:#ef4444:#f97316>Kit deleted.</gradient> <gray>Name: <white>{kitName}<reset>"
+  kitDeleted: "&7The kit &f{kitName} &7has been deleted."
   # Placeholders available: {kitName}, {kitDelay}
-  kitCreated: "<gradient:#22c55e:#14b8a6>Kit created.</gradient> <gray>Name: <white>{kitName}</white>, Delay: <white>{kitDelay}s</white><reset>"
+  kitCreated: "&7The kit &f{kitName} &7has been created with a delay of &f{kitDelay} seconds&7."
 
   # Placeholders available: {warpName}
-  warpCreated: "<gradient:#22c55e:#14b8a6>Warp created.</gradient> <gray>Name: <white>{warpName}<reset>"
+  warpCreated: "&7The warp &f{warpName} &7has been created."
   # Placeholders available: {warpName}
-  warpDeleted: "<gradient:#ef4444:#f97316>Warp deleted.</gradient> <gray>Name: <white>{warpName}<reset>"
+  warpDeleted: "&7The warp &f{warpName} &7has been deleted."
 
 
-  openingHomesInventory: "<gradient:#22c55e:#14b8a6>Opening homes menu...</gradient><reset>"
+  openingHomesInventory: "&aOpening homes inventory..."
 
-  openingAdminKitsInventory: "<gradient:#22c55e:#14b8a6>Opening kits menu</gradient> <gray>(Admin Mode)...<reset>"
-  openingPlayerKitsInventory: "<gradient:#22c55e:#14b8a6>Opening kits menu</gradient> <gray>(Player Mode)...<reset>"
+  openingAdminKitsInventory: "&aOpening kits (admin mode) inventory..."
+  openingPlayerKitsInventory: "&aOpening kits (player mode) inventory..."
 
-  openingAdminWarpsInventory: "<gradient:#22c55e:#14b8a6>Opening warps menu</gradient> <gray>(Admin Mode)...<reset>"
-  openingPlayerWarpsInventory: "<gradient:#22c55e:#14b8a6>Opening warps menu</gradient> <gray>(Player Mode)...<reset>"
+  openingAdminWarpsInventory: "&aOpening warps (admin mode) inventory..."
+  openingPlayerWarpsInventory: "&aOpening warps (player mode) inventory..."
 
-  openingWhoisInventory: "<gradient:#22c55e:#14b8a6>Opening whois menu...</gradient><reset>"
+  openingWhoisInventory: "&aOpening whois inventory..."
 
 
-  yes_value: "<green>Yes<reset>"
-  no_value: "<red>No<reset>"
-  flying: "<green>Flying<reset>"
-  notFlying: "<red>Not Flying<reset>"
+  yes_value: "&aYes"
+  no_value: "&cNo"
+  flying: "&aFlying"
+  notFlying: "&cNot Flying"
   gamemodeSurvival: "Survival"
   gamemodeCreative: "Creative"
   gamemodeAdventure: "Adventure"
@@ -178,16 +178,16 @@ general:
   hours: "{hours}h"
   minutes: "{minutes}m"
   seconds: "{seconds}s"
-  hidden: "<red>Hidden<reset>"
-  disabled: "<red>Disabled<reset>"
-  noNickname: "<red>No Nickname<reset>"
-  notAfk: "<red>Not AFK<reset>"
-  notJailed: "<red>Not Jailed<reset>"
-  notMuted: "<red>Not Muted<reset>"
-  noMuteReason: "<red>No mute reason<reset>"
-  notBanned: "<red>Not Banned<reset>"
-  noBanReason: "<red>No ban reason<reset>"
-  permanent: "<red>Permanent<reset>"
+  hidden: "&cHidden"
+  disabled: "&cDisabled"
+  noNickname: "&cNo Nickname"
+  notAfk: "&cNot AFK"
+  notJailed: "&cNot Jailed"
+  notMuted: "&cNot Muted"
+  noMuteReason: "&cNo mute reason"
+  notBanned: "&cNot Banned"
+  noBanReason: "&cNo ban reason"
+  permanent: "&cPermanent"
   # Placeholders available: {x}, {y}, {z}, {yaw}, {pitch}, {world}
   locationFormat: "{x}, {y}, {z} in {world}"
-  unknown: "<red>Unknown<reset>"
+  unknown: "&cUnknown"

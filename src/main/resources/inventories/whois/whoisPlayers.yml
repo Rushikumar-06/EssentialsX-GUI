@@ -1,4 +1,4 @@
-﻿############################################################
+############################################################
 # +------------------------------------------------------+ #
 # |                      Information                     | #
 # +------------------------------------------------------+ #
@@ -30,7 +30,7 @@ config-version: "1.0"
 
 whoisPlayers:
 
-  title: "<gradient:#06b6d4:#3b82f6>Choose a Player to View Info</gradient><reset>"
+  title: "&bChoose a player to view their info"
   rows: 6
 
   # The inventory scheme defines the layout of the inventory.
@@ -50,7 +50,7 @@ whoisPlayers:
     slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53]
     material: "BLACK_STAINED_GLASS_PANE"
     data: 15
-    displayName: "<dark_gray>- <gradient:#f59e0b:#fde68a><bold>EssentialsX-GUI</bold></gradient><reset>"
+    displayName: "&8- &6&lEssentialsX-GUI"
 
   items:
 
@@ -62,43 +62,42 @@ whoisPlayers:
     playerItem:
       material: "PLAYER_HEAD:{targetName}"
       data: 3
-      displayName: "<aqua>{targetName}<reset>"
+      displayName: "&b{targetName}"
       lore:
-        - "<gray>Click to view <aqua>{targetName}'s <gray>information.<reset>"
+        - "&7Click to view &b{targetName}'s &7information."
 
     # Placeholders available: {currentPage}, {previousPage}
     previousPageItem:
       enabled: true
       slot: 47
       material: "STONE_BUTTON"
-      displayName: "<gradient:#f59e0b:#f97316>Previous Page</gradient><gray>: <yellow>{previousPage}<reset>"
+      displayName: "&6Previous Page: &e{previousPage}"
       lore:
-        - "<gray>Click to open the previous page.<reset>"
+        - "&7Click to go to the previous page."
 
     # Placeholders available: {currentPage}, {nextPage}
     nextPageItem:
       enabled: true
       slot: 51
       material: "STONE_BUTTON"
-      displayName: "<gradient:#f59e0b:#f97316>Next Page</gradient><gray>: <yellow>{nextPage}<reset>"
+      displayName: "&6Next Page: &e{nextPage}"
       lore:
-        - "<gray>Click to open the next page.<reset>"
+        - "&7Click to go to the next page."
 
     # Placeholders available: {currentPage}, {totalPages}
     currentPageItem:
       enabled: true
       slot: 4
       material: "PAPER"
-      displayName: "<gradient:#22c55e:#14b8a6>Page</gradient><gray>: <green>{currentPage}/{totalPages}<reset>"
+      displayName: "&2Page: &a{currentPage}/{totalPages}"
       lore:
-        - "<gray>Previous Page: <white>{previousPage}<reset>"
-        - "<gray>Next Page: <white>{nextPage}<reset>"
+        - "&7Previous Page: &f{previousPage}"
+        - "&7Next Page: &f{nextPage}"
 
     closeItem:
       enabled: true
       slot: 49
       material: "BARRIER"
-      displayName: "<gradient:#ef4444:#f97316>Close</gradient><reset>"
+      displayName: "&cClose"
       lore:
-        - "<gray>Click to close this menu.<reset>"
-
+        - "&7Click to close the inventory."

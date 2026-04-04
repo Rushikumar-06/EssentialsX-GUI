@@ -1,4 +1,4 @@
-﻿############################################################
+############################################################
 # +------------------------------------------------------+ #
 # |                      Information                     | #
 # +------------------------------------------------------+ #
@@ -31,7 +31,7 @@ config-version: "1.0"
 kitPlayerGive:
 
   # Placeholders available: {kitDisplayName}, {kitName}
-  title: "<gradient:#22c55e:#14b8a6>Give Kit</gradient> <gradient:#f59e0b:#fde68a>{kitDisplayName}</gradient><reset>"
+  title: "&aGive Kit &2{kitDisplayName}"
   rows: 6
 
   # The inventory scheme defines the layout of the inventory.
@@ -51,7 +51,7 @@ kitPlayerGive:
     slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53]
     material: "BLACK_STAINED_GLASS_PANE"
     data: 15
-    displayName: "<dark_gray>- <gradient:#f59e0b:#fde68a><bold>EssentialsX-GUI</bold></gradient><reset>"
+    displayName: "&8- &6&lEssentialsX-GUI"
 
   items:
 
@@ -63,44 +63,43 @@ kitPlayerGive:
     playerItem:
       material: "PLAYER_HEAD:{targetName}"
       data: 3
-      displayName: "<aqua>{targetName}<reset>"
+      displayName: "&b{targetName}"
       lore:
-        - "<gray>Click to give this kit to the player.<reset>"
-        - "<gray>Kit Name: <white>{kitName}<reset>"
+        - "&7Click to give this kit to the player."
+        - "&7Kit Name: &f{kitName}"
 
     # Placeholders available: {currentPage}, {previousPage}
     previousPageItem:
       enabled: true
       slot: 47
       material: "STONE_BUTTON"
-      displayName: "<gradient:#f59e0b:#f97316>Previous Page</gradient><gray>: <yellow>{previousPage}<reset>"
+      displayName: "&6Previous Page: &e{previousPage}"
       lore:
-        - "<gray>Click to open the previous page.<reset>"
+        - "&7Click to go to the previous page."
 
     # Placeholders available: {currentPage}, {nextPage}
     nextPageItem:
       enabled: true
       slot: 51
       material: "STONE_BUTTON"
-      displayName: "<gradient:#f59e0b:#f97316>Next Page</gradient><gray>: <yellow>{nextPage}<reset>"
+      displayName: "&6Next Page: &e{nextPage}"
       lore:
-        - "<gray>Click to open the next page.<reset>"
+        - "&7Click to go to the next page."
 
     # Placeholders available: {currentPage}, {totalPages}
     currentPageItem:
       enabled: true
       slot: 4
       material: "PAPER"
-      displayName: "<gradient:#22c55e:#14b8a6>Page</gradient><gray>: <green>{currentPage}/{totalPages}<reset>"
+      displayName: "&2Page: &a{currentPage}/{totalPages}"
       lore:
-        - "<gray>Previous Page: <white>{previousPage}<reset>"
-        - "<gray>Next Page: <white>{nextPage}<reset>"
+        - "&7Previous Page: &f{previousPage}"
+        - "&7Next Page: &f{nextPage}"
 
     backItem:
       enabled: true
       slot: 49
       material: "ARROW"
-      displayName: "<gradient:#ef4444:#fb7185>Back</gradient><reset>"
+      displayName: "&cBack"
       lore:
-        - "<gray>Click to return to the kits list.<reset>"
-
+        - "&7Click to go back to the kits list."

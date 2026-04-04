@@ -32,7 +32,7 @@ kitEditor:
 
   # Placeholders available: {kitDisplayName}, {kitName}, {kitDisplayName}
   # By default, if kitDisplayName is not set, it will use the kit name.
-  title: "<gradient:#06b6d4:#3b82f6>Kit Editor</gradient> <dark_gray>- <gradient:#22c55e:#14b8a6>{kitName}</gradient><reset>"
+  title: "&3Kit Editor &8- &b{kitName}"
   # ⚠️ Warning: Make sure to always keep 36 slots empty for the kit items.
   #      - Consequently, the number of rows must be at least 5 to contains the 36 items
   #        of a kit and the actions items.
@@ -44,7 +44,7 @@ kitEditor:
     slots: [36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 48, 49, 50, 52, 53]
     material: "BLACK_STAINED_GLASS_PANE"
     data: 15
-    displayName: "<dark_gray>- <gradient:#f59e0b:#fde68a><bold>EssentialsX-GUI</bold></gradient><reset>"
+    displayName: "&8- &6&lEssentialsX-GUI"
 
   items:
 
@@ -53,17 +53,17 @@ kitEditor:
       slot: 47
       material: "LIME_DYE"
       data: 10
-      displayName: "<gradient:#22c55e:#14b8a6>Save Kit</gradient><reset>"
+      displayName: "&aSave Kit"
       lore:
-        - "<gray>Click to save the changes made to this kit.<reset>"
+        - "&7Click to save the changes made to this kit."
 
     # 'enabled' value will be ignored in this section. Item is enabled by default.
     cancelChangesItem:
       slot: 51
       material: "RED_DYE"
       data: 1
-      displayName: "<gradient:#ef4444:#fb7185>Cancel Changes</gradient><reset>"
+      displayName: "&cCancel Changes"
       lore:
-        - "<gray>Click to cancel all the changes made to this kit.<reset>"
+        - "&7Click to cancel all the changes made to this kit."
         - ""
-        - "<dark_red><bold>Warning: <red>All changes, and your items, will be lost!<reset>"
+        - "&4&lWarning: &cAll changes, and your items, will be lost!"

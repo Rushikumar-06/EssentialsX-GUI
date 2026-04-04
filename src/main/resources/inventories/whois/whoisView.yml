@@ -1,4 +1,4 @@
-﻿############################################################
+############################################################
 # +------------------------------------------------------+ #
 # |                      Information                     | #
 # +------------------------------------------------------+ #
@@ -31,7 +31,7 @@ config-version: "1.0"
 whoisView:
 
   # Placeholders available: {targetName}
-  title: "<gradient:#06b6d4:#3b82f6>{targetName}'s Information</gradient><reset>"
+  title: "&b{targetName}'s Information"
   rows: 6
 
   # The inventory scheme defines the layout of the inventory.
@@ -51,7 +51,7 @@ whoisView:
     slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53]
     material: "BLACK_STAINED_GLASS_PANE"
     data: 15
-    displayName: "<dark_gray>- <gradient:#f59e0b:#fde68a><bold>EssentialsX-GUI</bold></gradient><reset>"
+    displayName: "&8- &6&lEssentialsX-GUI"
 
   items:
 
@@ -60,13 +60,13 @@ whoisView:
     playerIdentificationItem:
       material: "BEACON"
       slot: 20
-      displayName: "<white><bold>Identification<reset>"
+      displayName: "&f&lIdentification"
       lore:
         - ""
-        - "<gray>Name: <white>{targetName}<reset>"
-        - "<gray>UUID: <white>{targetUUID}<reset>"
-        - "<gray>IP Address: <white>{targetIP}<reset>"
-        - "<gray>Playtime: <white>{targetPlaytime}<reset>"
+        - "&7Name: &f{targetName}"
+        - "&7UUID: &f{targetUUID}"
+        - "&7IP Address: &f{targetIP}"
+        - "&7Playtime: &f{targetPlaytime}"
         - ""
 
     # 'enabled' value will be ignored in this section. Item is enabled by default.
@@ -75,14 +75,14 @@ whoisView:
     playerStatisticsItem:
       material: "APPLE"
       slot: 21
-      displayName: "<white><bold>Player statistics<reset>"
+      displayName: "&f&lPlayer statistics"
       lore:
         - ""
-        - "<gray>Health: <white>{targetHealth}/{targetMaxHealth}<reset>"
-        - "<gray>Food Level: <white>{targetFoodLevel}/20<reset>"
-        - "<gray>Saturation: <white>{targetSaturation}<reset>"
-        - "<gray>Experience: <white>{targetExperience}<reset>"
-        - "<gray>Level: <white>{targetLevel}<reset>"
+        - "&7Health: &f{targetHealth}/{targetMaxHealth}"
+        - "&7Food Level: &f{targetFoodLevel}/20"
+        - "&7Saturation: &f{targetSaturation}"
+        - "&7Experience: &f{targetExperience}"
+        - "&7Level: &f{targetLevel}"
         - ""
 
     # 'enabled' value will be ignored in this section. Item is enabled by default.
@@ -91,14 +91,14 @@ whoisView:
     playerWorldItem:
       material: "COMPASS"
       slot: 22
-      displayName: "<white><bold>Player world<reset>"
+      displayName: "&f&lPlayer world"
       lore:
         - ""
-        - "<gray>World: <white>{targetWorld}<reset>"
-        - "<gray>Coordinates: <white>X:{targetX} Y:{targetY} Z:{targetZ}<reset>"
-        - "<gray>Yaw: <white>{targetYaw}<reset>"
-        - "<gray>Pitch: <white>{targetPitch}<reset>"
-        #- "<gray>Full Location: <white>{targetLocation}<reset>"
+        - "&7World: &f{targetWorld}"
+        - "&7Coordinates: &fX:{targetX} Y:{targetY} Z:{targetZ}"
+        - "&7Yaw: &f{targetYaw}"
+        - "&7Pitch: &f{targetPitch}"
+        #- "&7Full Location: &f{targetLocation}"
         - ""
 
     # 'enabled' value will be ignored in this section. Item is enabled by default.
@@ -109,23 +109,23 @@ whoisView:
     playerServerDataItem:
       material: "REDSTONE"
       slot: 23
-      displayName: "<white><bold>Player server data<reset>"
+      displayName: "&f&lPlayer server data"
       lore:
         - ""
-        - "<gray>Gamemode: <white>{targetGamemode}<reset>"
-        - "<gray>Money: <white>{targetMoney}<reset>"
-        - "<gray>God Mode: <white>{targetIsInGodMode}<reset>"
-        - "<gray>Can Fly: <white>{targetCanFly}<reset>"
-        - "<gray>Is Flying: <white>{targetIsFlying}<reset>"
-        - "<gray>Walk Speed: <white>{targetWalkSpeed}<reset>"
-        - "<gray>Fly Speed: <white>{targetFlySpeed}<reset>"
-        - "<gray>Whitelisted: <white>{targetIsWhitelisted}<reset>"
-        - "<gray>Operator: <white>{targetIsOperator}<reset>"
-        - "<gray>Vanished: <white>{targetIsVanished}<reset>"
-        - "<gray>Nicked: <white>{targetIsNicked}<reset>"
-        - "<gray>Nickname: <white>{targetNickname}<reset>"
-        - "<gray>AFK: <white>{targetIsAfk}<reset>"
-        - "<gray>AFK Since: <white>{targetAfkSince}<reset>"
+        - "&7Gamemode: &f{targetGamemode}"
+        - "&7Money: &f{targetMoney}"
+        - "&7God Mode: &f{targetIsInGodMode}"
+        - "&7Can Fly: &f{targetCanFly}"
+        - "&7Is Flying: &f{targetIsFlying}"
+        - "&7Walk Speed: &f{targetWalkSpeed}"
+        - "&7Fly Speed: &f{targetFlySpeed}"
+        - "&7Whitelisted: &f{targetIsWhitelisted}"
+        - "&7Operator: &f{targetIsOperator}"
+        - "&7Vanished: &f{targetIsVanished}"
+        - "&7Nicked: &f{targetIsNicked}"
+        - "&7Nickname: &f{targetNickname}"
+        - "&7AFK: &f{targetIsAfk}"
+        - "&7AFK Since: &f{targetAfkSince}"
         - ""
 
     # 'enabled' value will be ignored in this section. Item is enabled by default.
@@ -136,18 +136,18 @@ whoisView:
     playerPunishmentsItem:
       material: "ANVIL"
       slot: 24
-      displayName: "<white><bold>Player punishments<reset>"
+      displayName: "&f&lPlayer punishments"
       lore:
         - ""
-        - "<gray>Jailed: <white>{targetIsJailed}<reset>"
-        - "<gray>Jail Name: <white>{targetJailName}<reset>"
-        - "<gray>Jail Expiry: <white>{targetJailExpiry}<reset>"
-        - "<gray>Muted: <white>{targetIsMuted}<reset>"
-        - "<gray>Mute Reason: <white>{targetMuteReason}<reset>"
-        - "<gray>Mute Expiry: <white>{targetMuteExpiry}<reset>"
-        - "<gray>Banned: <white>{targetIsBanned}<reset>"
-        - "<gray>Ban Reason: <white>{targetBanReason}<reset>"
-        - "<gray>Ban Expiry: <white>{targetBanExpiry}<reset>"
+        - "&7Jailed: &f{targetIsJailed}"
+        - "&7Jail Name: &f{targetJailName}"
+        - "&7Jail Expiry: &f{targetJailExpiry}"
+        - "&7Muted: &f{targetIsMuted}"
+        - "&7Mute Reason: &f{targetMuteReason}"
+        - "&7Mute Expiry: &f{targetMuteExpiry}"
+        - "&7Banned: &f{targetIsBanned}"
+        - "&7Ban Reason: &f{targetBanReason}"
+        - "&7Ban Expiry: &f{targetBanExpiry}"
         - ""
 
     # Placeholders available: {currentPage}, {previousPage}
@@ -155,34 +155,33 @@ whoisView:
       enabled: true
       slot: 47
       material: "STONE_BUTTON"
-      displayName: "<gradient:#f59e0b:#f97316>Previous Page</gradient><gray>: <yellow>{previousPage}<reset>"
+      displayName: "&6Previous Page: &e{previousPage}"
       lore:
-        - "<gray>Click to open the previous page.<reset>"
+        - "&7Click to go to the previous page."
 
     # Placeholders available: {currentPage}, {nextPage}
     nextPageItem:
       enabled: true
       slot: 51
       material: "STONE_BUTTON"
-      displayName: "<gradient:#f59e0b:#f97316>Next Page</gradient><gray>: <yellow>{nextPage}<reset>"
+      displayName: "&6Next Page: &e{nextPage}"
       lore:
-        - "<gray>Click to open the next page.<reset>"
+        - "&7Click to go to the next page."
 
     # Placeholders available: {currentPage}, {totalPages}
     currentPageItem:
       enabled: true
       slot: 4
       material: "PAPER"
-      displayName: "<gradient:#22c55e:#14b8a6>Page</gradient><gray>: <green>{currentPage}/{totalPages}<reset>"
+      displayName: "&2Page: &a{currentPage}/{totalPages}"
       lore:
-        - "<gray>Previous Page: <white>{previousPage}<reset>"
-        - "<gray>Next Page: <white>{nextPage}<reset>"
+        - "&7Previous Page: &f{previousPage}"
+        - "&7Next Page: &f{nextPage}"
 
     backItem:
       enabled: true
       slot: 49
       material: "ARROW"
-      displayName: "<gradient:#ef4444:#fb7185>Back</gradient><reset>"
+      displayName: "&cBack"
       lore:
-        - "<gray>Click to return to the warps list.<reset>"
-
+        - "&7Click to go back to the warps list."

@@ -1,4 +1,4 @@
-﻿############################################################
+############################################################
 # +------------------------------------------------------+ #
 # |                      Information                     | #
 # +------------------------------------------------------+ #
@@ -32,7 +32,7 @@ homeEditing:
 
   # Placeholders available: {homeDisplayName}, {homeName}, {homeDisplayName}
   # By default, if homeDisplayName is not set, it will use the home name.
-  title: "<gradient:#22c55e:#14b8a6>Editing {homeName}'s Home</gradient><reset>"
+  title: "&2Editing &a{homeName}&2's home"
   rows: 6
 
   borderItem:
@@ -40,7 +40,7 @@ homeEditing:
     slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53]
     material: "BLACK_STAINED_GLASS_PANE"
     data: 15
-    displayName: "<dark_gray>- <gradient:#f59e0b:#fde68a><bold>EssentialsX-GUI</bold></gradient><reset>"
+    displayName: "&8- &6&lEssentialsX-GUI"
 
   items:
 
@@ -50,47 +50,46 @@ homeEditing:
     previewHomeItem:
       enabled: true
       slot: 22
-      displayName: "<gradient:#f59e0b:#fde68a>{homeDisplayName}</gradient><reset>"
+      displayName: "&6{homeDisplayName}"
       lore:
-        - "<gradient:#22c55e:#14b8a6><bold>Left Click</bold></gradient> <gray>to teleport to this home.<reset>"
-        - "<gradient:#f59e0b:#fde68a><bold>Right Click</bold></gradient> <gray>to edit this home.<reset>"
-        - "<gradient:#ef4444:#f97316><bold>Drop</bold></gradient> <gray>to delete this home.<reset>"
+        - "&f&lLeft Click &7to teleport to this home."
+        - "&f&lRight Click &7to edit this home."
+        - "&f&lDrop &7to delete this home."
         - ""
-        - "<gray>Home Name: <white><italic>{homeName}<reset>"
+        - "&7Home Name: &f&o{homeName}"
 
     # Placeholders available: {homeName}, {homeDisplayName}
     changeDisplayNameItem:
       enabled: true
       slot: 30
       material: "NAME_TAG"
-      displayName: "<gradient:#f59e0b:#fde68a>Change Display Name</gradient><reset>"
+      displayName: "&6Change Display Name"
       lore:
-        - "<gray>Click to change the display name of this home.<reset>"
+        - "&7Click to change the display name of this home."
 
     # Placeholders available: [homeName}
     changeIconItem:
       enabled: true
       slot: 31
       material: "CHEST"
-      displayName: "<gradient:#f59e0b:#fde68a>Change Icon</gradient><reset>"
+      displayName: "&6Change Icon"
       lore:
-        - "<gray>Click to change the icon of this home.<reset>"
+        - "&7Click to change the icon of this home."
 
     # Placeholders available: [homeName}, {homeDisplayName}
     deleteHomeItem:
       enabled: true
       slot: 32
       material: "LAVA_BUCKET"
-      displayName: "<gradient:#ef4444:#f97316>Delete Home</gradient><reset>"
+      displayName: "&cDelete Home"
       lore:
-        - "<gray>Click to delete this home.<reset>"
-        - "<red>This action cannot be undone!<reset>"
+        - "&7Click to delete this home."
+        - "&cThis action cannot be undone!"
 
     backItem:
       enabled: true
       slot: 49
       material: "ARROW"
-      displayName: "<gradient:#ef4444:#fb7185>Back</gradient><reset>"
+      displayName: "&cBack"
       lore:
-        - "<gray>Click to return to the homes list.<reset>"
-
+        - "&7Click to go back to the homes list."
