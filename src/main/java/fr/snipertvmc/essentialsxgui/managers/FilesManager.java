@@ -75,7 +75,7 @@ public class FilesManager {
 		put("warpsPlayerView", "1.0"); // Updated for version: 1.2.0
 
 		put("whoisPlayers", "1.0"); // Updated for version: 1.3.0
-		put("whoisView", "1.0"); // Updated for version: 1.3.0
+		put("whoisView", "1.1"); // Updated for version: 1.4.1
 
 		put("dataEntryGUI", "1.0"); // Updated for version: 1.1.0
 	}};
@@ -135,8 +135,6 @@ public class FilesManager {
 			case "messages" -> messagesFile = new MessagesFile(yamlFile);
 			default -> inventoriesFiles.put(fileName, new InventoryFile(yamlFile, fileName));
 		}
-
-		patchFileKeys(fileName);
 	}
 
 
@@ -187,60 +185,6 @@ public class FilesManager {
 
 		if (!latestVersion.equals(fileVersion)) {
 			Main.getInstance().getFilesManager().createBackupYAMLFile(fileName);
-		}
-	}
-
-
-	// -------------------------------------------------- //
-
-
-	public void patchFileKeys(String fileName) {
-
-		String filePath = filesPaths.get(fileName);
-		File file = new File(Main.getInstance().getDataFolder(), filePath + ".yml");
-
-		try {
-			List<String> lines = Files.readAllLines(file.toPath(), StandardCharsets.UTF_8);
-			List<String> updatedLines = new ArrayList<>();
-			boolean hasBeenUpdated = false;
-
-			Pattern keyPattern = Pattern.compile("^\\s*([^:#]+):.*$");
-
-			List<String> keysToRemove = switch (fileName) {
-				case "configuration" -> configurationFile.getKeysToRemove();
-				case "messages" -> messagesFile.getKeysToRemove();
-				default -> getInventory(fileName).getKeysToRemove();
-			};
-
-			for (String line : lines) {
-				Matcher matcher = keyPattern.matcher(line);
-				if (matcher.matches()) {
-					String matchedKey = matcher.group(1).trim();
-					if (keysToRemove.contains(matchedKey)) {
-						hasBeenUpdated = true;
-						continue; // on saute cette ligne
-					}
-				}
-				updatedLines.add(line);
-			}
-
-			Files.write(file.toPath(), updatedLines, StandardCharsets.UTF_8);
-
-			if (!hasBeenUpdated) {
-				return;
-			}
-
-			YamlConfiguration yamlFile = YamlConfiguration.loadConfiguration(file);
-
-			switch (fileName) {
-
-				case "configuration" -> configurationFile = new ConfigurationFile(yamlFile);
-				case "messages" -> messagesFile = new MessagesFile(yamlFile);
-				default -> inventoriesFiles.put(fileName, new InventoryFile(yamlFile, fileName));
-			}
-
-		} catch (IOException e) {
-			ConsoleLogger.error("Error while reading file: " + filePath + ".yml");
 		}
 	}
 

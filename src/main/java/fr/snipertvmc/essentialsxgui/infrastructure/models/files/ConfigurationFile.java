@@ -220,12 +220,4 @@ public class ConfigurationFile {
 
 
 	// -------------------------------------------------- //
-
-
-	public List<String> getKeysToRemove() {
-		return List.of();
-	}
-
-
-	// -------------------------------------------------- //
 }

@@ -77,17 +77,4 @@ public class MessagesFile {
 
 
 	// -------------------------------------------------- //
-
-
-	public Map<String, String> getPlaceholders() {
-		return new HashMap<>();
-	}
-
-
-	public List<String> getKeysToRemove() {
-		return List.of();
-	}
-
-
-	// -------------------------------------------------- //
 }

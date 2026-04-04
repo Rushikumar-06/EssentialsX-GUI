@@ -19,8 +19,16 @@
 ############################################################
 
 # Please do not change this value as it may cause the file to be reset.
-# Default: "1.0"
-config-version: "1.0"
+# Default: "1.1"
+config-version: "1.1"
+
+# If true, EssentialsX-GUI will only use PlaceholderAPI placeholders in this inventory.
+# This means that if you have PlaceholderAPI installed, you can use any PlaceholderAPI placeholder instead
+# of the built-in placeholders provided by EssentialsX-GUI.
+# Consequently, performance may be slightly worse when this option is enabled, as PlaceholderAPI placeholders
+# are generally more resource-intensive than built-in placeholders.
+# Default: false
+onlyUsePlaceholderAPI: false
 
 ############################################################
 # +------------------------------------------------------+ #

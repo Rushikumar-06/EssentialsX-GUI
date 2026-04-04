@@ -24,6 +24,8 @@ public class EXGWhoisViewInventoryConfig extends EXGInventoryConfig {
 
 	private InventoryScheme inventoryScheme;
 
+	private boolean onlyUsePlaceholderAPI;
+
 
 	// -------------------------------------------------- //
 
@@ -70,6 +72,10 @@ public class EXGWhoisViewInventoryConfig extends EXGInventoryConfig {
 		return inventoryScheme;
 	}
 
+	public boolean isOnlyUsePlaceholderAPI() {
+		return onlyUsePlaceholderAPI;
+	}
+
 
 	// -------------------------------------------------- //
 
@@ -109,6 +115,10 @@ public class EXGWhoisViewInventoryConfig extends EXGInventoryConfig {
 		this.inventoryScheme = inventoryScheme;
 	}
 
+	public void setOnlyUsePlaceholderAPI(boolean onlyUsePlaceholderAPI) {
+		this.onlyUsePlaceholderAPI = onlyUsePlaceholderAPI;
+	}
+
 
 	// -------------------------------------------------- //
 
@@ -135,6 +145,8 @@ public class EXGWhoisViewInventoryConfig extends EXGInventoryConfig {
 		copy.setBackItem(this.getBackItem().duplicate());
 
 		copy.setInventoryScheme(this.getInventoryScheme());
+
+		copy.setOnlyUsePlaceholderAPI(this.onlyUsePlaceholderAPI);
 
 		return copy;
 	}

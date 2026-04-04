@@ -480,6 +480,9 @@ public class InventoriesManager {
 				"backItem"));
 
 		whoisViewInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
+
+		whoisViewInventoryConfig.setOnlyUsePlaceholderAPI(inventoryFile.getYamlConfiguration()
+				.getBoolean("onlyUsePlaceholderAPI"));
 	}
 
 

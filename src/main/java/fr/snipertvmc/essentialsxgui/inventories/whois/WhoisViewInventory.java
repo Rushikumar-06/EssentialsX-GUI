@@ -47,127 +47,111 @@ public class WhoisViewInventory extends FastInv {
 
 
 		// Fetching user data
-		Map<String, String> playerData = getPlayerData(player);
+		boolean useOnlyPlaceholderAPI = config.isOnlyUsePlaceholderAPI();
 
-		String name = target.getName();
-		String uuid = target.getUniqueId().toString();
-		String ipAddress = playerData.get("ipAddress");
-		String playtime = playerData.get("playtime");
+		Map<String, String> playerIdentificationPlaceholders = new HashMap<>();
+		Map<String, String> playerStatisticsPlaceholders = new HashMap<>();
+		Map<String, String> playerWorldPlaceholders = new HashMap<>();
+		Map<String, String> playerServerDataPlaceholders = new HashMap<>();
+		Map<String, String> playerPunishmentsPlaceholders = new HashMap<>();
 
-		String health = playerData.get("health");
-		String maxHealth = playerData.get("maxHealth");
-		String foodLevel = playerData.get("foodLevel");
-		String saturation = playerData.get("saturation");
-		String experience = playerData.get("experience");
-		String level = playerData.get("level");
+		if (!useOnlyPlaceholderAPI) {
+			Map<String, String> playerData = getPlayerData(player);
+			Location worldLocation = target.getLocation();
 
-		Location worldLocation = target.getLocation();
-		String location = playerData.get("location");
+			playerIdentificationPlaceholders = new HashMap<>() {{
+				put("targetName", target.getName());
+				put("targetUUID", target.getUniqueId().toString());
+				put("targetIP", playerData.get("ipAddress"));
+				put("targetPlaytime", playerData.get("playtime"));
+			}};
 
-		String money = playerData.get("money");
-		String gamemodeName = playerData.get("gamemodeName");
-		String isGodMode = playerData.get("isGodMode");
-		String canFly = playerData.get("canFly");
-		String isFlying = playerData.get("isFlying");
-		String walkSpeed = playerData.get("walkSpeed");
-		String flySpeed = playerData.get("flySpeed");
-		String isOperator = playerData.get("isOperator");
-		String isWhitelisted = playerData.get("isWhitelisted");
-		String isVanished = playerData.get("isVanished");
-		String nickname = playerData.get("nickname");
-		String isNicked = playerData.get("isNicked");
-		String isAfk = playerData.get("isAfk");
-		String afkSince = playerData.get("afkSince");
+			playerStatisticsPlaceholders = new HashMap<>() {{
+				put("targetName", target.getName());
+				put("targetHealth", playerData.get("health"));
+				put("targetMaxHealth", playerData.get("maxHealth"));
+				put("targetFoodLevel", playerData.get("foodLevel"));
+				put("targetSaturation", playerData.get("saturation"));
+				put("targetExperience", playerData.get("experience"));
+				put("targetLevel", playerData.get("level"));
+			}};
 
-		String isJailed = playerData.get("isJailed");
-		String jailName = playerData.get("jailName");
-		String jailExpiry = playerData.get("jailExpiry");
-		String isMuted = playerData.get("isMuted");
-		String muteReason = playerData.get("muteReason");
-		String muteExpiry = playerData.get("muteExpiry");
-		String isBanned = playerData.get("isBanned");
-		String banReason = playerData.get("banReason");
-		String banExpiry = playerData.get("banExpiry");
+			playerWorldPlaceholders = new HashMap<>() {{
+				put("targetName", target.getName());
+				put("targetWorld", worldLocation.getWorld().getName());
+				put("targetX", String.valueOf((int) worldLocation.getX()));
+				put("targetY", String.valueOf((int) worldLocation.getY()));
+				put("targetZ", String.valueOf((int) worldLocation.getZ()));
+				put("targetYaw", String.valueOf((int) worldLocation.getYaw()));
+				put("targetPitch", String.valueOf((int) worldLocation.getPitch()));
+				put("targetLocation", playerData.get("location"));
+			}};
+
+			playerServerDataPlaceholders = new HashMap<>() {{
+				put("targetName", target.getName());
+				put("targetGamemode", playerData.get("gamemodeName"));
+				put("targetMoney", playerData.get("money"));
+				put("targetIsInGodMode", playerData.get("isGodMode"));
+				put("targetCanFly", playerData.get("canFly"));
+				put("targetIsFlying", playerData.get("isFlying"));
+				put("targetWalkSpeed", playerData.get("walkSpeed"));
+				put("targetFlySpeed", playerData.get("flySpeed"));
+				put("targetIsOperator", playerData.get("isOperator"));
+				put("targetIsWhitelisted", playerData.get("isWhitelisted"));
+				put("targetIsVanished", playerData.get("isVanished"));
+				put("targetIsNicked", playerData.get("isNicked"));
+				put("targetNickname", playerData.get("nickname"));
+				put("targetIsAfk", playerData.get("isAfk"));
+				put("targetAfkSince", playerData.get("afkSince"));
+			}};
+
+			playerPunishmentsPlaceholders = new HashMap<>() {{
+				put("targetName", target.getName());
+				put("targetIsJailed", playerData.get("isJailed"));
+				put("targetJailName", playerData.get("jailName"));
+				put("targetJailExpiry", playerData.get("jailExpiry"));
+				put("targetIsMuted", playerData.get("isMuted"));
+				put("targetMuteReason", playerData.get("muteReason"));
+				put("targetMuteExpiry", playerData.get("muteExpiry"));
+				put("targetIsBanned", playerData.get("isBanned"));
+				put("targetBanReason", playerData.get("banReason"));
+				put("targetBanExpiry", playerData.get("banExpiry"));
+			}};
+		}
 
 
 		// Setting items
 		if (config.getPlayerIdentificationItem().isEnabled()) {
 			setItem(config.getPlayerIdentificationItem().getSlot(), config.getPlayerIdentificationItem()
-					.updateVariables(Map.of(
-							"targetName", name,
-							"targetUUID", uuid,
-							"targetIP", ipAddress,
-							"targetPlaytime", playtime))
+					.updateVariables(playerIdentificationPlaceholders)
 					.build(player)
 			);
 		}
 
 		if (config.getPlayerStatisticsItem().isEnabled()) {
 			setItem(config.getPlayerStatisticsItem().getSlot(), config.getPlayerStatisticsItem()
-					.updateVariables(Map.of(
-							"targetName", name,
-							"targetHealth", health,
-							"targetMaxHealth", maxHealth,
-							"targetFoodLevel", foodLevel,
-							"targetSaturation", saturation,
-							"targetExperience", experience,
-							"targetLevel", level))
+					.updateVariables(playerStatisticsPlaceholders)
 					.build(player)
 			);
 		}
 
 		if (config.getPlayerWorldItem().isEnabled()) {
 			setItem(config.getPlayerWorldItem().getSlot(), config.getPlayerWorldItem()
-					.updateVariables(Map.of(
-							"targetName", name,
-							"targetWorld", worldLocation.getWorld().getName(),
-							"targetX", String.valueOf((int) worldLocation.getX()),
-							"targetY", String.valueOf((int) worldLocation.getY()),
-							"targetZ", String.valueOf((int) worldLocation.getZ()),
-							"targetYaw", String.valueOf((int) worldLocation.getYaw()),
-							"targetPitch", String.valueOf((int) worldLocation.getPitch()),
-							"targetLocation", location))
+					.updateVariables(playerWorldPlaceholders)
 					.build(player)
 			);
 		}
 
 		if (config.getPlayerServerDataItem().isEnabled()) {
 			setItem(config.getPlayerServerDataItem().getSlot(), config.getPlayerServerDataItem()
-					.updateVariables(new HashMap<>() {{
-							put("targetName", name);
-							put("targetGamemode", gamemodeName);
-							put("targetMoney", money);
-							put("targetIsInGodMode", isGodMode);
-							put("targetCanFly", canFly);
-							put("targetIsFlying", isFlying);
-							put("targetWalkSpeed", walkSpeed);
-							put("targetFlySpeed", flySpeed);
-							put("targetIsOperator", isOperator);
-							put("targetIsWhitelisted", isWhitelisted);
-							put("targetIsVanished", isVanished);
-							put("targetIsNicked", isNicked);
-							put("targetNickname", nickname);
-							put("targetIsAfk", isAfk);
-							put("targetAfkSince", afkSince);
-					}})
+					.updateVariables(playerServerDataPlaceholders)
 					.build(player)
 			);
 		}
 
 		if (config.getPlayerPunishmentsItem().isEnabled()) {
 			setItem(config.getPlayerPunishmentsItem().getSlot(), config.getPlayerPunishmentsItem()
-					.updateVariables(new HashMap<>() {{
-						put("targetName", name);
-						put("targetIsJailed", isJailed);
-						put("targetJailName", jailName);
-						put("targetJailExpiry", jailExpiry);
-						put("targetIsMuted", isMuted);
-						put("targetMuteReason", muteReason);
-						put("targetMuteExpiry", muteExpiry);
-						put("targetIsBanned", isBanned);
-						put("targetBanReason", banReason);
-						put("targetBanExpiry", banExpiry);
-					}})
+					.updateVariables(playerPunishmentsPlaceholders)
 					.build(player)
 			);
 		}
