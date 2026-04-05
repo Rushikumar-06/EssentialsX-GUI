@@ -85,7 +85,8 @@ public class TextUtils {
 
 	public static boolean hasMiniMessageFormat(String message) {
 		if (message == null || message.isEmpty()) return false;
-		return message.matches(".*<[a-z0-9_#/:-]+>.*");
+		Component component = MiniMessage.miniMessage().deserialize(message);
+		return !component.equals(Component.text(message));
 	}
 
 
