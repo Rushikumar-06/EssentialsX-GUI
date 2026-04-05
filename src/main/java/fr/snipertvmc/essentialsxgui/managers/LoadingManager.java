@@ -159,8 +159,7 @@ public class LoadingManager {
 	public void checkForServerVersionSupport() {
 
 		MCServerVersion serverVersion = Main.getInstance().getMCServerVersion();
-		String serverVersionColor = serverVersion.isFullySupported() ? "§a" : "§6";
-		serverVersionColor = serverVersion == MCServerVersion.UnknownVersion ? "§4" : serverVersionColor;
+		String serverVersionColor = serverVersion != MCServerVersion.UnknownVersion ? "§a" : "§6";
 
 		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Server version found: " + serverVersionColor + serverVersion.getVersionName());
 
@@ -173,13 +172,6 @@ public class LoadingManager {
 		if (serverVersion.isDeprecated()) {
 			ConsoleLogger.console("\t§6EssentialsX-GUI: §eThis server version is deprecated and could be removed in the future.");
 			ConsoleLogger.console("\t§6EssentialsX-GUI: §ePlease consider updating to a newer version.");
-			ConsoleLogger.console("\t§6EssentialsX-GUI: §eA list of fully supported versions is available on the plugin page.");
-			return;
-		}
-
-		if (!serverVersion.isFullySupported()) {
-			ConsoleLogger.console("\t§6EssentialsX-GUI: §eBe aware that this version of EssentialsX-GUI could");
-			ConsoleLogger.console("\t§6EssentialsX-GUI: §enot be fully compatible with your server version.");
 			ConsoleLogger.console("\t§6EssentialsX-GUI: §eA list of fully supported versions is available on the plugin page.");
 			return;
 		}

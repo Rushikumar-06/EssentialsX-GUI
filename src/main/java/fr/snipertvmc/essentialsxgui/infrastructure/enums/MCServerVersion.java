@@ -11,64 +11,64 @@ public enum MCServerVersion {
 	// -------------------------------------------------- //
 
 
-	UnknownVersion("Unknown version", false, false),
+	UnknownVersion("Unknown version", false),
 
-	v1_8_8("1.8.8", true, false),
+	v1_8_8("1.8.8", false),
+	v1_8_9("1.8.9", false),
 
-	v1_9_4("1.9.4", false, false),
+	v1_9_4("1.9.4", false),
 
-	v1_10_2("1.10.2", false, false),
+	v1_10_2("1.10.2", false),
 
-	v1_11_2("1.11.2", false, false),
+	v1_11_2("1.11.2", false),
 
-	v1_12_2("1.12.2", true, false),
+	v1_12_2("1.12.2", false),
 
-	v1_13_2("1.13.2", false, false),
+	v1_13_2("1.13.2", false),
 
-	v1_14_4("1.14.4", false, false),
+	v1_14_4("1.14.4", false),
 
-	v1_15_2("1.15.2", false, false),
+	v1_15_2("1.15.2", false),
 
-	v1_16_5("1.16.5", true, false),
+	v1_16_5("1.16.5", false),
 
-	v1_17_1("1.17.1", false, false),
+	v1_17_1("1.17.1", false),
 
-	v1_18_2("1.18.2", false, false),
+	v1_18_2("1.18.2", false),
 
-	v1_19_4("1.19.4", false, false),
+	v1_19_4("1.19.4", false),
 
-	v1_20_6("1.20.6", false, false),
+	v1_20_6("1.20.6", false),
 
-	v1_21("1.21", false, false),
-	v1_21_1("1.21.1", false, false),
-	v1_21_2("1.21.2", false, false),
-	v1_21_3("1.21.3", false, false),
-	v1_21_4("1.21.4", true, false),
-	v1_21_5("1.21.5", false, false),
-	v1_21_6("1.21.6", false, false),
-	v1_21_7("1.21.7", false, false),
-	v1_21_8("1.21.8", true, false),
-	v1_21_9("1.21.9", true, false),
-	v1_21_10("1.21.10", true, false),
-	v1_21_11("1.21.11", true, false);
+	v1_21("1.21", false),
+	v1_21_1("1.21.1", false),
+	v1_21_2("1.21.2", false),
+	v1_21_3("1.21.3", false),
+	v1_21_4("1.21.4", false),
+	v1_21_5("1.21.5", false),
+	v1_21_6("1.21.6", false),
+	v1_21_7("1.21.7", false),
+	v1_21_8("1.21.8", false),
+	v1_21_9("1.21.9", false),
+	v1_21_10("1.21.10", false),
+	v1_21_11("1.21.11", false),
+
+	v26_1("26.1", false),
+	v26_1_1("26.1.1", false);
 
 
 	// -------------------------------------------------- //
 
 
 	private final String versionName;
-
-	private final boolean fullySupported;
 	private final boolean deprecated;
 
 
 	// -------------------------------------------------- //
 
 
-	MCServerVersion(String versionName, boolean fullySupported, boolean deprecated) {
+	MCServerVersion(String versionName, boolean deprecated) {
 		this.versionName = versionName;
-
-		this.fullySupported = fullySupported;
 		this.deprecated = deprecated;
 	}
 
@@ -78,10 +78,6 @@ public enum MCServerVersion {
 
 	public String getVersionName() {
 		return versionName;
-	}
-
-	public boolean isFullySupported() {
-		return fullySupported;
 	}
 	public boolean isDeprecated() {
 		return deprecated;
