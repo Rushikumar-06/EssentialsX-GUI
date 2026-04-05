@@ -218,7 +218,7 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 		EXGEntryType entryType = Main.getInstance().getFilesManager().getConfiguration().getEntryType("kits", "createNewKitNameEntryType");
 		if (entryType == EXGEntryType.CHAT) {
 			player.closeInventory();
-			TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.ENTER_NEW_KIT_NAME));
+			TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.ENTER_NEW_KIT_NAME_CHAT));
 		}
 
 		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
@@ -240,8 +240,9 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 					}
 
 					Set<EXGKit> kits = Main.getInstance().getEXGServer().getKits();
+					String kitName = result.getLeft().toLowerCase().replace(" ", "_").replace("-", "_");
 
-					if (kits.stream().anyMatch(kit -> kit.getName().equalsIgnoreCase(result.getLeft()))) {
+					if (kits.stream().anyMatch(kit -> kit.getName().equalsIgnoreCase(kitName))) {
 						TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.KIT_NAME_ALREADY_EXISTS, null));
 						new KitsAdminViewInventory(player, null, null).open(player);
 						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);

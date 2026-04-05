@@ -42,6 +42,7 @@ public enum EXGMessage {
 
 	WARP_CREATION_ERROR("errors.warpCreationError"),
 	WARP_DELETE_ERROR("errors.warpDeleteError"),
+	WARP_NAME_ALREADY_EXISTS("errors.warpNameAlreadyExists"),
 	NO_WARP_FOUND("errors.noWarpFound"),
 
 

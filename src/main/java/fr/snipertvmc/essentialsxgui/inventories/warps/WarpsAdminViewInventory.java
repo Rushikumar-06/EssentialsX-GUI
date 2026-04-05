@@ -236,10 +236,19 @@ public class WarpsAdminViewInventory extends PaginatedFastInv {
 
 				result -> {
 
-					String warpName = result.getLeft();
 					Pattern pattern = Pattern.compile("^[a-zA-Z0-9 _-]+$");
 					if (!pattern.matcher(result.getLeft()).matches()) {
 						TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.INVALID_NAME));
+						new WarpsAdminViewInventory(player, null, null).open(player);
+						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
+						return;
+					}
+
+					Set<EXGWarp> warps = Main.getInstance().getEXGServer().getWarps();
+					String warpName = result.getLeft().toLowerCase().replace(" ", "_").replace("-", "_");
+
+					if (warps.stream().anyMatch(warp -> warp.getName().equalsIgnoreCase(warpName))) {
+						TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.WARP_NAME_ALREADY_EXISTS, null));
 						new WarpsAdminViewInventory(player, null, null).open(player);
 						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
 						return;

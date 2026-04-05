@@ -254,8 +254,9 @@ public class HomesInventory extends PaginatedFastInv {
 					}
 
 					Set<EXGHome> homes = Main.getInstance().getPlayerManager().getPlayer(player).getHomes();
+					String homeName = result.getLeft().toLowerCase().replace(" ", "_").replace("-", "_");
 
-					if (homes.stream().anyMatch(home -> home.getName().equalsIgnoreCase(result.getLeft()))) {
+					if (homes.stream().anyMatch(home -> home.getName().equalsIgnoreCase(homeName))) {
 						TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.HOME_NAME_ALREADY_EXISTS));
 						new HomesInventory(player, null, null).open(player);
 						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
@@ -269,7 +270,7 @@ public class HomesInventory extends PaginatedFastInv {
 						return;
 					}
 
-					Main.getInstance().getEssentials().getUser(player).setHome(result.getLeft().replace(" ", "_"), player.getLocation());
+					Main.getInstance().getEssentials().getUser(player).setHome(homeName, player.getLocation());
 					TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.HOME_CREATED, Map.of("homeName", result.getLeft())));
 					new HomesInventory(player, null, null).open(player);
 					SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
