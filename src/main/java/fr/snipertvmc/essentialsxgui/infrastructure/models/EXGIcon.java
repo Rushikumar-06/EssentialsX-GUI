@@ -23,8 +23,8 @@ public class EXGIcon {
 
 	public EXGIcon(String name) {
 		this.name = name;
+
 		this.displayName = name;
-		this.material = XMaterial.GRASS_BLOCK;
 		this.data = 0;
 	}
 
