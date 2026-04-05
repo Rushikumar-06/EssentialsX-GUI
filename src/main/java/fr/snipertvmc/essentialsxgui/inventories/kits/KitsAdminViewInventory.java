@@ -18,6 +18,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.*;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class KitsAdminViewInventory extends PaginatedFastInv {
@@ -229,6 +230,14 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 		DataEntryUtils.processStringEntry(player, entrySettings,
 
 				result -> {
+
+					Pattern pattern = Pattern.compile("^[a-zA-Z0-9 _-]+$");
+					if (!pattern.matcher(result.getLeft()).matches()) {
+						TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.INVALID_NAME));
+						new KitsAdminViewInventory(player, null, null).open(player);
+						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
+						return;
+					}
 
 					Set<EXGKit> kits = Main.getInstance().getEXGServer().getKits();
 

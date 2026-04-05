@@ -19,6 +19,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.*;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class HomesInventory extends PaginatedFastInv {
@@ -243,6 +244,14 @@ public class HomesInventory extends PaginatedFastInv {
 		DataEntryUtils.processStringEntry(player, entrySettings,
 
 				result -> {
+
+					Pattern pattern = Pattern.compile("^[a-zA-Z0-9 _-]+$");
+					if (!pattern.matcher(result.getLeft()).matches()) {
+						TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.INVALID_NAME));
+						new HomesInventory(player, null, null).open(player);
+						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
+						return;
+					}
 
 					Set<EXGHome> homes = Main.getInstance().getPlayerManager().getPlayer(player).getHomes();
 

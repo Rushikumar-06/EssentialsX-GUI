@@ -18,6 +18,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.*;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class WarpsAdminViewInventory extends PaginatedFastInv {
@@ -236,6 +237,13 @@ public class WarpsAdminViewInventory extends PaginatedFastInv {
 				result -> {
 
 					String warpName = result.getLeft();
+					Pattern pattern = Pattern.compile("^[a-zA-Z0-9 _-]+$");
+					if (!pattern.matcher(result.getLeft()).matches()) {
+						TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.INVALID_NAME));
+						new WarpsAdminViewInventory(player, null, null).open(player);
+						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
+						return;
+					}
 
 					try {
 						Main.getInstance().getHookManager().getEssentialsHook().createWarpWithPlayer(player, warpName.replace(" ", "_"));
