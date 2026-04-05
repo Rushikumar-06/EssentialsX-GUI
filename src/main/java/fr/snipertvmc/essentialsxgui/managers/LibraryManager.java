@@ -14,6 +14,7 @@ public class LibraryManager {
 		BukkitLibraryManager bukkitLibraryManager = Main.getInstance().getBukkitLibraryManager();
 		bukkitLibraryManager.addMavenCentral();
 		bukkitLibraryManager.addJitPack();
+		bukkitLibraryManager.addRepository("https://repo.marcely.de/repository/maven-public/");
 		loadEssentialLibraries();
 	}
 
@@ -75,7 +76,7 @@ public class LibraryManager {
 
 		bukkitLibraryManager.loadLibrary(Library.builder()
 				.groupId("com.github.cryptomorin")
-				.artifactId("XSeries")
+				.artifactId("XSeries-Fork")
 				.version("13.6.0")
 				.build());
 	}

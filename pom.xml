@@ -66,6 +66,12 @@
 			<url>https://repo.faststats.dev/releases</url>
 		</repository>
 
+		<!-- XSeries-Fork Repository -->
+		<repository>
+			<id>marcely-repo</id>
+			<url>https://repo.marcely.de/repository/maven-public/</url>
+		</repository>
+
 	</repositories>
 
 
@@ -111,19 +117,19 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- XSeries -->
-		<dependency>
-			<groupId>com.github.cryptomorin</groupId>
-			<artifactId>XSeries</artifactId>
-			<version>13.6.0</version>
-			<scope>provided</scope>
-		</dependency>
-
 		<!-- PlaceholderAPI -->
 		<dependency>
 			<groupId>me.clip</groupId>
 			<artifactId>placeholderapi</artifactId>
 			<version>2.12.2</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- XSeries (Fork for 26.1 support) -->
+		<dependency>
+			<groupId>com.github.cryptomorin</groupId>
+			<artifactId>XSeries-Fork</artifactId>
+			<version>13.6.0</version>
 			<scope>provided</scope>
 		</dependency>
 
