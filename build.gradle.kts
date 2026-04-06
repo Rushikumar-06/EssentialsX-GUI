@@ -14,43 +14,43 @@ java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
     mavenLocal()
+
+    // Libby Bukkit
     mavenCentral()
+
+    // SpigotMC, Moshi, HikariCP
     maven {
         url = uri("https://repo.papermc.io/repository/maven-public/")
     }
 
-    maven {
-        url = uri("https://jitpack.io/")
-    }
-
+    // EssentialsX
     maven {
         url = uri("https://repo.essentialsx.net/releases/")
     }
 
+    // PrivateBin Java API
     maven {
-        name = "mvn-wesjd-net"
-        url = uri("https://mvn.wesjd.net/")
+        url = uri("https://jitpack.io/")
     }
 
+    // PlaceholderAPI
     maven {
-        url = uri("https://repo.alessiodp.com/releases/")
+        url = uri("https://repo.extendedclip.com/releases/")
     }
 
-    maven {
-        url = uri("https://repo.helpch.at/releases/")
-    }
-
-    maven {
-        name = "faststatsReleases"
-        url = uri("https://repo.faststats.dev/releases")
-    }
-
+    // XSeries-Fork (26.1 support)
     maven {
         url = uri("https://repo.marcely.de/repository/maven-public/")
     }
 
+    // AnvilGUI
     maven {
-        url = uri("https://repo.maven.apache.org/maven2/")
+        url = uri("https://mvn.wesjd.net/")
+    }
+
+    // FastStats
+    maven {
+        url = uri("https://repo.faststats.dev/releases")
     }
 }
 
