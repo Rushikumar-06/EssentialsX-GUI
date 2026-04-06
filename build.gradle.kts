@@ -55,16 +55,17 @@ repositories {
 }
 
 dependencies {
-        compileOnly("org.spigotmc:spigot-api:1.21.1-R0.1-SNAPSHOT")
-        compileOnly("net.essentialsx:EssentialsX:2.21.2")
-        compileOnly("com.squareup.moshi:moshi:1.15.2")
-        compileOnly("com.zaxxer:HikariCP:7.0.2")
-        compileOnly("com.github.InstantlyMoist:privatebin-java-api:master")
-        compileOnly("me.clip:placeholderapi:2.12.2")
-        compileOnly("com.github.cryptomorin:XSeries-Fork:13.6.0")
-        implementation("net.wesjd:anvilgui:1.10.11-SNAPSHOT")
-        implementation("net.byteflux:libby-bukkit:1.3.1")
-        implementation("dev.faststats.metrics:bukkit:0.18.1")
+    compileOnly("org.spigotmc:spigot-api:1.21.11-R0.1-SNAPSHOT")
+    compileOnly("net.essentialsx:EssentialsX:2.21.2")
+    compileOnly("com.squareup.moshi:moshi:1.15.2")
+    compileOnly("com.zaxxer:HikariCP:7.0.2")
+    compileOnly("com.github.InstantlyMoist:privatebin-java-api:master")
+    compileOnly("me.clip:placeholderapi:2.12.2")
+    compileOnly("com.github.cryptomorin:XSeries-Fork:13.6.0")
+
+    implementation("net.byteflux:libby-bukkit:1.3.1")
+    implementation("net.wesjd:anvilgui:1.10.12-SNAPSHOT")
+    implementation("dev.faststats.metrics:bukkit:0.21.0")
 }
 
 
