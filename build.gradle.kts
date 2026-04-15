@@ -18,7 +18,7 @@ repositories {
     // Libby Bukkit
     mavenCentral()
 
-    // SpigotMC, Moshi, HikariCP
+    // SpigotMC, Moshi, HikariCP, XSeries (v13.6.0+26.1)
     maven {
         url = uri("https://repo.papermc.io/repository/maven-public/")
     }
@@ -36,11 +36,6 @@ repositories {
     // PlaceholderAPI
     maven {
         url = uri("https://repo.extendedclip.com/releases/")
-    }
-
-    // XSeries-Fork (26.1 support)
-    maven {
-        url = uri("https://repo.marcely.de/repository/maven-public/")
     }
 
     // AnvilGUI
@@ -61,7 +56,7 @@ dependencies {
     compileOnly("com.zaxxer:HikariCP:7.0.2")
     compileOnly("com.github.InstantlyMoist:privatebin-java-api:master")
     compileOnly("me.clip:placeholderapi:2.12.2")
-    compileOnly("com.github.cryptomorin:XSeries-Fork:13.6.0")
+    compileOnly("io.github.almighty-satan:XSeries:13.6.0+26.1")
 
     implementation("net.byteflux:libby-bukkit:1.3.1")
     implementation("net.wesjd:anvilgui:1.10.12-SNAPSHOT")
@@ -90,7 +85,6 @@ tasks.shadowJar {
 
     relocate("net.byteflux.libby", "fr.snipertvmc.essentialsxgui.libraries.libby")
     relocate("net.wesjd.anvilgui", "fr.snipertvmc.essentialsxgui.libraries.anvilgui")
-    relocate("net.kyori.adventure", "fr.snipertvmc.essentialsxgui.libraries.adventure")
     relocate("dev.faststats", "fr.snipertvmc.essentialsxgui.libraries.faststats")
 
     mergeServiceFiles()
