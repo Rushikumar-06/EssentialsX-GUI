@@ -117,6 +117,7 @@ public class ConfigurationFile {
 
 
 	public String getCharacterList(String path) {
+		if (path == null) return null;
 		return yamlConfiguration.getString(path, "regex:^[a-zA-Z0-9_ ]+$");
 	}
 

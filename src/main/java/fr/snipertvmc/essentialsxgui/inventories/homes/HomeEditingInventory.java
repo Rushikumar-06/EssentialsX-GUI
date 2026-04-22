@@ -152,7 +152,7 @@ public class HomeEditingInventory extends FastInv {
 		EXGEntrySettings entrySettings = new EXGEntrySettings(entryType)
 				.setAcceptedTypes(List.of(EXGEntryType.CHAT, EXGEntryType.ANVIL))
 				.setEntryDisplayName(MessagesUtils.getString(EXGMessage.ENTER_NEW_DISPLAY_NAME))
-				.setCharacterListPath("homes.changeHomeDisplayNameCharacterList")
+				.setCharactersListPath("homes.changeHomeDisplayNameCharacterList")
 				.setMinLength(Main.getInstance().getConfiguration().getMinNameLength())
 				.setMaxLength(Main.getInstance().getConfiguration().getMaxNameLength());
 

@@ -18,7 +18,7 @@ public class EXGEntrySettings {
 	// For String
 	int minLength = -1;
 	int maxLength = -1;
-	String characterListPath;
+	String charactersListPath;
 	boolean mustBeNumber = false;
 	String equalsToSomething;
 
@@ -56,8 +56,8 @@ public class EXGEntrySettings {
 	public int getMaxLength() {
 		return maxLength;
 	}
-	public String getCharacterListPath() {
-		return characterListPath;
+	public String getCharactersListPath() {
+		return charactersListPath;
 	}
 	public boolean isMustBeNumber() {
 		return mustBeNumber;
@@ -95,8 +95,8 @@ public class EXGEntrySettings {
 		this.maxLength = maxLength;
 		return this;
 	}
-	public EXGEntrySettings setCharacterListPath(String characterListPath) {
-		this.characterListPath = characterListPath;
+	public EXGEntrySettings setCharactersListPath(String charactersListPath) {
+		this.charactersListPath = charactersListPath;
 		return this;
 	}
 	public EXGEntrySettings setMustBeNumber(boolean mustBeNumber) {
