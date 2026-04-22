@@ -14,7 +14,7 @@ public class LibraryManager {
 		BukkitLibraryManager bukkitLibraryManager = Main.getInstance().getBukkitLibraryManager();
 		bukkitLibraryManager.addMavenCentral();
 		bukkitLibraryManager.addJitPack();
-		bukkitLibraryManager.addRepository("https://repo.marcely.de/repository/maven-public/");
+		bukkitLibraryManager.addRepository("https://repo.papermc.io/repository/maven-public/");
 		loadEssentialLibraries();
 	}
 
@@ -75,9 +75,9 @@ public class LibraryManager {
 				.build());
 
 		bukkitLibraryManager.loadLibrary(Library.builder()
-				.groupId("com.github.cryptomorin")
-				.artifactId("XSeries-Fork")
-				.version("13.6.0")
+				.groupId("io.github.almighty-satan")
+				.artifactId("XSeries")
+				.version("13.6.0+26.1")
 				.build());
 	}
 
