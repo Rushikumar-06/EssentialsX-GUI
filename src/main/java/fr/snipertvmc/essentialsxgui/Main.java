@@ -112,17 +112,11 @@ public class Main extends JavaPlugin {
 
 
 		// LOAD PLUGIN
-		boolean cancelLoading = false;
-		if (!loadingManager.loadPlugin(filesManager.getConfiguration().isDetailedLoading())) {
-			cancelLoading = true;
-		}
+		boolean successfullyLoaded = loadingManager.loadPlugin(filesManager.getConfiguration().isDetailedLoading());
 
 
 		// SERVER INITIALIZATION
-		if (!cancelLoading) {
-			serverManager = new ServerManager();
-		}
-
+		if (successfullyLoaded) serverManager = new ServerManager();
 		fastStatsMetrics.ready();
 
 
@@ -130,7 +124,7 @@ public class Main extends JavaPlugin {
 		long endTime = System.currentTimeMillis();
 		long loadingTime = endTime - startTime;
 
-		if (cancelLoading) {
+		if (successfullyLoaded) {
 			ConsoleLogger.console("\t§6EssentialsX-GUI: §cPlugin will be disabled due to loading errors.");
 			ConsoleLogger.console("");
 			getServer().getPluginManager().disablePlugin(this);
@@ -227,7 +221,6 @@ public class Main extends JavaPlugin {
 
 
 	// SHORTCUTS
-
 	public Essentials getEssentials() {
 		return hookManager.getEssentialsHook().getEssentials();
 	}
@@ -240,7 +233,6 @@ public class Main extends JavaPlugin {
 
 
 	// CONSTANTS VARIABLES
-
 	public MCServerVersion getMCServerVersion() {
 		return mcServerVersion;
 	}
