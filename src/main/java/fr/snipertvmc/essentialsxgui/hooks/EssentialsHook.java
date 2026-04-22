@@ -60,13 +60,13 @@ public class EssentialsHook {
 		String version = essentials.getDescription().getVersion();
 		String cleanVersion = version.split("-")[0];
 
-		return isVersionGreaterOrEqual(cleanVersion, minimumVersionRequired);
+		return isVersionGreaterOrEqual(cleanVersion);
 	}
 
 
-	private boolean isVersionGreaterOrEqual(String current, String minimum) {
+	private boolean isVersionGreaterOrEqual(String current) {
 		String[] currentParts = current.split("\\.");
-		String[] minimumParts = minimum.split("\\.");
+		String[] minimumParts = minimumVersionRequired.split("\\.");
 
 		int length = Math.max(currentParts.length, minimumParts.length);
 
