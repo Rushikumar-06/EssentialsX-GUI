@@ -84,9 +84,8 @@ public class DataEntryUtils {
 			return new Pair<>(value, EXGEntryResult.INVALID_NUMBER);
 		}
 
-		if (entrySettings.getCharactersListPath() != null && !entrySettings.getCharactersListPath().isEmpty()) {
+		if (entrySettings.getCharactersListPath() != null) {
 			String charactersList = Main.getInstance().getConfiguration().getCharacterList(entrySettings.getCharactersListPath());
-			if (charactersList == null) return new Pair<>(value, EXGEntryResult.SUCCESS);
 			return getCharactersAnalysisResult(charactersList, value);
 		}
 
