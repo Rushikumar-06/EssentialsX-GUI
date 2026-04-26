@@ -124,7 +124,7 @@ public class Main extends JavaPlugin {
 		long endTime = System.currentTimeMillis();
 		long loadingTime = endTime - startTime;
 
-		if (successfullyLoaded) {
+		if (!successfullyLoaded) {
 			ConsoleLogger.console("\t§6EssentialsX-GUI: §cPlugin will be disabled due to loading errors.");
 			ConsoleLogger.console("");
 			getServer().getPluginManager().disablePlugin(this);
