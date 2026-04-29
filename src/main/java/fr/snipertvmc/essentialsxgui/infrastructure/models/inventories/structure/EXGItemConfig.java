@@ -227,10 +227,12 @@ public class EXGItemConfig {
 		}
 		itemBuilder.amount(amount);
 
-		if (data < 0 || data > 15) {
-			data = 0;
+		if (!MCServerVersion.getMCServerVersion().isHigherThan(MCServerVersion.v1_12_2)) {
+			if (data < 0 || data > 15) {
+				data = 0;
+			}
+			itemBuilder.data(data);
 		}
-		itemBuilder.data(data);
 
 		applyDisplayName(player, itemBuilder);
 		applyLore(player, itemBuilder);
