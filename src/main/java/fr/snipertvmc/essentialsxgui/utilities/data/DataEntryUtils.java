@@ -70,7 +70,7 @@ public class DataEntryUtils {
 		}
 
 		Pair<String, EXGEntryResult> formatAnalysisResult = getFormatAnalysisResult(value);
-		if (formatAnalysisResult != null) getFormatAnalysisResult(value);
+		if (formatAnalysisResult != null) return formatAnalysisResult;
 
 		if ( (entrySettings.getMinLength() != -1 && value.length() < entrySettings.getMinLength())
 			|| (entrySettings.getMaxLength() != -1 && value.length() > entrySettings.getMaxLength()) ) {
