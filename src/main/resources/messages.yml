@@ -30,8 +30,8 @@
 ############################################################
 
 # Please do not change this value as it may cause the file to be reset.
-# Default: "1.8"
-messages-version: "1.8"
+# Default: "1.9"
+messages-version: "1.9"
 
 # Change the prefix sent at the beginning of most sent messages.
 # TIP: Use {prefix} in any message to include the prefix.
@@ -55,6 +55,9 @@ admin:
   # Placeholders available: {newStorageType}
   databaseReloaded: "{prefix} &eThe database has been reloaded. The storage type is &f{newStorageType}&e."
 
+  tasksReloading: "{prefix} &eThe tasks are being reloaded..."
+  tasksReloaded: "{prefix} &eThe tasks have been reloaded."
+
 ############################################################
 # +------------------------------------------------------+ #
 # |                   Error Messages                     | #
@@ -65,9 +68,6 @@ errors:
 
   invalidMaterial: "&cThe material name is invalid."
   invalidNumber: "&cThe input is not a valid number."
-  invalidMiniMessageFormat: "&cThe input format is invalid. You must use MiniMessage formatting."
-  invalidLegacyFormat: "&cThe input format is invalid. You must use legacy formatting."
-  invalidMixedFormat: "&cThe input format is invalid. You cannot use both MiniMessage and legacy formatting together."
   invalidCharacter: "&cThe input contains invalid characters. Please remove any special characters and try again."
   # Placeholders available: {min}, {max}
   lengthLimit: "&cThe input should be between &f{min}&c and &f{max} &ccharacters long."
@@ -170,6 +170,8 @@ general:
 
   openingWhoisInventory: "&aOpening whois inventory..."
 
+  openingBalanceTopInventory: "&aOpening balance top inventory..."
+
 
   yes_value: "&aYes"
   no_value: "&cNo"
@@ -179,10 +181,6 @@ general:
   gamemodeCreative: "Creative"
   gamemodeAdventure: "Adventure"
   gamemodeSpectator: "Spectator"
-  days: "{days}d"
-  hours: "{hours}h"
-  minutes: "{minutes}m"
-  seconds: "{seconds}s"
   hidden: "&cHidden"
   disabled: "&cDisabled"
   noNickname: "&cNo Nickname"
@@ -197,3 +195,12 @@ general:
   locationFormat: "{x}, {y}, {z} in {world}"
   unknown: "&cUnknown"
   typeHere: "Type here"
+  nobody: "&cNobody"
+  notRanked: "&cNot Ranked"
+
+
+  days: "{days}d"
+  hours: "{hours}h"
+  minutes: "{minutes}m"
+  seconds: "{seconds}s"
+  agoTimeFormat: "{time} ago"

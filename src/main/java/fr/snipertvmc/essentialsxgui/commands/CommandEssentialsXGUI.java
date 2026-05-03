@@ -137,6 +137,13 @@ public class CommandEssentialsXGUI implements CommandExecutor, TabCompleter {
 
 		String newStorageType = Main.getInstance().getConfiguration().getStorageType();
 		TextUtils.sendMessageToCommandSender(commandSender, MessagesUtils.getString(EXGMessage.DATABASE_RELOADED, Map.of("newStorageType", newStorageType)));
+
+
+		// TASK RELOADING
+		TextUtils.sendMessageToCommandSender(commandSender, MessagesUtils.getString(EXGMessage.TASKS_RELOADING, null));
+		Main.getInstance().getEXGServer().getBalanceTop().stopUpdateTask();
+		Main.getInstance().getEXGServer().getBalanceTop().startUpdateTask();
+		TextUtils.sendMessageToCommandSender(commandSender, MessagesUtils.getString(EXGMessage.TASKS_RELOADED, null));
 	}
 
 

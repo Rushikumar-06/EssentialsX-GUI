@@ -49,12 +49,14 @@ public class FilesManager {
 		put("whoisView", "inventories/whois/whoisView");
 
 		put("dataEntryGUI", "inventories/others/dataEntryGUI");
+
+		put("balanceTop", "inventories/economy/balanceTop");
 	}};
 
 
 	private final Map<String, String> filesVersions = new HashMap<>() {{
-		put("configuration", "1.7"); // Updated for version: 1.4.1
-		put("messages", "1.8"); // Updated for version: 1.4.2
+		put("configuration", "1.8"); // Updated for version: 1.5.0
+		put("messages", "1.9"); // Updated for version: 1.5.0
 
 		put("homeEditing", "1.1"); // Updated for version: 1.0.2
 		put("homes", "1.3"); // Updated for version: 1.1.0
@@ -64,17 +66,19 @@ public class FilesManager {
 		put("kitPreview", "1.0");
 		put("kitPlayerGive", "1.0");
 		put("kitEditing", "1.2"); // Updated for version: 1.1.0
-		put("kitEditor", "1.0"); // Updated for version: 1.0.2
+		put("kitEditor", "1.0");
 
-		put("warpEditing", "1.0"); // Updated for version: 1.2.0
-		put("warpPlayerTeleport", "1.0"); // Updated for version: 1.2.0
-		put("warpsAdminView", "1.0"); // Updated for version: 1.2.0
-		put("warpsPlayerView", "1.0"); // Updated for version: 1.2.0
+		put("warpEditing", "1.0");
+		put("warpPlayerTeleport", "1.0");
+		put("warpsAdminView", "1.0");
+		put("warpsPlayerView", "1.0");
 
-		put("whoisPlayers", "1.0"); // Updated for version: 1.3.0
+		put("whoisPlayers", "1.0");
 		put("whoisView", "1.1"); // Updated for version: 1.4.1
 
-		put("dataEntryGUI", "1.0"); // Updated for version: 1.1.0
+		put("dataEntryGUI", "1.0");
+
+		put("balanceTop", "1.0");
 	}};
 
 

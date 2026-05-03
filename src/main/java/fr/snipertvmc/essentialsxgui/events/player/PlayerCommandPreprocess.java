@@ -4,6 +4,7 @@ import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGPermission;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
+import fr.snipertvmc.essentialsxgui.inventories.economy.BalanceTopInventory;
 import fr.snipertvmc.essentialsxgui.inventories.homes.HomesInventory;
 import fr.snipertvmc.essentialsxgui.inventories.kits.KitsAdminViewInventory;
 import fr.snipertvmc.essentialsxgui.inventories.kits.KitsPlayerViewInventory;
@@ -33,7 +34,8 @@ public class PlayerCommandPreprocess implements Listener {
 			"home", "homes",
 			"kit", "kits",
 			"warp", "warps",
-			"whois"
+			"whois",
+			"balancetop", "baltop"
 	);
 
 
@@ -151,6 +153,22 @@ public class PlayerCommandPreprocess implements Listener {
 
 				TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.OPENING_WHOIS_INVENTORY));
 				new WhoisPlayersInventory(player).open(player);
+				SoundsUtils.playSound(player, EXGSound.GUI_OPEN);
+			}
+
+
+			// BALANCETOP
+
+			case "balancetop", "baltop" -> {
+
+				if (args.length > 1) return;
+				if (!player.hasPermission("essentials.balancetop")) return;
+				if (!Main.getInstance().getConfiguration().isEconomyBalanceTopModuleEnabled()) return;
+
+				event.setCancelled(true);
+
+				TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.OPENING_BALANCE_TOP_INVENTORY, null));
+				new BalanceTopInventory(player).open(player);
 				SoundsUtils.playSound(player, EXGSound.GUI_OPEN);
 			}
 		}

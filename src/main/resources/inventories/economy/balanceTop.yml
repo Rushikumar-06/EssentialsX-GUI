@@ -1,0 +1,154 @@
+############################################################
+# +------------------------------------------------------+ #
+# |                      Information                     | #
+# +------------------------------------------------------+ #
+############################################################
+
+# This is the balance top inventory file for EssentialsX-GUI.
+
+# If you need help with the configuration of the GUI,
+# you can join our discord server at: https://discord.gg/fSzK79TAYf
+
+# For more information about how to configure EssentialsX-GUI,
+# check our Wiki at: https://sniper-tvmc.gitbook.io/essentialsx-gui/configuration/inventories
+
+############################################################
+# +------------------------------------------------------+ #
+# |                        General                       | #
+# +------------------------------------------------------+ #
+############################################################
+
+# Please do not change this value as it may cause the file to be reset.
+# Default: "1.0"
+config-version: "1.0"
+
+# Here you can customize the items used for the player ranking in the balance top inventory.
+# The key of each item is the slot number where the item will be placed in the inventory.
+#
+# Placeholders: {playerName_#}, {playerBalance_#}
+#   - {playerName_#}: Replace '#' with the rank number to display the player's rank (e.g., {playerName_1} for the 1st place).
+#
+# Reminder: In theory, you can add up to 54 ranking items, but it is not recommended to avoid cluttering the inventory.
+rankingItems:
+  21:
+    material: "DIAMOND_HELMET"
+    displayName: "&b&l1st Place"
+    lore:
+      - "&7Congratulations to &3{playerName_1} &7for being"
+      - "&7the richest player on the server!"
+      - "&7Total Balance: &3{playerBalance_1}"
+  22:
+    material: "GOLDEN_HELMET"
+    displayName: "&e&l2nd Place"
+    lore:
+      - "&7Congratulations to &6{playerName_2} &7for being"
+      - "&7the second richest player on the server!"
+      - "&7Total Balance: &6{playerBalance_2}"
+  23:
+    material: "IRON_HELMET"
+    displayName: "&f&l3rd Place"
+    lore:
+      - "&7Congratulations to &f{playerName_3} &7for being"
+      - "&7the third richest player on the server!"
+      - "&7Total Balance: &f{playerBalance_3}"
+  29:
+    material: "CHAINMAIL_HELMET"
+    displayName: "&7&l4-8th Place"
+    lore:
+      - "&f&l#4th &8- &7{playerName_4}&8: &{playerBalance_4}"
+      - "&f&l#5th &8- &7{playerName_5}&8: &{playerBalance_5}"
+      - "&f&l#6th &8- &7{playerName_6}&8: &{playerBalance_6}"
+      - "&f&l#7th &8- &7{playerName_7}&8: &{playerBalance_7}"
+      - "&f&l#8th &8- &7{playerName_8}&8: &{playerBalance_8}"
+  30:
+    material: "CHAINMAIL_HELMET"
+    displayName: "&7&l9-13th Place"
+    lore:
+      - "&f&l#9th &8- &7{playerName_9}&8: &e{playerBalance_9}"
+      - "&f&l#10th &8- &7{playerName_10}&8: &e{playerBalance_10}"
+      - "&f&l#11th &8- &7{playerName_11}&8: &e{playerBalance_11}"
+      - "&f&l#12th &8- &7{playerName_12}&8: &e{playerBalance_12}"
+      - "&f&l#13th &8- &7{playerName_13}&8: &e{playerBalance_13}"
+  31:
+    material: "LEATHER_HELMET"
+    displayName: "&7&l14-18th Place"
+    lore:
+      - "&f&l#14th &8- &7{playerName_14}&8: &e{playerBalance_14}"
+      - "&f&l#15th &8- &7{playerName_15}&8: &e{playerBalance_15}"
+      - "&f&l#16th &8- &7{playerName_16}&8: &e{playerBalance_16}"
+      - "&f&l#17th &8- &7{playerName_17}&8: &e{playerBalance_17}"
+      - "&f&l#18th &8- &7{playerName_18}&8: &e{playerBalance_18}"
+  32:
+    material: "LEATHER_HELMET"
+    displayName: "&7&l19-23rd Place"
+    lore:
+      - "&f&l#19th &8- &7{playerName_19}&8: &e{playerBalance_19}"
+      - "&f&l#20th &8- &7{playerName_20}&8: &e{playerBalance_20}"
+      - "&f&l#21st &8- &7{playerName_21}&8: &e{playerBalance_21}"
+      - "&f&l#22nd &8- &7{playerName_22}&8: &e{playerBalance_22}"
+      - "&f&l#23rd &8- &7{playerName_23}&8: &e{playerBalance_23}"
+  33:
+    material: "TURTLE_HELMET"
+    displayName: "&7&l24-28th Place"
+    lore:
+      - "&f&l#24th &8- &7{playerName_24}&8: &e{playerBalance_24}"
+      - "&f&l#25th &8- &7{playerName_25}&8: &e{playerBalance_25}"
+      - "&f&l#26th &8- &7{playerName_26}&8: &e{playerBalance_26}"
+      - "&f&l#27th &8- &7{playerName_27}&8: &e{playerBalance_27}"
+      - "&f&l#28th &8- &7{playerName_28}&8: &e{playerBalance_28}"
+
+# Set the range of the player ranking to be displayed in the inventory.
+# The format is "start-end" (e.g., "1-10" to "display the top 10" players).
+# This value helps plugin to optimize the retrieval of player data for the balance top inventory.
+# Consequently, the more you increase the end value, the more resources it may consume, especially
+# if you have a large player base.
+rankingRange: "1-28"
+
+############################################################
+# +------------------------------------------------------+ #
+# |                       Inventory                      | #
+# +------------------------------------------------------+ #
+############################################################
+
+balanceTop:
+
+  # Placeholders available: {player}
+  title: "&6Balance Top"
+  rows: 6
+
+  borderItem:
+    enabled: true
+    slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53]
+    material: "BLACK_STAINED_GLASS_PANE"
+    data: 15
+    displayName: "&8- &6&lEssentialsX-GUI"
+
+  items:
+
+    # Placeholders available: {playerName}, {playerBalance}, {playerRank}
+    playerRankingItem:
+      enabled: true
+      slot: 4
+      material: "ENDER_PEARL"
+      displayName: "&e&l{playerName}"
+      lore:
+        - "&7Balance: &a{playerBalance}"
+        - "&7Rank: &a#{playerRank}"
+
+    # Placeholders available: {lastUpdate}
+    forceUpdateItem:
+      enabled: true
+      slot: 8
+      material: "REDSTONE"
+      displayName: "&cForce Update"
+      lore:
+        - "&7Click to force update the balance top data."
+        - "&7Last Update: &a{lastUpdate}"
+
+    closeItem:
+      enabled: true
+      slot: 49
+      material: "BARRIER"
+      displayName: "&cClose"
+      lore:
+        - "&7Click to close the inventory."

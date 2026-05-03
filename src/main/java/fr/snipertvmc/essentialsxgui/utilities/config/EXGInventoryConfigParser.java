@@ -31,7 +31,9 @@ public class EXGInventoryConfigParser {
 
 				"warpEditing",
 
-				"whoisView"
+				"whoisView",
+
+				"balanceTop"
 		));
 	}};
 

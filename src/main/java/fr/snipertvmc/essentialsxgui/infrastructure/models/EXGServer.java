@@ -1,8 +1,6 @@
 package fr.snipertvmc.essentialsxgui.infrastructure.models;
 
 import com.cryptomorin.xseries.XMaterial;
-import fr.snipertvmc.essentialsxgui.Main;
-import fr.snipertvmc.essentialsxgui.infrastructure.enums.MCServerVersion;
 import fr.snipertvmc.essentialsxgui.utilities.serializers.ItemStackSerializer;
 import fr.snipertvmc.essentialsxgui.utilities.type.TypeUtils;
 
@@ -16,26 +14,17 @@ public class EXGServer {
 
 	// -------------------------------------------------- //
 
-
-	private final MCServerVersion version;
-
 	private Set<EXGKit> kits = new HashSet<>();
 	private Set<EXGWarp> warps = new HashSet<>();
+
+	private EXGBalanceTop balanceTop = new EXGBalanceTop();
 
 
 	// -------------------------------------------------- //
 
 
 	public EXGServer() {
-		this.version = Main.getInstance().getMCServerVersion();
-	}
-
-
-	// -------------------------------------------------- //
-
-
-	public MCServerVersion getVersion() {
-		return version;
+		balanceTop.startUpdateTask();
 	}
 
 
@@ -160,6 +149,14 @@ public class EXGServer {
 
 			this.warps.add(warp);
 		});
+	}
+
+
+	// -------------------------------------------------- //
+
+
+	public EXGBalanceTop getBalanceTop() {
+		return balanceTop;
 	}
 
 

@@ -73,6 +73,10 @@ public class ConfigurationFile {
 		return yamlConfiguration.getBoolean("whois.enabled", false);
 	}
 
+	public boolean isEconomyBalanceTopModuleEnabled() {
+		return yamlConfiguration.getBoolean("economy.balanceTop.enabled", false);
+	}
+
 
 	// -------------------------------------------------- //
 
@@ -161,6 +165,14 @@ public class ConfigurationFile {
 	}
 	public String getInstantCreationDefaultWarpName() {
 		return yamlConfiguration.getString("general.instantCreationDefaultValues.warp_name", "warp_%number%");
+	}
+
+
+	// -------------------------------------------------- //
+
+
+	public int getBalanceTopUpdateInterval() {
+		return yamlConfiguration.getInt("economy.balanceTop.updateInterval", 60);
 	}
 
 

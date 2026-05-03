@@ -2,21 +2,17 @@ package fr.snipertvmc.essentialsxgui.infrastructure.models.files;
 
 import com.cryptomorin.xseries.XEnchantment;
 import com.cryptomorin.xseries.XItemFlag;
-import fr.snipertvmc.essentialsxgui.Main;
-import fr.snipertvmc.essentialsxgui.infrastructure.enums.MCServerVersion;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
 import fr.snipertvmc.essentialsxgui.libraries.exglib.Pair;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.InventoryScheme;
+import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
 import fr.snipertvmc.essentialsxgui.utilities.config.EXGItemConfigParser;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.inventory.ClickType;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class InventoryFile {
 
@@ -70,6 +66,61 @@ public class InventoryFile {
 	}
 
 
+	public Set<EXGItemConfig> getItemsSection(String sectionPath) {
+
+		ConfigurationSection configurationSection = yamlConfiguration.getConfigurationSection(sectionPath);
+		if (configurationSection == null) return Collections.emptySet();
+
+		Set<EXGItemConfig> itemConfigs = new HashSet<>();
+
+		for (String key : configurationSection.getKeys(false)) {
+
+			EXGItemConfig itemConfig = getItem(sectionPath + "." + key, false);
+
+			// Range slots
+			if (key.contains("-")) {
+
+				int startRange;
+				int endRange;
+
+				try {
+					startRange = Integer.parseInt(key.split("-")[0]);
+					endRange = Integer.parseInt(key.split("-")[1]);
+
+				} catch (NumberFormatException e) {
+					ConsoleLogger.error("Invalid slot range format for item '" + key + "' in inventory '" + inventoryName + "'." +
+							"Expected format: 'start-end' (e.g., '0-8'). Skipping this item.");
+					continue;
+				}
+
+				for (int i = startRange; i <= endRange; i++) {
+					itemConfig.setSlot((short) i);
+					itemConfigs.add(itemConfig);
+				}
+				continue;
+			}
+
+
+			// Specific slot
+			int slot;
+
+			try {
+				slot = Integer.parseInt(key.split("-")[0]);
+
+			} catch (NumberFormatException e) {
+				ConsoleLogger.error("Invalid slot format for item '" + key + "' in inventory '" + inventoryName + "'." +
+						"Expected a number or a range (e.g., '0' or '0-8'). Skipping this item.");
+				continue;
+			}
+
+			itemConfig.setSlot((short) slot);
+			itemConfigs.add(itemConfig);
+		}
+
+		return itemConfigs;
+	}
+
+
 	public EXGItemConfig getBorderItem() {
 		return getItem(inventoryName + ".borderItem", true);
 	}
@@ -120,7 +171,7 @@ public class InventoryFile {
 							"  <dark_gray>and fix error(s) seen in the console.",
 							"",
 							"<gold>Item path involved: ",
-							"<dark_gray>- <yello>" + path),
+							"<dark_gray>- <yellow>" + path),
 					null, null, new HashMap<>(), 0
 			);
 		}
@@ -215,27 +266,7 @@ public class InventoryFile {
 	// -------------------------------------------------- //
 
 
-	public List<String> getKeysToRemove() {
-
-		MCServerVersion serverVersion = Main.getInstance().getMCServerVersion();
-		switch (serverVersion) {
-
-			case v1_13_2, v1_14_4, v1_15_2, v1_16_5,
-			     v1_17_1, v1_18_2, v1_19_4, v1_20_6, v1_21, v1_21_1, v1_21_2, v1_21_3,
-			     v1_21_4, v1_21_5, v1_21_6, v1_21_7, v1_21_8, v1_21_9, v1_21_10, v1_21_11 -> {
-				return List.of("data");
-			}
-		}
-
-		return List.of();
-	}
-
-
-	// -------------------------------------------------- //
-
 	// CUSTOMS CONFIGURATIONS
-
-
 	public String getFullBedHomeItemMaterial(String worldName) {
 		String materialName = yamlConfiguration.getString("bedHomeItem." + worldName + ".material");
 		int materialData = yamlConfiguration.getInt("bedHomeItem." + worldName + ".data", 0);
@@ -244,6 +275,12 @@ public class InventoryFile {
 
 	public String getBedHomeItemWorldDisplayName(String worldName) {
 		return yamlConfiguration.getString("bedHomeItem." + worldName + ".worldDisplayName");
+	}
+
+	public Pair<Integer, Integer> getRankingRange() {
+		String range = yamlConfiguration.getString("rankingRange", "1-10");
+		String[] rangeSplit = range.split("-");
+		return Pair.of(Integer.parseInt(rangeSplit[0]), Integer.parseInt(rangeSplit[1]));
 	}
 
 

@@ -21,8 +21,8 @@
 general:
 
   # Please do not change this value as it may cause the file to be reset.
-  # Default: "1.7"
-  configVersion: "1.7"
+  # Default: "1.8"
+  configVersion: "1.8"
 
   # If you want to see a detailed loading message when the plugin is loading, set this to true. (Also works for unloading)
   # Default: false
@@ -235,6 +235,29 @@ whois:
   # This will allow players to access the whois GUI.
   # Default: true
   enabled: true
+
+############################################################
+# +------------------------------------------------------+ #
+# |                       Economy                        | #
+# +------------------------------------------------------+ #
+############################################################
+
+economy:
+
+  balanceTop:
+
+    # Set this to true if you want to use the balancetop features.
+    # This will allow players to access the balancetop GUI.
+    # Default: true
+    enabled: true
+
+    # Set this to the delay (in seconds) for updating the balance top data.
+    # TIP:
+    #   => If you have less than 1000 unique players, you can set this to a low value (e.g., 30 seconds) to keep the data more up-to-date.
+    #   => If you have more than 1000 unique players, I recommend you to set this to a higher value
+    #      (e.g., 300 seconds : 5 minutes) to reduce the load on your server.
+    # Default: 60
+    updateInterval: 60
 
 ############################################################
 # +------------------------------------------------------+ #

@@ -2,6 +2,7 @@ package fr.snipertvmc.essentialsxgui.managers;
 
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.files.InventoryFile;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.economy.EXGBalanceTopInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes.EXGHomeEditingInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes.EXGHomesInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.*;
@@ -42,6 +43,8 @@ public class InventoriesManager {
 
 	private EXGDataEntryGUInventoryConfig dataEntryGUIInventoryConfig;
 
+	private EXGBalanceTopInventoryConfig balanceTopInventoryConfig;
+
 
 	// -------------------------------------------------- //
 
@@ -76,6 +79,7 @@ public class InventoriesManager {
 
 			case "dataEntryGUI" -> loadDataEntryGUIInventory(title, rows, inventoryName, borderItem, borderSlots);
 
+			case "balanceTop" -> loadBalanceTopInventory(title, rows, inventoryName, borderItem, borderSlots);
 		}
 	}
 
@@ -514,6 +518,32 @@ public class InventoriesManager {
 	}
 
 
+	//
+	// ECONOMY INVENTORIES
+	//
+
+
+	public void loadBalanceTopInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+
+		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
+
+		balanceTopInventoryConfig = new EXGBalanceTopInventoryConfig(title, rows, borderItem, borderSlots);
+
+		balanceTopInventoryConfig.setPlayerRankingItem(inventoryFile.getItem(
+				"playerRankingItem"));
+		balanceTopInventoryConfig.setForceUpdateItem(inventoryFile.getItem(
+				"forceUpdateItem"));
+
+		balanceTopInventoryConfig.setCloseItem(inventoryFile.getItem(
+				"closeItem"));
+
+		balanceTopInventoryConfig.setRankingItems(inventoryFile.getItemsSection(
+				"rankingItems"));
+
+		balanceTopInventoryConfig.setRankingRange(inventoryFile.getRankingRange());
+	}
+
+
 	// -------------------------------------------------- //
 
 
@@ -537,7 +567,9 @@ public class InventoriesManager {
 				"whoisPlayers",
 				"whoisView",
 
-				"dataEntryGUI"
+				"dataEntryGUI",
+
+				"balanceTop"
 		);
 	}
 
@@ -597,6 +629,10 @@ public class InventoriesManager {
 
 	public EXGDataEntryGUInventoryConfig getDataEntryGUIInventoryConfig() {
 		return dataEntryGUIInventoryConfig;
+	}
+
+	public EXGBalanceTopInventoryConfig getBalanceTopInventoryConfig() {
+		return balanceTopInventoryConfig;
 	}
 
 

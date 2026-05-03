@@ -49,7 +49,10 @@ public class EXGItemConfigParser {
 				"whoisView.items.playerPunishmentsItem",
 
 				// OTHERS
-				"dataEntryGUI.items.materialIconItem"
+				"dataEntryGUI.items.materialIconItem",
+
+				// ECONOMY
+				"rankingItems"
 		));
 
 		put("slot", List.of(
@@ -81,7 +84,10 @@ public class EXGItemConfigParser {
 				"whoisPlayers.items.playerItem",
 
 				// OTHERS
-				"dataEntryGUI.items.materialIconItem"
+				"dataEntryGUI.items.materialIconItem",
+
+				// ECONOMY
+				"rankingItems"
 		));
 
 		put("material", List.of(
@@ -152,7 +158,12 @@ public class EXGItemConfigParser {
 
 
 	private static boolean isEnabled(Object enabled, String itemPath) {
-		return ignoredPaths.get("enabled").contains(itemPath) || (enabled instanceof Boolean && (Boolean) enabled);
+
+		if (isIgnored(itemPath, "enabled")) {
+			return true;
+		}
+
+		return (enabled instanceof Boolean && (Boolean) enabled);
 	}
 
 
@@ -329,7 +340,8 @@ public class EXGItemConfigParser {
 
 
 	private static boolean isIgnored(String itemPath, String propertyName) {
-		return ignoredPaths.containsKey(propertyName) && ignoredPaths.get(propertyName).contains(itemPath);
+		if (!ignoredPaths.containsKey(propertyName)) return false;
+		return ignoredPaths.get(propertyName).stream().anyMatch(ignoredPath -> itemPath.equals(ignoredPath) || itemPath.startsWith(ignoredPath + "."));
 	}
 
 

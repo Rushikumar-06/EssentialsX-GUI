@@ -15,6 +15,9 @@ public enum EXGMessage {
 	DATABASE_RELOADING("admin.databaseReloading"),
 	DATABASE_RELOADED("admin.databaseReloaded"),
 
+	TASKS_RELOADING("admin.tasksReloading"),
+	TASKS_RELOADED("admin.tasksReloaded"),
+
 
 	// ERRORS
 	INVALID_MATERIAL("errors.invalidMaterial"),
@@ -103,6 +106,8 @@ public enum EXGMessage {
 
 	OPENING_WHOIS_INVENTORY("general.openingWhoisInventory"),
 
+	OPENING_BALANCE_TOP_INVENTORY("general.openingBalanceTopInventory"),
+
 
 	YES("general.yes_value"),
 	NO("general.no_value"),
@@ -112,10 +117,6 @@ public enum EXGMessage {
 	GAMEMODE_CREATIVE("general.gamemodeCreative"),
 	GAMEMODE_ADVENTURE("general.gamemodeAdventure"),
 	GAMEMODE_SPECTATOR("general.gamemodeSpectator"),
-	DAYS("general.days"),
-	HOURS("general.hours"),
-	MINUTES("general.minutes"),
-	SECONDS("general.seconds"),
 	HIDDEN("general.hidden"),
 	DISABLED("general.disabled"),
 	NO_NICKNAME("general.noNickname"),
@@ -128,7 +129,16 @@ public enum EXGMessage {
 	PERMANENT("general.permanent"),
 	LOCATION_FORMAT("general.locationFormat"),
 	UNKNOWN("general.unknown"),
-	TYPE_HERE("general.typeHere");
+	TYPE_HERE("general.typeHere"),
+	NOBODY("general.nobody"),
+	NOT_RANKED("general.notRanked"),
+
+
+	DAYS("general.days"),
+	HOURS("general.hours"),
+	MINUTES("general.minutes"),
+	SECONDS("general.seconds"),
+	AGO_TIME_FORMAT("general.agoTimeFormat");
 
 
 	// -------------------------------------------------- //
