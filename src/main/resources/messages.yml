@@ -196,3 +196,4 @@ general:
   # Placeholders available: {x}, {y}, {z}, {yaw}, {pitch}, {world}
   locationFormat: "{x}, {y}, {z} in {world}"
   unknown: "&cUnknown"
+  typeHere: "Type here"

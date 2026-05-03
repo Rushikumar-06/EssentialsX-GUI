@@ -38,11 +38,6 @@ general:
   # Default: ""
   dateTimezone: ""
 
-
-  # Default text of input when using anvil way to enter text.
-  # Default: "Type here"
-  anvilTypeHereText: "Type here"
-
   # Minimum and maximum length for names entered by players.
   # ⚠️ Warning: Payers can bypass these limits if they use the defaults commands of EssentialsX.
   #             This only applies to names and not to display names, icons, etc.

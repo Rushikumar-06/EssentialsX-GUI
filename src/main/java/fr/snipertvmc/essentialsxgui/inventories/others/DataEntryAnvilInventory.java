@@ -3,8 +3,10 @@ package fr.snipertvmc.essentialsxgui.inventories.others;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGEntryResult;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGEntryType;
+import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGEntrySettings;
 import fr.snipertvmc.essentialsxgui.libraries.exglib.Pair;
+import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.TextUtils;
 import fr.snipertvmc.essentialsxgui.utilities.data.DataEntryUtils;
 import net.wesjd.anvilgui.AnvilGUI;
@@ -29,7 +31,7 @@ public class DataEntryAnvilInventory {
 
 		new AnvilGUI.Builder()
 
-				.text("Type here")
+				.text(MessagesUtils.getString(EXGMessage.TYPE_HERE))
 				.title(TextUtils.convertFormattedMessageToText(entrySettings.getEntryDisplayName()))
 
 				.onClick((slot, stateSnapshot) -> {

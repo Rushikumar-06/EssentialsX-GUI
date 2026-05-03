@@ -125,10 +125,6 @@ public class ConfigurationFile {
 	// -------------------------------------------------- //
 
 
-	public String getAnvilTypeTextHere() {
-		return yamlConfiguration.getString("general.anvilTypeHereText", "Type here");
-	}
-
 	public int getMinNameLength() {
 		return yamlConfiguration.getInt("general.minNameLength", 3);
 	}

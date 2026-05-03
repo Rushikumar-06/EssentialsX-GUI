@@ -127,7 +127,8 @@ public enum EXGMessage {
 	NO_BAN_REASON("general.noBanReason"),
 	PERMANENT("general.permanent"),
 	LOCATION_FORMAT("general.locationFormat"),
-	UNKNOWN("general.unknown");
+	UNKNOWN("general.unknown"),
+	TYPE_HERE("general.typeHere");
 
 
 	// -------------------------------------------------- //
