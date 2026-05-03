@@ -1,5 +1,6 @@
 package fr.snipertvmc.essentialsxgui.utilities;
 
+import com.earth2me.essentials.libs.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
 
@@ -20,7 +21,7 @@ public class MessagesUtils {
 
 		String prefix = Main.getInstance().getFilesManager().getMessages().getPrefix();
 		String message = Main.getInstance().getFilesManager().getMessages().getString(exgMessage.getPath(),
-				"§cMessage not found! Try to reset your messages.yml file, if the problem persists, contact plugin support."
+				"<red>Message not found! Try to reset your messages.yml file, if the problem persists, contact plugin support."
 		);
 		String finalMessage = message.replace("{prefix}", prefix);
 

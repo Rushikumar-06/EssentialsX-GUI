@@ -5,7 +5,6 @@ import com.earth2me.essentials.libs.kyori.adventure.text.minimessage.MiniMessage
 import com.earth2me.essentials.libs.kyori.adventure.text.serializer.bungeecord.BungeeComponentSerializer;
 import com.earth2me.essentials.libs.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import fr.snipertvmc.essentialsxgui.Main;
-import fr.snipertvmc.essentialsxgui.infrastructure.enums.MCServerVersion;
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.command.CommandSender;
@@ -20,20 +19,14 @@ public class TextUtils {
 
 
 	public static void sendMessageToCommandSender(CommandSender commandSender, String formattedMessage) {
-
-		if (Main.getInstance().getLoadingManager().isPlaceholderAPISupported() && commandSender instanceof Player player) {
-			formattedMessage = PlaceholderAPI.setPlaceholders(player, formattedMessage);
-		}
-
-		commandSender.sendMessage(convertFormattedMessageToText(formattedMessage));
+		Component component = convertFormattedMessageToComponent(commandSender, formattedMessage);
+		Main.getInstance().getBukkitAudiences().sender(commandSender).sendMessage(component);
 	}
 
 
-	// -------------------------------------------------- //
-
-
 	public static String convertFormattedMessageToText(String formattedMessage) {
-		return convertComponentToText(getComponent(formattedMessage));
+		Component component = convertFormattedMessageToComponent(null, formattedMessage);
+		return TextComponent.toLegacyText(BungeeComponentSerializer.get().serialize(component));
 	}
 
 
@@ -42,35 +35,25 @@ public class TextUtils {
 	}
 
 
-	public static String convertComponentToText(Component component) {
-		if (MCServerVersion.getMCServerVersion().isHigherThan(MCServerVersion.v1_15_2)) {
-			return TextComponent.toLegacyText(BungeeComponentSerializer.get().serialize(component));
-
-		} else {
-			return LegacyComponentSerializer.legacySection().serialize(component);
-		}
-	}
-
-
 	// -------------------------------------------------- //
 
 
-	private static Component getComponent(String formattedMessage) {
+	private static Component convertFormattedMessageToComponent(CommandSender commandSender, String formattedMessage) {
 
-		if (hasMixedFormat(formattedMessage)) {
-			ConsoleLogger.warn("Mixed formatting detected in message: " + formattedMessage);
-			ConsoleLogger.warn("Please use either legacy or MiniMessage formatting, not both. "
-					+ "This message will be treated as a plain text message.");
-
-			return Component.text(formattedMessage);
+		if (Main.getInstance().getLoadingManager().isPlaceholderAPISupported() && commandSender instanceof Player player) {
+			formattedMessage = PlaceholderAPI.setPlaceholders(player, formattedMessage);
 		}
+
+		Component component;
+		formattedMessage = replaceAmpersand(formattedMessage);
 
 		if (hasLegacyFormat(formattedMessage)) {
-			formattedMessage = formattedMessage.replace("&", "§");
-			return LegacyComponentSerializer.legacySection().deserialize(formattedMessage);
+			component = LegacyComponentSerializer.legacySection().deserialize(formattedMessage);
+		} else {
+			component = MiniMessage.miniMessage().deserialize(formattedMessage);
 		}
 
-		return MiniMessage.miniMessage().deserialize(formattedMessage);
+		return component;
 	}
 
 
@@ -83,16 +66,8 @@ public class TextUtils {
 	}
 
 
-	public static boolean hasMiniMessageFormat(String message) {
-		if (message == null || message.isEmpty()) return false;
-		Component component = MiniMessage.miniMessage().deserialize(message);
-		return !component.equals(Component.text(message));
-	}
-
-
-	public static boolean hasMixedFormat(String message) {
-		if (message == null || message.isEmpty()) return false;
-		return hasLegacyFormat(message) && hasMiniMessageFormat(message);
+	public static String replaceAmpersand(String message) {
+		return message.replaceAll("(?i)&([0-9a-fk-or])", "§$1");
 	}
 
 

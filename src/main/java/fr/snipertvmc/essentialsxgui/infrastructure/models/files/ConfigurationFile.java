@@ -150,10 +150,6 @@ public class ConfigurationFile {
 		return yamlConfiguration.getBoolean("general.skipDataEntryProcess", false);
 	}
 
-	public boolean acceptOnlyMiniMessageFormatInEntries() {
-		return yamlConfiguration.getBoolean("general.acceptOnlyMiniMessageFormatInEntries", false);
-	}
-
 	public String getInstantCreationDefaultHomeName() {
 		return yamlConfiguration.getString("general.instantCreationDefaultValues.home_name", "home_%number%");
 	}

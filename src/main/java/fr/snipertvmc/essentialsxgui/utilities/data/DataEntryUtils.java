@@ -7,7 +7,6 @@ import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGEntrySettings;
 import fr.snipertvmc.essentialsxgui.inventories.others.DataEntryAnvilInventory;
 import fr.snipertvmc.essentialsxgui.inventories.others.DataEntryGUIInventory;
 import fr.snipertvmc.essentialsxgui.libraries.exglib.Pair;
-import fr.snipertvmc.essentialsxgui.utilities.TextUtils;
 import fr.snipertvmc.essentialsxgui.utilities.type.TypeUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -68,9 +67,6 @@ public class DataEntryUtils {
 		if (value.equalsIgnoreCase("cancel")) {
 			return new Pair<>(value, EXGEntryResult.CANCELED);
 		}
-
-		Pair<String, EXGEntryResult> formatAnalysisResult = getFormatAnalysisResult(value);
-		if (formatAnalysisResult != null) return formatAnalysisResult;
 
 		if ( (entrySettings.getMinLength() != -1 && value.length() < entrySettings.getMinLength())
 			|| (entrySettings.getMaxLength() != -1 && value.length() > entrySettings.getMaxLength()) ) {
@@ -196,24 +192,6 @@ public class DataEntryUtils {
 
 
 	// -------------------------------------------------- //
-
-
-	private static Pair<String, EXGEntryResult> getFormatAnalysisResult(String value) {
-
-		if (TextUtils.hasMixedFormat(value)) {
-			return new Pair<>(value, EXGEntryResult.INVALID_MIXED_FORMAT);
-		}
-
-		if (Main.getInstance().getConfiguration().acceptOnlyMiniMessageFormatInEntries() && TextUtils.hasLegacyFormat(value)) {
-			return new Pair<>(value, EXGEntryResult.INVALID_MINIMESSAGE_FORMAT);
-		}
-
-		if (!Main.getInstance().getConfiguration().acceptOnlyMiniMessageFormatInEntries() && TextUtils.hasMiniMessageFormat(value)) {
-			return new Pair<>(value, EXGEntryResult.INVALID_LEGACY_FORMAT);
-		}
-
-		return null;
-	}
 
 
 	private static Pair<String, EXGEntryResult> getCharactersAnalysisResult(String characterListString, String value) {
