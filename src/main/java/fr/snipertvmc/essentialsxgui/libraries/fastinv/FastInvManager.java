@@ -2,6 +2,7 @@
  * This file is part of FastInv, licensed under the MIT License.
  *
  * Copyright (c) 2018-2021 MrMicky
+ * Contributors: Sniper_TVmc (adaptation for EssentialsX-GUI)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -40,7 +41,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /**
  * Manager for FastInv listeners.
  *
- * @author MrMicky
+ * @author MrMicky (original), Sniper_TVmc (adaptation for EssentialsX-GUI)
  */
 public final class FastInvManager {
 

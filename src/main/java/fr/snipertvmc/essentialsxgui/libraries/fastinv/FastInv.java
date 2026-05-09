@@ -2,6 +2,7 @@
  * This file is part of FastInv, licensed under the MIT License.
  *
  * Copyright (c) 2018-2021 MrMicky
+ * Contributors: Sniper_TVmc (adaptation for EssentialsX-GUI)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,6 +24,7 @@
  */
 package fr.snipertvmc.essentialsxgui.libraries.fastinv;
 
+import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.utilities.TextUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -30,18 +32,21 @@ import org.bukkit.event.inventory.*;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
 /**
  * Lightweight and easy-to-use inventory API for Bukkit plugins.
  * The project is on <a href="https://github.com/MrMicky-FR/FastInv">GitHub</a>.
  *
- * @author MrMicky (original), Sniper_TVmc (adaptation)
+ * @author MrMicky (original), Sniper_TVmc (adaptation for EssentialsX-GUI)
  * @version 3.1.2
  */
 public class FastInv implements InventoryHolder {
@@ -51,6 +56,8 @@ public class FastInv implements InventoryHolder {
     private final List<Consumer<InventoryCloseEvent>> closeHandlers = new ArrayList<>();
     private final List<Consumer<InventoryClickEvent>> clickHandlers = new ArrayList<>();
     private final List<Consumer<InventoryDragEvent>> dragHandlers = new ArrayList<>();
+
+    private final List<BukkitTask> dynamicItems = new ArrayList<>();
 
     private final Inventory inventory;
 
@@ -258,6 +265,90 @@ public class FastInv implements InventoryHolder {
     public void setItems(Iterable<Integer> slots, ItemStack item, Consumer<InventoryClickEvent> handler) {
         for (Integer slot : slots) {
             setItem(slot, item, handler);
+        }
+    }
+
+    /**
+     * Add an {link @link ItemStack} to the inventory on a specific slot, with a dynamic item that updates periodically
+     * with a default update interval of 200 ticks (10 seconds).
+     *
+     * @param slot         the slot where to add the item
+     * @param itemFunction the function that supplies the item to put in the inventory
+     */
+    public void setDynamicItem(int slot, Supplier<ItemStack> itemFunction) {
+        setDynamicItem(slot, itemFunction, 200L, null);
+    }
+
+    /**
+     * Add an {link @link ItemStack} to the inventory on a specific slot, with a dynamic item that updates periodically
+     * with a default update interval of 200 ticks (10 seconds).
+     *
+     * @param slot          the slot where to add the item
+     * @param itemFunction  the function that supplies the item to put in the inventory
+     * @param updateInterval the update interval in ticks for the dynamic item
+     */
+    public void setDynamicItem(int slot, Supplier<ItemStack> itemFunction, long updateInterval) {
+        setDynamicItem(slot, itemFunction, updateInterval, null);
+    }
+
+    /**
+     * Add an {link @link ItemStack} to the inventory on a specific slot, with a dynamic item that updates periodically.
+     *
+     * @param slot           the slot where to add the item
+     * @param itemFunction   the function that supplies the item to put in the inventory
+     * @param updateInterval the update interval in ticks for the dynamic item
+     * @param handler        the click handler associated with this item
+     */
+    public void setDynamicItem(int slot, Supplier<ItemStack> itemFunction, long updateInterval, Consumer<InventoryClickEvent> handler) {
+        dynamicItems.add(new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (inventory.getViewers().isEmpty()) {
+                    cancel();
+                    return;
+                }
+                setItem(slot, itemFunction.get(), handler);
+            }
+        }.runTaskTimer(Main.getInstance(), 0, updateInterval));
+    }
+
+    /**
+     * Add an {link @link ItemStack} to the inventory on multiple slots, with a dynamic item that updates periodically
+     * with a default update interval of 200 ticks (10 seconds).
+     *
+     * @param slots        the slots where to add the item
+     * @param itemFunction the function that supplies the item to put in the inventory for each slot
+     */
+    public void setDynamicItems(int[] slots, Supplier<ItemStack> itemFunction) {
+        for (int slot : slots) {
+            setDynamicItem(slot, itemFunction, 200L, null);
+        }
+    }
+
+    /**
+     * Add an {link @link ItemStack} to the inventory on multiple slots, with a dynamic item that updates periodically.
+     *
+     * @param slots          the slots where to add the item
+     * @param itemFunction   the function that supplies the item to put in the inventory for each slot
+     * @param updateInterval the update interval in ticks for the dynamic items
+     */
+    public void setDynamicItems(int[] slots, Supplier<ItemStack> itemFunction, long updateInterval) {
+        for (int slot : slots) {
+            setDynamicItem(slot, itemFunction, updateInterval, null);
+        }
+    }
+
+    /**
+     * Add an {link @link ItemStack} to the inventory on multiple slots, with a dynamic item that updates periodically.
+     *
+     * @param slots          the slots where to add the item
+     * @param itemFunction   the function that supplies the item to put in the inventory for each slot
+     * @param handler        the click handler associated with these items
+     * @param updateInterval the update interval in ticks for the dynamic items
+     */
+    public void setDynamicItems(int[] slots, Supplier<ItemStack> itemFunction, long updateInterval, Consumer<InventoryClickEvent> handler) {
+        for (int slot : slots) {
+            setDynamicItem(slot, itemFunction, updateInterval, handler);
         }
     }
 
