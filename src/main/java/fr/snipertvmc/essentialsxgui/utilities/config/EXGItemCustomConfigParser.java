@@ -31,6 +31,13 @@ public class EXGItemCustomConfigParser {
 				// WARPS
 				"warpsAdminView.items.warpItem"
 		));
+
+
+		put("updateItemInterval",  List.of(
+
+				// ECONOMY
+				"balanceTop.items.forceUpdateItem"
+		));
 	}};
 
 
@@ -75,7 +82,9 @@ public class EXGItemCustomConfigParser {
 
 
 		// Validate item properties
-		return areClickActionsValid(itemPath, config);
+		return areClickActionsValid(itemPath, config) &&
+
+				isUpdateItemIntervalValid(itemPath, config);
 	}
 
 
@@ -153,6 +162,27 @@ public class EXGItemCustomConfigParser {
 	// -------------------------------------------------- //
 
 
+	public static boolean isUpdateItemIntervalValid(String itemPath, YamlConfiguration config) {
+
+		Object updateItemIntervalValue = config.get(itemPath + ".updateItemInterval");
+
+		if (!isRequired(itemPath, "updateItemInterval")) {
+			return true;
+		}
+
+		if (updateItemIntervalValue == null) {
+			ConsoleLogger.error("Invalid update item interval for item '" + itemPath + "': 'updateItemInterval' is missing.");
+			return false;
+		}
+
+		return hasValidIntegerRange(updateItemIntervalValue, itemPath, "updateItemInterval", 0, 600);
+	}
+
+
+
+	// -------------------------------------------------- //
+
+
 	private static boolean isRequired(String itemPath, String propertyName) {
 		return requiredPaths.containsKey(propertyName) && requiredPaths.get(propertyName).contains(itemPath);
 	}
@@ -164,6 +194,21 @@ public class EXGItemCustomConfigParser {
 			return true;
 		}
 		return false;
+	}
+
+
+	private static boolean hasValidIntegerRange(Object value, String itemPath, String propertyName, int min, int max) {
+		if (value instanceof Integer intValue) {
+			if (intValue < min || intValue > max) {
+				ConsoleLogger.error("Invalid " + propertyName + " for item '" + itemPath + "': '" + intValue + "' is not between " + min + " and " + max + ".");
+				return false;
+			}
+			return true;
+
+		} else {
+			ConsoleLogger.error("Invalid " + propertyName + " for item '" + itemPath + "': '" + value + "' is not an integer.");
+			return false;
+		}
 	}
 
 

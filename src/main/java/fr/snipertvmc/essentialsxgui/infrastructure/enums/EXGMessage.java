@@ -78,6 +78,8 @@ public enum EXGMessage {
 	CONFIRM_DELETE_WARP_CHAT("general.confirmDeleteWarpInChat"),
 	CONFIRM_DELETE_WARP("general.confirmDeleteWarp"),
 
+	BALANCE_TOP_DATA_UPDATED("general.balanceTopDataUpdated"),
+
 	ACTION_CANCELED("general.actionCanceled"),
 	ACTION_EXPIRED("general.actionExpired"),
 	ONGOING_ACTION("general.ongoingAction"),

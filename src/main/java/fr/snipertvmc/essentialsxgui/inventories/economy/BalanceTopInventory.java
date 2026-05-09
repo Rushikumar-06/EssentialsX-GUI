@@ -10,8 +10,11 @@ import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.
 import fr.snipertvmc.essentialsxgui.libraries.exglib.Pair;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.FastInv;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
+import fr.snipertvmc.essentialsxgui.utilities.TextUtils;
+import fr.snipertvmc.essentialsxgui.utilities.data.TimeUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -64,24 +67,26 @@ public class BalanceTopInventory extends FastInv {
 					.build(player));
 		}
 
-
 		if (config.getForceUpdateItem().isEnabled()) {
 
-			EXGBalanceTop balanceTop = Main.getInstance().getEXGServer().getBalanceTop();
-			long lastUpdateTimestamp = balanceTop.getLastUpdate();
-			int secondsSinceLastUpdate = (int) ((System.currentTimeMillis() - lastUpdateTimestamp) / 1000);
+			if (config.getForceUpdateItem().hasUpdateItemInterval()) {
+				long updateInterval = config.getForceUpdateItem().getUpdateItemInterval() * 20L;
+				setDynamicItem(config.getForceUpdateItem().getSlot(), () -> getForceUpdateItem(player), updateInterval, e -> {
 
-			String agoTimeFormat = MessagesUtils.getString(EXGMessage.AGO_TIME_FORMAT);
-			String secondsFormat = MessagesUtils.getString(EXGMessage.SECONDS);
-			String seconds = secondsFormat.replace("{seconds}", String.valueOf(secondsSinceLastUpdate));
+					if (player.hasPermission("essentials.balancetop.force")) {
+						Main.getInstance().getEXGServer().getBalanceTop().forceUpdate();
+						TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.BALANCE_TOP_DATA_UPDATED));
+						SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
 
-			String lastUpdate = agoTimeFormat.replace("{time}", seconds);
+					} else {
+						TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.NO_PERMISSION));
+						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
+					}
+				});
 
-			setItem(config.getForceUpdateItem().getSlot(), config.getForceUpdateItem()
-					.updateVariables(Map.of(
-							"lastUpdate", lastUpdate
-					))
-					.build(player));
+			} else {
+				setItem(config.getForceUpdateItem().getSlot(), getForceUpdateItem(player));
+			}
 		}
 
 		addRankingItems(player);
@@ -159,6 +164,27 @@ public class BalanceTopInventory extends FastInv {
 			placeholders.put("{playerBalance_" + i + "}", balance);
 		}
 		return placeholders;
+	}
+
+
+	private ItemStack getForceUpdateItem(Player player) {
+
+		EXGBalanceTop balanceTop = Main.getInstance().getEXGServer().getBalanceTop();
+		long lastUpdateTimestamp = balanceTop.getLastUpdate();
+		int secondsSinceLastUpdate = (int) ((System.currentTimeMillis() - lastUpdateTimestamp) / 1000);
+		String lastUpdate = TimeUtils.formatAgoTime(secondsSinceLastUpdate);
+
+		int balanceTopUpdateInterval = Main.getInstance().getConfiguration().getBalanceTopUpdateInterval();
+		int secondesBeforeNextUpdate = balanceTopUpdateInterval - secondsSinceLastUpdate;
+		String nextUpdate = TimeUtils.formatInTime(secondesBeforeNextUpdate);
+
+		return config.getForceUpdateItem()
+				.duplicate()
+				.updateVariables(Map.of(
+						"lastUpdate", lastUpdate,
+						"nextUpdate", nextUpdate
+				))
+				.build(player);
 	}
 
 

@@ -135,15 +135,18 @@ balanceTop:
         - "&7Balance: &a{playerBalance}"
         - "&7Rank: &a#{playerRank}"
 
-    # Placeholders available: {lastUpdate}
+    # Placeholders available: {lastUpdate}, {nextUpdate}
     forceUpdateItem:
       enabled: true
       slot: 8
       material: "REDSTONE"
       displayName: "&cForce Update"
       lore:
-        - "&7Click to force update the balance top data."
         - "&7Last Update: &a{lastUpdate}"
+        - "&7Next Update: &a{nextUpdate}"
+        - ""
+        - "&7Click to force update the balance top data."
+      updateItemInterval: 1
 
     closeItem:
       enabled: true

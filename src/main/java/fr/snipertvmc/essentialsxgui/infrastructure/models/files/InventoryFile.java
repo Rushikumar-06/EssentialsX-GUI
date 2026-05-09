@@ -149,7 +149,7 @@ public class InventoryFile {
 
 		Object enabledValue = yamlConfiguration.get(path + ".enabled");
 		if (enabledValue instanceof Boolean isEnabled && !isEnabled) {
-			return new EXGItemConfig(false, (short) 0, Material.AIR.name(), 1, (byte) 0, null, null, null, null, new HashMap<>(), 0);
+			return new EXGItemConfig(false, (short) 0, Material.AIR.name(), 1, (byte) 0, null, null, null, null, new HashMap<>(), 0, 0);
 		}
 
 		// Check if the item configuration is valid
@@ -172,7 +172,7 @@ public class InventoryFile {
 							"",
 							"<gold>Item path involved: ",
 							"<dark_gray>- <yellow>" + path),
-					null, null, new HashMap<>(), 0
+					null, null, new HashMap<>(), 0, 0
 			);
 		}
 
@@ -200,6 +200,8 @@ public class InventoryFile {
 			put("clickActions", yamlConfiguration.getConfigurationSection(path + ".clickActions"));
 
 			put("customModelData", yamlConfiguration.getInt(path + ".customModelData", 0));
+
+			put("updateItemInterval", yamlConfiguration.getInt(path + ".updateItemInterval", 0));
 		}};
 
 
@@ -250,7 +252,9 @@ public class InventoryFile {
 
 				clickActions,
 
-				(Integer) itemConfiguration.get("customModelData")
+				(Integer) itemConfiguration.get("customModelData"),
+
+				(Integer) itemConfiguration.get("updateItemInterval")
 		);
 	}
 

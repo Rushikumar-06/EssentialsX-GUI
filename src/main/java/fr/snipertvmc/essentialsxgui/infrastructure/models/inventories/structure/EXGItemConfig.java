@@ -45,6 +45,8 @@ public class EXGItemConfig {
 
 	private int customModelData = 0;
 
+	private int updateItemInterval = 0;
+
 
 	// -------------------------------------------------- //
 
@@ -55,7 +57,8 @@ public class EXGItemConfig {
 	                     String displayName, List<String> lore,
 	                     List<Pair<XEnchantment, Integer>> enchantments, List<XItemFlag> itemFlags,
 	                     Map<String, ClickType> clickActions,
-	                     int customModelData) {
+	                     int customModelData,
+	                     int updateItemInterval) {
 
 		this.enabled = enabled;
 
@@ -74,6 +77,8 @@ public class EXGItemConfig {
 		this.clickActions = clickActions;
 
 		this.customModelData = customModelData;
+
+		this.updateItemInterval = updateItemInterval;
 	}
 
 
@@ -95,7 +100,9 @@ public class EXGItemConfig {
 
 		this.clickActions = new HashMap<>(itemConfig.getClickActions());
 
-		this.customModelData = itemConfig.customModelData;
+		this.customModelData = itemConfig.getCustomModelData();
+
+		this.updateItemInterval = itemConfig.getUpdateItemInterval();
 	}
 
 
@@ -159,6 +166,14 @@ public class EXGItemConfig {
 		return customModelData;
 	}
 
+	public boolean hasUpdateItemInterval() {
+		return updateItemInterval > 0;
+	}
+
+	public int getUpdateItemInterval() {
+		return updateItemInterval;
+	}
+
 
 	// -------------------------------------------------- //
 
@@ -207,6 +222,12 @@ public class EXGItemConfig {
 
 	public EXGItemConfig setCustomModelData(int customModelData) {
 		this.customModelData = customModelData;
+		return this;
+	}
+
+
+	public EXGItemConfig setUpdateItemInterval(int updateItemInterval) {
+		this.updateItemInterval = updateItemInterval;
 		return this;
 	}
 

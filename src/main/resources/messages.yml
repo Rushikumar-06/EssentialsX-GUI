@@ -133,6 +133,8 @@ general:
   confirmDeleteWarpInChat: "&6Are you sure you want to delete this warp? ({warpName}) &7Type &f'confirm' &7to confirm or &f'cancel' &7to cancel."
   confirmDeleteWarp: "Type 'confirm' to confirm deletion"
 
+  balanceTopDataUpdated: "&aThe balance top data has been updated."
+
 
   actionCanceled: "&6The action has been canceled."
   actionExpired: "&cThe action has expired. Please try again."
