@@ -192,9 +192,8 @@ public class WhoisViewInventory extends FastInv {
 				: "§c" + MessagesUtils.getString(EXGMessage.HIDDEN);
 
 		Statistic PLAY_ONE_TICK = EnumUtil.getStatistic("PLAY_ONE_MINUTE", "PLAY_ONE_TICK");
-		long playtimeMs = System.currentTimeMillis()
-				- (user.getBase().getStatistic(PLAY_ONE_TICK) * 50L);
-		String playtime = TimeUtils.formatDateDiffZoned(playtimeMs);
+		long playtimeSeconds = user.getBase().getStatistic(PLAY_ONE_TICK) / 20L;
+		String playtime = TimeUtils.formatDuration((int) (playtimeSeconds));
 
 		map.put("ipAddress", ipAddress);
 		map.put("playtime", playtime);
@@ -270,7 +269,7 @@ public class WhoisViewInventory extends FastInv {
 		map.put("isNicked", yesNo(isNicked));
 		map.put("isAfk", yesNo(isAfk));
 		map.put("afkSince", isAfk
-				? TimeUtils.formatDateDiffZoned(user.getAfkSince())
+				? TimeUtils.formatSinceTime((int) user.getAfkSince() / 1000)
 				: MessagesUtils.getString(EXGMessage.NOT_AFK));
 
 		return map;
@@ -282,9 +281,9 @@ public class WhoisViewInventory extends FastInv {
 
 		boolean isJailed = user.isJailed();
 		map.put("isJailed", yesNo(isJailed));
-		map.put("jailName", user.getFormattedJailTime());
+		map.put("jailName", user.getName());
 		map.put("jailExpiry", isJailed
-				? TimeUtils.formatDateDiffZoned(user.getJailTimeout())
+				? TimeUtils.formatInTime((int) user.getJailTimeout() / 1000)
 				: MessagesUtils.getString(EXGMessage.NOT_JAILED));
 
 		boolean isMuted = user.isMuted();
@@ -295,7 +294,7 @@ public class WhoisViewInventory extends FastInv {
 				: MessagesUtils.getString(EXGMessage.NO_MUTE_REASON))
 				: MessagesUtils.getString(EXGMessage.NOT_MUTED));
 		map.put("muteExpiry", isMuted
-				? TimeUtils.formatDateDiffZoned(user.getMuteTimeout())
+				? TimeUtils.formatInTime((int) user.getMuteTimeout() / 1000)
 				: MessagesUtils.getString(EXGMessage.NOT_MUTED));
 
 		BanEntry banEntry = Bukkit.getServer()
@@ -311,7 +310,7 @@ public class WhoisViewInventory extends FastInv {
 				: MessagesUtils.getString(EXGMessage.NOT_BANNED));
 		map.put("banExpiry", isBanned
 				? (banEntry.getExpiration() != null
-				? TimeUtils.formatDateDiffZoned(banEntry.getExpiration().getTime())
+				? TimeUtils.formatInTime((int) banEntry.getExpiration().getTime() / 1000)
 				: MessagesUtils.getString(EXGMessage.PERMANENT))
 				: MessagesUtils.getString(EXGMessage.NOT_BANNED));
 
