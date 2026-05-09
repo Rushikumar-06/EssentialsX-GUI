@@ -50,7 +50,7 @@ public class BalanceTopInventory extends FastInv {
 		if (config.getPlayerRankingItem().isEnabled()) {
 
 			EXGBalanceTop balanceTop = Main.getInstance().getEXGServer().getBalanceTop();
-			int playerRank = balanceTop.getPlayerRank(player.getName());
+			int playerRankValue = balanceTop.getPlayerRank(player.getName());
 
 			BigDecimal playerMoney = Main.getInstance().getEssentials().getUser(player).getMoney();
 			boolean ecoEnabled = !Main.getInstance().getEssentials().getSettings().isEcoDisabled();
@@ -58,10 +58,14 @@ public class BalanceTopInventory extends FastInv {
 					? NumberUtil.displayCurrency(playerMoney, Main.getInstance().getEssentials())
 					: MessagesUtils.getString(EXGMessage.DISABLED);
 
+			String playerRank = playerRankValue > 0
+					? MessagesUtils.getString(EXGMessage.RANK_FORMAT, Map.of("rank", String.valueOf(playerRankValue)))
+					: MessagesUtils.getString(EXGMessage.NOT_RANKED);
+
 			setItem(config.getPlayerRankingItem().getSlot(), config.getPlayerRankingItem()
 					.updateVariables(Map.of(
 							"playerName", player.getName(),
-							"playerRank", playerRank > 0 ? String.valueOf(playerRank) : MessagesUtils.getString(EXGMessage.NOT_RANKED),
+							"playerRank", playerRank,
 							"playerBalance", playerBalance
 					))
 					.build(player));

@@ -199,6 +199,7 @@ general:
   typeHere: "Type here"
   nobody: "&cNobody"
   notRanked: "&cNot Ranked"
+  rankFormat: "#{rank}"
 
 
   days: "{days}d"

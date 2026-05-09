@@ -134,6 +134,7 @@ public enum EXGMessage {
 	TYPE_HERE("general.typeHere"),
 	NOBODY("general.nobody"),
 	NOT_RANKED("general.notRanked"),
+	RANK_FORMAT("general.rankFormat"),
 
 
 	DAYS("general.days"),

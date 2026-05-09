@@ -55,11 +55,11 @@ rankingItems:
     material: "CHAINMAIL_HELMET"
     displayName: "&7&l4-8th Place"
     lore:
-      - "&f&l#4th &8- &7{playerName_4}&8: &{playerBalance_4}"
-      - "&f&l#5th &8- &7{playerName_5}&8: &{playerBalance_5}"
-      - "&f&l#6th &8- &7{playerName_6}&8: &{playerBalance_6}"
-      - "&f&l#7th &8- &7{playerName_7}&8: &{playerBalance_7}"
-      - "&f&l#8th &8- &7{playerName_8}&8: &{playerBalance_8}"
+      - "&f&l#4th &8- &7{playerName_4}&8: &e{playerBalance_4}"
+      - "&f&l#5th &8- &7{playerName_5}&8: &e{playerBalance_5}"
+      - "&f&l#6th &8- &7{playerName_6}&8: &e{playerBalance_6}"
+      - "&f&l#7th &8- &7{playerName_7}&8: &e{playerBalance_7}"
+      - "&f&l#8th &8- &7{playerName_8}&8: &e{playerBalance_8}"
   30:
     material: "CHAINMAIL_HELMET"
     displayName: "&7&l9-13th Place"
@@ -133,7 +133,7 @@ balanceTop:
       displayName: "&e&l{playerName}"
       lore:
         - "&7Balance: &a{playerBalance}"
-        - "&7Rank: &a#{playerRank}"
+        - "&7Rank: &a{playerRank}"
 
     # Placeholders available: {lastUpdate}, {nextUpdate}
     forceUpdateItem:
