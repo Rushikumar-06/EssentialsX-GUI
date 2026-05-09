@@ -138,7 +138,9 @@ public enum EXGMessage {
 	HOURS("general.hours"),
 	MINUTES("general.minutes"),
 	SECONDS("general.seconds"),
-	AGO_TIME_FORMAT("general.agoTimeFormat");
+	AGO_TIME_FORMAT("general.agoTimeFormat"),
+	IN_TIME_FORMAT("general.inTimeFormat"),
+	SINCE_TIME_FORMAT("general.sinceTimeFormat");
 
 
 	// -------------------------------------------------- //

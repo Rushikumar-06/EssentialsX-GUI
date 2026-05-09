@@ -203,4 +203,6 @@ general:
   hours: "{hours}h"
   minutes: "{minutes}m"
   seconds: "{seconds}s"
-  agoTimeFormat: "{time} ago"
+  agoTimeFormat: "&f{time} ago"
+  inTimeFormat: "&fin {time}"
+  sinceTimeFormat: "&fsince {time}"

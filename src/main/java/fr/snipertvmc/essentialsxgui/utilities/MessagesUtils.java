@@ -1,6 +1,5 @@
 package fr.snipertvmc.essentialsxgui.utilities;
 
-import com.earth2me.essentials.libs.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
 
