@@ -17,7 +17,8 @@ public class EXGServer {
 	private Set<EXGKit> kits = new HashSet<>();
 	private Set<EXGWarp> warps = new HashSet<>();
 
-	private EXGBalanceTop balanceTop = new EXGBalanceTop();
+	private final EXGBalanceTop balanceTop = new EXGBalanceTop();
+	private final EXGWorth worth = new EXGWorth();
 
 
 	// -------------------------------------------------- //
@@ -157,6 +158,9 @@ public class EXGServer {
 
 	public EXGBalanceTop getBalanceTop() {
 		return balanceTop;
+	}
+	public EXGWorth getWorth() {
+		return worth;
 	}
 
 

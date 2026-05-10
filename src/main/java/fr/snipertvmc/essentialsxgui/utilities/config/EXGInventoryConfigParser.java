@@ -33,7 +33,8 @@ public class EXGInventoryConfigParser {
 
 				"whoisView",
 
-				"balanceTop"
+				"balanceTop",
+				"worth"
 		));
 	}};
 

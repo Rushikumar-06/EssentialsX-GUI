@@ -5,6 +5,7 @@ import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGPermission;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
 import fr.snipertvmc.essentialsxgui.inventories.economy.BalanceTopInventory;
+import fr.snipertvmc.essentialsxgui.inventories.economy.WorthInventory;
 import fr.snipertvmc.essentialsxgui.inventories.homes.HomesInventory;
 import fr.snipertvmc.essentialsxgui.inventories.kits.KitsAdminViewInventory;
 import fr.snipertvmc.essentialsxgui.inventories.kits.KitsPlayerViewInventory;
@@ -35,7 +36,8 @@ public class PlayerCommandPreprocess implements Listener {
 			"kit", "kits",
 			"warp", "warps",
 			"whois",
-			"balancetop", "baltop"
+			"balancetop", "baltop",
+			"worth"
 	);
 
 
@@ -169,6 +171,22 @@ public class PlayerCommandPreprocess implements Listener {
 
 				TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.OPENING_BALANCE_TOP_INVENTORY, null));
 				new BalanceTopInventory(player).open(player);
+				SoundsUtils.playSound(player, EXGSound.GUI_OPEN);
+			}
+
+
+			// WORTH
+
+			case "worth" -> {
+
+				if (args.length > 1) return;
+				if (!player.hasPermission("essentials.worth")) return;
+				if (!Main.getInstance().getConfiguration().isEconomyWorthModuleEnabled()) return;
+
+				event.setCancelled(true);
+
+				TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.OPENING_WORTH_INVENTORY, null));
+				new WorthInventory(player).open(player);
 				SoundsUtils.playSound(player, EXGSound.GUI_OPEN);
 			}
 		}

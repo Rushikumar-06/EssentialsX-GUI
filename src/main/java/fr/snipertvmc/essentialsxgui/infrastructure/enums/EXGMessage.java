@@ -18,6 +18,9 @@ public enum EXGMessage {
 	TASKS_RELOADING("admin.tasksReloading"),
 	TASKS_RELOADED("admin.tasksReloaded"),
 
+	DATA_RELOADING("admin.dataReloading"),
+	DATA_RELOADED("admin.dataReloaded"),
+
 
 	// ERRORS
 	INVALID_MATERIAL("errors.invalidMaterial"),
@@ -110,6 +113,7 @@ public enum EXGMessage {
 	OPENING_WHOIS_INVENTORY("general.openingWhoisInventory"),
 
 	OPENING_BALANCE_TOP_INVENTORY("general.openingBalanceTopInventory"),
+	OPENING_WORTH_INVENTORY("general.openingWorthInventory"),
 
 
 	YES("general.yes_value"),
@@ -136,6 +140,7 @@ public enum EXGMessage {
 	NOBODY("general.nobody"),
 	NOT_RANKED("general.notRanked"),
 	RANK_FORMAT("general.rankFormat"),
+	NO_WORTH_AVAILABLE("general.noWorthAvailable"),
 
 
 	DAYS("general.days"),

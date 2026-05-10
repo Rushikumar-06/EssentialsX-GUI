@@ -58,6 +58,9 @@ admin:
   tasksReloading: "{prefix} &eThe tasks are being reloaded..."
   tasksReloaded: "{prefix} &eThe tasks have been reloaded."
 
+  dataReloading: "{prefix} &eThe data is being reloaded..."
+  dataReloaded: "{prefix} &eThe data has been reloaded."
+
 ############################################################
 # +------------------------------------------------------+ #
 # |                   Error Messages                     | #
@@ -174,6 +177,7 @@ general:
   openingWhoisInventory: "&aOpening whois inventory..."
 
   openingBalanceTopInventory: "&aOpening balance top inventory..."
+  openingWorthInventory: "&aOpening worth inventory..."
 
 
   yes_value: "&aYes"
@@ -199,8 +203,9 @@ general:
   unknown: "&cUnknown"
   typeHere: "Type here"
   nobody: "&cNobody"
-  notRanked: "&cNot Ranked"
+  notRanked: "&cNot ranked"
   rankFormat: "#{rank}"
+  noWorthAvailable: "&cNo worth available"
 
 
   days: "{days}d"

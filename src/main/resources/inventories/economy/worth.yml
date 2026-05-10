@@ -1,0 +1,82 @@
+############################################################
+# +------------------------------------------------------+ #
+# |                      Information                     | #
+# +------------------------------------------------------+ #
+############################################################
+
+# This is the worth inventory file for EssentialsX-GUI.
+
+# If you need help with the configuration of the GUI,
+# you can join our discord server at: https://discord.gg/fSzK79TAYf
+
+# For more information about how to configure EssentialsX-GUI,
+# check our Wiki at: https://sniper-tvmc.gitbook.io/essentialsx-gui/configuration/inventories
+
+############################################################
+# +------------------------------------------------------+ #
+# |                        General                       | #
+# +------------------------------------------------------+ #
+############################################################
+
+# Please do not change this value as it may cause the file to be reset.
+# Default: "1.0"
+config-version: "1.0"
+
+############################################################
+# +------------------------------------------------------+ #
+# |                       Inventory                      | #
+# +------------------------------------------------------+ #
+############################################################
+
+worth:
+
+  title: "&fWorth of items"
+  rows: 6
+
+  borderItem:
+    enabled: true
+    slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53]
+    material: "BLACK_STAINED_GLASS_PANE"
+    data: 15
+    displayName: "&8- &6&lEssentialsX-GUI"
+
+  items:
+
+    allItem:
+      enabled: true
+      slot: 29
+      material: "BOOKSHELF"
+      displayName: "&aAll items worth"
+      lore:
+        - "&7Click to view the worth of all existent items in the game."
+
+    # Placeholders available: {handItemMaterial}, {handItemMaterialName}, {handItemWorth}
+    handItem:
+      enabled: true
+      slot: 22
+      material: "{handItemMaterial}"
+      displayName: "&aHand item worth"
+      lore:
+        - "&7Worth of the item in your hand."
+        - ""
+        - "&7Type: &a{handItemMaterialName}"
+        - "&7Value: &a{handItemWorth}"
+
+    # Placeholders available: {inventoryWorth}
+    inventoryItem:
+      enabled: true
+      slot: 33
+      material: "REDSTONE"
+      displayName: "&aInventory worth"
+      lore:
+        - "&7Total Value: &a{inventoryWorth}"
+        - ""
+        - "&7Click to view the worth of each item in your inventory."
+
+    closeItem:
+      enabled: true
+      slot: 49
+      material: "BARRIER"
+      displayName: "&cClose"
+      lore:
+        - "&7Click to close the inventory."

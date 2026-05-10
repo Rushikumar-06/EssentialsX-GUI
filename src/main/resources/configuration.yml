@@ -259,6 +259,13 @@ economy:
     # Default: 60
     updateInterval: 60
 
+  worth:
+
+    # Set this to true if you want to use the worth features.
+    # This will allow players to access the worth GUI.
+    # Default: true
+    enabled: true
+
 ############################################################
 # +------------------------------------------------------+ #
 # |                        Sounds                        | #

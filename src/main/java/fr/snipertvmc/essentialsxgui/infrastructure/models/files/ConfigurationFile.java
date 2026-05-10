@@ -75,6 +75,8 @@ public class ConfigurationFile {
 
 	public boolean isEconomyBalanceTopModuleEnabled() {
 		return yamlConfiguration.getBoolean("economy.balanceTop.enabled", false);
+	}public boolean isEconomyWorthModuleEnabled() {
+		return yamlConfiguration.getBoolean("economy.worth.enabled", false);
 	}
 
 

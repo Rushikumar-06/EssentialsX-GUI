@@ -3,6 +3,7 @@ package fr.snipertvmc.essentialsxgui.managers;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.files.InventoryFile;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.economy.EXGBalanceTopInventoryConfig;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.economy.EXGWorthInventoryInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes.EXGHomeEditingInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes.EXGHomesInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.*;
@@ -23,6 +24,9 @@ public class InventoriesManager {
 	// -------------------------------------------------- //
 
 
+	private EXGBalanceTopInventoryConfig balanceTopInventoryConfig;
+	private EXGWorthInventoryInventoryConfig worthInventoryInventoryConfig;
+
 	private EXGHomesInventoryConfig homesInventoryConfig;
 	private EXGHomeEditingInventoryConfig homeEditingInventoryConfig;
 
@@ -33,6 +37,8 @@ public class InventoriesManager {
 	private EXGKitEditingInventoryConfig kitEditingInventoryConfig;
 	private EXGKitEditorInventoryConfig kitEditorInventoryConfig;
 
+	private EXGDataEntryGUInventoryConfig dataEntryGUIInventoryConfig;
+
 	private EXGWarpEditingInventoryConfig warpEditingInventoryConfig;
 	private EXGWarpPlayerTeleportInventoryConfig warpPlayerTeleportInventoryConfig;
 	private EXGWarpsAdminViewInventoryConfig warpsAdminViewInventoryConfig;
@@ -40,10 +46,6 @@ public class InventoriesManager {
 
 	private EXGWhoisPlayersInventoryConfig whoisPlayersInventoryConfig;
 	private EXGWhoisViewInventoryConfig whoisViewInventoryConfig;
-
-	private EXGDataEntryGUInventoryConfig dataEntryGUIInventoryConfig;
-
-	private EXGBalanceTopInventoryConfig balanceTopInventoryConfig;
 
 
 	// -------------------------------------------------- //
@@ -65,9 +67,11 @@ public class InventoriesManager {
 			case "kitsAdminView" -> loadKitsAdminViewInventory(title, rows, inventoryName, borderItem, borderSlots);
 			case "kitsPlayerView" -> loadKitsPlayerViewInventory(title, rows, inventoryName, borderItem, borderSlots);
 			case "kitPreview" -> loadKitPreviewInventory(title, rows, inventoryName, borderItem, borderSlots);
-			case "kitPlayerGive" -> loadkitPlayerGiveInventory(title, rows, inventoryName, borderItem, borderSlots);
+			case "kitPlayerGive" -> loadKitPlayerGiveInventory(title, rows, inventoryName, borderItem, borderSlots);
 			case "kitEditing" -> loadKitEditingInventory(title, rows, inventoryName, borderItem, borderSlots);
 			case "kitEditor" -> loadKitEditorInventory(title, rows, inventoryName, borderItem, borderSlots);
+
+			case "dataEntryGUI" -> loadDataEntryGUIInventory(title, rows, inventoryName, borderItem, borderSlots);
 
 			case "warpsAdminView" -> loadWarpsAdminViewInventory(title, rows, inventoryName, borderItem, borderSlots);
 			case "warpsPlayerView" -> loadWarpsPlayerViewInventory(title, rows, inventoryName, borderItem, borderSlots);
@@ -77,14 +81,57 @@ public class InventoriesManager {
 			case "whoisPlayers" -> loadWhoisPlayersInventory(title, rows, inventoryName, borderItem, borderSlots);
 			case "whoisView" -> loadWhoisViewInventory(title, rows, inventoryName, borderItem, borderSlots);
 
-			case "dataEntryGUI" -> loadDataEntryGUIInventory(title, rows, inventoryName, borderItem, borderSlots);
-
 			case "balanceTop" -> loadBalanceTopInventory(title, rows, inventoryName, borderItem, borderSlots);
+			case "worth" -> loadWorthInventory(title, rows, inventoryName, borderItem, borderSlots);
 		}
 	}
 
 
 	// -------------------------------------------------- //
+
+
+	//
+	// ECONOMY INVENTORIES
+	//
+
+
+	public void loadBalanceTopInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+
+		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
+
+		balanceTopInventoryConfig = new EXGBalanceTopInventoryConfig(title, rows, borderItem, borderSlots);
+
+		balanceTopInventoryConfig.setPlayerRankingItem(inventoryFile.getItem(
+				"playerRankingItem"));
+		balanceTopInventoryConfig.setForceUpdateItem(inventoryFile.getItem(
+				"forceUpdateItem"));
+
+		balanceTopInventoryConfig.setCloseItem(inventoryFile.getItem(
+				"closeItem"));
+
+		balanceTopInventoryConfig.setRankingItems(inventoryFile.getItemsSection(
+				"rankingItems"));
+
+		balanceTopInventoryConfig.setRankingRange(inventoryFile.getRankingRange());
+	}
+
+
+	public void loadWorthInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+
+		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
+
+		worthInventoryInventoryConfig = new EXGWorthInventoryInventoryConfig(title, rows, borderItem, borderSlots);
+
+		worthInventoryInventoryConfig.setAllItem(inventoryFile.getItem(
+				"allItem"));
+		worthInventoryInventoryConfig.setHandItem(inventoryFile.getItem(
+				"handItem"));
+		worthInventoryInventoryConfig.setInventoryItem(inventoryFile.getItem(
+				"inventoryItem"));
+
+		worthInventoryInventoryConfig.setCloseItem(inventoryFile.getItem(
+				"closeItem"));
+	}
 
 
 	//
@@ -255,7 +302,7 @@ public class InventoriesManager {
 		kitPreviewInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
 	}
 
-	private void loadkitPlayerGiveInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+	private void loadKitPlayerGiveInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
 
 		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
 
@@ -310,6 +357,34 @@ public class InventoriesManager {
 				"saveKitItem"));
 		kitEditorInventoryConfig.setCancelChangesItem(inventoryFile.getItem(
 				"cancelChangesItem"));
+	}
+
+
+	//
+	// OTHERS INVENTORIES
+	//
+
+
+	public void loadDataEntryGUIInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+
+		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
+
+		dataEntryGUIInventoryConfig = new EXGDataEntryGUInventoryConfig(title, rows, borderItem, borderSlots);
+
+		dataEntryGUIInventoryConfig.setMaterialIconItem(
+				inventoryFile.getItem("materialIconItem"));
+
+		dataEntryGUIInventoryConfig.setNextPageItem(inventoryFile.getItem(
+				"nextPageItem"));
+		dataEntryGUIInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
+				"previousPageItem"));
+		dataEntryGUIInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
+				"currentPageItem"));
+
+		dataEntryGUIInventoryConfig.setCancelItem(inventoryFile.getItem(
+				"cancelItem"));
+
+		dataEntryGUIInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
 	}
 
 
@@ -490,60 +565,6 @@ public class InventoriesManager {
 	}
 
 
-	//
-	// OTHERS INVENTORIES
-	//
-
-
-	public void loadDataEntryGUIInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
-
-		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
-
-		dataEntryGUIInventoryConfig = new EXGDataEntryGUInventoryConfig(title, rows, borderItem, borderSlots);
-
-		dataEntryGUIInventoryConfig.setMaterialIconItem(
-				inventoryFile.getItem("materialIconItem"));
-
-		dataEntryGUIInventoryConfig.setNextPageItem(inventoryFile.getItem(
-				"nextPageItem"));
-		dataEntryGUIInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
-				"previousPageItem"));
-		dataEntryGUIInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
-				"currentPageItem"));
-
-		dataEntryGUIInventoryConfig.setCancelItem(inventoryFile.getItem(
-				"cancelItem"));
-
-		dataEntryGUIInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
-	}
-
-
-	//
-	// ECONOMY INVENTORIES
-	//
-
-
-	public void loadBalanceTopInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
-
-		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
-
-		balanceTopInventoryConfig = new EXGBalanceTopInventoryConfig(title, rows, borderItem, borderSlots);
-
-		balanceTopInventoryConfig.setPlayerRankingItem(inventoryFile.getItem(
-				"playerRankingItem"));
-		balanceTopInventoryConfig.setForceUpdateItem(inventoryFile.getItem(
-				"forceUpdateItem"));
-
-		balanceTopInventoryConfig.setCloseItem(inventoryFile.getItem(
-				"closeItem"));
-
-		balanceTopInventoryConfig.setRankingItems(inventoryFile.getItemsSection(
-				"rankingItems"));
-
-		balanceTopInventoryConfig.setRankingRange(inventoryFile.getRankingRange());
-	}
-
-
 	// -------------------------------------------------- //
 
 
@@ -559,6 +580,8 @@ public class InventoriesManager {
 				"kitEditing",
 				"kitEditor",
 
+				"dataEntryGUI",
+
 				"warpEditing",
 				"warpPlayerTeleport",
 				"warpsAdminView",
@@ -567,9 +590,8 @@ public class InventoriesManager {
 				"whoisPlayers",
 				"whoisView",
 
-				"dataEntryGUI",
-
-				"balanceTop"
+				"balanceTop",
+				"worth"
 		);
 	}
 
@@ -605,6 +627,11 @@ public class InventoriesManager {
 	}
 
 
+	public EXGDataEntryGUInventoryConfig getDataEntryGUIInventoryConfig() {
+		return dataEntryGUIInventoryConfig;
+	}
+
+
 	public EXGWarpEditingInventoryConfig getWarpEditingInventoryConfig() {
 		return warpEditingInventoryConfig;
 	}
@@ -626,13 +653,11 @@ public class InventoriesManager {
 		return whoisViewInventoryConfig;
 	}
 
-
-	public EXGDataEntryGUInventoryConfig getDataEntryGUIInventoryConfig() {
-		return dataEntryGUIInventoryConfig;
-	}
-
 	public EXGBalanceTopInventoryConfig getBalanceTopInventoryConfig() {
 		return balanceTopInventoryConfig;
+	}
+	public EXGWorthInventoryInventoryConfig getWorthInventoryConfig() {
+		return worthInventoryInventoryConfig;
 	}
 
 

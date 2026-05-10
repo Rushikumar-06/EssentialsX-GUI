@@ -40,6 +40,8 @@ public class FilesManager {
 		put("kitEditing", "inventories/kits/kitEditing");
 		put("kitEditor", "inventories/kits/kitEditor");
 
+		put("dataEntryGUI", "inventories/others/dataEntryGUI");
+
 		put("warpEditing", "inventories/warps/warpEditing");
 		put("warpPlayerTeleport", "inventories/warps/warpPlayerTeleport");
 		put("warpsAdminView", "inventories/warps/warpsAdminView");
@@ -48,9 +50,8 @@ public class FilesManager {
 		put("whoisPlayers", "inventories/whois/whoisPlayers");
 		put("whoisView", "inventories/whois/whoisView");
 
-		put("dataEntryGUI", "inventories/others/dataEntryGUI");
-
 		put("balanceTop", "inventories/economy/balanceTop");
+		put("worth", "inventories/economy/worth");
 	}};
 
 
@@ -68,6 +69,8 @@ public class FilesManager {
 		put("kitEditing", "1.2"); // Updated for version: 1.1.0
 		put("kitEditor", "1.0");
 
+		put("dataEntryGUI", "1.0");
+
 		put("warpEditing", "1.0");
 		put("warpPlayerTeleport", "1.0");
 		put("warpsAdminView", "1.0");
@@ -76,9 +79,8 @@ public class FilesManager {
 		put("whoisPlayers", "1.0");
 		put("whoisView", "1.1"); // Updated for version: 1.4.1
 
-		put("dataEntryGUI", "1.0");
-
 		put("balanceTop", "1.0");
+		put("worth", "1.0");
 	}};
 
 

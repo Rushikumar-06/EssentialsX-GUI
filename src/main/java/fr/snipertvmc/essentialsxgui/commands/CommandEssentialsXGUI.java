@@ -144,6 +144,13 @@ public class CommandEssentialsXGUI implements CommandExecutor, TabCompleter {
 		Main.getInstance().getEXGServer().getBalanceTop().stopUpdateTask();
 		Main.getInstance().getEXGServer().getBalanceTop().startUpdateTask();
 		TextUtils.sendMessageToCommandSender(commandSender, MessagesUtils.getString(EXGMessage.TASKS_RELOADED, null));
+
+
+		// DATA RELOADING
+		TextUtils.sendMessageToCommandSender(commandSender, MessagesUtils.getString(EXGMessage.DATA_RELOADING, null));
+		Main.getInstance().getEXGServer().getBalanceTop().forceUpdate();
+		Main.getInstance().getEXGServer().getWorth().loadItemsWorth();
+		TextUtils.sendMessageToCommandSender(commandSender, MessagesUtils.getString(EXGMessage.DATA_RELOADED, null));
 	}
 
 
