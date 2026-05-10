@@ -300,6 +300,7 @@ public class FastInv implements InventoryHolder {
      * @param handler        the click handler associated with this item
      */
     public void setDynamicItem(int slot, Supplier<ItemStack> itemFunction, long updateInterval, Consumer<InventoryClickEvent> handler) {
+        setItem(slot, itemFunction.get(), handler);
         dynamicItems.add(new BukkitRunnable() {
             @Override
             public void run() {
@@ -309,7 +310,7 @@ public class FastInv implements InventoryHolder {
                 }
                 setItem(slot, itemFunction.get(), handler);
             }
-        }.runTaskTimer(Main.getInstance(), 0, updateInterval));
+        }.runTaskTimer(Main.getInstance(), updateInterval, updateInterval));
     }
 
     /**
