@@ -25,8 +25,6 @@ public class EXGItemConfigParser {
 
 				// HOMES
 				"homes.items.homeItem",
-				"homes.items.previousPageItem",
-				"homes.items.nextPageItem",
 
 				// KITS
 				"kitsAdminView.items.kitItem",
