@@ -21,18 +21,38 @@ public class InventoriesUtils {
 
 	public static void initializePaginatedInventory(Player player, EXGPaginatedInventoryConfig config, PaginatedFastInv inv) {
 
-		inv.previousPageItem(config.getPreviousPageItem().getSlot(), p -> config.getPreviousPageItem().duplicate()
-				.updateVariables(
-						Map.of("currentPage", String.valueOf(p + 1),
-								"previousPage", String.valueOf(p)))
-				.build(player));
+		if (config.getPreviousPageItem().isEnabled()) {
+			inv.previousPageItem(config.getPreviousPageItem().getSlot(), p -> config.getPreviousPageItem().duplicate()
+					.updateVariables(
+							Map.of("currentPage", String.valueOf(p + 1),
+									"previousPage", String.valueOf(p)))
+					.build(player));
+		}
 
 
-		inv.nextPageItem(config.getNextPageItem().getSlot(), p -> config.getNextPageItem().duplicate()
-				.updateVariables(
-						Map.of("currentPage", String.valueOf(p - 1),
-								"nextPage", String.valueOf(p)))
-				.build(player));
+		if (config.getNextPageItem().isEnabled()) {
+			inv.nextPageItem(config.getNextPageItem().getSlot(), p -> config.getNextPageItem().duplicate()
+					.updateVariables(
+							Map.of("currentPage", String.valueOf(p - 1),
+									"nextPage", String.valueOf(p)))
+					.build(player));
+		}
+
+		updateCurrentPageItem(player, config, inv);
+	}
+
+
+	public static void updateCurrentPageItem(Player player, EXGPaginatedInventoryConfig config, PaginatedFastInv inv) {
+
+		if (config.getCurrentPageItem().isEnabled()) {
+			inv.setItem(config.getCurrentPageItem().getSlot(), config.getCurrentPageItem()
+					.updateVariables(
+							Map.of("currentPage", String.valueOf(inv.currentPage()),
+									"totalPages", String.valueOf(inv.lastPage()),
+									"previousPage", String.valueOf(inv.currentPage() - 1),
+									"nextPage", String.valueOf(inv.currentPage() + 1)))
+					.build(player));
+		}
 	}
 
 
