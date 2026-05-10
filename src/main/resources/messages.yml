@@ -78,7 +78,8 @@ errors:
   noPermission: "{prefix} &cYou do not have permission to perform this action."
   onlyForPlayers: "{prefix} &cThis command can only be executed by players."
   playerNotFound: "{prefix} &cThe specified player was not found."
-  invalidName: "{prefix} &cThe name you entered is invalid. Please try again with a different name. (Allowed characters: a-z, A-Z, 0-9, _, -)"
+  invalidName: "&cThe name you entered is invalid. Please try again with a different name. (Allowed characters: a-z, A-Z, 0-9, _, -)"
+  waitBeforeNextAction: "&cPlease wait before performing another action."
 
   homeDeleteError: "&cAn error occurred while deleting the home. Please contact the server administrator."
   homeNameAlreadyExists: "&cA home with this name already exists."

@@ -33,6 +33,7 @@ public enum EXGMessage {
 	NO_PERMISSION("errors.noPermission"),
 	ONLY_FOR_PLAYERS("errors.onlyForPlayers"),
 	INVALID_NAME("errors.invalidName"),
+	WAIT_BEFORE_NEXT_ACTION("general.waitBeforeNextAction"),
 
 	HOME_DELETE_ERROR("general.homeDeleteError"),
 	HOME_NAME_ALREADY_EXISTS("errors.homeNameAlreadyExists"),

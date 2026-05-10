@@ -76,16 +76,7 @@ public class BalanceTopInventory extends FastInv {
 			if (config.getForceUpdateItem().hasUpdateItemInterval()) {
 				long updateInterval = config.getForceUpdateItem().getUpdateItemInterval() * 20L;
 				setDynamicItem(config.getForceUpdateItem().getSlot(), () -> getForceUpdateItem(player), updateInterval, e -> {
-
-					if (player.hasPermission("essentials.balancetop.force")) {
-						Main.getInstance().getEXGServer().getBalanceTop().forceUpdate();
-						TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.BALANCE_TOP_DATA_UPDATED));
-						SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
-
-					} else {
-						TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.NO_PERMISSION));
-						SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
-					}
+					forceUpdate(player);
 				});
 
 			} else {
@@ -189,6 +180,29 @@ public class BalanceTopInventory extends FastInv {
 						"nextUpdate", nextUpdate
 				))
 				.build(player);
+	}
+
+
+	private void forceUpdate(Player player) {
+
+		if (player.hasPermission("essentials.balancetop.force")) {
+
+			long lastUpdate = Main.getInstance().getEXGServer().getBalanceTop().getLastUpdate();
+			long lastUpdateSeconds = (System.currentTimeMillis() - lastUpdate) / 1000;
+			if (lastUpdateSeconds < 5) {
+				TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.WAIT_BEFORE_NEXT_ACTION));
+				SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
+				return;
+			}
+
+			Main.getInstance().getEXGServer().getBalanceTop().forceUpdate();
+			TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.BALANCE_TOP_DATA_UPDATED));
+			SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
+
+		} else {
+			TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.NO_PERMISSION));
+			SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
+		}
 	}
 
 
