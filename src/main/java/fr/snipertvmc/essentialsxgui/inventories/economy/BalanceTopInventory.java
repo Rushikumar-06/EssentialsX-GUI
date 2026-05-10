@@ -147,7 +147,7 @@ public class BalanceTopInventory extends FastInv {
 
 		for (int i = start; i <= end; i++) {
 			String name = nobodyMsg;
-			String balance = "0";
+			String balance = NumberUtil.displayCurrency(BigDecimal.valueOf(0), Main.getInstance().getEssentials());
 
 			if (i <= balanceTop.getBalanceTopEntries().size()) {
 				Pair<String, Double> entry = balanceTop.getBalanceTopEntries().get(i - 1);
