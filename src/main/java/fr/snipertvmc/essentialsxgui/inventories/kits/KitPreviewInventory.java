@@ -40,8 +40,8 @@ public class KitPreviewInventory extends PaginatedFastInv {
 		Main.getInstance().getServerDataManager().updateServerKits();
 
 
-		InventoriesUtils.initializePaginatedInventory(player, config, this, config.getInventoryScheme());
 		InventoriesUtils.initializeBorderItem(player, config, this);
+		InventoriesUtils.initializePaginatedInventory(player, config, this, config.getInventoryScheme());
 
 
 		List<ItemStack> items = Main.getInstance().getHookManager().getEssentialsHook().getKitItems(player, kit.getName());

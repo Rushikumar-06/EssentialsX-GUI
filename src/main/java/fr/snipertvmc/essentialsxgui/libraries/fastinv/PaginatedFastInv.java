@@ -56,7 +56,9 @@ public class PaginatedFastInv extends FastInv {
     private int page = 1;
 
     private IntFunction<ItemStack> previousPageItem;
+    private ItemStack previousPageBlankItem;
     private IntFunction<ItemStack> nextPageItem;
+    private ItemStack nextPageBlankItem;
     private int previousPageSlot = -1;
     private int nextPageSlot = -1;
 
@@ -267,12 +269,14 @@ public class PaginatedFastInv extends FastInv {
             setItem(this.previousPageSlot, this.previousPageItem.apply(this.page - 1), e -> openPrevious());
         } else if (this.previousPageSlot >= 0) {
             removeItem(this.previousPageSlot);
+            setItem(this.previousPageSlot, this.previousPageBlankItem);
         }
 
         if (this.page < lastPage && this.nextPageItem != null) {
             setItem(this.nextPageSlot, this.nextPageItem.apply(this.page + 1), e -> openNext());
         } else if (this.nextPageSlot >= 0) {
             removeItem(this.nextPageSlot);
+            setItem(this.nextPageSlot, this.nextPageBlankItem);
         }
 
         onPageChange(page);
@@ -302,6 +306,7 @@ public class PaginatedFastInv extends FastInv {
 
         this.previousPageSlot = slot;
         this.previousPageItem = item;
+        this.previousPageBlankItem = this.getInventory().getItem(this.previousPageSlot);
     }
 
     /**
@@ -327,6 +332,7 @@ public class PaginatedFastInv extends FastInv {
 
         this.nextPageSlot = slot;
         this.nextPageItem = item;
+        this.nextPageBlankItem = this.getInventory().getItem(this.nextPageSlot);
     }
 
     /**

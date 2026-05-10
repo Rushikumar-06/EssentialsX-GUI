@@ -44,8 +44,8 @@ public class DataEntryGUIInventory extends PaginatedFastInv {
 		);
 
 
-		InventoriesUtils.initializePaginatedInventory(player, config, this, config.getInventoryScheme());
 		InventoriesUtils.initializeBorderItem(player, config, this);
+		InventoriesUtils.initializePaginatedInventory(player, config, this, config.getInventoryScheme());
 
 
 		if (config.getCancelItem().isEnabled()) {

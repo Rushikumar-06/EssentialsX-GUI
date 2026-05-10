@@ -42,8 +42,8 @@ public class KitPlayerGiveInventory extends PaginatedFastInv {
 		Main.getInstance().getServerDataManager().updateServerKits();
 
 
-		InventoriesUtils.initializePaginatedInventory(player, config, this, config.getInventoryScheme());
 		InventoriesUtils.initializeBorderItem(player, config, this);
+		InventoriesUtils.initializePaginatedInventory(player, config, this, config.getInventoryScheme());
 
 
 		List<Player> targets = Bukkit.getOnlinePlayers().stream()

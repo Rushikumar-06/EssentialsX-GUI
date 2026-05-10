@@ -35,8 +35,8 @@ public class WhoisPlayersInventory extends PaginatedFastInv {
 		);
 
 
-		InventoriesUtils.initializePaginatedInventory(player, config, this, config.getInventoryScheme());
 		InventoriesUtils.initializeInventoryWithClose(player, config, this, config.getCloseItem());
+		InventoriesUtils.initializePaginatedInventory(player, config, this, config.getInventoryScheme());
 
 
 		List<Player> onlinePlayers = Bukkit.getOnlinePlayers().stream()

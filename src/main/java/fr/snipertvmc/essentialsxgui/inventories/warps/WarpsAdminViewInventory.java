@@ -42,8 +42,8 @@ public class WarpsAdminViewInventory extends PaginatedFastInv {
 		);
 
 
-		InventoriesUtils.initializePaginatedInventory(player, config, this, config.getInventoryScheme());
 		InventoriesUtils.initializeInventoryWithClose(player, config, this, config.getCloseItem());
+		InventoriesUtils.initializePaginatedInventory(player, config, this, config.getInventoryScheme());
 
 
 		Main.getInstance().getServerDataManager().updateServerWarps();
