@@ -10,6 +10,7 @@ import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.
 import fr.snipertvmc.essentialsxgui.libraries.exglib.Pair;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.ItemBuilder;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.PaginatedFastInv;
+import fr.snipertvmc.essentialsxgui.utilities.InventoriesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.data.DataEntryUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.entity.Player;
@@ -137,21 +138,8 @@ public class DataEntryGUIInventory extends PaginatedFastInv {
 
 	@Override
 	protected void onPageChange(int page) {
-
 		Player player = this.getInventory().getViewers().isEmpty() ? null : (Player) this.getInventory().getViewers().get(0);
-
-		setItem(config.getCurrentPageItem().getSlot(), config.getCurrentPageItem().duplicate()
-				.updateVariables(
-						Map.of("currentPage", String.valueOf(page),
-								"totalPages", String.valueOf(this.lastPage()),
-								"previousPage", String.valueOf(page - 1),
-								"nextPage", String.valueOf(page + 1)))
-				.build(player));
-
-		if (this.getInventory().getViewers().isEmpty()) {
-			return;
-		}
-
+		InventoriesUtils.updateCurrentPageItem(player, config, this);
 		SoundsUtils.playSound(player, EXGSound.GUI_PAGE_CHANGE);
 	}
 

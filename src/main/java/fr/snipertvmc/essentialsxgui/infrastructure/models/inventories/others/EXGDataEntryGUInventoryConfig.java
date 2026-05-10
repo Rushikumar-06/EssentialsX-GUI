@@ -1,20 +1,16 @@
 package fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.others;
 
-import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGPaginatedInventoryConfig;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.InventoryScheme;
 
-public class EXGDataEntryGUInventoryConfig extends EXGInventoryConfig {
+public class EXGDataEntryGUInventoryConfig extends EXGPaginatedInventoryConfig {
 
 
 	// -------------------------------------------------- //
 
 
 	private EXGItemConfig materialIconItem;
-
-	private EXGItemConfig nextPageItem;
-	private EXGItemConfig previousPageItem;
-	private EXGItemConfig currentPageItem;
 
 	private EXGItemConfig cancelItem;
 
@@ -36,16 +32,6 @@ public class EXGDataEntryGUInventoryConfig extends EXGInventoryConfig {
 		return materialIconItem;
 	}
 
-	public EXGItemConfig getNextPageItem() {
-		return nextPageItem;
-	}
-	public EXGItemConfig getPreviousPageItem() {
-		return previousPageItem;
-	}
-	public EXGItemConfig getCurrentPageItem() {
-		return currentPageItem;
-	}
-
 	public EXGItemConfig getCancelItem() {
 		return cancelItem;
 	}
@@ -60,16 +46,6 @@ public class EXGDataEntryGUInventoryConfig extends EXGInventoryConfig {
 
 	public void setMaterialIconItem(EXGItemConfig materialIconItem) {
 		this.materialIconItem = materialIconItem;
-	}
-
-	public void setNextPageItem(EXGItemConfig nextPageItem) {
-		this.nextPageItem = nextPageItem;
-	}
-	public void setPreviousPageItem(EXGItemConfig previousPageItem) {
-		this.previousPageItem = previousPageItem;
-	}
-	public void setCurrentPageItem(EXGItemConfig currentPageItem) {
-		this.currentPageItem = currentPageItem;
 	}
 
 	public void setCancelItem(EXGItemConfig cancelItem) {

@@ -1,10 +1,10 @@
 package fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.whois;
 
-import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGPaginatedInventoryConfig;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.InventoryScheme;
 
-public class EXGWhoisViewInventoryConfig extends EXGInventoryConfig {
+public class EXGWhoisViewInventoryConfig extends EXGPaginatedInventoryConfig {
 
 
 	// -------------------------------------------------- //
@@ -15,10 +15,6 @@ public class EXGWhoisViewInventoryConfig extends EXGInventoryConfig {
 	private EXGItemConfig playerWorldItem;
 	private EXGItemConfig playerServerDataItem;
 	private EXGItemConfig playerPunishmentsItem;
-
-	private EXGItemConfig nextPageItem;
-	private EXGItemConfig previousPageItem;
-	private EXGItemConfig currentPageItem;
 
 	private EXGItemConfig backItem;
 
@@ -54,16 +50,6 @@ public class EXGWhoisViewInventoryConfig extends EXGInventoryConfig {
 		return playerPunishmentsItem;
 	}
 
-	public EXGItemConfig getNextPageItem() {
-		return nextPageItem;
-	}
-	public EXGItemConfig getPreviousPageItem() {
-		return previousPageItem;
-	}
-	public EXGItemConfig getCurrentPageItem() {
-		return currentPageItem;
-	}
-
 	public EXGItemConfig getBackItem() {
 		return backItem;
 	}
@@ -94,17 +80,6 @@ public class EXGWhoisViewInventoryConfig extends EXGInventoryConfig {
 	}
 	public void setPlayerPunishmentsItem(EXGItemConfig playerPunishmentsItem) {
 		this.playerPunishmentsItem = playerPunishmentsItem;
-	}
-
-
-	public void setNextPageItem(EXGItemConfig nextPageItem) {
-		this.nextPageItem = nextPageItem;
-	}
-	public void setPreviousPageItem(EXGItemConfig previousPageItem) {
-		this.previousPageItem = previousPageItem;
-	}
-	public void setCurrentPageItem(EXGItemConfig currentPageItem) {
-		this.currentPageItem = currentPageItem;
 	}
 
 	public void setBackItem(EXGItemConfig backItem) {

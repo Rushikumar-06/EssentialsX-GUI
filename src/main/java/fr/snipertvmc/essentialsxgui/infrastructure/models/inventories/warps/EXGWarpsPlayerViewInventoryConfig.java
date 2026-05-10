@@ -18,10 +18,6 @@ public class EXGWarpsPlayerViewInventoryConfig extends EXGPaginatedInventoryConf
 	private EXGItemConfig cancelSearchWarpItem;
 	private EXGItemConfig noSearchWarpResultsItem;
 
-	private EXGItemConfig nextPageItem;
-	private EXGItemConfig previousPageItem;
-	private EXGItemConfig currentPageItem;
-
 	private EXGItemConfig closeItem;
 
 	private InventoryScheme inventoryScheme;

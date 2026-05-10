@@ -5,6 +5,7 @@ import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.whois.EXGWhoisPlayersInventoryConfig;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.PaginatedFastInv;
+import fr.snipertvmc.essentialsxgui.utilities.InventoriesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -89,17 +90,8 @@ public class WhoisPlayersInventory extends PaginatedFastInv {
 
 	@Override
 	protected void onPageChange(int page) {
-
 		Player player = this.getInventory().getViewers().isEmpty() ? null : (Player) this.getInventory().getViewers().get(0);
-
-		setItem(config.getCurrentPageItem().getSlot(), config.getCurrentPageItem()
-				.updateVariables(
-						Map.of("currentPage", String.valueOf(this.currentPage()),
-								"totalPages", String.valueOf(this.lastPage()),
-								"previousPage", String.valueOf(this.currentPage() - 1),
-								"nextPage", String.valueOf(this.currentPage() + 1)))
-				.build(player));
-
+		InventoriesUtils.updateCurrentPageItem(player, config, this);
 		SoundsUtils.playSound(player, EXGSound.GUI_PAGE_CHANGE);
 	}
 

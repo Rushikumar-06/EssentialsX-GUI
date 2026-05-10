@@ -88,17 +88,8 @@ public class WarpPlayerTeleportInventory extends PaginatedFastInv {
 
 	@Override
 	protected void onPageChange(int page) {
-
 		Player player = this.getInventory().getViewers().isEmpty() ? null : (Player) this.getInventory().getViewers().get(0);
-
-		setItem(config.getCurrentPageItem().getSlot(), config.getCurrentPageItem()
-				.updateVariables(
-						Map.of("currentPage", String.valueOf(this.currentPage()),
-								"totalPages", String.valueOf(this.lastPage()),
-								"previousPage", String.valueOf(this.currentPage() - 1),
-								"nextPage", String.valueOf(this.currentPage() + 1)))
-				.build(player));
-
+		InventoriesUtils.updateCurrentPageItem(player, config, this);
 		SoundsUtils.playSound(player, EXGSound.GUI_PAGE_CHANGE);
 	}
 
