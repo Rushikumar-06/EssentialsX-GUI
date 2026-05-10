@@ -8,6 +8,7 @@ import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.whois.EXGWhoisViewInventoryConfig;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.FastInv;
+import fr.snipertvmc.essentialsxgui.utilities.InventoriesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.data.TimeUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
@@ -39,10 +40,7 @@ public class WhoisViewInventory extends FastInv {
 		);
 
 
-		// Setting border
-		if (config.getBorderItem().isEnabled()) {
-			setItems(config.getBorderSlots(), config.getBorderItem().build(player));
-		}
+		InventoriesUtils.initializeBorderItem(player, config, this);
 
 
 		// Fetching user data

@@ -9,6 +9,7 @@ import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.economy.EX
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
 import fr.snipertvmc.essentialsxgui.libraries.exglib.Pair;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.FastInv;
+import fr.snipertvmc.essentialsxgui.utilities.InventoriesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.TextUtils;
 import fr.snipertvmc.essentialsxgui.utilities.data.TimeUtils;
@@ -44,7 +45,7 @@ public class BalanceTopInventory extends FastInv {
 		);
 
 
-		initializeInventory(player);
+		InventoriesUtils.initializeInventoryWithClose(player, config, this, config.getCloseItem());
 
 
 		if (config.getPlayerRankingItem().isEnabled()) {
@@ -202,23 +203,6 @@ public class BalanceTopInventory extends FastInv {
 		} else {
 			TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.NO_PERMISSION));
 			SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
-		}
-	}
-
-
-	private void initializeInventory(Player player) {
-
-		if (config.getBorderItem().isEnabled()) {
-			setItems(config.getBorderSlots(), config.getBorderItem().build(player));
-		}
-
-
-		if (config.getCloseItem().isEnabled()) {
-			setItem(config.getCloseItem().getSlot(), config.getCloseItem().build(player), e -> {
-
-				e.getWhoClicked().closeInventory();
-				SoundsUtils.playSound(player, EXGSound.GUI_CLOSE);
-			});
 		}
 	}
 

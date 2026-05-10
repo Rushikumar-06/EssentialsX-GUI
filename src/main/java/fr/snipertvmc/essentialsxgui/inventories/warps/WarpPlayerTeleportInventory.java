@@ -39,16 +39,11 @@ public class WarpPlayerTeleportInventory extends PaginatedFastInv {
 		);
 
 
+		InventoriesUtils.initializeBorderItem(player, config, this);
+		InventoriesUtils.initializePaginatedInventory(player, config, this, config.getInventoryScheme());
+
+
 		Main.getInstance().getServerDataManager().updateServerWarps();
-
-
-		if (config.getBorderItem().isEnabled()) {
-			setItems(config.getBorderSlots(), config.getBorderItem().build(player));
-		}
-
-
-		InventoriesUtils.initializePaginatedInventory(player, config, this);
-
 
 		List<Player> targets = Bukkit.getOnlinePlayers().stream()
 				.map(p -> (Player) p)
@@ -78,9 +73,6 @@ public class WarpPlayerTeleportInventory extends PaginatedFastInv {
 				SoundsUtils.playSound(player, EXGSound.GUI_BACK);
 			});
 		}
-
-
-		config.getInventoryScheme().apply(this);
 	}
 
 

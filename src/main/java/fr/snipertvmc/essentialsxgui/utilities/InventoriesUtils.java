@@ -1,11 +1,16 @@
 package fr.snipertvmc.essentialsxgui.utilities;
 
+import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGHome;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGKit;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGWarp;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGPaginatedInventoryConfig;
+import fr.snipertvmc.essentialsxgui.libraries.fastinv.FastInv;
+import fr.snipertvmc.essentialsxgui.libraries.fastinv.InventoryScheme;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.PaginatedFastInv;
+import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -19,7 +24,33 @@ public class InventoriesUtils {
 	// -------------------------------------------------- //
 
 
-	public static void initializePaginatedInventory(Player player, EXGPaginatedInventoryConfig config, PaginatedFastInv inv) {
+	public static void initializeBorderItem(Player player, EXGInventoryConfig config, FastInv inv) {
+
+		if (config.getBorderItem().isEnabled()) {
+			inv.setItems(config.getBorderSlots(), config.getBorderItem().build(player));
+		}
+	}
+
+
+	public static void initializeInventoryWithClose(Player player, EXGInventoryConfig config, FastInv inv, EXGItemConfig closeItem) {
+
+		initializeBorderItem(player, config, inv);
+
+		if (closeItem.isEnabled()) {
+			inv.setItem(closeItem.getSlot(), closeItem.build(player), e -> {
+
+				e.getWhoClicked().closeInventory();
+				SoundsUtils.playSound(player, EXGSound.GUI_CLOSE);
+			});
+		}
+	}
+
+
+	// -------------------------------------------------- //
+
+
+	public static void initializePaginatedInventory(Player player, EXGPaginatedInventoryConfig config, PaginatedFastInv inv, InventoryScheme scheme) {
+		scheme.apply(inv);
 
 		if (config.getPreviousPageItem().isEnabled()) {
 			inv.previousPageItem(config.getPreviousPageItem().getSlot(), p -> config.getPreviousPageItem().duplicate()

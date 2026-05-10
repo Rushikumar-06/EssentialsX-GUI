@@ -44,6 +44,10 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 		);
 
 
+		InventoriesUtils.initializePaginatedInventory(player, config, this, config.getInventoryScheme());
+		InventoriesUtils.initializeInventoryWithClose(player, config, this, config.getCloseItem());
+
+
 		Main.getInstance().getServerDataManager().updateServerKits();
 
 		Set<EXGKit> kits = kitSearch != null ? definedKits :
@@ -55,8 +59,6 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 						.collect(Collectors.toCollection(LinkedHashSet::new));
 
 
-		initializeGeneralInventory(player);
-		InventoriesUtils.initializePaginatedInventory(player, config, this);
 		defineKitsItems(player, kitSearch, kits);
 		defineSwitchToAdminModeItem(player);
 		defineSearchKitItem(player, kitSearch, kits);
@@ -136,26 +138,6 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 				});
 			}
 		}
-	}
-
-
-	private void initializeGeneralInventory(Player player) {
-
-		if (config.getBorderItem().isEnabled()) {
-			setItems(config.getBorderSlots(), config.getBorderItem().build(player));
-		}
-
-
-		if (config.getCloseItem().isEnabled()) {
-			setItem(config.getCloseItem().getSlot(), config.getCloseItem().build(player), e -> {
-
-				e.getWhoClicked().closeInventory();
-				SoundsUtils.playSound(player, EXGSound.GUI_CLOSE);
-			});
-		}
-
-
-		config.getInventoryScheme().apply(this);
 	}
 
 

@@ -44,8 +44,20 @@ public class DataEntryGUIInventory extends PaginatedFastInv {
 		);
 
 
+		InventoriesUtils.initializePaginatedInventory(player, config, this, config.getInventoryScheme());
+		InventoriesUtils.initializeBorderItem(player, config, this);
+
+
+		if (config.getCancelItem().isEnabled()) {
+			setItem(config.getCancelItem().getSlot(), config.getCancelItem().build(player), e -> {
+
+				onFailure.accept(new Pair<>(null, EXGEntryResult.CANCELED));
+				EXGEntryResult.CANCELED.playResult(player);
+			});
+		}
+
+
 		addMaterialItems(player, entrySettings, onSuccess, onFailure);
-		initializeInventory(player, onFailure);
 	}
 
 
@@ -97,39 +109,6 @@ public class DataEntryGUIInventory extends PaginatedFastInv {
 				}
 			});
 		}
-	}
-
-
-	private void initializeInventory(Player player, Consumer<Pair<String, EXGEntryResult>> onFailure) {
-
-		if (config.getBorderItem().isEnabled()) {
-			setItems(config.getBorderSlots(), config.getBorderItem().build(player));
-		}
-
-		previousPageItem(config.getPreviousPageItem().getSlot(), p -> config.getPreviousPageItem().duplicate()
-				.updateVariables(
-						Map.of("currentPage", String.valueOf(p + 1),
-								"previousPage", String.valueOf(p)))
-				.build(player));
-
-
-		nextPageItem(config.getNextPageItem().getSlot(), p -> config.getNextPageItem().duplicate()
-				.updateVariables(
-						Map.of("currentPage", String.valueOf(p - 1),
-								"nextPage", String.valueOf(p)))
-				.build(player));
-
-
-		if (config.getCancelItem().isEnabled()) {
-			setItem(config.getCancelItem().getSlot(), config.getCancelItem().build(player), e -> {
-
-				onFailure.accept(new Pair<>(null, EXGEntryResult.CANCELED));
-				EXGEntryResult.CANCELED.playResult(player);
-			});
-		}
-
-
-		config.getInventoryScheme().apply(this);
 	}
 
 

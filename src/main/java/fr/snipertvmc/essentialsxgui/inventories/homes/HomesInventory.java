@@ -45,6 +45,10 @@ public class HomesInventory extends PaginatedFastInv {
 		);
 
 
+		InventoriesUtils.initializePaginatedInventory(player, config, this, config.getInventoryScheme());
+		InventoriesUtils.initializeInventoryWithClose(player, config, this, config.getCloseItem());
+
+
 		EXGPlayer exgPlayer = Main.getInstance().getPlayerManager().getPlayer(player);
 		Main.getInstance().getPlayerDataManager().updatePlayerHomes(exgPlayer);
 
@@ -56,8 +60,6 @@ public class HomesInventory extends PaginatedFastInv {
 						.collect(Collectors.toCollection(LinkedHashSet::new));
 
 
-		initializeInventory(player);
-		InventoriesUtils.initializePaginatedInventory(player, config, this);
 		addHomesItems(player, homes, homeSearch);
 		addBedHomeItem(player);
 		addCreateHomeItem(player);
@@ -173,26 +175,6 @@ public class HomesInventory extends PaginatedFastInv {
 				});
 			}
 		}
-	}
-
-
-	private void initializeInventory(Player player) {
-
-		if (config.getBorderItem().isEnabled()) {
-			setItems(config.getBorderSlots(), config.getBorderItem().build(player));
-		}
-
-
-		if (config.getCloseItem().isEnabled()) {
-			setItem(config.getCloseItem().getSlot(), config.getCloseItem().build(player), e -> {
-
-				e.getWhoClicked().closeInventory();
-				SoundsUtils.playSound(player, EXGSound.GUI_CLOSE);
-			});
-		}
-
-
-		config.getInventoryScheme().apply(this);
 	}
 
 

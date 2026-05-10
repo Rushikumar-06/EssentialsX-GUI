@@ -44,6 +44,10 @@ public class WarpsPlayerViewInventory extends PaginatedFastInv {
 		);
 
 
+		InventoriesUtils.initializePaginatedInventory(player, config, this, config.getInventoryScheme());
+		InventoriesUtils.initializeInventoryWithClose(player, config, this, config.getCloseItem());
+
+
 		Main.getInstance().getServerDataManager().updateServerWarps();
 
 		Set<EXGWarp> warps = warpSearch != null ? definedWarps :
@@ -55,8 +59,6 @@ public class WarpsPlayerViewInventory extends PaginatedFastInv {
 						.collect(Collectors.toCollection(LinkedHashSet::new));
 
 
-		initializeGeneralInventory(player);
-		InventoriesUtils.initializePaginatedInventory(player, config, this);
 		defineWarpsItems(player, warpSearch, warps);
 		defineSwitchToAdminModeItem(player);
 		defineSearchWarpItem(player, warpSearch, warps);
@@ -129,26 +131,6 @@ public class WarpsPlayerViewInventory extends PaginatedFastInv {
 				});
 			}
 		}
-	}
-
-
-	private void initializeGeneralInventory(Player player) {
-
-		if (config.getBorderItem().isEnabled()) {
-			setItems(config.getBorderSlots(), config.getBorderItem().build(player));
-		}
-
-
-		if (config.getCloseItem().isEnabled()) {
-			setItem(config.getCloseItem().getSlot(), config.getCloseItem().build(player), e -> {
-
-				e.getWhoClicked().closeInventory();
-				SoundsUtils.playSound(player, EXGSound.GUI_CLOSE);
-			});
-		}
-
-
-		config.getInventoryScheme().apply(this);
 	}
 
 

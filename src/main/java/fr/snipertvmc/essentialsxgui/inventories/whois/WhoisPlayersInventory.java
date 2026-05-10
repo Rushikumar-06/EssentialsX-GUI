@@ -35,23 +35,8 @@ public class WhoisPlayersInventory extends PaginatedFastInv {
 		);
 
 
-		if (config.getBorderItem().isEnabled()) {
-			setItems(config.getBorderSlots(), config.getBorderItem().build(player));
-		}
-
-
-		previousPageItem(config.getPreviousPageItem().getSlot(), p -> config.getPreviousPageItem().duplicate()
-				.updateVariables(
-						Map.of("currentPage", String.valueOf(p + 1),
-								"previousPage", String.valueOf(p)))
-				.build(player));
-
-
-		nextPageItem(config.getNextPageItem().getSlot(), p -> config.getNextPageItem().duplicate()
-				.updateVariables(
-						Map.of("currentPage", String.valueOf(p - 1),
-								"nextPage", String.valueOf(p)))
-				.build(player));
+		InventoriesUtils.initializePaginatedInventory(player, config, this, config.getInventoryScheme());
+		InventoriesUtils.initializeInventoryWithClose(player, config, this, config.getCloseItem());
 
 
 		List<Player> onlinePlayers = Bukkit.getOnlinePlayers().stream()
@@ -71,17 +56,6 @@ public class WhoisPlayersInventory extends PaginatedFastInv {
 				SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 			});
 		}
-
-		if (config.getCloseItem().isEnabled()) {
-			setItem(config.getCloseItem().getSlot(), config.getCloseItem().build(player), e -> {
-
-				e.getWhoClicked().closeInventory();
-				SoundsUtils.playSound(player, EXGSound.GUI_CLOSE);
-			});
-		}
-
-
-		config.getInventoryScheme().apply(this);
 	}
 
 

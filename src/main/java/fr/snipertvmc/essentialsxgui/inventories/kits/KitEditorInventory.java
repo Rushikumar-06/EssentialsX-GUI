@@ -7,6 +7,7 @@ import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGKit;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGPlayerInventoryData;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.EXGKitEditorInventoryConfig;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.FastInv;
+import fr.snipertvmc.essentialsxgui.utilities.InventoriesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.data.InventoryBackupUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.Material;
@@ -44,11 +45,7 @@ public class KitEditorInventory extends FastInv {
 		);
 
 
-		if (config.getBorderItem().isEnabled()) {
-			setItems(config.getBorderSlots(), config.getBorderItem()
-					.setItemFlags(List.of(XItemFlag.HIDE_UNBREAKABLE))
-					.build(player), e -> e.setCancelled(true));
-		}
+		InventoriesUtils.initializeBorderItem(player, config, this);
 
 
 		if (config.getSaveKitItem().isEnabled()) {

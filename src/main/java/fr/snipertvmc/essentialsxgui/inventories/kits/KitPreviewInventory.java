@@ -40,12 +40,8 @@ public class KitPreviewInventory extends PaginatedFastInv {
 		Main.getInstance().getServerDataManager().updateServerKits();
 
 
-		if (config.getBorderItem().isEnabled()) {
-			setItems(config.getBorderSlots(), config.getBorderItem().build(player));
-		}
-
-
-		InventoriesUtils.initializePaginatedInventory(player, config, this);
+		InventoriesUtils.initializePaginatedInventory(player, config, this, config.getInventoryScheme());
+		InventoriesUtils.initializeBorderItem(player, config, this);
 
 
 		List<ItemStack> items = Main.getInstance().getHookManager().getEssentialsHook().getKitItems(player, kit.getName());
@@ -62,9 +58,6 @@ public class KitPreviewInventory extends PaginatedFastInv {
 				SoundsUtils.playSound(player, EXGSound.GUI_BACK);
 			});
 		}
-
-
-		config.getInventoryScheme().apply(this);
 	}
 
 
