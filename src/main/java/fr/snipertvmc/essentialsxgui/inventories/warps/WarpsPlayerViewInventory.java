@@ -74,6 +74,7 @@ public class WarpsPlayerViewInventory extends PaginatedFastInv {
 			ItemStack warpItemStack = InventoriesUtils.getWarpItemStack(warpItem, warp, player);
 
 			addContent(warpItemStack, e -> {
+				e.getWhoClicked().closeInventory();
 				player.performCommand("essentials:warp " + warp.getName());
 				SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 			});

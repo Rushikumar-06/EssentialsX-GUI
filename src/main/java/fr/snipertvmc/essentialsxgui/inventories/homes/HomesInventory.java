@@ -78,6 +78,7 @@ public class HomesInventory extends PaginatedFastInv {
 			addContent(homeItemStack, e -> {
 
 				if (homeItem.isCorrectClick(e.getClick(), "teleportToHome")) {
+					e.getWhoClicked().closeInventory();
 					player.performCommand("essentials:home " + home.getName());
 
 				} else if (homeItem.isCorrectClick(e.getClick(), "editHome")) {
@@ -119,6 +120,7 @@ public class HomesInventory extends PaginatedFastInv {
 					.build(player), e -> {
 
 				if (player.hasPermission("essentials.home.bed")) {
+					e.getWhoClicked().closeInventory();
 					player.performCommand("essentials:home bed");
 					return;
 				}

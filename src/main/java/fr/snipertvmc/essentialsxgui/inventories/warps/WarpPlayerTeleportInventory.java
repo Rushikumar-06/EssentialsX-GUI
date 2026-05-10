@@ -65,6 +65,7 @@ public class WarpPlayerTeleportInventory extends PaginatedFastInv {
 							"warpDisplayName", warp.getDisplayName()))
 					.build(player), e -> {
 
+				e.getWhoClicked().closeInventory();
 				player.performCommand("essentials:warp " + warp.getName() + " " + target.getName());
 				SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 			});
