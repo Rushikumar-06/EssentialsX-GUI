@@ -50,9 +50,12 @@ public class WorthInventory extends FastInv {
 
 		String handItemMaterialName = hasItemInHand
 				? player.getInventory().getItemInMainHand().getType().name()
-				: MessagesUtils.getString(EXGMessage.NO_WORTH_AVAILABLE);
+				: MessagesUtils.getString(EXGMessage.NO_ITEM_IN_HAND);
 
-		String handItemWorth = MessagesUtils.getString(EXGMessage.NO_WORTH_AVAILABLE);
+		String handItemWorth = MessagesUtils.getString(hasItemInHand
+				? EXGMessage.NO_WORTH_AVAILABLE
+				: EXGMessage.NO_ITEM_IN_HAND);
+
 		if (hasItemInHand) {
 
 			BigDecimal handItemPrice = Main.getInstance().getEXGServer().getWorth().getPrice(player.getInventory().getItemInMainHand());

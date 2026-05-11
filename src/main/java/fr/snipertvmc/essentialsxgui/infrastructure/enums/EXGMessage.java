@@ -141,6 +141,7 @@ public enum EXGMessage {
 	NOT_RANKED("general.notRanked"),
 	RANK_FORMAT("general.rankFormat"),
 	NO_WORTH_AVAILABLE("general.noWorthAvailable"),
+	NO_ITEM_IN_HAND("general.noItemInHand"),
 
 
 	DAYS("general.days"),

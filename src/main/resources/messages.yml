@@ -206,6 +206,7 @@ general:
   notRanked: "&cNot ranked"
   rankFormat: "#{rank}"
   noWorthAvailable: "&cNo worth available"
+  noItemInHand: "&cNo item in hand"
 
 
   days: "{days}d"
