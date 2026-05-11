@@ -25,14 +25,9 @@ public class PlayerDataManager {
 
 		for (String homeName : essentialsHomes) {
 
-			String defaultMaterial = switch (Main.getInstance().getMCServerVersion()) {
-				case v1_8_8, v1_9_4, v1_10_2, v1_11_2, v1_12_2 -> "GRASS";
-				default -> "GRASS_BLOCK";
-			};
-
 			playerHomes.put(homeName, new HashMap<>() {{
 				put("displayName", homeName);
-				put("material", defaultMaterial);
+				put("material", "GRASS_BLOCK");
 				put("data", "0");
 				put("customItemStack", null);
 			}});

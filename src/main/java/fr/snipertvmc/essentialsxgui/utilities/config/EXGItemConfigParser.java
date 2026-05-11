@@ -3,8 +3,8 @@ package fr.snipertvmc.essentialsxgui.utilities.config;
 import com.cryptomorin.xseries.XEnchantment;
 import com.cryptomorin.xseries.XItemFlag;
 import com.cryptomorin.xseries.XMaterial;
+import com.earth2me.essentials.utils.VersionUtil;
 import fr.snipertvmc.essentialsxgui.Main;
-import fr.snipertvmc.essentialsxgui.infrastructure.enums.MCServerVersion;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.files.InventoryFile;
 import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -188,7 +188,7 @@ public class EXGItemConfigParser {
 
 	private static boolean isDataValid(Object data, String itemPath) {
 
-		if (Main.getInstance().getMCServerVersion().isHigherThan(MCServerVersion.v1_12_2)) {
+		if (VersionUtil.getServerBukkitVersion().isHigherThan(VersionUtil.BukkitVersion.fromString("1.12.2-R0.1-SNAPSHOT"))) {
 			return true; // Data is not used in versions > 1.12.2
 		}
 

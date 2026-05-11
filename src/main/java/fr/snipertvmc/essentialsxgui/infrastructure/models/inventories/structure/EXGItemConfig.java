@@ -3,8 +3,8 @@ package fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure
 import com.cryptomorin.xseries.XEnchantment;
 import com.cryptomorin.xseries.XItemFlag;
 import com.cryptomorin.xseries.XMaterial;
+import com.earth2me.essentials.utils.VersionUtil;
 import fr.snipertvmc.essentialsxgui.Main;
-import fr.snipertvmc.essentialsxgui.infrastructure.enums.MCServerVersion;
 import fr.snipertvmc.essentialsxgui.libraries.exglib.Pair;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.ItemBuilder;
 import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
@@ -248,7 +248,7 @@ public class EXGItemConfig {
 		}
 		itemBuilder.amount(amount);
 
-		if (!MCServerVersion.getMCServerVersion().isHigherThan(MCServerVersion.v1_12_2)) {
+		if (VersionUtil.getServerBukkitVersion().isLowerThanOrEqualTo(VersionUtil.BukkitVersion.fromString("1.12.2-R0.1-SNAPSHOT"))) {
 			if (data < 0 || data > 15) {
 				data = 0;
 			}
@@ -337,7 +337,7 @@ public class EXGItemConfig {
 			itemBuilder = new ItemBuilder(getMaterial());
 		}
 
-		if (MCServerVersion.getMCServerVersion().isHigherThan(MCServerVersion.v1_13_2)) {
+		if (VersionUtil.getServerBukkitVersion().isHigherThan(VersionUtil.BukkitVersion.fromString("1.13.2-R0.1-SNAPSHOT"))) {
 			itemBuilder.meta(meta -> meta.setCustomModelData(customModelData));
 		}
 		return itemBuilder;

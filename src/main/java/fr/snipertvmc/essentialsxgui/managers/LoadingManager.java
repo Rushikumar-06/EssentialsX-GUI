@@ -1,11 +1,11 @@
 package fr.snipertvmc.essentialsxgui.managers;
 
+import com.earth2me.essentials.utils.VersionUtil;
 import dev.faststats.bukkit.BukkitMetrics;
 import dev.faststats.core.data.Metric;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGPermission;
-import fr.snipertvmc.essentialsxgui.infrastructure.enums.MCServerVersion;
 import fr.snipertvmc.essentialsxgui.libraries.bstats.Metrics;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.FastInvManager;
 import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
@@ -158,26 +158,32 @@ public class LoadingManager {
 
 	public void checkForServerVersionSupport() {
 
-		MCServerVersion serverVersion = Main.getInstance().getMCServerVersion();
-		String serverVersionColor = serverVersion != MCServerVersion.UnknownVersion ? "§a" : "§6";
+		VersionUtil.SupportStatus supportStatus = VersionUtil.getServerSupportStatus();
 
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Server version found: " + serverVersionColor + serverVersion.getVersionName());
+		boolean serverSupported = supportStatus == VersionUtil.SupportStatus.FULL || supportStatus == VersionUtil.SupportStatus.LIMITED;
+		String serverVersionColor = serverSupported ? "§a" : "§6";
 
-		if (serverVersion == MCServerVersion.UnknownVersion) {
-			ConsoleLogger.console("\t§6EssentialsX-GUI: §cBe very careful, the version has not been recognized or is not supported.");
-			ConsoleLogger.console("\t§6EssentialsX-GUI: §cPlease check the documentation for more information about this error.");
+		String version = VersionUtil.getServerBukkitVersion().getMajor() + "." + VersionUtil.getServerBukkitVersion().getMinor() + "." + VersionUtil.getServerBukkitVersion().getPatch();
+		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Server version found: " + serverVersionColor + version);
+
+		if (supportStatus == VersionUtil.SupportStatus.NMS_CLEANROOM
+				|| supportStatus == VersionUtil.SupportStatus.STUPID_PLUGIN
+				||  supportStatus == VersionUtil.SupportStatus.UNSTABLE
+				|| supportStatus == VersionUtil.SupportStatus.DANGEROUS_FORK) {
+
+			ConsoleLogger.console("\t§6EssentialsX-GUI: §eBe careful, the version may be not fully supported or may cause issues.");
+			ConsoleLogger.console("\t§6EssentialsX-GUI: §ePlease check the documentation for more information about this error.");
 			return;
 		}
 
-		if (serverVersion.isDeprecated()) {
-			ConsoleLogger.console("\t§6EssentialsX-GUI: §eThis server version is deprecated and could be removed in the future.");
+		if (supportStatus == VersionUtil.SupportStatus.OUTDATED) {
+			ConsoleLogger.console("\t§6EssentialsX-GUI: §eThis server version is outdated and may not be fully supported by EssentialsX-GUI.");
 			ConsoleLogger.console("\t§6EssentialsX-GUI: §ePlease consider updating to a newer version.");
 			ConsoleLogger.console("\t§6EssentialsX-GUI: §eA list of fully supported versions is available on the plugin page.");
 			return;
 		}
 
 		ConsoleLogger.console("\t§6EssentialsX-GUI: §aThis server version is fully supported by EssentialsX-GUI.");
-		return;
 	}
 
 

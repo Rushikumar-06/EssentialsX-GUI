@@ -52,8 +52,8 @@ public class EXGWorth {
 			if (!materials.contains(materialName)) continue;
 
 			// With data
-			boolean greaterThan1_12 = Main.getInstance().getMCServerVersion().isHigherThan(MCServerVersion.v1_12_2);
-			if (!greaterThan1_12 && worthConfig.getConfigurationSection(key) != null) {
+			boolean dataSupport = VersionUtil.getServerBukkitVersion().isLowerThanOrEqualTo(VersionUtil.BukkitVersion.fromString("1.12.2-R0.1-SNAPSHOT"));
+			if (dataSupport && worthConfig.getConfigurationSection(key) != null) {
 				ConfigurationSection materialSection = worthConfig.getConfigurationSection(key);
 				if (materialSection == null) continue;
 
@@ -76,7 +76,7 @@ public class EXGWorth {
 		String itemName = itemStack.getType().name().toLowerCase().replace("_", "");
 
 		// Without data
-		if (Main.getInstance().getMCServerVersion().isHigherThan(MCServerVersion.v1_12_2)) {
+		if (VersionUtil.getServerBukkitVersion().isHigherThan(VersionUtil.BukkitVersion.fromString("1.12.2-R0.1-SNAPSHOT"))) {
 			return itemsWorth.getOrDefault(itemName, null);
 		}
 

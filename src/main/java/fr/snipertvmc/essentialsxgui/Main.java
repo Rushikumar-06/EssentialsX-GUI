@@ -20,7 +20,6 @@ package fr.snipertvmc.essentialsxgui;
 import com.earth2me.essentials.Essentials;
 import com.earth2me.essentials.libs.kyori.adventure.platform.bukkit.BukkitAudiences;
 import dev.faststats.core.ErrorTracker;
-import fr.snipertvmc.essentialsxgui.infrastructure.enums.MCServerVersion;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGServer;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.files.ConfigurationFile;
 import fr.snipertvmc.essentialsxgui.libraries.bstats.Metrics;
@@ -53,11 +52,9 @@ public class Main extends JavaPlugin {
 	private ServerDataManager serverDataManager;
 	private ServerManager serverManager;
 
-	private MCServerVersion mcServerVersion;
-	private Metrics bStatsMetrics;
-
 	private BukkitAudiences bukkitAudiences;
 
+	private Metrics bStatsMetrics;
 	private dev.faststats.core.Metrics fastStatsMetrics;
 	private final ErrorTracker fastStatsErrorTracker = ErrorTracker.contextAware();
 
@@ -96,9 +93,6 @@ public class Main extends JavaPlugin {
 		playerManager = new PlayerManager();
 		serverDataManager = new ServerDataManager();
 
-		mcServerVersion = MCServerVersion.getMCServerVersion();
-		bStatsMetrics = new Metrics(this, 26314);
-
 		bukkitAudiences  = BukkitAudiences.create(this);
 
 
@@ -112,12 +106,13 @@ public class Main extends JavaPlugin {
 
 
 		// LOAD PLUGIN
+		bStatsMetrics = new Metrics(this, 26314);
 		boolean successfullyLoaded = loadingManager.loadPlugin(filesManager.getConfiguration().isDetailedLoading());
+		fastStatsMetrics.ready();
 
 
 		// SERVER INITIALIZATION
 		if (successfullyLoaded) serverManager = new ServerManager();
-		fastStatsMetrics.ready();
 
 
 		// PLUGIN LOADING COMPLETED
@@ -233,17 +228,13 @@ public class Main extends JavaPlugin {
 
 
 	// CONSTANTS VARIABLES
-	public MCServerVersion getMCServerVersion() {
-		return mcServerVersion;
-	}
-	public Metrics getbStatsMetrics() {
-		return bStatsMetrics;
-	}
-
 	public BukkitAudiences getBukkitAudiences() {
 		return bukkitAudiences;
 	}
 
+	public Metrics getbStatsMetrics() {
+		return bStatsMetrics;
+	}
 	public dev.faststats.core.Metrics getFastStatsMetrics() {
 		return fastStatsMetrics;
 	}
