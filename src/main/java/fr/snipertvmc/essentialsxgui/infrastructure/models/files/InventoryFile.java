@@ -147,7 +147,7 @@ public class InventoryFile {
 
 	private EXGItemConfig getItem(String path, boolean isBorderItem) {
 
-		Object enabledValue = yamlConfiguration.get(path + ".enabled");
+		Object enabledValue = yamlConfiguration.get(path + ".enabled", true);
 		if (enabledValue instanceof Boolean isEnabled && !isEnabled) {
 			return new EXGItemConfig(false, (short) 0, Material.AIR.name(), 1, (byte) 0, null, null, null, null, new HashMap<>(), 0, 0);
 		}

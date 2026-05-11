@@ -21,38 +21,6 @@ public class EXGItemConfigParser {
 
 	private static final Map<String, List<String>> ignoredPaths = new HashMap<>() {{
 
-		put("enabled", List.of(
-
-				// HOMES
-				"homes.items.homeItem",
-
-				// KITS
-				"kitsAdminView.items.kitItem",
-				"kitsPlayerView.items.kitItem",
-				"kitPlayerGive.items.playerItem",
-				"kitEditor.items.saveKitItem",
-				"kitEditor.items.cancelChangesItem",
-
-				// WARPS
-				"warpsAdminView.items.warpItem",
-				"warpsPlayerView.items.warpItem",
-				"warpPlayerTeleport.items.playerItem",
-
-				// WHOIS
-				"whoisPlayers.items.playerItem",
-				"whoisView.items.playerIdentificationItem",
-				"whoisView.items.playerStatisticsItem",
-				"whoisView.items.playerWorldItem",
-				"whoisView.items.playerServerDataItem",
-				"whoisView.items.playerPunishmentsItem",
-
-				// OTHERS
-				"dataEntryGUI.items.materialIconItem",
-
-				// ECONOMY
-				"rankingItems"
-		));
-
 		put("slot", List.of(
 
 				// HOMES
@@ -81,11 +49,12 @@ public class EXGItemConfigParser {
 				// WHOIS
 				"whoisPlayers.items.playerItem",
 
-				// OTHERS
-				"dataEntryGUI.items.materialIconItem",
-
 				// ECONOMY
-				"rankingItems"
+				"rankingItems",
+				"worthAll.items.worthItem",
+
+				// OTHERS
+				"dataEntryGUI.items.materialIconItem"
 		));
 
 		put("material", List.of(
@@ -117,8 +86,6 @@ public class EXGItemConfigParser {
 
 
 		// Retrieve item properties
-		Object enabled = config.get(itemPath + ".enabled");
-
 		Object slots = config.get(itemPath + ".slots");
 		Object slot = config.get(itemPath + ".slot");
 
@@ -134,9 +101,7 @@ public class EXGItemConfigParser {
 
 
 		// Validate item properties
-		return isEnabled(enabled, itemPath) &&
-
-				isSlotValid(slot, slots, itemPath, inventoryName, isBorderItem) &&
+		return isSlotValid(slot, slots, itemPath, inventoryName, isBorderItem) &&
 
 				isMaterialValid(material, itemPath) &&
 				isDataValid(data, itemPath) &&
@@ -153,16 +118,6 @@ public class EXGItemConfigParser {
 
 
 	// -------------------------------------------------- //
-
-
-	private static boolean isEnabled(Object enabled, String itemPath) {
-
-		if (isIgnored(itemPath, "enabled")) {
-			return true;
-		}
-
-		return (enabled instanceof Boolean && (Boolean) enabled);
-	}
 
 
 	private static boolean isSlotValid(Object slot, Object slots, String itemPath, String inventoryName, boolean isBorderItem) {
