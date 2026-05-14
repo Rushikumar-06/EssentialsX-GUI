@@ -1,18 +1,17 @@
 package fr.snipertvmc.essentialsxgui.infrastructure.models;
 
+import com.earth2me.essentials.utils.VersionUtil;
 import fr.snipertvmc.essentialsxgui.Main;
-import fr.snipertvmc.essentialsxgui.infrastructure.enums.MCServerVersion;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
 import java.math.BigDecimal;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 public class EXGWorth {
 
@@ -21,7 +20,7 @@ public class EXGWorth {
 
 
 	private final Map<String, BigDecimal> itemsWorth = new HashMap<>();
-	private final Set<String> materials = new HashSet<>();
+	private final Map<String, Material> materials = new HashMap<>();
 
 
 	// -------------------------------------------------- //
@@ -29,7 +28,7 @@ public class EXGWorth {
 
 	public EXGWorth() {
 		for (Material material : Material.values()) {
-			materials.add(material.name().toLowerCase().replace("_", ""));
+			materials.put(material.name().toLowerCase().replace("_", ""), material);
 		}
 
 		loadItemsWorth();
@@ -49,7 +48,7 @@ public class EXGWorth {
 
 		for (String key : worthConfig.getKeys(false)) {
 			String materialName = key.toLowerCase().replace("_", "");
-			if (!materials.contains(materialName)) continue;
+			if (!materials.containsKey(materialName)) continue;
 
 			// With data
 			boolean dataSupport = VersionUtil.getServerBukkitVersion().isLowerThanOrEqualTo(VersionUtil.BukkitVersion.fromString("1.12.2-R0.1-SNAPSHOT"));
@@ -71,13 +70,26 @@ public class EXGWorth {
 	}
 
 
-	public BigDecimal getPrice(ItemStack itemStack) {
+	public Map<String, BigDecimal> getItemsWorth() {
+		return itemsWorth;
+	}
+
+
+	public Material getMaterialFromWorthName(String materialName) {
+		return materials.get(materialName);
+	}
+
+
+	// -------------------------------------------------- //
+
+
+	public BigDecimal getUnitPrice(Player player, ItemStack itemStack) {
 
 		String itemName = itemStack.getType().name().toLowerCase().replace("_", "");
 
 		// Without data
 		if (VersionUtil.getServerBukkitVersion().isHigherThan(VersionUtil.BukkitVersion.fromString("1.12.2-R0.1-SNAPSHOT"))) {
-			return itemsWorth.getOrDefault(itemName, null);
+			return itemsWorth.getOrDefault(itemName, BigDecimal.ZERO).multiply(getMultiplier(player));
 		}
 
 		// With data
@@ -85,7 +97,28 @@ public class EXGWorth {
 
 		if (itemsWorth.containsKey(itemName + ":" + itemData)) {
 			return itemsWorth.get(itemName + ":" + itemData);
-		} else return itemsWorth.getOrDefault(itemName + ":*", null);
+		} else return itemsWorth.getOrDefault(itemName + ":*", BigDecimal.ZERO).multiply(getMultiplier(player));
+	}
+
+
+	public BigDecimal getInventoryPrice(Player player) {
+		BigDecimal totalPrice = BigDecimal.ZERO;
+
+		for (ItemStack itemStack : player.getInventory().getContents()) {
+			if (itemStack == null || itemStack.getType().isAir()) continue;
+
+			BigDecimal itemPrice = getUnitPrice(player, itemStack);
+			if (itemPrice != null) {
+				totalPrice = totalPrice.add(itemPrice.multiply(BigDecimal.valueOf(itemStack.getAmount())));
+			}
+		}
+
+		return totalPrice;
+	}
+
+
+	public BigDecimal getMultiplier(Player player) {
+		return Main.getInstance().getEssentials().getSettings().getMultiplier(Main.getInstance().getEssentials().getUser(player));
 	}
 
 

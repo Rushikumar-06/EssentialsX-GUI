@@ -68,6 +68,10 @@ public class EXGItemConfigParser {
 				// WARPS
 				"warpEditing.items.previewWarpItem",
 
+				// ECONOMY
+				"worthAll.items.worthItem",
+				"worthInventory.items.worthItem",
+
 				// OTHERS
 				"dataEntryGUI.items.materialIconItem"
 		));

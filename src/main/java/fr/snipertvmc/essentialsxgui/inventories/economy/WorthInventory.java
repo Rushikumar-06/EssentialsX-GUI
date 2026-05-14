@@ -3,11 +3,14 @@ package fr.snipertvmc.essentialsxgui.inventories.economy;
 import com.earth2me.essentials.utils.NumberUtil;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
-import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.economy.EXGWorthInventoryInventoryConfig;
+import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.economy.EXGWorthInventoryConfig;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.FastInv;
 import fr.snipertvmc.essentialsxgui.utilities.InventoriesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
+import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.math.BigDecimal;
 import java.util.Map;
@@ -18,7 +21,7 @@ public class WorthInventory extends FastInv {
 	// -------------------------------------------------- //
 
 
-	private final EXGWorthInventoryInventoryConfig config = Main.getInstance().getInventoriesManager().getWorthInventoryConfig().copy();
+	private final EXGWorthInventoryConfig config = Main.getInstance().getInventoriesManager().getWorthInventoryConfig().copy();
 
 
 	// -------------------------------------------------- //
@@ -38,52 +41,67 @@ public class WorthInventory extends FastInv {
 
 		if (config.getAllItem().isEnabled()) {
 			setItem(config.getAllItem().getSlot(), config.getAllItem()
-					.build(player));
+					.build(player), e -> {
+
+				new WorthAllInventory(player).open(player);
+				SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
+			});
 		}
 
 
-		boolean hasItemInHand = !player.getInventory().getItemInMainHand().getType().isAir();
+		ItemStack handItemStack = player.getInventory().getItemInMainHand();
+		boolean hasItemInHand = !handItemStack.getType().isAir();
 
 		String handItemMaterial = hasItemInHand
-				? player.getInventory().getItemInMainHand().getType().name()
+				? handItemStack.getType().name()
 				: "BARRIER";
 
-		String handItemMaterialName = hasItemInHand
-				? player.getInventory().getItemInMainHand().getType().name()
-				: MessagesUtils.getString(EXGMessage.NO_ITEM_IN_HAND);
-
-		String handItemWorth = MessagesUtils.getString(hasItemInHand
+		String handItemUnitWorth = MessagesUtils.getString(hasItemInHand
 				? EXGMessage.NO_WORTH_AVAILABLE
 				: EXGMessage.NO_ITEM_IN_HAND);
 
+		String handItemTotalWorth = MessagesUtils.getString(hasItemInHand
+				? EXGMessage.NO_WORTH_AVAILABLE
+				: EXGMessage.NO_ITEM_IN_HAND);
+
+		String handItemAmount = String.valueOf(handItemStack.getAmount());
+
 		if (hasItemInHand) {
 
-			BigDecimal handItemPrice = Main.getInstance().getEXGServer().getWorth().getPrice(player.getInventory().getItemInMainHand());
+			BigDecimal handItemUnitPrice = Main.getInstance().getEXGServer().getWorth().getUnitPrice(player, handItemStack);
+			if (handItemUnitPrice != null) {
 
-			if (handItemPrice != null) {
-				handItemWorth = NumberUtil.displayCurrency(handItemPrice, Main.getInstance().getEssentials());
+				handItemUnitWorth = NumberUtil.displayCurrency(handItemUnitPrice, Main.getInstance().getEssentials());
+				BigDecimal handItemTotalPrice = handItemUnitPrice.multiply(BigDecimal.valueOf(handItemStack.getAmount()));
+				handItemTotalWorth = NumberUtil.displayCurrency(handItemTotalPrice, Main.getInstance().getEssentials());
 			}
 		}
 
 		if (config.getHandItem().isEnabled()) {
 			setItem(config.getHandItem().getSlot(), config.getHandItem()
 					.duplicate()
+					.setAmount(handItemStack.getAmount())
 					.updateVariables(Map.of(
 							"handItemMaterial", handItemMaterial,
-							"handItemMaterialName", handItemMaterialName,
-							"handItemWorth", handItemWorth))
+							"handItemUnitWorth", handItemUnitWorth,
+							"handItemTotalWorth", handItemTotalWorth,
+							"handItemAmount", handItemAmount))
 					.build(player));
 		}
 
-//		Main.getInstance().getEssentials().getWorth().getPrice()
-//		String inventoryWorth;
 
+		BigDecimal inventoryPrice = Main.getInstance().getEXGServer().getWorth().getInventoryPrice(player);
+		String inventoryWorth = NumberUtil.displayCurrency(inventoryPrice, Main.getInstance().getEssentials());
 
 		if (config.getInventoryItem().isEnabled()) {
 			setItem(config.getInventoryItem().getSlot(), config.getInventoryItem()
-//					.updateVariables(Map.of(
-//							"inventoryWorth", inventoryWorth))
-					.build(player));
+					.updateVariables(Map.of(
+							"inventoryWorth", inventoryWorth))
+					.build(player), e -> {
+
+				new WorthInventoryInventory(player).open(player);
+				SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
+			});
 		}
 	}
 

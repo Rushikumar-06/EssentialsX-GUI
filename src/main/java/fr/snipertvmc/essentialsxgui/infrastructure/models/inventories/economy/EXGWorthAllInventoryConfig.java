@@ -4,7 +4,7 @@ import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGPaginatedInventoryConfig;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.InventoryScheme;
 
-public class EXGWorthInventoryInventoryConfig extends EXGPaginatedInventoryConfig {
+public class EXGWorthAllInventoryConfig extends EXGPaginatedInventoryConfig {
 
 
 	// -------------------------------------------------- //
@@ -20,7 +20,7 @@ public class EXGWorthInventoryInventoryConfig extends EXGPaginatedInventoryConfi
 	// -------------------------------------------------- //
 
 
-	public EXGWorthInventoryInventoryConfig(String title, int rows, EXGItemConfig borderItems, int... borderSlots) {
+	public EXGWorthAllInventoryConfig(String title, int rows, EXGItemConfig borderItems, int... borderSlots) {
 		super(title, rows, borderItems, borderSlots);
 	}
 
@@ -60,9 +60,9 @@ public class EXGWorthInventoryInventoryConfig extends EXGPaginatedInventoryConfi
 	// -------------------------------------------------- //
 
 
-	public EXGWorthInventoryInventoryConfig copy() {
+	public EXGWorthAllInventoryConfig copy() {
 
-		EXGWorthInventoryInventoryConfig copy = new EXGWorthInventoryInventoryConfig(
+		EXGWorthAllInventoryConfig copy = new EXGWorthAllInventoryConfig(
 				this.getEXGTitle().getTitle(null),
 				this.getRows(),
 				this.getBorderItem().duplicate(),

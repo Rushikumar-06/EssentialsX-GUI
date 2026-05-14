@@ -52,6 +52,8 @@ public class FilesManager {
 
 		put("balanceTop", "inventories/economy/balanceTop");
 		put("worth", "inventories/economy/worth");
+		put("worthAll", "inventories/economy/worthAll");
+		put("worthInventory", "inventories/economy/worthInventory");
 	}};
 
 
@@ -81,6 +83,8 @@ public class FilesManager {
 
 		put("balanceTop", "1.0");
 		put("worth", "1.0");
+		put("worthAll", "1.0");
+		put("worthInventory", "1.0");
 	}};
 
 

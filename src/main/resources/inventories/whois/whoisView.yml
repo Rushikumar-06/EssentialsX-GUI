@@ -192,4 +192,4 @@ whoisView:
       material: "ARROW"
       displayName: "&cBack"
       lore:
-        - "&7Click to go back to the warps list."
+        - "&7Click to go back to the whois menu."

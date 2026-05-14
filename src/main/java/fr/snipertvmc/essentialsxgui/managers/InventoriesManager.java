@@ -3,6 +3,8 @@ package fr.snipertvmc.essentialsxgui.managers;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.files.InventoryFile;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.economy.EXGBalanceTopInventoryConfig;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.economy.EXGWorthAllInventoryConfig;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.economy.EXGWorthInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.economy.EXGWorthInventoryInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes.EXGHomeEditingInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes.EXGHomesInventoryConfig;
@@ -24,9 +26,6 @@ public class InventoriesManager {
 	// -------------------------------------------------- //
 
 
-	private EXGBalanceTopInventoryConfig balanceTopInventoryConfig;
-	private EXGWorthInventoryInventoryConfig worthInventoryInventoryConfig;
-
 	private EXGHomesInventoryConfig homesInventoryConfig;
 	private EXGHomeEditingInventoryConfig homeEditingInventoryConfig;
 
@@ -37,8 +36,6 @@ public class InventoriesManager {
 	private EXGKitEditingInventoryConfig kitEditingInventoryConfig;
 	private EXGKitEditorInventoryConfig kitEditorInventoryConfig;
 
-	private EXGDataEntryGUInventoryConfig dataEntryGUIInventoryConfig;
-
 	private EXGWarpEditingInventoryConfig warpEditingInventoryConfig;
 	private EXGWarpPlayerTeleportInventoryConfig warpPlayerTeleportInventoryConfig;
 	private EXGWarpsAdminViewInventoryConfig warpsAdminViewInventoryConfig;
@@ -46,6 +43,13 @@ public class InventoriesManager {
 
 	private EXGWhoisPlayersInventoryConfig whoisPlayersInventoryConfig;
 	private EXGWhoisViewInventoryConfig whoisViewInventoryConfig;
+
+	private EXGBalanceTopInventoryConfig balanceTopInventoryConfig;
+	private EXGWorthInventoryConfig worthInventoryConfig;
+	private EXGWorthAllInventoryConfig worthAllInventoryConfig;
+	private EXGWorthInventoryInventoryConfig worthInventoryInventoryConfig;
+
+	private EXGDataEntryGUInventoryConfig dataEntryGUIInventoryConfig;
 
 
 	// -------------------------------------------------- //
@@ -71,8 +75,6 @@ public class InventoriesManager {
 			case "kitEditing" -> loadKitEditingInventory(title, rows, inventoryName, borderItem, borderSlots);
 			case "kitEditor" -> loadKitEditorInventory(title, rows, inventoryName, borderItem, borderSlots);
 
-			case "dataEntryGUI" -> loadDataEntryGUIInventory(title, rows, inventoryName, borderItem, borderSlots);
-
 			case "warpsAdminView" -> loadWarpsAdminViewInventory(title, rows, inventoryName, borderItem, borderSlots);
 			case "warpsPlayerView" -> loadWarpsPlayerViewInventory(title, rows, inventoryName, borderItem, borderSlots);
 			case "warpPlayerTeleport" -> loadWarpPlayerTeleportInventory(title, rows, inventoryName, borderItem, borderSlots);
@@ -83,55 +85,15 @@ public class InventoriesManager {
 
 			case "balanceTop" -> loadBalanceTopInventory(title, rows, inventoryName, borderItem, borderSlots);
 			case "worth" -> loadWorthInventory(title, rows, inventoryName, borderItem, borderSlots);
+			case "worthAll" -> loadWorthAllInventory(title, rows, inventoryName, borderItem, borderSlots);
+			case "worthInventory" -> loadWorthInventoryInventory(title, rows, inventoryName, borderItem, borderSlots);
+
+			case "dataEntryGUI" -> loadDataEntryGUIInventory(title, rows, inventoryName, borderItem, borderSlots);
 		}
 	}
 
 
 	// -------------------------------------------------- //
-
-
-	//
-	// ECONOMY INVENTORIES
-	//
-
-
-	public void loadBalanceTopInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
-
-		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
-
-		balanceTopInventoryConfig = new EXGBalanceTopInventoryConfig(title, rows, borderItem, borderSlots);
-
-		balanceTopInventoryConfig.setPlayerRankingItem(inventoryFile.getItem(
-				"playerRankingItem"));
-		balanceTopInventoryConfig.setForceUpdateItem(inventoryFile.getItem(
-				"forceUpdateItem"));
-
-		balanceTopInventoryConfig.setCloseItem(inventoryFile.getItem(
-				"closeItem"));
-
-		balanceTopInventoryConfig.setRankingItems(inventoryFile.getItemsSection(
-				"rankingItems"));
-
-		balanceTopInventoryConfig.setRankingRange(inventoryFile.getRankingRange());
-	}
-
-
-	public void loadWorthInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
-
-		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
-
-		worthInventoryInventoryConfig = new EXGWorthInventoryInventoryConfig(title, rows, borderItem, borderSlots);
-
-		worthInventoryInventoryConfig.setAllItem(inventoryFile.getItem(
-				"allItem"));
-		worthInventoryInventoryConfig.setHandItem(inventoryFile.getItem(
-				"handItem"));
-		worthInventoryInventoryConfig.setInventoryItem(inventoryFile.getItem(
-				"inventoryItem"));
-
-		worthInventoryInventoryConfig.setCloseItem(inventoryFile.getItem(
-				"closeItem"));
-	}
 
 
 	//
@@ -361,34 +323,6 @@ public class InventoriesManager {
 
 
 	//
-	// OTHERS INVENTORIES
-	//
-
-
-	public void loadDataEntryGUIInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
-
-		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
-
-		dataEntryGUIInventoryConfig = new EXGDataEntryGUInventoryConfig(title, rows, borderItem, borderSlots);
-
-		dataEntryGUIInventoryConfig.setMaterialIconItem(
-				inventoryFile.getItem("materialIconItem"));
-
-		dataEntryGUIInventoryConfig.setNextPageItem(inventoryFile.getItem(
-				"nextPageItem"));
-		dataEntryGUIInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
-				"previousPageItem"));
-		dataEntryGUIInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
-				"currentPageItem"));
-
-		dataEntryGUIInventoryConfig.setCancelItem(inventoryFile.getItem(
-				"cancelItem"));
-
-		dataEntryGUIInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
-	}
-
-
-	//
 	// WARPS INVENTORIES
 	//
 
@@ -565,6 +499,124 @@ public class InventoriesManager {
 	}
 
 
+	//
+	// ECONOMY INVENTORIES
+	//
+
+
+	public void loadBalanceTopInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+
+		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
+
+		balanceTopInventoryConfig = new EXGBalanceTopInventoryConfig(title, rows, borderItem, borderSlots);
+
+		balanceTopInventoryConfig.setPlayerRankingItem(inventoryFile.getItem(
+				"playerRankingItem"));
+		balanceTopInventoryConfig.setForceUpdateItem(inventoryFile.getItem(
+				"forceUpdateItem"));
+
+		balanceTopInventoryConfig.setCloseItem(inventoryFile.getItem(
+				"closeItem"));
+
+		balanceTopInventoryConfig.setRankingItems(inventoryFile.getItemsSection(
+				"rankingItems"));
+
+		balanceTopInventoryConfig.setRankingRange(inventoryFile.getRankingRange());
+	}
+
+
+	public void loadWorthInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+
+		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
+
+		worthInventoryConfig = new EXGWorthInventoryConfig(title, rows, borderItem, borderSlots);
+
+		worthInventoryConfig.setAllItem(inventoryFile.getItem(
+				"allItem"));
+		worthInventoryConfig.setHandItem(inventoryFile.getItem(
+				"handItem"));
+		worthInventoryConfig.setInventoryItem(inventoryFile.getItem(
+				"inventoryItem"));
+
+		worthInventoryConfig.setCloseItem(inventoryFile.getItem(
+				"closeItem"));
+	}
+
+
+	public void loadWorthAllInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+
+		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
+
+		worthAllInventoryConfig = new EXGWorthAllInventoryConfig(title, rows, borderItem, borderSlots);
+
+		worthAllInventoryConfig.setWorthItem(inventoryFile.getItem(
+				"worthItem"));
+
+		worthAllInventoryConfig.setNextPageItem(inventoryFile.getItem(
+				"nextPageItem"));
+		worthAllInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
+				"previousPageItem"));
+		worthAllInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
+				"currentPageItem"));
+
+		worthAllInventoryConfig.setBackItem(inventoryFile.getItem(
+				"backItem"));
+
+		worthAllInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
+	}
+
+
+	public void loadWorthInventoryInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+
+		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
+
+		worthInventoryInventoryConfig = new EXGWorthInventoryInventoryConfig(title, rows, borderItem, borderSlots);
+
+		worthInventoryInventoryConfig.setWorthItem(inventoryFile.getItem(
+				"worthItem"));
+
+		worthInventoryInventoryConfig.setNextPageItem(inventoryFile.getItem(
+				"nextPageItem"));
+		worthInventoryInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
+				"previousPageItem"));
+		worthInventoryInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
+				"currentPageItem"));
+
+		worthInventoryInventoryConfig.setBackItem(inventoryFile.getItem(
+				"backItem"));
+
+		worthInventoryInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
+	}
+
+
+	//
+	// OTHERS INVENTORIES
+	//
+
+
+	public void loadDataEntryGUIInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+
+		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
+
+		dataEntryGUIInventoryConfig = new EXGDataEntryGUInventoryConfig(title, rows, borderItem, borderSlots);
+
+		dataEntryGUIInventoryConfig.setMaterialIconItem(
+				inventoryFile.getItem("materialIconItem"));
+
+		dataEntryGUIInventoryConfig.setNextPageItem(inventoryFile.getItem(
+				"nextPageItem"));
+		dataEntryGUIInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
+				"previousPageItem"));
+		dataEntryGUIInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
+				"currentPageItem"));
+
+		dataEntryGUIInventoryConfig.setCancelItem(inventoryFile.getItem(
+				"cancelItem"));
+
+		dataEntryGUIInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
+	}
+
+
 	// -------------------------------------------------- //
 
 
@@ -580,8 +632,6 @@ public class InventoriesManager {
 				"kitEditing",
 				"kitEditor",
 
-				"dataEntryGUI",
-
 				"warpEditing",
 				"warpPlayerTeleport",
 				"warpsAdminView",
@@ -591,7 +641,11 @@ public class InventoriesManager {
 				"whoisView",
 
 				"balanceTop",
-				"worth"
+				"worth",
+				"worthAll",
+				"worthInventory",
+
+				"dataEntryGUI"
 		);
 	}
 
@@ -605,7 +659,6 @@ public class InventoriesManager {
 	public EXGHomeEditingInventoryConfig getHomeEditingInventoryConfig() {
 		return homeEditingInventoryConfig;
 	}
-
 
 	public EXGKitsAdminViewInventoryConfig getKitsAdminViewInventoryConfig() {
 		return kitsAdminViewInventoryConfig;
@@ -626,12 +679,6 @@ public class InventoriesManager {
 		return kitEditorInventoryConfig;
 	}
 
-
-	public EXGDataEntryGUInventoryConfig getDataEntryGUIInventoryConfig() {
-		return dataEntryGUIInventoryConfig;
-	}
-
-
 	public EXGWarpEditingInventoryConfig getWarpEditingInventoryConfig() {
 		return warpEditingInventoryConfig;
 	}
@@ -645,7 +692,6 @@ public class InventoriesManager {
 		return warpsPlayerViewInventoryConfig;
 	}
 
-
 	public EXGWhoisPlayersInventoryConfig getWhoisPlayersInventoryConfig() {
 		return whoisPlayersInventoryConfig;
 	}
@@ -656,8 +702,18 @@ public class InventoriesManager {
 	public EXGBalanceTopInventoryConfig getBalanceTopInventoryConfig() {
 		return balanceTopInventoryConfig;
 	}
-	public EXGWorthInventoryInventoryConfig getWorthInventoryConfig() {
+	public EXGWorthInventoryConfig getWorthInventoryConfig() {
+		return worthInventoryConfig;
+	}
+	public EXGWorthAllInventoryConfig  getWorthAllInventoryConfig() {
+		return worthAllInventoryConfig;
+	}
+	public EXGWorthInventoryInventoryConfig getWorthInventoryInventoryConfig() {
 		return worthInventoryInventoryConfig;
+	}
+
+	public EXGDataEntryGUInventoryConfig getDataEntryGUIInventoryConfig() {
+		return dataEntryGUIInventoryConfig;
 	}
 
 

@@ -196,6 +196,12 @@ public class EXGItemConfig {
 	}
 
 
+	public EXGItemConfig setAmount(int amount) {
+		this.amount = amount;
+		return this;
+	}
+
+
 	public EXGItemConfig setData(byte data) {
 		this.data = data;
 		return this;
@@ -332,6 +338,9 @@ public class EXGItemConfig {
 				SkullMeta skullMeta = (SkullMeta) itemMeta;
 				skullMeta.setOwner(playerHeadName);
 			});
+
+		} else if (getMaterial().get() == null || !getMaterial().get().isItem()) {
+			return new ItemBuilder(XMaterial.BARRIER);
 
 		} else {
 			itemBuilder = new ItemBuilder(getMaterial());
