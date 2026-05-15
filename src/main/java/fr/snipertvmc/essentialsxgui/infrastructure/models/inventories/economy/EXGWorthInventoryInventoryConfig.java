@@ -11,6 +11,7 @@ public class EXGWorthInventoryInventoryConfig extends EXGPaginatedInventoryConfi
 
 
 	private EXGItemConfig worthItem;
+	private EXGItemConfig emptyInventoryItem;
 
 	private EXGItemConfig backItem;
 
@@ -31,6 +32,9 @@ public class EXGWorthInventoryInventoryConfig extends EXGPaginatedInventoryConfi
 	public EXGItemConfig getWorthItem() {
 		return worthItem;
 	}
+	public EXGItemConfig getEmptyInventoryItem() {
+		return emptyInventoryItem;
+	}
 
 	public EXGItemConfig getBackItem() {
 		return backItem;
@@ -46,6 +50,9 @@ public class EXGWorthInventoryInventoryConfig extends EXGPaginatedInventoryConfi
 
 	public void setWorthItem(EXGItemConfig worthItem) {
 		this.worthItem = worthItem;
+	}
+	public void setEmptyInventoryItem(EXGItemConfig emptyInventoryItem) {
+		this.emptyInventoryItem = emptyInventoryItem;
 	}
 
 	public void setBackItem(EXGItemConfig backItem) {
@@ -70,6 +77,7 @@ public class EXGWorthInventoryInventoryConfig extends EXGPaginatedInventoryConfi
 		);
 
 		copy.setWorthItem(this.getWorthItem().duplicate());
+		copy.setEmptyInventoryItem(this.getEmptyInventoryItem().duplicate());
 
 		copy.setNextPageItem(this.getNextPageItem().duplicate());
 		copy.setPreviousPageItem(this.getPreviousPageItem().duplicate());

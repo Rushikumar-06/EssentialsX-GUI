@@ -52,6 +52,8 @@ public enum EXGMessage {
 	WARP_NAME_ALREADY_EXISTS("errors.warpNameAlreadyExists"),
 	NO_WARP_FOUND("errors.noWarpFound"),
 
+	NO_WORTH_FOUND("errors.noWorthFound"),
+
 
 	// GENERAL
 	ENTER_NEW_DISPLAY_NAME_CHAT("general.enterNewDisplayNameInChat"),
@@ -83,6 +85,8 @@ public enum EXGMessage {
 	CONFIRM_DELETE_WARP("general.confirmDeleteWarp"),
 
 	BALANCE_TOP_DATA_UPDATED("general.balanceTopDataUpdated"),
+	SEARCH_WORTH_CHAT("general.searchWorthInChat"),
+	SEARCH_WORTH("general.searchWorth"),
 
 	ACTION_CANCELED("general.actionCanceled"),
 	ACTION_EXPIRED("general.actionExpired"),

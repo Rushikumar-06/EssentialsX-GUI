@@ -89,7 +89,8 @@ public class EXGWorth {
 
 		// Without data
 		if (VersionUtil.getServerBukkitVersion().isHigherThan(VersionUtil.BukkitVersion.fromString("1.12.2-R0.1-SNAPSHOT"))) {
-			return itemsWorth.getOrDefault(itemName, BigDecimal.ZERO).multiply(getMultiplier(player));
+			BigDecimal unitPrice = itemsWorth.getOrDefault(itemName, null);
+			return unitPrice != null ? unitPrice.multiply(getMultiplier(player)) : null;
 		}
 
 		// With data
@@ -97,7 +98,10 @@ public class EXGWorth {
 
 		if (itemsWorth.containsKey(itemName + ":" + itemData)) {
 			return itemsWorth.get(itemName + ":" + itemData);
-		} else return itemsWorth.getOrDefault(itemName + ":*", BigDecimal.ZERO).multiply(getMultiplier(player));
+		} else {
+			BigDecimal unitPrice = itemsWorth.getOrDefault(itemName + ":*", null);
+			return unitPrice != null ? unitPrice.multiply(getMultiplier(player)) : null;
+		}
 	}
 
 

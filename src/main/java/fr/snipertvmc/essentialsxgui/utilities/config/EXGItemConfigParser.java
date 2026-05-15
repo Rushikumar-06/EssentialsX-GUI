@@ -52,6 +52,9 @@ public class EXGItemConfigParser {
 				// ECONOMY
 				"rankingItems",
 				"worthAll.items.worthItem",
+				"worthAll.items.noWorthItem",
+				"worthAll.items.noSearchWorthResultsItem",
+				"worthInventory.items.emptyInventoryItem",
 
 				// OTHERS
 				"dataEntryGUI.items.materialIconItem"

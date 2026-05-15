@@ -11,6 +11,11 @@ public class EXGWorthAllInventoryConfig extends EXGPaginatedInventoryConfig {
 
 
 	private EXGItemConfig worthItem;
+	private EXGItemConfig noWorthItem;
+
+	private EXGItemConfig searchWorthItem;
+	private EXGItemConfig cancelSearchWorthItem;
+	private EXGItemConfig noSearchWorthResultsItem;
 
 	private EXGItemConfig backItem;
 
@@ -31,6 +36,19 @@ public class EXGWorthAllInventoryConfig extends EXGPaginatedInventoryConfig {
 	public EXGItemConfig getWorthItem() {
 		return worthItem;
 	}
+	public EXGItemConfig getNoWorthItem() {
+		return noWorthItem;
+	}
+
+	public EXGItemConfig getSearchWorthItem() {
+		return searchWorthItem;
+	}
+	public EXGItemConfig getCancelSearchWorthItem() {
+		return cancelSearchWorthItem;
+	}
+	public EXGItemConfig getNoSearchWorthItemsItem() {
+		return noSearchWorthResultsItem;
+	}
 
 	public EXGItemConfig getBackItem() {
 		return backItem;
@@ -46,6 +64,19 @@ public class EXGWorthAllInventoryConfig extends EXGPaginatedInventoryConfig {
 
 	public void setWorthItem(EXGItemConfig worthItem) {
 		this.worthItem = worthItem;
+	}
+	public void setNoWorthItem(EXGItemConfig noWorthItem) {
+		this.noWorthItem = noWorthItem;
+	}
+
+	public void setSearchWorthItem(EXGItemConfig searchWorthItem) {
+		this.searchWorthItem = searchWorthItem;
+	}
+	public void setCancelSearchWorthItem(EXGItemConfig cancelSearchWorthItem) {
+		this.cancelSearchWorthItem = cancelSearchWorthItem;
+	}
+	public void setNoSearchWorthResultsItem(EXGItemConfig noSearchWorthResultsItem) {
+		this.noSearchWorthResultsItem = noSearchWorthResultsItem;
 	}
 
 	public void setBackItem(EXGItemConfig backItem) {
@@ -70,6 +101,11 @@ public class EXGWorthAllInventoryConfig extends EXGPaginatedInventoryConfig {
 		);
 
 		copy.setWorthItem(this.getWorthItem().duplicate());
+		copy.setNoWorthItem(this.getNoWorthItem().duplicate());
+
+		copy.setSearchWorthItem(this.getSearchWorthItem().duplicate());
+		copy.setCancelSearchWorthItem(this.getCancelSearchWorthItem().duplicate());
+		copy.setNoSearchWorthResultsItem(this.getNoSearchWorthItemsItem().duplicate());
 
 		copy.setNextPageItem(this.getNextPageItem().duplicate());
 		copy.setPreviousPageItem(this.getPreviousPageItem().duplicate());

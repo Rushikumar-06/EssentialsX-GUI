@@ -551,6 +551,15 @@ public class InventoriesManager {
 
 		worthAllInventoryConfig.setWorthItem(inventoryFile.getItem(
 				"worthItem"));
+		worthAllInventoryConfig.setNoWorthItem(inventoryFile.getItem(
+				"noWorthItem"));
+
+		worthAllInventoryConfig.setSearchWorthItem(inventoryFile.getItem(
+				"searchWorthItem"));
+		worthAllInventoryConfig.setCancelSearchWorthItem(inventoryFile.getItem(
+				"cancelSearchWorthItem"));
+		worthAllInventoryConfig.setNoSearchWorthResultsItem(inventoryFile.getItem(
+				"noSearchWorthResultsItem"));
 
 		worthAllInventoryConfig.setNextPageItem(inventoryFile.getItem(
 				"nextPageItem"));
@@ -574,6 +583,8 @@ public class InventoriesManager {
 
 		worthInventoryInventoryConfig.setWorthItem(inventoryFile.getItem(
 				"worthItem"));
+		worthInventoryInventoryConfig.setEmptyInventoryItem(inventoryFile.getItem(
+				"emptyInventoryItem"));
 
 		worthInventoryInventoryConfig.setNextPageItem(inventoryFile.getItem(
 				"nextPageItem"));

@@ -43,7 +43,7 @@ public class WorthInventory extends FastInv {
 			setItem(config.getAllItem().getSlot(), config.getAllItem()
 					.build(player), e -> {
 
-				new WorthAllInventory(player).open(player);
+				new WorthAllInventory(player, null, null).open(player);
 				SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 			});
 		}
@@ -52,7 +52,7 @@ public class WorthInventory extends FastInv {
 		ItemStack handItemStack = player.getInventory().getItemInMainHand();
 		boolean hasItemInHand = !handItemStack.getType().isAir();
 
-		String handItemMaterial = hasItemInHand
+		String handItemMaterialName = hasItemInHand
 				? handItemStack.getType().name()
 				: "BARRIER";
 
@@ -80,9 +80,10 @@ public class WorthInventory extends FastInv {
 		if (config.getHandItem().isEnabled()) {
 			setItem(config.getHandItem().getSlot(), config.getHandItem()
 					.duplicate()
-					.setAmount(handItemStack.getAmount())
+					.setMaterial(handItemMaterialName)
+					.setAmount(handItemStack.getAmount() > 0 ?  handItemStack.getAmount() : 1)
 					.updateVariables(Map.of(
-							"handItemMaterial", handItemMaterial,
+							"handItemMaterial", handItemMaterialName,
 							"handItemUnitWorth", handItemUnitWorth,
 							"handItemTotalWorth", handItemTotalWorth,
 							"handItemAmount", handItemAmount))

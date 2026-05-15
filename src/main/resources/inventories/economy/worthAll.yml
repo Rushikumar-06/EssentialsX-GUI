@@ -62,6 +62,43 @@ worthAll:
       lore:
         - "&7Worth &7&o(per item)&r&7: &a{itemWorth}"
 
+    # 'slot' value will be ignored in this section. The item will be placed in the first slot like a worth item.
+    # The item will be displayed if the server has no items with worth.
+    noWorthItem:
+      enabled: true
+      material: "BARRIER"
+      displayName: "&cNo items with worth"
+      lore:
+        - "&7There are no items with worth on this server."
+
+    searchWorthItem:
+      enabled: true
+      slot: 45
+      material: "TRIPWIRE_HOOK"
+      displayName: "&bSearch item worth"
+      lore:
+        - "&7Click to search for a item worth."
+
+    cancelSearchWorthItem:
+      enabled: true
+      slot: 45
+      material: "REDSTONE_BLOCK"
+      displayName: "&cCancel search"
+      lore:
+        - "&7Click to cancel the worth search."
+
+    # 'slot' value will be ignored in this section. The item will be placed in the first slot like a kit item.
+    # The item will be displayed if the player doesn't have any homes set.
+    # Placeholders available: {worthSearch}
+    noSearchWorthResultsItem:
+      enabled: true
+      material: "BARRIER"
+      displayName: "&cNo results"
+      lore:
+        - "&7No items worth matched your search."
+        - ""
+        - "&7Your search: &f&o{worthSearch}"
+
     # Placeholders available: {currentPage}, {previousPage}
     previousPageItem:
       enabled: true

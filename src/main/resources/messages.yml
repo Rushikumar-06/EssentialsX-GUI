@@ -98,6 +98,8 @@ errors:
   warpNameAlreadyExists: "&cA warp with this name already exists."
   noWarpFound: "&cNo warp found with that name."
 
+  noWorthFound: "&cNo items with worth found with that name."
+
 ############################################################
 # +------------------------------------------------------+ #
 # |                   General Messages                   | #
@@ -138,6 +140,8 @@ general:
   confirmDeleteWarp: "Type 'confirm' to confirm deletion"
 
   balanceTopDataUpdated: "&aThe balance top data has been updated."
+  searchWorthInChat: "&ePlease enter first few letters of the &fitem name &ein the chat. &7&oType 'cancel' to cancel the action."
+  searchWorth: "Search item worth"
 
 
   actionCanceled: "&6The action has been canceled."

@@ -266,6 +266,10 @@ economy:
     # Default: true
     enabled: true
 
+    # Decide how players can search for a worth.
+    # Ways available: "CHAT", "ANVIL"
+    searchWorthEntryType: "ANVIL"
+
 ############################################################
 # +------------------------------------------------------+ #
 # |                        Sounds                        | #

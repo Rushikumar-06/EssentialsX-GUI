@@ -3,16 +3,19 @@ package fr.snipertvmc.essentialsxgui.inventories.economy;
 import com.earth2me.essentials.utils.NumberUtil;
 import com.earth2me.essentials.utils.VersionUtil;
 import fr.snipertvmc.essentialsxgui.Main;
+import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.economy.EXGWorthInventoryInventoryConfig;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.PaginatedFastInv;
 import fr.snipertvmc.essentialsxgui.utilities.InventoriesUtils;
+import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,10 +52,18 @@ public class WorthInventoryInventory extends PaginatedFastInv {
 			String materialName = itemStack.getType().name();
 
 			BigDecimal itemUnitPrice = Main.getInstance().getEXGServer().getWorth().getUnitPrice(player, itemStack);
-			BigDecimal itemTotalPrice = itemUnitPrice.multiply(BigDecimal.valueOf(itemStack.getAmount()));
+			BigDecimal itemTotalPrice = null;
+			if (itemUnitPrice != null) {
+				itemTotalPrice = itemUnitPrice.multiply(BigDecimal.valueOf(itemStack.getAmount()));
+			}
 
-			String itemUnitWorth = NumberUtil.displayCurrency(itemUnitPrice, Main.getInstance().getEssentials());
-			String itemTotalWorth = NumberUtil.displayCurrency(itemTotalPrice, Main.getInstance().getEssentials());
+			String itemUnitWorth = itemUnitPrice == null
+					? MessagesUtils.getString(EXGMessage.NO_WORTH_AVAILABLE)
+					: NumberUtil.displayCurrency(itemUnitPrice, Main.getInstance().getEssentials());
+
+			String itemTotalWorth = itemTotalPrice == null
+					? MessagesUtils.getString(EXGMessage.NO_WORTH_AVAILABLE)
+					: NumberUtil.displayCurrency(itemTotalPrice, Main.getInstance().getEssentials());
 
 			Map<String, String> variables = new HashMap<>() {{
 				put("worthItemMaterial", materialName);
@@ -71,6 +82,15 @@ public class WorthInventoryInventory extends PaginatedFastInv {
 					.setAmount(itemStack.getAmount())
 					.setData((byte) itemStack.getDurability())
 					.updateVariables(variables)
+					.build(player));
+		}
+
+
+		boolean hasEmptyInventory = Arrays.stream(player.getInventory().getContents())
+				.noneMatch(itemStack -> itemStack != null && itemStack.getType() != Material.AIR);
+
+		if (hasEmptyInventory) {
+			addContent(config.getEmptyInventoryItem()
 					.build(player));
 		}
 

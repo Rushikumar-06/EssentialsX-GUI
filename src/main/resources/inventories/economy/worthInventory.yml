@@ -64,6 +64,15 @@ worthInventory:
         - "&7Total worth: &a{itemTotalWorth}"
         - "&7Amount: &a{itemAmount}"
 
+    # 'slot' value will be ignored in this section. The item will be placed in the first slot like a worth item.
+    # The item will be displayed if the player has no items in his inventory.
+    emptyInventoryItem:
+      enabled: true
+      material: "BARRIER"
+      displayName: "&cInventory empty"
+      lore:
+        - "&7Your inventory is empty."
+
     # Placeholders available: {currentPage}, {previousPage}
     previousPageItem:
       enabled: true
