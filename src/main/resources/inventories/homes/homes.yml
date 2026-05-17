@@ -85,8 +85,8 @@ homes:
       material: "GRASS_BLOCK"
       displayName: "&6{homeDisplayName}"
       lore:
-        - "&f&lLeft Click &7to teleport to this home."
-        - "&f&lRight Click &7to edit this home."
+        - "&f&lLeft click &7to teleport to this home."
+        - "&f&lRight click &7to edit this home."
         - "&f&lDrop &7to delete this home."
         - ""
         - "&7Home Name: &f&o{homeName}"
@@ -100,7 +100,7 @@ homes:
       enabled: true
       material: "{bedHomeWorldMaterial}"
       slot: 8
-      displayName: "&2Bed Home"
+      displayName: "&2Bed home"
       lore:
         - "&7The bed home is an automatic home"
         - "&7set when you sleep in a bed."
@@ -113,7 +113,7 @@ homes:
     noHomesItem:
       enabled: true
       material: "BARRIER"
-      displayName: "&cNo Homes"
+      displayName: "&cNo homes"
       lore:
         - "&7You have no homes set."
         - "&7Use &f/sethome <name> &7to set a home."
@@ -122,7 +122,7 @@ homes:
       enabled: true
       slot: 0
       material: "PISTON"
-      displayName: "&aCreate Home"
+      displayName: "&aCreate home"
       lore:
         - "&7Click to create a new home."
 
@@ -130,7 +130,7 @@ homes:
         enabled: true
         slot: 45
         material: "TRIPWIRE_HOOK"
-        displayName: "&bSearch Home"
+        displayName: "&bSearch home"
         lore:
           - "&7Click to search for a home."
 
@@ -138,7 +138,7 @@ homes:
         enabled: true
         slot: 45
         material: "REDSTONE_BLOCK"
-        displayName: "&cCancel Search"
+        displayName: "&cCancel search"
         lore:
           - "&7Click to cancel the home search."
 
@@ -148,7 +148,7 @@ homes:
     noSearchHomeResultsItem:
       enabled: true
       material: "BARRIER"
-      displayName: "&cNo Results"
+      displayName: "&cNo results"
       lore:
         - "&7No homes matched your search."
         - ""
@@ -159,7 +159,7 @@ homes:
       enabled: true
       slot: 47
       material: "STONE_BUTTON"
-      displayName: "&6Previous Page: &e{previousPage}"
+      displayName: "&6Previous page: &e{previousPage}"
       lore:
         - "&7Click to go to the previous page."
 
@@ -168,7 +168,7 @@ homes:
       enabled: true
       slot: 51
       material: "STONE_BUTTON"
-      displayName: "&6Next Page: &e{nextPage}"
+      displayName: "&6Next page: &e{nextPage}"
       lore:
         - "&7Click to go to the next page."
 
@@ -179,8 +179,8 @@ homes:
       material: "PAPER"
       displayName: "&2Page: &a{currentPage}/{totalPages}"
       lore:
-        - "&7Previous Page: &f{previousPage}"
-        - "&7Next Page: &f{nextPage}"
+        - "&7Previous page: &f{previousPage}"
+        - "&7Next page: &f{nextPage}"
 
     closeItem:
       enabled: true

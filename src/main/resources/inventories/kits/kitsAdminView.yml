@@ -67,8 +67,8 @@ kitsAdminView:
       material: "{kitMaterialName}"
       displayName: "&6{kitDisplayName}"
       lore:
-        - "&f&lLeft Click &7to give this kit to a player."
-        - "&f&lRight Click &7to edit this kit."
+        - "&f&lLeft click &7to give this kit to a player."
+        - "&f&lRight click &7to edit this kit."
         - "&f&lDrop &7to delete this kit."
         - ""
         - "&7Kit Name: &f&o{kitName}"
@@ -82,7 +82,7 @@ kitsAdminView:
     noKitsItem:
       enabled: true
       material: "BARRIER"
-      displayName: "&cNo Kits"
+      displayName: "&cNo kits"
       lore:
         - "&7There are no kits available."
         - "&7Use &f/createkit <kitName> &7to create a kit."
@@ -91,7 +91,7 @@ kitsAdminView:
       enabled: true
       slot: 0
       material: "PISTON"
-      displayName: "&aCreate Kit"
+      displayName: "&aCreate kit"
       lore:
         - "&7Click to create a new kit."
 
@@ -99,7 +99,7 @@ kitsAdminView:
       enabled: true
       slot: 8
       material: "ENDER_PEARL"
-      displayName: "&aSwitch to Player Mode"
+      displayName: "&aSwitch to player mode"
       lore:
         - "&7Click to switch to player mode."
 
@@ -107,7 +107,7 @@ kitsAdminView:
       enabled: true
       slot: 45
       material: "TRIPWIRE_HOOK"
-      displayName: "&bSearch Kit"
+      displayName: "&bSearch kit"
       lore:
         - "&7Click to search for a kit."
 
@@ -115,7 +115,7 @@ kitsAdminView:
       enabled: true
       slot: 45
       material: "REDSTONE_BLOCK"
-      displayName: "&cCancel Search"
+      displayName: "&cCancel search"
       lore:
         - "&7Click to cancel the kit search."
 
@@ -125,7 +125,7 @@ kitsAdminView:
     noSearchKitResultsItem:
       enabled: true
       material: "BARRIER"
-      displayName: "&cNo Results"
+      displayName: "&cNo results"
       lore:
         - "&7No kits matched your search."
         - ""
@@ -136,7 +136,7 @@ kitsAdminView:
       enabled: true
       slot: 47
       material: "STONE_BUTTON"
-      displayName: "&6Previous Page: &e{previousPage}"
+      displayName: "&6Previous page: &e{previousPage}"
       lore:
         - "&7Click to go to the previous page."
 
@@ -145,7 +145,7 @@ kitsAdminView:
       enabled: true
       slot: 51
       material: "STONE_BUTTON"
-      displayName: "&6Next Page: &e{nextPage}"
+      displayName: "&6Next page: &e{nextPage}"
       lore:
         - "&7Click to go to the next page."
 
@@ -156,8 +156,8 @@ kitsAdminView:
       material: "PAPER"
       displayName: "&2Page: &a{currentPage}/{totalPages}"
       lore:
-        - "&7Previous Page: &f{previousPage}"
-        - "&7Next Page: &f{nextPage}"
+        - "&7Previous page: &f{previousPage}"
+        - "&7Next page: &f{nextPage}"
 
     closeItem:
       enabled: true

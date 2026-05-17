@@ -67,8 +67,8 @@ warpsAdminView:
       material: "{warpMaterialName}"
       displayName: "&6{warpDisplayName}"
       lore:
-        - "&f&lLeft Click &7to teleport a player to this warp."
-        - "&f&lRight Click &7to edit this warp."
+        - "&f&lLeft click &7to teleport a player to this warp."
+        - "&f&lRight click &7to edit this warp."
         - "&f&lDrop &7to delete this warp."
         - ""
         - "&7Warp Name: &f&o{warpName}"
@@ -82,7 +82,7 @@ warpsAdminView:
     noWarpsItem:
       enabled: true
       material: "BARRIER"
-      displayName: "&cNo Warps"
+      displayName: "&cNo warps"
       lore:
         - "&7There are no warps available."
         - "&7Use &f/createwarp <warpName> &7to create a warp."
@@ -91,7 +91,7 @@ warpsAdminView:
       enabled: true
       slot: 0
       material: "PISTON"
-      displayName: "&aCreate Warp"
+      displayName: "&aCreate warp"
       lore:
         - "&7Click to create a new warp."
 
@@ -99,7 +99,7 @@ warpsAdminView:
       enabled: true
       slot: 8
       material: "ENDER_PEARL"
-      displayName: "&aSwitch to Player Mode"
+      displayName: "&aSwitch to player mode"
       lore:
         - "&7Click to switch to player mode."
 
@@ -107,7 +107,7 @@ warpsAdminView:
       enabled: true
       slot: 45
       material: "TRIPWIRE_HOOK"
-      displayName: "&bSearch Warp"
+      displayName: "&bSearch warp"
       lore:
         - "&7Click to search for a warp."
 
@@ -115,7 +115,7 @@ warpsAdminView:
       enabled: true
       slot: 45
       material: "REDSTONE_BLOCK"
-      displayName: "&cCancel Search"
+      displayName: "&cCancel search"
       lore:
         - "&7Click to cancel the warp search."
 
@@ -125,7 +125,7 @@ warpsAdminView:
     noSearchWarpResultsItem:
       enabled: true
       material: "BARRIER"
-      displayName: "&cNo Results"
+      displayName: "&cNo results"
       lore:
         - "&7No warps matched your search."
         - ""
@@ -136,7 +136,7 @@ warpsAdminView:
       enabled: true
       slot: 47
       material: "STONE_BUTTON"
-      displayName: "&6Previous Page: &e{previousPage}"
+      displayName: "&6Previous page: &e{previousPage}"
       lore:
         - "&7Click to go to the previous page."
 
@@ -145,7 +145,7 @@ warpsAdminView:
       enabled: true
       slot: 51
       material: "STONE_BUTTON"
-      displayName: "&6Next Page: &e{nextPage}"
+      displayName: "&6Next page: &e{nextPage}"
       lore:
         - "&7Click to go to the next page."
 
@@ -156,8 +156,8 @@ warpsAdminView:
       material: "PAPER"
       displayName: "&2Page: &a{currentPage}/{totalPages}"
       lore:
-        - "&7Previous Page: &f{previousPage}"
-        - "&7Next Page: &f{nextPage}"
+        - "&7Previous page: &f{previousPage}"
+        - "&7Next page: &f{nextPage}"
 
     closeItem:
       enabled: true

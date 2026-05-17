@@ -140,7 +140,7 @@ balanceTop:
       enabled: true
       slot: 8
       material: "REDSTONE"
-      displayName: "&cForce Update"
+      displayName: "&cForce update"
       lore:
         - "&7Last Update: &a{lastUpdate}"
         - "&7Next Update: &a{nextUpdate}"

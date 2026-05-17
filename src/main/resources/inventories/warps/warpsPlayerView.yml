@@ -72,7 +72,7 @@ warpsPlayerView:
     noWarpsItem:
       enabled: true
       material: "BARRIER"
-      displayName: "&cNo Warps"
+      displayName: "&cNo warps"
       lore:
         - "&7You have no access to any warp."
 
@@ -80,7 +80,7 @@ warpsPlayerView:
       enabled: true
       slot: 8
       material: "ENDER_EYE"
-      displayName: "&cSwitch to Admin Mode"
+      displayName: "&cSwitch to admin mode"
       lore:
         - "&7Click to switch to admin mode."
 
@@ -88,7 +88,7 @@ warpsPlayerView:
       enabled: true
       slot: 45
       material: "TRIPWIRE_HOOK"
-      displayName: "&bSearch Warp"
+      displayName: "&bSearch warp"
       lore:
         - "&7Click to search for a warp."
 
@@ -96,7 +96,7 @@ warpsPlayerView:
       enabled: true
       slot: 45
       material: "REDSTONE_BLOCK"
-      displayName: "&cCancel Search"
+      displayName: "&cCancel search"
       lore:
         - "&7Click to cancel the warp search."
 
@@ -106,7 +106,7 @@ warpsPlayerView:
     noSearchWarpResultsItem:
       enabled: true
       material: "BARRIER"
-      displayName: "&cNo Results"
+      displayName: "&cNo results"
       lore:
         - "&7No warps matched your search."
         - ""
@@ -117,7 +117,7 @@ warpsPlayerView:
       enabled: true
       slot: 47
       material: "STONE_BUTTON"
-      displayName: "&6Previous Page: &e{previousPage}"
+      displayName: "&6Previous page: &e{previousPage}"
       lore:
         - "&7Click to go to the previous page."
 
@@ -126,7 +126,7 @@ warpsPlayerView:
       enabled: true
       slot: 51
       material: "STONE_BUTTON"
-      displayName: "&6Next Page: &e{nextPage}"
+      displayName: "&6Next page: &e{nextPage}"
       lore:
         - "&7Click to go to the next page."
 
@@ -137,8 +137,8 @@ warpsPlayerView:
       material: "PAPER"
       displayName: "&2Page: &a{currentPage}/{totalPages}"
       lore:
-        - "&7Previous Page: &f{previousPage}"
-        - "&7Next Page: &f{nextPage}"
+        - "&7Previous page: &f{previousPage}"
+        - "&7Next page: &f{nextPage}"
 
     closeItem:
       enabled: true

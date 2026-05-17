@@ -52,8 +52,8 @@ kitEditing:
       slot: 22
       displayName: "&6{kitDisplayName}"
       lore:
-        - "&f&lLeft Click &7to receive this kit."
-        - "&f&lRight Click &7to preview this kit."
+        - "&f&lLeft click &7to receive this kit."
+        - "&f&lRight click &7to preview this kit."
         - ""
         - "&7Kit Name: &f&o{kitName}"
 
@@ -62,7 +62,7 @@ kitEditing:
       enabled: true
       slot: 30
       material: "NAME_TAG"
-      displayName: "&6Change Display Name"
+      displayName: "&6Change display name"
       lore:
         - "&7Click to change the display name of this kit."
 
@@ -71,7 +71,7 @@ kitEditing:
       enabled: true
       slot: 31
       material: "CHEST"
-      displayName: "&6Change Icon"
+      displayName: "&6Change icon"
       lore:
         - "&7Click to change the icon of this kit."
 
@@ -79,7 +79,7 @@ kitEditing:
       enabled: true
       slot: 32
       material: "LAVA_BUCKET"
-      displayName: "&cDelete Kit"
+      displayName: "&cDelete kit"
       lore:
         - "&7Click to delete this kit."
         - "&cThis action cannot be undone!"
@@ -88,7 +88,7 @@ kitEditing:
       enabled: true
       slot: 21
       material: "ENDER_CHEST"
-      displayName: "&6Edit Kit Contents"
+      displayName: "&6Edit kit contents"
       lore:
         - "&7Click to edit the contents of this kit."
         - "&7&oYou will be able to add or remove items from it."

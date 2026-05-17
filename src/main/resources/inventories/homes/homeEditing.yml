@@ -52,8 +52,8 @@ homeEditing:
       slot: 22
       displayName: "&6{homeDisplayName}"
       lore:
-        - "&f&lLeft Click &7to teleport to this home."
-        - "&f&lRight Click &7to edit this home."
+        - "&f&lLeft click &7to teleport to this home."
+        - "&f&lRight click &7to edit this home."
         - "&f&lDrop &7to delete this home."
         - ""
         - "&7Home Name: &f&o{homeName}"
@@ -63,7 +63,7 @@ homeEditing:
       enabled: true
       slot: 30
       material: "NAME_TAG"
-      displayName: "&6Change Display Name"
+      displayName: "&6Change display name"
       lore:
         - "&7Click to change the display name of this home."
 
@@ -72,7 +72,7 @@ homeEditing:
       enabled: true
       slot: 31
       material: "CHEST"
-      displayName: "&6Change Icon"
+      displayName: "&6Change icon"
       lore:
         - "&7Click to change the icon of this home."
 
@@ -81,7 +81,7 @@ homeEditing:
       enabled: true
       slot: 32
       material: "LAVA_BUCKET"
-      displayName: "&cDelete Home"
+      displayName: "&cDelete home"
       lore:
         - "&7Click to delete this home."
         - "&cThis action cannot be undone!"

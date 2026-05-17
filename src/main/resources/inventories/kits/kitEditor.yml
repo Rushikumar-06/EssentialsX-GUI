@@ -53,7 +53,7 @@ kitEditor:
       slot: 47
       material: "LIME_DYE"
       data: 10
-      displayName: "&aSave Kit"
+      displayName: "&aSave kit"
       lore:
         - "&7Click to save the changes made to this kit."
 
@@ -62,7 +62,7 @@ kitEditor:
       slot: 51
       material: "RED_DYE"
       data: 1
-      displayName: "&cCancel Changes"
+      displayName: "&cCancel changes"
       lore:
         - "&7Click to cancel all the changes made to this kit."
         - ""

@@ -61,7 +61,7 @@ warpEditing:
       enabled: true
       slot: 30
       material: "NAME_TAG"
-      displayName: "&6Change Display Name"
+      displayName: "&6Change display name"
       lore:
         - "&7Click to change the display name of this warp."
 
@@ -70,7 +70,7 @@ warpEditing:
       enabled: true
       slot: 31
       material: "CHEST"
-      displayName: "&6Change Icon"
+      displayName: "&6Change icon"
       lore:
         - "&7Click to change the icon of this warp."
 
@@ -78,7 +78,7 @@ warpEditing:
       enabled: true
       slot: 32
       material: "LAVA_BUCKET"
-      displayName: "&cDelete Warp"
+      displayName: "&cDelete warp"
       lore:
         - "&7Click to delete this warp."
         - "&cThis action cannot be undone!"

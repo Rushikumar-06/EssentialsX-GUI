@@ -73,7 +73,7 @@ kitPlayerGive:
       enabled: true
       slot: 47
       material: "STONE_BUTTON"
-      displayName: "&6Previous Page: &e{previousPage}"
+      displayName: "&6Previous page: &e{previousPage}"
       lore:
         - "&7Click to go to the previous page."
 
@@ -82,7 +82,7 @@ kitPlayerGive:
       enabled: true
       slot: 51
       material: "STONE_BUTTON"
-      displayName: "&6Next Page: &e{nextPage}"
+      displayName: "&6Next page: &e{nextPage}"
       lore:
         - "&7Click to go to the next page."
 
@@ -93,8 +93,8 @@ kitPlayerGive:
       material: "PAPER"
       displayName: "&2Page: &a{currentPage}/{totalPages}"
       lore:
-        - "&7Previous Page: &f{previousPage}"
-        - "&7Next Page: &f{nextPage}"
+        - "&7Previous page: &f{previousPage}"
+        - "&7Next page: &f{nextPage}"
 
     backItem:
       enabled: true
