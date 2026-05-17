@@ -44,7 +44,7 @@ public class KitPreviewInventory extends PaginatedFastInv {
 		InventoriesUtils.initializePaginatedInventory(player, config, this, config.getInventoryScheme());
 
 
-		List<ItemStack> items = Main.getInstance().getHookManager().getEssentialsHook().getKitItems(player, kit.getName());
+		List<ItemStack> items = Main.getInstance().getHookManager().getEssentialsHook().getKitItems(kit.getName());
 		for (ItemStack item : items) {
 			if (item != null && item.getType() != org.bukkit.Material.AIR) {
 				addContent(item);

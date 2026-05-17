@@ -82,7 +82,7 @@ public class KitEditorInventory extends FastInv {
 		}
 
 
-		List<ItemStack> kitItems = Main.getInstance().getHookManager().getEssentialsHook().getKitItems(player, kit.getName());
+		List<ItemStack> kitItems = Main.getInstance().getHookManager().getEssentialsHook().getKitItems(kit.getName());
 
 		for (ItemStack item : kitItems) {
 			if (item != null && item.getType() != Material.AIR) {

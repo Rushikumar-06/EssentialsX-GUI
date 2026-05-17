@@ -32,11 +32,23 @@ public class PlayerCommandPreprocess implements Listener {
 
 
 	private final List<String> commands = List.of(
+
+			// HOMES
 			"home", "homes",
+
+			// KITS
 			"kit", "kits",
+
+			// WARPS
 			"warp", "warps",
+
+			// WHOIS
 			"whois",
+
+			// BALANCE TOP
 			"balancetop", "baltop",
+
+			// WORTH
 			"worth"
 	);
 
