@@ -290,36 +290,36 @@ sounds:
 
 
   # The sound played when a player opens a GUI.
-  # Default: "%%value_guiOpen%%"
+  # Default: "BLOCK_CHEST_OPEN"
   guiOpen: "BLOCK_CHEST_OPEN"
 
   # The sound played when a player clicks on a close item.
-  # Default: "%%value_guiClose%%"
+  # Default: "BLOCK_CHEST_CLOSE"
   guiClose: "BLOCK_CHEST_CLOSE"
 
   # The sound played when a player clicks on a back item.
-  # Default: "%%value_guiBack%%"
+  # Default: "ENTITY_EXPERIENCE_BOTTLE_THROW"
   guiBack: "ENTITY_EXPERIENCE_BOTTLE_THROW"
 
   # The sound played when a player clicks on an interactive item in the GUI.
-  # Default: "%%value_guiClick%%"
+  # Default: "ENTITY_CHICKEN_EGG"
   guiClick: "ENTITY_CHICKEN_EGG"
 
   # The sound played when a player changes the page in a paginated GUI.
-  # Default: "%%value_guiPageChange%%"
+  # Default: "ITEM_BOOK_PAGE_TURN"
   guiPageChange: "ITEM_BOOK_PAGE_TURN"
 
 
   # The sound played when a player completes an action.
-  # Default: "%%value_actionSuccess%%"
+  # Default: "ENTITY_PLAYER_LEVELUP"
   actionSuccess: "ENTITY_PLAYER_LEVELUP"
 
   # The sound played when a player cancels an action.
-  # Default: "%%value_actionCanceled%%"
+  # Default: "ENTITY_ITEM_BREAK"
   actionCanceled: "ENTITY_ITEM_BREAK"
 
   # The sound played when a player fails an action.
-  # Default: "%%value_actionFailure%%"
+  # Default: "ENTITY_VILLAGER_NO"
   actionFailure: "ENTITY_VILLAGER_NO"
 
 ############################################################
