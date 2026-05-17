@@ -11,6 +11,7 @@ public class EXGKitPreviewInventoryConfig extends EXGPaginatedInventoryConfig {
 
 
 	private EXGItemConfig kitItem;
+	private EXGItemConfig emptyKitItem;
 
 	private EXGItemConfig backItem;
 
@@ -31,6 +32,9 @@ public class EXGKitPreviewInventoryConfig extends EXGPaginatedInventoryConfig {
 	public EXGItemConfig getKitItem() {
 		return kitItem;
 	}
+	public EXGItemConfig getEmptyKitItem() {
+		return emptyKitItem;
+	}
 
 	public EXGItemConfig getBackItem() {
 		return backItem;
@@ -46,6 +50,9 @@ public class EXGKitPreviewInventoryConfig extends EXGPaginatedInventoryConfig {
 
 	public void setKitItem(EXGItemConfig kitItem) {
 		this.kitItem = kitItem;
+	}
+	public void setEmptyKitItem(EXGItemConfig emptyKitItem) {
+		this.emptyKitItem = emptyKitItem;
 	}
 
 	public void setBackItem(EXGItemConfig backItem) {
@@ -70,6 +77,7 @@ public class EXGKitPreviewInventoryConfig extends EXGPaginatedInventoryConfig {
 		);
 
 		copy.setKitItem(this.getKitItem().duplicate());
+		copy.setEmptyKitItem(this.getEmptyKitItem().duplicate());
 
 		copy.setNextPageItem(this.getNextPageItem().duplicate());
 		copy.setPreviousPageItem(this.getPreviousPageItem().duplicate());

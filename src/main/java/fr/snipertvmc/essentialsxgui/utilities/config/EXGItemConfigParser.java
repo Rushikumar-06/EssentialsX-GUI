@@ -29,6 +29,7 @@ public class EXGItemConfigParser {
 				"homes.items.noSearchHomeResultsItem",
 
 				// KITS
+				"kitPreview.items.emptyKitItem",
 				"kitsAdminView.items.kitItem",
 				"kitsAdminView.items.noKitsItem",
 				"kitsAdminView.items.noSearchKitResultsItem",

@@ -51,6 +51,10 @@ public class KitPreviewInventory extends PaginatedFastInv {
 			}
 		}
 
+		if (items.isEmpty() && config.getEmptyKitItem().isEnabled()) {
+			addContent(config.getEmptyKitItem().build(player));
+		}
+
 		if (config.getBackItem().isEnabled()) {
 			setItem(config.getBackItem().getSlot(), config.getBackItem().build(player), e -> {
 

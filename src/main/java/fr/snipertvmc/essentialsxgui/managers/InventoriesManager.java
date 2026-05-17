@@ -250,6 +250,8 @@ public class InventoriesManager {
 
 		kitPreviewInventoryConfig.setKitItem(inventoryFile.getItem(
 				"kitItem"));
+		kitPreviewInventoryConfig.setEmptyKitItem(inventoryFile.getItem(
+				"emptyKitItem"));
 
 		kitPreviewInventoryConfig.setNextPageItem(inventoryFile.getItem(
 				"nextPageItem"));
