@@ -48,8 +48,8 @@ kitEditor:
 
   items:
 
-    # 'enabled' value will be ignored in this section. Item is enabled by default.
     saveKitItem:
+      enabled: true
       slot: 47
       material: "LIME_DYE"
       data: 10
@@ -57,8 +57,8 @@ kitEditor:
       lore:
         - "&7Click to save the changes made to this kit."
 
-    # 'enabled' value will be ignored in this section. Item is enabled by default.
     cancelChangesItem:
+      enabled: true
       slot: 51
       material: "RED_DYE"
       data: 1

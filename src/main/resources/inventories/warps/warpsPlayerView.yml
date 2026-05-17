@@ -56,10 +56,10 @@ warpsPlayerView:
   items:
 
     # 'slot' value will be ignored in this section. Use the 'inventoryScheme' section to set the slots.
-    # 'enabled' value will be ignored in this section. Item is enabled by default.
     # Placeholders available: {warpDisplayName}, {warpName}, {warpMaterialName}
     # By default, if warpDisplayName is not set, it will use the warp name.
     warpItem:
+      enabled: true
       material: "{warpMaterialName}"
       displayName: "&6{warpDisplayName}"
       lore:

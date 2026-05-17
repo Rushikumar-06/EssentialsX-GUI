@@ -63,9 +63,9 @@ whoisView:
 
   items:
 
-    # 'enabled' value will be ignored in this section. Item is enabled by default.
     # Placeholders available: {targetName}, {targetUUID}, [targetIP}, {targetPlaytime}
     playerIdentificationItem:
+      enabled: true
       material: "BEACON"
       slot: 20
       displayName: "&f&lIdentification"
@@ -77,10 +77,10 @@ whoisView:
         - "&7Playtime: &f{targetPlaytime}"
         - ""
 
-    # 'enabled' value will be ignored in this section. Item is enabled by default.
     # Placeholders available: {targetName}, {targetHealth}, {targetMaxHealth}, {targetFoodLevel},
     #                         {targetSaturation}, {targetExperience}, {targetLevel}
     playerStatisticsItem:
+      enabled: true
       material: "APPLE"
       slot: 21
       displayName: "&f&lPlayer statistics"
@@ -93,10 +93,10 @@ whoisView:
         - "&7Level: &f{targetLevel}"
         - ""
 
-    # 'enabled' value will be ignored in this section. Item is enabled by default.
     # Placeholders available: {targetName}, {targetWorld}, {targetX}, {targetY}, {targetZ},
     #                         {targetYaw}, {targetPitch}, {targetLocation},
     playerWorldItem:
+      enabled: true
       material: "COMPASS"
       slot: 22
       displayName: "&f&lPlayer world"
@@ -109,12 +109,12 @@ whoisView:
         #- "&7Full Location: &f{targetLocation}"
         - ""
 
-    # 'enabled' value will be ignored in this section. Item is enabled by default.
     # Placeholders available: {targetName}, {targetGamemode}, {targetMoney}, {targetIsInGodMode},
     #                         {targetCanFly}, {targetIsFlying}, {targetWalkSpeed}, {targetFlySpeed},
     #                         {targetIsWhitelisted}, {targetIsOperator}, {targetIsVanished}, {targetIsNicked}
     #                         {targetNickname}, {targetIsAfk}, {targetAfkTime}
     playerServerDataItem:
+      enabled: true
       material: "REDSTONE"
       slot: 23
       displayName: "&f&lPlayer server data"
@@ -136,12 +136,12 @@ whoisView:
         - "&7AFK Since: &f{targetAfkSince}"
         - ""
 
-    # 'enabled' value will be ignored in this section. Item is enabled by default.
     # Placeholders available: {targetName}, {targetIsJailed}, {targetJailName}, {targetJailExpiry},
     #                         {targetIsMuted}, {targetMuteReason}, {targetMuteExpiry},
     #                         {targetIsBanned}, {targetBanReason}, {targetBanExpiry}
 
     playerPunishmentsItem:
+      enabled: true
       material: "ANVIL"
       slot: 24
       displayName: "&f&lPlayer punishments"

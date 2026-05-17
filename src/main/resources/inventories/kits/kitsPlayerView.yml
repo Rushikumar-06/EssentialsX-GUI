@@ -56,7 +56,6 @@ kitsPlayerView:
   items:
 
     # 'slot' value will be ignored in this section. Use the 'inventoryScheme' section to set the slots.
-    # 'enabled' value will be ignored in this section. Item is enabled by default.
     #
     # Change the click from 'clickActions' section with a valid ClickType.
     # A complete list is available at: https://helpch.at/docs/1.21.5/org/bukkit/event/inventory/ClickType.html
@@ -65,6 +64,7 @@ kitsPlayerView:
     # Placeholders available: {kitDisplayName}, {kitName}, {kitMaterialName}
     # By default, if kitDisplayName is not set, it will use the kit name.
     kitItem:
+      enabled: true
       material: "{kitMaterialName}"
       displayName: "&6{kitDisplayName}"
       lore:

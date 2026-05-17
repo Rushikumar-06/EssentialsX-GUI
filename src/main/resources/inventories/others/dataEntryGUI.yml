@@ -55,11 +55,11 @@ dataEntryGUI:
 
   items:
 
-    # 'enabled' value will be ignored in this section. Item is enabled by default.
     # 'slot' value will be ignored in this section. Use the 'inventoryScheme' section to set the slots.
     # 'material' value will be ignored in this section. It will use the material from configuration file.
     # Placeholders available: {materialName}
     materialIconItem:
+      enabled: true
       displayName: "&f&l{materialName}"
       lore:
         - "&7Click to select this material as icon."

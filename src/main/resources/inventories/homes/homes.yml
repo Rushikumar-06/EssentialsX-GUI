@@ -71,7 +71,6 @@ homes:
 
   items:
 
-    # 'enabled' value will be ignored in this section. Item is enabled by default.
     # 'slot' value will be ignored in this section. Use the 'inventoryScheme' section to set the slots.
     # Change 'material' to the default item you want to use for homes.
     #
@@ -82,6 +81,7 @@ homes:
     # Placeholders available: {homeDisplayName}, {homeName}
     # By default, if homeDisplayName is not set, it will use the home name.
     homeItem:
+      enabled: true
       material: "GRASS_BLOCK"
       displayName: "&6{homeDisplayName}"
       lore:

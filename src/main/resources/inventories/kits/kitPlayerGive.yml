@@ -55,12 +55,12 @@ kitPlayerGive:
 
   items:
 
-    # 'enabled' value will be ignored in this section. Item is enabled by default.
     # 'slot' value will be ignored in this section. Use the 'inventoryScheme' section to set the slots.
     # 'material' value as "PLAYER_HEAD:{targetName}" will use the player's head as the item.
     # Placeholders available: {targetName}, {kitName}, {kitDisplayName}
     # By default, if kitDisplayName is not set, it will use the kit name.
     playerItem:
+      enabled: true
       material: "PLAYER_HEAD:{targetName}"
       data: 3
       displayName: "&b{targetName}"
