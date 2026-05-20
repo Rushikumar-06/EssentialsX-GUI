@@ -56,6 +56,9 @@ public class EXGItemConfigParser {
 				"worthAll.items.noWorthItem",
 				"worthAll.items.noSearchWorthResultsItem",
 				"worthInventory.items.emptyInventoryItem",
+				"ecoAmount.items.addItem",
+				"ecoAmount.items.removeItem",
+				"ecoPlayers.items.playerItem",
 
 				// OTHERS
 				"dataEntryGUI.items.materialIconItem"
@@ -85,7 +88,7 @@ public class EXGItemConfigParser {
 	// -------------------------------------------------- //
 
 
-	public static boolean isEXGItemConfigValid(InventoryFile inventoryFile, String itemPath, boolean isBorderItem) {
+	public static boolean isEXGItemConfigValid(InventoryFile inventoryFile, String itemPath, boolean multipleSlots) {
 
 
 		// Get the inventory configuration
@@ -109,7 +112,7 @@ public class EXGItemConfigParser {
 
 
 		// Validate item properties
-		return isSlotValid(slot, slots, itemPath, inventoryName, isBorderItem) &&
+		return isSlotValid(slot, slots, itemPath, inventoryName, multipleSlots) &&
 
 				isMaterialValid(material, itemPath) &&
 				isDataValid(data, itemPath) &&
@@ -128,13 +131,13 @@ public class EXGItemConfigParser {
 	// -------------------------------------------------- //
 
 
-	private static boolean isSlotValid(Object slot, Object slots, String itemPath, String inventoryName, boolean isBorderItem) {
+	private static boolean isSlotValid(Object slot, Object slots, String itemPath, String inventoryName, boolean multipleSlots) {
 
-		Object slotObject = (isBorderItem ? slots : slot);
-		String slotDisplayName = (isBorderItem ? "slots" : "slot");
-		Class<?> slotType = (isBorderItem ? List.class : Integer.class);
+		Object slotObject = (multipleSlots ? slots : slot);
+		String slotDisplayName = (multipleSlots ? "slots" : "slot");
+		Class<?> slotType = (multipleSlots ? List.class : Integer.class);
 
-		if (isIgnored(itemPath, (isBorderItem ? "slots" : "slot"))) {
+		if (isIgnored(itemPath, (multipleSlots ? "slots" : "slot"))) {
 			return true;
 		}
 
@@ -143,7 +146,7 @@ public class EXGItemConfigParser {
 			return false;
 		}
 
-		if (isBorderItem) {
+		if (multipleSlots) {
 
 			List<Integer> slotList = (List<Integer>) slots;
 			if (slotList.isEmpty()) {

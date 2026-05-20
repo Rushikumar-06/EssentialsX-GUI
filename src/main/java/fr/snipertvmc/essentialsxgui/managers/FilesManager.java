@@ -51,6 +51,9 @@ public class FilesManager {
 		put("whoisView", "inventories/whois/whoisView");
 
 		put("balanceTop", "inventories/economy/balanceTop");
+		put("ecoAction", "inventories/economy/ecoAction");
+		put("ecoAmount", "inventories/economy/ecoAmount");
+		put("ecoPlayers", "inventories/economy/ecoPlayers");
 		put("worth", "inventories/economy/worth");
 		put("worthAll", "inventories/economy/worthAll");
 		put("worthInventory", "inventories/economy/worthInventory");
@@ -82,6 +85,9 @@ public class FilesManager {
 		put("whoisView", "1.1"); // Updated for version: 1.4.1
 
 		put("balanceTop", "1.0");
+		put("ecoAction", "1.0");
+		put("ecoAmount", "1.0");
+		put("ecoPlayers", "1.0");
 		put("worth", "1.0");
 		put("worthAll", "1.0");
 		put("worthInventory", "1.0");

@@ -99,6 +99,12 @@ errors:
   noWarpFound: "&cNo warp found with that name."
 
   noWorthFound: "&cNo items with worth found with that name."
+  amountMustBePositive: "&cThe amount must be a positive number."
+  # Placeholders available: {maxAmount}
+  maxAmountLimit: "&cImpossible to have a balance higher than &f{maxAmount}&c."
+  # Placeholders available: {minAmount}
+  minAmountLimit: "&cImpossible to have a balance lower than &f{minAmount}&c."
+  cantHaveNegativeBalance: "&cThe target player cannot have a negative balance."
 
 ############################################################
 # +------------------------------------------------------+ #
@@ -182,6 +188,7 @@ general:
 
   openingBalanceTopInventory: "&aOpening balance top inventory..."
   openingWorthInventory: "&aOpening worth inventory..."
+  openingEcoInventory: "&aOpening economy inventory..."
 
 
   yes_value: "&aYes"
@@ -211,6 +218,10 @@ general:
   rankFormat: "#{rank}"
   noWorthAvailable: "&cNo worth available"
   noItemInHand: "&cNo item in hand"
+  add: "add"
+  take: "take"
+  set: "set"
+  reset: "reset"
 
 
   days: "{days}d"

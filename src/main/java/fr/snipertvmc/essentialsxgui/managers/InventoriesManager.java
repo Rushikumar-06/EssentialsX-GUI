@@ -2,10 +2,7 @@ package fr.snipertvmc.essentialsxgui.managers;
 
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.files.InventoryFile;
-import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.economy.EXGBalanceTopInventoryConfig;
-import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.economy.EXGWorthAllInventoryConfig;
-import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.economy.EXGWorthInventoryConfig;
-import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.economy.EXGWorthInventoryInventoryConfig;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.economy.*;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes.EXGHomeEditingInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.homes.EXGHomesInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.kits.*;
@@ -45,6 +42,9 @@ public class InventoriesManager {
 	private EXGWhoisViewInventoryConfig whoisViewInventoryConfig;
 
 	private EXGBalanceTopInventoryConfig balanceTopInventoryConfig;
+	private EXGEcoActionInventoryConfig ecoActionInventoryConfig;
+	private EXGEcoAmountInventoryConfig ecoAmountInventoryConfig;
+	private EXGEcoPlayersInventoryConfig  ecoPlayersInventoryConfig;
 	private EXGWorthInventoryConfig worthInventoryConfig;
 	private EXGWorthAllInventoryConfig worthAllInventoryConfig;
 	private EXGWorthInventoryInventoryConfig worthInventoryInventoryConfig;
@@ -84,6 +84,9 @@ public class InventoriesManager {
 			case "whoisView" -> loadWhoisViewInventory(title, rows, inventoryName, borderItem, borderSlots);
 
 			case "balanceTop" -> loadBalanceTopInventory(title, rows, inventoryName, borderItem, borderSlots);
+			case "ecoAction" -> loadEcoActionInventory(title, rows, inventoryName, borderItem, borderSlots);
+			case "ecoAmount" -> loadEcoAmountInventory(title, rows, inventoryName, borderItem, borderSlots);
+			case "ecoPlayers" -> loadEcoPlayersInventory(title, rows, inventoryName, borderItem, borderSlots);
 			case "worth" -> loadWorthInventory(title, rows, inventoryName, borderItem, borderSlots);
 			case "worthAll" -> loadWorthAllInventory(title, rows, inventoryName, borderItem, borderSlots);
 			case "worthInventory" -> loadWorthInventoryInventory(title, rows, inventoryName, borderItem, borderSlots);
@@ -527,6 +530,70 @@ public class InventoriesManager {
 	}
 
 
+	public void loadEcoActionInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+
+		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
+
+		ecoActionInventoryConfig = new EXGEcoActionInventoryConfig(title, rows, borderItem, borderSlots);
+
+		ecoActionInventoryConfig.setPlayerItem(inventoryFile.getItem(
+				"playerItem"));
+
+		ecoActionInventoryConfig.setAddBalanceItem(inventoryFile.getItem(
+				"addBalanceItem"));
+		ecoActionInventoryConfig.setTakeBalanceItem(inventoryFile.getItem(
+				"takeBalanceItem"));
+		ecoActionInventoryConfig.setSetBalanceItem(inventoryFile.getItem(
+				"setBalanceItem"));
+		ecoActionInventoryConfig.setResetBalanceItem(inventoryFile.getItem(
+				"resetBalanceItem"));
+
+		ecoActionInventoryConfig.setBackItem(inventoryFile.getItem(
+				"backItem"));
+	}
+
+
+	public void loadEcoAmountInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+
+		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
+
+		ecoAmountInventoryConfig = new EXGEcoAmountInventoryConfig(title, rows, borderItem, borderSlots);
+
+		ecoAmountInventoryConfig.setAddItems(inventoryFile.getItems(
+				"addItem", true));
+		ecoAmountInventoryConfig.setRemoveItems(inventoryFile.getItems(
+				"removeItem", true));
+
+		ecoAmountInventoryConfig.setConfirmActionItem(inventoryFile.getItem(
+				"confirmActionItem"));
+		ecoAmountInventoryConfig.setCancelActionItem(inventoryFile.getItem(
+				"cancelActionItem"));
+	}
+
+
+	public void loadEcoPlayersInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+
+		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
+
+		ecoPlayersInventoryConfig = new EXGEcoPlayersInventoryConfig(title, rows, borderItem, borderSlots);
+
+		ecoPlayersInventoryConfig.setPlayerItem(inventoryFile.getItem(
+				"playerItem"));
+
+		ecoPlayersInventoryConfig.setNextPageItem(inventoryFile.getItem(
+				"nextPageItem"));
+		ecoPlayersInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
+				"previousPageItem"));
+		ecoPlayersInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
+				"currentPageItem"));
+
+		ecoPlayersInventoryConfig.setCloseItem(inventoryFile.getItem(
+				"closeItem"));
+
+		ecoPlayersInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
+	}
+
+
 	public void loadWorthInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
 
 		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
@@ -654,6 +721,9 @@ public class InventoriesManager {
 				"whoisView",
 
 				"balanceTop",
+				"ecoAction",
+				"ecoAmount",
+				"ecoPlayers",
 				"worth",
 				"worthAll",
 				"worthInventory",
@@ -714,6 +784,15 @@ public class InventoriesManager {
 
 	public EXGBalanceTopInventoryConfig getBalanceTopInventoryConfig() {
 		return balanceTopInventoryConfig;
+	}
+	public EXGEcoActionInventoryConfig  getEcoActionInventoryConfig() {
+		return ecoActionInventoryConfig;
+	}
+	public EXGEcoAmountInventoryConfig getEcoAmountInventoryConfig() {
+		return ecoAmountInventoryConfig;
+	}
+	public EXGEcoPlayersInventoryConfig getEcoPlayersInventoryConfig() {
+		return ecoPlayersInventoryConfig;
 	}
 	public EXGWorthInventoryConfig getWorthInventoryConfig() {
 		return worthInventoryConfig;

@@ -38,6 +38,22 @@ public class EXGItemCustomConfigParser {
 				// ECONOMY
 				"balanceTop.items.forceUpdateItem"
 		));
+
+
+		put("amountValues", List.of(
+
+				// ECONOMY
+				"ecoAmount.items.addItem",
+				"ecoAmount.items.removeItem"
+		));
+
+
+		put("slots", List.of(
+
+				// ECONOMY
+				"ecoAmount.items.addItem",
+				"ecoAmount.items.removeItem"
+		));
 	}};
 
 
@@ -84,7 +100,9 @@ public class EXGItemCustomConfigParser {
 		// Validate item properties
 		return areClickActionsValid(itemPath, config) &&
 
-				isUpdateItemIntervalValid(itemPath, config);
+				isUpdateItemIntervalValid(itemPath, config) &&
+
+				areAmountValuesValid(itemPath, config);
 	}
 
 
@@ -179,6 +197,24 @@ public class EXGItemCustomConfigParser {
 	}
 
 
+	public static boolean areAmountValuesValid(String itemPath, YamlConfiguration config) {
+
+		Object amountValues = config.get(itemPath + ".amountValues");
+		Object slots = config.get(itemPath + ".slots");
+
+		if (!isRequired(itemPath, "amountValues")) {
+			return true;
+		}
+
+		if (amountValues == null) {
+			ConsoleLogger.error("Invalid amount values for item '" + itemPath + "': 'amountValues' is missing.");
+			return false;
+		}
+
+		return hasSameSize(amountValues, slots, itemPath, "amountValues");
+	}
+
+
 
 	// -------------------------------------------------- //
 
@@ -207,6 +243,21 @@ public class EXGItemCustomConfigParser {
 
 		} else {
 			ConsoleLogger.error("Invalid " + propertyName + " for item '" + itemPath + "': '" + value + "' is not an integer.");
+			return false;
+		}
+	}
+
+
+	private static boolean hasSameSize(Object firstValue,  Object secondValue, String itemPath, String propertyName) {
+		if (firstValue instanceof List<?> firstList && secondValue instanceof List<?> secondList) {
+			if (firstList.size() != secondList.size()) {
+				ConsoleLogger.error("Invalid " + propertyName + " for item '" + itemPath + "': the lists do not have the same size.");
+				return false;
+			}
+			return true;
+
+		} else {
+			ConsoleLogger.error("Invalid " + propertyName + " for item '" + itemPath + "': both values must be lists.");
 			return false;
 		}
 	}

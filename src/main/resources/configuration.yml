@@ -270,6 +270,13 @@ economy:
     # Ways available: "CHAT", "ANVIL"
     searchWorthEntryType: "ANVIL"
 
+  eco:
+
+    # Set this to true if you want to use the eco features.
+    # This will allow players to access the eco GUI.
+    # Default: true
+    enabled: true
+
 ############################################################
 # +------------------------------------------------------+ #
 # |                        Sounds                        | #

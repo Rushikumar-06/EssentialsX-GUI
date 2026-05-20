@@ -65,6 +65,35 @@ public class InventoryFile {
 		return itemConfig;
 	}
 
+	public List<EXGItemConfig> getItems(String itemName) {
+		EXGItemConfig itemConfig = getItem(inventoryName + ".items." + itemName, true);
+		List<Integer> slots = yamlConfiguration.getIntegerList(inventoryName + ".items." + itemName + ".slots");
+		List<EXGItemConfig> itemConfigs = new ArrayList<>();
+		for (int slot : slots) {
+			EXGItemConfig itemConfigCopy = itemConfig.duplicate();
+			itemConfigCopy.setSlot((short) slot);
+			itemConfigs.add(itemConfigCopy);
+		}
+		return itemConfigs;
+	}
+
+	public List<EXGItemConfig> getItems(String itemName, boolean withAmountValues) {
+		if (!withAmountValues) return getItems(itemName);
+		EXGItemConfig itemConfig = getItem(inventoryName + ".items." + itemName, true);
+		List<Integer> slots = yamlConfiguration.getIntegerList(inventoryName + ".items." + itemName + ".slots");
+		List<Integer> amountValues = yamlConfiguration.getIntegerList(inventoryName + ".items." + itemName + ".amountValues");
+		List<EXGItemConfig> itemConfigs = new ArrayList<>();
+		for (int i = 0; i < slots.size(); i++) {
+			int slot = slots.get(i);
+			int amountValue = amountValues.size() > i ? amountValues.get(i) : 0;
+			EXGItemConfig itemConfigCopy = itemConfig.duplicate();
+			itemConfigCopy.setSlot((short) slot);
+			itemConfigCopy.setAmountValue(amountValue);
+			itemConfigs.add(itemConfigCopy);
+		}
+		return itemConfigs;
+	}
+
 
 	public Set<EXGItemConfig> getItemsSection(String sectionPath) {
 
@@ -145,15 +174,15 @@ public class InventoryFile {
 	// -------------------------------------------------- //
 
 
-	private EXGItemConfig getItem(String path, boolean isBorderItem) {
+	private EXGItemConfig getItem(String path, boolean multipleSlots) {
 
 		Object enabledValue = yamlConfiguration.get(path + ".enabled", true);
 		if (enabledValue instanceof Boolean isEnabled && !isEnabled) {
-			return new EXGItemConfig(false, (short) 0, Material.AIR.name(), 1, (byte) 0, null, null, null, null, new HashMap<>(), 0, 0);
+			return new EXGItemConfig(false, (short) 0, Material.AIR.name(), 1, (byte) 0, null, null, null, null, new HashMap<>(), 0, 0, 0);
 		}
 
 		// Check if the item configuration is valid
-		if (!EXGItemConfigParser.isEXGItemConfigValid(this, path, isBorderItem)) {
+		if (!EXGItemConfigParser.isEXGItemConfigValid(this, path, multipleSlots)) {
 
 			Object slotValue = yamlConfiguration.get(path + ".slot");
 			short slot = 0;
@@ -172,7 +201,7 @@ public class InventoryFile {
 							"",
 							"<gold>Item path involved: ",
 							"<dark_gray>- <yellow>" + path),
-					null, null, new HashMap<>(), 0, 0
+					null, null, new HashMap<>(), 0, 0, 0
 			);
 		}
 
@@ -202,6 +231,7 @@ public class InventoryFile {
 			put("customModelData", yamlConfiguration.getInt(path + ".customModelData", 0));
 
 			put("updateItemInterval", yamlConfiguration.getInt(path + ".updateItemInterval", 0));
+			put("amountValue", yamlConfiguration.getInt(path + ".amountValue", 0));
 		}};
 
 
@@ -254,7 +284,8 @@ public class InventoryFile {
 
 				(Integer) itemConfiguration.get("customModelData"),
 
-				(Integer) itemConfiguration.get("updateItemInterval")
+				(Integer) itemConfiguration.get("updateItemInterval"),
+				(Integer)  itemConfiguration.get("amountValue")
 		);
 	}
 

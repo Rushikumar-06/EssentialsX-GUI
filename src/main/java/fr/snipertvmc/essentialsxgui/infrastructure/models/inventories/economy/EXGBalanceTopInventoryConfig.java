@@ -4,6 +4,7 @@ import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
 import fr.snipertvmc.essentialsxgui.libraries.exglib.Pair;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class EXGBalanceTopInventoryConfig extends EXGInventoryConfig {
@@ -93,7 +94,7 @@ public class EXGBalanceTopInventoryConfig extends EXGInventoryConfig {
 
 		copy.setCloseItem(this.getCloseItem().duplicate());
 
-		copy.setRankingItems(this.getRankingItems());
+		copy.setRankingItems(new HashSet<>(this.getRankingItems()));
 
 		copy.setRankingRange(this.getRankingRange());
 		return copy;

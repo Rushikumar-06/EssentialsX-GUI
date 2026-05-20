@@ -1,0 +1,96 @@
+############################################################
+# +------------------------------------------------------+ #
+# |                      Information                     | #
+# +------------------------------------------------------+ #
+############################################################
+
+# This is the eco action inventory file for EssentialsX-GUI.
+
+# If you need help with the configuration of the GUI,
+# you can join our discord server at: https://discord.gg/fSzK79TAYf
+
+# For more information about how to configure EssentialsX-GUI,
+# check our Wiki at: https://sniper-tvmc.gitbook.io/essentialsx-gui/configuration/inventories
+
+############################################################
+# +------------------------------------------------------+ #
+# |                        General                       | #
+# +------------------------------------------------------+ #
+############################################################
+
+# Please do not change this value as it may cause the file to be reset.
+# Default: "1.0"
+config-version: "1.0"
+
+############################################################
+# +------------------------------------------------------+ #
+# |                       Inventory                      | #
+# +------------------------------------------------------+ #
+############################################################
+
+ecoAction:
+
+  # Placeholders available for the title: {targetName}
+  title: "&fEconomy - {targetName}"
+  rows: 6
+
+  borderItem:
+    enabled: true
+    slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53]
+    material: "BLACK_STAINED_GLASS_PANE"
+    data: 15
+    displayName: "&8- &6&lEssentialsX-GUI"
+
+  items:
+
+    # 'material' value as "PLAYER_HEAD:{targetName}" will use the player's head as the item.
+    # Placeholders available: {targetName}, {targetBalance}
+    # By default, if kitDisplayName is not set, it will use the kit name.
+    playerItem:
+      enabled: true
+      slot: 4
+      material: "PLAYER_HEAD:{targetName}"
+      data: 3
+      displayName: "&b{targetName}"
+      lore:
+        - "&7Balance: &a{targetBalance}"
+
+    addBalanceItem:
+      enabled: true
+      slot: 21
+      material: "LIME_DYE"
+      displayName: "&aAdd to balance"
+      lore:
+        - "&7Click to add money to this player's balance."
+
+    takeBalanceItem:
+      enabled: true
+      slot: 23
+      material: "RED_DYE"
+      displayName: "&cTake from balance"
+      lore:
+        - "&7Click to take money from this player's balance."
+
+    resetBalanceItem:
+      enabled: true
+      slot: 30
+      material: "BUCKET"
+      displayName: "&4Reset balance"
+      lore:
+        - "&7Click to reset this player's balance to 0."
+
+    setBalanceItem:
+      enabled: true
+      slot: 32
+      material: "LAVA_BUCKET"
+      displayName: "&2Set balance"
+      lore:
+        - "&7Click to set this player's balance to a specific amount."
+
+    backItem:
+      enabled: true
+      slot: 49
+      material: "ARROW"
+      displayName: "&cBack"
+      lore:
+        - "&7Click to go back to the worth menu."

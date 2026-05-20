@@ -1,0 +1,97 @@
+############################################################
+# +------------------------------------------------------+ #
+# |                      Information                     | #
+# +------------------------------------------------------+ #
+############################################################
+
+# This is the eco amount inventory file for EssentialsX-GUI.
+
+# If you need help with the configuration of the GUI,
+# you can join our discord server at: https://discord.gg/fSzK79TAYf
+
+# For more information about how to configure EssentialsX-GUI,
+# check our Wiki at: https://sniper-tvmc.gitbook.io/essentialsx-gui/configuration/inventories
+
+############################################################
+# +------------------------------------------------------+ #
+# |                        General                       | #
+# +------------------------------------------------------+ #
+############################################################
+
+# Please do not change this value as it may cause the file to be reset.
+# Default: "1.0"
+config-version: "1.0"
+
+############################################################
+# +------------------------------------------------------+ #
+# |                       Inventory                      | #
+# +------------------------------------------------------+ #
+############################################################
+
+ecoAmount:
+
+  # Placeholders available: {targetName}, {ecoAction}
+  title: "&f{targetName} - {ecoAction}"
+  rows: 5
+
+  borderItem:
+    enabled: true
+    slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44]
+    material: "BLACK_STAINED_GLASS_PANE"
+    data: 15
+    displayName: "&8- &6&lEssentialsX-GUI"
+
+  items:
+
+    # Placeholders available: {targetBalance}, {targetNewBalance}, {ecoAction}, {amount}, {totalAmount}
+    addItem:
+      enabled: true
+      slots: [1, 2, 3, 4, 5, 6, 7]
+      material: "LIME_STAINED_GLASS"
+      data: 5
+      displayName: "&2Add {amount}"
+      lore:
+        - "&7Current balance: &e{targetBalance}"
+        - "&7New balance: &6{targetNewBalance}"
+        - "&7Amount to {ecoAction}: &f{totalAmount}"
+        - ""
+        - "&7Click to add {amount} to the amount."
+      amountValues: [1, 10, 100, 1000, 10000, 100000, 1000000]
+
+    # Placeholders available: {targetBalance}, {targetNewBalance}, {ecoAction}, {amount}, {totalAmount}
+    removeItem:
+      enabled: true
+      slots: [37, 38, 39, 40, 41, 42, 43]
+      material: "RED_STAINED_GLASS"
+      data: 14
+      displayName: "&4Remove {amount}"
+      lore:
+        - "&7Current balance: &e{targetBalance}"
+        - "&7New balance: &6{targetNewBalance}"
+        - "&7Amount to {ecoAction}: &f{totalAmount}"
+        - ""
+        - "&7Click to remove {amount} from the amount."
+      amountValues: [1, 10, 100, 1000, 10000, 100000, 1000000]
+
+    # Placeholders available: {targetBalance}, {targetNewBalance}, {ecoAction}, {amount}
+    confirmActionItem:
+      enabled: true
+      slot: 20
+      material: "LIME_DYE"
+      data: 10
+      displayName: "&aConfirm action"
+      lore:
+        - "&7Current balance: &e{targetBalance}"
+        - "&7New balance: &6{targetNewBalance}"
+        - ""
+        - "&7Click to confirm the {ecoAction} action with the amount of &f{amount}&7."
+
+    # Placeholders available: {ecoAction}
+    cancelActionItem:
+      enabled: true
+      slot: 24
+      material: "RED_DYE"
+      data: 1
+      displayName: "&cCancel action"
+      lore:
+        - "&7Click to cancel the {ecoAction} action."

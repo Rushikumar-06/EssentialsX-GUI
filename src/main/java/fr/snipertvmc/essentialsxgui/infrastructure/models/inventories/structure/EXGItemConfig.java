@@ -46,6 +46,7 @@ public class EXGItemConfig {
 	private int customModelData = 0;
 
 	private int updateItemInterval = 0;
+	private int amountValue = 0;
 
 
 	// -------------------------------------------------- //
@@ -58,7 +59,7 @@ public class EXGItemConfig {
 	                     List<Pair<XEnchantment, Integer>> enchantments, List<XItemFlag> itemFlags,
 	                     Map<String, ClickType> clickActions,
 	                     int customModelData,
-	                     int updateItemInterval) {
+	                     int updateItemInterval, int amountValue) {
 
 		this.enabled = enabled;
 
@@ -79,6 +80,7 @@ public class EXGItemConfig {
 		this.customModelData = customModelData;
 
 		this.updateItemInterval = updateItemInterval;
+		this.amountValue = amountValue;
 	}
 
 
@@ -103,6 +105,7 @@ public class EXGItemConfig {
 		this.customModelData = itemConfig.getCustomModelData();
 
 		this.updateItemInterval = itemConfig.getUpdateItemInterval();
+		this.amountValue = itemConfig.getAmountValue();
 	}
 
 
@@ -112,7 +115,6 @@ public class EXGItemConfig {
 	public boolean isEnabled() {
 		return enabled;
 	}
-
 	public short getSlot() {
 		return slot;
 	}
@@ -120,7 +122,6 @@ public class EXGItemConfig {
 	public String getMaterialName() {
 		return materialName;
 	}
-
 	public XMaterial getMaterial() {
 		Optional<XMaterial> possibleMaterial = XMaterial.matchXMaterial(materialName);
 		if (possibleMaterial.isEmpty()) {
@@ -129,11 +130,9 @@ public class EXGItemConfig {
 		}
 		return possibleMaterial.get();
 	}
-
 	public int getAmount() {
 		return amount;
 	}
-
 	public byte getData() {
 		return data;
 	}
@@ -141,7 +140,6 @@ public class EXGItemConfig {
 	public String getDisplayName() {
 		return displayName;
 	}
-
 	public List<String> getLore() {
 		return lore;
 	}
@@ -149,7 +147,6 @@ public class EXGItemConfig {
 	public List<Pair<XEnchantment, Integer>> getEnchantments() {
 		return enchantments;
 	}
-
 	public List<XItemFlag> getItemFlags() {
 		return itemFlags;
 	}
@@ -169,9 +166,11 @@ public class EXGItemConfig {
 	public boolean hasUpdateItemInterval() {
 		return updateItemInterval > 0;
 	}
-
 	public int getUpdateItemInterval() {
 		return updateItemInterval;
+	}
+	public int getAmountValue() {
+		return amountValue;
 	}
 
 
@@ -234,6 +233,12 @@ public class EXGItemConfig {
 
 	public EXGItemConfig setUpdateItemInterval(int updateItemInterval) {
 		this.updateItemInterval = updateItemInterval;
+		return this;
+	}
+
+
+	public EXGItemConfig setAmountValue(int amountValue) {
+		this.amountValue = amountValue;
 		return this;
 	}
 

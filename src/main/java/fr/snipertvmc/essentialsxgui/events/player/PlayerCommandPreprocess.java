@@ -5,6 +5,7 @@ import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGPermission;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
 import fr.snipertvmc.essentialsxgui.inventories.economy.BalanceTopInventory;
+import fr.snipertvmc.essentialsxgui.inventories.economy.EcoPlayersInventory;
 import fr.snipertvmc.essentialsxgui.inventories.economy.WorthInventory;
 import fr.snipertvmc.essentialsxgui.inventories.homes.HomesInventory;
 import fr.snipertvmc.essentialsxgui.inventories.kits.KitsAdminViewInventory;
@@ -34,22 +35,25 @@ public class PlayerCommandPreprocess implements Listener {
 	private final List<String> commands = List.of(
 
 			// HOMES
-			"home", "homes",
+			"home", "homes", "ehome", "ehomes",
 
 			// KITS
-			"kit", "kits",
+			"kit", "kits", "ekit", "ekits",
 
 			// WARPS
-			"warp", "warps",
+			"warp", "warps", "ewarp", "ewarps",
 
 			// WHOIS
-			"whois",
+			"whois", "ewhois",
 
 			// BALANCE TOP
-			"balancetop", "baltop",
+			"baltop", "balancetop", "ebaltop", "ebalancetop",
 
 			// WORTH
-			"worth"
+			"worth", "price", "eprice", "eworth",
+
+			// ECONOMY
+			"eco", "economy", "eeco", "eeconomy"
 	);
 
 
@@ -72,7 +76,7 @@ public class PlayerCommandPreprocess implements Listener {
 			// HOMES
 			//
 
-			case "home", "homes" -> {
+			case "home", "homes", "ehome", "ehomes" -> {
 
 				if (args.length > 1) return;
 				if (!player.hasPermission("essentials.home")) return;
@@ -89,7 +93,7 @@ public class PlayerCommandPreprocess implements Listener {
 			// KITS
 			//
 
-			case "kit", "kits" -> {
+			case "kit", "kits", "ekit", "ekits" -> {
 
 				if (args.length > 1) return;
 				if (!player.hasPermission("essentials.kit")) return;
@@ -116,7 +120,7 @@ public class PlayerCommandPreprocess implements Listener {
 			// WARPS
 			//
 
-			case "warp", "warps" -> {
+			case "warp", "warps", "ewarp", "ewarps" -> {
 
 				if (args.length > 1) return;
 				if (!player.hasPermission("essentials.warp")) return;
@@ -143,7 +147,7 @@ public class PlayerCommandPreprocess implements Listener {
  			// WHOIS
 			//
 
-			case "whois" -> {
+			case "whois", "ewhois" -> {
 
 				if (!player.hasPermission("essentials.whois")) return;
 				if (!Main.getInstance().getConfiguration().isWhoisModuleEnabled()) return;
@@ -173,7 +177,7 @@ public class PlayerCommandPreprocess implements Listener {
 
 			// BALANCETOP
 
-			case "balancetop", "baltop" -> {
+			case "balancetop", "baltop", "ebalancetop", "ebaltop" -> {
 
 				if (args.length > 1) return;
 				if (!player.hasPermission("essentials.balancetop")) return;
@@ -189,7 +193,7 @@ public class PlayerCommandPreprocess implements Listener {
 
 			// WORTH
 
-			case "worth" -> {
+			case "worth", "price", "eworth", "eprice" -> {
 
 				if (args.length > 1) return;
 				if (!player.hasPermission("essentials.worth")) return;
@@ -199,6 +203,22 @@ public class PlayerCommandPreprocess implements Listener {
 
 				TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.OPENING_WORTH_INVENTORY, null));
 				new WorthInventory(player).open(player);
+				SoundsUtils.playSound(player, EXGSound.GUI_OPEN);
+			}
+
+
+			// WORTH
+
+			case "eco", "economy", "eeco", "eeconomy" -> {
+
+				if (args.length > 1) return;
+				if (!player.hasPermission("essentials.eco")) return;
+				if (!Main.getInstance().getConfiguration().isEconomyEcoModuleEnabled()) return;
+
+				event.setCancelled(true);
+
+				TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.OPENING_ECO_INVENTORY, null));
+				new EcoPlayersInventory(player).open(player);
 				SoundsUtils.playSound(player, EXGSound.GUI_OPEN);
 			}
 		}

@@ -53,6 +53,10 @@ public enum EXGMessage {
 	NO_WARP_FOUND("errors.noWarpFound"),
 
 	NO_WORTH_FOUND("errors.noWorthFound"),
+	AMOUNT_MUST_BE_POSITIVE("errors.amountMustBePositive"),
+	MAX_AMOUNT_LIMIT("errors.maxAmountLimit"),
+	MIN_AMOUNT_LIMIT("errors.minAmountLimit"),
+	CANT_HAVE_NEGATIVE_BALANCE("errors.cantHaveNegativeBalance"),
 
 
 	// GENERAL
@@ -118,6 +122,7 @@ public enum EXGMessage {
 
 	OPENING_BALANCE_TOP_INVENTORY("general.openingBalanceTopInventory"),
 	OPENING_WORTH_INVENTORY("general.openingWorthInventory"),
+	OPENING_ECO_INVENTORY("general.openingEcoInventory"),
 
 
 	YES("general.yes_value"),
@@ -146,6 +151,10 @@ public enum EXGMessage {
 	RANK_FORMAT("general.rankFormat"),
 	NO_WORTH_AVAILABLE("general.noWorthAvailable"),
 	NO_ITEM_IN_HAND("general.noItemInHand"),
+	ADD("general.add"),
+	TAKE("general.take"),
+	SET("general.set"),
+	RESET("general.reset"),
 
 
 	DAYS("general.days"),
