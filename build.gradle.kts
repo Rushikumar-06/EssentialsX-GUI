@@ -59,8 +59,8 @@ dependencies {
     compileOnly("io.github.almighty-satan:XSeries:13.6.0+26.1")
 
     implementation("net.byteflux:libby-bukkit:1.3.1")
-    implementation("net.wesjd:anvilgui:1.10.12-SNAPSHOT")
-    implementation("dev.faststats.metrics:bukkit:0.21.0")
+    implementation("net.wesjd:anvilgui:1.10.13-SNAPSHOT")
+    implementation("dev.faststats.metrics:bukkit:0.22.0")
 }
 
 
