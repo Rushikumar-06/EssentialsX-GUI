@@ -14,11 +14,14 @@ import fr.snipertvmc.essentialsxgui.utilities.InventoriesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.MessagesUtils;
 import fr.snipertvmc.essentialsxgui.utilities.TextUtils;
 import fr.snipertvmc.essentialsxgui.utilities.data.DataEntryUtils;
+import fr.snipertvmc.essentialsxgui.utilities.data.TimeUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.SoundsUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class KitsPlayerViewInventory extends PaginatedFastInv {
@@ -62,6 +65,10 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 		defineKitsItems(player, kitSearch, kits);
 		defineSwitchToAdminModeItem(player);
 		defineSearchKitItem(player, kitSearch, kits);
+
+		if (config.getKitItem().hasUpdateItemInterval()) {
+			startRefreshTask(config.getKitItem().getUpdateItemInterval() * 20L);
+		}
 	}
 
 
@@ -72,16 +79,36 @@ public class KitsPlayerViewInventory extends PaginatedFastInv {
 
 		for (EXGKit kit : kits) {
 
-			EXGItemConfig kitItem = config.getKitItem().duplicate();
-			ItemStack kitItemStack = InventoriesUtils.getKitItemStack(kitItem, kit, player);
+			AtomicReference<EXGItemConfig> atomicKitItemConfig = new AtomicReference<>(config.getKitItem());
 
-			addContent(kitItemStack, e -> {
+			Supplier<ItemStack> supplierKitItem = () -> {
 
-				if (kitItem.isCorrectClick(e.getClick(), "receiveKit")) {
+				String kitDelay = MessagesUtils.getString(EXGMessage.AVAILABLE);
+				if (!player.hasPermission("essentials.kit.exemptdelay")) {
+					long delay = ((Number) Main.getInstance().getEssentials().getKits().getKit(kit.getName()).getOrDefault("delay", 0)).longValue();
+					long kitTimestamp = Main.getInstance().getEssentials().getUser(player.getUniqueId()).getKitTimestamp(kit.getName()) / 1000;
+					long now = System.currentTimeMillis() / 1000;
+					long secondsRemaining = delay - (now - kitTimestamp);
+					if (secondsRemaining > 0) {
+						kitDelay = TimeUtils.formatInTime(secondsRemaining);
+					}
+				}
+
+				atomicKitItemConfig.set(config.getKitItem().duplicate().updateVariables(Map.of(
+						"kitDelay", kitDelay
+				)));
+				return InventoriesUtils.getKitItemStack(atomicKitItemConfig.get(), kit, player);
+			};
+
+			EXGItemConfig kitItemConfig = atomicKitItemConfig.get();
+
+			addDynamicContent(supplierKitItem, e -> {
+
+				if (kitItemConfig.isCorrectClick(e.getClick(), "receiveKit")) {
 					player.performCommand("essentials:kit " + kit.getName());
 					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 
-				} else if (kitItem.isCorrectClick(e.getClick(), "previewKit")) {
+				} else if (kitItemConfig.isCorrectClick(e.getClick(), "previewKit")) {
 					new KitPreviewInventory(player, kit).open(player);
 					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 				}

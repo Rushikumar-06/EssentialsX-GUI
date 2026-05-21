@@ -155,6 +155,7 @@ public enum EXGMessage {
 	TAKE("general.take"),
 	SET("general.set"),
 	RESET("general.reset"),
+	AVAILABLE("general.available"),
 
 
 	DAYS("general.days"),

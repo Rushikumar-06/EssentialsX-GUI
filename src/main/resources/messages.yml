@@ -222,6 +222,7 @@ general:
   take: "take"
   set: "set"
   reset: "reset"
+  available: "&aAvailable"
 
 
   days: "{days}d"
