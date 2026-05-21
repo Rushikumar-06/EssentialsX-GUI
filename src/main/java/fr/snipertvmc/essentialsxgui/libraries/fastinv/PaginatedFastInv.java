@@ -24,6 +24,7 @@
  */
 package fr.snipertvmc.essentialsxgui.libraries.fastinv;
 
+import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.utilities.TextUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -32,12 +33,11 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.util.*;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.IntConsumer;
-import java.util.function.IntFunction;
+import java.util.function.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -48,9 +48,11 @@ import java.util.stream.IntStream;
  */
 public class PaginatedFastInv extends FastInv {
 
-    private final List<ItemStack> contentItems = new ArrayList<>();
+    private final List<Supplier<ItemStack>> contentItems = new ArrayList<>();
     private final List<Consumer<InventoryClickEvent>> contentHandlers = new ArrayList<>();
     private final List<IntConsumer> pageChangeHandlers = new ArrayList<>();
+
+    private BukkitTask refreshTask;
 
     private List<Integer> contentSlots;
     private int page = 1;
@@ -128,7 +130,7 @@ public class PaginatedFastInv extends FastInv {
      * @param handler the click handler associated with this item
      */
     public void addContent(ItemStack item, Consumer<InventoryClickEvent> handler) {
-        this.contentItems.add(item);
+        this.contentItems.add(() -> item);
         this.contentHandlers.add(handler);
     }
 
@@ -156,8 +158,20 @@ public class PaginatedFastInv extends FastInv {
             throw new IllegalArgumentException("The content and handlers lists must have the same size");
         }
 
-        this.contentItems.addAll(content);
+        this.contentItems.addAll(content.stream().map(item -> (Supplier<ItemStack>) () -> item).toList());
         this.contentHandlers.addAll(handlers);
+    }
+
+    /**
+     * Add an item supplier to the paginated content with a click handler,
+     * the item will be added to the next available slot.
+     *
+     * @param itemSupplier a supplier to get the item to add
+     * @param handler      the click handler associated with this item
+     */
+    public void addDynamicContent(Supplier<ItemStack> itemSupplier, Consumer<InventoryClickEvent> handler) {
+        this.contentItems.add(itemSupplier);
+        this.contentHandlers.add(handler);
     }
 
     /**
@@ -178,7 +192,7 @@ public class PaginatedFastInv extends FastInv {
      * @param handler the click handler associated with this item
      */
     public void setContent(int index, ItemStack item, Consumer<InventoryClickEvent> handler) {
-        this.contentItems.set(index, item);
+        this.contentItems.set(index, () -> item);
         this.contentHandlers.set(index, handler);
     }
 
@@ -238,9 +252,24 @@ public class PaginatedFastInv extends FastInv {
     /**
      * Refresh the current page by reloading the content items.
      * Equivalent to calling {@link #openPage(int)} with {@link #currentPage()}.
+     *
+     * @param disableHandler if true, the page change handlers will not be called
      */
-    public void refreshCurrentPage() {
-        openPage(this.page);
+    public void refreshCurrentPage(boolean disableHandler) {
+        openPage(this.page, disableHandler);
+    }
+
+    public void startRefreshTask(long updateInterval) {
+        refreshTask = new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (getInventory().getViewers().isEmpty()) {
+                    cancel();
+                    return;
+                }
+                refreshCurrentPage(true);
+            }
+        }.runTaskTimer(Main.getInstance(), updateInterval, updateInterval);
     }
 
     /**
@@ -250,6 +279,17 @@ public class PaginatedFastInv extends FastInv {
      * @param page the page to open
      */
     public void openPage(int page) {
+        openPage(page, false);
+    }
+
+    /**
+     * Replace the inventory items with the content of the specified page.
+     * To open the inventory itself, use {@link #open(Player)}.
+     *
+     * @param page the page to open
+     * @param disableHandler if true, the page change handlers will not be called
+     */
+    public void openPage(int page, boolean disableHandler) {
         int lastPage = lastPage();
 
         this.page = Math.max(1, Math.min(page, lastPage));
@@ -262,7 +302,7 @@ public class PaginatedFastInv extends FastInv {
                 continue;
             }
 
-            setItem(slot, contentItems.get(index), contentHandlers.get(index++));
+            setItem(slot, contentItems.get(index).get(), contentHandlers.get(index++));
         }
 
         if (this.page > 1 && this.previousPageItem != null) {
@@ -279,9 +319,10 @@ public class PaginatedFastInv extends FastInv {
             setItem(this.nextPageSlot, this.nextPageBlankItem);
         }
 
-        onPageChange(page);
-
-        this.pageChangeHandlers.forEach(c -> c.accept(this.page));
+        if (!disableHandler) {
+            onPageChange(page);
+            this.pageChangeHandlers.forEach(c -> c.accept(this.page));
+        }
     }
 
     /**
