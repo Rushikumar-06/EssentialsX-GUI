@@ -16,19 +16,19 @@ public class TimeUtils {
 	// -------------------------------------------------- //
 
 
-	public static String formatSeconds(int seconds) {
+	public static String formatSeconds(long seconds) {
 		return MessagesUtils.getString(EXGMessage.SECONDS, Map.of("seconds", String.valueOf(seconds)));
 	}
 
-	public static String formatMinutes(int minutes) {
+	public static String formatMinutes(long minutes) {
 		return MessagesUtils.getString(EXGMessage.MINUTES, Map.of("minutes", String.valueOf(minutes)));
 	}
 
-	public static String formatHours(int hours) {
+	public static String formatHours(long hours) {
 		return MessagesUtils.getString(EXGMessage.HOURS, Map.of("hours", String.valueOf(hours)));
 	}
 
-	public static String formatDays(int days) {
+	public static String formatDays(long days) {
 		return MessagesUtils.getString(EXGMessage.DAYS, Map.of("days", String.valueOf(days)));
 	}
 
@@ -36,19 +36,19 @@ public class TimeUtils {
 	// -------------------------------------------------- //
 
 
-	public static String formatAgoTime(int totalSeconds) {
+	public static String formatAgoTime(long totalSeconds) {
 		String duration = formatDuration(totalSeconds);
 		return MessagesUtils.getString(EXGMessage.AGO_TIME_FORMAT, Map.of("time", duration));
 	}
 
 
-	public static String formatInTime(int totalSeconds) {
+	public static String formatInTime(long totalSeconds) {
 		String duration = formatDuration(totalSeconds);
 		return MessagesUtils.getString(EXGMessage.IN_TIME_FORMAT, Map.of("time", duration));
 	}
 
 
-	public static String formatSinceTime(int totalSeconds) {
+	public static String formatSinceTime(long totalSeconds) {
 		String duration = formatDuration(totalSeconds);
 		return MessagesUtils.getString(EXGMessage.SINCE_TIME_FORMAT, Map.of("time", duration));
 	}
@@ -62,18 +62,18 @@ public class TimeUtils {
 		ZonedDateTime now = ZonedDateTime.now(zone);
 		ZonedDateTime target = Instant.ofEpochMilli(targetMillis).atZone(zone);
 		long seconds = Math.abs(Duration.between(now, target).getSeconds());
-		return formatDuration((int) seconds);
+		return formatDuration(seconds);
 	}
 
 
 	// -------------------------------------------------- //
 
 
-	public static String formatDuration(int totalSeconds) {
-		int days = totalSeconds / 86400;
-		int hours = (totalSeconds % 86400) / 3600;
-		int minutes = (totalSeconds % 3600) / 60;
-		int seconds = totalSeconds % 60;
+	public static String formatDuration(long totalSeconds) {
+		long days = totalSeconds / 86400;
+		long hours = (totalSeconds % 86400) / 3600;
+		long minutes = (totalSeconds % 3600) / 60;
+		long seconds = totalSeconds % 60;
 
 		StringBuilder result = new StringBuilder();
 		if (days > 0) result.append(formatDays(days)).append(" ");
