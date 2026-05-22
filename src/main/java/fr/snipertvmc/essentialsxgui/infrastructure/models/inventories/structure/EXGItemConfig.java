@@ -25,6 +25,7 @@ public class EXGItemConfig {
 	// -------------------------------------------------- //
 
 
+	private boolean misconfigured = false;
 	private boolean enabled = false;
 
 	private short slot;
@@ -59,7 +60,8 @@ public class EXGItemConfig {
 	                     List<Pair<XEnchantment, Integer>> enchantments, List<XItemFlag> itemFlags,
 	                     Map<String, ClickType> clickActions,
 	                     int customModelData,
-	                     int updateItemInterval, int amountValue) {
+	                     int updateItemInterval, int amountValue,
+	                     boolean misconfigured) {
 
 		this.enabled = enabled;
 
@@ -81,6 +83,8 @@ public class EXGItemConfig {
 
 		this.updateItemInterval = updateItemInterval;
 		this.amountValue = amountValue;
+
+		this.misconfigured = misconfigured;
 	}
 
 
@@ -111,6 +115,10 @@ public class EXGItemConfig {
 
 	// -------------------------------------------------- //
 
+
+	public boolean isMisconfigured() {
+		return misconfigured;
+	}
 
 	public boolean isEnabled() {
 		return enabled;
@@ -175,6 +183,11 @@ public class EXGItemConfig {
 
 
 	// -------------------------------------------------- //
+
+
+	public void setMisconfigured(boolean misconfigured) {
+		this.misconfigured = misconfigured;
+	}
 
 
 	public EXGItemConfig setEnabled(boolean enabled) {

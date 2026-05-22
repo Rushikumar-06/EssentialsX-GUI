@@ -52,11 +52,17 @@ public class EXGBalanceTop {
 		updateTask = Bukkit.getScheduler().runTaskTimer(Main.getInstance(), this::forceUpdate, 0, updateInterval);
 	}
 
+
 	public void stopUpdateTask() {
 		if (updateTask != null) {
 			updateTask.cancel();
 			updateTask = null;
 		}
+	}
+
+
+	public boolean isUpdateTaskRunning() {
+		return updateTask != null && !updateTask.isCancelled();
 	}
 
 

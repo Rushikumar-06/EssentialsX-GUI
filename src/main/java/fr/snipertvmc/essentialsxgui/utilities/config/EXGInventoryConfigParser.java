@@ -44,7 +44,7 @@ public class EXGInventoryConfigParser {
 	// -------------------------------------------------- //
 
 
-	public static boolean isEXGInventoryConfigValid(InventoryFile inventoryFile) {
+	public static int isEXGInventoryConfigValid(InventoryFile inventoryFile) {
 
 
 		// Get the inventory configuration
@@ -58,15 +58,18 @@ public class EXGInventoryConfigParser {
 		Object inventoryScheme = config.get(inventoryName + ".inventoryScheme");
 
 
+
 		// Validate inventory properties
 		if (!areRowsValid(rows, inventoryName)) {
-			return false;
+			return 1;
 		}
 
 		int rowsValue = ((Number) rows).intValue();
+		int errors = 0;
 
-		return isTitleValid(title, inventoryName) &&
-				isInventorySchemeValid(inventoryScheme, rowsValue, inventoryName);
+		errors += isTitleValid(title, inventoryName) ? 0 : 1;
+		errors += isInventorySchemeValid(inventoryScheme, rowsValue, inventoryName) ? 0 : 1;
+		return errors;
 	}
 
 	// -------------------------------------------------- //

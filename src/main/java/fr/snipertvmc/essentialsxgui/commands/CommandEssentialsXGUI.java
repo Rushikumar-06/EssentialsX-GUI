@@ -121,36 +121,7 @@ public class CommandEssentialsXGUI implements CommandExecutor, TabCompleter {
 			return;
 		}
 
-
-		// FILES RELOADING
-		TextUtils.sendMessageToCommandSender(commandSender, MessagesUtils.getString(EXGMessage.FILES_RELOADING, null));
-		Main.getInstance().getFilesManager().reloadFiles();
-		TextUtils.sendMessageToCommandSender(commandSender, MessagesUtils.getString(EXGMessage.FILES_RELOADED, null));
-
-
-		// DATABASE RELOADING
-		TextUtils.sendMessageToCommandSender(commandSender, MessagesUtils.getString(EXGMessage.DATABASE_RELOADING, null));
-
-		Main.getInstance().getDatabaseManager().disconnectAllDatabases();
-		Main.getInstance().getDatabaseManager().updateDatabaseStorage();
-		Main.getInstance().getDatabaseManager().connectAllDatabases();
-
-		String newStorageType = Main.getInstance().getConfiguration().getStorageType();
-		TextUtils.sendMessageToCommandSender(commandSender, MessagesUtils.getString(EXGMessage.DATABASE_RELOADED, Map.of("newStorageType", newStorageType)));
-
-
-		// TASK RELOADING
-		TextUtils.sendMessageToCommandSender(commandSender, MessagesUtils.getString(EXGMessage.TASKS_RELOADING, null));
-		Main.getInstance().getEXGServer().getBalanceTop().stopUpdateTask();
-		Main.getInstance().getEXGServer().getBalanceTop().startUpdateTask();
-		TextUtils.sendMessageToCommandSender(commandSender, MessagesUtils.getString(EXGMessage.TASKS_RELOADED, null));
-
-
-		// DATA RELOADING
-		TextUtils.sendMessageToCommandSender(commandSender, MessagesUtils.getString(EXGMessage.DATA_RELOADING, null));
-		Main.getInstance().getEXGServer().getBalanceTop().forceUpdate();
-		Main.getInstance().getEXGServer().getWorth().loadItemsWorth();
-		TextUtils.sendMessageToCommandSender(commandSender, MessagesUtils.getString(EXGMessage.DATA_RELOADED, null));
+		Main.getInstance().getLoadingManager().reloadPlugin(commandSender);
 	}
 
 

@@ -7,10 +7,14 @@ public enum EXGMessage {
 
 
 	// ADMIN
+	ALERT_UPDATE_AVAILABLE("admin.alertUpdateAvailable"),
+
+	PLUGIN_RELOADING("admin.pluginReloading"),
+	PLUGIN_RELOADED("admin.pluginReloaded"),
+	PLUGIN_RELOADED_WITH_ERRORS("admin.pluginReloadedWithErrors"),
+
 	FILES_RELOADING("admin.filesReloading"),
 	FILES_RELOADED("admin.filesReloaded"),
-
-	ALERT_UPDATE_AVAILABLE("admin.alertUpdateAvailable"),
 
 	DATABASE_RELOADING("admin.databaseReloading"),
 	DATABASE_RELOADED("admin.databaseReloaded"),

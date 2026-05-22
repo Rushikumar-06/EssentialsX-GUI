@@ -55,7 +55,7 @@ public class InventoriesManager {
 	// -------------------------------------------------- //
 
 
-	public void loadInventory(String inventoryName) {
+	public int loadInventory(String inventoryName) {
 
 		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
 
@@ -64,7 +64,7 @@ public class InventoriesManager {
 		EXGItemConfig borderItem = inventoryFile.getBorderItem();
 		int[] borderSlots = inventoryFile.getBorderSlots();
 
-		switch (inventoryName) {
+		return switch (inventoryName) {
 			case "homes" -> loadHomesInventory(title, rows, inventoryName, borderItem, borderSlots);
 			case "homeEditing" -> loadHomeEditingInventory(title, rows, inventoryName, borderItem, borderSlots);
 
@@ -92,7 +92,8 @@ public class InventoriesManager {
 			case "worthInventory" -> loadWorthInventoryInventory(title, rows, inventoryName, borderItem, borderSlots);
 
 			case "dataEntryGUI" -> loadDataEntryGUIInventory(title, rows, inventoryName, borderItem, borderSlots);
-		}
+			default -> 0;
+		};
 	}
 
 
@@ -104,37 +105,37 @@ public class InventoriesManager {
 	//
 
 
-	private void loadHomesInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+	private int loadHomesInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
 
 		homesInventoryConfig = new EXGHomesInventoryConfig(title, rows, borderItem, borderSlots);
 
 		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
 
 		homesInventoryConfig.setHomeItem(inventoryFile.getItem(
-				"homeItem"));
+				"homeItem", homesInventoryConfig));
 		homesInventoryConfig.setBedHomeItem(inventoryFile.getItem(
-				"bedHomeItem"));
+				"bedHomeItem", homesInventoryConfig));
 		homesInventoryConfig.setNoHomesItem(inventoryFile.getItem(
-				"noHomesItem"));
+				"noHomesItem", homesInventoryConfig));
 
 		homesInventoryConfig.setCreateHomeItem(inventoryFile.getItem(
-				"createHomeItem"));
+				"createHomeItem", homesInventoryConfig));
 		homesInventoryConfig.setSearchHomeItem(inventoryFile.getItem(
-				"searchHomeItem"));
+				"searchHomeItem", homesInventoryConfig));
 		homesInventoryConfig.setCancelSearchHomeItem(inventoryFile.getItem(
-				"cancelSearchHomeItem"));
+				"cancelSearchHomeItem", homesInventoryConfig));
 		homesInventoryConfig.setNoSearchHomeResultsItem(inventoryFile.getItem(
-				"noSearchHomeResultsItem"));
+				"noSearchHomeResultsItem", homesInventoryConfig));
 
 		homesInventoryConfig.setNextPageItem(inventoryFile.getItem(
-				"nextPageItem"));
+				"nextPageItem", homesInventoryConfig));
 		homesInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
-				"previousPageItem"));
+				"previousPageItem", homesInventoryConfig));
 		homesInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
-				"currentPageItem"));
+				"currentPageItem", homesInventoryConfig));
 
 		homesInventoryConfig.setCloseItem(inventoryFile.getItem(
-				"closeItem"));
+				"closeItem", homesInventoryConfig));
 
 		homesInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
 
@@ -144,26 +145,30 @@ public class InventoriesManager {
 				inventoryFile.getBedHomeItemWorldDisplayName("nether"));
 		homesInventoryConfig.setBedHomeItemNotSetMaterial(inventoryFile.getFullBedHomeItemMaterial("notSet"),
 				inventoryFile.getBedHomeItemWorldDisplayName("notSet"));
+
+		return homesInventoryConfig.getConfigurationErrors();
 	}
 
-	private void loadHomeEditingInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+	private int loadHomeEditingInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
 
 		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
 
 		homeEditingInventoryConfig = new EXGHomeEditingInventoryConfig(title, rows, borderItem, borderSlots);
 
 		homeEditingInventoryConfig.setPreviewHomeItem(inventoryFile.getItem(
-				"previewHomeItem"));
+				"previewHomeItem", homeEditingInventoryConfig));
 
 		homeEditingInventoryConfig.setChangeDisplayNameItem(inventoryFile.getItem(
-				"changeDisplayNameItem"));
+				"changeDisplayNameItem", homeEditingInventoryConfig));
 		homeEditingInventoryConfig.setChangeIconItem(inventoryFile.getItem(
-				"changeIconItem"));
+				"changeIconItem", homeEditingInventoryConfig));
 		homeEditingInventoryConfig.setDeleteHomeItem(inventoryFile.getItem(
-				"deleteHomeItem"));
+				"deleteHomeItem", homeEditingInventoryConfig));
 
 		homeEditingInventoryConfig.setBackItem(inventoryFile.getItem(
-				"backItem"));
+				"backItem", homeEditingInventoryConfig));
+
+		return homeEditingInventoryConfig.getConfigurationErrors();
 	}
 
 
@@ -172,75 +177,79 @@ public class InventoriesManager {
 	//
 
 
-	private void loadKitsAdminViewInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+	private int loadKitsAdminViewInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
 
 		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
 
 		kitsAdminViewInventoryConfig = new EXGKitsAdminViewInventoryConfig(title, rows, borderItem, borderSlots);
 
 		kitsAdminViewInventoryConfig.setKitItem(inventoryFile.getItem(
-				"kitItem"));
+				"kitItem", kitsAdminViewInventoryConfig));
 		kitsAdminViewInventoryConfig.setNoKitsItem(inventoryFile.getItem(
-				"noKitsItem"));
+				"noKitsItem", kitsAdminViewInventoryConfig));
 
 		kitsAdminViewInventoryConfig.setCreateKitItem(inventoryFile.getItem(
-				"createKitItem"));
+				"createKitItem", kitsAdminViewInventoryConfig));
 		kitsAdminViewInventoryConfig.setSwitchToPlayerModeItem(inventoryFile.getItem(
-				"switchToPlayerModeItem"));
+				"switchToPlayerModeItem", kitsAdminViewInventoryConfig));
 		kitsAdminViewInventoryConfig.setSearchKitItem(inventoryFile.getItem(
-				"searchKitItem"));
+				"searchKitItem", kitsAdminViewInventoryConfig));
 		kitsAdminViewInventoryConfig.setCancelSearchKitItem(inventoryFile.getItem(
-				"cancelSearchKitItem"));
+				"cancelSearchKitItem", kitsAdminViewInventoryConfig));
 		kitsAdminViewInventoryConfig.setNoSearchKitResultsItem(inventoryFile.getItem(
-				"noSearchKitResultsItem"));
+				"noSearchKitResultsItem", kitsAdminViewInventoryConfig));
 
 		kitsAdminViewInventoryConfig.setNextPageItem(inventoryFile.getItem(
-				"nextPageItem"));
+				"nextPageItem", kitsAdminViewInventoryConfig));
 		kitsAdminViewInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
-				"previousPageItem"));
+				"previousPageItem", kitsAdminViewInventoryConfig));
 		kitsAdminViewInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
-				"currentPageItem"));
+				"currentPageItem", kitsAdminViewInventoryConfig));
 
 		kitsAdminViewInventoryConfig.setCloseItem(inventoryFile.getItem(
-				"closeItem"));
+				"closeItem", kitsAdminViewInventoryConfig));
 
 		kitsAdminViewInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
+
+		return kitsAdminViewInventoryConfig.getConfigurationErrors();
 	}
 
-	private void loadKitsPlayerViewInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+	private int loadKitsPlayerViewInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
 
 		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
 
 		kitsPlayerViewInventoryConfig = new EXGKitsPlayerViewInventoryConfig(title, rows, borderItem, borderSlots);
 
 		kitsPlayerViewInventoryConfig.setKitItem(inventoryFile.getItem(
-				"kitItem"));
+				"kitItem", kitsPlayerViewInventoryConfig));
 		kitsPlayerViewInventoryConfig.setNoKitsItem(inventoryFile.getItem(
-				"noKitsItem"));
+				"noKitsItem", kitsPlayerViewInventoryConfig));
 
 		kitsPlayerViewInventoryConfig.setSwitchToAdminModeItem(inventoryFile.getItem(
-				"switchToAdminModeItem"));
+				"switchToAdminModeItem", kitsPlayerViewInventoryConfig));
 		kitsPlayerViewInventoryConfig.setSearchKitItem(inventoryFile.getItem(
-				"searchKitItem"));
+				"searchKitItem", kitsPlayerViewInventoryConfig));
 		kitsPlayerViewInventoryConfig.setCancelSearchKitItem(inventoryFile.getItem(
-				"cancelSearchKitItem"));
+				"cancelSearchKitItem", kitsPlayerViewInventoryConfig));
 		kitsPlayerViewInventoryConfig.setNoSearchKitResultsItem(inventoryFile.getItem(
-				"noSearchKitResultsItem"));
+				"noSearchKitResultsItem", kitsPlayerViewInventoryConfig));
 
 		kitsPlayerViewInventoryConfig.setNextPageItem(inventoryFile.getItem(
-				"nextPageItem"));
+				"nextPageItem", kitsPlayerViewInventoryConfig));
 		kitsPlayerViewInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
-				"previousPageItem"));
+				"previousPageItem", kitsPlayerViewInventoryConfig));
 		kitsPlayerViewInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
-				"currentPageItem"));
+				"currentPageItem", kitsPlayerViewInventoryConfig));
 
 		kitsPlayerViewInventoryConfig.setCloseItem(inventoryFile.getItem(
-				"closeItem"));
+				"closeItem", kitsPlayerViewInventoryConfig));
 
 		kitsPlayerViewInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
+
+		return kitsPlayerViewInventoryConfig.getConfigurationErrors();
 	}
 
-	private void loadKitPreviewInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+	private int loadKitPreviewInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
 
 		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
 
@@ -252,78 +261,86 @@ public class InventoriesManager {
 		kitPreviewInventoryConfig.setBorderSlots(borderSlots);
 
 		kitPreviewInventoryConfig.setKitItem(inventoryFile.getItem(
-				"kitItem"));
+				"kitItem", kitPreviewInventoryConfig));
 		kitPreviewInventoryConfig.setEmptyKitItem(inventoryFile.getItem(
-				"emptyKitItem"));
+				"emptyKitItem", kitPreviewInventoryConfig));
 
 		kitPreviewInventoryConfig.setNextPageItem(inventoryFile.getItem(
-				"nextPageItem"));
+				"nextPageItem", kitPreviewInventoryConfig));
 		kitPreviewInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
-				"previousPageItem"));
+				"previousPageItem", kitPreviewInventoryConfig));
 		kitPreviewInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
-				"currentPageItem"));
+				"currentPageItem", kitPreviewInventoryConfig));
 
 		kitPreviewInventoryConfig.setBackItem(inventoryFile.getItem(
-				"backItem"));
+				"backItem", kitPreviewInventoryConfig));
 
 		kitPreviewInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
+
+		return kitPreviewInventoryConfig.getConfigurationErrors();
 	}
 
-	private void loadKitPlayerGiveInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+	private int loadKitPlayerGiveInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
 
 		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
 
 		kitPlayerGiveInventoryConfig = new EXGKitPlayerGiveInventoryConfig(title, rows, borderItem, borderSlots);
 
 		kitPlayerGiveInventoryConfig.setPlayerItem(inventoryFile.getItem(
-				"playerItem"));
+				"playerItem", kitPlayerGiveInventoryConfig));
 
 		kitPlayerGiveInventoryConfig.setNextPageItem(inventoryFile.getItem(
-				"nextPageItem"));
+				"nextPageItem", kitPlayerGiveInventoryConfig));
 		kitPlayerGiveInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
-				"previousPageItem"));
+				"previousPageItem", kitPlayerGiveInventoryConfig));
 		kitPlayerGiveInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
-				"currentPageItem"));
+				"currentPageItem", kitPlayerGiveInventoryConfig));
 
 		kitPlayerGiveInventoryConfig.setBackItem(inventoryFile.getItem(
-				"backItem"));
+				"backItem", kitPlayerGiveInventoryConfig));
 
 		kitPlayerGiveInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
+
+		return kitPlayerGiveInventoryConfig.getConfigurationErrors();
 	}
 
-	private void loadKitEditingInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+	private int loadKitEditingInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
 
 		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
 
 		kitEditingInventoryConfig = new EXGKitEditingInventoryConfig(title, rows, borderItem, borderSlots);
 
 		kitEditingInventoryConfig.setPreviewKitItem(inventoryFile.getItem(
-				"previewKitItem"));
+				"previewKitItem", kitEditingInventoryConfig));
 
 		kitEditingInventoryConfig.setChangeDisplayNameItem(inventoryFile.getItem(
-				"changeDisplayNameItem"));
+				"changeDisplayNameItem", kitEditingInventoryConfig));
 		kitEditingInventoryConfig.setChangeIconItem(inventoryFile.getItem(
-				"changeIconItem"));
+				"changeIconItem", kitEditingInventoryConfig));
 		kitEditingInventoryConfig.setDeleteKitItem(inventoryFile.getItem(
-				"deleteKitItem"));
+				"deleteKitItem", kitEditingInventoryConfig));
 		kitEditingInventoryConfig.setEditKitContentsItem(inventoryFile.getItem(
-				"editKitContentsItem"));
+				"editKitContentsItem", kitEditingInventoryConfig));
 
 		kitEditingInventoryConfig.setBackItem(inventoryFile.getItem(
-				"backItem"));
+				"backItem", kitEditingInventoryConfig));
+
+		return kitEditingInventoryConfig.getConfigurationErrors();
 	}
 
 
-	private void loadKitEditorInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+	private int loadKitEditorInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
 
 		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
 
 		kitEditorInventoryConfig = new EXGKitEditorInventoryConfig(title, rows, borderItem, borderSlots);
 
 		kitEditorInventoryConfig.setSaveKitItem(inventoryFile.getItem(
-				"saveKitItem"));
+				"saveKitItem", kitEditorInventoryConfig));
 		kitEditorInventoryConfig.setCancelChangesItem(inventoryFile.getItem(
-				"cancelChangesItem"));
+				"cancelChangesItem", kitEditorInventoryConfig));
+
+		return kitEditorInventoryConfig.getConfigurationErrors();
 	}
 
 
@@ -332,114 +349,122 @@ public class InventoriesManager {
 	//
 
 
-	private void loadWarpEditingInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+	private int loadWarpEditingInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
 
 		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
 
 		warpEditingInventoryConfig = new EXGWarpEditingInventoryConfig(title, rows, borderItem, borderSlots);
 
 		warpEditingInventoryConfig.setPreviewWarpItem(inventoryFile.getItem(
-				"previewWarpItem"));
+				"previewWarpItem", warpEditingInventoryConfig));
 
 		warpEditingInventoryConfig.setChangeDisplayNameItem(inventoryFile.getItem(
-				"changeDisplayNameItem"));
+				"changeDisplayNameItem", warpEditingInventoryConfig));
 		warpEditingInventoryConfig.setChangeIconItem(inventoryFile.getItem(
-				"changeIconItem"));
+				"changeIconItem", warpEditingInventoryConfig));
 		warpEditingInventoryConfig.setDeleteWarpItem(inventoryFile.getItem(
-				"deleteWarpItem"));
+				"deleteWarpItem", warpEditingInventoryConfig));
 
 		warpEditingInventoryConfig.setBackItem(inventoryFile.getItem(
-				"backItem"));
+				"backItem", warpEditingInventoryConfig));
+
+		return warpEditingInventoryConfig.getConfigurationErrors();
 	}
 
-	private void loadWarpPlayerTeleportInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+	private int loadWarpPlayerTeleportInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
 
 		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
 
 		warpPlayerTeleportInventoryConfig = new EXGWarpPlayerTeleportInventoryConfig(title, rows, borderItem, borderSlots);
 
 		warpPlayerTeleportInventoryConfig.setPlayerItem(inventoryFile.getItem(
-				"playerItem"));
+				"playerItem", warpPlayerTeleportInventoryConfig));
 
 		warpPlayerTeleportInventoryConfig.setNextPageItem(inventoryFile.getItem(
-				"nextPageItem"));
+				"nextPageItem", warpPlayerTeleportInventoryConfig));
 		warpPlayerTeleportInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
-				"previousPageItem"));
+				"previousPageItem", warpPlayerTeleportInventoryConfig));
 		warpPlayerTeleportInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
-				"currentPageItem"));
+				"currentPageItem", warpPlayerTeleportInventoryConfig));
 
 		warpPlayerTeleportInventoryConfig.setBackItem(inventoryFile.getItem(
-				"backItem"));
+				"backItem", warpPlayerTeleportInventoryConfig));
 
 		warpPlayerTeleportInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
+
+		return warpPlayerTeleportInventoryConfig.getConfigurationErrors();
 	}
 
-	private void loadWarpsAdminViewInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+	private int loadWarpsAdminViewInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
 
 		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
 
 		warpsAdminViewInventoryConfig = new EXGWarpsAdminViewInventoryConfig(title, rows, borderItem, borderSlots);
 
 		warpsAdminViewInventoryConfig.setWarpItem(inventoryFile.getItem(
-				"warpItem"));
+				"warpItem", warpsAdminViewInventoryConfig));
 		warpsAdminViewInventoryConfig.setNoWarpsItem(inventoryFile.getItem(
-				"noWarpsItem"));
+				"noWarpsItem", warpsAdminViewInventoryConfig));
 
 		warpsAdminViewInventoryConfig.setCreateWarpItem(inventoryFile.getItem(
-				"createWarpItem"));
+				"createWarpItem", warpsAdminViewInventoryConfig));
 		warpsAdminViewInventoryConfig.setSwitchToPlayerModeItem(inventoryFile.getItem(
-				"switchToPlayerModeItem"));
+				"switchToPlayerModeItem", warpsAdminViewInventoryConfig));
 		warpsAdminViewInventoryConfig.setSearchWarpItem(inventoryFile.getItem(
-				"searchWarpItem"));
+				"searchWarpItem", warpsAdminViewInventoryConfig));
 		warpsAdminViewInventoryConfig.setCancelSearchWarpItem(inventoryFile.getItem(
-				"cancelSearchWarpItem"));
+				"cancelSearchWarpItem", warpsAdminViewInventoryConfig));
 		warpsAdminViewInventoryConfig.setNoSearchWarpResultsItem(inventoryFile.getItem(
-				"noSearchWarpResultsItem"));
+				"noSearchWarpResultsItem", warpsAdminViewInventoryConfig));
 
 		warpsAdminViewInventoryConfig.setNextPageItem(inventoryFile.getItem(
-				"nextPageItem"));
+				"nextPageItem", warpsAdminViewInventoryConfig));
 		warpsAdminViewInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
-				"previousPageItem"));
+				"previousPageItem", warpsAdminViewInventoryConfig));
 		warpsAdminViewInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
-				"currentPageItem"));
+				"currentPageItem", warpsAdminViewInventoryConfig));
 
 		warpsAdminViewInventoryConfig.setCloseItem(inventoryFile.getItem(
-				"closeItem"));
+				"closeItem", warpsAdminViewInventoryConfig));
 
 		warpsAdminViewInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
+
+		return warpsAdminViewInventoryConfig.getConfigurationErrors();
 	}
 
-	private void loadWarpsPlayerViewInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+	private int loadWarpsPlayerViewInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
 
 		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
 
 		warpsPlayerViewInventoryConfig = new EXGWarpsPlayerViewInventoryConfig(title, rows, borderItem, borderSlots);
 
 		warpsPlayerViewInventoryConfig.setWarpItem(inventoryFile.getItem(
-				"warpItem"));
+				"warpItem", warpsPlayerViewInventoryConfig));
 		warpsPlayerViewInventoryConfig.setNoWarpsItem(inventoryFile.getItem(
-				"noWarpsItem"));
+				"noWarpsItem", warpsPlayerViewInventoryConfig));
 
 		warpsPlayerViewInventoryConfig.setSwitchToAdminModeItem(inventoryFile.getItem(
-				"switchToAdminModeItem"));
+				"switchToAdminModeItem", warpsPlayerViewInventoryConfig));
 		warpsPlayerViewInventoryConfig.setSearchWarpItem(inventoryFile.getItem(
-				"searchWarpItem"));
+				"searchWarpItem", warpsPlayerViewInventoryConfig));
 		warpsPlayerViewInventoryConfig.setCancelSearchWarpItem(inventoryFile.getItem(
-				"cancelSearchWarpItem"));
+				"cancelSearchWarpItem", warpsPlayerViewInventoryConfig));
 		warpsPlayerViewInventoryConfig.setNoSearchWarpResultsItem(inventoryFile.getItem(
-				"noSearchWarpResultsItem"));
+				"noSearchWarpResultsItem", warpsPlayerViewInventoryConfig));
 
 		warpsPlayerViewInventoryConfig.setNextPageItem(inventoryFile.getItem(
-				"nextPageItem"));
+				"nextPageItem", warpsPlayerViewInventoryConfig));
 		warpsPlayerViewInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
-				"previousPageItem"));
+				"previousPageItem", warpsPlayerViewInventoryConfig));
 		warpsPlayerViewInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
-				"currentPageItem"));
+				"currentPageItem", warpsPlayerViewInventoryConfig));
 
 		warpsPlayerViewInventoryConfig.setCloseItem(inventoryFile.getItem(
-				"closeItem"));
+				"closeItem", warpsPlayerViewInventoryConfig));
 
 		warpsPlayerViewInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
+
+		return warpsPlayerViewInventoryConfig.getConfigurationErrors();
 	}
 
 
@@ -448,59 +473,63 @@ public class InventoriesManager {
 	//
 
 
-	private void loadWhoisPlayersInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+	private int loadWhoisPlayersInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
 
 		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
 
 		whoisPlayersInventoryConfig = new EXGWhoisPlayersInventoryConfig(title, rows, borderItem, borderSlots);
 
 		whoisPlayersInventoryConfig.setPlayerItem(inventoryFile.getItem(
-				"playerItem"));
+				"playerItem", whoisPlayersInventoryConfig));
 
 		whoisPlayersInventoryConfig.setNextPageItem(inventoryFile.getItem(
-				"nextPageItem"));
+				"nextPageItem", whoisPlayersInventoryConfig));
 		whoisPlayersInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
-				"previousPageItem"));
+				"previousPageItem", whoisPlayersInventoryConfig));
 		whoisPlayersInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
-				"currentPageItem"));
+				"currentPageItem", whoisPlayersInventoryConfig));
 
 		whoisPlayersInventoryConfig.setCloseItem(inventoryFile.getItem(
-				"closeItem"));
+				"closeItem", whoisPlayersInventoryConfig));
 
 		whoisPlayersInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
+
+		return whoisPlayersInventoryConfig.getConfigurationErrors();
 	}
 
-	private void loadWhoisViewInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+	private int loadWhoisViewInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
 
 		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
 
 		whoisViewInventoryConfig = new EXGWhoisViewInventoryConfig(title, rows, borderItem, borderSlots);
 
 		whoisViewInventoryConfig.setPlayerIdentificationItem(inventoryFile.getItem(
-				"playerIdentificationItem"));
+				"playerIdentificationItem", whoisViewInventoryConfig));
 		whoisViewInventoryConfig.setPlayerStatisticsItem(inventoryFile.getItem(
-				"playerStatisticsItem"));
+				"playerStatisticsItem", whoisViewInventoryConfig));
 		whoisViewInventoryConfig.setPlayerWorldItem(inventoryFile.getItem(
-				"playerWorldItem"));
+				"playerWorldItem", whoisViewInventoryConfig));
 		whoisViewInventoryConfig.setPlayerServerDataItem(inventoryFile.getItem(
-				"playerServerDataItem"));
+				"playerServerDataItem", whoisViewInventoryConfig));
 		whoisViewInventoryConfig.setPlayerPunishmentsItem(inventoryFile.getItem(
-				"playerPunishmentsItem"));
+				"playerPunishmentsItem", whoisViewInventoryConfig));
 
 		whoisViewInventoryConfig.setNextPageItem(inventoryFile.getItem(
-				"nextPageItem"));
+				"nextPageItem", whoisViewInventoryConfig));
 		whoisViewInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
-				"previousPageItem"));
+				"previousPageItem", whoisViewInventoryConfig));
 		whoisViewInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
-				"currentPageItem"));
+				"currentPageItem", whoisViewInventoryConfig));
 
 		whoisViewInventoryConfig.setBackItem(inventoryFile.getItem(
-				"backItem"));
+				"backItem", whoisViewInventoryConfig));
 
 		whoisViewInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
 
 		whoisViewInventoryConfig.setOnlyUsePlaceholderAPI(inventoryFile.getYamlConfiguration()
 				.getBoolean("onlyUsePlaceholderAPI"));
+
+		return whoisViewInventoryConfig.getConfigurationErrors();
 	}
 
 
@@ -509,163 +538,177 @@ public class InventoriesManager {
 	//
 
 
-	public void loadBalanceTopInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+	private int loadBalanceTopInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
 
 		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
 
 		balanceTopInventoryConfig = new EXGBalanceTopInventoryConfig(title, rows, borderItem, borderSlots);
 
 		balanceTopInventoryConfig.setPlayerRankingItem(inventoryFile.getItem(
-				"playerRankingItem"));
+				"playerRankingItem", balanceTopInventoryConfig));
 		balanceTopInventoryConfig.setForceUpdateItem(inventoryFile.getItem(
-				"forceUpdateItem"));
+				"forceUpdateItem", balanceTopInventoryConfig));
 
 		balanceTopInventoryConfig.setCloseItem(inventoryFile.getItem(
-				"closeItem"));
+				"closeItem", balanceTopInventoryConfig));
 
 		balanceTopInventoryConfig.setRankingItems(inventoryFile.getItemsSection(
-				"rankingItems"));
+				"rankingItems", balanceTopInventoryConfig));
 
 		balanceTopInventoryConfig.setRankingRange(inventoryFile.getRankingRange());
+
+		return balanceTopInventoryConfig.getConfigurationErrors();
 	}
 
 
-	public void loadEcoActionInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+	private int loadEcoActionInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
 
 		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
 
 		ecoActionInventoryConfig = new EXGEcoActionInventoryConfig(title, rows, borderItem, borderSlots);
 
 		ecoActionInventoryConfig.setPlayerItem(inventoryFile.getItem(
-				"playerItem"));
+				"playerItem", ecoActionInventoryConfig));
 
 		ecoActionInventoryConfig.setAddBalanceItem(inventoryFile.getItem(
-				"addBalanceItem"));
+				"addBalanceItem", ecoActionInventoryConfig));
 		ecoActionInventoryConfig.setTakeBalanceItem(inventoryFile.getItem(
-				"takeBalanceItem"));
+				"takeBalanceItem", ecoActionInventoryConfig));
 		ecoActionInventoryConfig.setSetBalanceItem(inventoryFile.getItem(
-				"setBalanceItem"));
+				"setBalanceItem", ecoActionInventoryConfig));
 		ecoActionInventoryConfig.setResetBalanceItem(inventoryFile.getItem(
-				"resetBalanceItem"));
+				"resetBalanceItem", ecoActionInventoryConfig));
 
 		ecoActionInventoryConfig.setBackItem(inventoryFile.getItem(
-				"backItem"));
+				"backItem", ecoActionInventoryConfig));
+
+		return ecoActionInventoryConfig.getConfigurationErrors();
 	}
 
 
-	public void loadEcoAmountInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+	private int loadEcoAmountInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
 
 		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
 
 		ecoAmountInventoryConfig = new EXGEcoAmountInventoryConfig(title, rows, borderItem, borderSlots);
 
 		ecoAmountInventoryConfig.setAddItems(inventoryFile.getItems(
-				"addItem", true));
+				"addItem", true, ecoAmountInventoryConfig));
 		ecoAmountInventoryConfig.setRemoveItems(inventoryFile.getItems(
-				"removeItem", true));
+				"removeItem", true, ecoAmountInventoryConfig));
 
 		ecoAmountInventoryConfig.setConfirmActionItem(inventoryFile.getItem(
-				"confirmActionItem"));
+				"confirmActionItem", ecoAmountInventoryConfig));
 		ecoAmountInventoryConfig.setCancelActionItem(inventoryFile.getItem(
-				"cancelActionItem"));
+				"cancelActionItem", ecoAmountInventoryConfig));
+
+		return ecoAmountInventoryConfig.getConfigurationErrors();
 	}
 
 
-	public void loadEcoPlayersInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+	private int loadEcoPlayersInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
 
 		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
 
 		ecoPlayersInventoryConfig = new EXGEcoPlayersInventoryConfig(title, rows, borderItem, borderSlots);
 
 		ecoPlayersInventoryConfig.setPlayerItem(inventoryFile.getItem(
-				"playerItem"));
+				"playerItem", ecoPlayersInventoryConfig));
 
 		ecoPlayersInventoryConfig.setNextPageItem(inventoryFile.getItem(
-				"nextPageItem"));
+				"nextPageItem", ecoPlayersInventoryConfig));
 		ecoPlayersInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
-				"previousPageItem"));
+				"previousPageItem", ecoPlayersInventoryConfig));
 		ecoPlayersInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
-				"currentPageItem"));
+				"currentPageItem", ecoPlayersInventoryConfig));
 
 		ecoPlayersInventoryConfig.setCloseItem(inventoryFile.getItem(
-				"closeItem"));
+				"closeItem", ecoPlayersInventoryConfig));
 
 		ecoPlayersInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
+
+		return ecoPlayersInventoryConfig.getConfigurationErrors();
 	}
 
 
-	public void loadWorthInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+	private int loadWorthInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
 
 		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
 
 		worthInventoryConfig = new EXGWorthInventoryConfig(title, rows, borderItem, borderSlots);
 
 		worthInventoryConfig.setAllItem(inventoryFile.getItem(
-				"allItem"));
+				"allItem", worthInventoryConfig));
 		worthInventoryConfig.setHandItem(inventoryFile.getItem(
-				"handItem"));
+				"handItem", worthInventoryConfig));
 		worthInventoryConfig.setInventoryItem(inventoryFile.getItem(
-				"inventoryItem"));
+				"inventoryItem", worthInventoryConfig));
 
 		worthInventoryConfig.setCloseItem(inventoryFile.getItem(
-				"closeItem"));
+				"closeItem", worthInventoryConfig));
+
+		return worthInventoryConfig.getConfigurationErrors();
 	}
 
 
-	public void loadWorthAllInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+	private int loadWorthAllInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
 
 		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
 
 		worthAllInventoryConfig = new EXGWorthAllInventoryConfig(title, rows, borderItem, borderSlots);
 
 		worthAllInventoryConfig.setWorthItem(inventoryFile.getItem(
-				"worthItem"));
+				"worthItem", worthAllInventoryConfig));
 		worthAllInventoryConfig.setNoWorthItem(inventoryFile.getItem(
-				"noWorthItem"));
+				"noWorthItem", worthAllInventoryConfig));
 
 		worthAllInventoryConfig.setSearchWorthItem(inventoryFile.getItem(
-				"searchWorthItem"));
+				"searchWorthItem", worthAllInventoryConfig));
 		worthAllInventoryConfig.setCancelSearchWorthItem(inventoryFile.getItem(
-				"cancelSearchWorthItem"));
+				"cancelSearchWorthItem", worthAllInventoryConfig));
 		worthAllInventoryConfig.setNoSearchWorthResultsItem(inventoryFile.getItem(
-				"noSearchWorthResultsItem"));
+				"noSearchWorthResultsItem", worthAllInventoryConfig));
 
 		worthAllInventoryConfig.setNextPageItem(inventoryFile.getItem(
-				"nextPageItem"));
+				"nextPageItem", worthAllInventoryConfig));
 		worthAllInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
-				"previousPageItem"));
+				"previousPageItem", worthAllInventoryConfig));
 		worthAllInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
-				"currentPageItem"));
+				"currentPageItem", worthAllInventoryConfig));
 
 		worthAllInventoryConfig.setBackItem(inventoryFile.getItem(
-				"backItem"));
+				"backItem", worthAllInventoryConfig));
 
 		worthAllInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
+
+		return worthAllInventoryConfig.getConfigurationErrors();
 	}
 
 
-	public void loadWorthInventoryInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+	private int loadWorthInventoryInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
 
 		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
 
 		worthInventoryInventoryConfig = new EXGWorthInventoryInventoryConfig(title, rows, borderItem, borderSlots);
 
 		worthInventoryInventoryConfig.setWorthItem(inventoryFile.getItem(
-				"worthItem"));
+				"worthItem", worthInventoryInventoryConfig));
 		worthInventoryInventoryConfig.setEmptyInventoryItem(inventoryFile.getItem(
-				"emptyInventoryItem"));
+				"emptyInventoryItem", worthInventoryInventoryConfig));
 
 		worthInventoryInventoryConfig.setNextPageItem(inventoryFile.getItem(
-				"nextPageItem"));
+				"nextPageItem", worthInventoryInventoryConfig));
 		worthInventoryInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
-				"previousPageItem"));
+				"previousPageItem", worthInventoryInventoryConfig));
 		worthInventoryInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
-				"currentPageItem"));
+				"currentPageItem", worthInventoryInventoryConfig));
 
 		worthInventoryInventoryConfig.setBackItem(inventoryFile.getItem(
-				"backItem"));
+				"backItem", worthInventoryInventoryConfig));
 
 		worthInventoryInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
+
+		return worthInventoryInventoryConfig.getConfigurationErrors();
 	}
 
 
@@ -674,26 +717,28 @@ public class InventoriesManager {
 	//
 
 
-	public void loadDataEntryGUIInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
+	private int loadDataEntryGUIInventory(String title, int rows, String inventoryName, EXGItemConfig borderItem, int... borderSlots) {
 
 		InventoryFile inventoryFile = Main.getInstance().getFilesManager().getInventory(inventoryName);
 
 		dataEntryGUIInventoryConfig = new EXGDataEntryGUInventoryConfig(title, rows, borderItem, borderSlots);
 
-		dataEntryGUIInventoryConfig.setMaterialIconItem(
-				inventoryFile.getItem("materialIconItem"));
+		dataEntryGUIInventoryConfig.setMaterialIconItem(inventoryFile.getItem(
+				"materialIconItem", dataEntryGUIInventoryConfig));
 
 		dataEntryGUIInventoryConfig.setNextPageItem(inventoryFile.getItem(
-				"nextPageItem"));
+				"nextPageItem", dataEntryGUIInventoryConfig));
 		dataEntryGUIInventoryConfig.setPreviousPageItem(inventoryFile.getItem(
-				"previousPageItem"));
+				"previousPageItem", dataEntryGUIInventoryConfig));
 		dataEntryGUIInventoryConfig.setCurrentPageItem(inventoryFile.getItem(
-				"currentPageItem"));
+				"currentPageItem", dataEntryGUIInventoryConfig));
 
 		dataEntryGUIInventoryConfig.setCancelItem(inventoryFile.getItem(
-				"cancelItem"));
+				"cancelItem", dataEntryGUIInventoryConfig));
 
 		dataEntryGUIInventoryConfig.setInventoryScheme(inventoryFile.getInventoryScheme());
+
+		return dataEntryGUIInventoryConfig.getConfigurationErrors();
 	}
 
 

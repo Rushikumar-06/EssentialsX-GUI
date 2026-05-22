@@ -122,7 +122,6 @@ public class EXGWhoisViewInventoryConfig extends EXGPaginatedInventoryConfig {
 		copy.setInventoryScheme(this.getInventoryScheme());
 
 		copy.setOnlyUsePlaceholderAPI(this.onlyUsePlaceholderAPI);
-
 		return copy;
 	}
 

@@ -2,6 +2,7 @@ package fr.snipertvmc.essentialsxgui.infrastructure.models.files;
 
 import com.cryptomorin.xseries.XEnchantment;
 import com.cryptomorin.xseries.XItemFlag;
+import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGInventoryConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
 import fr.snipertvmc.essentialsxgui.libraries.exglib.Pair;
 import fr.snipertvmc.essentialsxgui.libraries.fastinv.InventoryScheme;
@@ -58,14 +59,15 @@ public class InventoryFile {
 	}
 
 
-	public EXGItemConfig getItem(String itemName) {
+	public EXGItemConfig getItem(String itemName, EXGInventoryConfig inventoryConfig) {
 		EXGItemConfig itemConfig = getItem(inventoryName + ".items." + itemName, false);
 		short slot = (short) yamlConfiguration.getInt(inventoryName + ".items." + itemName + ".slot");
 		itemConfig.setSlot(slot);
+		if (itemConfig.isMisconfigured()) inventoryConfig.incrementConfigurationErrors();
 		return itemConfig;
 	}
 
-	public List<EXGItemConfig> getItems(String itemName) {
+	public List<EXGItemConfig> getItems(String itemName, EXGInventoryConfig inventoryConfig) {
 		EXGItemConfig itemConfig = getItem(inventoryName + ".items." + itemName, true);
 		List<Integer> slots = yamlConfiguration.getIntegerList(inventoryName + ".items." + itemName + ".slots");
 		List<EXGItemConfig> itemConfigs = new ArrayList<>();
@@ -73,12 +75,13 @@ public class InventoryFile {
 			EXGItemConfig itemConfigCopy = itemConfig.duplicate();
 			itemConfigCopy.setSlot((short) slot);
 			itemConfigs.add(itemConfigCopy);
+			if (itemConfig.isMisconfigured()) inventoryConfig.incrementConfigurationErrors();
 		}
 		return itemConfigs;
 	}
 
-	public List<EXGItemConfig> getItems(String itemName, boolean withAmountValues) {
-		if (!withAmountValues) return getItems(itemName);
+	public List<EXGItemConfig> getItems(String itemName, boolean withAmountValues, EXGInventoryConfig inventoryConfig) {
+		if (!withAmountValues) return getItems(itemName, inventoryConfig);
 		EXGItemConfig itemConfig = getItem(inventoryName + ".items." + itemName, true);
 		List<Integer> slots = yamlConfiguration.getIntegerList(inventoryName + ".items." + itemName + ".slots");
 		List<Integer> amountValues = yamlConfiguration.getIntegerList(inventoryName + ".items." + itemName + ".amountValues");
@@ -90,12 +93,13 @@ public class InventoryFile {
 			itemConfigCopy.setSlot((short) slot);
 			itemConfigCopy.setAmountValue(amountValue);
 			itemConfigs.add(itemConfigCopy);
+			if (itemConfig.isMisconfigured()) inventoryConfig.incrementConfigurationErrors();
 		}
 		return itemConfigs;
 	}
 
 
-	public Set<EXGItemConfig> getItemsSection(String sectionPath) {
+	public Set<EXGItemConfig> getItemsSection(String sectionPath, EXGInventoryConfig inventoryConfig) {
 
 		ConfigurationSection configurationSection = yamlConfiguration.getConfigurationSection(sectionPath);
 		if (configurationSection == null) return Collections.emptySet();
@@ -144,6 +148,7 @@ public class InventoryFile {
 
 			itemConfig.setSlot((short) slot);
 			itemConfigs.add(itemConfig);
+			if (itemConfig.isMisconfigured()) inventoryConfig.incrementConfigurationErrors();
 		}
 
 		return itemConfigs;
@@ -178,7 +183,7 @@ public class InventoryFile {
 
 		Object enabledValue = yamlConfiguration.get(path + ".enabled", true);
 		if (enabledValue instanceof Boolean isEnabled && !isEnabled) {
-			return new EXGItemConfig(false, (short) 0, Material.AIR.name(), 1, (byte) 0, null, null, null, null, new HashMap<>(), 0, 0, 0);
+			return new EXGItemConfig(false, (short) 0, Material.AIR.name(), 1, (byte) 0, null, null, null, null, new HashMap<>(), 0, 0, 0, false);
 		}
 
 		// Check if the item configuration is valid
@@ -201,7 +206,8 @@ public class InventoryFile {
 							"",
 							"<gold>Item path involved: ",
 							"<dark_gray>- <yellow>" + path),
-					null, null, new HashMap<>(), 0, 0, 0
+					null, null, new HashMap<>(), 0, 0, 0,
+					true
 			);
 		}
 
@@ -285,7 +291,9 @@ public class InventoryFile {
 				(Integer) itemConfiguration.get("customModelData"),
 
 				(Integer) itemConfiguration.get("updateItemInterval"),
-				(Integer)  itemConfiguration.get("amountValue")
+				(Integer)  itemConfiguration.get("amountValue"),
+
+				false
 		);
 	}
 

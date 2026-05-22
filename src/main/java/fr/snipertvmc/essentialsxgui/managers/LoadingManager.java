@@ -14,10 +14,13 @@ import fr.snipertvmc.essentialsxgui.utilities.RegisterUtils;
 import fr.snipertvmc.essentialsxgui.utilities.TextUtils;
 import fr.snipertvmc.essentialsxgui.utilities.other.UpdateUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
 
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.Callable;
 
 public class LoadingManager {
@@ -123,6 +126,120 @@ public class LoadingManager {
 		if (detailedLoading) ConsoleLogger.console("\t§6EssentialsX-GUI: §7Disconnecting databases...");
 		Main.getInstance().getDatabaseManager().disconnectAllDatabases();
 		if (detailedLoading) ConsoleLogger.console("\t§6EssentialsX-GUI: §7Databases disconnection §fcompleted§7.");
+	}
+
+
+	// -------------------------------------------------- //
+
+
+	public void reloadPlugin(CommandSender sender) {
+
+		Set<CommandSender> commandSenders = new HashSet<>();
+		commandSenders.add(sender);
+		if (sender instanceof Player) commandSenders.add(Bukkit.getConsoleSender());
+
+		boolean detailedLoading = Main.getInstance().getConfiguration().isDetailedLoading();
+		int totalErrors = 0;
+
+		TextUtils.sendMessageToCommandSender(commandSenders,
+				MessagesUtils.getString(EXGMessage.PLUGIN_RELOADING, null));
+
+
+		// FILES RELOADING
+		totalErrors += reloadFiles(commandSenders, detailedLoading);
+
+
+		// DATABASE RELOADING
+		totalErrors += reloadDatabase(commandSenders, detailedLoading);
+
+
+		// TASK RELOADING
+		totalErrors += reloadTasks(commandSenders, detailedLoading);
+
+
+		// DATA RELOADING
+		totalErrors += reloadData(commandSenders, detailedLoading);
+
+
+		TextUtils.sendMessageToCommandSender(commandSenders,
+				MessagesUtils.getString(EXGMessage.PLUGIN_RELOADED, Map.of(
+						"errors", String.valueOf(totalErrors)))
+		);
+
+		if (totalErrors > 0) {
+			TextUtils.sendMessageToCommandSender(commandSenders,
+					MessagesUtils.getString(EXGMessage.PLUGIN_RELOADED_WITH_ERRORS, null));
+		}
+	}
+
+
+	private int reloadFiles(Set<CommandSender> commandSenders, boolean detailedLoading) {
+		if (detailedLoading) TextUtils.sendMessageToCommandSender(commandSenders,
+				MessagesUtils.getString(EXGMessage.FILES_RELOADING, null));
+
+		int errors = Main.getInstance().getFilesManager().reloadFiles();
+
+		if (detailedLoading) TextUtils.sendMessageToCommandSender(commandSenders,
+				MessagesUtils.getString(EXGMessage.FILES_RELOADED, Map.of(
+						"errors", String.valueOf(errors)))
+		);
+
+		return errors;
+	}
+
+
+	private int reloadDatabase(Set<CommandSender> commandSenders, boolean detailedLoading) {
+		if (detailedLoading) TextUtils.sendMessageToCommandSender(commandSenders,
+				MessagesUtils.getString(EXGMessage.DATABASE_RELOADING, null));
+
+		Main.getInstance().getDatabaseManager().disconnectAllDatabases();
+		Main.getInstance().getDatabaseManager().updateDatabaseStorage();
+		Main.getInstance().getDatabaseManager().connectAllDatabases();
+
+		int errors = Main.getInstance().getDatabaseManager().getStorage().isConnected() ? 0 : 1;
+
+		if (detailedLoading) TextUtils.sendMessageToCommandSender(commandSenders,
+				MessagesUtils.getString(EXGMessage.DATABASE_RELOADED, Map.of(
+						"errors", String.valueOf(errors)))
+		);
+
+		return errors;
+	}
+
+
+	private int reloadTasks(Set<CommandSender> commandSenders, boolean detailedLoading) {
+		if (detailedLoading) TextUtils.sendMessageToCommandSender(commandSenders,
+				MessagesUtils.getString(EXGMessage.TASKS_RELOADING, null));
+
+		Main.getInstance().getEXGServer().getBalanceTop().stopUpdateTask();
+		Main.getInstance().getEXGServer().getBalanceTop().startUpdateTask();
+
+		int errors = Main.getInstance().getEXGServer().getBalanceTop().isUpdateTaskRunning() ? 0 : 1;
+
+		if (detailedLoading) TextUtils.sendMessageToCommandSender(commandSenders,
+				MessagesUtils.getString(EXGMessage.TASKS_RELOADED, Map.of(
+						"errors", String.valueOf(errors)))
+		);
+
+		return errors;
+	}
+
+
+	private int reloadData(Set<CommandSender> commandSenders, boolean detailedLoading) {
+		if (detailedLoading) TextUtils.sendMessageToCommandSender(commandSenders,
+				MessagesUtils.getString(EXGMessage.DATA_RELOADING, null));
+
+		Main.getInstance().getEXGServer().getBalanceTop().forceUpdate();
+		Main.getInstance().getEXGServer().getWorth().loadItemsWorth();
+
+		int errors = Main.getInstance().getDatabaseManager().getStorage().isConnected() ? 0 : 1;
+
+		if (detailedLoading) TextUtils.sendMessageToCommandSender(commandSenders,
+				MessagesUtils.getString(EXGMessage.DATA_RELOADED, Map.of(
+						"errors", String.valueOf(errors)))
+		);
+
+		return errors;
 	}
 
 

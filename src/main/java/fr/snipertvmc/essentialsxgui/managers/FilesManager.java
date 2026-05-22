@@ -108,45 +108,46 @@ public class FilesManager {
 	}
 
 
-	public void reloadFiles() {
-
-		long startTime = System.currentTimeMillis();
-
-		ConsoleLogger.console("");
+	public int reloadFiles() {
 		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Reloading files...");
 
-		loadAndCheckConfiguration(true);
-		loadAndCheckMessages(true);
-		loadAndCheckInventories(true);
+		int errors = loadAndCheckConfiguration(true);
+		errors += loadAndCheckMessages(true);
+		errors += loadAndCheckInventories(true);
 
-		long endTime = System.currentTimeMillis();
-		long loadingTime = endTime - startTime;
-
-		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Files reloading §fcompleted§7 in §f" + loadingTime + "ms§7.");
-		ConsoleLogger.console("");
+		ConsoleLogger.console("\t§6EssentialsX-GUI: §7Files reloading §fcompleted§7.");
+		return errors;
 	}
 
 
 	// -------------------------------------------------- //
 
 
-	private void loadYAMLFile(String fileName) {
+	private int loadYAMLFile(String fileName) {
 
-		String filePath = filesPaths.get(fileName);
-		File file = new File(Main.getInstance().getDataFolder(), filePath + ".yml");
+		try {
+			String filePath = filesPaths.get(fileName);
+			File file = new File(Main.getInstance().getDataFolder(), filePath + ".yml");
 
-		if (!file.exists()) {
-			file.getParentFile().mkdirs();
-			Main.getInstance().saveResource(filePath + ".yml", false);
-		}
+			if (!file.exists()) {
+				file.getParentFile().mkdirs();
+				Main.getInstance().saveResource(filePath + ".yml", false);
+			}
 
-		YamlConfiguration yamlFile = YamlConfiguration.loadConfiguration(file);
+			YamlConfiguration yamlFile = YamlConfiguration.loadConfiguration(file);
 
-		switch (fileName) {
+			switch (fileName) {
 
-			case "configuration" -> configurationFile = new ConfigurationFile(yamlFile);
-			case "messages" -> messagesFile = new MessagesFile(yamlFile);
-			default -> inventoriesFiles.put(fileName, new InventoryFile(yamlFile, fileName));
+				case "configuration" -> configurationFile = new ConfigurationFile(yamlFile);
+				case "messages" -> messagesFile = new MessagesFile(yamlFile);
+				default -> inventoriesFiles.put(fileName, new InventoryFile(yamlFile, fileName));
+			}
+
+			return 0;
+
+		} catch (Exception e) {
+			ConsoleLogger.console("\t§6EssentialsX-GUI: §cError while loading " + fileName + ".yml: " + e.getMessage());
+			return 1;
 		}
 	}
 
@@ -205,35 +206,45 @@ public class FilesManager {
 	// -------------------------------------------------- //
 
 
-	public void loadAndCheckConfiguration(boolean reload) {
-		loadYAMLFile("configuration");
+	public int loadAndCheckConfiguration(boolean reload) {
+		int errors = loadYAMLFile("configuration");
 		checkUpdateForFile("configuration");
 		String label = reload ? "Reloaded" : "Loaded";
 		if (configurationFile.isDetailedLoading()) ConsoleLogger.console("\t§6EssentialsX-GUI: §8- §fconfiguration.yml: §a" + label);
+		return errors;
 	}
 
 
-	public void loadAndCheckMessages(boolean reload) {
-		loadYAMLFile("messages");
+	public int loadAndCheckMessages(boolean reload) {
+		int errors = loadYAMLFile("messages");
 		checkUpdateForFile("messages");
 		String label = reload ? "Reloaded" : "Loaded";
 		if (configurationFile.isDetailedLoading()) ConsoleLogger.console("\t§6EssentialsX-GUI: §8- §fmessages.yml: §a" + label);
+		return errors;
 	}
 
 
-	public void loadAndCheckInventories(boolean reload) {
+	public int loadAndCheckInventories(boolean reload) {
+
+		int errors = 0;
 
 		for (String inventoryName : Main.getInstance().getInventoriesManager().getInventoryNames()) {
-			loadYAMLFile(inventoryName);
+			if (loadYAMLFile(inventoryName) == 1) {
+				errors++;
+				continue;
+			}
 			checkUpdateForFile(inventoryName);
-			boolean isValid = EXGInventoryConfigParser.isEXGInventoryConfigValid(getInventory(inventoryName));
-			Main.getInstance().getInventoriesManager().loadInventory(inventoryName);
+			int inventoryErrors = EXGInventoryConfigParser.isEXGInventoryConfigValid(getInventory(inventoryName));
+			inventoryErrors += Main.getInstance().getInventoriesManager().loadInventory(inventoryName);
 
 			String label = reload ? "Reloaded" : "Loaded";
-			label = isValid ? label : "§4Not valid, please resolve the above errors";
+			label = inventoryErrors == 0 ? label : "§4Not valid, please resolve the above errors";
 
+			if (inventoryErrors > 0) errors += inventoryErrors;
 			if (configurationFile.isDetailedLoading()) ConsoleLogger.console("\t§6EssentialsX-GUI: §8- §f" + inventoryName + ".yml: §a" + label);
 		}
+
+		return errors;
 	}
 
 

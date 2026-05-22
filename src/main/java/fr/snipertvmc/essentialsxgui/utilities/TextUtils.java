@@ -11,6 +11,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.List;
+import java.util.Set;
 
 public class TextUtils {
 
@@ -19,9 +20,15 @@ public class TextUtils {
 
 
 	public static void sendMessageToCommandSender(CommandSender commandSender, String formattedMessage) {
+		sendMessageToCommandSender(Set.of(commandSender), formattedMessage);
+	}
+
+
+	public static void sendMessageToCommandSender(Set<CommandSender> commandSenders, String formattedMessage) {
 		if (formattedMessage.isEmpty()) return;
-		Component component = convertFormattedMessageToComponent(commandSender, formattedMessage);
-		Main.getInstance().getBukkitAudiences().sender(commandSender).sendMessage(component);
+		if (commandSenders.isEmpty()) return;
+		Component component = convertFormattedMessageToComponent(commandSenders.stream().findFirst().orElse(null), formattedMessage);
+		commandSenders.forEach(commandSender -> Main.getInstance().getBukkitAudiences().sender(commandSender).sendMessage(component));
 	}
 
 

@@ -45,21 +45,29 @@ prefix: "&8[&6&LEXG&8]&7"
 
 admin:
 
-  filesReloading: "{prefix} &eThe files are being reloaded..."
-  filesReloaded: "{prefix} &eThe files have been reloaded. Please check the console if you encounter any errors."
-
   # Placeholders available: {currentVersion}, {latestVersion}
   alertUpdateAvailable: "{prefix} &eAn update is available for EssentialsX-GUI. &6Please check the console for more information."
 
+  pluginReloading: "{prefix} &eThe plugin is being reloaded..."
+  # Placeholders available: {errors}
+  pluginReloaded: "{prefix} &eThe plugin has been reloaded with {errors} error(s)."
+  pluginReloadedWithErrors: "{prefix} &6Please check the console for more information."
+
+  filesReloading: "{prefix} &eThe files are being reloaded..."
+  # Placeholders available: {errors}
+  filesReloaded: "{prefix} &eThe files have been reloaded with {errors} error(s)."
+
   databaseReloading: "{prefix} &eThe database is being reloaded..."
-  # Placeholders available: {newStorageType}
-  databaseReloaded: "{prefix} &eThe database has been reloaded. The storage type is &f{newStorageType}&e."
+  # Placeholders available: {errors}
+  databaseReloaded: "{prefix} &eThe database has been reloaded with {errors} error(s)."
 
   tasksReloading: "{prefix} &eThe tasks are being reloaded..."
-  tasksReloaded: "{prefix} &eThe tasks have been reloaded."
+  # Placeholders available: {errors}
+  tasksReloaded: "{prefix} &eThe tasks have been reloaded with {errors} error(s)."
 
   dataReloading: "{prefix} &eThe data is being reloaded..."
-  dataReloaded: "{prefix} &eThe data has been reloaded."
+  # Placeholders available: {errors}
+  dataReloaded: "{prefix} &eThe data has been reloaded with {errors} error(s)."
 
 ############################################################
 # +------------------------------------------------------+ #
