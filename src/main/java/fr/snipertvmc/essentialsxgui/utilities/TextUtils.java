@@ -19,6 +19,7 @@ public class TextUtils {
 
 
 	public static void sendMessageToCommandSender(CommandSender commandSender, String formattedMessage) {
+		if (formattedMessage.isEmpty()) return;
 		Component component = convertFormattedMessageToComponent(commandSender, formattedMessage);
 		Main.getInstance().getBukkitAudiences().sender(commandSender).sendMessage(component);
 	}
