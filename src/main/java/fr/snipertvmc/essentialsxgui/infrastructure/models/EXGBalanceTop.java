@@ -1,5 +1,6 @@
 package fr.snipertvmc.essentialsxgui.infrastructure.models;
 
+import com.earth2me.essentials.utils.FormatUtil;
 import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.libraries.exglib.Pair;
 import org.bukkit.Bukkit;
@@ -13,11 +14,10 @@ public class EXGBalanceTop {
 
 	// -------------------------------------------------- //
 
+	private final List<Pair<String, Double>> balanceTopEntries = new ArrayList<>();
+
 
 	private long lastUpdate = System.currentTimeMillis();
-
-	private List<Pair<String, Double>> balanceTopEntries = new ArrayList<>();
-
 	private BukkitTask updateTask;
 
 
@@ -25,22 +25,26 @@ public class EXGBalanceTop {
 
 
 	public void forceUpdate() {
-		balanceTopEntries = new ArrayList<>();
-		Main.getInstance().getEssentials().getBalanceTop().getBalanceTopCache().values().forEach(entry -> {
-			balanceTopEntries.add(new Pair<>(entry.getDisplayName(), entry.getBalance().doubleValue()));
-		});
+		Main.getInstance().getEssentials().getBalanceTop().calculateBalanceTopMapAsync().thenRun(() -> {
 
-		lastUpdate = System.currentTimeMillis();
+			balanceTopEntries.clear();
+			Main.getInstance().getEssentials().getBalanceTop().getBalanceTopCache().values().forEach(entry -> {
+				balanceTopEntries.add(new Pair<>(FormatUtil.stripFormat(entry.getDisplayName()), entry.getBalance().doubleValue()));
+
+			});
+
+			lastUpdate = System.currentTimeMillis();
+		});
 	}
 
 
 	public int getPlayerRank(String playerName) {
-		return balanceTopEntries.indexOf(
-				balanceTopEntries.stream()
-						.filter(entry -> entry.getLeft().equals(playerName))
-						.findFirst()
-						.orElse(null)
-		) + 1;
+		for (int i = 0; i < balanceTopEntries.size(); i++) {
+			if (balanceTopEntries.get(i).getLeft().equals(playerName)) {
+				return i + 1;
+			}
+		}
+		return -1;
 	}
 
 
@@ -69,12 +73,12 @@ public class EXGBalanceTop {
 	// -------------------------------------------------- //
 
 
-	public long getLastUpdate() {
-		return lastUpdate;
-	}
-
 	public List<Pair<String, Double>> getBalanceTopEntries() {
 		return balanceTopEntries;
+	}
+
+	public long getLastUpdate() {
+		return lastUpdate;
 	}
 
 

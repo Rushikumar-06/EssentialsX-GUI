@@ -40,12 +40,10 @@ public class EXGItemConfig {
 	private final List<Pair<XEnchantment, Integer>> enchantments;
 	private List<XItemFlag> itemFlags;
 
-	private Map<String, String> variables = new HashMap<>();
-
-	private Map<String, ClickType> clickActions = new HashMap<>();
-
 	private int customModelData = 0;
 
+	private Map<String, String> variables = new HashMap<>();
+	private Map<String, ClickType> clickActions = new HashMap<>();
 	private int updateItemInterval = 0;
 	private int amountValue = 0;
 
@@ -77,10 +75,9 @@ public class EXGItemConfig {
 		this.enchantments = enchantments;
 		this.itemFlags = itemFlags;
 
-		this.clickActions = clickActions;
-
 		this.customModelData = customModelData;
 
+		this.clickActions = clickActions;
 		this.updateItemInterval = updateItemInterval;
 		this.amountValue = amountValue;
 
@@ -97,17 +94,15 @@ public class EXGItemConfig {
 		this.data = itemConfig.getData();
 
 		this.displayName = itemConfig.getDisplayName();
-		this.lore = itemConfig.getLore();
+		this.lore = itemConfig.getLore() != null ? new ArrayList<>(itemConfig.getLore()) : new ArrayList<>();
 
-		this.enchantments = itemConfig.getEnchantments();
-		this.itemFlags = itemConfig.getItemFlags();
-
-		this.variables = new HashMap<>(itemConfig.getVariables());
-
-		this.clickActions = new HashMap<>(itemConfig.getClickActions());
+		this.enchantments = itemConfig.getEnchantments() != null ? new ArrayList<>(itemConfig.getEnchantments()) : new ArrayList<>();
+		this.itemFlags = itemConfig.getItemFlags() != null ? new ArrayList<>(itemConfig.getItemFlags()) : new ArrayList<>();
 
 		this.customModelData = itemConfig.getCustomModelData();
 
+		this.variables = new HashMap<>(itemConfig.getVariables());
+		this.clickActions = new HashMap<>(itemConfig.getClickActions());
 		this.updateItemInterval = itemConfig.getUpdateItemInterval();
 		this.amountValue = itemConfig.getAmountValue();
 	}

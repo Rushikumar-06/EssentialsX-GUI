@@ -48,6 +48,28 @@ public class BalanceTopInventory extends FastInv {
 		InventoriesUtils.initializeInventoryWithClose(player, config, this, config.getCloseItem());
 
 
+		if (config.getForceUpdateItem().isEnabled()) {
+
+			if (config.getForceUpdateItem().hasUpdateItemInterval()) {
+				long updateInterval = config.getForceUpdateItem().getUpdateItemInterval() * 20L;
+				setDynamicItem(config.getForceUpdateItem().getSlot(), () -> getForceUpdateItem(player),
+						updateInterval, e -> forceUpdate(player)
+				);
+
+			} else {
+				setItem(config.getForceUpdateItem().getSlot(), getForceUpdateItem(player), e -> forceUpdate(player));
+			}
+		}
+
+		addPlayerRankingItem(player);
+		addRankingItems(player);
+	}
+
+
+	// -------------------------------------------------- //
+
+
+	private void addPlayerRankingItem(Player player) {
 		if (config.getPlayerRankingItem().isEnabled()) {
 
 			EXGBalanceTop balanceTop = Main.getInstance().getEXGServer().getBalanceTop();
@@ -64,6 +86,7 @@ public class BalanceTopInventory extends FastInv {
 					: MessagesUtils.getString(EXGMessage.NOT_RANKED);
 
 			setItem(config.getPlayerRankingItem().getSlot(), config.getPlayerRankingItem()
+					.duplicate()
 					.updateVariables(Map.of(
 							"playerName", player.getName(),
 							"playerRank", playerRank,
@@ -71,25 +94,7 @@ public class BalanceTopInventory extends FastInv {
 					))
 					.build(player));
 		}
-
-		if (config.getForceUpdateItem().isEnabled()) {
-
-			if (config.getForceUpdateItem().hasUpdateItemInterval()) {
-				long updateInterval = config.getForceUpdateItem().getUpdateItemInterval() * 20L;
-				setDynamicItem(config.getForceUpdateItem().getSlot(), () -> getForceUpdateItem(player), updateInterval, e -> {
-					forceUpdate(player);
-				});
-
-			} else {
-				setItem(config.getForceUpdateItem().getSlot(), getForceUpdateItem(player));
-			}
-		}
-
-		addRankingItems(player);
 	}
-
-
-	// -------------------------------------------------- //
 
 
 	private void addRankingItems(Player player) {
@@ -197,6 +202,7 @@ public class BalanceTopInventory extends FastInv {
 			}
 
 			Main.getInstance().getEXGServer().getBalanceTop().forceUpdate();
+			addRankingItems(player);
 			TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.BALANCE_TOP_DATA_UPDATED));
 			SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
 
