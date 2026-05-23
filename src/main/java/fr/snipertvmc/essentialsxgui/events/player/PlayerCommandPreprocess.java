@@ -1,10 +1,12 @@
 package fr.snipertvmc.essentialsxgui.events.player;
 
 import fr.snipertvmc.essentialsxgui.Main;
+import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGEcoAction;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGMessage;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGPermission;
 import fr.snipertvmc.essentialsxgui.infrastructure.enums.EXGSound;
 import fr.snipertvmc.essentialsxgui.inventories.economy.BalanceTopInventory;
+import fr.snipertvmc.essentialsxgui.inventories.economy.EcoAmountInventory;
 import fr.snipertvmc.essentialsxgui.inventories.economy.EcoPlayersInventory;
 import fr.snipertvmc.essentialsxgui.inventories.economy.WorthInventory;
 import fr.snipertvmc.essentialsxgui.inventories.homes.HomesInventory;
@@ -211,11 +213,46 @@ public class PlayerCommandPreprocess implements Listener {
 
 			case "eco", "economy", "eeco", "eeconomy" -> {
 
-				if (args.length > 1) return;
+				if (args.length > 3) return;
 				if (!player.hasPermission("essentials.eco")) return;
 				if (!Main.getInstance().getConfiguration().isEconomyEcoModuleEnabled()) return;
 
 				event.setCancelled(true);
+
+				if (args.length > 2) {
+
+
+					// Check the action argument
+					String ecoActionArgument = args[1];
+					EXGEcoAction ecoAction = switch (ecoActionArgument.toLowerCase()) {
+						case "give", "add" -> EXGEcoAction.GIVE;
+						case "take", "remove" -> EXGEcoAction.TAKE;
+						case "set" -> EXGEcoAction.SET;
+						case "reset" -> EXGEcoAction.RESET;
+						default -> null;
+					};
+
+					if (ecoAction == null) {
+						TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.ARGUMENT_NOT_FOUND, Map.of(
+								"argument", ecoActionArgument))
+						);
+						return;
+					}
+
+
+					// Check the target player argument
+					String targetPlayerName = args[2];
+					Player targetPlayer = Main.getInstance().getServer().getPlayerExact(targetPlayerName);
+					if (targetPlayer == null) {
+						TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.PLAYER_NOT_FOUND, Map.of("player", targetPlayerName)));
+						return;
+					}
+
+					TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.OPENING_ECO_INVENTORY, null));
+					new EcoAmountInventory(player, targetPlayer, ecoAction).open(player);
+					SoundsUtils.playSound(player, EXGSound.GUI_OPEN);
+					return;
+				}
 
 				TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.OPENING_ECO_INVENTORY, null));
 				new EcoPlayersInventory(player).open(player);

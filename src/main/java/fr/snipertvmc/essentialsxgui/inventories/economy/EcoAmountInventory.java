@@ -78,7 +78,7 @@ public class EcoAmountInventory extends FastInv {
 
 		String targetBalance = NumberUtil.displayCurrency(BigDecimal.valueOf(this.targetBalanceValue), Main.getInstance().getEssentials());
 		String targetNewBalance = NumberUtil.displayCurrency(BigDecimal.valueOf(switch (ecoAction) {
-			case ADD -> this.targetBalanceValue + this.totalAmountValue;
+			case GIVE -> this.targetBalanceValue + this.totalAmountValue;
 			case TAKE -> this.targetBalanceValue - this.totalAmountValue;
 			case SET -> this.totalAmountValue;
 			case RESET -> 0;
@@ -137,7 +137,7 @@ public class EcoAmountInventory extends FastInv {
 			String targetBalance = NumberUtil.displayCurrency(BigDecimal.valueOf(this.targetBalanceValue), Main.getInstance().getEssentials());
 
 			double targetNewBalanceValue = switch (ecoAction) {
-				case ADD -> this.targetBalanceValue + this.totalAmountValue;
+				case GIVE -> this.targetBalanceValue + this.totalAmountValue;
 				case TAKE -> this.targetBalanceValue - this.totalAmountValue;
 				case SET -> this.totalAmountValue;
 				case RESET -> 0;
@@ -177,7 +177,7 @@ public class EcoAmountInventory extends FastInv {
 
 
 		// Max balance exceeded
-		if (ecoAction == EXGEcoAction.ADD || ecoAction == EXGEcoAction.SET) {
+		if (ecoAction == EXGEcoAction.GIVE || ecoAction == EXGEcoAction.SET) {
 			double newBalanceValue = this.targetBalanceValue + this.totalAmountValue;
 			double maxBalanceValue = Main.getInstance().getEssentials().getSettings().getMaxMoney().doubleValue();
 			if (newBalanceValue > maxBalanceValue) {

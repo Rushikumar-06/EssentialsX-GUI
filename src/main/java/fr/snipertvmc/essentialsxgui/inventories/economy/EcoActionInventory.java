@@ -54,7 +54,7 @@ public class EcoActionInventory extends FastInv {
 		if (config.getAddBalanceItem().isEnabled()) {
 			setItem(config.getAddBalanceItem().getSlot(), config.getAddBalanceItem().build(player), e -> {
 
-				new EcoAmountInventory(player, target, EXGEcoAction.ADD).open(player);
+				new EcoAmountInventory(player, target, EXGEcoAction.GIVE).open(player);
 				SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 			});
 		}

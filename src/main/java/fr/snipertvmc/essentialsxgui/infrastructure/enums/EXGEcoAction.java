@@ -6,7 +6,7 @@ public enum EXGEcoAction {
 	// -------------------------------------------------- //
 
 
-	ADD(EXGMessage.ADD),
+	GIVE(EXGMessage.GIVE),
 	TAKE(EXGMessage.TAKE),
 	SET(EXGMessage.SET),
 	RESET(EXGMessage.RESET);
@@ -35,7 +35,7 @@ public enum EXGEcoAction {
 
 	public String getCommand(String targetName, double amount) {
 		return switch (this) {
-			case ADD -> "eco give " + targetName + " " + amount;
+			case GIVE -> "eco give " + targetName + " " + amount;
 			case TAKE -> "eco take " + targetName + " " + amount;
 			case SET -> "eco set " + targetName + " " + amount;
 			case RESET -> "eco set " + targetName + " 0";

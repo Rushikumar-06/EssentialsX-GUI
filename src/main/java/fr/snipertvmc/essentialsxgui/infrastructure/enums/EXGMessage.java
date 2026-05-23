@@ -155,7 +155,7 @@ public enum EXGMessage {
 	RANK_FORMAT("general.rankFormat"),
 	NO_WORTH_AVAILABLE("general.noWorthAvailable"),
 	NO_ITEM_IN_HAND("general.noItemInHand"),
-	ADD("general.add"),
+	GIVE("general.give"),
 	TAKE("general.take"),
 	SET("general.set"),
 	RESET("general.reset"),

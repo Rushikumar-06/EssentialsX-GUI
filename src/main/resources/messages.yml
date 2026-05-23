@@ -88,7 +88,8 @@ errors:
   argumentNotFound: "{prefix} &cThe argument &f{argument} &cwas not found."
   noPermission: "{prefix} &cYou do not have permission to perform this action."
   onlyForPlayers: "{prefix} &cThis command can only be executed by players."
-  playerNotFound: "{prefix} &cThe specified player was not found."
+  # Placeholders available: {player}
+  playerNotFound: "{prefix} &cThe player &f{player} &cwas not found."
   invalidName: "&cThe name you entered is invalid. Please try again with a different name. (Allowed characters: a-z, A-Z, 0-9, _, -)"
   waitBeforeNextAction: "&cPlease wait before performing another action."
 
@@ -226,7 +227,7 @@ general:
   rankFormat: "#{rank}"
   noWorthAvailable: "&cNo worth available"
   noItemInHand: "&cNo item in hand"
-  add: "add"
+  give: "give"
   take: "take"
   set: "set"
   reset: "reset"
