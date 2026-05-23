@@ -45,7 +45,7 @@ public class EXGItemConfig {
 	private Map<String, String> variables = new HashMap<>();
 	private Map<String, ClickType> clickActions = new HashMap<>();
 	private int updateItemInterval = 0;
-	private int amountValue = 0;
+	private double amountValue = 0;
 
 
 	// -------------------------------------------------- //
@@ -172,7 +172,7 @@ public class EXGItemConfig {
 	public int getUpdateItemInterval() {
 		return updateItemInterval;
 	}
-	public int getAmountValue() {
+	public double getAmountValue() {
 		return amountValue;
 	}
 
@@ -245,7 +245,7 @@ public class EXGItemConfig {
 	}
 
 
-	public EXGItemConfig setAmountValue(int amountValue) {
+	public EXGItemConfig setAmountValue(double amountValue) {
 		this.amountValue = amountValue;
 		return this;
 	}

@@ -67,6 +67,7 @@ public class InventoryFile {
 		return itemConfig;
 	}
 
+
 	public List<EXGItemConfig> getItems(String itemName, EXGInventoryConfig inventoryConfig) {
 		EXGItemConfig itemConfig = getItem(inventoryName + ".items." + itemName, true);
 		List<Integer> slots = yamlConfiguration.getIntegerList(inventoryName + ".items." + itemName + ".slots");
@@ -80,15 +81,16 @@ public class InventoryFile {
 		return itemConfigs;
 	}
 
+
 	public List<EXGItemConfig> getItems(String itemName, boolean withAmountValues, EXGInventoryConfig inventoryConfig) {
 		if (!withAmountValues) return getItems(itemName, inventoryConfig);
 		EXGItemConfig itemConfig = getItem(inventoryName + ".items." + itemName, true);
 		List<Integer> slots = yamlConfiguration.getIntegerList(inventoryName + ".items." + itemName + ".slots");
-		List<Integer> amountValues = yamlConfiguration.getIntegerList(inventoryName + ".items." + itemName + ".amountValues");
+		List<Double> amountValues = yamlConfiguration.getDoubleList(inventoryName + ".items." + itemName + ".amountValues");
 		List<EXGItemConfig> itemConfigs = new ArrayList<>();
 		for (int i = 0; i < slots.size(); i++) {
 			int slot = slots.get(i);
-			int amountValue = amountValues.size() > i ? amountValues.get(i) : 0;
+			double amountValue = amountValues.size() > i ? amountValues.get(i) : 0;
 			EXGItemConfig itemConfigCopy = itemConfig.duplicate();
 			itemConfigCopy.setSlot((short) slot);
 			itemConfigCopy.setAmountValue(amountValue);
