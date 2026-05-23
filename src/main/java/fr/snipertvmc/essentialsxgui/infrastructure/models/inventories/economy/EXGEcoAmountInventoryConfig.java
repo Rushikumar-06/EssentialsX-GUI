@@ -18,8 +18,6 @@ public class EXGEcoAmountInventoryConfig extends EXGInventoryConfig {
 	private EXGItemConfig confirmActionItem;
 	private EXGItemConfig cancelActionItem;
 
-	private EXGItemConfig backItem;
-
 
 	// -------------------------------------------------- //
 

@@ -15,8 +15,6 @@ public class EXGKitPreviewInventoryConfig extends EXGPaginatedInventoryConfig {
 
 	private EXGItemConfig backItem;
 
-	private InventoryScheme inventoryScheme;
-
 
 	// -------------------------------------------------- //
 
@@ -40,10 +38,6 @@ public class EXGKitPreviewInventoryConfig extends EXGPaginatedInventoryConfig {
 		return backItem;
 	}
 
-	public InventoryScheme getInventoryScheme() {
-		return inventoryScheme;
-	}
-
 
 	// -------------------------------------------------- //
 
@@ -57,10 +51,6 @@ public class EXGKitPreviewInventoryConfig extends EXGPaginatedInventoryConfig {
 
 	public void setBackItem(EXGItemConfig backItem) {
 		this.backItem = backItem;
-	}
-
-	public void setInventoryScheme(InventoryScheme inventoryScheme) {
-		this.inventoryScheme = inventoryScheme;
 	}
 
 
@@ -79,14 +69,9 @@ public class EXGKitPreviewInventoryConfig extends EXGPaginatedInventoryConfig {
 		copy.setKitItem(this.getKitItem().duplicate());
 		copy.setEmptyKitItem(this.getEmptyKitItem().duplicate());
 
-		copy.setNextPageItem(this.getNextPageItem().duplicate());
-		copy.setPreviousPageItem(this.getPreviousPageItem().duplicate());
-		copy.setCurrentPageItem(this.getCurrentPageItem().duplicate());
-
 		copy.setBackItem(this.getBackItem().duplicate());
 
-		copy.setInventoryScheme(this.getInventoryScheme());
-
+		copy.copyPaginatedInventoryConfig(this);
 		return copy;
 	}
 

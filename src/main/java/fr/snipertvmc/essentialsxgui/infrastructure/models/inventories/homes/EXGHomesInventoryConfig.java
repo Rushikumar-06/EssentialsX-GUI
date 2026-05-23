@@ -22,8 +22,6 @@ public class EXGHomesInventoryConfig extends EXGPaginatedInventoryConfig {
 
 	private EXGItemConfig closeItem;
 
-	private InventoryScheme inventoryScheme;
-
 	private Pair<String, String> bedHomeItemOverworld;
 	private Pair<String, String> bedHomeItemNether;
 	private Pair<String, String> bedHomeItemNotSet;
@@ -65,10 +63,6 @@ public class EXGHomesInventoryConfig extends EXGPaginatedInventoryConfig {
 
 	public EXGItemConfig getCloseItem() {
 		return closeItem;
-	}
-
-	public InventoryScheme getInventoryScheme() {
-		return inventoryScheme;
 	}
 
 	public String getBedHomeItemOverworldMaterial() {
@@ -121,10 +115,6 @@ public class EXGHomesInventoryConfig extends EXGPaginatedInventoryConfig {
 		this.closeItem = closeItem;
 	}
 
-	public void setInventoryScheme(InventoryScheme inventoryScheme) {
-		this.inventoryScheme = inventoryScheme;
-	}
-
 	public void setBedHomeItemOverworldMaterial(String bedHomeItemOverworldMaterial, String bedHomeItemOverworldDisplayName) {
 		this.bedHomeItemOverworld = Pair.of(bedHomeItemOverworldMaterial, bedHomeItemOverworldDisplayName);
 	}
@@ -157,17 +147,13 @@ public class EXGHomesInventoryConfig extends EXGPaginatedInventoryConfig {
 		copy.setCancelSearchHomeItem(this.getCancelSearchHomeItem().duplicate());
 		copy.setNoSearchHomeResultsItem(this.getNoSearchHomeResultsItem().duplicate());
 
-		copy.setNextPageItem(this.getNextPageItem().duplicate());
-		copy.setPreviousPageItem(this.getPreviousPageItem().duplicate());
-		copy.setCurrentPageItem(this.getCurrentPageItem().duplicate());
-
 		copy.setCloseItem(this.getCloseItem().duplicate());
-
-		copy.setInventoryScheme(this.getInventoryScheme());
 
 		copy.setBedHomeItemOverworldMaterial(this.getBedHomeItemOverworldMaterial(), this.getBedHomeItemOverworldDisplayName());
 		copy.setBedHomeItemNetherMaterial(this.getBedHomeItemNetherMaterial(), this.getBedHomeItemNetherDisplayName());
 		copy.setBedHomeItemNotSetMaterial(this.getBedHomeItemNotSetMaterial(), this.getBedHomeItemNotSetDisplayName());
+
+		copy.copyPaginatedInventoryConfig(this);
 		return copy;
 	}
 

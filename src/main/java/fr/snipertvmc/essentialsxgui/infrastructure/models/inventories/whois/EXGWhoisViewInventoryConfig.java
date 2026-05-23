@@ -113,15 +113,11 @@ public class EXGWhoisViewInventoryConfig extends EXGPaginatedInventoryConfig {
 		copy.setPlayerServerDataItem(this.getPlayerServerDataItem().duplicate());
 		copy.setPlayerPunishmentsItem(this.getPlayerPunishmentsItem().duplicate());
 
-		copy.setNextPageItem(this.getNextPageItem().duplicate());
-		copy.setPreviousPageItem(this.getPreviousPageItem().duplicate());
-		copy.setCurrentPageItem(this.getCurrentPageItem().duplicate());
-
 		copy.setBackItem(this.getBackItem().duplicate());
 
-		copy.setInventoryScheme(this.getInventoryScheme());
-
 		copy.setOnlyUsePlaceholderAPI(this.onlyUsePlaceholderAPI);
+
+		copy.copyPaginatedInventoryConfig(this);
 		return copy;
 	}
 

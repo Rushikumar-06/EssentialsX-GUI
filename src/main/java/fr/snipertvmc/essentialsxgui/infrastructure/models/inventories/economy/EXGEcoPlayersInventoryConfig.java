@@ -14,8 +14,6 @@ public class EXGEcoPlayersInventoryConfig extends EXGPaginatedInventoryConfig {
 
 	private EXGItemConfig closeItem;
 
-	private InventoryScheme inventoryScheme;
-
 
 	// -------------------------------------------------- //
 
@@ -36,10 +34,6 @@ public class EXGEcoPlayersInventoryConfig extends EXGPaginatedInventoryConfig {
 		return closeItem;
 	}
 
-	public InventoryScheme getInventoryScheme() {
-		return inventoryScheme;
-	}
-
 
 	// -------------------------------------------------- //
 
@@ -50,10 +44,6 @@ public class EXGEcoPlayersInventoryConfig extends EXGPaginatedInventoryConfig {
 
 	public void setCloseItem(EXGItemConfig closeItem) {
 		this.closeItem = closeItem;
-	}
-
-	public void setInventoryScheme(InventoryScheme inventoryScheme) {
-		this.inventoryScheme = inventoryScheme;
 	}
 
 
@@ -71,13 +61,9 @@ public class EXGEcoPlayersInventoryConfig extends EXGPaginatedInventoryConfig {
 
 		copy.setPlayerItem(this.getPlayerItem().duplicate());
 
-		copy.setNextPageItem(this.getNextPageItem().duplicate());
-		copy.setPreviousPageItem(this.getPreviousPageItem().duplicate());
-		copy.setCurrentPageItem(this.getCurrentPageItem().duplicate());
-
 		copy.setCloseItem(this.getCloseItem().duplicate());
 
-		copy.setInventoryScheme(this.getInventoryScheme());
+		copy.copyPaginatedInventoryConfig(this);
 		return copy;
 	}
 

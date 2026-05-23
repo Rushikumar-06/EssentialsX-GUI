@@ -21,8 +21,6 @@ public class EXGWarpsAdminViewInventoryConfig extends EXGPaginatedInventoryConfi
 
 	private EXGItemConfig closeItem;
 
-	private InventoryScheme inventoryScheme;
-
 
 	// -------------------------------------------------- //
 
@@ -62,10 +60,6 @@ public class EXGWarpsAdminViewInventoryConfig extends EXGPaginatedInventoryConfi
 		return closeItem;
 	}
 
-	public InventoryScheme getInventoryScheme() {
-		return inventoryScheme;
-	}
-
 
 	// -------------------------------------------------- //
 
@@ -97,10 +91,6 @@ public class EXGWarpsAdminViewInventoryConfig extends EXGPaginatedInventoryConfi
 		this.closeItem = closeItem;
 	}
 
-	public void setInventoryScheme(InventoryScheme inventoryScheme) {
-		this.inventoryScheme = inventoryScheme;
-	}
-
 
 	// -------------------------------------------------- //
 
@@ -123,13 +113,9 @@ public class EXGWarpsAdminViewInventoryConfig extends EXGPaginatedInventoryConfi
 		copy.setCancelSearchWarpItem(this.getCancelSearchWarpItem().duplicate());
 		copy.setNoSearchWarpResultsItem(this.getNoSearchWarpResultsItem().duplicate());
 
-		copy.setNextPageItem(this.getNextPageItem().duplicate());
-		copy.setPreviousPageItem(this.getPreviousPageItem().duplicate());
-		copy.setCurrentPageItem(this.getCurrentPageItem().duplicate());
-
 		copy.setCloseItem(this.getCloseItem().duplicate());
 
-		copy.setInventoryScheme(this.getInventoryScheme());
+		copy.copyPaginatedInventoryConfig(this);
 		return copy;
 	}
 

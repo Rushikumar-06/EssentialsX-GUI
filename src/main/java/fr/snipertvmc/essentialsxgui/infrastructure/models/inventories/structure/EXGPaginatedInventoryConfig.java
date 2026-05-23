@@ -1,9 +1,14 @@
 package fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure;
 
+import fr.snipertvmc.essentialsxgui.libraries.fastinv.InventoryScheme;
+
 public class EXGPaginatedInventoryConfig extends EXGInventoryConfig {
 
 
 	// -------------------------------------------------- //
+
+
+	private InventoryScheme inventoryScheme;
 
 	private EXGItemConfig nextPageItem;
 	private EXGItemConfig previousPageItem;
@@ -21,6 +26,10 @@ public class EXGPaginatedInventoryConfig extends EXGInventoryConfig {
 	// -------------------------------------------------- //
 
 
+	public InventoryScheme getInventoryScheme() {
+		return inventoryScheme;
+	}
+
 	public EXGItemConfig getNextPageItem() {
 		return nextPageItem;
 	}
@@ -34,6 +43,11 @@ public class EXGPaginatedInventoryConfig extends EXGInventoryConfig {
 
 	// -------------------------------------------------- //
 
+
+	public void setInventoryScheme(InventoryScheme inventoryScheme) {
+		this.inventoryScheme = inventoryScheme;
+	}
+
 	public void setNextPageItem(EXGItemConfig nextPageItem) {
 		this.nextPageItem = nextPageItem;
 	}
@@ -42,6 +56,18 @@ public class EXGPaginatedInventoryConfig extends EXGInventoryConfig {
 	}
 	public void setCurrentPageItem(EXGItemConfig currentPageItem) {
 		this.currentPageItem = currentPageItem;
+	}
+
+
+	// -------------------------------------------------- //
+
+
+	public void copyPaginatedInventoryConfig(EXGPaginatedInventoryConfig source) {
+		this.setInventoryScheme(source.getInventoryScheme());
+
+		this.setNextPageItem(source.getNextPageItem().duplicate());
+		this.setPreviousPageItem(source.getPreviousPageItem().duplicate());
+		this.setCurrentPageItem(source.getCurrentPageItem().duplicate());
 	}
 
 

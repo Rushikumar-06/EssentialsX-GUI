@@ -19,8 +19,6 @@ public class EXGWorthAllInventoryConfig extends EXGPaginatedInventoryConfig {
 
 	private EXGItemConfig backItem;
 
-	private InventoryScheme inventoryScheme;
-
 
 	// -------------------------------------------------- //
 
@@ -54,10 +52,6 @@ public class EXGWorthAllInventoryConfig extends EXGPaginatedInventoryConfig {
 		return backItem;
 	}
 
-	public InventoryScheme getInventoryScheme() {
-		return inventoryScheme;
-	}
-
 
 	// -------------------------------------------------- //
 
@@ -83,10 +77,6 @@ public class EXGWorthAllInventoryConfig extends EXGPaginatedInventoryConfig {
 		this.backItem = backItem;
 	}
 
-	public void setInventoryScheme(InventoryScheme inventoryScheme) {
-		this.inventoryScheme = inventoryScheme;
-	}
-
 
 	// -------------------------------------------------- //
 
@@ -107,13 +97,9 @@ public class EXGWorthAllInventoryConfig extends EXGPaginatedInventoryConfig {
 		copy.setCancelSearchWorthItem(this.getCancelSearchWorthItem().duplicate());
 		copy.setNoSearchWorthResultsItem(this.getNoSearchWorthItemsItem().duplicate());
 
-		copy.setNextPageItem(this.getNextPageItem().duplicate());
-		copy.setPreviousPageItem(this.getPreviousPageItem().duplicate());
-		copy.setCurrentPageItem(this.getCurrentPageItem().duplicate());
-
 		copy.setBackItem(this.getBackItem().duplicate());
 
-		copy.setInventoryScheme(this.getInventoryScheme());
+		copy.copyPaginatedInventoryConfig(this);
 		return copy;
 	}
 
