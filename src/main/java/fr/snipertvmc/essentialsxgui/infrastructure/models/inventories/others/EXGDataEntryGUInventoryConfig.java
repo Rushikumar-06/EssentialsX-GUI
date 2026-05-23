@@ -2,7 +2,6 @@ package fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.others;
 
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGItemConfig;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.inventories.structure.EXGPaginatedInventoryConfig;
-import fr.snipertvmc.essentialsxgui.libraries.fastinv.InventoryScheme;
 
 public class EXGDataEntryGUInventoryConfig extends EXGPaginatedInventoryConfig {
 
