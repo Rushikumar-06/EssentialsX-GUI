@@ -21,7 +21,7 @@ EssentialsX-GUI is an **unofficial** EssentialsX addon that adds some GUIs for E
 - Lightweight and high-performance.
 - Clean and structured code.
 - Update checker.
-- Cross-server support: Java Edition and Bedrock Edition. *(Requires GeyserMC plugin)*
+- Cross-server support: Java Edition <!-- and Bedrock Edition. *(Requires GeyserMC plugin)* -->
 - Compatible with most server types: Spigot, Paper, Purpur, Leaf, etc.
 
 ### Homes:
@@ -188,9 +188,9 @@ EssentialsX-GUI is an **unofficial** EssentialsX addon that adds some GUIs for E
 
 Requirements:
 
-- Minecraft Server: **Java Edition**, Bedrock Edition is partially supported. *(Requires GeyserMC plugin)*
+- Minecraft Server: **Java Edition** <!-- Bedrock Edition is partially supported. *(Requires GeyserMC plugin)* -->
 - Supported Versions: **1.8.8 to 26.2+**
-- Java Version: **17+**
+- Java Version: **21+**
 - EssentialsX Version: **2.21.2+**
 
 > For more help, please visit the [wiki](https://sniper-tvmc.gitbook.io/essentialsx-gui/installation/prerequisites).

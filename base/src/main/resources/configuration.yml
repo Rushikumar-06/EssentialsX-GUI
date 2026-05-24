@@ -1,0 +1,400 @@
+############################################################
+# +------------------------------------------------------+ #
+# |                      Information                     | #
+# +------------------------------------------------------+ #
+############################################################
+
+# This is the configuration file for EssentialsX-GUI.
+
+# If you need help with the configuration of the plugin,
+# you can join our discord server at: https://discord.gg/fSzK79TAYf
+
+# For more information about how to configure EssentialsX-GUI,
+# check our Wiki at: https://sniper-tvmc.gitbook.io/essentialsx-gui/configuration/main-configuration
+
+############################################################
+# +------------------------------------------------------+ #
+# |                        General                       | #
+# +------------------------------------------------------+ #
+############################################################
+
+general:
+
+  # Please do not change this value as it may cause the file to be reset.
+  # Default: "1.8"
+  configVersion: "1.8"
+
+  # If you want to see a detailed loading message when the plugin is loading, set this to true. (Also works for unloading)
+  # Default: false
+  detailedLoading: false
+
+  # Do you want to check for updates of the plugin?
+  # Default: true
+  checkForUpdates: true
+
+  # Time zone ID used for displaying time-related information in the plugin.
+  # Leave this blank to use the server's default time zone.
+  # Example values: "America/New_York", "Europe/Paris", "Asia/Tokyo"
+  # Default: ""
+  dateTimezone: ""
+
+  # Minimum and maximum length for names entered by players.
+  # ⚠️ Warning: Payers can bypass these limits if they use the defaults commands of EssentialsX.
+  #             This only applies to names and not to display names, icons, etc.
+  # Default: min = 3, max = 32
+  minNameLength: 3
+  maxNameLength: 32
+
+  # Set this to true if you want to open the kit admin view by default when the /kit command is performed for players
+  # with permission to see the admin view.
+  # Default: false
+  openKitAdminViewByDefault: false
+
+  # Set this to true if you want to open the warp admin view by default when the /warp command is performed for players
+  # with permission to see the admin view.
+  # Default: false
+  openWarpAdminViewByDefault: false
+
+  # Delay (in seconds) for typing in chat before the input is canceled.
+  # This is used when players are required to type something in chat (like a name).
+  # Default: 10
+  delayForTypingInChat: 10
+
+  # Set this to true if you want to instantly create a home/kit/warp when the player
+  # click on the create button, without asking for information like name in chat or anvil.
+  # TIP: If you accept bedrock players, I recommend you to set this to true. Because bedrock players
+  #      typing in chat can be complicated for them. You can always change the name/icon later using the GUI.
+  # Default: false
+  skipDataEntryProcess: false
+
+  # Configure the default names used when skipDataEntryProcess (instant creation) is enabled.
+  # You must use %number% placeholder to indicate where the number will be placed. (e.g., home_1, home_2, etc.)
+  # If you don't use %number%, the same home/kit/warp will be overwritten each time a new one is created.
+  # Please just use lowercase letters, numbers and underscores. No spaces or special characters. These names will be
+  # used as internal names for EssentialsX, so they must follow EssentialsX 'naming rules'. If you don't know
+  # what that means, just use simple names like the ones provided by default.
+  instantCreationDefaultValues:
+    home_name: "home_%number%"
+
+    kit_name: "kit_%number%"
+    kit_delay: 3600
+
+    warp_name: "warp_%number%"
+
+############################################################
+# +------------------------------------------------------+ #
+# |                        Homes                         | #
+# +------------------------------------------------------+ #
+############################################################
+
+homes:
+
+  # Set this to true if you want to use the homes features.
+  # This will allow players to access the homes GUI.
+  # Default: true
+  enabled: true
+
+  # Decide how players can create a home.
+  # Ways available: "CHAT", "ANVIL"
+  createNewHomeEntryType: "CHAT"
+
+  # Decide how players can search for a home.
+  # Ways available: "CHAT", "ANVIL"
+  searchHomeEntryType: "ANVIL"
+
+  # Decide how players can change the display name of a home.
+  # Ways available: "CHAT", "ANVIL"
+  changeHomeDisplayNameEntryType: "CHAT"
+
+  # Decide how players can change the icon of a home.
+  # Ways available: "CHAT", "ANVIL", "GUI", "ITEM_IN_HAND"
+  changeHomeIconEntryType: "GUI"
+
+  # If you set the changeHomeIconEntryType to "GUI", you must set the materials available in the GUI here.
+  changeHomeIconMaterialList: ["STONE", "COBBLESTONE", "DIRT", "IRON_ORE", "DIAMOND_BLOCK", "SPONGE", "ANVIL",
+                               "QUARTZ_BLOCK", "COOKED_BEEF", "APPLE", "BREAD", "WHEAT", "BOW", "IRON_SWORD",]
+
+  # Decide which characters are allowed in the display name of a home.
+  # You can specify a list of allowed characters or use a regex pattern.
+  # Set this to "" if you want to allow all characters.
+  #   => Without regex: Just list the allowed characters in the string. For example, "abc123" will allow only letters a, b, c and numbers 1, 2, 3.
+  #   => With regex, start the string with "regex:" followed by the regex pattern.
+  #      For example, "regex:^[a-zA-Z0-9_ ]+$" will allow only letters, numbers, underscores and spaces.
+  #   => Blank field: If you want to allow all characters, just leave this field blank.
+  changeHomeDisplayNameCharacterList: "regex:^[a-zA-Z0-9_ ]+$"
+
+  # Decide how players can delete a home.
+  # Ways available: "CHAT", "ANVIL"
+  deleteHomeEntryType: "CHAT"
+
+############################################################
+# +------------------------------------------------------+ #
+# |                         Kits                         | #
+# +------------------------------------------------------+ #
+############################################################
+
+kits:
+
+  # Set this to true if you want to use the kits features.
+  # This will allow players to access the kits GUI.
+  # Default: true
+  enabled: true
+
+  # Decide how players can create a kit.
+  # Ways available: "CHAT", "ANVIL"
+  createNewKitNameEntryType: "CHAT"
+
+  # Decide how players can create a kit.
+  # Ways available: "CHAT", "ANVIL"
+  createNewKitDelayEntryType: "CHAT"
+
+  # Decide how players can search for a kit.
+  # Ways available: "CHAT", "ANVIL"
+  searchKitEntryType: "ANVIL"
+
+  # Decide how players can change the display name of a kit.
+  # Ways available: "CHAT", "ANVIL"
+  changeKitDisplayNameEntryType: "CHAT"
+
+  # Decide how players can change the icon of a kit.
+  # Ways available: "CHAT", "ANVIL", "GUI", "ITEM_IN_HAND"
+  changeKitIconEntryType: "GUI"
+
+  # If you set the changeKitIconEntryType to "GUI", you must set the materials available in the GUI here.
+  changeKitIconMaterialList: ["STONE", "COBBLESTONE", "DIRT", "IRON_ORE", "DIAMOND_BLOCK", "SPONGE", "ANVIL",
+                              "QUARTZ_BLOCK", "COOKED_BEEF", "APPLE", "BREAD", "WHEAT", "BOW", "IRON_SWORD",]
+
+  # Decide which characters are allowed in the display name of a kit.
+  # You can specify a list of allowed characters or use a regex pattern.
+  # Set this to "" if you want to allow all characters.
+  #   => Without regex: Just list the allowed characters in the string. For example, "abc123" will allow only letters a, b, c and numbers 1, 2, 3.
+  #   => With regex, start the string with "regex:" followed by the regex pattern.
+  #      For example, "regex:^[a-zA-Z0-9_ ]+$" will allow only letters, numbers, underscores and spaces.
+  #   => Blank field: If you want to allow all characters, just leave this field blank.
+  changeKitDisplayNameCharacterList: "regex:^[a-zA-Z0-9_ ]+$"
+
+  # Decide how players can delete a kit.
+  # Ways available: "CHAT", "ANVIL"
+  deleteKitEntryType: "CHAT"
+
+############################################################
+# +------------------------------------------------------+ #
+# |                        Warps                         | #
+# +------------------------------------------------------+ #
+############################################################
+
+warps:
+
+  # Set this to true if you want to use the warps features.
+  # This will allow players to access the warps GUI.
+  # Default: true
+  enabled: true
+
+  # Decide how players can create a warp.
+  # Ways available: "CHAT", "ANVIL"
+  createNewWarpEntryType: "CHAT"
+
+  # Decide how players can search for a warp.
+  # Ways available: "CHAT", "ANVIL"
+  searchWarpEntryType: "ANVIL"
+
+  # Decide how players can change the display name of a warp.
+  # Ways available: "CHAT", "ANVIL"
+  changeWarpDisplayNameEntryType: "CHAT"
+
+  # Decide how players can change the icon of a warp.
+  # Ways available: "CHAT", "ANVIL", "GUI", "ITEM_IN_HAND"
+  changeWarpIconEntryType: "GUI"
+
+  # If you set the changeWarpIconEntryType to "GUI", you must set the materials available in the GUI here.
+  changeWarpIconMaterialList: ["STONE", "COBBLESTONE", "DIRT", "IRON_ORE", "DIAMOND_BLOCK", "SPONGE", "ANVIL",
+                               "QUARTZ_BLOCK", "COOKED_BEEF", "APPLE", "BREAD", "WHEAT", "BOW", "IRON_SWORD",]
+
+  # Decide which characters are allowed in the display name of a warp.
+  # You can specify a list of allowed characters or use a regex pattern.
+  # Set this to "" if you want to allow all characters.
+  #   => Without regex: Just list the allowed characters in the string. For example, "abc123" will allow only letters a, b, c and numbers 1, 2, 3.
+  #   => With regex, start the string with "regex:" followed by the regex pattern.
+  #      For example, "regex:^[a-zA-Z0-9_ ]+$" will allow only letters, numbers, underscores and spaces.
+  #   => Blank field: If you want to allow all characters, just leave this field blank.
+  changeWarpDisplayNameCharacterList: "regex:^[a-zA-Z0-9_ ]+$"
+
+  # Decide how players can delete a warp.
+  # Ways available: "CHAT", "ANVIL"
+  deleteWarpEntryType: "CHAT"
+
+############################################################
+# +------------------------------------------------------+ #
+# |                        Whois                         | #
+# +------------------------------------------------------+ #
+############################################################
+
+whois:
+
+  # Set this to true if you want to use the whois features.
+  # This will allow players to access the whois GUI.
+  # Default: true
+  enabled: true
+
+############################################################
+# +------------------------------------------------------+ #
+# |                       Economy                        | #
+# +------------------------------------------------------+ #
+############################################################
+
+economy:
+
+  balanceTop:
+
+    # Set this to true if you want to use the balancetop features.
+    # This will allow players to access the balancetop GUI.
+    # Default: true
+    enabled: true
+
+    # Set this to the delay (in seconds) for updating the balance top data.
+    # TIP:
+    #   => If you have less than 1000 unique players, you can set this to a low value (e.g., 30 seconds) to keep the data more up-to-date.
+    #   => If you have more than 1000 unique players, I recommend you to set this to a higher value
+    #      (e.g., 300 seconds : 5 minutes) to reduce the load on your server.
+    # Default: 60
+    updateInterval: 60
+
+  worth:
+
+    # Set this to true if you want to use the worth features.
+    # This will allow players to access the worth GUI.
+    # Default: true
+    enabled: true
+
+    # Decide how players can search for a worth.
+    # Ways available: "CHAT", "ANVIL"
+    searchWorthEntryType: "ANVIL"
+
+  eco:
+
+    # Set this to true if you want to use the eco features.
+    # This will allow players to access the eco GUI.
+    # Default: true
+    enabled: true
+
+  sell:
+
+    # Set this to true if you want to use the sell features.
+    # This will allow players to access the sell GUI.
+    # Default: true
+    enabled: true
+
+############################################################
+# +------------------------------------------------------+ #
+# |                        Sounds                        | #
+# +------------------------------------------------------+ #
+############################################################
+
+sounds:
+
+  # Set this to true if you want to enable all sounds in the plugin.
+  # To disable a specific sound, you can leave the sound name blank.
+  # Default: true
+  enabled: true
+
+
+  # Warning: This section should follow values listed on this website:
+  # - https://helpch.at/docs/1.21.5/org/bukkit/Sound.html
+  # Change '1.21.5' with your current Minecraft version.
+
+
+  # The sound played when a player opens a GUI.
+  # Default: "BLOCK_CHEST_OPEN"
+  guiOpen: "BLOCK_CHEST_OPEN"
+
+  # The sound played when a player clicks on a close item.
+  # Default: "BLOCK_CHEST_CLOSE"
+  guiClose: "BLOCK_CHEST_CLOSE"
+
+  # The sound played when a player clicks on a back item.
+  # Default: "ENTITY_EXPERIENCE_BOTTLE_THROW"
+  guiBack: "ENTITY_EXPERIENCE_BOTTLE_THROW"
+
+  # The sound played when a player clicks on an interactive item in the GUI.
+  # Default: "ENTITY_CHICKEN_EGG"
+  guiClick: "ENTITY_CHICKEN_EGG"
+
+  # The sound played when a player changes the page in a paginated GUI.
+  # Default: "ITEM_BOOK_PAGE_TURN"
+  guiPageChange: "ITEM_BOOK_PAGE_TURN"
+
+
+  # The sound played when a player completes an action.
+  # Default: "ENTITY_PLAYER_LEVELUP"
+  actionSuccess: "ENTITY_PLAYER_LEVELUP"
+
+  # The sound played when a player cancels an action.
+  # Default: "ENTITY_ITEM_BREAK"
+  actionCanceled: "ENTITY_ITEM_BREAK"
+
+  # The sound played when a player fails an action.
+  # Default: "ENTITY_VILLAGER_NO"
+  actionFailure: "ENTITY_VILLAGER_NO"
+
+############################################################
+# +------------------------------------------------------+ #
+# |                        Storage                       | #
+# +------------------------------------------------------+ #
+############################################################
+
+storage:
+
+  # ⚠ Warning ⚠: Changing this value will migrate all your data to the new storage type,
+  #              For example, if you change from SQLite to MySQL, your data will be migrated to MySQL database,
+  #              so data (of the plugin) on your old MySQL database will be lost if you had any,
+  #              and the SQLite database file will remain in the plugin folder with all current data and
+  #              will not be used anymore. (Neither deleted, you can delete it manually if you want.)
+  #
+  # Choose the storage type you want to use to save data.
+  # Available types: "SQLite" (local file), "MySQL", "MariaDB" (preferred over MySQL)
+  # Default: "SQLite"
+  type: "SQLite"
+
+  mysql:
+
+    # MySQL or MariaDB hostname (IP address or domain name).
+    host: "localhost"
+
+    # MySQL or MariaDB port.
+    port: 3306
+
+    # MySQL or MariaDB database name.
+    database: "minecraft_database"
+
+    # MySQL or MariaDB username.
+    username: "minecraft_user"
+
+    # MySQL or MariaDB password.
+    password: ""
+
+    # MySQL or MariaDB settings.
+    # Warning: Do not change this if you don't know what you are doing.
+    settings: "?useSSL=false&serverTimezone=UTC"
+
+    # If you want to use a custom table prefix for the tables created by EssentialsX-GUI, set it here.
+    tablePrefix: "exg_"
+
+    # MySQL or MariaDB advanced settings for HikariCP connection pool.
+    # Warning: Do not change this if you don't know what you are doing.
+    #          Default values are recommended for most servers.
+    connectionPool:
+
+      # The maximum number of connections in the pool.
+      maximumPoolSize: 10
+
+      # The minimum number of idle connections in the pool.
+      minimumIdle: 10
+
+      # The maximum lifetime of a connection in the pool (in milliseconds).
+      maxLifetime: 1800000
+
+      # The idle timeout for connections in the pool (in milliseconds).
+      keepaliveTime: 0
+
+      # The connection timeout for the pool (in milliseconds).
+      connectionTimeout: 5000

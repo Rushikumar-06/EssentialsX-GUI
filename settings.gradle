@@ -1,1 +1,5 @@
-rootProject.name = 'EssentialsX-GUI'
+rootProject.name = "EssentialsX-GUI"
+
+include(":base")
+include(":v2_21_2")
+include(":v2_22_0")
