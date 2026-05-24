@@ -1,0 +1,61 @@
+############################################################
+# +------------------------------------------------------+ #
+# |                      Information                     | #
+# +------------------------------------------------------+ #
+############################################################
+
+# This is the sell editor inventory file for EssentialsX-GUI.
+
+# If you need help with the configuration of the GUI,
+# you can join our discord server at: https://discord.gg/fSzK79TAYf
+
+# For more information about how to configure EssentialsX-GUI,
+# check our Wiki at: https://sniper-tvmc.gitbook.io/essentialsx-gui/configuration/inventories
+
+############################################################
+# +------------------------------------------------------+ #
+# |                        General                       | #
+# +------------------------------------------------------+ #
+############################################################
+
+# Please do not change this value as it may cause the file to be reset.
+# Default: "1.0"
+config-version: "1.0"
+
+############################################################
+# +------------------------------------------------------+ #
+# |                       Inventory                      | #
+# +------------------------------------------------------+ #
+############################################################
+
+sell:
+
+  title: "&6Sell items"
+  rows: 6
+
+  borderItem:
+    enabled: true
+    slots: [36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 48, 49, 50, 52, 53]
+    material: "BLACK_STAINED_GLASS_PANE"
+    data: 15
+    displayName: "&8- &6&lEssentialsX-GUI"
+
+  items:
+
+    confirmSellItem:
+      enabled: true
+      slot: 47
+      material: "LIME_DYE"
+      data: 10
+      displayName: "&aConfirm sell"
+      lore:
+        - "&7Click to confirm selling the items in this inventory."
+
+    cancelSellItem:
+      enabled: true
+      slot: 51
+      material: "RED_DYE"
+      data: 1
+      displayName: "&cCancel sell"
+      lore:
+        - "&7Click to cancel selling the items in this inventory."
