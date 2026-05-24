@@ -73,9 +73,11 @@ public class BalanceTopInventory extends FastInv {
 		if (config.getPlayerRankingItem().isEnabled()) {
 
 			EXGBalanceTop balanceTop = Main.getInstance().getEXGServer().getBalanceTop();
-			int playerRankValue = balanceTop.getPlayerRank(player.getName());
 
-			BigDecimal playerMoney = Main.getInstance().getEssentials().getUser(player).getMoney();
+			Pair<Integer, BigDecimal> playerRanking = balanceTop.getPlayerRanking(player.getName());
+			int playerRankValue = playerRanking.getLeft();
+			BigDecimal playerMoney = playerRanking.getRight();
+
 			boolean ecoEnabled = !Main.getInstance().getEssentials().getSettings().isEcoDisabled();
 			String playerBalance = ecoEnabled
 					? NumberUtil.displayCurrency(playerMoney, Main.getInstance().getEssentials())

@@ -197,7 +197,7 @@ public class EcoAmountInventory extends FastInv {
 
 			TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.CANT_HAVE_NEGATIVE_BALANCE));
 			SoundsUtils.playSound(player, EXGSound.ACTION_FAILURE);
-			this.totalAmountValue = 0;
+			this.totalAmountValue = this.targetBalanceValue;
 			return false;
 		}
 

@@ -6,6 +6,7 @@ import fr.snipertvmc.essentialsxgui.libraries.exglib.Pair;
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitTask;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,13 +39,13 @@ public class EXGBalanceTop {
 	}
 
 
-	public int getPlayerRank(String playerName) {
+	public Pair<Integer, BigDecimal> getPlayerRanking(String playerName) {
 		for (int i = 0; i < balanceTopEntries.size(); i++) {
 			if (balanceTopEntries.get(i).getLeft().equals(playerName)) {
-				return i + 1;
+				return Pair.of(i + 1, BigDecimal.valueOf(balanceTopEntries.get(i).getRight()));
 			}
 		}
-		return -1;
+		return Pair.of(-1, BigDecimal.ZERO);
 	}
 
 
