@@ -2,6 +2,7 @@ package fr.snipertvmc.essentialsxgui.v2_22_0;
 
 import com.earth2me.essentials.Kit;
 import com.earth2me.essentials.MetaItemStack;
+import com.earth2me.essentials.Trade;
 import com.earth2me.essentials.User;
 import com.earth2me.essentials.adventure.AdventureUtil;
 import com.earth2me.essentials.craftbukkit.Inventories;
@@ -92,23 +93,19 @@ public class Essentials_v2_22_0 implements EssentialsManager {
 
 		for (final String rawItem : rawItems) {
 
-			// Ignore any currency amounts (e.g., "$10")
 			if (rawItem.startsWith(essentials.getSettings().getCurrencySymbol())) {
 				continue;
 			}
 
 			try {
-				// Remove the "slot:N" prefix if it is present
 				final String itemStr = rawItem.replaceFirst("^slot:\\d+\\s+", "");
 				ItemStack parsed;
 
 				if (itemStr.startsWith("@") && serializationProvider != null) {
-					// Désérialisation Base64 (BetterKits)
 					final String base64 = itemStr.substring(1).trim();
 					parsed = serializationProvider.deserializeItem(Base64Coder.decodeLines(base64));
 
 				} else {
-					// Standard text format: "diamond_sword 1 ..."
 					final String[] parts = itemStr.split(" +");
 					final int amount = parts.length > 1 ? Integer.parseInt(parts[1]) : 1;
 					final ItemStack baseStack = essentials.getItemDb().get(parts[0], amount);
@@ -125,7 +122,6 @@ public class Essentials_v2_22_0 implements EssentialsManager {
 				}
 
 			} catch (Exception e) {
-				// We log in and keep going so we don't get stuck on a malformed item
 				ConsoleLogger.warn("Unable to parse the kit item '" + kitName + "': " + rawItem + " — " + e.getMessage());
 			}
 		}
@@ -158,7 +154,6 @@ public class Essentials_v2_22_0 implements EssentialsManager {
 
 		final List<ItemStack> notSold = new ArrayList<>();
 
-		// On clone la liste pour pouvoir modifier les quantités (setAmount(0)) sans détruire les originaux
 		final List<ItemStack> itemsToProcess = new ArrayList<>();
 		for (ItemStack item : items) {
 			if (item != null && item.getType() != Material.AIR) {
@@ -179,14 +174,12 @@ public class Essentials_v2_22_0 implements EssentialsManager {
 			}
 
 			try {
-				// Appel de notre méthode personnalisée compatible avec ta liste
 				BigDecimal price = customSellItem(user, stack);
 
 				if (price != null && price.compareTo(BigDecimal.ZERO) > 0) {
 					totalWorth = totalWorth.add(price);
 					count++;
 
-					// On met à 0 les items similaires pour ne pas les vendre deux fois
 					for (final ItemStack zeroStack : itemsToProcess) {
 						if (zeroStack != null && zeroStack.isSimilar(stack)) {
 							zeroStack.setAmount(0);
@@ -200,7 +193,6 @@ public class Essentials_v2_22_0 implements EssentialsManager {
 			}
 		}
 
-		// Affichage des erreurs pour les items nommés restants
 		if (!notSold.isEmpty()) {
 			final List<String> names = new ArrayList<>();
 			for (final ItemStack stack : notSold) {
@@ -213,7 +205,6 @@ public class Essentials_v2_22_0 implements EssentialsManager {
 			}
 		}
 
-		// Message global de fin si au moins une vente a réussi
 		if (count > 0) {
 			final AdventureUtil.ParsedPlaceholder totalWorthStr = AdventureUtil.parsed(NumberUtil.displayCurrency(totalWorth, essentials));
 			user.sendTl("totalWorthAll", totalWorthStr, totalWorthStr);
@@ -224,36 +215,23 @@ public class Essentials_v2_22_0 implements EssentialsManager {
 
 
 	public BigDecimal customSellItem(final User user, final ItemStack is) throws Exception {
-		// 1. Récupération du prix de base
 		final BigDecimal originalWorth = essentials.getWorth().getPrice(essentials, is);
-
-		// 2. Application du Multiplicateur de l'utilisateur (Prend en compte ses permissions de multiplicateurs)
 		final BigDecimal worth = originalWorth == null ? null : originalWorth.multiply(essentials.getSettings().getMultiplier(user));
 
-		if (worth == null) {
-			return BigDecimal.ZERO; // Pas de valeur définie
-		}
+		if (worth == null) return BigDecimal.ZERO;
 
 		final int amount = is.getAmount();
-		if (amount <= 0) {
-			return BigDecimal.ZERO;
-		}
+		if (amount <= 0) return BigDecimal.ZERO;
 
-		// 3. Calcul du montant final (Prix avec multiplicateur * quantité)
 		final BigDecimal result = worth.multiply(BigDecimal.valueOf(amount));
-
-		// 4. Log Interne EssentialsX & Économie
-		// On simule l'item vendu pour les logs sans toucher à l'inventaire réel de Spigot
 		final ItemStack ris = is.clone();
 
-		com.earth2me.essentials.Trade.log("Command", "Sell", "Item", user.getName(),
+		Trade.log("Command", "Sell", "Item", user.getName(),
 				new com.earth2me.essentials.Trade(ris, essentials), user.getName(),
 				new com.earth2me.essentials.Trade(result, essentials), user.getLocation(), user.getMoney(), essentials);
 
-		// On donne l'argent avec la cause d'EssentialsX
 		user.giveMoney(result, null, UserBalanceUpdateEvent.Cause.COMMAND_SELL);
 
-		// 5. Envoi des messages d'EssentialsX au joueur et dans la console (comme la commande de base)
 		final String typeName = is.getType().toString().toLowerCase(Locale.ENGLISH);
 		final AdventureUtil.ParsedPlaceholder worthDisplay = AdventureUtil.parsed(NumberUtil.displayCurrency(worth, essentials));
 

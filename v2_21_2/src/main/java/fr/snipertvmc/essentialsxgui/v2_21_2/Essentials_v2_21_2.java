@@ -161,7 +161,6 @@ public class Essentials_v2_21_2 implements EssentialsManager {
 			throw new TranslatableException("sellBulkPermission");
 		}
 
-		final boolean isBulk = true;
 		int count = 0;
 
 		final List<ItemStack> notSold = new ArrayList<>();
@@ -220,38 +219,33 @@ public class Essentials_v2_21_2 implements EssentialsManager {
 
 
 	public BigDecimal customSellItem(final User user, final ItemStack is) throws Exception {
-//		final int amount = essentials.getWorth().getAmount(essentials, user, is, args, isBulkSell);
-//		final BigDecimal originalWorth = essentials.getWorth().getPrice(essentials, is);
-//		final BigDecimal worth = originalWorth == null ? null : originalWorth.multiply(essentials.getSettings().getMultiplier(user));
-//
-//		if (worth == null) {
-//			throw new TranslatableException("itemCannotBeSold");
-//		}
-//
-//		if (amount <= 0) {
-//			if (!isBulkSell) {
-//				user.sendTl("itemSold", AdventureUtil.parsed(NumberUtil.displayCurrency(BigDecimal.ZERO, essentials)), BigDecimal.ZERO, is.getType().toString().toLowerCase(Locale.ENGLISH), NumberUtil.displayCurrency(worth, essentials));
-//			}
-//			return BigDecimal.ZERO;
-//		}
-//
-//		final BigDecimal result = worth.multiply(BigDecimal.valueOf(amount));
-//
-//		final ItemStack ris = is.clone();
-//		ris.setAmount(amount);
-//		if (!Inventories.containsAtLeast(user.getBase(), ris, amount)) {
-//			throw new IllegalStateException("Trying to remove more items than are available.");
-//		}
-//		Inventories.removeItemAmount(user.getBase(), ris, ris.getAmount());
-//		user.getBase().updateInventory();
-//		Trade.log("Command", "Sell", "Item", user.getName(), new Trade(ris, essentials), user.getName(), new Trade(result, essentials), user.getLocation(), user.getMoney(), essentials);
-//		user.giveMoney(result, null, UserBalanceUpdateEvent.Cause.COMMAND_SELL);
-//		final String typeName = is.getType().toString().toLowerCase(Locale.ENGLISH);
-//		final AdventureUtil.ParsedPlaceholder worthDisplay = AdventureUtil.parsed(NumberUtil.displayCurrency(worth, essentials));
-//		user.sendTl("itemSold", AdventureUtil.parsed(NumberUtil.displayCurrency(result, essentials)), amount, typeName, worthDisplay);
-//		essentials.getLogger().log(Level.INFO, AdventureUtil.miniToLegacy(tlLiteral("itemSoldConsole", user.getName(), typeName, AdventureUtil.miniToLegacy(NumberUtil.displayCurrency(result, essentials)), amount, AdventureUtil.miniToLegacy(worthDisplay.toString()), user.getDisplayName())));
-//		return result;
-		return BigDecimal.ZERO;
+		final BigDecimal originalWorth = essentials.getWorth().getPrice(essentials, is);
+		final BigDecimal worth = originalWorth == null ? null : originalWorth.multiply(essentials.getSettings().getMultiplier(user));
+
+		if (worth == null) return BigDecimal.ZERO;
+
+		final int amount = is.getAmount();
+		if (amount <= 0) return BigDecimal.ZERO;
+
+		final BigDecimal result = worth.multiply(BigDecimal.valueOf(amount));
+		final ItemStack ris = is.clone();
+
+		Trade.log("Command", "Sell", "Item", user.getName(),
+				new com.earth2me.essentials.Trade(ris, essentials), user.getName(),
+				new com.earth2me.essentials.Trade(result, essentials), user.getLocation(), user.getMoney(), essentials);
+
+		user.giveMoney(result, null, UserBalanceUpdateEvent.Cause.COMMAND_SELL);
+
+		final String typeName = is.getType().toString().toLowerCase(Locale.ENGLISH);
+		final AdventureUtil.ParsedPlaceholder worthDisplay = AdventureUtil.parsed(NumberUtil.displayCurrency(worth, essentials));
+
+		user.sendTl("itemSold", AdventureUtil.parsed(NumberUtil.displayCurrency(result, essentials)), amount, typeName, worthDisplay);
+
+		essentials.getLogger().log(Level.INFO,
+				AdventureUtil.miniToLegacy(tlLiteral("itemSoldConsole", user.getName(), typeName,
+						AdventureUtil.miniToLegacy(NumberUtil.displayCurrency(result, essentials)), amount,
+						AdventureUtil.miniToLegacy(worthDisplay.toString()), user.getDisplayName())));
+		return result;
 	}
 
 
