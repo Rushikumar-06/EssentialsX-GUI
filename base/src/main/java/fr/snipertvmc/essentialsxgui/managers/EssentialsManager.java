@@ -27,7 +27,6 @@ public interface EssentialsManager {
 	// -------------------------------------------------- //
 
 
-	void createKitWithPlayer(Player player, String kitName, long delay);
 	List<ItemStack> getKitItems(String kitName);
 
 

@@ -46,36 +46,6 @@ public class Essentials_v2_22_0 implements EssentialsManager {
 	// -------------------------------------------------- //
 
 
-	public void createKitWithPlayer(Player player, String kitName, long delay) {
-
-		final ItemStack[] items = Inventories.getInventory(essentials.getUser(player).getBase(), true);
-		final List<String> list = new ArrayList<>();
-
-		final SerializationProvider serializationProvider = essentials.provider(SerializationProvider.class);
-		final boolean useBetterKits = essentials.getSettings().isUseBetterKits() && serializationProvider != null;
-
-		for (int i = 0; i < items.length; i++) {
-
-			final ItemStack is = items[i];
-			if (is == null || is.getType() == Material.AIR) {
-				continue;
-			}
-
-			final String serialized;
-			if (useBetterKits) {
-				// Format Base64 (BetterKits / SerializationProvider)
-				serialized = "slot:" + i + " @" + Base64Coder.encodeLines(serializationProvider.serializeItem(is));
-			} else {
-				// EssentialsX Classic Text Format
-				serialized = "slot:" + i + " " + essentials.getItemDb().serialize(is);
-			}
-			list.add(serialized);
-		}
-
-		essentials.getKits().addKit(kitName, list, delay);
-	}
-
-
 	public List<ItemStack> getKitItems(String kitName) {
 
 		final List<String> rawItems;

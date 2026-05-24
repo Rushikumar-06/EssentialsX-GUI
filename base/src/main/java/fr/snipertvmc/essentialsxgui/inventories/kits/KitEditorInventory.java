@@ -110,7 +110,7 @@ public class KitEditorInventory extends FastInv {
 		player.getInventory().clear();
 
 		player.getInventory().setContents(kitItems.toArray(new ItemStack[0]));
-		Main.getInstance().getEssentialsManager().createKitWithPlayer(player, kit.getName(), delay);
+		player.performCommand("createkit " +  kit.getName() + " " + delay);
 
 		InventoryBackupUtils.loadPlayerInventoryBackup(player, inventoryBackup);
 

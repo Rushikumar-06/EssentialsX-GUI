@@ -186,7 +186,7 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 
 			long delay = Main.getInstance().getConfiguration().getInstantCreationDefaultKitDelay();
 
-			Main.getInstance().getEssentialsManager().createKitWithPlayer(player, finalKitName, delay);
+			player.performCommand("createkit " +  finalKitName + " " + delay);
 			TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.KIT_CREATED, Map.of("kitName", finalKitName, "kitDelay", String.valueOf(delay))));
 			new KitsAdminViewInventory(player, null, null).open(player);
 			SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
@@ -261,7 +261,7 @@ public class KitsAdminViewInventory extends PaginatedFastInv {
 
 					long delay = Long.parseLong(result.getLeft());
 
-					Main.getInstance().getEssentialsManager().createKitWithPlayer(player, kitName.replace(" ", "_"), delay);
+					player.performCommand("createkit " +  kitName.replace(" ", "_") + " " + delay);
 					TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.KIT_CREATED, Map.of("kitName", kitName, "kitDelay", String.valueOf(delay))));
 					new KitsAdminViewInventory(player, null, null).open(player);
 					SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
