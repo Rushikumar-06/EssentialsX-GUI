@@ -9,6 +9,7 @@ import org.bukkit.scheduler.BukkitTask;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public class EXGBalanceTop {
 
@@ -25,13 +26,12 @@ public class EXGBalanceTop {
 	// -------------------------------------------------- //
 
 
-	public void forceUpdate() {
-		Main.getInstance().getEssentials().getBalanceTop().calculateBalanceTopMapAsync().thenRun(() -> {
+	public CompletableFuture<?> forceUpdate() {
+		return Main.getInstance().getEssentials().getBalanceTop().calculateBalanceTopMapAsync().thenRun(() -> {
 
 			balanceTopEntries.clear();
 			Main.getInstance().getEssentials().getBalanceTop().getBalanceTopCache().values().forEach(entry -> {
 				balanceTopEntries.add(new Pair<>(FormatUtil.stripFormat(entry.getDisplayName()), entry.getBalance().doubleValue()));
-
 			});
 
 			lastUpdate = System.currentTimeMillis();

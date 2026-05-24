@@ -203,10 +203,12 @@ public class BalanceTopInventory extends FastInv {
 				return;
 			}
 
-			Main.getInstance().getEXGServer().getBalanceTop().forceUpdate();
-			addRankingItems(player);
-			TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.BALANCE_TOP_DATA_UPDATED));
-			SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
+			Main.getInstance().getEXGServer().getBalanceTop().forceUpdate().thenRun(() -> {
+				addPlayerRankingItem(player);
+				addRankingItems(player);
+				TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.BALANCE_TOP_DATA_UPDATED));
+				SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
+			});
 
 		} else {
 			TextUtils.sendMessageToCommandSender(player, MessagesUtils.getString(EXGMessage.NO_PERMISSION));
