@@ -67,7 +67,12 @@ public class EXGBalanceTop {
 
 
 	public boolean isUpdateTaskRunning() {
-		return updateTask != null && !updateTask.isCancelled();
+		try {
+			return updateTask != null && !updateTask.isCancelled();
+
+		} catch (NoSuchMethodError e) {
+			return updateTask != null;
+		}
 	}
 
 

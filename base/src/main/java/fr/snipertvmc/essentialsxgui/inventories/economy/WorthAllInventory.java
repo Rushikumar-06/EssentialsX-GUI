@@ -77,8 +77,10 @@ public class WorthAllInventory extends PaginatedFastInv {
 
 			for (Map.Entry<String, BigDecimal> entry : itemsWorth.entrySet()) {
 
-				String materialName = entry.getKey().split(":")[0];
-				String dataValue = entry.getKey().split(":")[1];
+				String[] fullMaterial = entry.getKey().split(":");
+
+				String materialName = fullMaterial[0];
+				String dataValue = fullMaterial.length > 1 ? fullMaterial[1] : "0";
 
 				Material material = Main.getInstance().getEXGServer().getWorth().getMaterialFromWorthName(materialName);
 				byte data = !dataValue.equals("*") ? Byte.valueOf(dataValue) : 0;

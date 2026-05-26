@@ -79,6 +79,36 @@ public class LibraryManager {
 				.artifactId("XSeries")
 				.version("13.6.0+26.1")
 				.build());
+
+		bukkitLibraryManager.loadLibrary(Library.builder()
+				.groupId("org.slf4j")
+				.artifactId("slf4j-api")
+				.version("2.0.18")
+				.build());
+
+		bukkitLibraryManager.loadLibrary(Library.builder()
+				.groupId("org.slf4j")
+				.artifactId("slf4j-simple")
+				.version("2.0.18")
+				.build());
+
+
+		// Adventure support
+		if (!hasNativeAdventureSupport()) {
+			bukkitLibraryManager.loadLibrary(Library.builder()
+					.groupId("net.kyori")
+					.artifactId("adventure-text-minimessage")
+					.version("4.26.1")
+					.resolveTransitiveDependencies(true)
+					.build());
+
+			bukkitLibraryManager.loadLibrary(Library.builder()
+					.groupId("net.kyori")
+					.artifactId("adventure-platform-bukkit")
+					.version("4.4.1")
+					.resolveTransitiveDependencies(true)
+					.build());
+		}
 	}
 
 
@@ -105,6 +135,20 @@ public class LibraryManager {
 					.artifactId("mysql-connector-j")
 					.version("9.4.0")
 					.build());
+		}
+	}
+
+
+	// -------------------------------------------------- //
+
+
+	public boolean hasNativeAdventureSupport() {
+		try {
+			Class<?> componentClass = Class.forName("net.kyori.adventure.text.Component");
+			Class.forName("org.bukkit.entity.Player").getMethod("sendMessage", componentClass);
+			return true;
+		} catch (ClassNotFoundException | NoSuchMethodException | NoClassDefFoundError e) {
+			return false;
 		}
 	}
 

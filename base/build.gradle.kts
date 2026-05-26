@@ -17,7 +17,7 @@ java.sourceCompatibility = JavaVersion.VERSION_21
 repositories {
     mavenLocal()
 
-    // Libby Bukkit, Adventure
+    // Adventure
     mavenCentral()
 
     // SpigotMC, Moshi, HikariCP, XSeries (v13.6.0+26.1)
@@ -62,10 +62,8 @@ dependencies {
     compileOnly("com.github.InstantlyMoist:privatebin-java-api:master")
     compileOnly("me.clip:placeholderapi:2.12.2")
     compileOnly("io.github.almighty-satan:XSeries:13.6.0+26.1")
+    compileOnly("net.kyori:adventure-platform-bukkit:4.4.1")
 
-    implementation("net.kyori:adventure-api:5.1.1")
-    implementation("net.kyori:adventure-text-minimessage:5.1.1")
-    implementation("net.kyori:adventure-platform-bukkit:4.4.1")
     implementation("net.wesjd:anvilgui:1.10.13-SNAPSHOT")
     implementation("dev.faststats.metrics:bukkit:0.22.0")
 }

@@ -2,11 +2,10 @@ package fr.snipertvmc.essentialsxgui.utilities;
 
 import fr.snipertvmc.essentialsxgui.Main;
 import me.clip.placeholderapi.PlaceholderAPI;
+import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
-import net.kyori.adventure.text.serializer.bungeecord.BungeeComponentSerializer;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
-import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -20,25 +19,32 @@ public class TextUtils {
 
 
 	public static void sendMessageToCommandSender(CommandSender commandSender, String formattedMessage) {
+		if (commandSender == null || formattedMessage == null || formattedMessage.isEmpty()) return;
 		sendMessageToCommandSender(Set.of(commandSender), formattedMessage);
 	}
 
 
 	public static void sendMessageToCommandSender(Set<CommandSender> commandSenders, String formattedMessage) {
-		if (formattedMessage.isEmpty()) return;
-		if (commandSenders.isEmpty()) return;
-		Component component = convertFormattedMessageToComponent(commandSenders.stream().findFirst().orElse(null), formattedMessage);
-		commandSenders.forEach(commandSender -> Main.getInstance().getBukkitAudiences().sender(commandSender).sendMessage(component));
+		if (formattedMessage == null || formattedMessage.isEmpty() || commandSenders.isEmpty()) return;
+
+		CommandSender firstSender = commandSenders.stream().findFirst().orElse(null);
+		Component component = convertFormattedMessageToComponent(firstSender, formattedMessage);
+
+		for (CommandSender sender : commandSenders) {
+			getAudience(sender).sendMessage(component);
+		}
 	}
 
 
 	public static String convertFormattedMessageToText(String formattedMessage) {
+		if (formattedMessage == null || formattedMessage.isEmpty()) return "";
 		Component component = convertFormattedMessageToComponent(null, formattedMessage);
-		return TextComponent.toLegacyText(BungeeComponentSerializer.get().serialize(component));
+		return LegacyComponentSerializer.legacySection().serialize(component);
 	}
 
 
 	public static List<String> convertFormattedMessagesToText(List<String> formattedMessages) {
+		if (formattedMessages == null) return List.of();
 		return formattedMessages.stream().map(TextUtils::convertFormattedMessageToText).toList();
 	}
 
@@ -47,21 +53,28 @@ public class TextUtils {
 
 
 	private static Component convertFormattedMessageToComponent(CommandSender commandSender, String formattedMessage) {
-
 		if (Main.getInstance().getLoadingManager().isPlaceholderAPISupported() && commandSender instanceof Player player) {
 			formattedMessage = PlaceholderAPI.setPlaceholders(player, formattedMessage);
 		}
 
-		Component component;
-		formattedMessage = replaceAmpersand(formattedMessage);
-
 		if (hasLegacyFormat(formattedMessage)) {
-			component = LegacyComponentSerializer.legacySection().deserialize(formattedMessage);
+			String sectionMessage = replaceAmpersand(formattedMessage);
+			return LegacyComponentSerializer.legacySection().deserialize(sectionMessage);
 		} else {
-			component = MiniMessage.miniMessage().deserialize(formattedMessage);
+			return MiniMessage.miniMessage().deserialize(formattedMessage);
 		}
+	}
 
-		return component;
+
+	// -------------------------------------------------- //
+
+
+	private static Audience getAudience(CommandSender sender) {
+		if (Main.getInstance().getLibraryManager().hasNativeAdventureSupport()) {
+			return (Audience) sender;
+		} else {
+			return Main.getInstance().getBukkitAudiences().sender(sender);
+		}
 	}
 
 
@@ -75,7 +88,8 @@ public class TextUtils {
 
 
 	public static String replaceAmpersand(String message) {
-		return message.replaceAll("(?i)&([0-9a-fk-or])", "§$1");
+		if (message == null) return "";
+		return message.replaceAll("(?i)&([0-9a-fk-orx])", "§$1");
 	}
 
 
@@ -83,6 +97,7 @@ public class TextUtils {
 
 
 	public static String firstLetterToUpperCase(String string) {
+		if (string == null || string.isEmpty()) return "";
 		return string.substring(0, 1).toUpperCase() + string.substring(1);
 	}
 

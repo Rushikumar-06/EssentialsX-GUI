@@ -93,7 +93,11 @@ public class Main extends JavaPlugin {
 		playerManager = new PlayerManager();
 		serverDataManager = new ServerDataManager();
 
-		bukkitAudiences  = BukkitAudiences.create(this);
+
+		// BUKKIT PLATFORM SUPPORT INITIALIZATION
+		if (!libraryManager.hasNativeAdventureSupport()) {
+			bukkitAudiences = BukkitAudiences.create(this);
+		}
 
 
 		// FILES LOADING
@@ -151,6 +155,13 @@ public class Main extends JavaPlugin {
 
 		// UNLOAD PLUGIN
 		loadingManager.unloadPlugin(filesManager.getConfiguration().isDetailedLoading());
+
+
+		// BUKKIT PLATFORM SUPPORT SHUTDOWN
+		if (this.bukkitAudiences != null) {
+			this.bukkitAudiences.close();
+			this.bukkitAudiences = null;
+		}
 
 
 		// PLUGIN UNLOADING COMPLETED
