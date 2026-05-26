@@ -1,8 +1,8 @@
 package fr.snipertvmc.essentialsxgui.managers;
 
 import fr.snipertvmc.essentialsxgui.Main;
-import net.byteflux.libby.BukkitLibraryManager;
-import net.byteflux.libby.Library;
+import fr.snipertvmc.essentialsxgui.libraries.libby.bukkit.BukkitLibraryManager;
+import fr.snipertvmc.essentialsxgui.libraries.libby.core.Library;
 
 public class LibraryManager {
 

@@ -66,7 +66,6 @@ dependencies {
     implementation("net.kyori:adventure-api:5.1.1")
     implementation("net.kyori:adventure-text-minimessage:5.1.1")
     implementation("net.kyori:adventure-platform-bukkit:4.4.1")
-    implementation("net.byteflux:libby-bukkit:1.3.1")
     implementation("net.wesjd:anvilgui:1.10.13-SNAPSHOT")
     implementation("dev.faststats.metrics:bukkit:0.22.0")
 }
@@ -91,10 +90,6 @@ tasks.shadowJar {
     archiveFileName.set("EssentialsX-GUI-${project.version}.jar")
     destinationDirectory.set(layout.buildDirectory.dir("shadow"))
 
-    from(sourceSets.main.get().output)
-    configurations = listOf(project.configurations.runtimeClasspath.get())
-
-    relocate("net.byteflux.libby", "fr.snipertvmc.essentialsxgui.libraries.libby")
     relocate("net.wesjd.anvilgui", "fr.snipertvmc.essentialsxgui.libraries.anvilgui")
     relocate("dev.faststats", "fr.snipertvmc.essentialsxgui.libraries.faststats")
 

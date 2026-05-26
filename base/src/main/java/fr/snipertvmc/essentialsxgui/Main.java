@@ -22,9 +22,9 @@ import dev.faststats.core.ErrorTracker;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.EXGServer;
 import fr.snipertvmc.essentialsxgui.infrastructure.models.files.ConfigurationFile;
 import fr.snipertvmc.essentialsxgui.libraries.bstats.Metrics;
+import fr.snipertvmc.essentialsxgui.libraries.libby.bukkit.BukkitLibraryManager;
 import fr.snipertvmc.essentialsxgui.managers.*;
 import fr.snipertvmc.essentialsxgui.utilities.ConsoleLogger;
-import net.byteflux.libby.BukkitLibraryManager;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.bukkit.plugin.java.JavaPlugin;
 
