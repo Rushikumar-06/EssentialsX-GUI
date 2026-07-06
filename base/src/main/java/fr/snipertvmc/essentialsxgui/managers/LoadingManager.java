@@ -112,6 +112,9 @@ public class LoadingManager {
 		// STOP TASKS
 		if (detailedLoading) ConsoleLogger.console("\t§6EssentialsX-GUI: §7Stopping tasks...");
 		stopUpdateCheckerTask();
+		if (Main.getInstance().getServerManager() != null) {
+			Main.getInstance().getEXGServer().getBalanceTop().stopUpdateTask();
+		}
 		if (detailedLoading) ConsoleLogger.console("\t§6EssentialsX-GUI: §7Tasks stopping §fcompleted§7.");
 
 
@@ -212,9 +215,12 @@ public class LoadingManager {
 				MessagesUtils.getString(EXGMessage.TASKS_RELOADING, null));
 
 		Main.getInstance().getEXGServer().getBalanceTop().stopUpdateTask();
-		Main.getInstance().getEXGServer().getBalanceTop().startUpdateTask();
+		if (Main.getInstance().getConfiguration().isEconomyBalanceTopModuleEnabled()) {
+			Main.getInstance().getEXGServer().getBalanceTop().startUpdateTask();
+		}
 
-		int errors = Main.getInstance().getEXGServer().getBalanceTop().isUpdateTaskRunning() ? 0 : 1;
+		boolean balanceTopEnabled = Main.getInstance().getConfiguration().isEconomyBalanceTopModuleEnabled();
+		int errors = !balanceTopEnabled || Main.getInstance().getEXGServer().getBalanceTop().isUpdateTaskRunning() ? 0 : 1;
 
 		if (detailedLoading) TextUtils.sendMessageToCommandSender(commandSenders,
 				MessagesUtils.getString(EXGMessage.TASKS_RELOADED, Map.of(
@@ -229,7 +235,9 @@ public class LoadingManager {
 		if (detailedLoading) TextUtils.sendMessageToCommandSender(commandSenders,
 				MessagesUtils.getString(EXGMessage.DATA_RELOADING, null));
 
-		Main.getInstance().getEXGServer().getBalanceTop().forceUpdate();
+		if (Main.getInstance().getConfiguration().isEconomyBalanceTopModuleEnabled()) {
+			Main.getInstance().getEXGServer().getBalanceTop().forceUpdate();
+		}
 		Main.getInstance().getEXGServer().getWorth().loadItemsWorth();
 
 		int errors = Main.getInstance().getDatabaseManager().getStorage().isConnected() ? 0 : 1;
