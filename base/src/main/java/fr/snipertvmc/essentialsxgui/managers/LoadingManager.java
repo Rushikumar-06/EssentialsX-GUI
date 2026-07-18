@@ -30,7 +30,6 @@ public class LoadingManager {
 
 
 	private boolean pluginReady = false;
-	private boolean isPlaceholderAPISupported = false;
 	private final long startTimestamp = System.currentTimeMillis();
 
 
@@ -411,12 +410,8 @@ public class LoadingManager {
 
 	public void checkForPlaceholderAPISupport() {
 
-		if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+		if (Main.getInstance().getHookManager().getPlaceholderAPIHook().isSupported()) {
 			ConsoleLogger.console("\t§6EssentialsX-GUI: §bPlaceholderAPI found. Placeholder support enabled.");
-			isPlaceholderAPISupported  = true;
-
-		} else {
-			isPlaceholderAPISupported = false;
 		}
 	}
 
@@ -474,9 +469,6 @@ public class LoadingManager {
 
 	public boolean isPluginReady() {
 		return pluginReady;
-	}
-	public boolean isPlaceholderAPISupported() {
-		return isPlaceholderAPISupported;
 	}
 	public long getUptimeInMilliseconds() {
 		return System.currentTimeMillis() - startTimestamp;

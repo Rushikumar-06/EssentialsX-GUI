@@ -289,7 +289,7 @@ public class EXGItemConfig {
 
 	private void applyDisplayName(Player player, ItemBuilder itemBuilder) {
 		if (displayName != null) {
-			if (Main.getInstance().getLoadingManager().isPlaceholderAPISupported()) {
+			if (Main.getInstance().getHookManager().getPlaceholderAPIHook().isSupported()) {
 				itemBuilder.name(PlaceholderAPI.setPlaceholders(player, displayName));
 			} else {
 				itemBuilder.name(displayName);
@@ -303,7 +303,7 @@ public class EXGItemConfig {
 
 	private void applyLore(Player player, ItemBuilder itemBuilder) {
 		if (lore != null) {
-			if (Main.getInstance().getLoadingManager().isPlaceholderAPISupported()) {
+			if (Main.getInstance().getHookManager().getPlaceholderAPIHook().isSupported()) {
 				itemBuilder.lore(new ArrayList<>(PlaceholderAPI.setPlaceholders(player, lore)));
 			} else {
 				itemBuilder.lore(new ArrayList<>(lore));

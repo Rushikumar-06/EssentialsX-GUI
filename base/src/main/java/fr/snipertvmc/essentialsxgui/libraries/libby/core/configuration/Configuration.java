@@ -5,11 +5,7 @@ import fr.snipertvmc.essentialsxgui.libraries.libby.core.relocation.Relocation;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Represents a Libby configuration loaded from a configuration file.

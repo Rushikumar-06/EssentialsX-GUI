@@ -53,7 +53,7 @@ public class TextUtils {
 
 
 	private static Component convertFormattedMessageToComponent(CommandSender commandSender, String formattedMessage) {
-		if (Main.getInstance().getLoadingManager().isPlaceholderAPISupported() && commandSender instanceof Player player) {
+		if (Main.getInstance().getHookManager().getPlaceholderAPIHook().isSupported() && commandSender instanceof Player player) {
 			formattedMessage = PlaceholderAPI.setPlaceholders(player, formattedMessage);
 		}
 

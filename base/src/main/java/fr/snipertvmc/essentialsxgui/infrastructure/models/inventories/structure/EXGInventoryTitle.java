@@ -27,7 +27,7 @@ public class EXGInventoryTitle {
 
 
 	public String getTitle(Player player) {
-		if (Main.getInstance().getLoadingManager().isPlaceholderAPISupported()) {
+		if (Main.getInstance().getHookManager().getPlaceholderAPIHook().isSupported()) {
 			return PlaceholderAPI.setPlaceholders(player, title);
 		} else {
 			return title;

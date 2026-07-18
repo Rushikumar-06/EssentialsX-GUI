@@ -17,6 +17,9 @@ import java.util.Set;
 public class WorldGuardHook {
 
 
+	// -------------------------------------------------- //
+
+
 	public boolean isSupported() {
 		try {
 			Class.forName("com.sk89q.worldguard.WorldGuard");
@@ -26,6 +29,9 @@ public class WorldGuardHook {
 			return false;
 		}
 	}
+
+
+	// -------------------------------------------------- //
 
 
 	public List<ProtectedRegion> getPlayerRegions(Player player) {
@@ -68,4 +74,7 @@ public class WorldGuardHook {
 
 		return true;
 	}
+
+
+	// -------------------------------------------------- //
 }
