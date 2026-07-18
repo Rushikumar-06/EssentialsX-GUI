@@ -215,12 +215,10 @@ public class LoadingManager {
 				MessagesUtils.getString(EXGMessage.TASKS_RELOADING, null));
 
 		Main.getInstance().getEXGServer().getBalanceTop().stopUpdateTask();
-		if (Main.getInstance().getConfiguration().isEconomyBalanceTopModuleEnabled()) {
-			Main.getInstance().getEXGServer().getBalanceTop().startUpdateTask();
-		}
+		Main.getInstance().getEXGServer().getBalanceTop().startUpdateTask();
 
-		boolean balanceTopEnabled = Main.getInstance().getConfiguration().isEconomyBalanceTopModuleEnabled();
-		int errors = !balanceTopEnabled || Main.getInstance().getEXGServer().getBalanceTop().isUpdateTaskRunning() ? 0 : 1;
+		boolean balanceTopModuleEnabled = Main.getInstance().getConfiguration().isEconomyBalanceTopModuleEnabled();
+		int errors = !balanceTopModuleEnabled ? 0 : Main.getInstance().getEXGServer().getBalanceTop().isUpdateTaskRunning() ? 0 : 1;
 
 		if (detailedLoading) TextUtils.sendMessageToCommandSender(commandSenders,
 				MessagesUtils.getString(EXGMessage.TASKS_RELOADED, Map.of(

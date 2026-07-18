@@ -54,7 +54,6 @@ public class EXGBalanceTop {
 
 	public void startUpdateTask() {
 		if (!Main.getInstance().getConfiguration().isEconomyBalanceTopModuleEnabled()) {
-			stopUpdateTask();
 			return;
 		}
 
