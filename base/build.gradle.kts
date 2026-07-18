@@ -8,7 +8,6 @@ plugins {
     id("maven-publish")
 }
 
-
 group = "fr.snipertvmc.essentialsxgui"
 version = "1.5.0"
 description = "EssentialsX-GUI"
@@ -68,6 +67,7 @@ dependencies {
     compileOnly("me.clip:placeholderapi:2.12.2")
     compileOnly("com.github.cryptomorin:XSeries:13.7.1")
     compileOnly("net.kyori:adventure-platform-bukkit:4.4.1")
+    compileOnly("com.sk89q.worldguard:worldguard-bukkit:7.0.17")
 
     implementation("net.wesjd:anvilgui:1.10.13-SNAPSHOT")
     implementation("dev.faststats.metrics:bukkit:0.22.0")
