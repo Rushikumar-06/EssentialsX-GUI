@@ -356,7 +356,14 @@ public class EXGItemConfig {
 			return new ItemBuilder(XMaterial.BARRIER);
 
 		} else {
-			itemBuilder = new ItemBuilder(getMaterial());
+
+			itemBuilder = new ItemBuilder(XMaterial.BARRIER);
+
+			try {
+				if (getMaterial().get().isItem()) {
+					itemBuilder = new ItemBuilder(getMaterial());
+				}
+			} catch (Exception ignored) {}
 		}
 
 		if (VersionUtil.getServerBukkitVersion().isHigherThan(VersionUtil.BukkitVersion.fromString("1.13.2-R0.1-SNAPSHOT"))) {
