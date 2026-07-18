@@ -61,6 +61,7 @@ public class LoadingManager {
 			startUpdateCheckerTask();
 		}
 		checkForPlaceholderAPISupport();
+		checkForWorldGuardSupport();
 		checkForUpdates(false);
 		if (detailedLoading) ConsoleLogger.console("\t§6EssentialsX-GUI: §7Server configuration analysis §fcompleted§7.");
 
@@ -416,6 +417,14 @@ public class LoadingManager {
 
 		} else {
 			isPlaceholderAPISupported = false;
+		}
+	}
+
+
+	public void checkForWorldGuardSupport() {
+
+		if (Main.getInstance().getHookManager().getWorldGuardHook().isSupported()) {
+			ConsoleLogger.console("\t§6EssentialsX-GUI: §bWorldGuard found. WorldGuard support enabled.");
 		}
 	}
 

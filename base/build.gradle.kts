@@ -49,6 +49,11 @@ repositories {
     maven {
         url = uri("https://repo.faststats.dev/releases")
     }
+
+    // WorldGuard
+    maven {
+        url = uri("https://maven.enginehub.org/repo/")
+    }
 }
 
 dependencies {
@@ -68,6 +73,12 @@ dependencies {
     implementation("dev.faststats.metrics:bukkit:0.22.0")
 }
 
+configurations.all {
+    resolutionStrategy {
+        force("com.google.guava:guava:33.6.0-jre")
+        force("com.google.code.gson:gson:2.14.0")
+    }
+}
 
 publishing {
     publications {

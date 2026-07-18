@@ -122,7 +122,7 @@ public class WarpsAdminViewInventory extends PaginatedFastInv {
 			setItem(config.getCreateWarpItem().getSlot(), config.getCreateWarpItem()
 					.build(player), e -> {
 
-				if (player.hasPermission("essentials.setwarp")) {
+				if (Main.getInstance().getPlayerManager().getPlayer(player).canDo("setwarp", "essentials.setwarp")) {
 					createNewWarp(player);
 					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 					return;

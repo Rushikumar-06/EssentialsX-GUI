@@ -15,6 +15,7 @@ depend:
   - Essentials
 softdepend:
   - PlaceholderAPI
+  - WorldGuard
 
 
 commands:
