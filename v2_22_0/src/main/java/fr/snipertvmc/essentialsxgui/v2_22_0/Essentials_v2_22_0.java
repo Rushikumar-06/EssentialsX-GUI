@@ -17,10 +17,10 @@ import net.ess3.provider.SerializationProvider;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
@@ -73,7 +73,7 @@ public class Essentials_v2_22_0 implements EssentialsManager {
 
 				if (itemStr.startsWith("@") && serializationProvider != null) {
 					final String base64 = itemStr.substring(1).trim();
-					parsed = serializationProvider.deserializeItem(Base64Coder.decodeLines(base64));
+					parsed = serializationProvider.deserializeItem(Base64.getDecoder().decode(base64));
 
 				} else {
 					final String[] parts = itemStr.split(" +");
