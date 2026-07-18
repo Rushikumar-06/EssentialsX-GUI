@@ -19,7 +19,7 @@ repositories {
 dependencies {
     implementation(project(":base"))
 
-    compileOnly("org.spigotmc:spigot-api:1.21.11-R0.1-SNAPSHOT")
+    compileOnly("org.spigotmc:spigot-api:26.2-R0.1-SNAPSHOT")
     compileOnly("net.essentialsx:EssentialsX:2.21.2-SNAPSHOT") {
         exclude(group = "io.papermc.paper", module = "paper-api")
     }
