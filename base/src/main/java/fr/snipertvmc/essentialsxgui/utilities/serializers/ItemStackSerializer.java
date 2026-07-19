@@ -3,11 +3,11 @@ package fr.snipertvmc.essentialsxgui.utilities.serializers;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.io.BukkitObjectInputStream;
 import org.bukkit.util.io.BukkitObjectOutputStream;
-import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Base64;
 
 public class ItemStackSerializer {
 
@@ -52,7 +52,7 @@ public class ItemStackSerializer {
 				dataOutput.writeObject(item);
 			}
 
-			return Base64Coder.encodeLines(outputStream.toByteArray());
+			return Base64.getEncoder().encodeToString(outputStream.toByteArray());
 
 		} catch (IOException e) {
 			throw new IllegalStateException("Unable to save item stacks.", e);
@@ -80,7 +80,7 @@ public class ItemStackSerializer {
 			return new ItemStack[0];
 		}
 
-		try (ByteArrayInputStream inputStream = new ByteArrayInputStream(Base64Coder.decodeLines(data));
+		try (ByteArrayInputStream inputStream = new ByteArrayInputStream(Base64.getDecoder().decode(data));
 		     BukkitObjectInputStream dataInput = new BukkitObjectInputStream(inputStream)) {
 
 			ItemStack[] items = new ItemStack[dataInput.readInt()];

@@ -76,6 +76,22 @@ public class SellInventory extends FastInv {
 			setItem(config.getCancelSellItem().getSlot(), config.getCancelSellItem()
 					.build(player), e -> {
 
+				List<ItemStack> sellItems = new ArrayList<>();
+
+				for (int i = 0; i < e.getInventory().getSize(); i++) {
+					if (reservedSlots.contains(i)) continue;
+
+					ItemStack itemStack = e.getInventory().getItem(i);
+					if (itemStack != null && itemStack.getType() != Material.AIR) {
+						sellItems.add(itemStack);
+					}
+				}
+
+				for (ItemStack sellItem : sellItems) {
+					HashMap<Integer, ItemStack> dontFitItems = player.getInventory().addItem(sellItem);
+					dontFitItems.forEach((integer, itemStack) -> player.getWorld().dropItem(player.getLocation(), itemStack));
+				}
+
 				player.closeInventory();
 				SoundsUtils.playSound(player, EXGSound.ACTION_CANCELED);
 			});

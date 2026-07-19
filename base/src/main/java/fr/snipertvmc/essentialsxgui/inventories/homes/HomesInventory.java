@@ -140,7 +140,7 @@ public class HomesInventory extends PaginatedFastInv {
 			setItem(config.getCreateHomeItem().getSlot(), config.getCreateHomeItem()
 					.build(player), e -> {
 
-				if (player.hasPermission("essentials.sethome")) {
+				if (Main.getInstance().getPlayerManager().getPlayer(player).canDo("sethome", "essentials.sethome")) {
 					createNewHome(player);
 					SoundsUtils.playSound(player, EXGSound.GUI_CLICK);
 					return;

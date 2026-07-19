@@ -30,7 +30,6 @@ public class LoadingManager {
 
 
 	private boolean pluginReady = false;
-	private boolean isPlaceholderAPISupported = false;
 	private final long startTimestamp = System.currentTimeMillis();
 
 
@@ -61,6 +60,7 @@ public class LoadingManager {
 			startUpdateCheckerTask();
 		}
 		checkForPlaceholderAPISupport();
+		checkForWorldGuardSupport();
 		checkForUpdates(false);
 		if (detailedLoading) ConsoleLogger.console("\t§6EssentialsX-GUI: §7Server configuration analysis §fcompleted§7.");
 
@@ -410,12 +410,16 @@ public class LoadingManager {
 
 	public void checkForPlaceholderAPISupport() {
 
-		if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+		if (Main.getInstance().getHookManager().getPlaceholderAPIHook().isSupported()) {
 			ConsoleLogger.console("\t§6EssentialsX-GUI: §bPlaceholderAPI found. Placeholder support enabled.");
-			isPlaceholderAPISupported  = true;
+		}
+	}
 
-		} else {
-			isPlaceholderAPISupported = false;
+
+	public void checkForWorldGuardSupport() {
+
+		if (Main.getInstance().getHookManager().getWorldGuardHook().isSupported()) {
+			ConsoleLogger.console("\t§6EssentialsX-GUI: §bWorldGuard found. WorldGuard support enabled.");
 		}
 	}
 
@@ -465,9 +469,6 @@ public class LoadingManager {
 
 	public boolean isPluginReady() {
 		return pluginReady;
-	}
-	public boolean isPlaceholderAPISupported() {
-		return isPlaceholderAPISupported;
 	}
 	public long getUptimeInMilliseconds() {
 		return System.currentTimeMillis() - startTimestamp;

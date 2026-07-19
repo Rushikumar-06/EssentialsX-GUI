@@ -1,7 +1,7 @@
 package fr.snipertvmc.essentialsxgui.libraries.libby.core;
 
-import fr.snipertvmc.essentialsxgui.libraries.libby.core.transitive.ExcludedDependency;
 import fr.snipertvmc.essentialsxgui.libraries.libby.core.relocation.Relocation;
+import fr.snipertvmc.essentialsxgui.libraries.libby.core.transitive.ExcludedDependency;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -10,10 +10,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 
-import static fr.snipertvmc.essentialsxgui.libraries.libby.core.Util.craftPartialPath;
-import static fr.snipertvmc.essentialsxgui.libraries.libby.core.Util.craftPath;
-import static fr.snipertvmc.essentialsxgui.libraries.libby.core.Util.hexStringToByteArray;
-import static fr.snipertvmc.essentialsxgui.libraries.libby.core.Util.replaceWithDots;
+import static fr.snipertvmc.essentialsxgui.libraries.libby.core.Util.*;
 import static java.util.Objects.requireNonNull;
 
 /**

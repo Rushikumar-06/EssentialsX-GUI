@@ -8,7 +8,6 @@ plugins {
     id("maven-publish")
 }
 
-
 group = "fr.snipertvmc.essentialsxgui"
 version = "1.5.0"
 description = "EssentialsX-GUI"
@@ -49,25 +48,37 @@ repositories {
     maven {
         url = uri("https://repo.faststats.dev/releases")
     }
+
+    // WorldGuard
+    maven {
+        url = uri("https://maven.enginehub.org/repo/")
+    }
 }
 
 dependencies {
     runtimeOnly(project(":v2_21_2"))
     runtimeOnly(project(":v2_22_0"))
 
-    compileOnly("org.spigotmc:spigot-api:1.21.11-R0.1-SNAPSHOT")
+    compileOnly("org.spigotmc:spigot-api:26.2-R0.1-SNAPSHOT")
     compileOnly("net.essentialsx:EssentialsX:2.21.2-SNAPSHOT")
     compileOnly("com.squareup.moshi:moshi:1.15.2")
     compileOnly("com.zaxxer:HikariCP:7.0.2")
     compileOnly("com.github.InstantlyMoist:privatebin-java-api:master")
     compileOnly("me.clip:placeholderapi:2.12.2")
-    compileOnly("io.github.almighty-satan:XSeries:13.6.0+26.1")
+    compileOnly("com.github.cryptomorin:XSeries:13.7.1")
     compileOnly("net.kyori:adventure-platform-bukkit:4.4.1")
+    compileOnly("com.sk89q.worldguard:worldguard-bukkit:7.0.17")
 
     implementation("net.wesjd:anvilgui:1.10.13-SNAPSHOT")
     implementation("dev.faststats.metrics:bukkit:0.22.0")
 }
 
+configurations.all {
+    resolutionStrategy {
+        force("com.google.guava:guava:33.6.0-jre")
+        force("com.google.code.gson:gson:2.14.0")
+    }
+}
 
 publishing {
     publications {

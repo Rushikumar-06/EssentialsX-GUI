@@ -1,6 +1,7 @@
 package fr.snipertvmc.essentialsxgui.infrastructure.models;
 
 import com.cryptomorin.xseries.XMaterial;
+import fr.snipertvmc.essentialsxgui.Main;
 import fr.snipertvmc.essentialsxgui.utilities.serializers.ItemStackSerializer;
 import fr.snipertvmc.essentialsxgui.utilities.type.TypeUtils;
 import org.bukkit.entity.Player;
@@ -107,6 +108,17 @@ public class EXGPlayer {
 
 			this.homes.add(home);
 		});
+	}
+
+
+	// -------------------------------------------------- //
+
+
+	public boolean canDo(String command, String permission) {
+		if (permission != null && !player.hasPermission(permission)) return false;
+		if (!Main.getInstance().getHookManager().getWorldGuardHook().canExecuteCommand(player, command)
+			&& !player.hasPermission("worldguard.region.bypass." + player.getWorld().getName())) return false;
+		return true;
 	}
 
 

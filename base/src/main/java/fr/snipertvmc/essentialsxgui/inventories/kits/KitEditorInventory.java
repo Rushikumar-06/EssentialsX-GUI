@@ -15,6 +15,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -83,8 +84,18 @@ public class KitEditorInventory extends FastInv {
 
 				e.setCancelled(true);
 
-				new KitEditingInventory(player, kit).open(player);
-				SoundsUtils.playSound(player, EXGSound.ACTION_CANCELED);
+				List<ItemStack> kitItems = new ArrayList<>();
+
+				for (int i = 0; i < e.getInventory().getSize(); i++) {
+					if (reservedSlots.contains(i)) continue;
+
+					ItemStack itemStack = e.getInventory().getItem(i);
+					if (itemStack != null && itemStack.getType() != Material.AIR) {
+						kitItems.add(itemStack);
+					}
+				}
+
+				cancelChanges(player, kit, kitItems);
 			});
 		}
 
@@ -116,6 +127,24 @@ public class KitEditorInventory extends FastInv {
 
 		new KitEditingInventory(player, kit).open(player);
 		SoundsUtils.playSound(player, EXGSound.ACTION_SUCCESS);
+	}
+
+
+	private void cancelChanges(Player player,  EXGKit kit, List<ItemStack> kitItems) {
+
+		List<ItemStack> originalKitItems = Main.getInstance().getEssentialsManager().getKitItems(kit.getName());
+
+		for (ItemStack kitItem : kitItems) {
+			if (kitItem != null && kitItem.getType() != Material.AIR) {
+				if (!originalKitItems.contains(kitItem)) {
+					HashMap<Integer, ItemStack> dontFitItems = player.getInventory().addItem(kitItem);
+					dontFitItems.forEach((integer, itemStack) -> player.getWorld().dropItem(player.getLocation(), itemStack));
+				}
+			}
+		}
+
+		new KitEditingInventory(player, kit).open(player);
+		SoundsUtils.playSound(player, EXGSound.ACTION_CANCELED);
 	}
 
 

@@ -11,13 +11,8 @@ import org.jetbrains.annotations.Nullable;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.stream.Stream;
 
 import static fr.snipertvmc.essentialsxgui.libraries.libby.core.Util.replaceWithDots;

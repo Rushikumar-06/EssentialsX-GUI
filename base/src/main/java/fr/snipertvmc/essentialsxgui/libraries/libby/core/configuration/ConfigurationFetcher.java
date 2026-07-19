@@ -12,13 +12,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static fr.snipertvmc.essentialsxgui.libraries.libby.core.Util.replaceWithDots;
 import static java.util.Objects.requireNonNull;
